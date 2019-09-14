@@ -6,6 +6,7 @@ français.
 | Anglais | Français | Remarques |
 | ------- | ------ | ------ |
 | ahead-of-time compilation | compilation anticipée | sigle : AOT |
+| alias | alias | - |
 | allocated | alloué | - |
 | annotate | indiquer | - |
 | Appendix | annexe | tout en minuscule (sauf en début de phrase) |
@@ -63,6 +64,7 @@ français.
 | function | fonction | - |
 | functional programming | programmation fonctionnelle | - |
 | generics | génériques / généricité | - |
+| glob | global | opérateur |
 | global scope | portée globale | - |
 | guessing game | jeu de devinettes | - |
 | handle | référence abstraite | - |
@@ -72,6 +74,7 @@ français.
 | Hello, world! | Hello, world! | - |
 | high-level | haut niveau | - |
 | identifier | identificateur | - |
+| idiomatic | idéal | - |
 | immutability | immuabilité | - |
 | immutable | immuable | - |
 | index | indice | - |
@@ -103,6 +106,7 @@ français.
 | mutability | mutabilité | - |
 | mutable | mutable | modifiable |
 | mutate | muter | - |
+| nested (path) | (chemin) imbriqué | - |
 | Note | remarque | tout en minuscule (sauf en début de phrase) |
 | numerical characters | chiffres | - |
 | object-oriented language | langage orienté objet | - |
