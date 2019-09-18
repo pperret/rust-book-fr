@@ -19,3 +19,5 @@
     - [Les types de données](ch03-02-data-types.md)
 
 - [Utiliser les structures pour structurer des données apparentées](ch05-00-structs.md)
+
+- [Les collections standard](ch08-00-common-collections.md)
