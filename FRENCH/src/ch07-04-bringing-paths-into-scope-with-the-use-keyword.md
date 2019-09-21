@@ -1,5 +1,3 @@
-<!-- correction bonpatron.com -->
-
 <!--
 ## Bringing Paths into Scope with the `use` Keyword
 -->
@@ -103,15 +101,13 @@ défini dans la crate racine. Les chemins importés dans la portée avec `use`
 sont soumis au principe de protection, tout comme les autres chemins.
 
 <!--
-Specifying a relative path with `use` is slightly different. Instead of
-starting from a name in the current scope, we must start the path given to
-`use` with the keyword `self`. Listing 7-12 shows how to specify a relative
-path to get the same behavior as in Listing 7-11.
+You can also bring an item into scope with `use` and a relative path. Listing
+7-12 shows how to specify a relative path to get the same behavior as in
+Listing 7-11.
 -->
 
-Importer un chemin relatif avec `use` est un peu différent. Au lieu de commencer
-à partir d'un nom dans la portée courante, nous devons commencer le chemin du
-`use` avec le mot-clé `self`. L'encart 7-12 nous montre comment utiliser un
+Vous pouvez aussi importer un élément dans portée avec `use` et un chemin
+relatif. L'encart 7-12 nous montre comment utiliser un
 chemin relatif pour obtenir le même résultat que l'encart 7-11.
 
 <!--
@@ -128,7 +124,7 @@ mod front_of_house {
     }
 }
 
-use self::front_of_house::hosting;
+use front_of_house::hosting;
 
 pub fn eat_at_restaurant() {
     hosting::add_to_waitlist();
@@ -146,7 +142,7 @@ mod salle_a_manger {
     }
 }
 
-use self::salle_a_manger::accueil;
+use salle_a_manger::accueil;
 
 pub fn manger_au_restaurant() {
     accueil::ajouter_a_la_liste_attente();
@@ -158,20 +154,11 @@ pub fn manger_au_restaurant() {
 
 <!--
 <span class="caption">Listing 7-12: Bringing a module into scope with `use` and
-a relative path starting with `self`</span>
+a relative path</span>
 -->
 
 <span class="caption">Encart 7-12 : Importer un module dans la portée avec `use`
-et un chemin relatif qui commence par `self`</span>
-
-<!--
-Note that using `self` in this way might not be necessary in the future; it’s
-an inconsistency in the language that Rust developers are working to eliminate.
--->
-
-Notez toutefois qu'utiliser `self` de cette manière pourrait ne plus être
-nécessaire à l'avenir ; c'est une incohérence que les développeurs de Rust
-essayent de supprimer.
+et un chemin relatif</span>
 
 <!--
 ### Creating Idiomatic `use` Paths
