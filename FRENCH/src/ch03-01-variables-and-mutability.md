@@ -157,7 +157,7 @@ But mutability can be very useful. Variables are immutable only by default; as
 you did in Chapter 2, you can make them mutable by adding `mut` in front of the
 variable name. In addition to allowing this value to change, `mut` conveys
 intent to future readers of the code by indicating that other parts of the code
-will be changing this variable value.
+will be changing this variable's value.
 -->
 
 Mais la mutabilité peut s'avérer très utile. Les variables sont immuables par
