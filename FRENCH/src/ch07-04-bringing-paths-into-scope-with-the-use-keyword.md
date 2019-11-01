@@ -572,6 +572,12 @@ un paquet externe qui s'appelle `rand` afin d'obtenir des nombres aléatoires.
 Pour pouvoir utiliser `rand` dans notre projet, nous avons ajouté cette ligne
 dans le *Cargo.toml* :
 
+<!-- When updating the version of `rand` used, also update the version of
+`rand` used in these files so they all match:
+* ch02-00-guessing-game-tutorial.md
+* ch14-03-cargo-workspaces.md
+-->
+
 <!--
 <span class="filename">Filename: Cargo.toml</span>
 -->
