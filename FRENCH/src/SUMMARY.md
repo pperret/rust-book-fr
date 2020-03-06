@@ -70,3 +70,4 @@
     - [🚧 Récupérer les arguments de la ligne de commande](ch12-01-accepting-command-line-arguments.md)
     - [🚧 Lire un fichier](ch12-02-reading-a-file.md)
     - [🚧 Remanier le code pour améliorer sa modularité et la gestion des erreurs](ch12-03-improving-error-handling-and-modularity.md)
+    - [🚧 Développer les fonctionnalités de la bibliothèque avec le TDD](ch12-04-testing-the-librarys-functionality.md)
