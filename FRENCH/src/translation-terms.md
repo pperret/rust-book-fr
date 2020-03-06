@@ -36,6 +36,7 @@ français.
 | Cargo | Cargo | - |
 | catchall value | valeur passe-partout | - |
 | Chapter | chapitre | tout en minuscule (sauf en début de phrase) |
+| clause | clause | - |
 | closure | fermeture | - |
 | code review | revue de code | - |
 | coercion | extrapolation | - |
@@ -72,6 +73,7 @@ français.
 | directory | dossier | - |
 | dot notation | la notation avec un point | - |
 | double free | double libération | - |
+| elision | élision | - |
 | enum | énumération | - |
 | enumeration | énumération | - |
 | enum’s variant | variante d'énumération | - |
@@ -146,6 +148,7 @@ français.
 | numerical characters | chiffres | - |
 | object-oriented language | langage orienté objet | - |
 | operating system | système d'exploitation | - |
+| output | sortie | - |
 | owner | propriétaire | - |
 | ownership | possession | - |
 | package manager | système de gestion de paquets | - |
