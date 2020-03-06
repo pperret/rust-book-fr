@@ -64,3 +64,4 @@
 - [🚧 Ecrire des tests automatisés](ch11-00-testing.md)
     - [🚧 Comment écrire des tests](ch11-01-writing-tests.md)
     - [🚧 Gérer l'exécution des tests](ch11-02-running-tests.md)
+    - [🚧 L'organisation des tests](ch11-03-test-organization.md)
