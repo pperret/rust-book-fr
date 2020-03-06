@@ -47,3 +47,4 @@
     - [🚧 Séparer les modules dans différents fichiers](ch07-05-separating-modules-into-different-files.md)
 
 - [🚧 Les collections standard](ch08-00-common-collections.md)
+    - [🚧 Stocker des listes de valeurs avec des vecteurs](ch08-01-vectors.md)
