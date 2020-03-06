@@ -20,6 +20,7 @@ français.
 | artifact | artéfact | - |
 | associated function | fonction associée | - |
 | attributes | attributs | - |
+| backtrace | re-traçage | - |
 | binary crate | crate binaire | s'utilise au féminin |
 | *n*-bit number | nombre encodé sur *n* bits | - |
 | blob | blob | - |
@@ -27,6 +28,7 @@ français.
 | boolean | booléen | - |
 | borrow | emprunt(er) | - |
 | borrow checker | vérificateur d'emprunt | - |
+| buffer overread | sur-lecture de tampon | - |
 | bug | bogue | - |
 | build system | système de compilation | - |
 | byte | octet | - |
@@ -229,6 +231,7 @@ français.
 | unsafe | non sécurisé | - |
 | unsigned | sans signe (toujours positif) | - |
 | unsigned | non signé | - |
+| unwind | dérouler | (la pile) |
 | user input | saisie utilisateur | - |
 | variable | variable | - |
 | variant | variante | d'une énumération |
