@@ -86,6 +86,7 @@ français.
 | garbage collector | ramasse-miettes | - |
 | generics | génériques / généricité | - |
 | generic type parameter | paramètre de type générique | - |
+| getter | accesseur | - |
 | glob | global | opérateur |
 | global scope | portée globale | - |
 | grapheme cluster | groupe de graphèmes  | - |
@@ -148,6 +149,7 @@ français.
 | panic | panique(r) | - |
 | parallelism | parallélisme | - |
 | parameter | paramètre | - |
+| parse | interpréter | - |
 | PATH | PATH | - |
 | pattern | motif | - |
 | pattern-matching | filtrage par motif | - |
