@@ -58,3 +58,4 @@
 
 - [🚧 Les types génériques, les traits et les durées de vies](ch10-00-generics.md)
     - [🚧 Les types de données génériques](ch10-01-syntax.md)
+    - [🚧 Définir des comportements partagés avec les traits](ch10-02-traits.md)
