@@ -158,6 +158,7 @@ français.
 | privacy | protection | explication de la protection des éléments d'un module |
 | procedural macro | macro procédurale | - |
 | project chapter | chapitre de projet | - |
+| propagate | propager | - |
 | race condition | situation de concurrence | - |
 | pushing onto the stack | empiler | - |
 | raw identifier | identificateur brut | - |
@@ -214,6 +215,7 @@ français.
 | systems-level code | code système | - |
 | terminal | terminal | - |
 | trait | trait | - |
+| trait object | objet trait | - |
 | tree | arborescence | - |
 | troubleshooting | dépannage | - |
 | tuple | tuple | - |
