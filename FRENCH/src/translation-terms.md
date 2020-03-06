@@ -86,6 +86,7 @@ français.
 | generic type parameter | paramètre de type générique | - |
 | glob | global | opérateur |
 | global scope | portée globale | - |
+| grapheme cluster | groupe de graphèmes  | - |
 | guessing game | jeu de devinettes | - |
 | handle | référence abstraite | - |
 | hash | hash / relatif au hachage | - |

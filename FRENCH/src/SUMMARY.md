@@ -48,3 +48,4 @@
 
 - [🚧 Les collections standard](ch08-00-common-collections.md)
     - [🚧 Stocker des listes de valeurs avec des vecteurs](ch08-01-vectors.md)
+    - [🚧 Stocker du texte encodé en UTF-8 avec les chaînes de caractères](ch08-02-strings.md)
