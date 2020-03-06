@@ -67,3 +67,4 @@
     - [🚧 L'organisation des tests](ch11-03-test-organization.md)
 
 - [🚧 Un projet d'entrée/sortie : construire un programme en ligne de commande](ch12-00-an-io-project.md)
+    - [🚧 Récupérer les arguments de la ligne de commande](ch12-01-accepting-command-line-arguments.md)
