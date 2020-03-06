@@ -133,11 +133,13 @@ français.
 | modern | récent | - |
 | module | module | - |
 | module system | système de modules | - |
+| monomorphization | monomorphisation | - |
 | move | déplacement | - |
 | mutability | mutabilité | - |
 | mutable | mutable | modifiable |
 | mutate | muter | - |
 | namespace | espace de nom | - |
+| namespacing | l'espace de nom | - |
 | nested (path) | (chemin) imbriqué | - |
 | Note | remarque | tout en minuscule (sauf en début de phrase) |
 | numerical characters | chiffres | - |
