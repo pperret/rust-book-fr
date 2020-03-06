@@ -10,6 +10,7 @@ français.
 | allocated | alloué | - |
 | angle bracket | chevrons | - |
 | annotate | indiquer | - |
+| anti-pattern | anti-patron | - |
 | append | ajouter | - |
 | Appendix | annexe | tout en minuscule (sauf en début de phrase) |
 | Application Programming Interface (API) | interface de programmation applicative (API) | - |
@@ -159,7 +160,7 @@ français.
 | panic | panique(r) | - |
 | parallelism | parallélisme | - |
 | parameter | paramètre | - |
-| parse | interpréter | - |
+| parse | interprêter | - |
 | PATH | PATH | - |
 | pattern | motif | - |
 | pattern-matching | filtrage par motif | - |
@@ -167,6 +168,7 @@ français.
 | pointer | pointeur | - |
 | popping off the stack | dépiler | - |
 | prelude | étape préliminaire | - |
+| primitive obsession | obsession primitive | - |
 | privacy | protection | explication de la protection des éléments d'un module |
 | procedural macro | macro procédurale | - |
 | project chapter | chapitre de projet | - |
@@ -241,7 +243,7 @@ français.
 | underlying operating system | système d'exploitation sous-jacent | - |
 | underscore | tiret bas | le caractère `_` |
 | unit-like struct | structure unité | - |
-| unit type | type unité | - |
+| unit type | type unité | le `()` |
 | unit value | valeur unité | - |
 | unsafe | non sécurisé | - |
 | unsigned | sans signe (toujours positif) | - |
@@ -252,6 +254,7 @@ français.
 | variant | variante | d'une énumération |
 | vector | vecteur | - |
 | version control system (VCS) | système de gestion de versions (VCS) | - |
+| vertical pipe | barre verticale | la barre `|` |
 | warning | avertissement | - |
 | wildcard | joker | - |
 | zero-cost abstraction | abstraction sans coût | - |

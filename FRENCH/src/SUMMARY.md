@@ -69,3 +69,4 @@
 - [🚧 Un projet d'entrée/sortie : construire un programme en ligne de commande](ch12-00-an-io-project.md)
     - [🚧 Récupérer les arguments de la ligne de commande](ch12-01-accepting-command-line-arguments.md)
     - [🚧 Lire un fichier](ch12-02-reading-a-file.md)
+    - [🚧 Remanier le code pour améliorer sa modularité et la gestion des erreurs](ch12-03-improving-error-handling-and-modularity.md)
