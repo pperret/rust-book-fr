@@ -34,6 +34,7 @@ français.
 | boolean | booléen | - |
 | borrow | emprunt(er) | - |
 | borrow checker | vérificateur d'emprunt | - |
+| box | boite | - |
 | buffer overread | sur-lecture de tampon | - |
 | bug | bogue | - |
 | build | compilation | - |
@@ -54,6 +55,7 @@ français.
 | concurrency | concurrence | - |
 | concurrent | concurrent | - |
 | conditional | structure conditionnelle | - |
+| cons list | liste de construction | - |
 | constant | constant / constante | - |
 | construct | instruction | - |
 | consuming adaptor | adaptateur de consommation | - |
@@ -185,6 +187,7 @@ français.
 | pushing onto the stack | empiler | - |
 | raw identifier | identificateur brut | - |
 | README | README | - |
+| recursive type | type récursif | - |
 | refactoring | remaniement | - |
 | reference | référence | - |
 | reference counting | compteur de références | - |
