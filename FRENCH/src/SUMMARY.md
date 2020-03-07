@@ -79,3 +79,4 @@
 - [Les fonctionnalités des langages fonctionnels : les itérateurs et les fermetures](ch13-00-functional-features.md)
     - [Les fermetures : fonctions anonymes qui peuvent utiliser leur environnement](ch13-01-closures.md)
     - [Traiter une série d'éléments avec un itérateur](ch13-02-iterators.md)
+    - [Amélioration de notre projet d'entrée/sortie](ch13-03-improving-our-io-project.md)
