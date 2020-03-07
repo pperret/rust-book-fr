@@ -36,6 +36,7 @@ français.
 | borrow checker | vérificateur d'emprunt | - |
 | buffer overread | sur-lecture de tampon | - |
 | bug | bogue | - |
+| build | compilation | - |
 | build system | système de compilation | - |
 | byte | octet | - |
 | Cargo | Cargo | - |
@@ -185,6 +186,7 @@ français.
 | README | README | - |
 | refactoring | remaniement | - |
 | reference | référence | - |
+| release | publication | - |
 | registry | registre | - |
 | regression | régression | - |
 | remainder | modulo | opération `%` |
@@ -264,4 +266,5 @@ français.
 | vertical pipe | barre verticale | la barre `|` |
 | warning | avertissement | - |
 | wildcard | joker | - |
+| workspace | espace de travail | - |
 | zero-cost abstraction | abstraction sans coût | - |
