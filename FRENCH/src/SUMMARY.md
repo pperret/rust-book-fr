@@ -108,3 +108,4 @@
 ## Sujets avancés
 
 - [🚧 Les motifs et le filtrage par motif](ch18-00-patterns.md)
+    - [🚧 Tous les endroits où les motifs peuvent être utilisés](ch18-01-all-the-places-for-patterns.md)
