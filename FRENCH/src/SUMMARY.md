@@ -87,3 +87,4 @@
     - [🚧 Publier une crate sur crates.io](ch14-02-publishing-to-crates-io.md)
     - [🚧 Les espaces de travail de cargo](ch14-03-cargo-workspaces.md)
     - [🚧 Installer des binaires à partir de crates.io avec `cargo install`](ch14-04-installing-binaries.md)
+    - [🚧 Etendre les fonctionnalités de cargo avec des commandes personnalisées](ch14-05-extending-cargo.md)
