@@ -94,3 +94,4 @@
     - [🚧 Considérer les pointeurs intelligents comme des références grâce au trait `Deref`](ch15-02-deref.md)
     - [🚧 Exécuter du code au nettoyage avec le trait `Drop`](ch15-03-drop.md)
     - [🚧 `Rc<T>`, le pointeur intelligent qui compte les références](ch15-04-rc.md)
+    - [🚧 `RefCell<T>` et le motif de mutabilité interne](ch15-05-interior-mutability.md)

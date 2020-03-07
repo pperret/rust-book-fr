@@ -151,6 +151,7 @@ français.
 | map | tableau associatif | - |
 | memory management | gestion de mémoire | - |
 | method | méthode | - |
+| mock object | mock object | - |
 | modern | récent | - |
 | module | module | - |
 | module system | système de modules | - |
@@ -249,6 +250,7 @@ français.
 | terminal | terminal | - |
 | thread | processus | - |
 | token | jeton | - |
+| test double | double de test | - |
 | trait | trait | - |
 | trait bound | trait lié | - |
 | trait object | objet trait | - |
