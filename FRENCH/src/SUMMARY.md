@@ -88,3 +88,5 @@
     - [🚧 Les espaces de travail de cargo](ch14-03-cargo-workspaces.md)
     - [🚧 Installer des binaires à partir de crates.io avec `cargo install`](ch14-04-installing-binaries.md)
     - [🚧 Etendre les fonctionnalités de cargo avec des commandes personnalisées](ch14-05-extending-cargo.md)
+
+- [🚧 Les pointeurs intelligents](ch15-00-smart-pointers.md)

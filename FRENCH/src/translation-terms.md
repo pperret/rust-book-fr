@@ -121,6 +121,7 @@ français.
 | integer literal | littéral d'entiers | - |
 | integer overflow | dépassement d'entier | - |
 | Integrated Development Environment (IDE) | environnement de développement intégré (IDE) | - |
+| interior mutability | mutabilité interne | - |
 | interrupt signal | signal d'arrêt | - |
 | invalidate | neutraliser | - |
 | IOT | internet des objets (IOT) | - |
@@ -186,6 +187,8 @@ français.
 | README | README | - |
 | refactoring | remaniement | - |
 | reference | référence | - |
+| reference counting | compteur de références | - |
+| reference cycle | cycle de référence | - |
 | release | publication | - |
 | registry | registre | - |
 | regression | régression | - |
