@@ -92,3 +92,4 @@
 - [🚧 Les pointeurs intelligents](ch15-00-smart-pointers.md)
     - [🚧 Utiliser `Box<T>` pour pointer sur des données présentes sur le tas](ch15-01-box.md)
     - [🚧 Considérer les pointeurs intelligents comme des références grâce au trait `Deref`](ch15-02-deref.md)
+    - [🚧 Exécuter du code au nettoyage avec le trait `Drop`](ch15-03-drop.md)

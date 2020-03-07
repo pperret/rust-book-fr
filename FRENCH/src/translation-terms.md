@@ -44,6 +44,7 @@ français.
 | catchall value | valeur passe-partout | - |
 | Chapter | chapitre | tout en minuscule (sauf en début de phrase) |
 | clause | clause | - |
+| cleanup | nettoyage | - |
 | closure | fermeture | - |
 | code review | revue de code | - |
 | coercion | extrapolation | - |
@@ -59,6 +60,7 @@ français.
 | constant | constant / constante | - |
 | construct | instruction | - |
 | consuming adaptor | adaptateur de consommation | - |
+| constructor | constructeur | - |
 | control flow construct | structure de contrôle | - |
 | core of the error | message d'erreur | - |
 | corruption | corruption / être corrompu | - |
@@ -77,11 +79,13 @@ français.
 | deref coercion | extrapolation de déréferencement | - |
 | dereference operator | opérateur de déréférencement | - |
 | dereferencing | déréférencement | - |
+| destructor | destructeur | - |
 | destructure | déstructurer | - |
 | DevOps | DevOps | - |
 | directory | dossier | - |
 | dot notation | la notation avec un point | - |
 | double free | double libération | - |
+| drop | libérér | - |
 | elision | élision | - |
 | enum | énumération | - |
 | enumeration | énumération | - |
