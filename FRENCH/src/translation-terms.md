@@ -55,6 +55,7 @@ français.
 | concept chapter | chapitre théorique | - |
 | concurrency | concurrence | - |
 | concurrent | concurrent | - |
+| concurrent programming | programmation concurrente | - |
 | conditional | structure conditionnelle | - |
 | cons list | liste de construction | - |
 | constant | constant / constante | - |
@@ -151,6 +152,7 @@ français.
 | map | tableau associatif | - |
 | memory leak | fuite de mémoire | - |
 | memory management | gestion de mémoire | - |
+| message-passing | passage de messages | - |
 | method | méthode | - |
 | mock object | mock object | - |
 | modern | récent | - |
@@ -175,6 +177,7 @@ français.
 | package manager | système de gestion de paquets | - |
 | panic | panique(r) | - |
 | parallelism | parallélisme | - |
+| parallel programming | parallélisme | - |
 | parameter | paramètre | - |
 | parse | interprêter | - |
 | PATH | PATH | - |
