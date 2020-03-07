@@ -247,6 +247,7 @@ français.
 | systems-level | niveau système | - |
 | systems-level code | code système | - |
 | terminal | terminal | - |
+| thread | processus | - |
 | token | jeton | - |
 | trait | trait | - |
 | trait bound | trait lié | - |
