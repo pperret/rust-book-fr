@@ -86,3 +86,4 @@
     - [🚧 Personnaliser les compilations avec les profils de publication](ch14-01-release-profiles.md)
     - [🚧 Publier une crate sur crates.io](ch14-02-publishing-to-crates-io.md)
     - [🚧 Les espaces de travail de cargo](ch14-03-cargo-workspaces.md)
+    - [🚧 Installer des binaires à partir de crates.io avec `cargo install`](ch14-04-installing-binaries.md)
