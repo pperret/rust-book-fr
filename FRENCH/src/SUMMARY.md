@@ -80,3 +80,4 @@
     - [Les fermetures : fonctions anonymes qui peuvent utiliser leur environnement](ch13-01-closures.md)
     - [Traiter une série d'éléments avec un itérateur](ch13-02-iterators.md)
     - [Amélioration de notre projet d'entrée/sortie](ch13-03-improving-our-io-project.md)
+    - [Comparaison des performances : les boucles et les itérateurs](ch13-04-performance.md)
