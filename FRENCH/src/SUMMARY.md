@@ -99,3 +99,4 @@
 
 - [🚧 La concurrence sans craintes](ch16-00-concurrency.md)
     - [🚧 Utiliser les tâches pour exécuter simultanément du code](ch16-01-threads.md)
+    - [🚧 Utiliser l'envoi de messages pour transférer des données entre les tâches](ch16-02-message-passing.md)
