@@ -98,3 +98,4 @@
     - [🚧 Les boucles de références qui peuvent provoquer des fuites de mémoire](ch15-06-reference-cycles.md)
 
 - [🚧 La concurrence sans craintes](ch16-00-concurrency.md)
+    - [🚧 Utiliser les tâches pour exécuter simultanément du code](ch16-01-threads.md)

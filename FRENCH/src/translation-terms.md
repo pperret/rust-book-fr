@@ -72,6 +72,7 @@ français.
 | dangling | pendouillant | - |
 | data race | accès concurrent | - |
 | data representation | modèle de données | - |
+| deadlock | interblocage | - |
 | deallocate | désalloué | - |
 | debug | déboguer | - |
 | debugging | débogage | - |
@@ -109,6 +110,7 @@ français.
 | glob | global | opérateur |
 | global scope | portée globale | - |
 | grapheme cluster | groupe de graphèmes  | - |
+| green thread | tâche virtuelle | - |
 | guessing game | jeu de devinettes | - |
 | handle | référence abstraite | - |
 | hash | hash / relatif au hachage | - |
@@ -190,10 +192,12 @@ français.
 | primitive obsession | obsession primitive | - |
 | privacy | protection | explication de la protection des éléments d'un module |
 | procedural macro | macro procédurale | - |
+| process | processus | - |
 | project chapter | chapitre de projet | - |
 | propagate | propager | - |
 | race condition | situation de concurrence | - |
 | pushing onto the stack | empiler | - |
+| race condition | situation de concurrence | - |
 | raw identifier | identificateur brut | - |
 | README | README | - |
 | recursive type | type récursif | - |
@@ -253,7 +257,7 @@ français.
 | systems-level | niveau système | - |
 | systems-level code | code système | - |
 | terminal | terminal | - |
-| thread | processus | - |
+| thread | tâche | - |
 | token | jeton | - |
 | test double | double de test | - |
 | trait | trait | - |
