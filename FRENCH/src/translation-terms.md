@@ -22,6 +22,7 @@ français.
 | artifact | artéfact | - |
 | associated function | fonction associée | - |
 | attribute | attribut | - |
+| backend | application dorsale | - |
 | backtrace | re-traçage | - |
 | benchmark | benchmark | - |
 | binary crate | crate binaire | s'utilise au féminin |
@@ -88,6 +89,7 @@ français.
 | float | nombre à virgule flottante | - |
 | floating-point number | nombre à virgule flottante | - |
 | framework | environnement de développement | - |
+| frontend | application frontale | - |
 | function | fonction | - |
 | functional programming | programmation fonctionnelle | - |
 | garbage collector | ramasse-miettes | - |
