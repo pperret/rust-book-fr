@@ -264,6 +264,7 @@ français.
 | thread | tâche | - |
 | token | jeton | - |
 | test double | double de test | - |
+| thread pool | groupe de tâches | - |
 | trait | trait | - |
 | trait bound | trait lié | - |
 | trait object | objet trait | - |
