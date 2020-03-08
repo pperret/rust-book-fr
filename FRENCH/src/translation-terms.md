@@ -153,6 +153,7 @@ français.
 | macro | macro | - |
 | main | main | - |
 | map | tableau associatif | - |
+| match guard | contrôle de correspondance | - |
 | memory leak | fuite de mémoire | - |
 | memory management | gestion de mémoire | - |
 | message-passing | passage de messages | - |
