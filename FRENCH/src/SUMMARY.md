@@ -104,6 +104,9 @@
     - [🚧 Etendre la concurrence avec les traits `Sync` et `Send`](ch16-04-extensible-concurrency-sync-and-send.md)
 
 - [Les fonctionnalités orientées objet de Rust](ch17-00-oop.md)
+    - [💬 Characteristics of Object-Oriented Languages](ch17-01-what-is-oo.md)
+    - [💬 Using Trait Objects That Allow for Values of Different Types](ch17-02-trait-objects.md)
+    - [💬 Implementing an Object-Oriented Design Pattern](ch17-03-oo-design-patterns.md)
 
 ## Sujets avancés
 
@@ -115,3 +118,6 @@
 - [🚧 Les fonctionnalités avancées](ch19-00-advanced-features.md)
     - [🚧 Le Rust non sécurisé (`unsafe`)](ch19-01-unsafe-rust.md)
     - [🚧 Les traits avancés](ch19-03-advanced-traits.md)
+    - [💬 Advanced Types](ch19-04-advanced-types.md)
+    - [💬 Advanced Functions and Closures](ch19-05-advanced-functions-and-closures.md)
+    - [🚧 Les macros](ch19-06-macros.md)
