@@ -5,7 +5,7 @@
 > erronées, être formulées maladroitement, ou contenir d'autre types de fautes.
 >
 > Vous pouvez contribuer à l'amélioration de cette page sur sa
-> [Push Request](https://github.com/Jimskapt/rust-book-fr/pull/194).
+> [Pull Request](https://github.com/Jimskapt/rust-book-fr/pull/194).
 
 <!--
 ## `RefCell<T>` and the Interior Mutability Pattern

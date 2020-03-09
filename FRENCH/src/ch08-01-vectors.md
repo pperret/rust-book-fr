@@ -5,7 +5,7 @@
 > erronées, être formulées maladroitement, ou contenir d'autre types de fautes.
 >
 > Vous pouvez contribuer à l'amélioration de cette page sur sa
-> [Push Request](https://github.com/Jimskapt/rust-book-fr/pull/83).
+> [Pull Request](https://github.com/Jimskapt/rust-book-fr/pull/83).
 
 <!--
 ## Storing Lists of Values with Vectors
