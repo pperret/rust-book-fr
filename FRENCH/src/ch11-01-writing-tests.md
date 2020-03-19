@@ -353,8 +353,8 @@ which is to call the `panic!` macro. Enter the new test, `another`, so your
 
 Ajoutons un autre test, mais cette fois nous allons construire un test qui
 échoue ! Les tests échouent lorsque quelque chose dans la fonction de test
-panique. Chaque test est lancé dans un nouveau processus, et lorsque le
-processus principal voit qu'un processus de test est mort, le test est considéré
+panique. Chaque test est lancé dans une nouvelle tâche, et lorsque la tâche
+principale voit qu'une tâche de test est mort, le test est considéré
 comme échoué. Nous avons vu la façon la plus simple de faire paniquer au
 chapitre 9, qui consiste à appeler la macro `panic!`. Ecrivez ce nouveau test,
 `un_autre`, de sorte que votre fichier `src/lib.rs` ressemble à ceci :
