@@ -3,6 +3,9 @@
 > Cette page a été traduite par une seule personne et n'a pas été relue et
 > vérifiée par quelqu'un d'autre ! Les informations peuvent par exemple être
 > erronées, être formulées maladroitement, ou contenir d'autre types de fautes.
+>
+> Vous pouvez contribuer à l'amélioration de cette page sur sa
+> [Pull Request](https://github.com/Jimskapt/rust-book-fr/pull/215).
 
 <!--
 ## Building a Single-Threaded Web Server
