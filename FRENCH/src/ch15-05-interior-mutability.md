@@ -147,8 +147,8 @@ multithreaded program in Chapter 16.
 -->
 
 De la même manière que `Rc<T>`, `RefCell<T>` sert uniquement pour des
-scénarios à un seul processus et va vous donner une erreur à la compilation
-si vous essayez de l'utiliser dans un contexte multi-processus. Nous verrons
+scénarios à une seule tâche et va vous donner une erreur à la compilation si
+vous essayez de l'utiliser dans un contexte multitâches. Nous verrons
 comment bénéficier les des fonctionnalités de `RefCell<T>` dans un programme
 multi-processus au chapitre 16.
 
@@ -1206,9 +1206,9 @@ La bibliothèque standard a d'autres types qui fournissent de la mutabilité
 interne, comme `Cell<T>`, qui est similaire sauf qu'au lieu de fournir des
 références à la valeur interne, la valeur est copiée à l'intérieur et à
 l'extérieur du `Cell<T>`. Il existe aussi `Mutex<T>` qui offre de la mutabilité
-interne qui est sécurisée pour une utilisation partagée entre plusieurs
-processus ; nous allons voir son utilisation au chapitre 16. Plongez-vous dans
-la documentation de la bibliothèque standard pour plus de détails entre ces
+interne qui est sécurisée pour une utilisation partagée entre plusieures
+tâches ; nous allons voir son utilisation au chapitre 16. Plongez-vous dans la
+documentation de la bibliothèque standard pour plus de détails entre ces
 différents types.
 
 <!--
