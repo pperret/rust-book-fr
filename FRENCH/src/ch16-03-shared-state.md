@@ -641,8 +641,8 @@ guarantees atomics provide.
 Vous vous demandez pourquoi tous les types primitifs ne sont pas atomiques et
 pourquoi les types de la bibliothèque standard ne sont pas implémentés en
 utilisant `Arc<T>` par défaut. La raison à cela est que la sécurité entre les
-processus a un coût sur les performances que vous n'êtes prêt à payer que
-lorsque vous en avez besoin. Si vous procédez à des opérations sur des valeurs
+tâches a un coût sur les performances que vous n'êtes prêt à payer que lorsque
+vous en avez besoin. Si vous procédez à des opérations sur des valeurs
 uniquement dans une seule tâche, votre code va s'exécuter plus vite car il n'a
 pas besoin de garantir de que les atomes fournissent.
 
