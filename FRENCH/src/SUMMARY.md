@@ -118,7 +118,7 @@
 - [🚧 Les fonctionnalités avancées](ch19-00-advanced-features.md)
     - [🚧 Le Rust non sécurisé (`unsafe`)](ch19-01-unsafe-rust.md)
     - [🚧 Les traits avancés](ch19-03-advanced-traits.md)
-    - [💬 Advanced Types](ch19-04-advanced-types.md)
+    - [🚧 Les types avancés](ch19-04-advanced-types.md)
     - [💬 Advanced Functions and Closures](ch19-05-advanced-functions-and-closures.md)
     - [🚧 Les macros](ch19-06-macros.md)
 
