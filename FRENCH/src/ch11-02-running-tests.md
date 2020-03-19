@@ -66,12 +66,11 @@ environment variables.
 -->
 
 Lorsque vous lancez de nombreux tests, par défaut ils s'exécutent en parallèle
-dans des processus. Cela veut dire que tous les tests vont finir de s'exécuter
-plus rapidement afin que vous sachiez si votre code fonctionne ou non. Comme
-mes tests s'exécutent en même temps, il faut s'assurer que vos tests ne
-dépendent pas l'un de l'autre ou sur un état partagé, y compris un
-environnement partagé, comme le dossier de travail actuel ou des variables
-d'environnement.
+dans des tâches. Cela veut dire que tous les tests vont finir de s'exécuter plus
+rapidement afin que vous sachiez si votre code fonctionne ou non. Comme mes
+tests s'exécutent en même temps, il faut s'assurer que vos tests ne dépendent
+pas l'un de l'autre ou sur un état partagé, y compris un environnement partagé,
+comme le dossier de travail actuel ou des variables d'environnement.
 
 <!--
 For example, say each of your tests runs some code that creates a file on disk
@@ -104,8 +103,8 @@ the following example:
 -->
 
 Si vous ne souhaitez pas exécuter les tests en parallèle ou si vous voulez un
-contrôle plus précis du nombre de processus utilisés, vous pouvez envoyer le
-drapeau `--test-threads` ainsi que le nombre de processus que vous souhaitez
+contrôle plus précis du nombre de tâches utilisés, vous pouvez envoyer le
+drapeau `--test-threads` ainsi que le nombre de tâches que vous souhaitez
 utiliser sur le binaire de test. Regardez cet exemple :
 
 <!--
@@ -125,10 +124,10 @@ them in parallel, but the tests won’t interfere with each other if they share
 state.
 -->
 
-Nous avons réglé le nombre de processus à `1`, ce qui indique au programme de
-ne pas utiliser le parallélisme. Exécuter ces tests en utilisant un seul
-processus va prendre plus de temps que de les lancer en parallèle, mais les
-tests ne vont pas s'influencer mutuellement s'ils partagent le même état.
+Nous avons réglé le nombre de tâches à `1`, ce qui indique au programme de ne
+pas utiliser le parallélisme. Exécuter ces tests en utilisant une seule tâche va
+prendre plus de temps que de les lancer en parallèle, mais les tests ne vont pas
+s'influencer mutuellement s'ils partagent le même état.
 
 <!--
 ### Showing Function Output
