@@ -369,7 +369,7 @@ principles you might be familiar with.
 -->
 
 Au chapitre 16, nous passerons en revue les différents modes de programmation
-concurrente et comment Rust nous aide à développer dans des processus parallèles
+concurrente et comment Rust nous aide à développer dans des tâches parallèles
 sans crainte. Le chapitre 17 comparera les fonctionnalités de Rust aux
 principes de programmation orientée objet, que vous connaissez peut-être.
 
@@ -393,7 +393,7 @@ multithreaded web server!
 -->
 
 Au chapitre 20, nous terminerons un projet dans lequel nous allons
-implémenter en bas-niveau un serveur web multi-processus !
+implémenter en bas-niveau un serveur web multitâches !
 
 <!--
 Finally, some appendixes contain useful information about the language in a
