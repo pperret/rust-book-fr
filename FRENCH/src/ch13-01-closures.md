@@ -1826,8 +1826,8 @@ data so it’s owned by the new thread.
 Si nous voulons forcer la fermeture à prendre possession des valeurs qu'elle
 utilise dans l'environnement, nous pouvons utiliser le mot-clé `move` avant la
 liste des paramètres. Cette technique est très utile lorsque vous passez une
-fermeture à un nouveau processus pour déplacer les données afin qu'elles
-appartiennent au nouveau processus.
+fermeture à une nouvelle tâche pour déplacer les données afin qu'elles
+appartiennent à la nouvelle tâche.
 
 <!--
 We’ll have more examples of `move` closures in Chapter 16 when we talk about
