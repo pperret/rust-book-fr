@@ -37,7 +37,7 @@ technique follows these steps:
 -->
 
 Dans cette section, nous allons ajouter la logique de recherche au programme
-`minigrep` en utilisant le processus de développement piloté par les tests
+`minigrep` en utilisant le processus de développement orienté par les tests
 (c'est le TDD : *Test-Driven Development*). Cette technique de développement
 de logiciels suit ces trois étapes :
 
