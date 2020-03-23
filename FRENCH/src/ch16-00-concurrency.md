@@ -28,7 +28,7 @@ autre objectif majeur de Rust. La *programmation concurrente*, dans laquelle
 différentes parties d'un programme s'exécutent de manière indépendente, et le
 *parallélisme*, dans lequel différentes parties d'un programme s'exécutent en
 même temps, sont devenus des pratiques de plus en plus importantes au fur et à
-mesure que les ordinateurs tirent parti de leurs processus multiples.
+mesure que les ordinateurs tirent parti de leurs processeurs multiples.
 Historiquement, le développement dans ces contextes est difficile et favorise
 les erreurs : Rust compte bien changer la donne.
 
@@ -98,7 +98,7 @@ for your situation and requirements.
 De nombreux langages sont dogmatiques sur les solutions qu'ils offrent pour
 gérer les problèmes de concurrence. Par exemple, Erlang a une fonctionnalité
 élégante de passage de messages pour la concurrence mais a une façon étrange
-de partager un état entre des processus. Ne proposer qu'un sous-ensemble de
+de partager un état entre les tâches. Ne proposer qu'un sous-ensemble de
 solutions possibles est une stratégie acceptable pour les langages de haut
 niveau, car un langage de haut niveau offre des avantages en sacrifiant
 certains contrôles pour être plus accessibles. Cependant, les langages de bas
@@ -122,9 +122,8 @@ Voici les sujets que nous allons aborder dans ce chapitre :
   user-defined types as well as types provided by the standard library
 -->
 
-* Comment créer des processus pour exécuter plusieurs parties de code en même
-  temps
-* Le *passage de message* en concurrence, qui permet à plusieurs processus
+* Comment créer des tâches pour exécuter plusieurs parties de code en même temps
+* Le *passage de message* en concurrence, qui permet à plusieurs tâches
   d'accéder à la même donnée
 * Les traits `Sync` et `Send`, qui étendent les garanties de Rust sur la
   concurrence autant à des types définis par les utilisateurs que par ceux qui

@@ -142,7 +142,7 @@ type exposes an API for mutating an interior value. We’ll also discuss
 
 En outre, nous allons voir le motif de *mutabilité interne* dans lequel un
 type immuable propose une API pour muter une valeur interne. Nous allons aussi
-parler des *cycles des références* : comment elles peuvent provoquer des fuites
+parler des *boucles de références* : comment elles peuvent provoquer des fuites
 de mémoire et comment les éviter.
 
 <!--
