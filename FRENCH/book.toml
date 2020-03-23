@@ -4,4 +4,4 @@ author = "Steve Klabnik et Carol Nichols, avec la participation de la Communaut√
 
 [output.html]
 additional-css = ["../ferris.css", "../theme/2018-edition.css"]
-additional-js = ["../ferris.js"]
+additional-js = ["../ferris.js", "github-button.js"]
