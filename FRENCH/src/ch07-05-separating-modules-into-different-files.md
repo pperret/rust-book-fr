@@ -1,12 +1,3 @@
-> # 🚧 Attention, peinture fraîche !
->
-> Cette page a été traduite par une seule personne et n'a pas été relue et
-> vérifiée par quelqu'un d'autre ! Les informations peuvent par exemple être
-> erronées, être formulées maladroitement, ou contenir d'autre types de fautes.
->
-> Vous pouvez contribuer à l'amélioration de cette page sur sa
-> [Pull Request](https://github.com/Jimskapt/rust-book-fr/pull/79).
-
 <!--
 ## Separating Modules into Different Files
 -->
@@ -32,12 +23,12 @@ the crate root file is *src/lib.rs*, but this procedure also works with binary
 crates whose crate root file is *src/main.rs*.
 -->
 
-Par exemple, basons-nous sur le code de l'encart 7-17 et déplaçons le module
+Prenons par exemple le code de l'encart 7-17 et déplaçons le module
 `salle_a_manger` dans son propre fichier *src/front_of_house.rs* en changeant le
-fichier de la crate racine afin qu'il corresponde au code de l'encart 7-21. Dans
-notre cas, le fichier de la crate racine est *src/lib.rs*, mais cette procédure
-fonctionne aussi avec les crates binaires dans lesquels le fichier de la crate
-racine est *src/main.rs*.
+fichier à la racine de la crate afin qu'il corresponde au code de l'encart 7-21.
+Dans notre cas, le fichier à la racine de la crate est *src/lib.rs*, mais cette
+procédure fonctionne aussi avec les crates binaires dans lesquels le fichier à
+la racine de la crate est *src/main.rs*.
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -196,8 +187,7 @@ that module.
 Remarquez que l'instruction `pub use crate::salle_a_manger::accueil` dans
 *src/lib.rs* n'a pas changée, et que `use` n'a aucun impact sur quels fichiers
 sont compilés pour constituer la crate. Le mot-clé `mod` déclare un module, et
-Rust recherche un fichier avec le même nom que le module qui contiendrait du
-code qui correspondrait à ce module.
+Rust recherche un fichier de code qui porte le nom du dit module.
 
 <!--
 ## Summary
@@ -214,13 +204,13 @@ the item in that scope. Module code is private by default, but you can make
 definitions public by adding the `pub` keyword.
 -->
 
-Rust vous permet de décomposer un paquet dans plusieurs crates et un crate en
+Rust vous permet de découper un paquet en plusieurs crates et un crate en
 modules afin que vous puissiez réutiliser vos éléments d'un module à un autre.
 Vous pouvez faire cela en utilisant des chemins absolus ou relatifs. Ces chemins
-peuvent être importés dans la portée avec une instruction `use` afin d'avoir un
-chemin plus court pour pouvoir l'utiliser plusieurs fois cet élément dans la
-portée. Le code du module est privé par défaut, mais vous pouvez rendre public
-des définitions en ajoutant le mot-clé `pub`.
+peuvent être importés dans la portée avec l'instruction `use` pour pouvoir
+utiliser l'élémént plusieurs fois dans la portée avec un chemin plus court. Le
+code du module est privé par défaut, mais vous pouvez rendre public des
+définitions en ajoutant le mot-clé `pub`.
 
 <!--
 In the next chapter, we’ll look at some collection data structures in the
