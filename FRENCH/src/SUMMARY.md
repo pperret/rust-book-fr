@@ -45,3 +45,5 @@
     - [Désigner un élément dans l'arborescence de modules](ch07-03-paths-for-referring-to-an-item-in-the-module-tree.md)
     - [Importer des chemins dans la portée via le mot-clé `use`](ch07-04-bringing-paths-into-scope-with-the-use-keyword.md)
     - [Séparer les modules dans différents fichiers](ch07-05-separating-modules-into-different-files.md)
+
+    - [E - Les éditions](appendix-05-editions.md)
