@@ -26,13 +26,13 @@ collections that are used very often in Rust programs:
 -->
 
 La bibliothèque standard de Rust apporte quelques structures de données très
-utiles qui s'appellent les *collections*. La plupart des autres types de données
+utiles appelées *collections*. La plupart des autres types de données
 représentent une seule valeur précise, mais les collections peuvent avoir
-plusieurs valeurs. Contrairement aux types tableau et tuple qui sont intégrés,
+plusieurs valeurs. Contrairement aux tableaux et aux tuples,
 les données que ces collections contiennent sont stockées sur le tas, ce qui
 veut dire que la quantité de données n'a pas à être connue au moment de la
 compilation et peut augmenter ou diminuer pendant l'exécution du programme.
-Chaque type de collection a différentes capacités et coûts, et en choisir une
+Chaque type de collection a ses avantages et ses inconvénients, et en choisir un
 qui répond à votre besoin sur le moment est une aptitude que vous allez
 développer avec le temps. Dans ce chapitre, nous allons découvrir trois
 collections qui sont très utilisées dans les programmes Rust :
@@ -48,11 +48,11 @@ collections qui sont très utilisées dans les programmes Rust :
 * Le *vecteur* qui vous permet de stocker un nombre variable de valeurs l'une à
   côté de l'autre.
 * La *String*, qui est une collection de caractères. Nous avons déjà vu le type
-  `String` précédemment, mais dans ce chapitre nous allons les découvrir en
-  détails.
+  `String` précédemment, mais dans ce chapitre nous allons le découvrir en
+  détail.
 * La *table de hachage* qui vous permet d'associer une valeur à une clé précise.
-  C'est une implémentation spécifique d'une structure de données plus générique
-  qui s'appelle un *tableau associatif*.
+  C'est une implémentation spécifique d'une structure de données plus générique :
+  le *tableau associatif*.
 
 <!--
 To learn about the other kinds of collections provided by the standard library,
@@ -73,5 +73,5 @@ We’ll discuss how to create and update vectors, strings, and hash maps, as wel
 as what makes each special.
 -->
 
-Nous allons voir comment créer et mettre à jour les vecteurs, les String, et les
-tables de hachages, et ce qui les différencie.
+Nous allons voir comment créer et modifier les vecteurs, les String, et les
+tables de hachages, et étudier leurs différences.
