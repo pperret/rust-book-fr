@@ -44,6 +44,7 @@ français.
 | catchall value | valeur passe-partout | - |
 | channel | canal | - |
 | Chapter | chapitre | tout en minuscule (sauf en début de phrase) |
+| CI system | système d'Intégration Continue | - |
 | clause | clause | - |
 | cleanup | nettoyage | - |
 | closure | fermeture | - |

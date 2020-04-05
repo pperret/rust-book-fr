@@ -134,3 +134,4 @@
     - [🚧 D - Des outils de développement utiles](appendix-04-useful-development-tools.md)
     - [🚧 E - Les éditions](appendix-05-editions.md)
     - [🚧 F - Les traductions de ce livre](appendix-06-translation.md)
+    - [🚧 G - Comment Rust est construit, et “Nightly Rust”](appendix-07-nightly-rust.md)
