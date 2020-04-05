@@ -133,3 +133,4 @@
     - [🚧 C - les traits dérivables](appendix-03-derivable-traits.md)
     - [🚧 D - Des outils de développement utiles](appendix-04-useful-development-tools.md)
     - [🚧 E - Les éditions](appendix-05-editions.md)
+    - [🚧 F - Les traductions de ce livre](appendix-06-translation.md)
