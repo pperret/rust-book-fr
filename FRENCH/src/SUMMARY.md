@@ -126,3 +126,5 @@
     - [🚧 Développer un serveur web monotâche](ch20-01-single-threaded.md)
     - [🚧 Transformer notre serveur monotâche en serveur multitâches](ch20-02-multithreaded.md)
     - [🚧 Arrêt propre et nettoyage](ch20-03-graceful-shutdown-and-cleanup.md)
+
+- [Annexes](appendix-00.md)
