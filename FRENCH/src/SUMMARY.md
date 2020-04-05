@@ -132,3 +132,4 @@
     - [🚧 B - les opérateurs et les symboles](appendix-02-operators.md)
     - [🚧 C - les traits dérivables](appendix-03-derivable-traits.md)
     - [🚧 D - Des outils de développement utiles](appendix-04-useful-development-tools.md)
+    - [🚧 E - Les éditions](appendix-05-editions.md)
