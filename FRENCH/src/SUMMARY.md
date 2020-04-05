@@ -129,3 +129,4 @@
 
 - [🚧 Annexes](appendix-00.md)
     - [🚧 A - les mots-clés](appendix-01-keywords.md)
+    - [🚧 B - les opérateurs et les symboles](appendix-02-operators.md)
