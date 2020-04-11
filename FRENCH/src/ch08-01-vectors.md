@@ -1,12 +1,3 @@
-> # 🚧 Attention, peinture fraîche !
->
-> Cette page a été traduite par une seule personne et n'a pas été relue et
-> vérifiée par quelqu'un d'autre ! Les informations peuvent par exemple être
-> erronées, être formulées maladroitement, ou contenir d'autres types de fautes.
->
-> Vous pouvez contribuer à l'amélioration de cette page sur sa
-> [Pull Request](https://github.com/Jimskapt/rust-book-fr/pull/83).
-
 <!--
 ## Storing Lists of Values with Vectors
 -->
@@ -52,8 +43,8 @@ let v: Vec<i32> = Vec::new();
 of type `i32`</span>
 -->
 
-<span class="caption">Encart 8-1 : Créer un nouveau vecteur vide pour y stocker
-des valeurs de type `i32`</span>
+<span class="caption">Encart 8-1 : création d'un nouveau vecteur vide pour y
+stocker des valeurs de type `i32`</span>
 
 <!--
 Note that we added a type annotation here. Because we aren’t inserting any
@@ -67,7 +58,7 @@ hold elements of the `i32` type.
 -->
 
 Remarquez que nous avons ajouté ici une annotation de type. Comme nous
-n'ajoutons de valeurs dans ce vecteur, Rust ne sait pas quel type d'éléments
+n'ajoutons pas de valeurs dans ce vecteur, Rust ne sait pas quel type d'éléments
 nous souhaitons stocker. C'est une information importante. Les vecteurs sont
 implémentés avec la généricité, nous allons voir comment utiliser la généricité
 sur vos propres types au chapitre 10. Pour l'instant, sachez que le type
@@ -108,7 +99,7 @@ let v = vec![1, 2, 3];
 values</span>
 -->
 
-<span class="caption">Encart 8-2 : Création d'un nouveau vecteur qui contient
+<span class="caption">Encart 8-2 : création d'un nouveau vecteur qui contient
 des valeurs</span>
 
 <!--
@@ -149,8 +140,8 @@ v.push(8);
 vector</span>
 -->
 
-<span class="caption">Encart 8-3 : Utiliser la méthode `push` pour ajouter des
-valeurs à un vecteur</span>
+<span class="caption">Encart 8-3 : utilisation de la méthode `push` pour ajouter
+des valeurs à un vecteur</span>
 
 <!--
 As with any variable, if we want to be able to change its value, we need to
@@ -204,7 +195,7 @@ portée, comme précisé dans l'encart 8-4.
 are dropped</span>
 -->
 
-<span class="caption">Encart 8-4 : On met en évidence où le vecteur et ses
+<span class="caption">Encart 8-4 : mise en évidence où le vecteur et ses
 éléments sont libérés</span>
 
 <!--
@@ -215,8 +206,8 @@ introduce references to the elements of the vector. Let’s tackle that next!
 -->
 
 Lorsque le vecteur est libéré, tout son contenu est aussi libéré, ce qui veut
-dire que les entiers qu'il stocke vont être effacés de la mémoire. Cela semble
-très simple mais cela peut devenir plus compliqué quand vous commencez à
+dire que les nombres entiers qu'il stocke vont être effacés de la mémoire. Cela
+semble très simple mais cela peut devenir plus compliqué quand vous commencez à
 utiliser des références dans les éléments du vecteur. Voyons ceci dès à
 présent !
 
@@ -234,9 +225,10 @@ values that are returned from these functions for extra clarity.
 -->
 
 Maintenant que vous savez comment créer, modifier, et détruire des vecteurs,
-savoir lire leur contenu est la suite logique. Il existe deux façons de désigner
-une valeur enregistrée dans un vecteur. Dans ces exemples, nous avons précisé
-les types des valeurs qui sont retournées par ces fonctions pour plus de clarté.
+la prochaine étape est de savoir lire leur contenu. Il existe deux façons de
+désigner une valeur enregistrée dans un vecteur. Dans ces exemples, nous avons
+précisé les types des valeurs qui sont retournées par ces fonctions pour plus de
+clarté.
 
 <!--
 Listing 8-5 shows both methods of accessing a value in a vector, either with
@@ -244,7 +236,7 @@ indexing syntax or the `get` method.
 -->
 
 L'encart 8-5 nous montre les deux façons pour accéder à une valeur d'un vecteur,
-soit la syntaxe avec un indice, soit avec la méthode `get`.
+soit la syntaxe d'indexation, soit avec la méthode `get`.
 
 <!--
 ```rust
@@ -277,8 +269,8 @@ match v.get(2) {
 access an item in a vector</span>
 -->
 
-<span class="caption">Encart 8-5 : Utilisation de la syntaxe avec l'indice ou
-la méthode `get` pour accéder à un élément d'un vecteur</span>
+<span class="caption">Encart 8-5 : utilisation de la syntaxe d'indexation ainsi
+que la méthode `get` pour accéder à un élément d'un vecteur</span>
 
 <!--
 Note two details here. First, we use the index value of `2` to get the third
@@ -290,10 +282,10 @@ us an `Option<&T>`.
 
 Il y a deux détails à remarquer ici. Premièrement, nous avons utilisé l'indice
 `2` pour obtenir le troisième élément : les vecteurs sont indexés par des
-nombres, qui commencent à partir zéro. Deuxièmement, les deux façons d'obtenir
-le troisième éléments consistent soit à utiliser `&` et `[]`, ce qui nous donne
-une référence, soit en utilisant la méthode `get` avec l'indice en argument, ce
-qui nous fournit un `Option<&T>`.
+nombres, qui commencent à partir de zéro. Deuxièmement, les deux façons
+d'obtenir le troisième élément consistent soit à utiliser `&` et `[]`, ce qui
+nous donne une référence, soit en utilisant la méthode `get` avec l'indice en
+argument, ce qui nous fournit un `Option<&T>`.
 
 <!--
 Rust has two ways to reference an element so you can choose how the program
@@ -330,7 +322,7 @@ let existe_pas = v.get(100);
 100 in a vector containing five elements</span>
 -->
 
-<span class="caption">Encart 8-6 : Tentative d'accès à l'élément à l'indice 100
+<span class="caption">Encart 8-6 : tentative d'accès à l'élément à l'indice 100
 dans un vecteur qui contient cinq éléments</span>
 
 <!--
@@ -415,7 +407,7 @@ println!("Le premier élément est : {}", premier);
 while holding a reference to an item</span>
 -->
 
-<span class="caption">Encart 8-7 : Tentative d'ajout d'un élément à un vecteur
+<span class="caption">Encart 8-7 : tentative d'ajout d'un élément à un vecteur
 alors que nous utilisons une référence à un élément</span>
 
 <!--
@@ -499,7 +491,7 @@ in a vector of `i32` values and print them.
 Si nous voulons accéder à chaque élément d'un vecteur chacun à leur tour, nous
 pouvons itérer sur tous les éléments plutôt que d'utiliser individuellement les
 indices. L'encart 8-8 nous montre comment utiliser une boucle `for` pour obtenir
-des références imuables pour chacun des éléments dans un vecteur de `i32`, et
+des références immuables pour chacun des éléments dans un vecteur de `i32`, et
 les afficher.
 
 ```rust
@@ -514,7 +506,7 @@ for i in &v {
 iterating over the elements using a `for` loop</span>
 -->
 
-<span class="caption">Encart 8-8 : Afficher chaque élément d'un vecteur en
+<span class="caption">Encart 8-8 : affichage de chaque élément d'un vecteur en
 itérant sur les éléments en utilisant une boucle `for`</span>
 
 <!--
@@ -539,8 +531,8 @@ for i in &mut v {
 elements in a vector</span>
 -->
 
-<span class="caption">Encart 8-9 : Itérer avec des références mutables vers des
-éléments d'un vecteur</span>
+<span class="caption">Encart 8-9 : itérations sur des références mutables vers
+des éléments d'un vecteur</span>
 
 <!--
 To change the value that the mutable reference refers to, we have to use the
@@ -550,10 +542,10 @@ dereference operator (`*`) to get to the value in `i` before we can use the
 section of Chapter 15.
 -->
 
-Afin de changer la valeur que la référence mutable pointe, nous devons utiliser
+Afin de changer la valeur pointée par la référence mutable, nous devons utiliser
 l'opérateur de déréférencement (`*`) pour obtenir la valeur dans `i` avant que
-nous puissions utiliser l'opérateur `+=`. Nous verrons l'opérateur de
-déréférencement dans une section du [chapitre 15][deref].
+nous puissions utiliser l'opérateur `+=`. Nous verrons plus en détail
+l'opérateur de déréférencement dans une section du [chapitre 15][deref].
 
 <!--
 ### Using an Enum to Store Multiple Types
@@ -586,11 +578,11 @@ that of the enum. Then we can create a vector that holds that enum and so,
 ultimately, holds different types. We’ve demonstrated this in Listing 8-10.
 -->
 
-Par exemple, imaginons que nous voulons obtenir les valeurs d'une ligne d'une
+Par exemple, imaginons que nous voulions obtenir les valeurs d'une ligne d'une
 feuille de calculs dans laquelle quelques colonnes sont des entiers, d'autres
 des nombres à virgule flottante, et quelques chaînes de caractères. Nous pouvons
 définir une énumération dont les variantes vont avoir les différents types, et
-ainsi toutes les variantes de l'énumération seront du même type : celle de
+ainsi toutes les variantes de l'énumération seront du même type : celui de
 l'énumération. Ensuite, nous pouvons créer un vecteur qui stocke cette
 énumération et ainsi, au final, qui stocke différents types. La démonstration de
 cette technique est dans l'encart 8-10.
@@ -630,7 +622,7 @@ let ligne = vec![
 different types in one vector</span>
 -->
 
-<span class="caption">Encart 8-10 : Définition d'une `enum` pour stocker des
+<span class="caption">Encart 8-10 : définition d'une `enum` pour stocker des
 valeurs de différents types dans un seul vecteur</span>
 
 <!--
@@ -644,15 +636,16 @@ that Rust will ensure at compile time that every possible case is handled, as
 discussed in Chapter 6.
 -->
 
-Rust a besoin de savoir quel type de données sera stocké dans le vecteur au
-moment de la compilation afin de savoir exactement combien de mémoire il aura
-besoin pour stocker chaque élément sur le tas. Le second avantage est que nous
-sommes précis sur les types autorisés dans ce vecteur. Si Rust avait permis
-qu'un vecteur stocke n'importe quel type, il aurait pu avoir un risque qu'un ou
-plusieurs des types causerait une erreur avec les manipulations effectuées sur
-les éléments du vecteur. L'utilisation d'une énumération ainsi qu'une expression
-`match` peut permettre à Rust de garantir au moment de la compilation que tous
-les cas possibles sont traités, comme nous l'avons appris au chapitre 6.
+Rust a besoin de savoir quel type de donnée sera stocké dans le vecteur au
+moment de la compilation afin de connaître la quantité de mémoire nécessaire
+pour stocker chaque élément sur le tas. Le second avantage est que nous sommes
+précis sur les types autorisés dans ce vecteur. Si Rust avait permis qu'un
+vecteur stocke n'importe quel type, il y aurait pu avoir un risque qu'un ou
+plusieurs des types provoque(nt) une erreur avec les manipulations effectuées
+sur les éléments du vecteur. L'utilisation d'une énumération ainsi qu'une
+expression `match` peut permettre à Rust de garantir au moment de la compilation
+que tous les cas possibles sont traités, comme nous l'avons appris au
+chapitre 6.
 
 <!--
 When you’re writing a program, if you don’t know the exhaustive set of types
