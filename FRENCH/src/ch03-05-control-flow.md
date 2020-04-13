@@ -51,28 +51,12 @@ découvrir les expressions `if`. Dans le fichier *src/main.rs*, écrivez ceci :
 
 <!--
 ```rust
-fn main() {
-    let number = 3;
-
-    if number < 5 {
-        println!("condition was true");
-    } else {
-        println!("condition was false");
-    }
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-26-if-true/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let nombre = 3;
-
-    if nombre < 5 {
-        println!("La condition est vérifiée");
-    } else {
-        println!("La condition n'est pas vérifiée");
-    }
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-26-if-true/src/main.rs}}
 ```
 
 <!--
@@ -120,20 +104,12 @@ Essayez d'exécuter ce code ; vous verrez ceci :
 
 <!--
 ```text
-$ cargo run
-   Compiling branches v0.1.0 (file:///projects/branches)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.31 secs
-     Running `target/debug/branches`
-condition was true
+{{#include ../listings/ch03-common-programming-concepts/no-listing-26-if-true/output.txt}}
 ```
 -->
 
 ```text
-$ cargo run
-   Compiling branches v0.1.0 (file:///projects/branches)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.31 secs
-     Running `target/debug/branches`
-La condition est vérifiée
+{{#include ../listings/ch03-common-programming-concepts/no-listing-26-if-true/output.txt}}
 ```
 
 <!--
@@ -146,12 +122,12 @@ non vérifiée pour voir ce qui se passe :
 
 <!--
 ```rust,ignore
-let number = 7;
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-27-if-false/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-let nombre = 7;
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-27-if-false/src/main.rs:here}}
 ```
 
 <!--
@@ -162,20 +138,12 @@ Exécutez à nouveau le programme, et regardez le résultat :
 
 <!--
 ```text
-$ cargo run
-   Compiling branches v0.1.0 (file:///projects/branches)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.31 secs
-     Running `target/debug/branches`
-condition was false
+{{#include ../listings/ch03-common-programming-concepts/no-listing-27-if-false/output.txt}}
 ```
 -->
 
 ```text
-$ cargo run
-   Compiling branches v0.1.0 (file:///projects/branches)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.31 secs
-     Running `target/debug/branches`
-La condition n'est pas vérifiée
+{{#include ../listings/ch03-common-programming-concepts/no-listing-27-if-false/output.txt}}
 ```
 
 <!--
@@ -196,24 +164,12 @@ exemple, essayez d'exécuter le code suivant :
 
 <!--
 ```rust,ignore,does_not_compile
-fn main() {
-    let number = 3;
-
-    if number {
-        println!("number was three");
-    }
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-28-if-condition-must-be-bool/src/main.rs}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-fn main() {
-    let nombre = 3;
-
-    if nombre {
-        println!("Le nombre était trois");
-    }
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-28-if-condition-must-be-bool/src/main.rs}}
 ```
 
 <!--
@@ -225,26 +181,12 @@ La condition `if` vaut `3` cette fois, et Rust lève une erreur :
 
 <!--
 ```text
-error[E0308]: mismatched types
- -- > src/main.rs:4:8
-  |
-4 |     if number {
-  |        ^^^^^^ expected bool, found integer
-  |
-  = note: expected type `bool`
-             found type `{integer}`
+{{#include ../listings/ch03-common-programming-concepts/no-listing-28-if-condition-must-be-bool/output.txt}}
 ```
 -->
 
 ```text
-error[E0308]: mismatched types
- -- > src/main.rs:4:8
-  |
-4 |     if nombre {
-  |        ^^^^^^ expected bool, found integer
-  |
-  = note: expected type `bool`
-             found type `{integer}`
+{{#include ../listings/ch03-common-programming-concepts/no-listing-28-if-condition-must-be-bool/output.txt}}
 ```
 
 <!--
@@ -272,24 +214,12 @@ par la suivante :
 
 <!--
 ```rust
-fn main() {
-    let number = 3;
-
-    if number != 0 {
-        println!("number was something other than zero");
-    }
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-29-if-not-equal-0/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let nombre = 3;
-
-    if nombre != 0 {
-        println!("Le nombre valait autre chose que zéro");
-    }
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-29-if-not-equal-0/src/main.rs}}
 ```
 
 <!--
@@ -320,36 +250,12 @@ expression `else if`. Par exemple :
 
 <!--
 ```rust
-fn main() {
-    let number = 6;
-
-    if number % 4 == 0 {
-        println!("number is divisible by 4");
-    } else if number % 3 == 0 {
-        println!("number is divisible by 3");
-    } else if number % 2 == 0 {
-        println!("number is divisible by 2");
-    } else {
-        println!("number is not divisible by 4, 3, or 2");
-    }
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-30-else-if/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let nombre = 6;
-
-    if nombre % 4 == 0 {
-        println!("Le nombre est divisible par 4");
-    } else if nombre % 3 == 0 {
-        println!("Le nombre est divisible par 3");
-    } else if nombre % 2 == 0 {
-        println!("Le nombre est divisible par 2");
-    } else {
-        println!("Le nombre n'est pas divisible par 4, 3 ou 2");
-    }
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-30-else-if/src/main.rs}}
 ```
 
 <!--
@@ -362,20 +268,12 @@ exécuté, vous devriez voir le résultat suivant :
 
 <!--
 ```text
-$ cargo run
-   Compiling branches v0.1.0 (file:///projects/branches)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.31 secs
-     Running `target/debug/branches`
-number is divisible by 3
+{{#include ../listings/ch03-common-programming-concepts/no-listing-30-else-if/output.txt}}
 ```
 -->
 
 ```text
-$ cargo run
-   Compiling branches v0.1.0 (file:///projects/branches)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.31 secs
-     Running `target/debug/branches`
-Le nombre est divisible par 3
+{{#include ../listings/ch03-common-programming-concepts/no-listing-30-else-if/output.txt}}
 ```
 
 <!--
@@ -427,30 +325,12 @@ instruction `let`, comme dans l'encart 3-2.
 
 <!--
 ```rust
-fn main() {
-    let condition = true;
-    let number = if condition {
-        5
-    } else {
-        6
-    };
-
-    println!("The value of number is: {}", number);
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/listing-03-02/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let condition = true;
-    let nombre = if condition {
-        5
-    } else {
-        6
-    };
-
-    println!("La valeur du nombre est : {}", nombre);
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/listing-03-02/src/main.rs}}
 ```
 
 <!--
@@ -471,20 +351,12 @@ Exécutez ce code pour découvrir ce qui va se passer :
 
 <!--
 ```text
-$ cargo run
-   Compiling branches v0.1.0 (file:///projects/branches)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.30 secs
-     Running `target/debug/branches`
-The value of number is: 5
+{{#include ../listings/ch03-common-programming-concepts/listing-03-02/output.txt}}
 ```
 -->
 
 ```text
-$ cargo run
-   Compiling branches v0.1.0 (file:///projects/branches)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.30 secs
-     Running `target/debug/branches`
-La valeur du nombre est : 5
+{{#include ../listings/ch03-common-programming-concepts/listing-03-02/output.txt}}
 ```
 
 <!--
@@ -514,32 +386,12 @@ obtenir une erreur :
 
 <!--
 ```rust,ignore,does_not_compile
-fn main() {
-    let condition = true;
-
-    let number = if condition {
-        5
-    } else {
-        "six"
-    };
-
-    println!("The value of number is: {}", number);
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-31-arms-must-return-same-type/src/main.rs}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-fn main() {
-    let condition = true;
-
-    let nombre = if condition {
-        5
-    } else {
-        "six"
-    };
-
-    println!("La valeur du nombre est : {}", nombre);
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-31-arms-must-return-same-type/src/main.rs}}
 ```
 
 <!--
@@ -554,36 +406,12 @@ Rust indique exactement où trouver le problème dans le programme :
 
 <!--
 ```text
-error[E0308]: if and else have incompatible types
- -- > src/main.rs:4:18
-  |
-4 |       let number = if condition {
-  |  __________________^
-5 | |         5
-6 | |     } else {
-7 | |         "six"
-8 | |     };
-  | |_____^ expected integer, found &str
-  |
-  = note: expected type `{integer}`
-             found type `&str`
+{{#include ../listings/ch03-common-programming-concepts/no-listing-31-arms-must-return-same-type/output.txt}}
 ```
 -->
 
 ```text
-error[E0308]: if and else have incompatible types
- -- > src/main.rs:4:18
-  |
-4 |       let nombre = if condition {
-  |  __________________^
-5 | |         5
-6 | |     } else {
-7 | |         "six"
-8 | |     };
-  | |_____^ expected integer, found &str
-  |
-  = note: expected type `{integer}`
-             found type `&str`
+{{#include ../listings/ch03-common-programming-concepts/no-listing-31-arms-must-return-same-type/output.txt}}
 ```
 
 <!--
@@ -663,20 +491,12 @@ ceci :
 
 <!--
 ```rust,ignore
-fn main() {
-    loop {
-        println!("again!");
-    }
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-32-loop/src/main.rs}}
 ```
 -->
 
 ```rust,ignore
-fn main() {
-    loop {
-        println!("À nouveau !");
-    }
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-32-loop/src/main.rs}}
 ```
 
 <!--
@@ -693,10 +513,18 @@ ctrl-c</span>, pour arrêter un programme qui est bloqué dans une boucle infini
 Essayons cela :
 
 <!--
+<!-- manual-regeneration
+cd listings/ch03-common-programming-concepts/no-listing-32-loop
+cargo run
+CTRL-C
+-- >
+-->
+
+<!--
 ```text
 $ cargo run
    Compiling loops v0.1.0 (file:///projects/loops)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.29 secs
+    Finished dev [unoptimized + debuginfo] target(s) in 0.29s
      Running `target/debug/loops`
 again!
 again!
@@ -709,7 +537,7 @@ again!
 ```text
 $ cargo run
    Compiling loops v0.1.0 (file:///projects/loops)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.29 secs
+    Finished dev [unoptimized + debuginfo] target(s) in 0.29s
      Running `target/debug/loops`
 À nouveau !
 À nouveau !
@@ -771,36 +599,12 @@ ci-dessous :
 
 <!--
 ```rust
-fn main() {
-    let mut counter = 0;
-
-    let result = loop {
-        counter += 1;
-
-        if counter == 10 {
-            break counter * 2;
-        }
-    };
-
-    println!("The result is {}", result);
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-33-return-value-from-loop/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let mut compteur = 0;
-
-    let resultat = loop {
-        compteur += 1;
-
-        if compteur == 10 {
-            break compteur * 2;
-        }
-    };
-
-    println!("Le résultat est {}", resultat);
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-33-return-value-from-loop/src/main.rs}}
 ```
 
 <!--
@@ -862,32 +666,12 @@ fois, et ensuite, après la boucle, il va afficher un message et se fermer.
 
 <!--
 ```rust
-fn main() {
-    let mut number = 3;
-
-    while number != 0 {
-        println!("{}!", number);
-
-        number -= 1;
-    }
-
-    println!("LIFTOFF!!!");
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/listing-03-03/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let mut nombre = 3;
-
-    while nombre != 0 {
-        println!("{} !", nombre);
-
-        nombre -= 1;
-    }
-
-    println!("DÉCOLLAGE !!!");
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/listing-03-03/src/main.rs}}
 ```
 
 <!--
@@ -931,30 +715,12 @@ Vous pouvez utiliser la construction `while` pour itérer sur les
 
 <!--
 ```rust
-fn main() {
-    let a = [10, 20, 30, 40, 50];
-    let mut index = 0;
-
-    while index < 5 {
-        println!("the value is: {}", a[index]);
-
-        index += 1;
-    }
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/listing-03-04/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let a = [10, 20, 30, 40, 50];
-    let mut indice = 0;
-
-    while indice < 5 {
-        println!("La valeur est : {}", a[indice]);
-
-        indice += 1;
-    }
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/listing-03-04/src/main.rs}}
 ```
 
 <!--
@@ -979,28 +745,12 @@ plus vraie). Exécuter ce code va afficher chaque élément du tableau :
 
 <!--
 ```text
-$ cargo run
-   Compiling loops v0.1.0 (file:///projects/loops)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.32 secs
-     Running `target/debug/loops`
-the value is: 10
-the value is: 20
-the value is: 30
-the value is: 40
-the value is: 50
+{{#include ../listings/ch03-common-programming-concepts/listing-03-04/output.txt}}
 ```
 -->
 
 ```text
-$ cargo run
-   Compiling loops v0.1.0 (file:///projects/loops)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.32 secs
-     Running `target/debug/loops`
-La valeur est : 10
-La valeur est : 20
-La valeur est : 30
-La valeur est : 40
-La valeur est : 50
+{{#include ../listings/ch03-common-programming-concepts/listing-03-04/output.txt}}
 ```
 
 <!--
@@ -1042,24 +792,12 @@ s'utilise comme dans le code de l'encart 3-5.
 
 <!--
 ```rust
-fn main() {
-    let a = [10, 20, 30, 40, 50];
-
-    for element in a.iter() {
-        println!("the value is: {}", element);
-    }
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/listing-03-05/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let a = [10, 20, 30, 40, 50];
-
-    for element in a.iter() {
-        println!("La valeur est : {}", element);
-    }
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/listing-03-05/src/main.rs}}
 ```
 
 <!--
@@ -1084,17 +822,18 @@ si on dépassait la fin du tableau, ou si on n'allait pas jusqu'au bout
 et qu'on ratait quelques éléments.
 
 <!--
-For example, in the code in Listing 3-4, if you removed an item from the `a`
-array but forgot to update the condition to `while index < 4`, the code would
-panic. Using the `for` loop, you wouldn’t need to remember to change any other
-code if you changed the number of values in the array.
+For example, in the code in Listing 3-4, if you changed the definition of the
+`a` array to have four elements but forgot to update the condition to `while
+index < 4`, the code would panic. Using the `for` loop, you wouldn’t need to
+remember to change any other code if you changed the number of values in the
+array.
 -->
 
-Par exemple, dans le code de l'encart 3-4, si vous enlevez un élément du
-tableau `a` mais que vous oubliez de mettre à jour la condition tel que
-`while indice < 4`, le code va paniquer. En utilisant la boucle `for`, vous
-n'aurez pas à vous rappeler de changer le code si vous changez le nombre de
-valeurs dans le tableau.
+Par exemple, dans le code de l'encart 3-4, si vous changez la définition du
+tableau `a` pour qu'il stocle quatre éléments mais que vous oubliez de mettre à
+jour la condition tel que `while indice < 4`, le code va paniquer. En utilisant
+la boucle `for`, vous n'aurez pas à vous rappeler de changer le code si vous
+changez le nombre de valeurs dans le tableau.
 
 <!--
 The safety and conciseness of `for` loops make them the most commonly used loop
@@ -1130,22 +869,12 @@ méthode que nous n'avons pas encore vue, `rev`, qui inverse l'intervalle :
 
 <!--
 ```rust
-fn main() {
-    for number in (1..4).rev() {
-        println!("{}!", number);
-    }
-    println!("LIFTOFF!!!");
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-34-for-range/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    for nombre in (1..4).rev() {
-        println!("{} !", nombre);
-    }
-    println!("DÉCOLLAGE !!!");
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-34-for-range/src/main.rs}}
 ```
 
 <!--

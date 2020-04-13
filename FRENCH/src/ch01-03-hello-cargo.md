@@ -48,6 +48,12 @@ avez utilisé l'installateur officiel présenté dans la section
 autrement, vérifiez que Cargo est installé en utilisant la commande suivante
 dans votre terminal :
 
+<!--
+```text
+$ cargo --version
+```
+-->
+
 ```text
 $ cargo --version
 ```
@@ -81,6 +87,13 @@ notre projet initial “Hello, world!”. Retournez dans votre dossier *projects
 (ou là où vous avez décidé d'enregistrer votre code). Ensuite, sur n'importe
 quel système d'exploitation, lancez les commandes suivantes :
 
+<!--
+```text
+$ cargo new hello_cargo
+$ cd hello_cargo
+```
+-->
+
 ```text
 $ cargo new hello_cargo
 $ cd hello_cargo
@@ -99,15 +112,24 @@ avec le même nom.
 <!--
 Go into the *hello_cargo* directory and list the files. You’ll see that Cargo
 has generated two files and one directory for us: a *Cargo.toml* file and a
-*src* directory with a *main.rs* file inside. It has also initialized a new Git
-repository along with a *.gitignore* file.
+*src* directory with a *main.rs* file inside.
 -->
 
 Rendez-vous dans le dossier *hello_cargo* et afficher la liste des fichiers.
 Vous constaterez que Cargo a généré deux fichiers et un dossier pour nous : un
 fichier *Cargo.toml* et un dossier *src* avec un fichier *main.rs* à
-l'intérieur. Il a aussi créé un nouveau dépôt Git ainsi qu'un fichier
-*.gitignore*.
+l'intérieur.
+
+<!--
+It has also initialized a new Git repository along with a *.gitignore* file.
+Git files won’t be generated if you run `cargo new` within an existing Git
+repository; you can override this behavior by using `cargo new --vcs=git`.
+-->
+
+Il a aussi créé un nouveau dépôt Git ainsi qu'un fichier *.gitignore*. Les
+fichiers de Git ne seront pas générés si vous lancez `cargo new` au sein d'un
+dépôt Git ; vous pouvez désactiver ce comportement temporairement en utilisant
+`cargo new --vcs=git`.
 
 <!--
 > Note: Git is a common version control system. You can change `cargo new` to
@@ -134,6 +156,18 @@ Ouvrez *Cargo.toml* dans votre éditeur de texte favori. Son contenu devrait
 
 <span class="filename">Fichier : Cargo.toml</span>
 
+<!--
+```toml
+[package]
+name = "hello_cargo"
+version = "0.1.0"
+authors = ["Your Name <you@example.com>"]
+edition = "2018"
+
+[dependencies]
+```
+-->
+
 ```toml
 [package]
 name = "hello_cargo"
@@ -159,6 +193,10 @@ Language*) format, which is Cargo’s configuration format.
 
 Ce fichier est au format [*TOML*][toml]<!-- ignore --> (*Tom’s Obvious, Minimal
 Language*), qui est le format de configuration de Cargo.
+
+<!--
+[toml]: https://github.com/toml-lang/toml
+-->
 
 [toml]: https://github.com/toml-lang/toml
 
@@ -212,6 +250,14 @@ Maintenant, ouvrez *src/main.rs* et jetez-y un coup d'œil :
 -->
 
 <span class="filename">Fichier : src/main.rs</span>
+
+<!--
+```rust
+fn main() {
+    println!("Hello, world!");
+}
+```
+-->
 
 ```rust
 fn main() {
@@ -274,6 +320,14 @@ Maintenant, regardons ce qu'il y a de différent quand nous compilons et
 exécutons le programme “Hello, world!” avec Cargo ! À l'intérieur de votre
 dossier *hello_cargo*, compilez votre projet en utilisant la commande suivante :
 
+<!--
+```text
+$ cargo build
+   Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)
+    Finished dev [unoptimized + debuginfo] target(s) in 2.85 secs
+```
+-->
+
 ```text
 $ cargo build
    Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)
@@ -330,6 +384,15 @@ Nous venons de compiler un projet avec `cargo build` avant de l'exécuter avec
 compiler le code et ensuite lancer l'exécutable dans une seule et même
 commande :
 
+<!--
+```text
+$ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+     Running `target/debug/hello_cargo`
+Hello, world!
+```
+-->
+
 ```text
 $ cargo run
     Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
@@ -350,6 +413,16 @@ donc il a juste exécuté le binaire. Si vous aviez modifié votre code source,
 Cargo aurait recompilé le projet avant de le lancer, et vous auriez eu les
 messages suivants :
 
+<!--
+```text
+$ cargo run
+   Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.33 secs
+     Running `target/debug/hello_cargo`
+Hello, world!
+```
+-->
+
 ```text
 $ cargo run
    Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)
@@ -366,6 +439,14 @@ your code to make sure it compiles but doesn’t produce an executable:
 Cargo fournit aussi une commande appelée `cargo check`. Elle vérifie rapidement
 votre code pour s'assurer qu'il est compilable, mais ne produit pas
 d'exécutable :
+
+<!--
+```text
+$ cargo check
+   Checking hello_cargo v0.1.0 (file:///projects/hello_cargo)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.32 secs
+```
+-->
 
 ```text
 $ cargo check
@@ -504,6 +585,10 @@ For more information about Cargo, check out [its documentation].
 Pour plus d'informations à propos de Cargo, vous pouvez consulter [sa
 documentation][its documentation].
 
+<!--
+[its documentation]: https://doc.rust-lang.org/cargo/
+-->
+
 [its documentation]: https://doc.rust-lang.org/cargo/
 
 <!--
@@ -548,5 +633,9 @@ s'habituer à lire et écrire du code Rust. Donc, au chapitre 2, nous allons
 Si vous préférez commencer par apprendre comment les principes de programmation
 de base fonctionnent avec Rust, rendez-vous au chapitre 3, puis revenez au
 chapitre 2.
+
+<!--
+[installation]: ch01-01-installation.html#installation
+-->
 
 [installation]: ch01-01-installation.html#installation

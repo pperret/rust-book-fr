@@ -38,28 +38,12 @@ la racine de la crate est *src/main.rs*.
 
 <!--
 ```rust,ignore
-mod front_of_house;
-
-pub use crate::front_of_house::hosting;
-
-pub fn eat_at_restaurant() {
-    hosting::add_to_waitlist();
-    hosting::add_to_waitlist();
-    hosting::add_to_waitlist();
-}
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-21-and-22/src/lib.rs}}
 ```
 -->
 
 ```rust,ignore
-mod salle_a_manger;
-
-pub use crate::salle_a_manger::accueil;
-
-pub fn manger_au_restaurant() {
-    accueil::ajouter_a_la_liste_attente();
-    accueil::ajouter_a_la_liste_attente();
-    accueil::ajouter_a_la_liste_attente();
-}
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-21-and-22/src/lib.rs}}
 ```
 
 <!--
@@ -85,17 +69,13 @@ Et *src/salle_a_manger.rs* contiendra la définition du corps du module
 <span class="filename">Fichier : src/salle_a_manger.rs</span>
 
 <!--
-```rust
-pub mod hosting {
-    pub fn add_to_waitlist() {}
-}
+```rust,ignore
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-21-and-22/src/front_of_house.rs}}
 ```
 -->
 
-```rust
-pub mod accueil {
-    pub fn ajouter_a_la_liste_attente() {}
-}
+```rust,ignore
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-21-and-22/src/front_of_house.rs}}
 ```
 
 <!--
@@ -128,13 +108,13 @@ le même nom que le module. Pour continuer avec notre exemple et déplacer
 <span class="filename">Fichier : src/salle_a_manger.rs</span>
 
 <!--
-```
-pub mod hosting;
+```rust,ignore
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/no-listing-02-extracting-hosting/src/front_of_house.rs}}
 ```
 -->
 
-```
-pub mod accueil;
+```rust,ignore
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/no-listing-02-extracting-hosting/src/front_of_house.rs}}
 ```
 
 <!--
@@ -154,13 +134,13 @@ Ensuite, nous créons un dossier *src/salle_a_manger* et un fichier
 <span class="filename">Fichier : src/salle_a_manger/accueil.rs</span>
 
 <!--
-```
-pub fn add_to_waitlist() {}
+```rust
+{{# rustdoc_include ../listings/ch07-managing-growing-projects/no-listing-02-extracting-hosting/src/front_of_house/hosting.rs}}
 ```
 -->
 
-```
-pub fn ajouter_a_la_liste_attente() {}
+```rust
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/no-listing-02-extracting-hosting/src/accueil/hosting.rs}}
 ```
 
 <!--

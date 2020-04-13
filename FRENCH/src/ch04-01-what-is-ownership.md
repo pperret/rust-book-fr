@@ -68,14 +68,14 @@ chaînes de caractères.
 > be described in relation to the stack and the heap later in this chapter, so
 > here is a brief explanation in preparation.
 >
-> Both the stack and the heap are parts of memory that are available to your code
-> to use at runtime, but they are structured in different ways. The stack stores
-> values in the order it gets them and removes the values in the opposite order.
-> This is referred to as *last in, first out*. Think of a stack of plates: when
-> you add more plates, you put them on top of the pile, and when you need a
-> plate, you take one off the top. Adding or removing plates from the middle or
-> bottom wouldn’t work as well! Adding data is called *pushing onto the stack*,
-> and removing data is called *popping off the stack*.
+> Both the stack and the heap are parts of memory that are available to your
+> code to use at runtime, but they are structured in different ways. The stack
+> stores values in the order it gets them and removes the values in the
+> opposite order. This is referred to as *last in, first out*. Think of a stack
+> of plates: when you add more plates, you put them on top of the pile, and
+> when you need a plate, you take one off the top. Adding or removing plates
+> from the middle or bottom wouldn’t work as well! Adding data is called
+> *pushing onto the stack*, and removing data is called *popping off the stack*.
 >
 > All data stored on the stack must have a known, fixed size. Data with an
 > unknown size at compile time or a size that might change must be stored on
@@ -255,6 +255,12 @@ Pour le premier exemple de possession, nous allons analyser la *portée* de
 certaines variables. Une portée est une zone dans un programme dans laquelle un
 élément est en vigueur. Imaginons que nous ayons la variable suivante :
 
+<!--
+```rust
+let s = "hello";
+```
+-->
+
 ```rust
 let s = "hello";
 ```
@@ -274,20 +280,12 @@ est en vigueur :
 
 <!--
 ```rust
-{                      // s is not valid here, it’s not yet declared
-    let s = "hello";   // s is valid from this point forward
-
-    // do stuff with s
-}                      // this scope is now over, and s is no longer valid
+{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-01/src/main.rs:here}}
 ```
 -->
 
 ```rust
-{            // s n'est pas en vigueur ici, elle n'est pas encore déclarée
-    let s = "hello";   // s est en vigueur à partir de ce point
-
-    // on fait des choses avec s ici
-}            // cette portée est maintenant terminée, et s n'est plus en vigueur
+{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-01/src/main.rs:here}}
 ```
 
 <!--
@@ -383,6 +381,12 @@ est ainsi capable de stocker une quantité de texte qui nous est inconnue au
 moment de la compilation. Vous pouvez créer une `String` à partir d'un littéral
 de chaîne de caractères en utilisant la fonction `from`, comme ceci :
 
+<!--
+```rust
+let s = String::from("hello");
+```
+-->
+
 ```rust
 let s = String::from("hello");
 ```
@@ -412,20 +416,12 @@ Ce type de chaîne de caractères *peut* être mutable :
 
 <!--
 ```rust
-let mut s = String::from("hello");
-
-s.push_str(", world!"); // push_str() appends a literal to a String
-
-println!("{}", s); // This will print `hello, world!`
+{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-01-can-mutate-string/src/main.rs:here}}
 ```
 -->
 
 ```rust
-let mut s = String::from("hello");
-
-s.push_str(", world!"); // push_str() ajoute un littéral de chaîne dans une String
-
-println!("{}", s); // Cela va afficher `hello, world!`
+{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-01-can-mutate-string/src/main.rs:here}}
 ```
 
 <!--
@@ -528,22 +524,12 @@ de chaîne de caractères :
 
 <!--
 ```rust
-{
-    let s = String::from("hello"); // s is valid from this point forward
-
-    // do stuff with s
-}                                  // this scope is now over, and s is no
-                                   // longer valid
+{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-02-string-scope/src/main.rs:here}}
 ```
 -->
 
 ```rust
-{
-    let s = String::from("hello"); // s est en vigueur à partir de ce point
-
-    // on fait des choses avec s ici
-}                                  // cette portée est désormais terminée, et s
-                                   // n'est plus en vigueur maintenant
+{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-02-string-scope/src/main.rs:here}}
 ```
 
 <!--
@@ -600,9 +586,14 @@ Let’s look at an example using an integer in Listing 4-2.
 Plusieurs variables peuvent interagir avec les mêmes données de différentes
 manières en Rust. Regardons un exemple avec un entier dans l'encart 4-2 :
 
+<!--
 ```rust
-let x = 5;
-let y = x;
+{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-02/src/main.rs:here}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-02/src/main.rs:here}}
 ```
 
 <!--
@@ -633,9 +624,14 @@ Now let’s look at the `String` version:
 
 Maintenant, essayons une nouvelle version avec `String` :
 
+<!--
 ```rust
-let s1 = String::from("hello");
-let s2 = s1;
+{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-03-string-move/src/main.rs:here}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-03-string-move/src/main.rs:here}}
 ```
 
 <!--
@@ -790,11 +786,13 @@ besoin de libérer quoi que ce soit lorsque `s1` sort de la portée. Regardez ce
 qu'il se passe quand vous essayez d'utiliser `s1` après que `s2` est créé,
 cela ne va pas fonctionner :
 
-```rust,ignore,does_not_compile
-let s1 = String::from("hello");
-let s2 = s1;
+<!--
+{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-04-cant-use-after-move/src/main.rs:here}}
+```
+-->
 
-println!("{}, world!", s1);
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-04-cant-use-after-move/src/main.rs:here}}
 ```
 
 <!--
@@ -805,18 +803,14 @@ invalidated reference:
 Vous allez avoir une erreur comme celle-ci, car Rust vous défend d'utiliser la
 référence qui n'est plus en vigueur :
 
+<!--
 ```text
-error[E0382]: use of moved value: `s1`
- -- > src/main.rs:5:28
-  |
-3 |     let s2 = s1;
-  |         -- value moved here
-4 |
-5 |     println!("{}, world!", s1);
-  |                            ^^ value used here after move
-  |
-  = note: move occurs because `s1` has type `std::string::String`, which does
-  not implement the `Copy` trait
+{{#include ../listings/ch04-understanding-ownership/no-listing-04-cant-use-after-move/output.txt}}
+```
+-->
+
+```text
+{{#include ../listings/ch04-understanding-ownership/no-listing-04-cant-use-after-move/output.txt}}
 ```
 
 <!--
@@ -897,11 +891,14 @@ Here’s an example of the `clone` method in action:
 
 Voici un exemple d'utilisation de la méthode `clone` :
 
+<!--
 ```rust
-let s1 = String::from("hello");
-let s2 = s1.clone();
+{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-05-clone/src/main.rs:here}}
+```
+-->
 
-println!("s1 = {}, s2 = {}", s1, s2);
+```rust
+{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-05-clone/src/main.rs:here}}
 ```
 
 <!--
@@ -937,11 +934,14 @@ Il y a un autre détail dont on n'a pas encore parlé. Le code suivant utilise
 des entiers, et on en a vu une partie dans l'encart 4-2 ; il fonctionne et
 est correct :
 
+<!--
 ```rust
-let x = 5;
-let y = x;
+{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-06-copy/src/main.rs:here}}
+```
+-->
 
-println!("x = {}, y = {}", x, y);
+```rust
+{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-06-copy/src/main.rs:here}}
 ```
 
 <!--
@@ -1049,55 +1049,12 @@ portée :
 
 <!--
 ```rust
-fn main() {
-    let s = String::from("hello");  // s comes into scope
-
-    takes_ownership(s);             // s's value moves into the function...
-                                    // ... and so is no longer valid here
-
-    let x = 5;                      // x comes into scope
-
-    makes_copy(x);                  // x would move into the function,
-                                    // but i32 is Copy, so it’s okay to still
-                                    // use x afterward
-
-} // Here, x goes out of scope, then s. But because s's value was moved, nothing
-  // special happens.
-
-fn takes_ownership(some_string: String) { // some_string comes into scope
-    println!("{}", some_string);
-} // Here, some_string goes out of scope and `drop` is called. The backing
-  // memory is freed.
-
-fn makes_copy(some_integer: i32) { // some_integer comes into scope
-    println!("{}", some_integer);
-} // Here, some_integer goes out of scope. Nothing special happens.
+{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-03/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let s = String::from("hello");  // s rentre dans la portée.
-
-    prendre_possession(s);  // La valeur de s est déplacée dans la fonction…
-                            // … et n'est plus en vigueur à partir d'ici
-
-    let x = 5;              // x rentre dans la portée.
-
-    creer_copie(x);         // x va être déplacée dans la fonction,
-                            // mais i32 est Copy, donc on peut
-                            // utiliser x ensuite.
-
-} // Ici, x sort de la portée, puis ensuite s. Mais puisque la valeur de s a
-  // été déplacée, il ne se passe rien de spécial.
-
-fn prendre_possession(texte: String) { // texte rentre dans la portée.
-    println!("{}", texte);
-} // Ici, texte sort de la portée et `drop` est appelé. La mémoire est libérée.
-
-fn creer_copie(entier: i32) { // entier rentre dans la portée.
-    println!("{}", entier);
-} // Ici, entier sort de la portée. Il ne se passe rien de spécial.
+{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-03/src/main.rs}}
 ```
 
 <!--
@@ -1143,68 +1100,12 @@ exemple avec des annotations similaires à celles de l'encart 4-3 :
 
 <!--
 ```rust
-fn main() {
-    let s1 = gives_ownership();         // gives_ownership moves its return
-                                        // value into s1
-
-    let s2 = String::from("hello");     // s2 comes into scope
-
-    let s3 = takes_and_gives_back(s2);  // s2 is moved into
-                                        // takes_and_gives_back, which also
-                                        // moves its return value into s3
-} // Here, s3 goes out of scope and is dropped. s2 goes out of scope but was
-  // moved, so nothing happens. s1 goes out of scope and is dropped.
-
-fn gives_ownership() -> String {             // gives_ownership will move its
-                                             // return value into the function
-                                             // that calls it
-
-    let some_string = String::from("hello"); // some_string comes into scope
-
-    some_string                              // some_string is returned and
-                                             // moves out to the calling
-                                             // function
-}
-
-// takes_and_gives_back will take a String and return one
-fn takes_and_gives_back(a_string: String) -> String { // a_string comes into
-                                                      // scope
-
-    a_string  // a_string is returned and moves out to the calling function
-}
+{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-04/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let s1 = donne_possession();     // donne_possession déplace sa valeur de
-                                     // retour dans s1
-
-    let s2 = String::from("hello");  // s2 rentre dans la portée
-
-    let s3 = prend_et_rend(s2);      // s2 est déplacée dans
-                                     // prend_et_rend, qui elle aussi
-                                     // déplace sa valeur de retour dans s3.
-} // Ici, s3 sort de la portée et est éliminée. s2 sort de la portée mais a été
-  // déplacée donc il ne se passe rien. s1 sort aussi de la portée et est
-  // éliminée.
-
-fn donne_possession() -> String {        // donne_possession va déplacer sa
-                                         // valeur de retour dans la
-                                         // fonction qui l'appelle.
-
-    let texte = String::from("hello");   // texte rentre dans la portée.
-
-    texte                                // texte est retournée et
-                                         // est déplacée vers le code qui
-                                         // l'appelle.
-}
-
-// prend_et_rend va prendre une String et en retourne aussi une.
-fn prend_et_rend(texte: String) -> String { // texte rentre dans la portée.
-
-    texte  // texte est retournée et déplacée vers le code qui l'appelle.
-}
+{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-04/src/main.rs}}
 ```
 
 <!--
@@ -1257,36 +1158,12 @@ Il est possible de retourner plusieurs valeurs à l'aide d'un tuple, comme ceci�
 
 <!--
 ```rust
-fn main() {
-    let s1 = String::from("hello");
-
-    let (s2, len) = calculate_length(s1);
-
-    println!("The length of '{}' is {}.", s2, len);
-}
-
-fn calculate_length(s: String) -> (String, usize) {
-    let length = s.len(); // len() returns the length of a String
-
-    (s, length)
-}
+{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-05/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let s1 = String::from("hello");
-
-    let (s2, taille) = calculer_taille(s1);
-
-    println!("La taille de '{}' est {}.", s2, taille);
-}
-
-fn calculer_taille(s: String) -> (String, usize) {
-    let taille = s.len(); // len() retourne la taille d'une String.
-
-    (s, taille)
-}
+{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-05/src/main.rs}}
 ```
 
 <!--
