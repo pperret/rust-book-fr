@@ -14,6 +14,7 @@ français.
 | anti-pattern | anti-patron | - |
 | append | ajouter | - |
 | Appendix | annexe | tout en minuscule (sauf en début de phrase) |
+| append | ajouter | - |
 | Application Programming Interface (API) | interface de programmation applicative (API) | - |
 | assertion | vérification | - |
 | assign | assigner | - |
@@ -110,6 +111,7 @@ français.
 | generics | génériques / généricité | - |
 | generic type parameter | paramètre de type générique | - |
 | getter | accesseur | - |
+| grapheme cluster | groupe de graphèmes  | - |
 | glob | global | opérateur |
 | global scope | portée globale | - |
 | grapheme cluster | groupe de graphèmes  | - |
