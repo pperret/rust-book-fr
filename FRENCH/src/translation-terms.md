@@ -84,6 +84,7 @@ français.
 | deref coercion | extrapolation de déréferencement | - |
 | dereference operator | opérateur de déréférencement | - |
 | dereferencing | déréférencement | - |
+| design pattern | patron de conception | - |
 | destructor | destructeur | - |
 | destructure | déstructurer | - |
 | DevOps | DevOps | - |
