@@ -22,18 +22,18 @@ Rust supports it.
 
 Il n'y a aucun consensus parmi les programmeurs sur les fonctionnalités qu'un
 langage doit avoir pour être considéré orienté objet. Rust est influencé par
-beaucoup de paradigmes de programmation, y compris la POO ; par exemple, nous
+de nombreux paradigmes de programmation, y compris la POO ; par exemple, nous
 avons examiné les fonctionnalités issues de la programmation fonctionnelle au
 chapitre 13. On peut vraisemblablement dire que les langages orientés objet ont
-plusieurs caractéristiques en commun, à savoir les objets, l'encapsulation et
-l'héritage. Examinons chacune de ces caractéristiques et déterminons si Rust
+plusieurs caractéristiques en commun, comme les objets, l'encapsulation et
+l'héritage. Examinons chacune de ces caractéristiques et regardons si Rust
 les supporte.
 
 <!--
 ### Objects Contain Data and Behavior
 -->
 
-### Les objets contiennent des données et du comportement
+### Les objets contiennent des données et suivent un comportement
 
 <!--
 The book *Design Patterns: Elements of Reusable Object-Oriented Software* by
@@ -66,8 +66,8 @@ functionality, according to the Gang of Four’s definition of objects.
 
 Si l'on se tient à cette définition, Rust est orienté objet : les structures et
 les énumérations ont des données, et les blocs `impl` leur fournissent des
-méthodes. Bien que les structures et les énumérations ne soient pas qualifiées
-d'objets, elles en ont les fonctionnalités, selon la définition des objets par
+méthodes. Bien que les structures et les énumérations avec des méthodes ne soient pas qualifiées
+d'objets, elles en ont les fonctionnalités, d'après la définition des objets par
 le *Gang of Four*.
 
 <!--
@@ -91,7 +91,7 @@ qui signifie que les détails d'implémentation d'un objet ne sont pas accessibl
 au code utilisant cet objet. Ainsi, la seule façon d'interagir avec un objet est
 via son API publique ; le code qui utilise l'objet ne devrait pas pouvoir
 accéder aux éléments internes d'un objet et changer directement ses données ou
-son comportement. Cela permet au programmeur de changer et remanier les éléments
+son comportement. Cela permet au développeur de changer et remanier les éléments
 internes d'un objet sans avoir à changer le code qui utilise cet objet.
 
 <!--
@@ -146,7 +146,7 @@ collection</span>
 -->
 
 <span class="caption">Encart 17-1 : Une structure `CollectionMoyennee` qui
-maintient une liste d'entiers et la moyenne des éléments de la collection</span>
+contient une liste d'entiers et la moyenne des éléments de la collection</span>
 
 <!--
 The struct is marked `pub` so that other code can use it, but the fields within
@@ -293,10 +293,10 @@ que la structure de données, à l'avenir. Par exemple, nous pourrions utiliser
 un `HashSet<i32>` plutôt qu'un `Vec<i32>` pour le champ `liste`. Du moment que
 les signatures des méthodes publiques `ajouter`, `retirer` et `moyenne` restent
 les mêmes, du code qui utilise `CollectionMoyennee` n'aurait pas besoin de
-changer. En revanche, si nous avions rendu `liste` public, cela n'aurait pas été
+changer. En revanche, si nous avions fait en sorte que `liste` soit publique, cela n'aurait pas été
 forcément le cas : `HashSet<i32>` et `Vec<i32>` ont des méthodes différentes
 pour ajouter et retirer des éléments, donc il aurait vraisemblablement fallu
-changer le code externe s'il modifiait `liste` directement.
+changer le code externe s'il modifiait directement `liste`.
 
 <!--
 If encapsulation is a required aspect for a language to be considered object
@@ -357,7 +357,7 @@ implementation of a method inherited from a parent class.
 
 Il y a deux principales raisons de choisir l'héritage. La première raison est la
 réutilisation de code : vous pouvez implémenter un comportement particulier pour
-un type et l'héritage vous permet de réutiliser cette implémentation pour un
+un type, et l'héritage vous permet de réutiliser cette implémentation sur un
 autre type. À la place, vous pouvez partager du code Rust en utilisant des
 implémentations de méthodes de trait par défaut, comme nous l'avons vu dans
 l'encart 10-14 lorsque nous avons ajouté une implémentation par défaut de la
@@ -365,9 +365,9 @@ méthode `resumer` sur le trait `Resumable`. La méthode `resumer` serait alors
 disponible sur tout type implémentant le trait `Resumable` sans avoir besoin de
 rajouter du code. C'est comme si vous aviez une classe mère avec
 l'implémentation d'une méthode et une classe fille avec une autre implémentation
-de cette méthode. On peut aussi masquer l'implémentation par défaut de la
+de cette méthode. On peut aussi remplacer l'implémentation par défaut de la
 méthode `resumer` quand on implémente le trait `Resumable`, un peu comme une
-classe fille qui masque l'implémentation d'une méthode héritée d'une classe
+classe fille qui remplace l'implémentation d'une méthode héritée d'une classe
 mère.
 
 <!--
@@ -401,7 +401,7 @@ objets entre eux à l'exécution s'ils partagent certaines caractéristiques.
 > des données de divers types. Pour l'héritage, ces types sont généralement des
 > classes filles (ou *sous-classes*).
 >
-> À la place, Rust utilise la généricité pour abstraire les différents types et
+> À la place, Rust utilise la généricité pour construire des abstractions des différents types et
 > traits liés possibles pour imposer des contraintes sur ce que ces types
 > doivent fournir. Cela est parfois appelé *polymorphisme paramétrique borné*.
 
@@ -433,6 +433,6 @@ For these reasons, Rust takes a different approach, using trait objects instead
 of inheritance. Let’s look at how trait objects enable polymorphism in Rust.
 -->
 
-Voilà pourquoi Rust prend une autre approche, en utilisant des objets de trait
-plutôt que l'héritage. Jetons un œil à la façon dont les objets de trait
+Voilà pourquoi Rust suit une autre approche, en utilisant des objets traits
+plutôt que l'héritage. Jetons un œil à la façon dont les objets traits
 permettent le polymorphisme en Rust.
