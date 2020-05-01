@@ -105,7 +105,7 @@
 
 - [Les fonctionnalités orientées objet de Rust](ch17-00-oop.md)
     - [🚧 Les caractéristiques des langages orientés objet](ch17-01-what-is-oo.md)
-    - [💬 Using Trait Objects That Allow for Values of Different Types](ch17-02-trait-objects.md)
+    - [🚧 Utiliser les objets traits qui permettent des valeurs de types différents](ch17-02-trait-objects.md)
     - [💬 Implementing an Object-Oriented Design Pattern](ch17-03-oo-design-patterns.md)
 
 ## Sujets avancés
