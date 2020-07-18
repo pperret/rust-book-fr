@@ -80,7 +80,7 @@ chaînes de caractères.
 > All data stored on the stack must have a known, fixed size. Data with an
 > unknown size at compile time or a size that might change must be stored on
 > the heap instead. The heap is less organized: when you put data on the heap,
-> you request a certain amount of space. The operating system finds an empty
+> you request a certain amount of space. The memory allocator finds an empty
 > spot in the heap that is big enough, marks it as being in use, and returns a
 > *pointer*, which is the address of that location. This process is called
 > *allocating on the heap* and is sometimes abbreviated as just *allocating*.
@@ -94,9 +94,9 @@ chaînes de caractères.
 > you’ve been seated to find you.
 >
 > Pushing to the stack is faster than allocating on the heap because the
-> operating system never has to search for a place to store new data; that
+> allocator never has to search for a place to store new data; that
 > location is always at the top of the stack. Comparatively, allocating space
-> on the heap requires more work, because the operating system must first find
+> on the heap requires more work, because the allocator must first find
 > a big enough space to hold the data and then perform bookkeeping to prepare
 > for the next allocation.
 >
@@ -149,7 +149,7 @@ chaînes de caractères.
 > fixe. Les données avec une taille inconnue au moment de la compilation ou une
 > taille qui peut changer doivent plutôt être stockées sur le tas. Le tas est
 > moins bien organisé : lorsque vous ajoutez des données sur le tas, vous
-> demandez une certaine quantité d'espace mémoire. Le système d'exploitation va
+> demandez une certaine quantité d'espace mémoire. Le gestionnaire de mémoire va
 > trouver un emplacement dans le tas qui est suffisamment grand, va le marquer
 > comme étant en cours d'utilisation, et va retourner un *pointeur*, qui est
 > l'adresse de cet emplacement. Cette procédure est appelée *allocation sur le
@@ -164,12 +164,12 @@ chaînes de caractères.
 > dans votre groupe arrive en retard, il peut leur demander où vous êtes assis
 > pour vous rejoindre.
 >
-> Empiler sur la pile est plus rapide qu'allouer sur le tas car le système
-> d'exploitation ne va jamais avoir besoin de chercher un emplacement pour y
-> stocker les nouvelles données ; il le fait toujours au sommet de la pile. En
-> comparaison, allouer de la place sur le tas demande plus de travail, car le
-> système d'exploitation doit d'abord trouver un espace assez grand pour stocker
-> les données et mettre à jour son suivi pour préparer la prochaine allocation.
+> Empiler sur la pile est plus rapide qu'allouer sur le tas car le gestionnaire
+> ne va jamais avoir besoin de chercher un emplacement pour y stocker les
+> nouvelles données ; il le fait toujours au sommet de la pile. En comparaison,
+> allouer de la place sur le tas demande plus de travail, car le gestionnaire
+> doit d'abord trouver un espace assez grand pour stocker les données et mettre
+> à jour son suivi pour préparer la prochaine allocation.
 >
 > Accéder à des données dans le tas est plus lent que d'accéder aux données sur
 > la pile car nous devons suivre un pointeur pour les obtenir. Les processeurs
@@ -468,15 +468,15 @@ s'agrandir, nous devons allouer une quantité de mémoire sur le tas, inconnue
 au moment de la compilation, pour stocker le contenu. Cela signifie que :
 
 <!--
-* The memory must be requested from the operating system at runtime.
-* We need a way of returning this memory to the operating system when we’re
+* The memory must be requested from the memory allocator at runtime.
+* We need a way of returning this memory to the allocator when we’re
   done with our `String`.
 -->
 
-* La mémoire doit être demandée auprès du système d'exploitation lors de
+* La mémoire doit être demandée auprès du gestionnaire de mémoire lors de
   l'exécution.
-* Nous avons besoin d'un moyen de rendre cette mémoire au système
-  d'exploitation lorsque nous aurons fini d'utiliser notre `String`.
+* Nous avons besoin d'un moyen de rendre cette mémoire au gestionnaire lorsque
+  nous aurons fini d'utiliser notre `String`.
 
 <!--
 That first part is done by us: when we call `String::from`, its implementation
@@ -534,18 +534,18 @@ de chaîne de caractères :
 
 <!--
 There is a natural point at which we can return the memory our `String` needs
-to the operating system: when `s` goes out of scope. When a variable goes out
+to the allocator: when `s` goes out of scope. When a variable goes out
 of scope, Rust calls a special function for us. This function is called `drop`,
 and it’s where the author of `String` can put the code to return the memory.
 Rust calls `drop` automatically at the closing curly bracket.
 -->
 
 Il y a un moment naturel où nous devons rendre la mémoire de notre
-`String` au système d'exploitation : quand `s` sort de la portée. Quand une
-variable sort de la portée, Rust appelle une fonction spéciale pour nous. Cette
-fonction s'appelle `drop`, et c'est dans celle-ci que l'auteur de `String` a pu
-mettre le code pour libérer la mémoire. Rust appelle automatiquement `drop` à
-l'accolade fermante `}`.
+`String` au gestionnaire : quand `s` sort de la portée. Quand une variable sort
+de la portée, Rust appelle une fonction spéciale pour nous. Cette fonction
+s'appelle `drop`, et c'est dans celle-ci que l'auteur de `String` a pu mettre le
+code pour libérer la mémoire. Rust appelle automatiquement `drop` à l'accolade
+fermante `}`.
 
 <!--
 > Note: In C++, this pattern of deallocating resources at the end of an item’s
@@ -679,16 +679,16 @@ holding the value `"hello"` bound to `s1`</span>
 <!--
 The length is how much memory, in bytes, the contents of the `String` is
 currently using. The capacity is the total amount of memory, in bytes, that the
-`String` has received from the operating system. The difference between length
+`String` has received from the allocator. The difference between length
 and capacity matters, but not in this context, so for now, it’s fine to ignore
 the capacity.
 -->
 
 La taille est la quantité de mémoire, en octets, que le contenu de la `String`
 utilise actuellement. La capacité est la quantité totale de mémoire, en octets,
-que la `String` a reçue du système d'exploitation. La différence entre la taille
-et la capacité est importante, mais pas pour notre exemple, donc pour l'instant,
-ce n'est pas grave d'ignorer la capacité.
+que la `String` a reçue du gestionnaire. La différence entre la taille et la
+capacité est importante, mais pas pour notre exemple, donc pour l'instant, ce
+n'est pas grave d'ignorer la capacité.
 
 <!--
 When we assign `s1` to `s2`, the `String` data is copied, meaning we copy the
@@ -787,6 +787,7 @@ qu'il se passe quand vous essayez d'utiliser `s1` après que `s2` est créé,
 cela ne va pas fonctionner :
 
 <!--
+```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-04-cant-use-after-move/src/main.rs:here}}
 ```
 -->
@@ -804,12 +805,12 @@ Vous allez avoir une erreur comme celle-ci, car Rust vous défend d'utiliser la
 référence qui n'est plus en vigueur :
 
 <!--
-```text
+```console
 {{#include ../listings/ch04-understanding-ownership/no-listing-04-cant-use-after-move/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch04-understanding-ownership/no-listing-04-cant-use-after-move/output.txt}}
 ```
 

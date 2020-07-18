@@ -49,12 +49,12 @@ autrement, vérifiez que Cargo est installé en utilisant la commande suivante
 dans votre terminal :
 
 <!--
-```text
+```console
 $ cargo --version
 ```
 -->
 
-```text
+```console
 $ cargo --version
 ```
 
@@ -88,13 +88,13 @@ notre projet initial “Hello, world!”. Retournez dans votre dossier *projects
 quel système d'exploitation, lancez les commandes suivantes :
 
 <!--
-```text
+```console
 $ cargo new hello_cargo
 $ cd hello_cargo
 ```
 -->
 
-```text
+```console
 $ cargo new hello_cargo
 $ cd hello_cargo
 ```
@@ -321,14 +321,14 @@ exécutons le programme “Hello, world!” avec Cargo ! À l'intérieur de vot
 dossier *hello_cargo*, compilez votre projet en utilisant la commande suivante :
 
 <!--
-```text
+```console
 $ cargo build
    Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)
     Finished dev [unoptimized + debuginfo] target(s) in 2.85 secs
 ```
 -->
 
-```text
+```console
 $ cargo build
    Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)
     Finished dev [unoptimized + debuginfo] target(s) in 2.85 secs
@@ -345,13 +345,13 @@ Cette commande crée un fichier exécutable dans *target/debug/hello_cargo* (ou
 dossier courant. Vous pouvez lancer l'exécutable avec cette commande :
 
 <!--
-```text
+```console
 $ ./target/debug/hello_cargo # or .\target\debug\hello_cargo.exe on Windows
 Hello, world!
 ```
 -->
 
-```text
+```console
 $ ./target/debug/hello_cargo # ou .\target\debug\hello_cargo.exe sous Windows
 Hello, world!
 ```
@@ -385,7 +385,7 @@ compiler le code et ensuite lancer l'exécutable dans une seule et même
 commande :
 
 <!--
-```text
+```console
 $ cargo run
     Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
      Running `target/debug/hello_cargo`
@@ -393,7 +393,7 @@ Hello, world!
 ```
 -->
 
-```text
+```console
 $ cargo run
     Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
      Running `target/debug/hello_cargo`
@@ -414,7 +414,7 @@ Cargo aurait recompilé le projet avant de le lancer, et vous auriez eu les
 messages suivants :
 
 <!--
-```text
+```console
 $ cargo run
    Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)
     Finished dev [unoptimized + debuginfo] target(s) in 0.33 secs
@@ -423,7 +423,7 @@ Hello, world!
 ```
 -->
 
-```text
+```console
 $ cargo run
    Compiling hello_cargo v0.1.0 (file:///projects/hello_cargo)
     Finished dev [unoptimized + debuginfo] target(s) in 0.33 secs
@@ -441,14 +441,14 @@ votre code pour s'assurer qu'il est compilable, mais ne produit pas
 d'exécutable :
 
 <!--
-```text
+```console
 $ cargo check
    Checking hello_cargo v0.1.0 (file:///projects/hello_cargo)
     Finished dev [unoptimized + debuginfo] target(s) in 0.32 secs
 ```
 -->
 
-```text
+```console
 $ cargo check
    Checking hello_cargo v0.1.0 (file:///projects/hello_cargo)
     Finished dev [unoptimized + debuginfo] target(s) in 0.32 secs
@@ -477,16 +477,21 @@ Let’s recap what we’ve learned so far about Cargo:
 
 Récapitulons ce que nous avons appris sur Cargo :
 
+<!-- markdownlint-disable -->
 <!--
-* We can build a project using `cargo build` or `cargo check`.
+* We can build a project using `cargo build`.
 * We can build and run a project in one step using `cargo run`.
+* We can build a project without producing a binary to check for errors using `cargo check`.
 * Instead of saving the result of the build in the same directory as our code,
   Cargo stores it in the *target/debug* directory.
 -->
+<!-- markdownlint-restore -->
 
-* Nous pouvons compiler un projet en utilisant `cargo build` ou `cargo check`
+* Nous pouvons compiler un projet en utilisant `cargo build`.
 * Nous pouvons compiler puis exécuter un projet en une seule fois en utilisant
   `cargo run`.
+* Nous pouvons compiler un projet sans produire de binaire afin de vérifier
+  l'existance d'erreurs en utilisant `cargo check`.
 * Au lieu d'enregistrer le résultat de la compilation dans le même dossier que
   votre code, Cargo l'enregistre dans le dossier *target/debug*.
 
@@ -565,14 +570,14 @@ qu'à saisir les commandes suivantes pour télécharger le code avec Git, vous
 déplacer dans le dossier projet et compiler :
 
 <!--
-```text
+```console
 $ git clone someurl.com/someproject
 $ cd someproject
 $ cargo build
 ```
 -->
 
-```text
+```console
 $ git clone example.com/projet_quelconque
 $ cd projet_quelconque
 $ cargo build

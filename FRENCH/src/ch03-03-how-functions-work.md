@@ -81,12 +81,12 @@ apprendre plus sur les fonctions. Ajoutez l'exemple `une_autre_fonction` dans le
 *src/main.rs* et exécutez-le. Vous devriez avoir ceci :
 
 <!--
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-16-functions/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-16-functions/output.txt}}
 ```
 
@@ -156,12 +156,12 @@ Try running this program; you should get the following output:
 En exécutant ce programme, vous devriez obtenir ceci :
 
 <!--
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-17-functions-with-parameters/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-17-functions-with-parameters/output.txt}}
 ```
 
@@ -237,12 +237,12 @@ votre fichier *src/main.rs* de votre projet *functions* par l'exemple précéden
 et lancez-le en utilisant `cargo run` :
 
 <!--
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-18-functions-with-multiple-parameters/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-18-functions-with-multiple-parameters/output.txt}}
 ```
 
@@ -363,12 +363,12 @@ Quand vous exécutez ce programme, l'erreur que vous obtenez devrait ressembler 
 ceci :
 
 <!--
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-19-statements-vs-expressions/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-19-statements-vs-expressions/output.txt}}
 ```
 
@@ -516,12 +516,12 @@ parfaitement valide avec Rust. Remarquez que le type de retour de la fonction a
 devrait ressembler à ceci :
 
 <!--
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-21-function-return-values/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-21-function-return-values/output.txt}}
 ```
 
@@ -614,12 +614,12 @@ Compiling this code produces an error, as follows:
 Compiler ce code va produire une erreur, comme ci-dessous :
 
 <!--
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-23-statements-dont-return-values/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-23-statements-dont-return-values/output.txt}}
 ```
 

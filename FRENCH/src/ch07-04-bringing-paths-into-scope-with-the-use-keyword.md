@@ -461,18 +461,18 @@ télécharger le paquet `rand` et toutes ses dépendances à partir de
 
 <!--
 Then, to bring `rand` definitions into the scope of our package, we added a
-`use` line starting with the name of the package, `rand`, and listed the items
+`use` line starting with the name of the crate, `rand`, and listed the items
 we wanted to bring into scope. Recall that in the [“Generating a Random
 Number”][rand]<!-- ignore -- > section in Chapter 2, we brought the `Rng` trait
 into scope and called the `rand::thread_rng` function:
 -->
 
 Ensuite, pour importer les définitions de `rand` dans la portée de notre paquet,
-nous avons ajouté une ligne `use` qui commence avec le nom de notre paquet,
-`rand`, et nous avons listé les éléments que nous voulions importer dans notre
-portée. Dans la section [“Générer le nombre secret”][rand]<!-- ignore --> du
-chapitre 2, nous avons importé le trait `Rng` dans la portée, puis nous avons
-appelé la fonction `rand::thread_rng` :
+nous avons ajouté une ligne `use` qui commence avec le nom de la crate, `rand`,
+et nous avons listé les éléments que nous voulions importer dans notre portée.
+Dans la section [“Générer le nombre secret”][rand]<!-- ignore --> du chapitre 2,
+nous avons importé le trait `Rng` dans la portée, puis nous avons appelé la
+fonction `rand::thread_rng` :
 
 <!--
 ```rust,ignore
@@ -488,13 +488,14 @@ appelé la fonction `rand::thread_rng` :
 Members of the Rust community have made many packages available at
 [crates.io](https://crates.io/), and pulling any of them into your package
 involves these same steps: listing them in your package’s *Cargo.toml* file and
-using `use` to bring items into scope.
+using `use` to bring items from their crates into scope.
 -->
 
 Les membres de la communauté Rust ont mis à disposition de nombreux paquets
 dans [crates.io](https://crates.io/), et utiliser l'un d'entre eux dans votre
 paquet implique toujours ces mêmes étapes : les lister dans le fichier
-*Cargo.toml* de votre paquet et utiliser `use` pour les importer dans la portée.
+*Cargo.toml* de votre paquet et utiliser `use` pour importer certains éléments
+de ces crates dans la portée.
 
 <!--
 Note that the standard library (`std`) is also a crate that’s external to our
@@ -536,13 +537,13 @@ bibliothèque standard.
 ### Utiliser des chemins imbriqués pour simplifier les grandes listes de `use`
 
 <!--
-If we’re using multiple items defined in the same package or same module,
+If we’re using multiple items defined in the same crate or same module,
 listing each item on its own line can take up a lot of vertical space in our
 files. For example, these two `use` statements we had in the Guessing Game in
 Listing 2-4 bring items from `std` into scope:
 -->
 
-Si vous utilisez de nombreux éléments définis dans un même paquet ou dans un
+Si vous utilisez de nombreux éléments définis dans une même crate ou dans un
 même module, lister chaque élément sur sa propre ligne prendra beaucoup d'espace
 vertical dans vos fichiers. Par exemple, ces deux instructions `use`, que nous
 avions dans le jeu de devinettes, dans l'encart 2-4, importaient des éléments de
@@ -601,13 +602,13 @@ items with the same prefix into scope</span>
 plusieurs éléments avec le même préfixe dans la portée</span>
 
 <!--
-In bigger programs, bringing many items into scope from the same package or
+In bigger programs, bringing many items into scope from the same crate or
 module using nested paths can reduce the number of separate `use` statements
 needed by a lot!
 -->
 
 Pour des programmes plus gros, importer plusieurs éléments dans la portée pour
-le même paquet ou module en utilisant des chemins imbriqués peut réduire
+la même crate ou module en utilisant des chemins imbriqués peut réduire
 considérablement le nombre de `use` utilisés !
 
 <!--

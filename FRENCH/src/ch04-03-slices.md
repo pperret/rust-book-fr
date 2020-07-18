@@ -551,12 +551,12 @@ Here’s the compiler error:
 Voici l'erreur du compilateur :
 
 <!--
-```text
+```console
 {{#include ../listings/ch04-understanding-ownership/no-listing-19-slice-error/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch04-understanding-ownership/no-listing-19-slice-error/output.txt}}
 ```
 

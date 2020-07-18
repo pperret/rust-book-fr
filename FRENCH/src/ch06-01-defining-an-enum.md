@@ -686,12 +686,12 @@ If we run this code, we get an error message like this:
 Si nous lançons ce code, nous aurons un message d'erreur comme celui-ci :
 
 <!--
-```text
+```console
 {{#include ../listings/ch06-enums-and-pattern-matching/no-listing-07-cant-use-option-directly/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch06-enums-and-pattern-matching/no-listing-07-cant-use-option-directly/output.txt}}
 ```
 

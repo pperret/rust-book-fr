@@ -52,13 +52,13 @@ vous avez créé au chapitre 1 et utilisez Cargo pour créer votre projet, comme
 ceci :
 
 <!--
-```text
+```console
 $ cargo new guessing_game
 $ cd guessing_game
 ```
 -->
 
-```text
+```console
 $ cargo new jeu_du_plus_ou_du_moins
 $ cd jeu_du_plus_ou_du_moins
 ```
@@ -136,12 +136,12 @@ Maintenant, lançons la compilation de ce programme “Hello, world!” et
 son exécution en une seule commande avec `cargo run` :
 
 <!--
-```text
+```console
 {{#include ../listings/ch02-guessing-game-tutorial/no-listing-01-cargo-new/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch02-guessing-game-tutorial/no-listing-01-cargo-new/output.txt}}
 ```
 
@@ -683,12 +683,12 @@ Si on n'appelle pas `expect`, le programme compilera, mais avec un
 avertissement :
 
 <!--
-```text
+```console
 {{#include ../listings/ch02-guessing-game-tutorial/no-listing-02-without-expect/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch02-guessing-game-tutorial/no-listing-02-without-expect/output.txt}}
 ```
 
@@ -798,7 +798,7 @@ input 6 -- >
 -->
 
 <!--
-```text
+```console
 $ cargo run
    Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
     Finished dev [unoptimized + debuginfo] target(s) in 6.44s
@@ -810,7 +810,7 @@ You guessed: 6
 ```
 -->
 
-```text
+```console
 $ cargo run
    Compiling jeu_du_plus_ou_du_moins v0.1.0 (file:///projects/jeu_du_plus_ou_du_moins)
     Finished dev [unoptimized + debuginfo] target(s) in 6.44s
@@ -959,7 +959,7 @@ cargo build -- >
 -->
 
 <!--
-```text
+```console
 $ cargo build
     Updating crates.io index
   Downloaded rand v0.5.5
@@ -977,7 +977,7 @@ $ cargo build
 ```
 -->
 
-```text
+```console
 $ cargo build
     Updating crates.io index
   Downloaded rand v0.5.5
@@ -1079,14 +1079,14 @@ cargo build -- >
 -->
 
 <!--
-```text
+```console
 $ cargo build
    Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
     Finished dev [unoptimized + debuginfo] target(s) in 2.53 secs
 ```
 -->
 
-```text
+```console
 $ cargo build
    Compiling jeu_du_plus_ou_du_moins v0.1.0 (file:///projects/jeu_du_plus_ou_du_moins)
     Finished dev [unoptimized + debuginfo] target(s) in 2.53 secs
@@ -1192,14 +1192,14 @@ as a guide to creating the hypothetical output shown here -- >
 -->
 
 <!--
-```text
+```console
 $ cargo update
     Updating crates.io index
     Updating rand v0.5.5 -> v0.5.6
 ```
 -->
 
-```text
+```console
 $ cargo update
     Updating crates.io index
     Updating rand v0.5.5 -> v0.5.6
@@ -1390,7 +1390,7 @@ cargo run
 -->
 
 <!--
-```text
+```console
 $ cargo run
    Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
     Finished dev [unoptimized + debuginfo] target(s) in 2.53s
@@ -1412,7 +1412,7 @@ You guessed: 5
 ```
 -->
 
-```text
+```console
 $ cargo run
    Compiling jeu_du_plus_ou_du_moins v0.1.0 (file:///projects/jeu_du_plus_ou_du_moins)
     Finished dev [unoptimized + debuginfo] target(s) in 2.53s
@@ -1580,12 +1580,12 @@ Cependant, notre code dans l'encart 2-4 ne compile pas encore. Essayons de le
 faire :
 
 <!--
-```text
+```console
 {{#include ../listings/ch02-guessing-game-tutorial/listing-02-04/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch02-guessing-game-tutorial/listing-02-04/output.txt}}
 ```
 
@@ -1620,13 +1620,13 @@ nombre.
 <!--
 Ultimately, we want to convert the `String` the program reads as input into a
 real number type so we can compare it numerically to the secret number. We can
-do that by adding the following two lines to the `main` function body:
+do that by adding another line to the `main` function body:
 -->
 
 Au bout du compte, nous voulons convertir la `String` que le programme récupère
 de la saisie utilisateur en un nombre, pour qu'on puisse la comparer
-numériquement au nombre secret. Nous pouvons faire ceci en ajoutant les deux
-lignes suivantes dans le corps de la fonction `main` :
+numériquement au nombre secret. Nous pouvons faire ceci en ajoutant une ligne
+supplémentaire dans le corps de la fonction `main` :
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -1645,21 +1645,19 @@ lignes suivantes dans le corps de la fonction `main` :
 ```
 
 <!--
-The two new lines are:
+The line is:
 -->
 
-Les deux nouvelles lignes sont :
+La nouvelle ligne est :
 
 <!--
 ```rust,ignore
-let guess: u32 = guess.trim().parse()
-    .expect("Please type a number!");
+let guess: u32 = guess.trim().parse().expect("Please type a number!");
 ```
 -->
 
 ```rust,ignore
-let supposition: u32 = supposition.trim().parse()
-    .expect("Veuillez entrer un nombre !");
+let supposition: u32 = supposition.trim().parse().expect("Veuillez entrer un nombre !");
 ```
 
 <!--
@@ -1789,7 +1787,7 @@ cargo run
 -->
 
 <!--
-```text
+```console
 $ cargo run
    Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
     Finished dev [unoptimized + debuginfo] target(s) in 0.43s
@@ -1803,7 +1801,7 @@ Too big!
 ```
 -->
 
-```text
+```console
 $ cargo run
    Compiling jeu_du_plus_ou_du_moins v0.1.0 (file:///projects/jeu_du_plus_ou_du_moins)
     Finished dev [unoptimized + debuginfo] target(s) in 0.43s
@@ -1914,7 +1912,7 @@ quit
 
 <!-- markdownlint-disable -->
 <!--
-```text
+```console
 $ cargo run
    Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
     Finished dev [unoptimized + debuginfo] target(s) in 1.50s
@@ -1941,7 +1939,7 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace.
 -->
 <!-- markdownlint-restore -->
 
-```text
+```console
 $ cargo run
    Compiling jeu_du_plus_ou_du_moins v0.1.0 (file:///projects/jeu_du_plus_ou_du_moins)
     Finished dev [unoptimized + debuginfo] target(s) in 1.50 secs
@@ -2132,7 +2130,7 @@ foo
 -->
 
 <!--
-```text
+```console
 $ cargo run
    Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
      Running `target/debug/guessing_game`
@@ -2155,7 +2153,7 @@ You win!
 ```
 -->
 
-```text
+```console
 $ cargo run
    Compiling jeu_du_plus_ou_du_moins v0.1.0 (file:///projects/jeu_du_plus_ou_du_moins)
      Running `target/debug/jeu_du_plus_ou_du_moins`

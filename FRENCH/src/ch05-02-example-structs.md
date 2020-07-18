@@ -58,12 +58,12 @@ Now, run this program using `cargo run`:
 Maintenant, lancez ce programme avec `cargo run` :
 
 <!--
-```text
+```console
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-08/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-08/output.txt}}
 ```
 
@@ -463,12 +463,12 @@ Maintenant, quand on exécute le programme, nous n'avons plus d'erreurs et ce
 texte s'affiche à l'écran :
 
 <!--
-```text
+```console
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-12/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-12/output.txt}}
 ```
 
@@ -488,12 +488,12 @@ au lieu de `{:?}` dans la chaîne de formatage. Quand on utilise `{:#?}` dans ce
 exemple, l'affichage donnera plutôt ceci :
 
 <!--
-```text
+```console
 {{#include ../listings/ch05-using-structs-to-structure-related-data/output-only-02-pretty-debug/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch05-using-structs-to-structure-related-data/output-only-02-pretty-debug/output.txt}}
 ```
 

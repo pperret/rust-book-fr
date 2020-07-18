@@ -204,12 +204,12 @@ Here’s the error:
 Voici l'erreur :
 
 <!--
-```text
+```console
 {{#include ../listings/ch04-understanding-ownership/listing-04-06/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch04-understanding-ownership/listing-04-06/output.txt}}
 ```
 
@@ -294,12 +294,12 @@ Here’s the error:
 Voici l'erreur :
 
 <!--
-```text
+```console
 {{#include ../listings/ch04-understanding-ownership/no-listing-10-multiple-mut-not-allowed/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch04-understanding-ownership/no-listing-10-multiple-mut-not-allowed/output.txt}}
 ```
 
@@ -388,12 +388,12 @@ Here’s the error:
 Voici l'erreur :
 
 <!--
-```text
+```console
 {{#include ../listings/ch04-understanding-ownership/no-listing-12-immutable-and-mutable-not-allowed/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch04-understanding-ownership/no-listing-12-immutable-and-mutable-not-allowed/output.txt}}
 ```
 
@@ -500,15 +500,6 @@ erreur au moment de la compilation :
 <!--
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-14-dangling-reference/src/main.rs}}
-fn main() {
-    let reference_to_nothing = dangle();
-}
-
-fn dangle() -> &String {
-    let s = String::from("hello");
-
-    &s
-}
 ```
 -->
 
@@ -523,12 +514,12 @@ Here’s the error:
 Voici l'erreur :
 
 <!--
-```text
+```console
 {{#include ../listings/ch04-understanding-ownership/no-listing-14-dangling-reference/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch04-understanding-ownership/no-listing-14-dangling-reference/output.txt}}
 ```
 

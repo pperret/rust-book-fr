@@ -69,7 +69,7 @@ For Linux, macOS, and PowerShell on Windows, enter this:
 Sous Linux, macOS et PowerShell sous Windows, écrivez ceci :
 
 <!--
-```text
+```console
 $ mkdir ~/projects
 $ cd ~/projects
 $ mkdir hello_world
@@ -77,7 +77,7 @@ $ cd hello_world
 ```
 -->
 
-```text
+```console
 $ mkdir ~/projects
 $ cd ~/projects
 $ mkdir hello_world
@@ -167,14 +167,14 @@ Enregistrez le fichier et retournez dans votre terminal. Sur Linux
 ou macOS, écrivez les commandes suivantes pour compiler et exécuter le fichier :
 
 <!--
-```text
+```console
 $ rustc main.rs
 $ ./main
 Hello, world!
 ```
 -->
 
-```text
+```console
 $ rustc main.rs
 $ ./main
 Hello, world!
@@ -309,13 +309,18 @@ Inside the `main` function is the following code:
 
 <!--
 This line does all the work in this little program: it prints text to the
-screen. There are four important details to notice here. First, Rust style is
-to indent with four spaces, not a tab.
+screen. There are four important details to notice here.
 -->
 
 Cette ligne fait tout le travail dans ce petit programme : il écrit le texte à
-l'écran. Il y a quatre détails importants à noter ici. Premièrement, le style de
-Rust est d'indenter avec quatre espaces, et non pas avec une tabulation.
+l'écran. Il y a quatre détails importants à noter ici.
+
+<!--
+First, Rust style is to indent with four spaces, not a tab.
+-->
+
+Premièrement, le style de Rust est d'indenter avec quatre espaces, et non pas
+avec une tabulation.
 
 <!--
 Second, `println!` calls a Rust macro. If it called a function instead, it
@@ -374,12 +379,12 @@ compilateur Rust en entrant la commande `rustc` et en lui passant le nom de
 votre fichier source, comme ceci :
 
 <!--
-```text
+```console
 $ rustc main.rs
 ```
 -->
 
-```text
+```console
 $ rustc main.rs
 ```
 
@@ -452,12 +457,12 @@ informations de débogage avec l'extension *.pdb*. Dans ce dossier, vous pouvez
 exécuter le fichier *main* ou *main.exe* comme ceci :
 
 <!--
-```text
+```console
 $ ./main # or .\main.exe on Windows
 ```
 -->
 
-```text
+```console
 $ ./main # ou .\main.exe sous Windows
 ```
 

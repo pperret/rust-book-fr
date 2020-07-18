@@ -56,12 +56,12 @@ suivante, signifiant que le compilateur a besoin de plus d'informations pour
 déterminer quel type nous souhaitons utiliser :
 
 <!--
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/output-only-01-no-type-annotations/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/output-only-01-no-type-annotations/output.txt}}
 ```
 
@@ -850,12 +850,12 @@ Running this code using `cargo run` produces the following result:
 Exécuter ce code en utilisant `cargo run` va donner le résultat suivant :
 
 <!--
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-15-invalid-array-access/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-15-invalid-array-access/output.txt}}
 ```
 

@@ -41,7 +41,7 @@ Découvrons ce qui se passe quand nous créons un paquet. D'abord, nous utilison
 la commande `cargo new` :
 
 <!--
-```text
+```console
 $ cargo new my-project
      Created binary (application) `my-project` package
 $ ls my-project
@@ -52,7 +52,7 @@ main.rs
 ```
 -->
 
-```text
+```console
 $ cargo new mon-projet
      Created binary (application) `mon-projet` package
 $ ls mon-projet

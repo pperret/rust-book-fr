@@ -64,12 +64,12 @@ Sauvegardez et lancez le programme en utilisant `cargo run`. Vous devriez
 avoir un message d'erreur comme celui-ci :
 
 <!--
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-01-variables-are-immutable/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-01-variables-are-immutable/output.txt}}
 ```
 
@@ -171,18 +171,13 @@ When we run the program now, we get this:
 Lorsque nous exécutons le programme, nous obtenons :
 
 <!--
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-02-adding-mut/output.txt}}
 ```
 -->
 
-```text
-$ cargo run
-   Compiling variables v0.1.0 (file:///projects/variables)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.30 secs
-     Running `target/debug/variables`
-La valeur de x est : 5
-La valeur de x est : 6
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-02-adding-mut/output.txt}}
 ```
 
 <!--
@@ -384,12 +379,12 @@ pour donner à `x` la valeur finale de `12`. Lorsque nous exécutons ce programm
 nous obtenons ceci :
 
 <!--
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-03-shadowing/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-03-shadowing/output.txt}}
 ```
 
@@ -467,12 +462,12 @@ The error says we’re not allowed to mutate a variable’s type:
 L'erreur indique que nous ne pouvons pas muter le type d'une variable :
 
 <!--
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-05-mut-cant-change-types/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-05-mut-cant-change-types/output.txt}}
 ```
 

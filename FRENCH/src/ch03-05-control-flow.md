@@ -103,12 +103,12 @@ Try running this code; you should see the following output:
 Essayez d'exécuter ce code ; vous verrez ceci :
 
 <!--
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-26-if-true/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-26-if-true/output.txt}}
 ```
 
@@ -137,12 +137,12 @@ Run the program again, and look at the output:
 Exécutez à nouveau le programme, et regardez le résultat :
 
 <!--
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-27-if-false/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-27-if-false/output.txt}}
 ```
 
@@ -180,12 +180,12 @@ error:
 La condition `if` vaut `3` cette fois, et Rust lève une erreur :
 
 <!--
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-28-if-condition-must-be-bool/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-28-if-condition-must-be-bool/output.txt}}
 ```
 
@@ -267,12 +267,12 @@ Ce programme peut choisir entre quatre chemins différents. Après l'avoir
 exécuté, vous devriez voir le résultat suivant :
 
 <!--
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-30-else-if/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-30-else-if/output.txt}}
 ```
 
@@ -350,12 +350,12 @@ La variable `nombre` va avoir la valeur du résultat de l'expression `if`.
 Exécutez ce code pour découvrir ce qui va se passer :
 
 <!--
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/listing-03-02/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/listing-03-02/output.txt}}
 ```
 
@@ -405,12 +405,12 @@ branches `if` et `else` ont des types de valeurs qui ne sont pas compatibles, et
 Rust indique exactement où trouver le problème dans le programme :
 
 <!--
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-31-arms-must-return-same-type/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch03-common-programming-concepts/no-listing-31-arms-must-return-same-type/output.txt}}
 ```
 
@@ -521,7 +521,7 @@ CTRL-C
 -->
 
 <!--
-```text
+```console
 $ cargo run
    Compiling loops v0.1.0 (file:///projects/loops)
     Finished dev [unoptimized + debuginfo] target(s) in 0.29s
@@ -534,7 +534,7 @@ again!
 ```
 -->
 
-```text
+```console
 $ cargo run
    Compiling loops v0.1.0 (file:///projects/loops)
     Finished dev [unoptimized + debuginfo] target(s) in 0.29s

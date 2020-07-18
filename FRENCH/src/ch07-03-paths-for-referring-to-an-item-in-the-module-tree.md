@@ -173,12 +173,12 @@ compile pas pour le moment ! L'erreur que nous obtenons est affichée dans
 l'encart 7-4.
 
 <!--
-```text
+```console
 {{#include ../listings/ch07-managing-growing-projects/listing-07-03/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch07-managing-growing-projects/listing-07-03/output.txt}}
 ```
 
@@ -304,12 +304,12 @@ Malheureusement, il reste une erreur dans le code de l'encart 7-5, la voici dans
 l'encart 7-6.
 
 <!--
-```text
+```console
 {{#include ../listings/ch07-managing-growing-projects/listing-07-05/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch07-managing-growing-projects/listing-07-05/output.txt}}
 ```
 

@@ -442,12 +442,12 @@ Heureusement, c'est un bogue que Rust sait gérer. Si nous essayons de compiler
 ce code, nous allons obtenir cette erreur :
 
 <!--
-```text
+```console
 {{#include ../listings/ch06-enums-and-pattern-matching/no-listing-10-non-exhaustive-match/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch06-enums-and-pattern-matching/no-listing-10-non-exhaustive-match/output.txt}}
 ```
 
@@ -521,7 +521,7 @@ nous nous préoccupons uniquement *d'un seul* cas. Pour ce cas, Rust nous propos
 d'utiliser une autre structure, `if let`.
 
 <!--
-More about patterns, and matching can be found in [chapter 18][ch18-00-patterns].
+More about patterns and matching can be found in [chapter 18][ch18-00-patterns].
 -->
 
 Vous pouvez en apprendre plus sur les motifs et le filtrage par motif au

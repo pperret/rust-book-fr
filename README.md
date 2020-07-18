@@ -1,10 +1,14 @@
-> # Le langage de programmation Rust
+> # 📖 Le langage de programmation Rust
 >
-> **This is the french translation of the book "The Rust Programming Language"**
+> **🌐 This is the french translation of the book "The Rust Programming Language"**
 >
-> *English Book : [https://github.com/rust-lang/book](https://github.com/rust-lang/book)*
+> [👓 Click here to read this translated book online](https://jimskapt.github.io/rust-book-fr/)
 >
-> Translations are inside `/FRENCH/` folder. Everything else should be remaing as the English Book (except this README.md).
+> *[🔗 Click here to go to the English Book repository](https://github.com/rust-lang/book)*
+>
+> Translations are inside [`/FRENCH/`](https://github.com/Jimskapt/rust-book-fr/tree/french-release/FRENCH)
+> folder. Everything else should be remaining as the English Book *(except some
+> necessary files, like this README.md)*.
 >
 > Want to help to translate ?
 > Please read the file
@@ -12,7 +16,7 @@
 
 # The Rust Programming Language
 
-[![Build Status](https://travis-ci.com/rust-lang/book.svg?branch=master)](https://travis-ci.com/rust-lang/book)
+![Build Status](https://github.com/rust-lang/book/workflows/CI/badge.svg)
 
 This repository contains the source of "The Rust Programming Language" book.
 

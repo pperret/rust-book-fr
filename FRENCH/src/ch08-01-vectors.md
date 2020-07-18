@@ -347,7 +347,7 @@ and any other references to the contents of the vector remain valid. Recall the
 rule that states you can’t have mutable and immutable references in the same
 scope. That rule applies in Listing 8-7, where we hold an immutable reference to
 the first element in a vector and try to add an element to the end, which won’t
-work.
+work if we also try to refer to that element later in the function:
 -->
 
 Lorsque le programme obtient une référence valide, le vérificateur d'emprunt va
@@ -357,7 +357,8 @@ références au contenu de ce vecteur restent valides. Souvenez-vous de la règl
 qui dit que vous ne pouvez pas avoir des références mutables et immuables dans
 la même portée. Cette règle s'applique à l'encart 8-7, où nous obtenons une
 référence immuable vers le premier élément d'un vecteur et nous essayons
-d'ajouter un élément à la fin, ce qui ne fonctionne pas.
+d'ajouter un élément à la fin, ce qui ne fonctionnera pas si nous essayons aussi
+d'utiliser cet élément plus tard dans la fonction :
 
 <!--
 ```rust,ignore,does_not_compile
@@ -384,24 +385,13 @@ Compiling this code will result in this error:
 Compiler ce code va nous mener à cette erreur :
 
 <!--
-```text
+```console
 {{#include ../listings/ch08-common-collections/listing-08-07/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch08-common-collections/listing-08-07/output.txt}}
-error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable
- --> src/main.rs:6:5
-  |
-4 |     let premier = &v[0];
-  |                    - immutable borrow occurs here
-5 |
-6 |     v.push(6);
-  |     ^^^^^^^^^ mutable borrow occurs here
-7 |
-8 |     println!("Le premier élément est : {}", premier);
-  |                                             ------- immutable borrow later used here
 ```
 
 <!--

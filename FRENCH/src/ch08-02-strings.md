@@ -596,12 +596,12 @@ This code will result in the following error:
 Ce code va produire l'erreur suivante :
 
 <!--
-```text
+```console
 {{#include ../listings/ch08-common-collections/listing-08-19/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch08-common-collections/listing-08-19/output.txt}}
 ```
 
@@ -885,12 +885,12 @@ aurait paniqué au moment de l'exécution de la même façon que si nous
 utiliserions un indice invalide pour accéder à un élément d'un vecteur :
 
 <!--
-```text
+```console
 {{#include ../listings/ch08-common-collections/output-only-01-not-char-boundary/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch08-common-collections/output-only-01-not-char-boundary/output.txt}}
 ```
 
