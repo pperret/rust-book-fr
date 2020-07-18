@@ -72,16 +72,17 @@ starts with 50.
 
 Vous pouvez créer une table de hachage vide avec `new` et ajouter des éléments
 avec `insert`. Dans l'encart 8-20, nous consignons les scores des deux équipes
-qui s'appellent Blue et Yellow. L'équipe Blue commence avec 10 points, et
-l'équipe Yellow commence avec 50.
+qui s'appellent Bleu et Jaune. L'équipe Bleu commence avec 10 points, et
+l'équipe Jaune commence avec 50.
+
+<!--
+```rust
+{{#rustdoc_include ../listings/ch08-common-collections/listing-08-20/src/main.rs:here}}
+```
+-->
 
 ```rust
-use std::collections::HashMap;
-
-let mut scores = HashMap::new();
-
-scores.insert(String::from("Blue"), 10);
-scores.insert(String::from("Yellow"), 50);
+{{#rustdoc_include ../listings/ch08-common-collections/listing-08-20/src/main.rs:here}}
 ```
 
 <!--
@@ -89,7 +90,7 @@ scores.insert(String::from("Yellow"), 50);
 keys and values</span>
 -->
 
-<span class="caption">Encart 8-20 : Création d'une nouvelle table de hachage et
+<span class="caption">Encart 8-20 : création d'une nouvelle table de hachage et
 insertion de quelques clés et valeurs</span>
 
 <!--
@@ -121,32 +122,37 @@ clés doivent être du même type, et toutes valeurs doivent aussi toutes être 
 même type.
 
 <!--
-Another way of constructing a hash map is by using the `collect` method on a
-vector of tuples, where each tuple consists of a key and its value. The
-`collect` method gathers data into a number of collection types, including
-`HashMap`. For example, if we had the team names and initial scores in two
-separate vectors, we could use the `zip` method to create a vector of tuples
-where “Blue” is paired with 10, and so forth. Then we could use the `collect`
-method to turn that vector of tuples into a hash map, as shown in Listing 8-21.
+Another way of constructing a hash map is by using iterators and the `collect`
+method on a vector of tuples, where each tuple consists of a key and its value.
+We’ll be going into more detail about iterators and their associated methods in
+the [”Processing a Series of Items with Iterators” section of Chapter
+13][iterators]<!-- ignore -- >. The `collect` method gathers data into a number
+of collection types, including `HashMap`. For example, if we had the team names
+and initial scores in two separate vectors, we could use the `zip` method to
+create a vector of tuples where “Blue” is paired with 10, and so forth. Then we
+could use the `collect` method to turn that vector of tuples into a hash map,
+as shown in Listing 8-21.
 -->
 
-Une autre façon de construire une table de hachage est d'utiliser la méthode
-`collect` sur un vecteur de tuples, où chaque tuple représente une clé et sa
-valeur. La méthode `collect` regroupe les données dans quelques types de
-collections, dont `HashMap`. Par exemple, si nous avions les noms des équipes et
-les scores initiaux dans deux vecteurs séparés, nous pourrions utiliser la
-méthode `zip` pour créer un vecteur de tuples où “Blue” est associé à 10, et
-ainsi de suite. Ensuite nous pourrions utiliser la méthode `collect` pour
-transformer ce vecteur de tuples en table de hachage, comme nous l'avons fait
-dans l'encart 8-21.
+Une autre façon de construire une table de hachage est d'utiliser les itérateurs
+et la méthode `collect` sur un vecteur de tuples, où chaque tuple représente une
+clé et sa valeur. Nous aborderons les itérateurs et leurs méthodes associées
+dans [une section du chapitre 13][iterators]<!-- ignore -->. La méthode
+`collect` regroupe les données dans quelques types de collections, dont
+`HashMap`. Par exemple, si nous avions les noms des équipes et les scores
+initiaux dans deux vecteurs séparés, nous pourrions utiliser la méthode `zip`
+pour créer un vecteur de tuples où “Bleu” est associé à 10, et ainsi de suite.
+Ensuite nous pourrions utiliser la méthode `collect` pour transformer ce vecteur
+de tuples en table de hachage, comme nous l'avons fait dans l'encart 8-21.
+
+<!--
+```rust
+{{#rustdoc_include ../listings/ch08-common-collections/listing-08-21/src/main.rs:here}}
+```
+-->
 
 ```rust
-use std::collections::HashMap;
-
-let teams  = vec![String::from("Blue"), String::from("Yellow")];
-let initial_scores = vec![10, 50];
-
-let scores: HashMap<_, _> = teams.iter().zip(initial_scores.iter()).collect();
+{{#rustdoc_include ../listings/ch08-common-collections/listing-08-21/src/main.rs:here}}
 ```
 
 <!--
@@ -154,7 +160,7 @@ let scores: HashMap<_, _> = teams.iter().zip(initial_scores.iter()).collect();
 and a list of scores</span>
 -->
 
-<span class="caption">Encart 8-21 : Création d'une table de hachage à partir
+<span class="caption">Encart 8-21 : création d'une table de hachage à partir
 d'une liste d'équipe et une liste de scores</span>
 
 <!--
@@ -162,7 +168,9 @@ The type annotation `HashMap<_, _>` is needed here because it’s possible to
 `collect` into many different data structures and Rust doesn’t know which you
 want unless you specify. For the parameters for the key and value types,
 however, we use underscores, and Rust can infer the types that the hash map
-contains based on the types of the data in the vectors.
+contains based on the types of the data in the vectors. In Listing 8-21, the
+key type will be `String` and the value type will be `i32`, just as the types
+were in Listing 8-20.
 -->
 
 L'annotation de type `HashMap<_, _>` est nécessaire ici car `collect` peut
@@ -170,7 +178,9 @@ générer plusieurs types de structures de données et Rust ne sait pas celle qu
 vous souhaitez si vous ne le précisez pas. Mais pour les paramètres qui
 correspondent aux types de clés et de valeur, nous utilisons des tirets bas, et
 Rust peut déduire les types que la table de hachage contient en fonction des
-types de données présentes dans les vecteurs.
+types de données présentes dans les vecteurs. Dans l'encart 8-21, le type de la
+clé doit être une `String` et le type de la valeur doit être un `i32`, tout
+comme l'étaient les types dans l'encart 8-20.
 
 <!--
 ### Hash Maps and Ownership
@@ -191,28 +201,12 @@ propriétaire de ces valeurs, comme démontré dans l'encart 8-22.
 
 <!--
 ```rust
-use std::collections::HashMap;
-
-let field_name = String::from("Favorite color");
-let field_value = String::from("Blue");
-
-let mut map = HashMap::new();
-map.insert(field_name, field_value);
-// field_name and field_value are invalid at this point, try using them and
-// see what compiler error you get!
+{{#rustdoc_include ../listings/ch08-common-collections/listing-08-22/src/main.rs:here}}
 ```
 -->
 
 ```rust
-use std::collections::HashMap;
-
-let nom_champ = String::from("Couleur favorite");
-let valeur_champ = String::from("Bleu");
-
-let mut table = HashMap::new();
-table.insert(nom_champ, valeur_champ);
-// nom_champ et valeur_champ ne sont plus en vigueur à partir d'ici, essayez de
-// les utiliser et vous verrez l'erreur du compilateur que vous obtiendrez ! 
+{{#rustdoc_include ../listings/ch08-common-collections/listing-08-22/src/main.rs:here}}
 ```
 
 <!--
@@ -220,7 +214,7 @@ table.insert(nom_champ, valeur_champ);
 the hash map once they’re inserted</span>
 -->
 
-<span class="caption">Encart 8-22 : Démonstration que les clés et les valeurs
+<span class="caption">Encart 8-22 : démonstration que les clés et les valeurs
 sont possédées par la table de hachage une fois qu'elles sont insérées</span>
 
 <!--
@@ -263,28 +257,12 @@ méthode `get`, comme dans l'encart 8-23.
 
 <!--
 ```rust
-use std::collections::HashMap;
-
-let mut scores = HashMap::new();
-
-scores.insert(String::from("Blue"), 10);
-scores.insert(String::from("Yellow"), 50);
-
-let team_name = String::from("Blue");
-let score = scores.get(&team_name);
+{{#rustdoc_include ../listings/ch08-common-collections/listing-08-23/src/main.rs:here}}
 ```
 -->
 
 ```rust
-use std::collections::HashMap;
-
-let mut scores = HashMap::new();
-
-scores.insert(String::from("Blue"), 10);
-scores.insert(String::from("Yellow"), 50);
-
-let nom_equipe = String::from("Blue");
-let score = scores.get(&nom_equipe);
+{{#rustdoc_include ../listings/ch08-common-collections/listing-08-23/src/main.rs:here}}
 ```
 
 <!--
@@ -292,7 +270,7 @@ let score = scores.get(&nom_equipe);
 stored in the hash map</span>
 -->
 
-<span class="caption">Encart 8-23 : Récupérer le score de l'équipe `Blue`,
+<span class="caption">Encart 8-23 : récupération du score de l'équipe `Bleu`,
 stocké dans la table de hachage</span>
 
 <!--
@@ -303,7 +281,7 @@ returns an `Option<&V>`; if there’s no value for that key in the hash map,
 of the ways that we covered in Chapter 6.
 -->
 
-Dans notre cas, `score` aura la valeur qui est associée à l'équipe `Blue`, et le
+Dans notre cas, `score` aura la valeur qui est associée à l'équipe `Bleu`, et le
 résultat sera `Some(&10)`. Le résultat est encapsulé dans un `Some` car `get`
 retourne une `Option<&V>` : s'il n'y a pas de valeur pour cette clé dans la
 table de hachage, `get` va retourner `None`. Le programme doit gérer le `Option`
@@ -320,30 +298,12 @@ la même manière que nous le faisons avec les vecteurs, en utilisant une boucle
 
 <!--
 ```rust
-use std::collections::HashMap;
-
-let mut scores = HashMap::new();
-
-scores.insert(String::from("Blue"), 10);
-scores.insert(String::from("Yellow"), 50);
-
-for (key, value) in &scores {
-    println!("{}: {}", key, value);
-}
+{{#rustdoc_include ../listings/ch08-common-collections/no-listing-03-iterate-over-hashmap/src/main.rs:here}}
 ```
 -->
 
 ```rust
-use std::collections::HashMap;
-
-let mut scores = HashMap::new();
-
-scores.insert(String::from("Blue"), 10);
-scores.insert(String::from("Yellow"), 50);
-
-for (clee, valeur) in &scores {
-    println!("{} : {}", clee, valeur);
-}
+{{#rustdoc_include ../listings/ch08-common-collections/no-listing-03-iterate-over-hashmap/src/main.rs:here}}
 ```
 
 <!--
@@ -360,8 +320,8 @@ Blue: 10
 -->
 
 ```text
-Yellow : 50
-Blue : 10
+Jaune : 50
+Bleu : 10
 ```
 
 <!--
@@ -409,17 +369,16 @@ Si nous ajoutons une clé et une valeur dans une table de hachage et que nous
 ajoutons à nouveau la même clé avec une valeur différente, la valeur associée
 à cette clé sera remplacée. Même si le code dans l'encart 8-24 appelle deux
 fois `insert`, la table de hachage contiendra un seul couple de clé/valeur car
-nous ajoutons la valeur pour l'équipe `Blue` à deux reprises.
+nous ajoutons la valeur pour l'équipe `Bleu` à deux reprises.
+
+<!--
+```rust
+{{#rustdoc_include ../listings/ch08-common-collections/listing-08-24/src/main.rs:here}}
+```
+-->
 
 ```rust
-use std::collections::HashMap;
-
-let mut scores = HashMap::new();
-
-scores.insert(String::from("Blue"), 10);
-scores.insert(String::from("Blue"), 25);
-
-println!("{:?}", scores);
+{{#rustdoc_include ../listings/ch08-common-collections/listing-08-24/src/main.rs:here}}
 ```
 
 <!--
@@ -427,7 +386,7 @@ println!("{:?}", scores);
 key</span>
 -->
 
-<span class="caption">Encart 8-24 : Remplacement d'une valeur stockée sous une
+<span class="caption">Encart 8-24 : remplacement d'une valeur stockée sous une
 clé spécifique</span>
 
 <!--
@@ -435,7 +394,7 @@ This code will print `{"Blue": 25}`. The original value of `10` has been
 overwritten.
 -->
 
-Ce code va afficher `{"Blue": 25}`. La valeur initiale `10` a été remplacée.
+Ce code va afficher `{"Bleu": 25}`. La valeur initiale `10` a été remplacée.
 
 <!--
 #### Only Inserting a Value If the Key Has No Value
@@ -459,21 +418,19 @@ n'est pas le cas, de lui associer une valeur. Les tables de hachage ont une API
 spécifique pour ce cas-là qui s'appelle `entry` et qui prend en paramètre la
 clé que vous voulez vérifier. La valeur de retour de la méthode `entry` est une
 énumération qui s'appelle `Entry` qui représente une valeur qui existe ou non.
-Imaginons que nous souhaitons vérifier si la clé pour l'équipe `Yellow` a une
+Imaginons que nous souhaitons vérifier si la clé pour l'équipe `Jaune` a une
 valeur qui lui est associée. Si ce n'est pas le cas, nous voulons lui associer
-la valeur 50, et faire de même pour l'équipe `Blue`. En utilisant l'API `entry`,
+la valeur 50, et faire de même pour l'équipe `Bleu`. En utilisant l'API `entry`,
 ce code va ressembler à l'encart 8-25.
 
+<!--
 ```rust
-use std::collections::HashMap;
+{{#rustdoc_include ../listings/ch08-common-collections/listing-08-25/src/main.rs:here}}
+```
+-->
 
-let mut scores = HashMap::new();
-scores.insert(String::from("Blue"), 10);
-
-scores.entry(String::from("Yellow")).or_insert(50);
-scores.entry(String::from("Blue")).or_insert(50);
-
-println!("{:?}", scores);
+```rust
+{{#rustdoc_include ../listings/ch08-common-collections/listing-08-25/src/main.rs:here}}
 ```
 
 <!--
@@ -481,7 +438,7 @@ println!("{:?}", scores);
 the key does not already have a value</span>
 -->
 
-<span class="caption">Encart 8-25 : Utilisation de la méthode `entry` pour
+<span class="caption">Encart 8-25 : utilisation de la méthode `entry` pour
 ajouter la clé uniquement si elle n'a pas déjà de valeur associée</span>
 
 <!--
@@ -507,10 +464,10 @@ first call to `entry` will insert the key for the Yellow team with the value
 value 10.
 -->
 
-L'exécution du code de l'encart 8-25 va afficher `{"Yellow": 50, "Blue": 10}`.
-Le premier appel à `entry` va ajouter la clé pour l'équipe `Yellow` avec la
-valeur `50` car l'équipe `Yellow` n'a pas encore de valeur. Le second appel à
-`entry` ne vas pas changer la table de hachage car l'équipe `Blue` a déjà la
+L'exécution du code de l'encart 8-25 va afficher `{"Jaune": 50, "Bleu": 10}`.
+Le premier appel à `entry` va ajouter la clé pour l'équipe `Jaune` avec la
+valeur `50` car l'équipe `Jaune` n'a pas encore de valeur. Le second appel à
+`entry` ne vas pas changer la table de hachage car l'équipe `Bleu` a déjà la
 valeur `10`.
 
 <!--
@@ -538,34 +495,12 @@ valeur `0`.
 
 <!--
 ```rust
-use std::collections::HashMap;
-
-let text = "hello world wonderful world";
-
-let mut map = HashMap::new();
-
-for word in text.split_whitespace() {
-    let count = map.entry(word).or_insert(0);
-    *count += 1;
-}
-
-println!("{:?}", map);
+{{#rustdoc_include ../listings/ch08-common-collections/listing-08-26/src/main.rs:here}}
 ```
 -->
 
 ```rust
-use std::collections::HashMap;
-
-let texte = "bonjour le monde magnifique monde";
-
-let mut tableau = HashMap::new();
-
-for mot in texte.split_whitespace() {
-    let compteur = map.entry(mot).or_insert(0);
-    *compteur += 1;
-}
-
-println!("{:?}", tableau);
+{{#rustdoc_include ../listings/ch08-common-collections/listing-08-26/src/main.rs:here}}
 ```
 
 <!--
@@ -573,7 +508,7 @@ println!("{:?}", tableau);
 map that stores words and counts</span>
 -->
 
-<span class="caption">Encart 8-26 : Comptage des occurrences des mots en
+<span class="caption">Encart 8-26 : comptage des occurrences des mots en
 utilisant une table de hachage qui stocke les mots et leur quantité</span>
 
 <!--
@@ -626,6 +561,10 @@ forcément besoin d'implémenter votre propre hacheur à partir de zéro;
 [crates.io](https://crates.io/) héberge des bibliothèques partagées par d'autres
 utilisateurs de Rust qui fournissent de nombreux algorithmes de hachage
 répandus.
+
+<!--
+[^siphash]: [https://www.131002.net/siphash/siphash.pdf](https://www.131002.net/siphash/siphash.pdf)
+-->
 
 [^siphash]: [https://www.131002.net/siphash/siphash.pdf](https://www.131002.net/siphash/siphash.pdf)
 
@@ -698,9 +637,11 @@ les opérations peuvent échouer, c'est donc le moment idéal pour voir comment
 bien gérer les erreurs. C'est que nous allons faire au prochain chapitre !
 
 <!--
+[iterators]: ch13-02-iterators.html
 [validating-references-with-lifetimes]:
 ch10-03-lifetime-syntax.html#validating-references-with-lifetimes
 -->
 
+[iterators]: ch13-02-iterators.html
 [validating-references-with-lifetimes]:
 ch10-03-lifetime-syntax.html
