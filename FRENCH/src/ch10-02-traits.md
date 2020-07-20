@@ -90,16 +90,12 @@ décrit ce comportement.
 
 <!--
 ```rust
-pub trait Summary {
-    fn summarize(&self) -> String;
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-12/src/lib.rs}}
 ```
 -->
 
 ```rust
-pub trait Resumable {
-    fn resumer(&self) -> String;
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-12/src/lib.rs}}
 ```
 
 <!--
@@ -107,7 +103,7 @@ pub trait Resumable {
 behavior provided by a `summarize` method</span>
 -->
 
-<span class="caption">Encart 10-12 : Un trait `Resumable` qui représente le
+<span class="caption">Encart 10-12 : un trait `Resumable` qui représente le
 comportement fourni par une méthode `resumer`</span>
 
 <!--
@@ -177,68 +173,12 @@ tweet, en supposant que le contenu du tweet est déjà limité à 280 caractère
 
 <!--
 ```rust
-# pub trait Summary {
-#     fn summarize(&self) -> String;
-# }
-#
-pub struct NewsArticle {
-    pub headline: String,
-    pub location: String,
-    pub author: String,
-    pub content: String,
-}
-
-impl Summary for NewsArticle {
-    fn summarize(&self) -> String {
-        format!("{}, by {} ({})", self.headline, self.author, self.location)
-    }
-}
-
-pub struct Tweet {
-    pub username: String,
-    pub content: String,
-    pub reply: bool,
-    pub retweet: bool,
-}
-
-impl Summary for Tweet {
-    fn summarize(&self) -> String {
-        format!("{}: {}", self.username, self.content)
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-13/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# pub trait Resumable {
-#     fn resumer(&self) -> String;
-# }
-#
-pub struct ArticleDePresse {
-    pub titre: String,
-    pub lieu: String,
-    pub auteur: String,
-    pub contenu: String,
-}
-
-impl Resumable for ArticleDePresse {
-    fn resumer(&self) -> String {
-        format!("{}, par {} ({})", self.titre, self.auteur, self.lieu)
-    }
-}
-
-pub struct Tweet {
-    pub nom_utilisateur: String,
-    pub contenu: String,
-    pub reponse: bool,
-    pub retweet: bool,
-}
-
-impl Resumable for Tweet {
-    fn resumer(&self) -> String {
-        format!("{} : {}", self.nom_utilisateur, self.contenu)
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-13/src/lib.rs:here}}
 ```
 
 <!--
@@ -246,7 +186,7 @@ impl Resumable for Tweet {
 `NewsArticle` and `Tweet` types</span>
 -->
 
-<span class="caption">Encart 10-13 : Implémentation du trait `Resumable` sur les
+<span class="caption">Encart 10-13 : implémentation du trait `Resumable` sur les
 types `ArticleDePresse` et `Tweet`</span>
 
 <!--
@@ -281,26 +221,12 @@ classiques, comme ceci :
 
 <!--
 ```rust,ignore
-let tweet = Tweet {
-    username: String::from("horse_ebooks"),
-    content: String::from("of course, as you probably already know, people"),
-    reply: false,
-    retweet: false,
-};
-
-println!("1 new tweet: {}", tweet.summarize());
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-01-calling-trait-method/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-let tweet = Tweet {
-    nom_utilisateur: String::from("jean"),
-    contenu: String::from("Bien sûr, les amis, comme vous le savez probablement déjà"),
-    reponse: false,
-    retweet: false,
-};
-
-println!("1 nouveau tweet : {}", tweet.resume());
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-01-calling-trait-method/src/main.rs:here}}
 ```
 
 <!--
@@ -417,20 +343,12 @@ signature de la méthode, comme nous l'avons fait dans l'encart 10-12.
 
 <!--
 ```rust
-pub trait Summary {
-    fn summarize(&self) -> String {
-        String::from("(Read more...)")
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-14/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-pub trait Resumable {
-    fn resumer(&self) -> String {
-        String::from("(En savoir plus ...)")
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-14/src/lib.rs:here}}
 ```
 
 <!--
@@ -438,7 +356,7 @@ pub trait Resumable {
 default implementation of the `summarize` method</span>
 -->
 
-<span class="caption">Encart 10-14 : Définition du trait `Resumable` avec une
+<span class="caption">Encart 10-14 : définition du trait `Resumable` avec une
 implémentation par défaut de la méthode `resume`</span>
 
 <!--
@@ -466,28 +384,12 @@ pouvons toujours appeler la méthode `resumer` sur une instance de
 
 <!--
 ```rust,ignore
-let article = NewsArticle {
-    headline: String::from("Penguins win the Stanley Cup Championship!"),
-    location: String::from("Pittsburgh, PA, USA"),
-    author: String::from("Iceburgh"),
-    content: String::from("The Pittsburgh Penguins once again are the best
-    hockey team in the NHL."),
-};
-
-println!("New article available! {}", article.summarize());
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-02-calling-default-impl/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-let article = ArticleDePresse {
-    titre: String::from("Les Pinguins ont gagné la Stanley Cup Championship !"),
-    lieu: String::from("Pittsburgh, PA, USA"),
-    auteur: String::from("Iceburgh"),
-    contenu: String::from("Les Pinguins de Pittsburgh sont une nouvelle fois la
-    meilleure équipe de hockey de la NHL."),
-};
-
-println!("Nouvel article disponible ! {}", article.resumer());
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-02-calling-default-impl/src/main.rs:here}}
 ```
 
 <!--
@@ -531,24 +433,12 @@ méthode `resumer` qui a une implémentation par défaut qui appelle la méthode
 
 <!--
 ```rust
-pub trait Summary {
-    fn summarize_author(&self) -> String;
-
-    fn summarize(&self) -> String {
-        format!("(Read more from {}...)", self.summarize_author())
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-03-default-impl-calls-other-methods/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-pub trait Resumable {
-    fn resumer_auteur(&self) -> String;
-
-    fn resumer(&self) -> String {
-        format!("(Lire plus d'éléments de {} ...)", self.resumer_auteur())
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-03-default-impl-calls-other-methods/src/lib.rs:here}}
 ```
 
 <!--
@@ -561,20 +451,12 @@ de définir `resumer_auteur` lorsqu'on implémente le trait sur le type :
 
 <!--
 ```rust,ignore
-impl Summary for Tweet {
-    fn summarize_author(&self) -> String {
-        format!("@{}", self.username)
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-03-default-impl-calls-other-methods/src/lib.rs:impl}}
 ```
 -->
 
 ```rust,ignore
-impl Resumable for Tweet {
-    fn resumer_auteur(&self) -> String {
-        format!("@{}", self.nom_utilisateur)
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-03-default-impl-calls-other-methods/src/lib.rs:impl}}
 ```
 
 <!--
@@ -594,26 +476,12 @@ supplémentaire.
 
 <!--
 ```rust,ignore
-let tweet = Tweet {
-    username: String::from("horse_ebooks"),
-    content: String::from("of course, as you probably already know, people"),
-    reply: false,
-    retweet: false,
-};
-
-println!("1 new tweet: {}", tweet.summarize());
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-03-default-impl-calls-other-methods/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-let tweet = Tweet {
-    nom_utilisateur: String::from("jean"),
-    contenu: String::from("Bien sûr, les amis, comme vous le savez probablement déjà"),
-    reponse: false,
-    retweet: false,
-};
-
-println!("1 nouveau tweet : {}", tweet.resume());
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-03-default-impl-calls-other-methods/src/main.rs:here}}
 ```
 
 <!--
@@ -661,16 +529,12 @@ la syntaxe `impl Trait`, comme ceci :
 
 <!--
 ```rust,ignore
-pub fn notify(item: impl Summary) {
-    println!("Breaking news! {}", item.summarize());
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-04-traits-as-parameters/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore
-pub fn notifier(element: impl Summary) {
-    println!("Flash-info ! {}", element.resumer());
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-04-traits-as-parameters/src/lib.rs:here}}
 ```
 
 <!--
@@ -710,14 +574,14 @@ réalité du sucre syntaxique pour une forme plus longue, qui s'appelle le
 
 <!--
 ```rust,ignore
-pub fn notify<T: Summary>(item: T) {
+pub fn notify<T: Summary>(item: &T) {
     println!("Breaking news! {}", item.summarize());
 }
 ```
 -->
 
 ```rust,ignore
-pub fn notifier<T: Resumable>(element: T) {
+pub fn notifier<T: Resumable>(element: &T) {
     println!("Flash-info ! {}", element.resumer());
 }
 ```
@@ -746,12 +610,12 @@ cas. Par exemple, nous pouvons avoir deux paramètres qui implémentent
 
 <!--
 ```rust,ignore
-pub fn notify(item1: impl Summary, item2: impl Summary) {
+pub fn notify(item1: &impl Summary, item2: &impl Summary) {
 ```
 -->
 
 ```rust,ignore
-pub fn notifier(element1: impl Resumable, element2: impl Resumable) {
+pub fn notifier(element1: &impl Resumable, element2: &impl Resumable) {
 ```
 
 <!--
@@ -769,7 +633,7 @@ lié, comme ceci :
 
 <!--
 ```rust,ignore
-pub fn notify<T: Summary>(item1: T, item2: T) {
+pub fn notify<T: Summary>(item1: &T, item2: &T) {
 ```
 -->
 
@@ -808,12 +672,12 @@ pouvons faire ceci avec la syntaxe `+` :
 
 <!--
 ```rust,ignore
-pub fn notify(item: impl Summary + Display) {
+pub fn notify(item: &(impl Summary + Display)) {
 ```
 -->
 
 ```rust,ignore
-pub fn notifier(element: impl Resumable + Affichable) {
+pub fn notifier(element: &(impl Resumable + Affichable)) {
 ```
 
 <!--
@@ -824,12 +688,12 @@ La syntaxe `+` fonctionne aussi avec les traits liés sur des types génériques
 
 <!--
 ```rust,ignore
-pub fn notify<T: Summary + Display>(item: T) {
+pub fn notify<T: Summary + Display>(item: &T) {
 ```
 -->
 
 ```rust,ignore
-pub fn notifier<T: Resumable + Affichable>(element: T) {
+pub fn notifier<T: Resumable + Affichable>(element: &T) {
 ```
 
 <!--
@@ -863,18 +727,33 @@ rend la signature de la fonction difficile à lire. Pour cette raison, Rust a un
 syntaxe alternative pour renseigner les traits liés, dans une instruction
 `where` après la signature de la fonction. Donc, à la place d'écrire ceci ...
 
+<!--
 ```rust,ignore
-fn some_function<T: Display + Clone, U: Clone + Debug>(t: T, u: U) -> i32 {
+fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
+```
+-->
+
+```rust,ignore
+fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
 ```
 
 <!--
 we can use a `where` clause, like this:
 -->
 
-... nous pouvons utiliser l'instruction `where`, comme cela :
+... nous pouvons utiliser l'instruction `where`, comme ceci :
+
+<!--
+```rust,ignore
+fn some_function<T, U>(t: &T, u: &U) -> i32
+    where T: Display + Clone,
+          U: Clone + Debug
+{
+```
+-->
 
 ```rust,ignore
-fn some_function<T, U>(t: T, u: U) -> i32
+fn some_function<T, U>(t: &T, u: &U) -> i32
     where T: Display + Clone,
           U: Clone + Debug
 {
@@ -906,26 +785,12 @@ de retourner une valeur d'un type qui implémente un trait, comme ci-dessous :
 
 <!--
 ```rust,ignore
-fn returns_summarizable() -> impl Summary {
-    Tweet {
-        username: String::from("horse_ebooks"),
-        content: String::from("of course, as you probably already know, people"),
-        reply: false,
-        retweet: false,
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-05-returning-impl-trait/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore
-fn retourne_resumable() -> impl Resumable {
-    Tweet {
-        nom_utilisateur: String::from("jean"),
-        content: String::from("Bien sûr, les amis, comme vous le savez probablement déjà"),
-        reponse: false,
-        retweet: false,
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-05-returning-impl-trait/src/lib.rs:here}}
 ```
 
 <!--
@@ -972,46 +837,12 @@ fonctionner :
 
 <!--
 ```rust,ignore,does_not_compile
-fn returns_summarizable(switch: bool) -> impl Summary {
-    if switch {
-        NewsArticle {
-            headline: String::from("Penguins win the Stanley Cup Championship!"),
-            location: String::from("Pittsburgh, PA, USA"),
-            author: String::from("Iceburgh"),
-            content: String::from("The Pittsburgh Penguins once again are the best
-            hockey team in the NHL."),
-        }
-    } else {
-        Tweet {
-            username: String::from("horse_ebooks"),
-            content: String::from("of course, as you probably already know, people"),
-            reply: false,
-            retweet: false,
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-06-impl-trait-returns-one-type/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-fn retourne_resumable(estArticle: bool) -> impl Resumable {
-    if switch {
-        ArticleDePresse {
-            titre: String::from("Les Pinguins ont gagné la Stanley Cup Championship !"),
-            lieu: String::from("Pittsburgh, PA, USA"),
-            auteur: String::from("Iceburgh"),
-            contenu: String::from("Les Pinguins de Pittsburgh sont une nouvelle fois la
-            meilleure équipe de hockey de la NHL."),
-        }
-    } else {
-        Tweet {
-            nom_utilisateur: String::from("jean"),
-            contenu: String::from("Bien sûr, les amis, comme vous le savez probablement déjà"),
-            reponse: false,
-            retweet: false,
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-06-impl-trait-returns-one-type/src/lib.rs:here}}
 ```
 
 <!--
@@ -1051,24 +882,12 @@ lancer ce code, nous avions l'erreur suivante :
 
 <!--
 ```text
-error[E0369]: binary operation `>` cannot be applied to type `T`
- -- > src/main.rs:5:12
-  |
-5 |         if item > largest {
-  |            ^^^^^^^^^^^^^^
-  |
-  = note: an implementation of `std::cmp::PartialOrd` might be missing for `T`
+{{#include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-05/output.txt}}
 ```
 -->
 
 ```text
-error[E0369]: binary operation `>` cannot be applied to type `T`
- -- > src/main.rs:5:12
-  |
-5 |         if element > le_plus_grand {
-  |            ^^^^^^^^^^^^^^^^^^^^^^^
-  |
-  = note: an implementation of `std::cmp::PartialOrd` might be missing for `T`
+{{#include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-05/output.txt}}
 ```
 
 <!--
@@ -1093,12 +912,12 @@ ceci :
 
 <!--
 ```rust,ignore
-fn largest<T: PartialOrd>(list: &[T]) -> T {
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-07-fixing-listing-10-05/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-fn le_plus_grand<T: PartialOrd>(list: &[T]) -> T {
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-07-fixing-listing-10-05/src/main.rs:here}}
 ```
 
 <!--
@@ -1109,47 +928,14 @@ Cette fois, lorsque nous allons compiler le code, nous aurons un ensemble
 d'erreurs différent :
 
 <!--
-```text
-error[E0508]: cannot move out of type `[T]`, a non-copy slice
- -- > src/main.rs:2:23
-  |
-2 |     let mut largest = list[0];
-  |                       ^^^^^^^
-  |                       |
-  |                       cannot move out of here
-  |                       help: consider using a reference instead: `&list[0]`
-
-error[E0507]: cannot move out of borrowed content
- -- > src/main.rs:4:9
-  |
-4 |     for &item in list.iter() {
-  |         ^----
-  |         ||
-  |         |hint: to prevent move, use `ref item` or `ref mut item`
-  |         cannot move out of borrowed content
+```console
+{{#include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-07-fixing-listing-10-05/output.txt}}
 ```
 -->
 
-```text
-error[E0508]: cannot move out of type `[T]`, a non-copy slice
- -- > src/main.rs:2:23
-  |
-2 |     let mut le_plus_grand = liste[0];
-  |                             ^^^^^^^^
-  |                             |
-  |                             cannot move out of here
-  |                             help: consider using a reference instead: `&liste[0]`
-
-error[E0507]: cannot move out of borrowed content
- -- > src/main.rs:4:9
-  |
-4 |     for &element in liste.iter() {
-  |         ^-------
-  |         ||
-  |         |hint: to prevent move, use `ref element` or `ref mut element`
-  |         cannot move out of borrowed content
+```console
+{{#include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-07-fixing-listing-10-05/output.txt}}
 ```
-
 
 <!--
 The key line in this error is `cannot move out of type [T], a non-copy slice`.
@@ -1197,56 +983,12 @@ fonction implémente les traits `PartialOrd` *et* `Copy`, comme le font `i32` et
 
 <!--
 ```rust
-fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
-    let mut largest = list[0];
-
-    for &item in list.iter() {
-        if item > largest {
-            largest = item;
-        }
-    }
-
-    largest
-}
-
-fn main() {
-    let number_list = vec![34, 50, 25, 100, 65];
-
-    let result = largest(&number_list);
-    println!("The largest number is {}", result);
-
-    let char_list = vec!['y', 'm', 'a', 'q'];
-
-    let result = largest(&char_list);
-    println!("The largest char is {}", result);
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-15/src/main.rs}}
 ```
 -->
 
 ```rust
-fn le_plus_grand<T: PartialOrd + Copy>(liste: &[T]) -> T {
-    let mut le_plus_grand = liste[0];
-
-    for &element in liste.iter() {
-        if element > le_plus_grand {
-            le_plus_grand = element;
-        }
-    }
-
-    le_plus_grand
-}
-
-fn main() {
-    let liste_de_nombres = vec![34, 50, 25, 100, 65];
-
-    let resultat = le_plus_grand(&liste_de_nombres);
-    println!("Le nombre le plus grand est {}", resultat);
-
-    let liste_de_caracteres = vec!['y', 'm', 'a', 'q'];
-
-    let resultat = le_plus_grand(&liste_de_caracteres);
-    println!("Le plus grand caractère est {}", resultat);
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-15/src/main.rs}}
 ```
 
 <!--
@@ -1255,7 +997,7 @@ function that works on any generic type that implements the `PartialOrd` and
 `Copy` traits</span>
 -->
 
-<span class="caption">Encart 10-15 : Une définition de la fonction
+<span class="caption">Encart 10-15 : une définition de la fonction
 `le_plus_grand` qui fonctionne et s'applique sur n'importe quel type générique
 qui implémente les traits `PartialOrd` et `Copy`</span>
 
@@ -1317,61 +1059,19 @@ implémente le trait `PartialOrd` qui active la comparaison *et* le trait
 `Display` qui permet l'affichage.
 
 <!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+
+<span class="filename">Fichier : src/lib.rs</span>
+
+<!--
 ```rust
-use std::fmt::Display;
-
-struct Pair<T> {
-    x: T,
-    y: T,
-}
-
-impl<T> Pair<T> {
-    fn new(x: T, y: T) -> Self {
-        Self {
-            x,
-            y,
-        }
-    }
-}
-
-impl<T: Display + PartialOrd> Pair<T> {
-    fn cmp_display(&self) {
-        if self.x >= self.y {
-            println!("The largest member is x = {}", self.x);
-        } else {
-            println!("The largest member is y = {}", self.y);
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-16/src/lib.rs}}
 ```
 -->
 
 ```rust
-use std::fmt::Display;
-
-struct Pair<T> {
-    x: T,
-    y: T,
-}
-
-impl<T> Pair<T> {
-    fn new(x: T, y: T) -> Self {
-        Self {
-            x,
-            y,
-        }
-    }
-}
-
-impl<T: Display + PartialOrd> Pair<T> {
-    fn affiche_comparaison(&self) {
-        if self.x >= self.y {
-            println!("Le plus grand élément est x = {}", self.x);
-        } else {
-            println!("Le plus grand élément est y = {}", self.y);
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-16/src/lib.rs}}
 ```
 
 <!--
@@ -1379,7 +1079,7 @@ impl<T: Display + PartialOrd> Pair<T> {
 generic type depending on trait bounds</span>
 -->
 
-<span class="caption">Encart 10-16 : Implémentation de méthodes sur un type
+<span class="caption">Encart 10-16 : implémentation de méthodes sur un type
 générique en fonction du trait lié</span>
 
 <!--
@@ -1398,9 +1098,17 @@ bibliothèque standard Rust. Par exemple, la bibliothèque standard implémente 
 trait `ToString` sur tous les types qui implémentent le trait `Display`. Le bloc
 `impl` de la bibliothèque standard ressemble au code suivant :
 
+<!--
 ```rust,ignore
 impl<T: Display> ToString for T {
     // --snip--
+}
+```
+-->
+
+```rust,ignore
+impl<T: Display> ToString for T {
+    // -- partie masquée ici --
 }
 ```
 
@@ -1416,6 +1124,12 @@ appeler la méthode `to_string` définie par le trait `ToString` sur n'importe
 quel type qui implémente le trait `Display`. Par exemple, nous pouvons
 transformer les entiers en leur équivalent dans une `String` comme ci-dessous
 car les entiers implémentent `Display` :
+
+<!--
+```rust
+let s = 3.to_string();
+```
+-->
 
 ```rust
 let s = 3.to_string();
@@ -1435,12 +1149,12 @@ reduce duplication but also specify to the compiler that we want the generic
 type to have particular behavior. The compiler can then use the trait bound
 information to check that all the concrete types used with our code provide the
 correct behavior. In dynamically typed languages, we would get an error at
-runtime if we called a method on a type that the type didn’t implement. But
-Rust moves these errors to compile time so we’re forced to fix the problems
-before our code is even able to run. Additionally, we don’t have to write code
-that checks for behavior at runtime because we’ve already checked at compile
-time. Doing so improves performance without having to give up the flexibility
-of generics.
+runtime if we called a method on a type which didn’t define the method. But Rust
+moves these errors to compile time so we’re forced to fix the problems before
+our code is even able to run. Additionally, we don’t have to write code that
+checks for behavior at runtime because we’ve already checked at compile time.
+Doing so improves performance without having to give up the flexibility of
+generics.
 -->
 
 Les traits et les traits liés nous permettent d'écrire du code qui utilise des
@@ -1450,9 +1164,9 @@ comportement particulier. Le compilateur peut ensuite utiliser les informations
 liées aux traits pour vérifier que tous les types concrets utilisés dans notre
 code suivent le comportement souhaité. Dans les langages typés dynamiquement,
 nous aurons une erreur à l'exécution si nous appelions une méthode sur un type
-que le type n'implémentait pas. Mais Rust décale l'apparition de ces erreurs au
-moment de la compilation afin de nous forcer à résoudre les problèmes avant même
-que notre code soit capable de s'exécuter. De plus, nous n'avons pas besoin
+qui n'implémentait pas la méthode. Mais Rust décale l'apparition de ces erreurs
+au moment de la compilation afin de nous forcer à résoudre les problèmes avant
+même que notre code soit capable de s'exécuter. De plus, nous n'avons pas besoin
 d'écrire un code qui vérifie le comportement lors de l'exécution car nous
 l'avons déjà vérifié au moment de la compilation. Cela permet d'améliorer les
 performances sans avoir à sacrifier la flexibilité des génériques.
