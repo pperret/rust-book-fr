@@ -72,17 +72,14 @@ pendouillantes qui font qu'un programme pointe des données autres que celles su
 lesquelles il était censé pointer. Admettons le programme de l'encart 10-17, qui
 a une portée externe et une portée interne.
 
+<!--
 ```rust,ignore,does_not_compile
-{
-    let r;
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-17/src/main.rs:here}}
+```
+-->
 
-    {
-        let x = 5;
-        r = &x;
-    }
-
-    println!("r: {}", r);
-}
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-17/src/main.rs:here}}
 ```
 
 <!--
@@ -90,7 +87,7 @@ a une portée externe et une portée interne.
 has gone out of scope</span>
 -->
 
-<span class="caption">Encart 10-17 : Tentative d'utiliser une référence vers
+<span class="caption">Encart 10-17 : tentative d'utiliser une référence vers
 une valeur qui est sortie de la portée</span>
 
 <!--
@@ -127,17 +124,14 @@ valeur dans `r`. Ce code ne va pas se compiler car la valeur `r` se réfère à
 quelque chose qui est sortie de la portée avant que nous essayons de l'utiliser.
 Voici le message d'erreur :
 
-```text
-error[E0597]: `x` does not live long enough
-  -- > src/main.rs:7:5
-   |
-6  |         r = &x;
-   |              - borrow occurs here
-7  |     }
-   |     ^ `x` dropped here while still borrowed
-...
-10 | }
-   | - borrowed value needs to live until here
+<!--
+```console
+{{#include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-17/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-17/output.txt}}
 ```
 
 <!--
@@ -176,17 +170,14 @@ compare les portées pour déterminer si les emprunts sont valides. L'encart 10-
 montre le même code que l'encart 10-17, mais avec des commentaires qui montrent
 les durées de vies des variables.
 
+<!--
 ```rust,ignore,does_not_compile
-{
-    let r;                // ---------+-- 'a
-                          //          |
-    {                     //          |
-        let x = 5;        // -+-- 'b  |
-        r = &x;           //  |       |
-    }                     // -+       |
-                          //          |
-    println!("r: {}", r); //          |
-}                         // ---------+
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-18/src/main.rs:here}}
+```
+-->
+
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-18/src/main.rs:here}}
 ```
 
 <!--
@@ -194,7 +185,7 @@ les durées de vies des variables.
 `x`, named `'a` and `'b`, respectively</span>
 -->
 
-<span class="caption">Encart 10-18 : Commentaires pour montrer les durées de vie
+<span class="caption">Encart 10-18 : commentaires pour montrer les durées de vie
 de `r` et `x`, qui s'appellent respectivement `'a` et `'b`</span>
 
 <!--
@@ -222,15 +213,14 @@ compiles without any errors.
 L'encart 10-19 résout le code afin qu'il n'ai plus de référence pendouillante et
 qu'il se compile sans erreur.
 
+<!--
 ```rust
-{
-    let x = 5;            // ----------+-- 'b
-                          //           |
-    let r = &x;           // --+-- 'a  |
-                          //   |       |
-    println!("r: {}", r); //   |       |
-                          // --+       |
-}                         // ----------+
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-19/src/main.rs:here}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-19/src/main.rs:here}}
 ```
 
 <!--
@@ -238,7 +228,7 @@ qu'il se compile sans erreur.
 longer lifetime than the reference</span>
 -->
 
-<span class="caption">Encart 10-19 : La référence est valide puisque la donnée a
+<span class="caption">Encart 10-19 : la référence est valide puisque la donnée a
 une durée de vie plus longue que la référence</span>
 
 <!--
@@ -289,24 +279,12 @@ afficher `La plus grande chaîne est abcd`.
 
 <!--
 ```rust,ignore
-fn main() {
-    let string1 = String::from("abcd");
-    let string2 = "xyz";
-
-    let result = longest(string1.as_str(), string2);
-    println!("The longest string is {}", result);
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-20/src/main.rs}}
 ```
 -->
 
 ```rust,ignore
-fn main() {
-    let string1 = String::from("abcd");
-    let string2 = "xyz";
-
-    let resultat = la_plus_longue(string1.as_str(), string2);
-    println!("La plus grande chaîne est {}", resultat);
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-20/src/main.rs}}
 ```
 
 <!--
@@ -314,7 +292,7 @@ fn main() {
 function to find the longer of two string slices</span>
 -->
 
-<span class="caption">Encart 10-20 : Une fonction `main` qui appelle la
+<span class="caption">Encart 10-20 : une fonction `main` qui appelle la
 fonction `la_plus_longue` pour trouver la plus grande des deux slices de chaîne
 de caractères
 </span>
@@ -322,25 +300,16 @@ de caractères
 <!--
 Note that we want the function to take string slices, which are references,
 because we don’t want the `longest` function to take ownership of its
-parameters. We want to allow the function to accept slices of a `String` (the
-type stored in the variable `string1`) as well as string literals (which is
-what variable `string2` contains).
+parameters. Refer to the [“String Slices as
+Parameters”][string-slices-as-parameters]<!-- ignore -- > section in Chapter 4
+for more discussion about why the parameters we use in Listing 10-20 are the
+ones we want.
 -->
 
 Remarquez que nous souhaitons que la fonction prenne deux slices de chaînes de
 caractères, qui sont des références, car nous ne voulons pas que la fonction
-`la_plus_longue` prenne possession de ses paramètres. Nous souhaitons permettre
-à la fonction d'accepter des slices d'une `String` (le type stocké dans la
-variable `string1`) ainsi que des littéraux de chaînes de caractères (qui est le
-type stocké dans la variable `string2`).
-
-<!--
-Refer to the [“String Slices as Parameters”][string-slices-as-parameters]<!--
-ignore -- > section in Chapter 4 for more discussion about why the parameters we
-use in Listing 10-20 are the ones we want.
--->
-
-Rendez-vous à la section [“Les slices de chaînes de caractères en
+`la_plus_longue` prenne possession de ses paramètres. Rendez-vous à la section
+[“Les slices de chaînes de caractères en
 paramètres”][string-slices-as-parameters]<!-- ignore --> du chapitre 4 pour
 savoir pourquoi nous utilisons ce type de paramètre dans l'encart 10-20.
 
@@ -360,24 +329,12 @@ Si nous essayons d'implémenter la fonction `la_plus_longue` comme dans l'encart
 
 <!--
 ```rust,ignore,does_not_compile
-fn longest(x: &str, y: &str) -> &str {
-    if x.len() > y.len() {
-        x
-    } else {
-        y
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-21/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-fn la_plus_longue(x: &str, y: &str) -> &str {
-    if x.len() > y.len() {
-        x
-    } else {
-        y
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-21/src/main.rs:here}}
 ```
 
 <!--
@@ -386,7 +343,7 @@ function that returns the longer of two string slices but does not yet
 compile</span>
 -->
 
-<span class="caption">Encart 10-21 : Une implémentation de la fonction
+<span class="caption">Encart 10-21 : une implémentation de la fonction
 `la_plus_longue` qui retourne la plus longue des deux slices de chaînes de
 caractères, mais ne se compile pas encore</span>
 
@@ -397,27 +354,13 @@ Instead, we get the following error that talks about lifetimes:
 A la place, nous obtenons l'erreur suivante qui nous parle de durées de vie :
 
 <!--
-```text
-error[E0106]: missing lifetime specifier
- -- > src/main.rs:1:33
-  |
-1 | fn longest(x: &str, y: &str) -> &str {
-  |                                 ^ expected lifetime parameter
-  |
-  = help: this function's return type contains a borrowed value, but the
-signature does not say whether it is borrowed from `x` or `y`
+```console
+{{#include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-21/output.txt}}
 ```
 -->
 
-```text
-error[E0106]: missing lifetime specifier
- -- > src/main.rs:1:33
-  |
-1 | fn la_plus_longue(x: &str, y: &str) -> &str {
-  |                                        ^ expected lifetime parameter
-  |
-  = help: this function's return type contains a borrowed value, but the
-signature does not say whether it is borrowed from `x` or `y`
+```console
+{{#include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-21/output.txt}}
 ```
 
 <!--
@@ -574,24 +517,12 @@ dans l'encart 10-22.
 
 <!--
 ```rust
-fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-    if x.len() > y.len() {
-        x
-    } else {
-        y
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-22/src/main.rs:here}}
 ```
 -->
 
 ```rust
-fn la_plus_longue<'a>(x: &'a str, y: &'a str) -> &'a str {
-    if x.len() > y.len() {
-        x
-    } else {
-        y
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-22/src/main.rs:here}}
 ```
 
 <!--
@@ -600,7 +531,7 @@ specifying that all the references in the signature must have the same lifetime
 `'a`</span>
 -->
 
-<span class="caption">Encart 10-22 : Définition de la fonction `la_plus_longue`
+<span class="caption">Encart 10-22 : définition de la fonction `la_plus_longue`
 qui indique que toutes les références présentes dans la signature doivent avoir
 la même durée de vie `'a`</span>
 
@@ -701,44 +632,12 @@ concrètement différentes. L'encart 10-23 en est un exemple.
 
 <!--
 ```rust
-# fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-#     if x.len() > y.len() {
-#         x
-#     } else {
-#         y
-#     }
-# }
-#
-fn main() {
-    let string1 = String::from("long string is long");
-
-    {
-        let string2 = String::from("xyz");
-        let result = longest(string1.as_str(), string2.as_str());
-        println!("The longest string is {}", result);
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-23/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# fn la_plus_longue<'a>(x: &'a str, y: &'a str) -> &'a str {
-#     if x.len() > y.len() {
-#         x
-#     } else {
-#         y
-#     }
-# }
-#
-fn main() {
-    let string1 = String::from("une longue chaîne est longue");
-
-    {
-        let string2 = String::from("xyz");
-        let resultat = la_plus_longue(string1.as_str(), string2.as_str());
-        println!("La chaîne la plus longue est {}", resultat);
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-23/src/main.rs:here}}
 ```
 
 <!--
@@ -746,7 +645,7 @@ fn main() {
 references to `String` values that have different concrete lifetimes</span>
 -->
 
-<span class="caption">Encart 10-23 : Utilisation de la fonction `la_plus_longue`
+<span class="caption">Encart 10-23 : utilisation de la fonction `la_plus_longue`
 sur des références à des valeurs `String` qui ont concrètement des durées de vie
 différentes</span>
 
@@ -791,28 +690,12 @@ que la portée soit terminée. Le code de l'encart 10-24 ne va pas se compiler.
 
 <!--
 ```rust,ignore,does_not_compile
-fn main() {
-    let string1 = String::from("long string is long");
-    let result;
-    {
-        let string2 = String::from("xyz");
-        result = longest(string1.as_str(), string2.as_str());
-    }
-    println!("The longest string is {}", result);
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-24/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-fn main() {
-    let string1 = String::from("une longue chaîne est longue");
-    let resultat;
-    {
-        let string2 = String::from("xyz");
-        resultat = la_plus_longue(string1.as_str(), string2.as_str());
-    }
-    println!("La chaîne la plus longue est {}", resultat);
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-24/src/main.rs:here}}
 ```
 
 <!--
@@ -820,7 +703,7 @@ fn main() {
 has gone out of scope</span>
 -->
 
-<span class="caption">Encart 10-24 : Tentative d'utilisation de `resultat` après
+<span class="caption">Encart 10-24 : tentative d'utilisation de `resultat` après
 `string2`, qui est sortie de la portée</span>
 
 <!--
@@ -830,31 +713,13 @@ When we try to compile this code, we’ll get this error:
 Lorsque nous essayons de compiler ce code, nous aurons cette erreur :
 
 <!--
-```text
-error[E0597]: `string2` does not live long enough
-  -- > src/main.rs:15:5
-   |
-14 |         result = longest(string1.as_str(), string2.as_str());
-   |                                            ------- borrow occurs here
-15 |     }
-   |     ^ `string2` dropped here while still borrowed
-16 |     println!("The longest string is {}", result);
-17 | }
-   | - borrowed value needs to live until here
+```console
+{{#include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-24/output.txt}}
 ```
 -->
 
-```text
-error[E0597]: `string2` does not live long enough
-  -- > src/main.rs:15:5
-   |
-14 |         resultat = la_plus_longue(string1.as_str(), string2.as_str());
-   |                                                     ------- borrow occurs here
-15 |     }
-   |     ^ `string2` dropped here while still borrowed
-16 |     println!("La chaîne la plus longue est {}", resultat);
-17 | }
-   | - borrowed value needs to live until here
+```console
+{{#include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-24/output.txt}}
 ```
 
 <!--
@@ -934,16 +799,12 @@ code suivant se compile :
 
 <!--
 ```rust
-fn longest<'a>(x: &'a str, y: &str) -> &'a str {
-    x
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-08-only-one-reference-with-lifetime/src/main.rs:here}}
 ```
 -->
 
 ```rust
-fn la_plus_longue<'a>(x: &'a str, y: &str) -> &'a str {
-    x
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-08-only-one-reference-with-lifetime/src/main.rs:here}}
 ```
 
 <!--
@@ -982,18 +843,12 @@ la fonction `la_plus_longue` qui ne se compile pas :
 
 <!--
 ```rust,ignore,does_not_compile
-fn longest<'a>(x: &str, y: &str) -> &'a str {
-    let result = String::from("really long string");
-    result.as_str()
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-09-unrelated-lifetime/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-fn la_plus_longue<'a>(x: &str, y: &str) -> &'a str {
-    let resultat = String::from("très longue chaîne");
-    resultat.as_str()
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-09-unrelated-lifetime/src/main.rs:here}}
 ```
 
 <!--
@@ -1009,45 +864,13 @@ la valeur de retour n'est pas du tout liée à la durée de vie des paramètres.
 Voici le message d'erreur que nous obtenons :
 
 <!--
-```text
-error[E0597]: `result` does not live long enough
- -- > src/main.rs:3:5
-  |
-3 |     result.as_str()
-  |     ^^^^^^ does not live long enough
-4 | }
-  | - borrowed value only lives until here
-  |
-note: borrowed value must be valid for the lifetime 'a as defined on the
-function body at 1:1...
- -- > src/main.rs:1:1
-  |
-1 | / fn longest<'a>(x: &str, y: &str) -> &'a str {
-2 | |     let result = String::from("really long string");
-3 | |     result.as_str()
-4 | | }
-  | |_^
+```console
+{{#include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-09-unrelated-lifetime/output.txt}}
 ```
 -->
 
-```text
-error[E0597]: `resultat` does not live long enough
- -- > src/main.rs:3:5
-  |
-3 |     resultat.as_str()
-  |     ^^^^^^^^ does not live long enough
-4 | }
-  | - borrowed value only lives until here
-  |
-note: borrowed value must be valid for the lifetime 'a as defined on the
-function body at 1:1...
- -- > src/main.rs:1:1
-  |
-1 | / fn la_plus_longue<'a>(x: &str, y: &str) -> &'a str {
-2 | |     let resultat = String::from("très longue chaîne");
-3 | |     resultat.as_str()
-4 | | }
-  | |_^
+```console
+{{#include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-09-unrelated-lifetime/output.txt}}
 ```
 
 <!--
@@ -1109,32 +932,12 @@ structure `ExtraitImportant` qui stocke une slice de chaîne de caractères.
 
 <!--
 ```rust
-struct ImportantExcerpt<'a> {
-    part: &'a str,
-}
-
-fn main() {
-    let novel = String::from("Call me Ishmael. Some years ago...");
-    let first_sentence = novel.split('.')
-        .next()
-        .expect("Could not find a '.'");
-    let i = ImportantExcerpt { part: first_sentence };
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-25/src/main.rs}}
 ```
 -->
 
 ```rust
-struct ExtraitImportant<'a> {
-    partie: &'a str,
-}
-
-fn main() {
-    let roman = String::from("Appelez-moi Ismaël. Il y a quelques années ...");
-    let premiere_phrase = roman.split('.')
-        .next()
-        .expect("Impossible de trouver un '.'");
-    let i = ExtraitImportant { partie: premiere_phrase };
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-25/src/main.rs}}
 ```
 
 <!--
@@ -1142,7 +945,7 @@ fn main() {
 definition needs a lifetime annotation</span>
 -->
 
-<span class="caption">Encart 10-25 : Une structure qui stocke une référence,
+<span class="caption">Encart 10-25 : une structure qui stocke une référence,
 par conséquent sa définition a besoin d'une annotation de durée de vie</span>
 
 <!--
@@ -1205,32 +1008,12 @@ compilait sans informations de durée de vie.
 
 <!--
 ```rust
-fn first_word(s: &str) -> &str {
-    let bytes = s.as_bytes();
-
-    for (i, &item) in bytes.iter().enumerate() {
-        if item == b' ' {
-            return &s[0..i];
-        }
-    }
-
-    &s[..]
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-26/src/main.rs:here}}
 ```
 -->
 
 ```rust
-fn premier_mot(s: &str) -> &str {
-    let octets = s.as_bytes();
-
-    for (i, &element) in octets.iter().enumerate() {
-        if element == b' ' {
-            return &s[0..i];
-        }
-    }
-
-    &s[..]
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-26/src/main.rs:here}}
 ```
 
 <!--
@@ -1239,7 +1022,7 @@ compiled without lifetime annotations, even though the parameter and return
 type are references</span>
 -->
 
-<span class="caption">Encart 10-26 : Une fonction que nous avons défini dans
+<span class="caption">Encart 10-26 : une fonction que nous avons défini dans
 l'encart 4-9 qui se compilait sans avoir d'indications sur la durée de vie, même
 si les paramètres et le type de retour sont des références</span>
 
@@ -1585,28 +1368,12 @@ pas une référence :
 
 <!--
 ```rust
-# struct ImportantExcerpt<'a> {
-#     part: &'a str,
-# }
-#
-impl<'a> ImportantExcerpt<'a> {
-    fn level(&self) -> i32 {
-        3
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-10-lifetimes-on-methods/src/main.rs:1st}}
 ```
 -->
 
 ```rust
-# struct ExtraitImportant<'a> {
-#     partie: &'a str,
-# }
-#
-impl<'a> ExtraitImportant<'a> {
-    fn niveau(&self) -> i32 {
-        3
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-10-lifetimes-on-methods/src/main.rs:1st}}
 ```
 
 <!--
@@ -1627,30 +1394,12 @@ Voici un exemple où la troisième règle d'élision des durées de vie s'appliq
 
 <!--
 ```rust
-# struct ImportantExcerpt<'a> {
-#     part: &'a str,
-# }
-#
-impl<'a> ImportantExcerpt<'a> {
-    fn announce_and_return_part(&self, announcement: &str) -> &str {
-        println!("Attention please: {}", announcement);
-        self.part
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-10-lifetimes-on-methods/src/main.rs:3rd}}
 ```
 -->
 
 ```rust
-# struct ExtraitImportant<'a> {
-#     partie: &'a str,
-# }
-#
-impl<'a> ExtraitImportant<'a> {
-    fn annoncer_et_retourner_partie(&self, annonce: &str) -> &str {
-        println!("Votre attention s'il vous plaît : {}", annonce);
-        self.partie
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-10-lifetimes-on-methods/src/main.rs:3rd}}
 ```
 
 <!--
@@ -1739,34 +1488,12 @@ génériques, les traits liés, et les durées de vies sur une seule fonction !
 
 <!--
 ```rust
-use std::fmt::Display;
-
-fn longest_with_an_announcement<'a, T>(x: &'a str, y: &'a str, ann: T) -> &'a str
-    where T: Display
-{
-    println!("Announcement! {}", ann);
-    if x.len() > y.len() {
-        x
-    } else {
-        y
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-11-generics-traits-and-lifetimes/src/main.rs:here}}
 ```
 -->
 
 ```rust
-use std::fmt::Display;
-
-fn la_plus_longue_avec_annonce<'a, T>(x: &'a str, y: &'a str, ann: T) -> &'a str
-    where T: Display
-{
-    println!("Annonce ! {}", ann);
-    if x.len() > y.len() {
-        x
-    } else {
-        y
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-11-generics-traits-and-lifetimes/src/main.rs:here}}
 ```
 
 <!--
@@ -1823,27 +1550,32 @@ pas sur les performances au moment de l'exécution du programme !
 <!--
 Believe it or not, there is much more to learn on the topics we discussed in
 this chapter: Chapter 17 discusses trait objects, which are another way to use
-traits. Chapter 19 covers more complex scenarios involving lifetime annotations
-as well as some advanced type system features. But next, you’ll learn how to
-write tests in Rust so you can make sure your code is working the way it should.
+traits. There are also more complex scenarios involving lifetime annotations
+that you will only need in very advanced scenarios; for those, you should read
+the [Rust Reference][reference]. But next, you’ll learn how to write tests in
+Rust so you can make sure your code is working the way it should.
 -->
 
 Croyez-le ou non, mais il y a encore des choses à apprendre sur les sujets que
 nous avons traités dans ce chapitre : le chapitre 17 expliquera les objets de
-trait, qui est une façon d'utiliser les traits. Le chapitre 19 exposera des
-scénarios plus complexes qui nécessitent des indications de durée de vie ainsi
-que certaines fonctionnalités avancées du système de type. Mais avant, nous
-allons voir au chapitre suivant comment écrire des tests en Rust afin que vous
-puissiez vous assurer que votre code fonctionne comme il devrait le faire.
+trait, qui est une façon d'utiliser les traits. Il existe aussi des scénarios
+plus complexes qui nécessitent des indications de durée de vie ainsi que
+d'utiliser, uniquement pour ces ces scénarios avancés, certaines fonctionnalités
+avancées du système de type ; pour ces cas-là, vous devriez consulter la
+[Référence de Rust][reference]. Maintenant, nous allons voir au chapitre suivant
+comment écrire des tests en Rust afin que vous puissiez vous assurer que votre
+code fonctionne comme il devrait le faire.
 
 <!--
 [references-and-borrowing]:
 ch04-02-references-and-borrowing.html#references-and-borrowing
 [string-slices-as-parameters]:
 ch04-03-slices.html#string-slices-as-parameters
+[reference]: ../reference/index.html
 -->
 
 [references-and-borrowing]:
 ch04-02-references-and-borrowing.html#les-références-et-lemprunt
 [string-slices-as-parameters]:
 ch04-03-slices.html#les-slices-de-chaînes-de-caractères-en-paramètres
+[reference]: https://doc.rust-lang.org/reference/index.html
