@@ -104,14 +104,14 @@ Commençons par créer un nouveau projet de bibliothèque que nous appellerons
 `addition` :
 
 <!--
-```text
+```console
 $ cargo new adder --lib
      Created library `adder` project
 $ cd adder
 ```
 -->
 
-```text
+```console
 $ cargo new addition --lib
      Created library `addition` project
 $ cd addition
@@ -131,15 +131,14 @@ devrait ressembler à l'encart 11-1.
 
 <span class="filename">Fichier : src/lib.rs</span>
 
+<!--
 ```rust
-# fn main() {}
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-01/src/lib.rs:here}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-01/src/lib.rs:here}}
 ```
 
 <!--
@@ -147,7 +146,7 @@ mod tests {
 automatically by `cargo new`</span>
 -->
 
-<span class="caption">Encart 11-1 : Le module de test et la fonction générées
+<span class="caption">Encart 11-1 : le module de test et la fonction générées
 automatiquement par `cargo new`</span>
 
 <!--
@@ -187,41 +186,13 @@ La commande `cargo test` lance tous les tests présents dans votre projet, comme
 le montre l'encart 11-2.
 
 <!--
-```text
-$ cargo test
-   Compiling adder v0.1.0 (file:///projects/adder)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.22 secs
-     Running target/debug/deps/adder-ce99bcc2479f4607
-
-running 1 test
-test tests::it_works ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-
-   Doc-tests adder
-
-running 0 tests
-
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/listing-11-01/output.txt}}
 ```
 -->
 
-```text
-$ cargo test
-   Compiling addition v0.1.0 (file:///projects/addition)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.22 secs
-     Running target/debug/deps/addition-ce99bcc2479f4607
-
-running 1 test
-test tests::it_works ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-
-   Doc-tests addition
-
-running 0 tests
-
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/listing-11-01/output.txt}}
 ```
 
 <!--
@@ -229,7 +200,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 generated test</span>
 -->
 
-<span class="caption">Encart 11-2 : Le résultat du lancement des tests sur le
+<span class="caption">Encart 11-2 : le résultat du lancement des tests sur le
 test généré automatiquement</span>
 
 <!--
@@ -316,15 +287,14 @@ test. Changeons le nom de la fonction `it_works` pour un nom différent, comme
 
 <span class="filename">Fichier : src/lib.rs</span>
 
+<!--
 ```rust
-# fn main() {}
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn exploration() {
-        assert_eq!(2 + 2, 4);
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-01-changing-test-name/src/lib.rs:here}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-01-changing-test-name/src/lib.rs:here}}
 ```
 
 <!--
@@ -335,11 +305,14 @@ Then run `cargo test` again. The output now shows `exploration` instead of
 Lancez ensuite à nouveau `cargo test`. Le résultat affiche désormais
 `exploration` plutôt que `it_works` :
 
-```text
-running 1 test
-test tests::exploration ... ok
+<!--
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-01-changing-test-name/output.txt}}
+```
+-->
 
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-01-changing-test-name/output.txt}}
 ```
 
 <!--
@@ -367,21 +340,13 @@ chapitre 9, qui consiste à appeler la macro `panic!`. Ecrivez ce nouveau test,
 
 <!--
 ```rust,panics
-# fn main() {}
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn exploration() {
-        assert_eq!(2 + 2, 4);
-    }
-
-    #[test]
-    fn another() {
-        panic!("Make this test fail");
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-03/src/lib.rs:here}}
 ```
 -->
+
+```rust,panics
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-03/src/lib.rs:here}}
+```
 
 ```rust,panics
 # fn main() {}
@@ -404,7 +369,7 @@ mod tests {
 we call the `panic!` macro</span>
 -->
 
-<span class="caption">Encart 11-3 : Ajout d'un second test qui va échouer car
+<span class="caption">Encart 11-3 : ajout d'un second test qui va échouer car
 nous appelons la macro `panic!`</span>
 
 <!--
@@ -418,42 +383,12 @@ réussi et que `un_autre` va échouer.
 
 <!--
 ```text
-running 2 tests
-test tests::exploration ... ok
-test tests::another ... FAILED
-
-failures:
-
----- tests::another stdout ----
-thread 'tests::another' panicked at 'Make this test fail', src/lib.rs:10:9
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
-
-failures:
-    tests::another
-
-test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
-
-error: test failed
+{{#include ../listings/ch11-writing-automated-tests/listing-11-03/output.txt}}
 ```
 -->
 
 ```text
-running 2 tests
-test tests::exploration ... ok
-test tests::un_autre ... FAILED
-
-failures:
-
----- tests::un_autre stdout ----
-thread 'tests::un_autre' panicked at 'Fait échouer ce test', src/lib.rs:10:9
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
-
-failures:
-    tests::un_autre
-
-test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
-
-error: test failed
+{{#include ../listings/ch11-writing-automated-tests/listing-11-03/output.txt}}
 ```
 
 <!--
@@ -461,7 +396,7 @@ error: test failed
 test fails</span>
 -->
 
-<span class="caption">Encart 11-4 : Les résultats de tests lorsque un test
+<span class="caption">Encart 11-4 : les résultats de tests lorsque un test
 réussit et un autre test échoue</span>
 
 <!--
@@ -549,34 +484,12 @@ tests en utilisant la macro `assert!`.
 
 <!--
 ```rust
-# fn main() {}
-#[derive(Debug)]
-struct Rectangle {
-    width: u32,
-    height: u32,
-}
-
-impl Rectangle {
-    fn can_hold(&self, other: &Rectangle) -> bool {
-        self.width > other.width && self.height > other.height
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-05/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# fn main() {}
-#[derive(Debug)]
-struct Rectangle {
-    largeur: u32,
-    hauteur: u32,
-}
-
-impl Rectangle {
-    fn peut_contenir(&self, autre: &Rectangle) -> bool {
-        self.largeur > autre.largeur && self.hauteur > autre.hauteur
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-05/src/lib.rs:here}}
 ```
 
 <!--
@@ -584,7 +497,7 @@ impl Rectangle {
 `can_hold` method from Chapter 5</span>
 -->
 
-<span class="caption">Encart 11-5 : Utilisation de la structure `Rectangle` et
+<span class="caption">Encart 11-5 : utilisation de la structure `Rectangle` et
 sa méthode `peut_contenir` du chapitre 5</span>
 
 <!--
@@ -610,36 +523,12 @@ hauteur de 1.
 
 <!--
 ```rust
-# fn main() {}
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn larger_can_hold_smaller() {
-        let larger = Rectangle { width: 8, height: 7 };
-        let smaller = Rectangle { width: 5, height: 1 };
-
-        assert!(larger.can_hold(&smaller));
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-06/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# fn main() {}
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn un_grand_peut_contenir_un_petit() {
-        let le_grand = Rectangle { largeur: 8, hauteur: 7 };
-        let le_petit = Rectangle { largeur: 5, hauteur: 1 };
-
-        assert!(le_grand.peut_contenir(&le_petit));
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-06/src/lib.rs:here}}
 ```
 
 <!--
@@ -647,7 +536,7 @@ mod tests {
 larger rectangle can indeed hold a smaller rectangle</span>
 -->
 
-<span class="caption">Encart 11-6 : Un test pour `peut_contenir` qui vérifie le
+<span class="caption">Encart 11-6 : un test pour `peut_contenir` qui vérifie le
 cas où un grand rectangle peut contenir un plus petit rectangle</span>
 
 <!--
@@ -685,19 +574,13 @@ appelé la macro `assert!` et nous lui avons passé le résultat de l'appel à
 `true`, donc notre test devrait réussir. Vérifions cela !
 
 <!--
-```text
-running 1 test
-test tests::larger_can_hold_smaller ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/listing-11-06/output.txt}}
 ```
 -->
 
-```text
-running 1 test
-test tests::un_grand_peut_contenir_un_petit ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/listing-11-06/output.txt}}
 ```
 
 <!--
@@ -716,46 +599,12 @@ petit rectangle ne peut contenir un rectangle plus grand :
 
 <!--
 ```rust
-# fn main() {}
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn larger_can_hold_smaller() {
-        // --snip--
-    }
-
-    #[test]
-    fn smaller_cannot_hold_larger() {
-        let larger = Rectangle { width: 8, height: 7 };
-        let smaller = Rectangle { width: 5, height: 1 };
-
-        assert!(!smaller.can_hold(&larger));
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-02-adding-another-rectangle-test/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# fn main() {}
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn un_grand_peut_contenir_un_petit() {
-        // -- partie masquée ici --
-    }
-
-    #[test]
-    fn un_petit_ne_peut_pas_contenir_un_plus_grand() {
-        let le_grand = Rectangle { width: 8, height: 7 };
-        let le_petit = Rectangle { width: 5, height: 1 };
-
-        assert!(!le_petit.peut_contenir(&le_grand));
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-02-adding-another-rectangle-test/src/lib.rs:here}}
 ```
 
 <!--
@@ -770,21 +619,13 @@ macro `assert!`. Cela aura pour effet de faire réussir notre test si
 `peut_contenir` retourne `false` :
 
 <!--
-```text
-running 2 tests
-test tests::smaller_cannot_hold_larger ... ok
-test tests::larger_can_hold_smaller ... ok
-
-test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-02-adding-another-rectangle-test/output.txt}}
 ```
 -->
 
-```text
-running 2 tests
-test tests::un_grand_peut_contenir_un_petit ... ok
-test tests::un_petit_ne_peut_pas_contenir_un_plus_grand ... ok
-
-test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-02-adding-another-rectangle-test/output.txt}}
 ```
 
 <!--
@@ -802,36 +643,12 @@ des largeurs :
 
 <!--
 ```rust,not_desired_behavior
-# fn main() {}
-# #[derive(Debug)]
-# struct Rectangle {
-#     width: u32,
-#     height: u32,
-# }
-// --snip--
-
-impl Rectangle {
-    fn can_hold(&self, other: &Rectangle) -> bool {
-        self.width < other.width && self.height > other.height
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-03-introducing-a-bug/src/lib.rs:here}}
 ```
 -->
 
 ```rust,not_desired_behavior
-# fn main() {}
-# #[derive(Debug)]
-# struct Rectangle {
-#     largeur: u32,
-#     hauteur: u32,
-# }
-// -- partie masquée ici --
-
-impl Rectangle {
-    fn peut_contenir(&self, autre: &Rectangle) -> bool {
-        self.largeur < other.largeur && self.hauteur > other.hauteur
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-03-introducing-a-bug/src/lib.rs:here}}
 ```
 
 <!--
@@ -841,41 +658,13 @@ Running the tests now produces the following:
 Le lancement des tests donne maintenant le résultat suivant :
 
 <!--
-```text
-running 2 tests
-test tests::smaller_cannot_hold_larger ... ok
-test tests::larger_can_hold_smaller ... FAILED
-
-failures:
-
----- tests::larger_can_hold_smaller stdout ----
-thread 'tests::larger_can_hold_smaller' panicked at 'assertion failed:
-larger.can_hold(&smaller)', src/lib.rs:22:9
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
-
-failures:
-    tests::larger_can_hold_smaller
-
-test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-03-introducing-a-bug/output.txt}}
 ```
 -->
 
-```text
-running 2 tests
-test tests::un_petit_ne_peut_pas_contenir_un_plus_grand ... ok
-test tests::un_grand_peut_contenir_un_petit ... FAILED
-
-failures:
-
----- tests::un_grand_peut_contenir_un_petit stdout ----
-thread 'tests::un_grand_peut_contenir_un_petit' panicked at 'assertion failed:
-le_grand.peut_contenir(&le_petit)', src/lib.rs:22:9
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
-
-failures:
-    tests::un_grand_peut_contenir_un_petit
-
-test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-03-introducing-a-bug/output.txt}}
 ```
 
 <!--
@@ -938,38 +727,12 @@ utilisant la macro `assert_eq!`.
 
 <!--
 ```rust
-# fn main() {}
-pub fn add_two(a: i32) -> i32 {
-    a + 2
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_adds_two() {
-        assert_eq!(4, add_two(2));
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-07/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# fn main() {}
-pub fn ajouter_deux(a: i32) -> i32 {
-    a + 2
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn cela_ajoute_deux() {
-        assert_eq!(4, ajouter_deux(2));
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-07/src/lib.rs:here}}
 ```
 
 <!--
@@ -977,7 +740,7 @@ mod tests {
 `assert_eq!` macro</span>
 -->
 
-<span class="caption">Encart 11-7 : Test de la fonction `ajouter_deux` en
+<span class="caption">Encart 11-7 : test de la fonction `ajouter_deux` en
 utilisant la macro `assert_eq!`.</span>
 
 <!--
@@ -987,19 +750,13 @@ Let’s check that it passes!
 Vérifions si cela fonctionne !
 
 <!--
-```text
-running 1 test
-test tests::it_adds_two ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/listing-11-07/output.txt}}
 ```
 -->
 
-```text
-running 1 test
-test tests::cela_ajoute_deux ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/listing-11-07/output.txt}}
 ```
 
 <!--
@@ -1025,18 +782,12 @@ qui utilise `assert_eq!` échoue. Changez l'implémentation de la fonction
 
 <!--
 ```rust,not_desired_behavior
-# fn main() {}
-pub fn add_two(a: i32) -> i32 {
-    a + 3
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-04-bug-in-add-two/src/lib.rs:here}}
 ```
 -->
 
 ```rust,not_desired_behavior
-# fn main() {}
-pub fn ajouter_deux(a: i32) -> i32 {
-    a + 3
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-04-bug-in-add-two/src/lib.rs:here}}
 ```
 
 <!--
@@ -1046,41 +797,13 @@ Run the tests again:
 Lancez à nouveau les tests :
 
 <!--
-```text
-running 1 test
-test tests::it_adds_two ... FAILED
-
-failures:
-
----- tests::it_adds_two stdout ----
-thread 'tests::it_adds_two' panicked at 'assertion failed: `(left == right)`
-  left: `4`,
- right: `5`', src/lib.rs:11:9
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
-
-failures:
-    tests::it_adds_two
-
-test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-04-bug-in-add-two/output.txt}}
 ```
 -->
 
-```text
-running 1 test
-test tests::cela_ajoute_deux ... FAILED
-
-failures:
-
----- tests::cela_ajoute_deux stdout ----
-thread 'tests::cela_ajoute_deux' panicked at 'assertion failed: `(left == right)`
-  left: `4`,
- right: `5`', src/lib.rs:11:9
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
-
-failures:
-    tests::cela_ajoute_deux
-
-test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-04-bug-in-add-two/output.txt}}
 ```
 
 <!--
@@ -1218,40 +941,12 @@ apparaît dans le résultat :
 
 <!--
 ```rust
-# fn main() {}
-pub fn greeting(name: &str) -> String {
-    format!("Hello {}!", name)
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn greeting_contains_name() {
-        let result = greeting("Carol");
-        assert!(result.contains("Carol"));
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-05-greeter/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# fn main() {}
-pub fn accueil(nom: &str) -> String {
-    format!("Salut, {} !", nom)
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn accueil_contient_le_nom() {
-        let resultat = accueil("Carole");
-        assert!(resultat.contains("Carole"));
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-05-greeter/src/lib.rs:here}}
 ```
 
 <!--
@@ -1281,18 +976,12 @@ ajouter `nom` afin voir ce que donne l'échec de ce test :
 
 <!--
 ```rust,not_desired_behavior
-# fn main() {}
-pub fn greeting(name: &str) -> String {
-    String::from("Hello!")
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-06-greeter-with-bug/src/lib.rs:here}}
 ```
 -->
 
 ```rust,not_desired_behavior
-# fn main() {}
-pub fn accueil(nom: &str) -> String {
-    String::from("Salut !")
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-06-greeter-with-bug/src/lib.rs:here}}
 ```
 
 <!--
@@ -1302,35 +991,13 @@ Running this test produces the following:
 L'exécution du test va donner ceci :
 
 <!--
-```text
-running 1 test
-test tests::greeting_contains_name ... FAILED
-
-failures:
-
----- tests::greeting_contains_name stdout ----
-thread 'tests::greeting_contains_name' panicked at 'assertion failed:
-result.contains("Carol")', src/lib.rs:12:9
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
-
-failures:
-    tests::greeting_contains_name
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-06-greeter-with-bug/output.txt}}
 ```
 -->
 
-```text
-running 1 test
-test tests::accueil_contient_le_nom ... FAILED
-
-failures:
-
----- tests::accueil_contient_le_nom stdout ----
-thread 'tests::accueil_contient_le_nom' panicked at 'assertion failed:
-resultat.contains("Carole")', src/lib.rs:12:9
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
-
-failures:
-    tests::accueil_contient_le_nom
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-06-greeter-with-bug/output.txt}}
 ```
 
 <!--
@@ -1350,26 +1017,12 @@ nous avons obtenue de la fonction `accueil` :
 
 <!--
 ```rust,ignore
-#[test]
-fn greeting_contains_name() {
-    let result = greeting("Carol");
-    assert!(
-        result.contains("Carol"),
-        "Greeting did not contain name, value was `{}`", result
-    );
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-07-custom-failure-message/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore
-#[test]
-fn accueil_contient_nom() {
-    let resultat = accueil("Carole");
-    assert!(
-        resultat.contains("Carole"),
-        "Le message d'accueil ne contient pas le nom, il vaut `{}`", resultat
-    );
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-07-custom-failure-message/src/lib.rs:here}}
 ```
 
 <!--
@@ -1380,19 +1033,13 @@ Maintenant, lorsque nous lançons à nouveau le test, nous obtenons un message
 d'échec plus explicite :
 
 <!--
-```text
----- tests::greeting_contains_name stdout ----
-thread 'tests::greeting_contains_name' panicked at 'Greeting did not
-contain name, value was `Hello!`', src/lib.rs:12:9
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-07-custom-failure-message/output.txt}}
 ```
 -->
 
-```text
----- tests::accueil_contient_nom stdout ----
-thread 'tests::accueil_contient_nom' panicked at 'Le message d'accueil
-ne contient pas le nom, il vaut `Salut !`', src/lib.rs:12:9
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-07-custom-failure-message/output.txt}}
 ```
 
 <!--
@@ -1456,64 +1103,12 @@ L'encart 11-8 nous montre un test qui vérifie que les conditions d'erreur de
 
 <!--
 ```rust
-# fn main() {}
-pub struct Guess {
-    value: i32,
-}
-
-impl Guess {
-    pub fn new(value: i32) -> Guess {
-        if value < 1 || value > 100 {
-            panic!("Guess value must be between 1 and 100, got {}.", value);
-        }
-
-        Guess {
-            value
-        }
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    #[should_panic]
-    fn greater_than_100() {
-        Guess::new(200);
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-08/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# fn main() {}
-pub struct Supposition {
-    valeur: i32,
-}
-
-impl Supposition {
-    pub fn new(valeur: i32) -> Supposition {
-        if valeur < 1 || valeur > 100 {
-            panic!("La supposition doit se trouver entre 1 et 100, et nous avons {}.", valeur);
-        }
-
-        Supposition {
-            valeur
-        }
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    #[should_panic]
-    fn plus_grand_que_100() {
-        Guess::new(200);
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-08/src/lib.rs:here}}
 ```
 
 <!--
@@ -1521,7 +1116,7 @@ mod tests {
 `panic!`</span>
 -->
 
-<span class="caption">Encart 11-8 : Tester qu'une condition va faire un `panic`
+<span class="caption">Encart 11-8 : tester qu'une condition va faire un `panic`
 </span>
 
 <!--
@@ -1535,19 +1130,13 @@ la fonction de test sur laquelle il s'applique. Voyons le résultat lorsque ce
 test réussit :
 
 <!--
-```text
-running 1 test
-test tests::greater_than_100 ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/listing-11-08/output.txt}}
 ```
 -->
 
-```text
-running 1 test
-test tests::plus_grand_que_100 ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/listing-11-08/output.txt}}
 ```
 
 <!--
@@ -1561,46 +1150,12 @@ plus grande que 100 :
 
 <!--
 ```rust,not_desired_behavior
-# fn main() {}
-# pub struct Guess {
-#     value: i32,
-# }
-#
-// --snip--
-
-impl Guess {
-    pub fn new(value: i32) -> Guess {
-        if value < 1  {
-            panic!("Guess value must be between 1 and 100, got {}.", value);
-        }
-
-        Guess {
-            value
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-08-guess-with-bug/src/lib.rs:here}}
 ```
 -->
 
 ```rust,not_desired_behavior
-# fn main() {}
-# pub struct Supposition {
-#     valeur: i32,
-# }
-#
-// -- partie masquée ici --
-
-impl Supposition {
-    pub fn new(valeur: i32) -> Supposition {
-        if valeur < 1  {
-            panic!("La supposition doit se trouver entre 1 et 100, et nous avons {}.", valeur);
-        }
-
-        Supposition {
-            valeur
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-08-guess-with-bug/src/lib.rs:here}}
 ```
 
 <!--
@@ -1610,29 +1165,13 @@ When we run the test in Listing 11-8, it will fail:
 Lorsque nous lançons le test de l'encart 11-8, il va échouer :
 
 <!--
-```text
-running 1 test
-test tests::greater_than_100 ... FAILED
-
-failures:
-
-failures:
-    tests::greater_than_100
-
-test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-08-guess-with-bug/output.txt}}
 ```
 -->
 
-```text
-running 1 test
-test tests::plus_grand_que_100 ... FAILED
-
-failures:
-
-failures:
-    tests::plus_grand_que_100
-
-test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-08-guess-with-bug/output.txt}}
 ```
 
 <!--
@@ -1675,76 +1214,12 @@ valeur est trop petite ou trop grande.
 
 <!--
 ```rust
-# fn main() {}
-# pub struct Guess {
-#     value: i32,
-# }
-#
-// --snip--
-
-impl Guess {
-    pub fn new(value: i32) -> Guess {
-        if value < 1 {
-            panic!("Guess value must be greater than or equal to 1, got {}.",
-                   value);
-        } else if value > 100 {
-            panic!("Guess value must be less than or equal to 100, got {}.",
-                   value);
-        }
-
-        Guess {
-            value
-        }
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    #[should_panic(expected = "Guess value must be less than or equal to 100")]
-    fn greater_than_100() {
-        Guess::new(200);
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-09/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# fn main() {}
-# pub struct Supposition {
-#     valeur: i32,
-# }
-#
-// -- partie masquée ici --
-
-impl Supposition {
-    pub fn new(valeur: i32) -> Supposition {
-        if valeur < 1 {
-            panic!("La supposition doit être plus grande ou égale à 1, et nous avons {}.",
-                   valeur);
-        } else if valeur > 100 {
-            panic!("La supposition doit être plus petite ou égale à 100, et nous avons {}.",
-                   valeur);
-        }
-
-        Supposition {
-            valeur
-        }
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    #[should_panic(expected = "La supposition doit être plus petite ou égale à 100")]
-    fn plus_grand_que_100() {
-        Supposition::new(200);
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-09/src/lib.rs:here}}
 ```
 
 <!--
@@ -1752,7 +1227,7 @@ mod tests {
 `panic!` with a particular panic message</span>
 -->
 
-<span class="caption">Encart 11-9 : On vérifie qu'une situation va provoquer un
+<span class="caption">Encart 11-9 : on vérifie qu'une situation va provoquer un
 `panic!` avec un message de panique bien précis</span>
 
 <!--
@@ -1791,20 +1266,12 @@ en permutant les corps des blocs de `if valeur < 1` et de
 
 <!--
 ```rust,ignore,not_desired_behavior
-if value < 1 {
-    panic!("Guess value must be less than or equal to 100, got {}.", value);
-} else if value > 100 {
-    panic!("Guess value must be greater than or equal to 1, got {}.", value);
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-09-guess-with-panic-msg-bug/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore,not_desired_behavior
-if valeur < 1 {
-    panic!("La supposition doit être plus petite ou égale à 100, et nous avons {}.", valeur);
-} else if valeur > 100 {
-    panic!("La supposition doit être plus grande ou égale à 1, et nous avons {}.", valeur);
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-09-guess-with-panic-msg-bug/src/lib.rs:here}}
 ```
 
 <!--
@@ -1815,43 +1282,13 @@ Cette fois, lorsque nous lançons le test avec `should_panic`, il devrait
 échouer :
 
 <!--
-```text
-running 1 test
-test tests::greater_than_100 ... FAILED
-
-failures:
-
----- tests::greater_than_100 stdout ----
-thread 'tests::greater_than_100' panicked at 'Guess value must be
-greater than or equal to 1, got 200.', src/lib.rs:11:13
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
-note: Panic did not include expected string 'Guess value must be less than or
-equal to 100'
-
-failures:
-    tests::greater_than_100
-
-test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-09-guess-with-panic-msg-bug/output.txt}}
 ```
 -->
 
-```text
-running 1 test
-test tests::plus_grand_que_100 ... FAILED
-
-failures:
-
----- tests::plus_grand_que_100 stdout ----
-thread 'tests::plus_grand_que_100' panicked at 'La supposition doit
-être plus grande ou égale à 1, et nous avons 200.', src/lib.rs:11:13
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
-note: Panic did not include expected string 'La supposition doit être plus
-petite ou égale à 100'
-
-failures:
-    tests::plus_grand_que_100
-
-test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-09-guess-with-panic-msg-bug/output.txt}}
 ```
 
 <!--
@@ -1887,32 +1324,12 @@ une `Err` au lieu de paniquer :
 
 <!--
 ```rust
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() -> Result<(), String> {
-        if 2 + 2 == 4 {
-            Ok(())
-        } else {
-            Err(String::from("two plus two does not equal four"))
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-10-result-in-tests/src/lib.rs}}
 ```
 -->
 
 ```rust
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() -> Result<(), String> {
-        if 2 + 2 == 4 {
-            Ok(())
-        } else {
-            Err(String::from("deux plus deux ne vaut pas quatre"))
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-10-result-in-tests/src/lib.rs}}
 ```
 
 <!--
