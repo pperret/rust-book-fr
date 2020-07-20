@@ -63,84 +63,12 @@ slice.
 
 <!--
 ```rust
-fn largest_i32(list: &[i32]) -> i32 {
-    let mut largest = list[0];
-
-    for &item in list.iter() {
-        if item > largest {
-            largest = item;
-        }
-    }
-
-    largest
-}
-
-fn largest_char(list: &[char]) -> char {
-    let mut largest = list[0];
-
-    for &item in list.iter() {
-        if item > largest {
-            largest = item;
-        }
-    }
-
-    largest
-}
-
-fn main() {
-    let number_list = vec![34, 50, 25, 100, 65];
-
-    let result = largest_i32(&number_list);
-    println!("The largest number is {}", result);
-#    assert_eq!(result, 100);
-
-    let char_list = vec!['y', 'm', 'a', 'q'];
-
-    let result = largest_char(&char_list);
-    println!("The largest char is {}", result);
-#    assert_eq!(result, 'y');
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-04/src/main.rs:here}}
 ```
 -->
 
 ```rust
-fn le_plus_grand_i32(liste: &[i32]) -> i32 {
-    let mut le_plus_grand = liste[0];
-
-    for &element in liste.iter() {
-        if element > le_plus_grand {
-            le_plus_grand = element;
-        }
-    }
-
-    le_plus_grand
-}
-
-fn le_plus_grand_caractere(list: &[char]) -> char {
-    let mut le_plus_grand = liste[0];
-
-    for &element in liste.iter() {
-        if element > le_plus_grand {
-            le_plus_grand = element;
-        }
-    }
-
-    le_plus_grand
-}
-
-fn main() {
-    let liste_de_nombres = vec![34, 50, 25, 100, 65];
-
-    let resultat = le_plus_grand_i32(&liste_de_nombres);
-    println!("Le plus grand nombre est {}", resultat);
-#    assert_eq!(resultat, 100);
-
-    let liste_de_caracteres = vec!['y', 'm', 'a', 'q'];
-
-    let resultat = plus_grand_caractere(&liste_de_caracteres);
-    println!("Le plus grand caractère est {}", resultat);
-#    assert_eq!(result, 'y');
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-04/src/main.rs:here}}
 ```
 
 <!--
@@ -148,7 +76,7 @@ fn main() {
 names and the types in their signatures</span>
 -->
 
-<span class="caption">Encart 10-4 : Deux fonctions qui se distinguent seulement
+<span class="caption">Encart 10-4 : deux fonctions qui se distinguent seulement
 par leurs noms et le type dans leur signature</span>
 
 <!--
@@ -202,24 +130,25 @@ paramètres, comme ceci :
 
 <!--
 ```rust,ignore
-fn largest<T>(list: &[T]) -> T {
+fn largest<T>(list: &[T]) -> &T {
 ```
 -->
 
 ```rust,ignore
-fn le_plus_grand<T>(liste: &[T]) -> T {
+fn le_plus_grand<T>(liste: &[T]) -> &T {
 ```
 
 <!--
 We read this definition as: the function `largest` is generic over some type
 `T`. This function has one parameter named `list`, which is a slice of values
-of type `T`. The `largest` function will return a value of the same type `T`.
+of type `T`. The `largest` function will return a reference to a value of the
+same type `T`.
 -->
 
 Cette définition se lit comme ceci : la fonction `le_plus_grand` est générique
 en fonction du type `T`. Cette fonction a un paramètre qui s'appelle `liste`,
 qui est une slice de valeurs de type `T`. Cette fonction `le_plus_grand` va
-retourner une valeur du même type `T`.
+retourner une référence vers la valeur du même type `T`.
 
 <!--
 Listing 10-5 shows the combined `largest` function definition using the generic
@@ -242,56 +171,12 @@ encore, mais nous allons y remédier plus tard dans ce chapitre.
 
 <!--
 ```rust,ignore,does_not_compile
-fn largest<T>(list: &[T]) -> T {
-    let mut largest = list[0];
-
-    for &item in list.iter() {
-        if item > largest {
-            largest = item;
-        }
-    }
-
-    largest
-}
-
-fn main() {
-    let number_list = vec![34, 50, 25, 100, 65];
-
-    let result = largest(&number_list);
-    println!("The largest number is {}", result);
-
-    let char_list = vec!['y', 'm', 'a', 'q'];
-
-    let result = largest(&char_list);
-    println!("The largest char is {}", result);
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-05/src/main.rs}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-fn le_plus_grand<T>(liste: &[T]) -> T {
-    let mut le_plus_grand = liste[0];
-
-    for &element in liste.iter() {
-        if element > le_plus_grand {
-            le_plus_grand = element;
-        }
-    }
-
-    element
-}
-
-fn main() {
-    let liste_de_nombres = vec![34, 50, 25, 100, 65];
-
-    let resultat = le_plus_grand(&liste_de_nombres);
-    println!("Le nombre le plus grand est {}", resultat);
-
-    let liste_de_caracteres = vec!['y', 'm', 'a', 'q'];
-
-    let resultat = le_plus_grand(&liste_de_caracteres);
-    println!("Le plus grand caractère est {}", resultat);
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-05/src/main.rs}}
 ```
 
 <!--
@@ -299,7 +184,7 @@ fn main() {
 uses generic type parameters but doesn’t compile yet</span>
 -->
 
-<span class="caption">Encart 10-5 : Une définition de la fonction
+<span class="caption">Encart 10-5 : une définition de la fonction
 `le_plus_grand` qui utilise des paramètres de type génériques, mais qui ne
 compile pas encore</span>
 
@@ -310,14 +195,14 @@ If we compile this code right now, we’ll get this error:
 Si nous essayons de compiler ce code dès maintenant, nous aurons l'erreur
 suivante :
 
-```text
-error[E0369]: binary operation `>` cannot be applied to type `T`
- -- > src/main.rs:5:12
-  |
-5 |         if item > largest {
-  |            ^^^^^^^^^^^^^^
-  |
-  = note: an implementation of `std::cmp::PartialOrd` might be missing for `T`
+<!--
+```console
+{{#include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-05/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-05/output.txt}}
 ```
 
 <!--
@@ -371,28 +256,12 @@ valeurs de coordonnées `x` et `y` de n'importe quel type.
 
 <!--
 ```rust
-struct Point<T> {
-    x: T,
-    y: T,
-}
-
-fn main() {
-    let integer = Point { x: 5, y: 10 };
-    let float = Point { x: 1.0, y: 4.0 };
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-06/src/main.rs}}
 ```
 -->
 
 ```rust
-struct Point<T> {
-    x: T,
-    y: T,
-}
-
-fn main() {
-    let entiers = Point { x: 5, y: 10 };
-    let flottants = Point { x: 1.0, y: 4.0 };
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-06/src/main.rs}}
 ```
 
 <!--
@@ -400,7 +269,7 @@ fn main() {
 values of type `T`</span>
 -->
 
-<span class="caption">Encart 10-6 : Une structure `Point<T>` qui stocke les
+<span class="caption">Encart 10-6 : une structure `Point<T>` qui stocke les
 valeurs `x` et `y` de type `T`</span>
 
 <!--
@@ -440,26 +309,12 @@ compiler.
 
 <!--
 ```rust,ignore,does_not_compile
-struct Point<T> {
-    x: T,
-    y: T,
-}
-
-fn main() {
-    let wont_work = Point { x: 5, y: 4.0 };
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-07/src/main.rs}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-struct Point<T> {
-    x: T,
-    y: T,
-}
-
-fn main() {
-    let ne_fonctionnera_pas = Point { x: 5, y: 4.0 };
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-07/src/main.rs}}
 ```
 
 <!--
@@ -467,7 +322,7 @@ fn main() {
 type because both have the same generic data type `T`.</span>
 -->
 
-<span class="caption">Encart 10-7 : Les champs `x` et `y` doivent être du même
+<span class="caption">Encart 10-7 : les champs `x` et `y` doivent être du même
 type car ils ont tous les deux le même type de données générique `T`.</span>
 
 <!--
@@ -483,16 +338,14 @@ instance de `Point<T>`. Ensuite, lorsque assignons 4.0 à `y`, que nous avons
 défini comme ayant le même type que `x`, nous obtenons une erreur pour mauvais
 type comme celle-ci :
 
-```text
-error[E0308]: mismatched types
- -- > src/main.rs:7:38
-  |
-7 |     let ne_fonctionnera_pas = Point { x: 5, y: 4.0 };
-  |                                                ^^^ expected integer, found
-floating-point number
-  |
-  = note: expected type `{integer}`
-             found type `{float}`
+<!--
+```console
+{{#include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-07/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-07/output.txt}}
 ```
 
 <!--
@@ -516,30 +369,12 @@ et `U` où `x` est de type `T` et `y` est de type `U`.
 
 <!--
 ```rust
-struct Point<T, U> {
-    x: T,
-    y: U,
-}
-
-fn main() {
-    let both_integer = Point { x: 5, y: 10 };
-    let both_float = Point { x: 1.0, y: 4.0 };
-    let integer_and_float = Point { x: 5, y: 4.0 };
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-08/src/main.rs}}
 ```
 -->
 
 ```rust
-struct Point<T, U> {
-    x: T,
-    y: U,
-}
-
-fn main() {
-    let deux_entiers = Point { x: 5, y: 10 };
-    let deux_flottants = Point { x: 1.0, y: 4.0 };
-    let un_entier_et_un_flottant = Point { x: 5, y: 4.0 };
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-08/src/main.rs}}
 ```
 
 <!--
@@ -547,7 +382,7 @@ fn main() {
 that `x` and `y` can be values of different types</span>
 -->
 
-<span class="caption">Encart 10-8: Un `Point<T, U>` générique en fonction de
+<span class="caption">Encart 10-8: un `Point<T, U>` générique en fonction de
 deux types `x` et `y` qui peuvent être des valeurs de différents types</span>
 
 <!--
@@ -581,6 +416,15 @@ Comme nous l'avons fait avec les structures, nous pouvons définir des
 Commençons par regarder à nouveau l'énumération `Option<T>` que fournit la
 bibliothèque standard, et que nous avons utilisé au chapitre 6 :
 
+<!--
+```rust
+enum Option<T> {
+    Some(T),
+    None,
+}
+```
+-->
+
 ```rust
 enum Option<T> {
     Some(T),
@@ -613,6 +457,15 @@ enum that we used in Chapter 9 is one example:
 Les énumérations peuvent utiliser aussi utiliser plusieurs types génériques. La
 définition de l'énumération `Result` que nous avons utilisé au chapitre 9 en est
 un exemple :
+
+<!--
+```rust
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
+```
+-->
 
 ```rust
 enum Result<T, E> {
@@ -677,23 +530,14 @@ implémentée sur cette dernière.
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
 ```rust
-struct Point<T> {
-    x: T,
-    y: T,
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-09/src/main.rs}}
+```
+-->
 
-impl<T> Point<T> {
-    fn x(&self) -> &T {
-        &self.x
-    }
-}
-
-fn main() {
-    let p = Point { x: 5, y: 10 };
-
-    println!("p.x = {}", p.x());
-}
+```rust
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-09/src/main.rs}}
 ```
 
 <!--
@@ -702,7 +546,7 @@ fn main() {
 `T`</span>
 -->
 
-<span class="caption">Encart 10-9 : Implémentation d'une méthode `x` sur la
+<span class="caption">Encart 10-9 : implémentation d'une méthode `x` sur la
 structure `Point<T>` qui va retourner une référence au champ `x`, de type `T`
 </span>
 
@@ -739,31 +583,19 @@ Dans l'encart 10-10, nous utilisons le type concret `f32`, ce qui veut dire que
 nous n'avons pas besoin de déclarer un type après `impl`.
 
 <!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+
+<span class="filename">Fichier : src/main.rs</span>
+
+<!--
 ```rust
-# struct Point<T> {
-#     x: T,
-#     y: T,
-# }
-#
-impl Point<f32> {
-    fn distance_from_origin(&self) -> f32 {
-        (self.x.powi(2) + self.y.powi(2)).sqrt()
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-10/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# struct Point<T> {
-#     x: T,
-#     y: T,
-# }
-#
-impl Point<f32> {
-    fn distance_depuis_lorigine(&self) -> f32 {
-        (self.x.powi(2) + self.y.powi(2)).sqrt()
-    }
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-10/src/main.rs:here}}
 ```
 
 <!--
@@ -771,8 +603,9 @@ impl Point<f32> {
 struct with a particular concrete type for the generic type parameter `T`</span>
 -->
 
-<span class="caption">Encart 10-10: Un bloc `impl` qui ne s'applique que sur une
-structure d'un type concret particulier pour le paramètre de type générique `T`
+<span class="caption">Encart 10-10 : un bloc `impl` qui ne s'applique que sur
+une structure d'un type concret particulier pour le paramètre de type générique
+`T`
 </span>
 
 <!--
@@ -817,30 +650,13 @@ instance de `Point` avec la valeur de `x` provenant du `self` `Point` (de type
 
 <!--
 ```rust
-struct Point<T, U> {
-    x: T,
-    y: U,
-}
-
-impl<T, U> Point<T, U> {
-    fn mixup<V, W>(self, other: Point<V, W>) -> Point<T, W> {
-        Point {
-            x: self.x,
-            y: other.y,
-        }
-    }
-}
-
-fn main() {
-    let p1 = Point { x: 5, y: 10.4 };
-    let p2 = Point { x: "Hello", y: 'c'};
-
-    let p3 = p1.mixup(p2);
-
-    println!("p3.x = {}, p3.y = {}", p3.x, p3.y);
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-11/src/main.rs}}
 ```
 -->
+
+```rust
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-11/src/main.rs}}
+```
 
 ```rust
 struct Point<T, U> {
@@ -872,7 +688,7 @@ fn main() {
 from its struct’s definition</span>
 -->
 
-<span class="caption">Encart 10-11 : Une méthode qui utilise différents types
+<span class="caption">Encart 10-11 : une méthode qui utilise différents types
 génériques provenant de la définition de la structure</span>
 
 <!--
