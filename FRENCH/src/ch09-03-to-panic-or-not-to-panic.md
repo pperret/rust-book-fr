@@ -127,10 +127,14 @@ Si en inspectant manuellement le code vous vous rendez compte que vous n'aurez
 jamais une variante `Err`, vous pouvez tout à fait utiliser `unwrap`. Voici un
 exemple :
 
+<!--
 ```rust
-use std::net::IpAddr;
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-08-unwrap-that-cant-fail/src/main.rs:here}}
+```
+-->
 
-let home: IpAddr = "127.0.0.1".parse().unwrap();
+```rust
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-08-unwrap-that-cant-fail/src/main.rs:here}}
 ```
 
 <!--
@@ -329,42 +333,12 @@ et ensuite vérifier que le nombre est dans la plage autorisée, comme ceci :
 
 <!--
 ```rust,ignore
-loop {
-    // --snip--
-
-    let guess: i32 = match guess.trim().parse() {
-        Ok(num) => num,
-        Err(_) => continue,
-    };
-
-    if guess < 1 || guess > 100 {
-        println!("The secret number will be between 1 and 100.");
-        continue;
-    }
-
-    match guess.cmp(&secret_number) {
-    // --snip--
-}
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-09-guess-out-of-range/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-loop {
-    // -- partie masquée ici --
-
-    let supposition: i32 = match supposition.trim().parse() {
-        Ok(nombre) => nombre,
-        Err(_) => continue,
-    };
-
-    if supposition < 1 || supposition > 100 {
-        println!("Le nombre secret est entre 1 et 100.");
-        continue;
-    }
-
-    match supposition.cmp(&nombre_secret) {
-    // -- partie masquée ici --
-}
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-09-guess-out-of-range/src/main.rs:here}}
 ```
 
 <!--
@@ -413,49 +387,20 @@ les valeurs qu'ils reçoivent. L'entrée 9-10 montre une façon de définir un t
 `new` reçoit une valeur entre 1 et 100 :
 
 <!--
+<!-- Deliberately not using rustdoc_include here; the `main` function in the
+file requires the `rand` crate. We do want to include it for reader
+experimentation purposes, but don't want to include it for rustdoc testing
+purposes. -- >
+-->
+
+<!--
 ```rust
-pub struct Guess {
-    value: i32,
-}
-
-impl Guess {
-    pub fn new(value: i32) -> Guess {
-        if value < 1 || value > 100 {
-            panic!("Guess value must be between 1 and 100, got {}.", value);
-        }
-
-        Guess {
-            value
-        }
-    }
-
-    pub fn value(&self) -> i32 {
-        self.value
-    }
-}
+{{#include ../listings/ch09-error-handling/listing-09-10/src/main.rs:here}}
 ```
 -->
 
 ```rust
-pub struct Supposition {
-    valeur: i32,
-}
-
-impl Supposition {
-    pub fn new(valeur: i32) -> Supposition {
-        if valeur < 1 || valeur > 100 {
-            panic!("La supposition doit se trouver entre 1 et 100, et nous avons {}.", valeur);
-        }
-
-        Guess {
-            valeur
-        }
-    }
-
-    pub fn valeur(&self) -> i32 {
-        self.valeur
-    }
-}
+{{#include ../listings/ch09-error-handling/listing-09-10/src/main.rs:here}}
 ```
 
 <!--

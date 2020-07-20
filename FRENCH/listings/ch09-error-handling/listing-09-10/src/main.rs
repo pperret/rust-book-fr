@@ -1,0 +1,55 @@
+use rand::Rng;
+use std::cmp::Ordering;
+use std::io;
+
+// ANCHOR: here
+pub struct Supposition {
+    valeur: i32,
+}
+
+impl Supposition {
+    pub fn new(valeur: i32) -> Supposition {
+        if valeur < 1 || valeur > 100 {
+            panic!("La supposition doit se trouver entre 1 et 100, et nous avons {}.", valeur);
+        }
+
+        Supposition { valeur }
+    }
+
+    pub fn valeur(&self) -> i32 {
+        self.valeur
+    }
+}
+// ANCHOR_END: here
+
+fn main() {
+    println!("Devinez le nombre !");
+
+    let secret_number = rand::thread_rng().gen_range(1, 101);
+
+    loop {
+        println!("Veuillez saisir un nombre.");
+
+        let mut guess = String::new();
+
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Echec de la lecture de la saisie");
+
+        let supposition: i32 = match supposition.trim().parse() {
+            Ok(nombre) => nombre,
+            Err(_) => continue,
+        };
+
+        let supposition = Supposition::new(supposition);
+
+        match supposition.cmp(&nombre_secret) {
+            Ordering::Less => println!("C'est plus !"),
+            Ordering::Greater => println!("C'est moins !"),
+            Ordering::Equal => {
+                println!("Gagné !");
+                break;
+            }
+        }
+    }
+}
