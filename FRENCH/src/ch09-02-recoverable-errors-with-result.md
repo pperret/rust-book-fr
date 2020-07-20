@@ -45,6 +45,15 @@ et `Err`, comme ci-dessous :
 
 [handle_failure]: ch02-00-guessing-game-tutorial.html#gérer-les-erreurs-potentielles-avec-le-type-result
 
+<!--
+```rust
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
+```
+-->
+
 ```rust
 enum Result<T, E> {
     Ok(T),
@@ -87,19 +96,21 @@ peut échouer. Dans l'encart 9-3 nous essayons d'ouvrir un fichier :
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
 ```rust
-use std::fs::File;
+{{#rustdoc_include ../listings/ch09-error-handling/listing-09-03/src/main.rs}}
+```
+-->
 
-fn main() {
-    let f = File::open("hello.txt");
-}
+```rust
+{{#rustdoc_include ../listings/ch09-error-handling/listing-09-03/src/main.rs}}
 ```
 
 <!--
 <span class="caption">Listing 9-3: Opening a file</span>
 -->
 
-<span class="caption">Encart 9-3 : Ouverture d'un fichier</span>
+<span class="caption">Encart 9-3 : ouverture d'un fichier</span>
 
 <!--
 How do we know `File::open` returns a `Result`? We could look at the [standard
@@ -122,8 +133,14 @@ ensuite *quel est le type* de `f`. Essayons cela ! Nous savons que le retour de
 `File::open` n'est pas du type `u32`, alors essayons de changer l'instruction
 `let f` par ceci :
 
+<!--
 ```rust,ignore,does_not_compile
-let f: u32 = File::open("hello.txt");
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-02-ask-compiler-for-type/src/main.rs:here}}
+```
+-->
+
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-02-ask-compiler-for-type/src/main.rs:here}}
 ```
 
 <!--
@@ -132,16 +149,14 @@ Attempting to compile now gives us the following output:
 
 La compilation nous donne maintenant le résultat suivant :
 
-```text
-error[E0308]: mismatched types
- -- > src/main.rs:4:18
-  |
-4 |     let f: u32 = File::open("hello.txt");
-  |                  ^^^^^^^^^^^^^^^^^^^^^^^ expected u32, found enum
-`std::result::Result`
-  |
-  = note: expected type `u32`
-             found type `std::result::Result<std::fs::File, std::io::Error>`
+<!--
+```console
+{{#include ../listings/ch09-error-handling/no-listing-02-ask-compiler-for-type/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch09-error-handling/no-listing-02-ask-compiler-for-type/output.txt}}
 ```
 
 <!--
@@ -207,34 +222,12 @@ avons vu au chapitre 6.
 
 <!--
 ```rust,should_panic
-use std::fs::File;
-
-fn main() {
-    let f = File::open("hello.txt");
-
-    let f = match f {
-        Ok(file) => file,
-        Err(error) => {
-            panic!("Problem opening the file: {:?}", error)
-        },
-    };
-}
+{{#rustdoc_include ../listings/ch09-error-handling/listing-09-04/src/main.rs}}
 ```
 -->
 
 ```rust,should_panic
-use std::fs::File;
-
-fn main() {
-    let f = File::open("hello.txt");
-
-    let f = match f {
-        Ok(fichier) => fichier,
-        Err(erreur) => {
-            panic!("Erreur lors de l'ouverture du fichier : {:?}", erreur)
-        },
-    };
-}
+{{#rustdoc_include ../listings/ch09-error-handling/listing-09-04/src/main.rs}}
 ```
 
 <!--
@@ -242,7 +235,7 @@ fn main() {
 `Result` variants that might be returned</span>
 -->
 
-<span class="caption">Encart 9-4: Utilisation de l'expression `match` pour
+<span class="caption">Encart 9-4: utilisation de l'expression `match` pour
 gérer les variantes que `Result` pourrait retourner</span>
 
 <!--
@@ -283,14 +276,12 @@ suivante suite à l'appel de la macro `panic!` :
 
 <!--
 ```text
-thread 'main' panicked at 'Problem opening the file: Error { repr:
-Os { code: 2, message: "No such file or directory" } }', src/main.rs:9:12
+{{#include ../listings/ch09-error-handling/listing-09-04/output.txt}}
 ```
 -->
 
 ```text
-thread 'main' panicked at 'Erreur lors de l'ouverture du fichier : Error { repr:
-Os { code: 2, message: "No such file or directory" } }', src/main.rs:9:12
+{{#include ../listings/ch09-error-handling/listing-09-04/output.txt}}
 ```
 
 <!--
@@ -332,49 +323,19 @@ au bloc `match` :
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
 <!-- ignore this test because otherwise it creates hello.txt which causes other
-tests to fail lol -->
+tests to fail lol -- >
+-->
 
 <!--
 ```rust,ignore
-use std::fs::File;
-use std::io::ErrorKind;
-
-fn main() {
-    let f = File::open("hello.txt");
-
-    let f = match f {
-        Ok(file) => file,
-        Err(error) => match error.kind() {
-            ErrorKind::NotFound => match File::create("hello.txt") {
-                Ok(fc) => fc,
-                Err(e) => panic!("Problem creating the file: {:?}", e),
-            },
-            other_error => panic!("Problem opening the file: {:?}", other_error),
-        },
-    };
-}
+{{#rustdoc_include ../listings/ch09-error-handling/listing-09-05/src/main.rs}}
 ```
 -->
 
 ```rust,ignore
-use std::fs::File;
-use std::io::ErrorKind;
-
-fn main() {
-    let f = File::open("hello.txt");
-
-    let f = match f {
-        Ok(fichier) => fichier,
-        Err(erreur) => match erreur.kind() {
-            ErrorKind::NotFound => match File::create("hello.txt") {
-                Ok(fc) => fc,
-                Err(e) => panic!("Erreur lors de la création du fichier : {:?}", e),
-            },
-            autre_erreur => panic!("Erreur lors de l'ouverture du fichier : {:?}", autre_erreur),
-        },
-    };
-}
+{{#rustdoc_include ../listings/ch09-error-handling/listing-09-05/src/main.rs}}
 ```
 
 <!--
@@ -382,7 +343,7 @@ fn main() {
 different ways</span>
 -->
 
-<span class="caption">Encart 9-5 : Gestion des différents cas d'erreurs avec des
+<span class="caption">Encart 9-5 : gestion des différents cas d'erreurs avec des
 actions différentes.</span>
 
 <!--
@@ -443,38 +404,12 @@ Rustacé plus habitué écrira ce code plutôt que celui de l'encart 9-5 :
 
 <!--
 ```rust,ignore
-use std::fs::File;
-use std::io::ErrorKind;
-
-fn main() {
-    let f = File::open("hello.txt").unwrap_or_else(|error| {
-        if error.kind() == ErrorKind::NotFound {
-            File::create("hello.txt").unwrap_or_else(|error| {
-                panic!("Problem creating the file: {:?}", error);
-            })
-        } else {
-            panic!("Problem opening the file: {:?}", error);
-        }
-    });
-}
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-03-closures/src/main.rs}}
 ```
 -->
 
 ```rust,ignore
-use std::fs::File;
-use std::io::ErrorKind;
-
-fn main() {
-    let f = File::open("hello.txt").unwrap_or_else(|erreur| {
-        if error.kind() == ErrorKind::NotFound {
-            File::create("hello.txt").unwrap_or_else(|erreur| {
-                panic!("Erreur lors de la création du fichier : {:?}", erreur);
-            })
-        } else {
-            panic!("Erreur lors de l'ouverture du fichier : {:?}", erreur);
-        }
-    });
-}
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-03-closures/src/main.rs}}
 ```
 
 <!--
@@ -523,12 +458,14 @@ l'expression `match` que nous avons écrit dans l'encart 9-4. Si la valeur de
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
 ```rust,should_panic
-use std::fs::File;
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-04-unwrap/src/main.rs}}
+```
+-->
 
-fn main() {
-    let f = File::open("hello.txt").unwrap();
-}
+```rust,should_panic
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-04-unwrap/src/main.rs}}
 ```
 
 <!--
@@ -538,6 +475,14 @@ the `panic!` call that the `unwrap` method makes:
 
 Si nous exécutons ce code sans le fichier *hello.txt*, nous allons voir un
 message d'erreur suite à l'appel à `panic!` que la méthode `unwrap` a fait :
+
+<!--
+```text
+thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: Error {
+repr: Os { code: 2, message: "No such file or directory" } }',
+src/libcore/result.rs:906:4
+```
+-->
 
 ```text
 thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: Error {
@@ -566,20 +511,12 @@ est la suivante :
 
 <!--
 ```rust,should_panic
-use std::fs::File;
-
-fn main() {
-    let f = File::open("hello.txt").expect("Failed to open hello.txt");
-}
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-05-expect/src/main.rs}}
 ```
 -->
 
 ```rust,should_panic
-use std::fs::File;
-
-fn main() {
-    let f = File::open("hello.txt").expect("Echec à l'ouverture de hello.txt");
-}
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-05-expect/src/main.rs}}
 ```
 
 <!--
@@ -659,26 +596,20 @@ fonction va retourner ces erreurs au code qui a appelé cette fonction.
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
+<!-- Deliberately not using rustdoc_include here; the `main` function in the
+file panics. We do want to include it for reader experimentation purposes, but
+don't want to include it for rustdoc testing purposes. -- >
+-->
+
+<!--
 ```rust
-use std::io;
-use std::io::Read;
-use std::fs::File;
+{{#include ../listings/ch09-error-handling/listing-09-06/src/main.rs:here}}
+```
+-->
 
-fn read_username_from_file() -> Result<String, io::Error> {
-    let f = File::open("hello.txt");
-
-    let mut f = match f {
-        Ok(file) => file,
-        Err(e) => return Err(e),
-    };
-
-    let mut s = String::new();
-
-    match f.read_to_string(&mut s) {
-        Ok(_) => Ok(s),
-        Err(e) => Err(e),
-    }
-}
+```rust
+{{#include ../listings/ch09-error-handling/listing-09-06/src/main.rs:here}}
 ```
 
 <!--
@@ -819,17 +750,20 @@ utilise l'opérateur point d'interrogation :
 
 <span class="filename">Fichier : src/main.rs</span>
 
-```rust
-use std::io;
-use std::io::Read;
-use std::fs::File;
+<!--
+<!-- Deliberately not using rustdoc_include here; the `main` function in the
+file panics. We do want to include it for reader experimentation purposes, but
+don't want to include it for rustdoc testing purposes. -- >
+-->
 
-fn read_username_from_file() -> Result<String, io::Error> {
-    let mut f = File::open("hello.txt")?;
-    let mut s = String::new();
-    f.read_to_string(&mut s)?;
-    Ok(s)
-}
+<!--
+```rust
+{{#include ../listings/ch09-error-handling/listing-09-07/src/main.rs:here}}
+```
+-->
+
+```rust
+{{#include ../listings/ch09-error-handling/listing-09-07/src/main.rs:here}}
 ```
 
 <!--
@@ -837,7 +771,7 @@ fn read_username_from_file() -> Result<String, io::Error> {
 calling code using the `?` operator</span>
 -->
 
-<span class="caption">Encart 9-7 : Une fonction qui retourne les erreurs au code
+<span class="caption">Encart 9-7 : une fonction qui retourne les erreurs au code
 appelant en utilisant l'opérateur `?`</span>
 
 <!--
@@ -859,16 +793,16 @@ comme si nous avions utilisé le mot-clé `result` afin que la valeur d'erreur
 soit propagée au code appelant.
 
 <!--
-There is a difference between what the `match` expression from Listing 9-6 and
-the `?` operator do: error values that have the `?` operator called on them go
-through the `from` function, defined in the `From` trait in the standard
-library, which is used to convert errors from one type into another. When the
-`?` operator calls the `from` function, the error type received is converted
-into the error type defined in the return type of the current function. This is
-useful when a function returns one error type to represent all the ways a
-function might fail, even if parts might fail for many different reasons. As
-long as each error type implements the `from` function to define how to convert
-itself to the returned error type, the `?` operator takes care of the
+There is a difference between what the `match` expression from Listing 9-6 does
+and what the `?` operator does: error values that have the `?` operator called
+on them go through the `from` function, defined in the `From` trait in the
+standard library, which is used to convert errors from one type into another.
+When the `?` operator calls the `from` function, the error type received is
+converted into the error type defined in the return type of the current
+function. This is useful when a function returns one error type to represent all
+the ways a function might fail, even if parts might fail for many different
+reasons. As long as each error type implements the `from` function to define how
+to convert itself to the returned error type, the `?` operator takes care of the
 conversion automatically.
 -->
 
@@ -915,18 +849,20 @@ immédiatement les appels aux méthodes après le `?` comme dans l'encart 9-8 :
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
+<!-- Deliberately not using rustdoc_include here; the `main` function in the
+file panics. We do want to include it for reader experimentation purposes, but
+don't want to include it for rustdoc testing purposes. -- >
+-->
+
+<!--
 ```rust
-use std::io;
-use std::io::Read;
-use std::fs::File;
+{{#include ../listings/ch09-error-handling/listing-09-08/src/main.rs:here}}
+```
+-->
 
-fn read_username_from_file() -> Result<String, io::Error> {
-    let mut s = String::new();
-
-    File::open("hello.txt")?.read_to_string(&mut s)?;
-
-    Ok(s)
-}
+```rust
+{{#include ../listings/ch09-error-handling/listing-09-08/src/main.rs:here}}
 ```
 
 <!--
@@ -934,7 +870,7 @@ fn read_username_from_file() -> Result<String, io::Error> {
 operator</span>
 -->
 
-<span class="caption">Encart 9-8 : Enchaînement des appels aux méthodes après
+<span class="caption">Encart 9-8 : enchaînement des appels aux méthodes après
 l'opérateur `?`</span>
 
 <!--
@@ -972,13 +908,20 @@ montre qu'il y a une façon d'écrire encore moins de code.
 
 <span class="filename">Fichier : src/main.rs</span>
 
-```rust
-use std::io;
-use std::fs;
+<!--
+<!-- Deliberately not using rustdoc_include here; the `main` function in the
+file panics. We do want to include it for reader experimentation purposes, but
+don't want to include it for rustdoc testing purposes. -- >
+-->
 
-fn read_username_from_file() -> Result<String, io::Error> {
-    fs::read_to_string("hello.txt")
-}
+<!--
+```rust
+{{#include ../listings/ch09-error-handling/listing-09-09/src/main.rs:here}}
+```
+-->
+
+```rust
+{{#include ../listings/ch09-error-handling/listing-09-09/src/main.rs:here}}
 ```
 
 <!--
@@ -986,7 +929,7 @@ fn read_username_from_file() -> Result<String, io::Error> {
 opening and then reading the file</span>
 -->
 
-<span class="caption">Encart 9-9: Utilisation de `fs::read_to_string` plutôt que
+<span class="caption">Encart 9-9: utilisation de `fs::read_to_string` plutôt que
 d'ouvrir puis lire le fichier</span>
 
 <!--
@@ -1034,12 +977,14 @@ Voyons ce que ce passe si nous utilisons l'opérateur `?` dans la fonction
 `main`, pour laquelle vous devriez vous souvenir qu'elle a un type de retour
 `()` :
 
+<!--
 ```rust,ignore,does_not_compile
-use std::fs::File;
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-06-question-mark-in-main/src/main.rs}}
+```
+-->
 
-fn main() {
-    let f = File::open("hello.txt")?;
-}
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-06-question-mark-in-main/src/main.rs}}
 ```
 
 <!--
@@ -1048,29 +993,26 @@ When we compile this code, we get the following error message:
 
 Lorsque nous compilons ce code, nous obtenons le message d'erreur suivant :
 
-```text
-error[E0277]: the `?` operator can only be used in a function that returns
-`Result` or `Option` (or another type that implements `std::ops::Try`)
- -- > src/main.rs:4:13
-  |
-4 |     let f = File::open("hello.txt")?;
-  |             ^^^^^^^^^^^^^^^^^^^^^^^^ cannot use the `?` operator in a
-  function that returns `()`
-  |
-  = help: the trait `std::ops::Try` is not implemented for `()`
-  = note: required by `std::ops::Try::from_error`
+<!--
+```console
+{{#include ../listings/ch09-error-handling/no-listing-06-question-mark-in-main/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch09-error-handling/no-listing-06-question-mark-in-main/output.txt}}
 ```
 
 <!--
 This error points out that we’re only allowed to use the `?` operator in a
 function that returns `Result` or `Option` or another type that implements
-`std::ops::Try`. When you’re writing code in a function that doesn’t return
-one of these types, and you want to use `?` when you call other functions that
-return `Result<T, E>`, you have two choices to fix this problem. One technique
-is to change the return type of your function to be `Result<T, E>` if you have
-no restrictions preventing that. The other technique is to use a `match` or one
-of the `Result<T, E>` methods to handle the `Result<T, E>` in whatever way is
-appropriate.
+`std::ops::Try`. When you’re writing code in a function
+that doesn’t return one of these types, and you want to use `?` when you call other
+functions that return `Result<T, E>`, you have two choices to fix this problem.
+One technique is to change the return type of your function to be `Result<T,
+E>` if you have no restrictions preventing that. The other technique is to use
+a `match` or one of the `Result<T, E>` methods to handle the `Result<T, E>` in
+whatever way is appropriate.
 -->
 
 Cette erreur explique que nous sommes uniquement autorisés à utiliser
@@ -1094,15 +1036,14 @@ son type de retour. Une type de retour correct pour `main` est `()`, et il
 existe aussi un autre type de retour acceptable qui est `Result<T, E>`, comme
 ci-dessous :
 
+<!--
 ```rust,ignore
-use std::error::Error;
-use std::fs::File;
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-07-main-returning-result/src/main.rs}}
+```
+-->
 
-fn main() -> Result<(), Box<dyn Error>> {
-    let f = File::open("hello.txt")?;
-
-    Ok(())
-}
+```rust,ignore
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-07-main-returning-result/src/main.rs}}
 ```
 
 <!--
