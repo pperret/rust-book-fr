@@ -108,12 +108,12 @@ drapeau `--test-threads` ainsi que le nombre de tâches que vous souhaitez
 utiliser sur le binaire de test. Regardez cet exemple :
 
 <!--
-```text
+```console
 $ cargo test -- --test-threads=1
 ```
 -->
 
-```text
+```console
 $ cargo test -- --test-threads=1
 ```
 
@@ -166,52 +166,12 @@ paramètres et retourne 10, ainsi qu'un test qui réussit et un test qui échoue
 
 <!--
 ```rust,panics
-fn prints_and_returns_10(a: i32) -> i32 {
-    println!("I got the value {}", a);
-    10
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn this_test_will_pass() {
-        let value = prints_and_returns_10(4);
-        assert_eq!(10, value);
-    }
-
-    #[test]
-    fn this_test_will_fail() {
-        let value = prints_and_returns_10(8);
-        assert_eq!(5, value);
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-10/src/lib.rs}}
 ```
 -->
 
 ```rust,panics
-fn affiche_et_retourne_10(a: i32) -> i32 {
-    println!("J'ai obtenu la valeur {}", a);
-    10
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn ce_test_reussit() {
-        let valeur = affiche_et_retourne_10(4);
-        assert_eq!(10, valeur);
-    }
-
-    #[test]
-    fn ce_test_echoue() {
-        let valeur = affiche_et_retourne_10(8);
-        assert_eq!(5, valeur);
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-10/src/lib.rs}}
 ```
 
 <!--
@@ -219,7 +179,7 @@ mod tests {
 `println!`</span>
 -->
 
-<span class="caption">Encart 11-10 : Tests d'une fonction qui fait appel à
+<span class="caption">Encart 11-10 : tests d'une fonction qui fait appel à
 `println!`</span>
 
 <!--
@@ -229,45 +189,13 @@ When we run these tests with `cargo test`, we’ll see the following output:
 Lorsque nous lançons ces tests avec `cargo test`, nous voyons cette sortie :
 
 <!--
-```text
-running 2 tests
-test tests::this_test_will_pass ... ok
-test tests::this_test_will_fail ... FAILED
-
-failures:
-
----- tests::this_test_will_fail stdout ----
-I got the value 8
-thread 'tests::this_test_will_fail' panicked at 'assertion failed: `(left == right)`
-  left: `5`,
- right: `10`', src/lib.rs:19:9
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
-
-failures:
-    tests::this_test_will_fail
-
-test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/listing-11-10/output.txt}}
 ```
 -->
 
-```text
-running 2 tests
-test tests::ce_test_reussit ... ok
-test tests::ce_test_echoue ... FAILED
-
-failures:
-
----- tests::ce_test_echoue stdout ----
-J'ai obtenu la valeur 8
-thread 'tests::ce_test_echoue' panicked at 'assertion failed: `(left == right)`
-  left: `5`,
- right: `10`', src/lib.rs:19:9
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
-
-failures:
-    tests::ce_test_echoue
-
-test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/listing-11-10/output.txt}}
 ```
 
 <!--
@@ -294,12 +222,12 @@ pouvons demander à Rust d'afficher également la sortie des tests fructueux en
 lui rajoutant à la fin `--show-output`.
 
 <!--
-```text
+```console
 $ cargo test -- --show-output
 ```
 -->
 
-```text
+```console
 $ cargo test -- --show-output
 ```
 
@@ -312,65 +240,13 @@ Lorsque nous lançons à nouveau les tests de l'encart 11-10 avec le drapeau
 `--show-output`, nous voyons la sortie suivante :
 
 <!--
-```text
-running 2 tests
-test tests::this_test_will_pass ... ok
-test tests::this_test_will_fail ... FAILED
-
-successes:
-
----- tests::this_test_will_pass stdout ----
-I got the value 4
-
-
-successes:
-    tests::this_test_will_pass
-
-failures:
-
----- tests::this_test_will_fail stdout ----
-I got the value 8
-thread 'tests::this_test_will_fail' panicked at 'assertion failed: `(left == right)`
-  left: `5`,
- right: `10`', src/lib.rs:19:9
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace.
-
-
-failures:
-    tests::this_test_will_fail
-
-test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/output-only-01-show-output/output.txt}}
 ```
 -->
 
-```text
-running 2 tests
-test tests::ce_test_reussit ... ok
-test tests::ce_test_echoue ... FAILED
-
-successes:
-
----- tests::ce_test_reussit stdout ----
-J'ai obtenu la valeur 4
-
-
-successes:
-    tests::ce_test_reussit
-
-failures:
-
----- tests::ce_test_echoue stdout ----
-J'ai obtenu la valeur 8
-thread 'tests::ce_test_echoue' panicked at 'assertion failed: `(left == right)`
-  left: `5`,
- right: `10`', src/lib.rs:19:9
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace.
-
-
-failures:
-    tests::ce_test_echoue
-
-test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/output-only-01-show-output/output.txt}}
 ```
 
 <!--
@@ -409,56 +285,12 @@ choisir lesquels nous allons exécuter.
 
 <!--
 ```rust
-pub fn add_two(a: i32) -> i32 {
-    a + 2
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn add_two_and_two() {
-        assert_eq!(4, add_two(2));
-    }
-
-    #[test]
-    fn add_three_and_two() {
-        assert_eq!(5, add_two(3));
-    }
-
-    #[test]
-    fn one_hundred() {
-        assert_eq!(102, add_two(100));
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-11/src/lib.rs}}
 ```
 -->
 
 ```rust
-pub fn ajouter_deux(a: i32) -> i32 {
-    a + 2
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn ajouter_deux_a_deux() {
-        assert_eq!(4, ajouter_deux(2));
-    }
-
-    #[test]
-    fn ajouter_deux_a_trois() {
-        assert_eq!(5, ajouter_deux(3));
-    }
-
-    #[test]
-    fn cent() {
-        assert_eq!(102, ajouter_deux(100));
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-11/src/lib.rs}}
 ```
 
 <!--
@@ -466,7 +298,7 @@ mod tests {
 names</span>
 -->
 
-<span class="caption">Encart 11-11 : Trois tests avec trois noms différents
+<span class="caption">Encart 11-11 : trois tests avec trois noms différents
 </span>
 
 <!--
@@ -478,23 +310,13 @@ Si nous exécutons les tests sans ajouter d'arguments, comme nous l'avons vu
 précédemment, tous les tests vont s'exécuter en parallèle :
 
 <!--
-```text
-running 3 tests
-test tests::add_two_and_two ... ok
-test tests::add_three_and_two ... ok
-test tests::one_hundred ... ok
-
-test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/listing-11-11/output.txt}}
 ```
 -->
 
-```text
-running 3 tests
-test tests::ajouter_deux_a_deux ... ok
-test tests::ajouter_deux_a_trois ... ok
-test tests::cent ... ok
-
-test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/listing-11-11/output.txt}}
 ```
 
 <!--
@@ -511,27 +333,13 @@ Nous pouvons donner le nom de n'importe quelle fonction de test à `cargo test`
 afin d'exécuter uniquement ce test :
 
 <!--
-```text
-$ cargo test one_hundred
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running target/debug/deps/adder-06a75b4a1f2515e9
-
-running 1 test
-test tests::one_hundred ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/output-only-02-single-test/output.txt}}
 ```
 -->
 
-```text
-$ cargo test cent
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running target/debug/deps/addition-06a75b4a1f2515e9
-
-running 1 test
-test tests::cent ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/output-only-02-single-test/output.txt}}
 ```
 
 <!--
@@ -572,29 +380,13 @@ deux de nos noms de tests contiennent `ajouter`, nous pouvons exécuter ces deux
 en lançant `cargo test ajouter` :
 
 <!--
-```text
-$ cargo test add
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running target/debug/deps/adder-06a75b4a1f2515e9
-
-running 2 tests
-test tests::add_two_and_two ... ok
-test tests::add_three_and_two ... ok
-
-test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/output-only-03-multiple-tests/output.txt}}
 ```
 -->
 
-```text
-$ cargo test ajouter
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running target/debug/deps/addition-06a75b4a1f2515e9
-
-running 2 tests
-test tests::ajouter_deux_a_deux ... ok
-test tests::ajouter_deux_a_trois ... ok
-
-test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/output-only-03-multiple-tests/output.txt}}
 ```
 
 <!--
@@ -638,30 +430,12 @@ ci-dessous :
 
 <!--
 ```rust
-#[test]
-fn it_works() {
-    assert_eq!(2 + 2, 4);
-}
-
-#[test]
-#[ignore]
-fn expensive_test() {
-    // code that takes an hour to run
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-11-ignore-a-test/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-#[test]
-fn it_works() {
-    assert_eq!(2 + 2, 4);
-}
-
-#[test]
-#[ignore]
-fn test_long() {
-    // du code qui prend une heure à s'exécuter
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-11-ignore-a-test/src/lib.rs:here}}
 ```
 
 <!--
@@ -674,31 +448,13 @@ souhaitons exclure. Maintenant lorsque nous exécutons nos tests, `it_works`
 s'exécute, mais pas `test_long` :
 
 <!--
-```text
-$ cargo test
-   Compiling adder v0.1.0 (file:///projects/adder)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.24 secs
-     Running target/debug/deps/adder-ce99bcc2479f4607
-
-running 2 tests
-test expensive_test ... ignored
-test it_works ... ok
-
-test result: ok. 1 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-11-ignore-a-test/output.txt}}
 ```
 -->
 
-```text
-$ cargo test
-   Compiling addition v0.1.0 (file:///projects/addition)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.24 secs
-     Running target/debug/deps/addition-ce99bcc2479f4607
-
-running 2 tests
-test test_long ... ignored
-test it_works ... ok
-
-test result: ok. 1 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-11-ignore-a-test/output.txt}}
 ```
 
 <!--
@@ -710,27 +466,13 @@ La fonction `test_long` est listée comme `ignored`. Si nous voulons exécuter
 uniquement les tests ignorés, nous pouvons utiliser `cargo test -- --ignored` :
 
 <!--
-```text
-$ cargo test -- --ignored
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running target/debug/deps/adder-ce99bcc2479f4607
-
-running 1 test
-test expensive_test ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/output-only-04-running-ignored/output.txt}}
 ```
 -->
 
-```text
-$ cargo test -- --ignored
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running target/debug/deps/addition-ce99bcc2479f4607
-
-running 1 test
-test test_long ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/output-only-04-running-ignored/output.txt}}
 ```
 
 <!--
