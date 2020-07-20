@@ -21,7 +21,7 @@ stack, and then quit. This most commonly occurs when a bug of some kind has
 been detected and it’s not clear to the programmer how to handle the error.
 -->
 
-Parfois, les choses se passent mal dans votre code, et vous ne pouvez rien y
+Parfois, des choses se passent mal dans votre code, et vous ne pouvez rien y
 faire. Pour ces cas-là, Rust a la macro `panic!`. Quand la macro `panic!`
 s'exécute, votre programme va afficher un message d'erreur, dérouler et nettoyer
 la pile, et ensuite fermer le programme. Cela se produit fréquemment lorsqu'un
@@ -50,7 +50,7 @@ erreur.
 
 > ### Dérouler la pile ou abandonner suite à un `panic!`
 >
-> Par défaut, quand un `panic!` se produit, le programme commence par
+> Par défaut, quand un `panic` se produit, le programme commence par
 > *dérouler*, ce qui veut dire que Rust retourne en arrière dans la pile et
 > nettoie les données de chaque fonction qu'il rencontre sur son passage. Mais
 > cette marche arrière et le nettoyage demande beaucoup de travail. Une
@@ -82,16 +82,12 @@ Essayons d'appeler `panic!` dans un programme simple :
 
 <!--
 ```rust,should_panic,panics
-fn main() {
-    panic!("crash and burn");
-}
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-01-panic/src/main.rs}}
 ```
 -->
 
 ```rust,should_panic,panics
-fn main() {
-    panic!("crash and burn");
-}
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-01-panic/src/main.rs}}
 ```
 
 <!--
@@ -100,13 +96,14 @@ When you run the program, you’ll see something like this:
 
 Lorsque vous lancez le programme, vous allez voir quelque chose comme ceci :
 
-```text
-$ cargo run
-   Compiling panic v0.1.0 (file:///projects/panic)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.25s
-     Running `target/debug/panic`
-thread 'main' panicked at 'crash and burn', src/main.rs:2:5
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
+<!--
+```console
+{{#include ../listings/ch09-error-handling/no-listing-01-panic/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch09-error-handling/no-listing-01-panic/output.txt}}
 ```
 
 <!--
@@ -157,8 +154,8 @@ element by index in a vector.
 -->
 
 Analysons un autre exemple pour voir ce qui se passe lors d'un appel de
-`panic!` se produit dans un librairie à cause d'un bug dans notre code plutôt
-que d'appeler la macro directent. L'encart 9-1 montre du code qui essaye
+`panic!` qui se produit dans une bibliothèque à cause d'un bug dans notre code plutôt
+qu'un appel à la macro directement. L'encart 9-1 montre du code qui essaye
 d'accéder à un élément d'un vecteur via son indice :
 
 <!--
@@ -167,12 +164,14 @@ d'accéder à un élément d'un vecteur via son indice :
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
 ```rust,should_panic,panics
-fn main() {
-    let v = vec![1, 2, 3];
+{{#rustdoc_include ../listings/ch09-error-handling/listing-09-01/src/main.rs}}
+```
+-->
 
-    v[99];
-}
+```rust,should_panic,panics
+{{#rustdoc_include ../listings/ch09-error-handling/listing-09-01/src/main.rs}}
 ```
 
 <!--
@@ -180,7 +179,7 @@ fn main() {
 end of a vector, which will cause a call to `panic!`</span>
 -->
 
-<span class="caption">Encart 9-1 : Tentative d'accéder à un élément en dehors de
+<span class="caption">Encart 9-1 : tentative d'accès à un élément qui dépasse de
 l'intervalle d'un vecteur, ce qui provoque un `panic!`</span>
 
 <!--
@@ -193,28 +192,28 @@ would be correct.
 
 Ici, nous essayons d'accéder au centième élément de notre vecteur (qui est à
 l'indice 99 car l'indexation commence à zéro), mais le vecteur a seulement trois
-éléments. Dans ce cas, Rust va faire un panic. Utiliser `[]` est censé retourner
+éléments. Dans ce cas, Rust va paniquer. Utiliser `[]` est censé retourner
 un élément, mais si vous lui donnez un indice invalide, Rust ne pourra pas
 retourner un élément acceptable dans ce cas.
 
 <!--
-Other languages, like C, will attempt to give you exactly what you asked for in
-this situation, even though it isn’t what you want: you’ll get whatever is at
-the location in memory that would correspond to that element in the vector,
-even though the memory doesn’t belong to the vector. This is called a *buffer
-overread* and can lead to security vulnerabilities if an attacker is able to
-manipulate the index in such a way as to read data they shouldn’t be allowed to
-that is stored after the array.
+In C, attempting to read beyond the end of a data structure is undefined
+behavior. You might get whatever is at the location in memory that would
+correspond to that element in the data structure, even though the memory
+doesn’t belong to that structure. This is called a *buffer overread* and can
+lead to security vulnerabilities if an attacker is able to manipulate the index
+in such a way as to read data they shouldn’t be allowed to that is stored after
+the data structure.
 -->
 
-D'autres langages, comme le C, vont tenter de vous donner exactement ce que vous
-avez demandé, même si ce n'est pas ce que vous vouliez : vous allez récupérer
-quelque chose à l'emplacement mémoire demandée qui devrait correspondre à
-l'élément demandé dans le vecteur, même si cette partie de la mémoire
-n'appartient pas au vecteur. C'est ce qu'on appelle une *sur-lecture de tampon*
-et peut mener à une faille de sécurité si un attaquant à la possibilité de
-piloter l'indice de telle manière qu'il puisse lire les données qui ne devraient
-pas être lisibles en dehors du tableau.
+En C, tenter de lire en dehors de la fin d'une structure de donnée suit un
+comportement non défini. Vous pourriez récupérer quelque chose à l'emplacement
+mémoire demandé qui pourrait correspondre à l'élément demandé de la structure
+de données, même si cette partie de la mémoire n'appartient pas à cette
+structure de données. C'est ce qu'on appelle une *sur-lecture de tampon* et cela
+peut mener à une faille de sécurité si un attaquant a la possibilité de contrôler
+l'indice de telle manière qu'il puisse lire les données qui ne devraient pas
+être lisibles en dehors de la structure de données.
 
 <!--
 To protect your program from this sort of vulnerability, if you try to read an
@@ -226,13 +225,14 @@ Afin de protéger votre programme de ce genre de vulnérabilité, si vous essaye
 de lire un élément à un indice qui n'existe pas, Rust va arrêter l'exécution et
 refuser de continuer. Essayez et vous verrez :
 
-```text
-$ cargo run
-   Compiling panic v0.1.0 (file:///projects/panic)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.27s
-     Running `target/debug/panic`
-thread 'main' panicked at 'index out of bounds: the len is 3 but the index is 99', libcore/slice/mod.rs:2448:10
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
+<!--
+```console
+{{#include ../listings/ch09-error-handling/listing-09-01/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch09-error-handling/listing-09-01/output.txt}}
 ```
 
 <!--
@@ -242,7 +242,7 @@ we use `[]` on our vector `v` is in *libcore/slice/mod.rs*, and that is where
 the `panic!` is actually happening.
 -->
 
-Cette erreur se réfère à un fichier que nous n'avons pas codé,
+Cette erreur se réfère à un fichier que nous n'avons pas écrit,
 *libcore/slice/mod.rs*. C'est l'implémentation de `slice` dans la bibliothèque
 standard. Le code qui est lancé quand nous utilisons `[]` sur notre vecteur `v`
 est dans *libcore/slice/mod.rs*, et c'est ici que le `panic!` se produit dans
@@ -268,8 +268,8 @@ exactement passé pour mener à cette erreur. Un *re-traçage* consiste à liste
 toutes les fonctions qui ont été appelées pour arriver jusqu'à ce point. Avec
 Rust, le re-traçage fonctionne comme il le fait dans d'autres langages : le
 secret pour lire le re-traçage est de commencer d'en haut et lire jusqu'à ce
-que vous voyez les fichiers que vous avez écris. C'est l'endroit où s'est
-produit le problème. Les lignes avant celle qui mentionne vos fichier
+que vous voyiez les fichiers que vous avez écris. C'est l'endroit où s'est
+produit le problème. Les lignes avant celle qui mentionne vos fichiers
 représentent le code qu'à appelé votre code ; les lignes qui suivent
 représentent le code qui a appelé votre code. Ces lignes peuvent être du code
 du coeur de Rust, du code de la bibliothèque standard, ou des crates que vous
@@ -277,53 +277,131 @@ utilisez. Essayons d'obtenir un re-traçage en réglant la variable
 d'environnement `RUST_BACKTRACE` à n'importe quelle valeur autre que 0. L'encart
 9-2 nous montre un retour similaire à ce que vous devriez voir :
 
-```text
+<!--
+<!-- manual-regeneration
+cd listings/ch09-error-handling/listing-09-01
+RUST_BACKTRACE=1 cargo run
+copy the backtrace output below
+check the backtrace number mentioned in the text below the listing
+-- >
+-->
+
+<!--
+```console
 $ RUST_BACKTRACE=1 cargo run
-    Finished dev [unoptimized + debuginfo] target(s) in 0.00s
-     Running `target/debug/panic`
-thread 'main' panicked at 'index out of bounds: the len is 3 but the index is 99', libcore/slice/mod.rs:2448:10
+thread 'main' panicked at 'index out of bounds: the len is 3 but the index is 99', /rustc/5e1a799842ba6ed4a57e91f7ab9435947482f7d8/src/libcore/slice/mod.rs:2806:10
 stack backtrace:
-   0: std::sys::unix::backtrace::tracing::imp::unwind_backtrace
-             at libstd/sys/unix/backtrace/tracing/gcc_s.rs:49
-   1: std::sys_common::backtrace::print
-             at libstd/sys_common/backtrace.rs:71
-             at libstd/sys_common/backtrace.rs:59
-   2: std::panicking::default_hook::{{closure}}
-             at libstd/panicking.rs:211
-   3: std::panicking::default_hook
-             at libstd/panicking.rs:227
-   4: <std::panicking::begin_panic::PanicPayload<A> as core::panic::BoxMeUp>::get
-             at libstd/panicking.rs:476
-   5: std::panicking::continue_panic_fmt
-             at libstd/panicking.rs:390
-   6: std::panicking::try::do_call
-             at libstd/panicking.rs:325
-   7: core::ptr::drop_in_place
-             at libcore/panicking.rs:77
-   8: core::ptr::drop_in_place
-             at libcore/panicking.rs:59
-   9: <usize as core::slice::SliceIndex<[T]>>::index
-             at libcore/slice/mod.rs:2448
-  10: core::slice::<impl core::ops::index::Index<I> for [T]>::index
-             at libcore/slice/mod.rs:2316
-  11: <alloc::vec::Vec<T> as core::ops::index::Index<I>>::index
-             at liballoc/vec.rs:1653
-  12: panic::main
+   0: backtrace::backtrace::libunwind::trace
+             at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.40/src/backtrace/libunwind.rs:88
+   1: backtrace::backtrace::trace_unsynchronized
+             at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.40/src/backtrace/mod.rs:66
+   2: std::sys_common::backtrace::_print_fmt
+             at src/libstd/sys_common/backtrace.rs:84
+   3: <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt
+             at src/libstd/sys_common/backtrace.rs:61
+   4: core::fmt::ArgumentV1::show_usize
+   5: std::io::Write::write_fmt
+             at src/libstd/io/mod.rs:1426
+   6: std::sys_common::backtrace::_print
+             at src/libstd/sys_common/backtrace.rs:65
+   7: std::sys_common::backtrace::print
+             at src/libstd/sys_common/backtrace.rs:50
+   8: std::panicking::default_hook::{{closure}}
+             at src/libstd/panicking.rs:193
+   9: std::panicking::default_hook
+             at src/libstd/panicking.rs:210
+  10: std::panicking::rust_panic_with_hook
+             at src/libstd/panicking.rs:471
+  11: rust_begin_unwind
+             at src/libstd/panicking.rs:375
+  12: core::panicking::panic_fmt
+             at src/libcore/panicking.rs:84
+  13: core::panicking::panic_bounds_check
+             at src/libcore/panicking.rs:62
+  14: <usize as core::slice::SliceIndex<[T]>>::index
+             at /rustc/5e1a799842ba6ed4a57e91f7ab9435947482f7d8/src/libcore/slice/mod.rs:2806
+  15: core::slice::<impl core::ops::index::Index<I> for [T]>::index
+             at /rustc/5e1a799842ba6ed4a57e91f7ab9435947482f7d8/src/libcore/slice/mod.rs:2657
+  16: <alloc::vec::Vec<T> as core::ops::index::Index<I>>::index
+             at /rustc/5e1a799842ba6ed4a57e91f7ab9435947482f7d8/src/liballoc/vec.rs:1871
+  17: panic::main
              at src/main.rs:4
-  13: std::rt::lang_start::{{closure}}
-             at libstd/rt.rs:74
-  14: std::panicking::try::do_call
-             at libstd/rt.rs:59
-             at libstd/panicking.rs:310
-  15: macho_symbol_search
-             at libpanic_unwind/lib.rs:102
-  16: std::alloc::default_alloc_error_hook
-             at libstd/panicking.rs:289
-             at libstd/panic.rs:392
-             at libstd/rt.rs:58
-  17: std::rt::lang_start
-             at libstd/rt.rs:74
-  18: panic::main
+  18: std::rt::lang_start::{{closure}}
+             at /rustc/5e1a799842ba6ed4a57e91f7ab9435947482f7d8/src/libstd/rt.rs:67
+  19: std::rt::lang_start_internal::{{closure}}
+             at src/libstd/rt.rs:52
+  20: std::panicking::try::do_call
+             at src/libstd/panicking.rs:292
+  21: __rust_maybe_catch_panic
+             at src/libpanic_unwind/lib.rs:78
+  22: std::panicking::try
+             at src/libstd/panicking.rs:270
+  23: std::panic::catch_unwind
+             at src/libstd/panic.rs:394
+  24: std::rt::lang_start_internal
+             at src/libstd/rt.rs:51
+  25: std::rt::lang_start
+             at /rustc/5e1a799842ba6ed4a57e91f7ab9435947482f7d8/src/libstd/rt.rs:67
+  26: panic::main
+```
+-->
+
+```console
+$ RUST_BACKTRACE=1 cargo run
+thread 'main' panicked at 'index out of bounds: the len is 3 but the index is 99', /rustc/5e1a799842ba6ed4a57e91f7ab9435947482f7d8/src/libcore/slice/mod.rs:2806:10
+stack backtrace:
+   0: backtrace::backtrace::libunwind::trace
+             at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.40/src/backtrace/libunwind.rs:88
+   1: backtrace::backtrace::trace_unsynchronized
+             at /Users/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/backtrace-0.3.40/src/backtrace/mod.rs:66
+   2: std::sys_common::backtrace::_print_fmt
+             at src/libstd/sys_common/backtrace.rs:84
+   3: <std::sys_common::backtrace::_print::DisplayBacktrace as core::fmt::Display>::fmt
+             at src/libstd/sys_common/backtrace.rs:61
+   4: core::fmt::ArgumentV1::show_usize
+   5: std::io::Write::write_fmt
+             at src/libstd/io/mod.rs:1426
+   6: std::sys_common::backtrace::_print
+             at src/libstd/sys_common/backtrace.rs:65
+   7: std::sys_common::backtrace::print
+             at src/libstd/sys_common/backtrace.rs:50
+   8: std::panicking::default_hook::{{closure}}
+             at src/libstd/panicking.rs:193
+   9: std::panicking::default_hook
+             at src/libstd/panicking.rs:210
+  10: std::panicking::rust_panic_with_hook
+             at src/libstd/panicking.rs:471
+  11: rust_begin_unwind
+             at src/libstd/panicking.rs:375
+  12: core::panicking::panic_fmt
+             at src/libcore/panicking.rs:84
+  13: core::panicking::panic_bounds_check
+             at src/libcore/panicking.rs:62
+  14: <usize as core::slice::SliceIndex<[T]>>::index
+             at /rustc/5e1a799842ba6ed4a57e91f7ab9435947482f7d8/src/libcore/slice/mod.rs:2806
+  15: core::slice::<impl core::ops::index::Index<I> for [T]>::index
+             at /rustc/5e1a799842ba6ed4a57e91f7ab9435947482f7d8/src/libcore/slice/mod.rs:2657
+  16: <alloc::vec::Vec<T> as core::ops::index::Index<I>>::index
+             at /rustc/5e1a799842ba6ed4a57e91f7ab9435947482f7d8/src/liballoc/vec.rs:1871
+  17: panic::main
+             at src/main.rs:4
+  18: std::rt::lang_start::{{closure}}
+             at /rustc/5e1a799842ba6ed4a57e91f7ab9435947482f7d8/src/libstd/rt.rs:67
+  19: std::rt::lang_start_internal::{{closure}}
+             at src/libstd/rt.rs:52
+  20: std::panicking::try::do_call
+             at src/libstd/panicking.rs:292
+  21: __rust_maybe_catch_panic
+             at src/libpanic_unwind/lib.rs:78
+  22: std::panicking::try
+             at src/libstd/panicking.rs:270
+  23: std::panic::catch_unwind
+             at src/libstd/panic.rs:394
+  24: std::rt::lang_start_internal
+             at src/libstd/rt.rs:51
+  25: std::rt::lang_start
+             at /rustc/5e1a799842ba6ed4a57e91f7ab9435947482f7d8/src/libstd/rt.rs:67
+  26: panic::main
 ```
 
 <!--
@@ -331,7 +409,7 @@ stack backtrace:
 `panic!` displayed when the environment variable `RUST_BACKTRACE` is set</span>
 -->
 
-<span class="caption">Encart 9-2: Le re-traçage généré par l'appel de `panic!`
+<span class="caption">Encart 9-2: le re-traçage généré par l'appel de `panic!`
 est affiché quand la variable d'environnement `RUST_BACKTRACE` est définie
 </span>
 
@@ -343,15 +421,15 @@ default when using `cargo build` or `cargo run` without the `--release` flag,
 as we have here.
 -->
 
-Cela fait beaucoup de contenu ! L'exactitude de votre retour qui est affiché
+Cela fait beaucoup de contenu ! Ce que vous voyez sur votre machine
 peut être différent en fonction de votre système d'exploitation et de votre
 version de Rust. Pour avoir le re-traçage avec ces informations, les instructions
-de déboguage doivent être activés. Les instructions de déboguage sont activées
+de déboguage doivent être activées. Les instructions de déboguage sont activées
 par défaut quand on utilise `cargo build` ou `cargo run` sans le drapeau
 `--release`, comme c'est le cas ici.
 
 <!--
-In the output in Listing 9-2, line 12 of the backtrace points to the line in
+In the output in Listing 9-2, line 17 of the backtrace points to the line in
 our project that’s causing the problem: line 4 of *src/main.rs*. If we don’t
 want our program to panic, the location pointed to by the first line mentioning
 a file we wrote is where we should start investigating. In Listing 9-1, where
@@ -362,7 +440,7 @@ you’ll need to figure out what action the code is taking with what values to
 cause the panic and what the code should do instead.
 -->
 
-Dans l'encart 9-2, la ligne 12 du re-traçage nous montre la ligne de notre projet
+Dans l'encart 9-2, la ligne 17 du re-traçage nous montre la ligne de notre projet
 qui provoque le problème : la ligne 4 de *src/main.rs*. Si nous ne voulons pas
 que notre programme panique, le premier endroit que nous devrions inspecter est
 l'emplacement cité par la première ligne qui mentionne du code que nous avons
