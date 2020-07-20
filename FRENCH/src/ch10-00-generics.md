@@ -120,38 +120,12 @@ dans l'encart 10-1.
 
 <!--
 ```rust
-fn main() {
-    let number_list = vec![34, 50, 25, 100, 65];
-
-    let mut largest = number_list[0];
-
-    for number in number_list {
-        if number > largest {
-            largest = number;
-        }
-    }
-
-    println!("The largest number is {}", largest);
-#  assert_eq!(largest, 100);
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-01/src/main.rs:here}}
 ```
 -->
 
 ```rust
-fn main() {
-    let liste_de_nombres = vec![34, 50, 25, 100, 65];
-
-    let mut le_plus_gros = liste_de_nombres[0];
-
-    for nombre in liste_de_nombres {
-        if nombre > le_plus_gros {
-            le_plus_gros = nombre;
-        }
-    }
-
-    println!("Le nombre le plus gros est {}", le_plus_gros);
-#  assert_eq!(le_plus_gros, 100);
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-01/src/main.rs:here}}
 ```
 
 <!--
@@ -159,7 +133,7 @@ fn main() {
 of numbers</span>
 -->
 
-<span class="caption">Encart 10-1 : Le code pour trouver le nombre le plus gros
+<span class="caption">Encart 10-1 : le code pour trouver le nombre le plus gros
 dans une liste de nombres</span>
 
 <!--
@@ -201,60 +175,12 @@ deux endroits différents du programme, comme dans l'encart 10-2.
 
 <!--
 ```rust
-fn main() {
-    let number_list = vec![34, 50, 25, 100, 65];
-
-    let mut largest = number_list[0];
-
-    for number in number_list {
-        if number > largest {
-            largest = number;
-        }
-    }
-
-    println!("The largest number is {}", largest);
-
-    let number_list = vec![102, 34, 6000, 89, 54, 2, 43, 8];
-
-    let mut largest = number_list[0];
-
-    for number in number_list {
-        if number > largest {
-            largest = number;
-        }
-    }
-
-    println!("The largest number is {}", largest);
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-02/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let liste_de_nombres = vec![34, 50, 25, 100, 65];
-
-    let mut le_plus_grand = liste_de_nombres[0];
-
-    for nombre in liste_de_nombres {
-        if nombre > le_plus_grand {
-            le_plus_grand = nombre;
-        }
-    }
-
-    println!("Le nombre le plus grand est {}", le_plus_grand);
-
-    let liste_de_nombres = vec![102, 34, 6000, 89, 54, 2, 43, 8];
-
-    let mut le_plus_grand = liste_de_nombres[0];
-
-    for nombre in liste_de_nombres {
-        if nombre > le_plus_grand {
-            le_plus_grand = nombre;
-        }
-    }
-
-    println!("Le nombre le plus grand est {}", largest);
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-02/src/main.rs}}
 ```
 
 <!--
@@ -262,7 +188,7 @@ fn main() {
 lists of numbers</span>
 -->
 
-<span class="caption">Encart 10-2 : Le code pour trouver les plus grands
+<span class="caption">Encart 10-2 : le code pour trouver les plus grands
 nombres dans *deux* listes de nombres</span>
 
 <!--
@@ -308,60 +234,12 @@ nombre dans deux listes différentes.
 
 <!--
 ```rust
-fn largest(list: &[i32]) -> i32 {
-    let mut largest = list[0];
-
-    for &item in list {
-        if item > largest {
-            largest = item;
-        }
-    }
-
-    largest
-}
-
-fn main() {
-    let number_list = vec![34, 50, 25, 100, 65];
-
-    let result = largest(&number_list);
-    println!("The largest number is {}", result);
-#    assert_eq!(result, 100);
-
-    let number_list = vec![102, 34, 6000, 89, 54, 2, 43, 8];
-
-    let result = largest(&number_list);
-    println!("The largest number is {}", result);
-#    assert_eq!(result, 6000);
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-03/src/main.rs:here}}
 ```
 -->
 
 ```rust
-fn le_plus_grand(liste: &[i32]) -> i32 {
-    let mut le_plus_grand = liste[0];
-
-    for &element in liste {
-        if element > le_plus_grand {
-            le_plus_grand = element;
-        }
-    }
-
-    le_plus_grand
-}
-
-fn main() {
-    let liste_de_nombres = vec![34, 50, 25, 100, 65];
-
-    let resultat = le_plus_grand(&liste_de_nombres);
-    println!("Le nombre le plus grand est {}", resultat);
-#    assert_eq!(resultat, 100);
-
-    let liste_de_nombres = vec![102, 34, 6000, 89, 54, 2, 43, 8];
-
-    let resultat = le_plus_grand(&liste_de_nombres);
-    println!("Le nombre le plus grand est {}", resultat);
-#    assert_eq!(resultat, 6000);
-}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-03/src/main.rs:here}}
 ```
 
 <!--
@@ -369,7 +247,7 @@ fn main() {
 in two lists</span>
 -->
 
-<span class="caption">Encart 10-3 : Du code abstrait qui trouve le plus grand
+<span class="caption">Encart 10-3 : du code abstrait qui trouve le plus grand
 nombre dans deux listes</span>
 
 <!--
