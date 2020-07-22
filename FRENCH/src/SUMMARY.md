@@ -32,7 +32,6 @@
     - [La syntaxe des méthodes](ch05-03-method-syntax.md)
 
 - [Les énumérations et le filtrage par motif](ch06-00-enums.md)
-
     - [Définir une énumération](ch06-01-defining-an-enum.md)
     - [La structure de contrôle `match`](ch06-02-match.md)
     - [Une structure de contrôle concise : `if let`](ch06-03-if-let.md)

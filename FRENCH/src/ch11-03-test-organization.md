@@ -110,24 +110,12 @@ première section de ce chapitre, Cargo a généré ce code pour nous :
 
 <!--
 ```rust
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-01/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-01/src/lib.rs:here}}
 ```
 
 <!--
@@ -179,55 +167,19 @@ la fonction privée `addition_interne`.
 
 <!--
 ```rust
-# fn main() {}
-
-pub fn add_two(a: i32) -> i32 {
-    internal_adder(a, 2)
-}
-
-fn internal_adder(a: i32, b: i32) -> i32 {
-    a + b
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn internal() {
-        assert_eq!(4, internal_adder(2, 2));
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-12/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# fn main() {}
-
-pub fn ajouter_deux(a: i32) -> i32 {
-    addition_interne(a, 2)
-}
-
-fn addition_interne(a: i32, b: i32) -> i32 {
-    a + b
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn interne() {
-        assert_eq!(4, addition_interne(2, 2));
-    }
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-12/src/lib.rs:here}}
 ```
 
 <!--
 <span class="caption">Listing 11-12: Testing a private function</span>
 -->
 
-<span class="caption">Encart 11-12 : Test d'une fonction privée</span>
+<span class="caption">Encart 11-12 : test d'une fonction privée</span>
 
 <!--
 Note that the `internal_adder` function is not marked as `pub`, but because
@@ -308,22 +260,12 @@ un nouveau fichier *tests/test_integration.rs*, et insérez-y le code de l'encar
 
 <!--
 ```rust,ignore
-use adder;
-
-#[test]
-fn it_adds_two() {
-    assert_eq!(4, adder::add_two(2));
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-13/tests/integration_test.rs}}
 ```
 -->
 
 ```rust,ignore
-use addition;
-
-#[test]
-fn cela_ajoute_deux() {
-    assert_eq!(4, addition::ajouter_deux(2));
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-13/tests/integration_test.rs}}
 ```
 
 <!--
@@ -331,7 +273,7 @@ fn cela_ajoute_deux() {
 `adder` crate</span>
 -->
 
-<span class="caption">Encart 11-13 : Un test d'intégration d'une fonction
+<span class="caption">Encart 11-13 : un test d'intégration d'une fonction
 présente dans la crate `addition`</span>
 
 <!--
@@ -357,55 +299,13 @@ particulière et compile les fichiers présents dans ce dossier uniquement si no
 lançons `cargo test`. Lancez dès maintenant `cargo test` :
 
 <!--
-```text
-$ cargo test
-   Compiling adder v0.1.0 (file:///projects/adder)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.31 secs
-     Running target/debug/deps/adder-abcabcabc
-
-running 1 test
-test tests::internal ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-
-     Running target/debug/deps/integration_test-ce99bcc2479f4607
-
-running 1 test
-test it_adds_two ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-
-   Doc-tests adder
-
-running 0 tests
-
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/listing-11-13/output.txt}}
 ```
 -->
 
-```text
-$ cargo test
-   Compiling addition v0.1.0 (file:///projects/addition)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.31 secs
-     Running target/debug/deps/addition-abcabcabc
-
-running 1 test
-test tests::interne ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-
-     Running target/debug/deps/test_integration-ce99bcc2479f4607
-
-running 1 test
-test cela_ajoute_deux ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-
-   Doc-tests addition
-
-running 0 tests
-
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/listing-11-13/output.txt}}
 ```
 
 <!--
@@ -465,27 +365,13 @@ exécuter tous les tests d'un fichier de tests d'intégration précis, utilisez
 l'argument `--test` de `cargo test` suivi du nom du fichier :
 
 <!--
-```text
-$ cargo test --test integration_test
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running target/debug/integration_test-952a27e0126bb565
-
-running 1 test
-test it_adds_two ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/output-only-05-single-integration/output.txt}}
 ```
 -->
 
-```text
-$ cargo test --test test_integration
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running target/debug/test_integration-952a27e0126bb565
-
-running 1 test
-test cela_ajoute_deux ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/output-only-05-single-integration/output.txt}}
 ```
 
 <!--
@@ -560,11 +446,13 @@ test :
 
 <!--
 ```rust
-pub fn setup() {
-    // setup code specific to your library's tests would go here
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-12-shared-test-code-problem/tests/common.rs}}
 ```
 -->
+
+```rust
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-12-shared-test-code-problem/tests/common.rs}}
+```
 
 ```rust
 pub fn parametrage() {
@@ -584,57 +472,13 @@ fichier ne contient aucune fonction de test et que nous n'avons utilisé nulle
 part la fonction `parametrage` :
 
 <!--
-```text
-running 1 test
-test tests::internal ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-
-     Running target/debug/deps/common-b8b07b6f1be2db70
-
-running 0 tests
-
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-
-     Running target/debug/deps/integration_test-d993c68b431d39df
-
-running 1 test
-test it_adds_two ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-
-   Doc-tests adder
-
-running 0 tests
-
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-12-shared-test-code-problem/output.txt}}
 ```
 -->
 
-```text
-running 1 test
-test tests::interne ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-
-     Running target/debug/deps/commun-b8b07b6f1be2db70
-
-running 0 tests
-
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-
-     Running target/debug/deps/test_integration-d993c68b431d39df
-
-running 1 test
-test cela_ajoute_deux ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
-
-   Doc-tests addition
-
-running 0 tests
-
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch11-writing-automated-tests/no-listing-12-shared-test-code-problem/output.txt}}
 ```
 
 <!--
@@ -688,28 +532,12 @@ exemple d'appel à la fonction `parametrage` à partir du test
 
 <!--
 ```rust,ignore
-use adder;
-
-mod common;
-
-#[test]
-fn it_adds_two() {
-    common::setup();
-    assert_eq!(4, adder::add_two(2));
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-13-fix-shared-test-code-problem/tests/integration_test.rs}}
 ```
 -->
 
 ```rust,ignore
-use addition;
-
-mod commun;
-
-#[test]
-fn cela_ajoute_deux() {
-    commun::parametrage();
-    assert_eq!(4, addition::ajouter_deux(2));
-}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-13-fix-shared-test-code-problem/tests/integration_test.rs}}
 ```
 
 <!--
@@ -799,6 +627,11 @@ chapters to work on a project!
 
 Et maintenant, combinons le savoir que vous avez accumulé dans ce chapitre et
 dans les chapitres précédents en travaillant sur un nouveau projet !
+
+<!--
+[separating-modules-into-files]:
+ch07-05-separating-modules-into-different-files.html
+-->
 
 [separating-modules-into-files]:
 ch07-05-separating-modules-into-different-files.html
