@@ -23,7 +23,15 @@ Créons un nouveau projet comme à l'accoutumée avec `cargo new`. Appelons
 notre projet `minigrep` pour le distinguer de l'outil `grep` que vous avez
 probablement déjà sur votre système.
 
-```text
+<!--
+```console
+$ cargo new minigrep
+     Created binary (application) `minigrep` project
+$ cd minigrep
+```
+-->
+
+```console
 $ cargo new minigrep
      Created binary (application) `minigrep` project
 $ cd minigrep
@@ -43,12 +51,12 @@ rechercher. Autrement dit, nous voulons pouvoir exécuter notre programme avec
 fichier dans lequel chercher, comme ceci :
 
 <!--
-```text
+```console
 $ cargo run searchstring example-filename.txt
 ```
 -->
 
-```text
+```console
 $ cargo run chaine_a_chercher fichier-exemple.txt
 ```
 
@@ -108,13 +116,14 @@ valeurs dans un vecteur.
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
 ```rust
-use std::env;
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-01/src/main.rs}}
+```
+-->
 
-fn main() {
-    let args: Vec<String> = env::args().collect();
-    println!("{:?}", args);
-}
+```rust
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-01/src/main.rs}}
 ```
 
 <!--
@@ -200,25 +209,23 @@ Essayons d'abord de lancer le code sans arguments, puis ensuite avec deux
 arguments :
 
 <!--
-```text
-$ cargo run
---snip--
-["target/debug/minigrep"]
-
-$ cargo run needle haystack
---snip--
-["target/debug/minigrep", "needle", "haystack"]
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-01/output.txt}}
 ```
 -->
 
-```text
-$ cargo run
--- partie masquée ici --
-["target/debug/minigrep"]
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-01/output.txt}}
+```
 
-$ cargo run aiguille botte_de_foin
--- partie masquée ici --
-["target/debug/minigrep", "aiguille", "botte_de_foin"]
+<!--
+```console
+{{#include ../listings/ch12-an-io-project/output-only-01-with-args/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch12-an-io-project/output-only-01-with-args/output.txt}}
 ```
 
 <!--
@@ -268,32 +275,12 @@ le reste du programme. C'est que nous faisons dans l'encart 12-2.
 
 <!--
 ```rust,should_panic
-use std::env;
-
-fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    let query = &args[1];
-    let filename = &args[2];
-
-    println!("Searching for {}", query);
-    println!("In file {}", filename);
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-02/src/main.rs}}
 ```
 -->
 
 ```rust,should_panic
-use std::env;
-
-fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    let recherche = &args[1];
-    let nom_fichier = &args[2];
-
-    println!("On recherche : {}", recherche);
-    println!("Dans le fichier : {}", nom_fichier);
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-02/src/main.rs}}
 ```
 
 <!--
@@ -332,23 +319,13 @@ code fonctionne bien comme nous le souhaitons. Lançons à nouveau ce programme
 avec les arguments `test` et `example.txt` :
 
 <!--
-```text
-$ cargo run test sample.txt
-   Compiling minigrep v0.1.0 (file:///projects/minigrep)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running `target/debug/minigrep test sample.txt`
-Searching for test
-In file sample.txt
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-02/output.txt}}
 ```
 -->
 
-```text
-$ cargo run test exemple.txt
-   Compiling minigrep v0.1.0 (file:///projects/minigrep)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running `target/debug/minigrep test exemple.txt`
-On recherche : test
-Dans le fichier : exemple.txt
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-02/output.txt}}
 ```
 
 <!--
@@ -366,10 +343,10 @@ d'erreurs, comme lorsque l'utilisateur ne fournit pas d'arguments ; pour le
 moment, nous allons ignorer ces situations et continuer à travailler pour
 l'ajout d'une capacité de lecture de fichier, à la place.
 
-[ch13]: ch13-00-functional-features.html
-
 <!--
+[ch13]: ch13-00-functional-features.html
 [ch7-idiomatic-use]: ch07-04-bringing-paths-into-scope-with-the-use-keyword.html#creating-idiomatic-use-paths
 -->
 
+[ch13]: ch13-00-functional-features.html
 [ch7-idiomatic-use]: ch07-04-bringing-paths-into-scope-with-the-use-keyword.html

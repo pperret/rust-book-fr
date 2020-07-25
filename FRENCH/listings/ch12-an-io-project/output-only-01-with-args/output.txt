@@ -1,0 +1,5 @@
+$ cargo run aiguille botte_de_foin
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.57s
+     Running `target/debug/minigrep aiguille botte_de_foin`
+["target/debug/minigrep", "aiguille", "botte_de_foin"]
