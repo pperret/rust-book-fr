@@ -21,5 +21,5 @@ fn main() {
         }
     }
 
-    println!("Le nombre le plus grand est {}", largest);
+    println!("Le nombre le plus grand est {}", le_plus_grand);
 }
