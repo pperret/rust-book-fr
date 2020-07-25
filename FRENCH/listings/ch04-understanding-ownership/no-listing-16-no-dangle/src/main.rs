@@ -1,5 +1,5 @@
 fn main() {
-    let string = no_dangle();
+    let string = ne_pendouille_pas();
 }
 
 // ANCHOR: here

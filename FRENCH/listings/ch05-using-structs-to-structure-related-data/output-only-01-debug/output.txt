@@ -3,8 +3,8 @@ $ cargo run
 error[E0277]: `Rectangle` doesn't implement `std::fmt::Debug`
   --> src/main.rs:12:31
    |
-12 |     println!("rect1 is {:?}", rect1);
-   |                               ^^^^^ `Rectangle` cannot be formatted using `{:?}`
+12 |     println!("rect1 vaut {:?}", rect1);
+   |                                 ^^^^^ `Rectangle` cannot be formatted using `{:?}`
    |
    = help: the trait `std::fmt::Debug` is not implemented for `Rectangle`
    = note: add `#[derive(Debug)]` or manually implement `std::fmt::Debug`

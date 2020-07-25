@@ -26,6 +26,6 @@ fn main() {
     match supposition.cmp(&nombre_secret) {
         Ordering::Less => println!("C'est plus !"),
         Ordering::Greater => println!("C'est moins !"),
-        Ordering::Equal => println!("Vous avez gagné !");
+        Ordering::Equal => println!("Vous avez gagné !"),
     }
 }
