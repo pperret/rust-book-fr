@@ -3,7 +3,7 @@ use std::io::ErrorKind;
 
 fn main() {
     let f = File::open("hello.txt").unwrap_or_else(|erreur| {
-        if error.kind() == ErrorKind::NotFound {
+        if erreur.kind() == ErrorKind::NotFound {
             File::create("hello.txt").unwrap_or_else(|erreur| {
                 panic!("Erreur lors de la création du fichier : {:?}", erreur);
             })
