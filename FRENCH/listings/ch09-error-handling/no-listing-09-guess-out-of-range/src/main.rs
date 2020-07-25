@@ -14,10 +14,10 @@ fn main() {
         // ANCHOR_END: here
         println!("Veuillez saisir un nombre.");
 
-        let mut guess = String::new();
+        let mut supposition = String::new();
 
         io::stdin()
-            .read_line(&mut guess)
+            .read_line(&mut supposition)
             .expect("Echec de la lecture de la saisie");
 
         // ANCHOR: here
