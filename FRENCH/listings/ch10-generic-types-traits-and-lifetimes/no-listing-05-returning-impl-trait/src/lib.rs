@@ -11,7 +11,7 @@ pub struct ArticleDePresse {
 
 impl Resumable for ArticleDePresse {
     fn resumer(&self) -> String {
-        format!("{}, par {} ({})", self.headline, self.author, self.location)
+        format!("{}, par {} ({})", self.titre, self.auteur, self.lieu)
     }
 }
 
@@ -32,7 +32,7 @@ impl Resumable for Tweet {
 fn retourne_resumable() -> impl Resumable {
     Tweet {
         nom_utilisateur: String::from("jean"),
-        content: String::from("Bien sûr, les amis, comme vous le savez probablement déjà"),
+        contenu: String::from("Bien sûr, les amis, comme vous le savez probablement déjà"),
         reponse: false,
         retweet: false,
     }

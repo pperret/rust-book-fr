@@ -1,4 +1,4 @@
-use chapter10::{self, Summary, Tweet};
+use chapter10::{self, Resumable, Tweet};
 
 fn main() {
     // ANCHOR: here
@@ -9,6 +9,6 @@ fn main() {
         retweet: false,
     };
     
-    println!("1 nouveau tweet : {}", tweet.resume());
+    println!("1 nouveau tweet : {}", tweet.resumer());
     // ANCHOR_END: here
 }

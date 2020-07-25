@@ -1,4 +1,4 @@
-use chapter10::{self, NewsArticle, Summary};
+use chapter10::{self, ArticleDePresse, Resumable};
 
 fn main() {
     // ANCHOR: here
@@ -6,8 +6,10 @@ fn main() {
         titre: String::from("Les Pinguins ont gagné la Stanley Cup Championship !"),
         lieu: String::from("Pittsburgh, PA, USA"),
         auteur: String::from("Iceburgh"),
-        contenu: String::from("Les Pinguins de Pittsburgh sont une nouvelle fois la
-        meilleure équipe de hockey de la NHL."),
+        contenu: String::from(
+            "Les Pinguins de Pittsburgh sont une nouvelle fois la meilleure\
+            équipe de hockey de la NHL."
+        ),
     };
     
     println!("Nouvel article disponible ! {}", article.resumer());

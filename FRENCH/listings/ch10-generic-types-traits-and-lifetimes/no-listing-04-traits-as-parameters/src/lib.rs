@@ -23,13 +23,13 @@ pub struct Tweet {
 }
 
 impl Resumable for Tweet {
-    fn resumer_auteur(&self) -> String {
-        format!("@{}", self.nom_utilisateur)
+    fn resumer(&self) -> String {
+        format!("{} : {}", self.nom_utilisateur, self.contenu)
     }
 }
 
 // ANCHOR: here
-pub fn notifier(element: impl Summary) {
+pub fn notifier(element: impl Resumable) {
     println!("Flash-info ! {}", element.resumer());
 }
 // ANCHOR_END: here

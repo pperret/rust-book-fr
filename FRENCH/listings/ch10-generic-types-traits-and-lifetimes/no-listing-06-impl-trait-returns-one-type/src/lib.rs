@@ -11,7 +11,7 @@ pub struct ArticleDePresse {
 
 impl Resumable for ArticleDePresse {
     fn resumer(&self) -> String {
-        format!("{}, par {} ({})", self.headline, self.author, self.location)
+        format!("{}, par {} ({})", self.titre, self.auteur, self.lieu)
     }
 }
 
@@ -30,7 +30,7 @@ impl Resumable for Tweet {
 
 // ANCHOR: here
 fn retourne_resumable(estArticle: bool) -> impl Resumable {
-    if switch {
+    if estArticle {
         ArticleDePresse {
             titre: String::from("Les Pinguins ont gagné la Stanley Cup Championship !"),
             lieu: String::from("Pittsburgh, PA, USA"),
