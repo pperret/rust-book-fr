@@ -27,20 +27,25 @@ Maintenant, nous allons ajouter une fonctionnalité pour lire le fichier qui est
 renseigné dans l'argument `nom_fichier` de la ligne de commande. D'abord, nous
 avons besoin d'un fichier d'exemple pour le tester : le meilleur type de
 fichier pour s'assurer que `minigrep` fonctionne est un fichier avec une petite
-quantité de texte sur plusieurs lignes avec quelques mots répétés.
+quantité de texte sur plusieurs lignes avec quelques mots répétés. L'encart 12-3
+présente un poème en Anglais de Emily Dickinson qui fonctionnera bien pour ce
+test ! Créez un fichier *poem.txt* à la racine de votre projet, et saisissez ce
+poème “I’m Nobody! Who are you?”.
+
+<!--
+<span class="filename">Filename: poem.txt</span>
+-->
 
 <span class="filename">Filename: poem.txt</span>
 
+<!--
 ```text
-I'm nobody! Who are you?
-Are you nobody, too?
-Then there's a pair of us - don't tell!
-They'd banish us, you know.
+{{#include ../listings/ch12-an-io-project/listing-12-03/poem.txt}}
+```
+-->
 
-How dreary to be somebody!
-How public, like a frog
-To tell your name the livelong day
-To an admiring bog!
+```text
+{{#include ../listings/ch12-an-io-project/listing-12-03/poem.txt}}
 ```
 
 <!--
@@ -67,46 +72,12 @@ lire le fichier, comme indiqué dans l'encart 12-4.
 
 <!--
 ```rust,should_panic
-use std::env;
-use std::fs;
-
-fn main() {
-#     let args: Vec<String> = env::args().collect();
-#
-#     let query = &args[1];
-#     let filename = &args[2];
-#
-#     println!("Searching for {}", query);
-    // --snip--
-    println!("In file {}", filename);
-
-    let contents = fs::read_to_string(filename)
-        .expect("Something went wrong reading the file");
-
-    println!("With text:\n{}", contents);
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-04/src/main.rs:here}}
 ```
 -->
 
 ```rust,should_panic
-use std::env;
-use std::fs;
-
-fn main() {
-#     let args: Vec<String> = env::args().collect();
-#
-#     let recherche = &args[1];
-#     let nom_fichier = &args[2];
-#
-#     println!("On recherche : {}", recherche);
-    // -- partie masquée ici --
-    println!("Dans le fichier : {}", nom_fichier);
-
-    let contenu = fs::read_to_string(nom_fichier)
-        .expect("Quelque chose s'est mal passé lors de la lecture du fichier");
-
-    println!("Dans le texte :\n{}", contenu);
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-04/src/main.rs:here}}
 ```
 
 <!--
@@ -158,43 +129,13 @@ partie de recherche pour l'instant), ainsi que le fichier *poem.txt* en
 second argument :
 
 <!--
-```text
-$ cargo run the poem.txt
-   Compiling minigrep v0.1.0 (file:///projects/minigrep)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running `target/debug/minigrep the poem.txt`
-Searching for the
-In file poem.txt
-With text:
-I'm nobody! Who are you?
-Are you nobody, too?
-Then there's a pair of us — don't tell!
-They'd banish us, you know.
-
-How dreary to be somebody!
-How public, like a frog
-To tell your name the livelong day
-To an admiring bog!
+```console
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-04/output.txt}}
 ```
 -->
 
-```text
-$ cargo run the poem.txt
-   Compiling minigrep v0.1.0 (file:///projects/minigrep)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running `target/debug/minigrep the poem.txt`
-On recherche : the
-Dans le fichier : poem.txt
-Dans le texte :
-I'm nobody! Who are you?
-Are you nobody, too?
-Then there's a pair of us — don't tell!
-They'd banish us, you know.
-
-How dreary to be somebody!
-How public, like a frog
-To tell your name the livelong day
-To an admiring bog!
+```console
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-04/output.txt}}
 ```
 
 <!--
