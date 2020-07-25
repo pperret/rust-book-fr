@@ -25,15 +25,15 @@ impl Supposition {
 fn main() {
     println!("Devinez le nombre !");
 
-    let secret_number = rand::thread_rng().gen_range(1, 101);
+    let nombre_secret = rand::thread_rng().gen_range(1, 101);
 
     loop {
         println!("Veuillez saisir un nombre.");
 
-        let mut guess = String::new();
+        let mut supposition = String::new();
 
         io::stdin()
-            .read_line(&mut guess)
+            .read_line(&mut supposition)
             .expect("Echec de la lecture de la saisie");
 
         let supposition: i32 = match supposition.trim().parse() {
