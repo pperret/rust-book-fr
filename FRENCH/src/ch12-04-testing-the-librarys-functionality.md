@@ -114,55 +114,13 @@ L'encart 12-15 montre ce test, qui ne se compile pas encore.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
-# pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-#      vec![]
-# }
-#
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn one_result() {
-        let query = "duct";
-        let contents = "\
-Rust:
-safe, fast, productive.
-Pick three.";
-
-        assert_eq!(
-            vec!["safe, fast, productive."],
-            search(query, contents)
-        );
-    }
-}
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-15/src/lib.rs:here}}
 ```
 -->
 
-```rust
-# pub fn rechercher<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
-#      vec![]
-# }
-#
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn un_resultat() {
-        let recherche = "duct";
-        let contenu = "\
-Rust:
-sécurité, rapidité, productivité.
-Obtenez les trois en même temps.";
-
-        assert_eq!(
-            vec!["sécurité, rapidité, productivité."],
-            rechercher(recherche, contenu)
-        );
-    }
-}
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-15/src/lib.rs:here}}
 ```
 
 <!--
@@ -209,16 +167,12 @@ qui contient la ligne `"sécurité, rapidité, productivité."`
 
 <!--
 ```rust
-pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    vec![]
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-16/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-pub fn rechercher<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
-    vec![]
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-16/src/lib.rs:here}}
 ```
 
 <!--
@@ -273,29 +227,13 @@ Si nous oublions les annotations de durée de vie et que nous essayons de
 compiler cette fonction, nous allons obtenir cette erreur :
 
 <!--
-```text
-error[E0106]: missing lifetime specifier
- -- > src/lib.rs:5:51
-  |
-5 | pub fn search(query: &str, contents: &str) -> Vec<&str> {
-  |                                                   ^ expected lifetime
-parameter
-  |
-  = help: this function's return type contains a borrowed value, but the
-  signature does not say whether it is borrowed from `query` or `contents`
+```console
+{{#include ../listings/ch12-an-io-project/output-only-02-missing-lifetimes/output.txt}}
 ```
 -->
 
-```text
-error[E0106]: missing lifetime specifier
- -- > src/lib.rs:5:51
-  |
-5 | pub fn rechercher(recherche: &str, contenu: &str) -> Vec<&str> {
-  |                                                          ^ expected lifetime
-parameter
-  |
-  = help: this function's return type contains a borrowed value, but the
-  signature does not say whether it is borrowed from `query` or `contents`
+```console
+{{#include ../listings/ch12-an-io-project/output-only-02-missing-lifetimes/output.txt}}
 ```
 
 <!--
@@ -331,64 +269,14 @@ Now let’s run the test:
 
 Maintenant, exécutons le test :
 
-<!-- markdownlint-disable -->
 <!--
-```text
-$ cargo test
-   Compiling minigrep v0.1.0 (file:///projects/minigrep)
---warnings--
-    Finished dev [unoptimized + debuginfo] target(s) in 0.43 secs
-     Running target/debug/deps/minigrep-abcabcabc
-
-running 1 test
-test tests::one_result ... FAILED
-
-failures:
-
----- tests::one_result stdout ----
-        thread 'tests::one_result' panicked at 'assertion failed: `(left ==
-right)`
-left: `["safe, fast, productive."]`,
-right: `[]`)', src/lib.rs:48:8
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
-
-
-failures:
-    tests::one_result
-
-test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
-
-error: test failed, to rerun pass '--lib'
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-16/output.txt}}
 ```
 -->
-<!-- markdownlint-restore -->
 
-```text
-$ cargo test
-   Compiling minigrep v0.1.0 (file:///projects/minigrep)
---warnings--
-    Finished dev [unoptimized + debuginfo] target(s) in 0.43 secs
-     Running target/debug/deps/minigrep-abcabcabc
-
-running 1 test
-test tests::un_resultat ... FAILED
-
-failures:
-
----- tests::un_resultat stdout ----
-        thread 'tests::un_resultat' panicked at 'assertion failed: `(left ==
-right)`
-left: `["sécurité, rapidité, productivité."]`,
-right: `[]`)', src/lib.rs:48:8
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
-
-
-failures:
-    tests::un_resultat
-
-test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
-
-error: test failed, to rerun pass '--lib'
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-16/output.txt}}
 ```
 
 <!--
@@ -458,20 +346,12 @@ l'encart 12-17. Notez que cela ne se compile pas encore.
 
 <!--
 ```rust,ignore
-pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    for line in contents.lines() {
-        // do something with line
-    }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-17/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore
-pub fn rechercher<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
-    for ligne in contenu.lines() {
-        // faire quelquechose avec ligne ici
-    }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-17/src/lib.rs:here}}
 ```
 
 <!--
@@ -525,24 +405,12 @@ Notez qu'ici non plus nous ne pouvons pas encore compiler.
 
 <!--
 ```rust,ignore
-pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    for line in contents.lines() {
-        if line.contains(query) {
-            // do something with line
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-18/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore
-pub fn rechercher<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
-    for ligne in contenu.lines() {
-        if ligne.contains(recherche) {
-            // faire quelquechose avec la ligne ici
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-18/src/lib.rs:here}}
 ```
 
 <!--
@@ -580,19 +448,13 @@ le vecteur, comme dans l'encart 12-19 :
 
 <!--
 ```rust,ignore
-pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    let mut results = Vec::new();
-
-    for line in contents.lines() {
-        if line.contains(query) {
-            results.push(line);
-        }
-    }
-
-    results
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-19/src/lib.rs:here}}
 ```
 -->
+
+```rust,ignore
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-19/src/lib.rs:here}}
+```
 
 ```rust,ignore
 pub fn rechercher<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
@@ -625,23 +487,13 @@ Maintenant, notre fonction `rechercher` retourne uniquement les lignes qui
 contiennent `recherche`, et notre test devrait réussir. Exécutons le test :
 
 <!--
-```text
-$ cargo test
---snip--
-running 1 test
-test tests::one_result ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-19/output.txt}}
 ```
 -->
 
-```text
-$ cargo test
--- partie masquée ici --
-running 1 test
-test tests::un_resultat ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-19/output.txt}}
 ```
 
 <!--
@@ -694,28 +546,12 @@ en lisant le fichier. Ensuite, `run` devra afficher chaque ligne retournée par
 
 <!--
 ```rust,ignore
-pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
-    let contents = fs::read_to_string(config.filename)?;
-
-    for line in search(&config.query, &contents) {
-        println!("{}", line);
-    }
-
-    Ok(())
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/no-listing-02-using-search-in-run/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore
-pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
-    let contenu = fs::read_to_string(config.nom_fichier)?;
-
-    for ligne in rechercher(&config.recherche, &contenu) {
-        println!("{}", ligne);
-    }
-
-    Ok(())
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/no-listing-02-using-search-in-run/src/lib.rs:here}}
 ```
 
 <!--
@@ -734,12 +570,14 @@ Maintenant, l'intégralité du programme devrait fonctionner ! Essayons-le, pou
 commencer avec un mot qui devrait retourner exactement une seule ligne du poème
 d'Emily Dickinson, “frog” :
 
-```text
-$ cargo run frog poem.txt
-   Compiling minigrep v0.1.0 (file:///projects/minigrep)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.38 secs
-     Running `target/debug/minigrep frog poem.txt`
-How public, like a frog
+<!--
+```console
+{{#include ../listings/ch12-an-io-project/no-listing-02-using-search-in-run/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch12-an-io-project/no-listing-02-using-search-in-run/output.txt}}
 ```
 
 <!--
@@ -749,13 +587,14 @@ Cool! Now let’s try a word that will match multiple lines, like “body”:
 Super ! Maintenant, essayons un mot qui devrait retourner plusieurs lignes,
 comme “body” :
 
-```text
-$ cargo run body poem.txt
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running `target/debug/minigrep body poem.txt`
-I’m nobody! Who are you?
-Are you nobody, too?
-How dreary to be somebody!
+<!--
+```console
+{{#include ../listings/ch12-an-io-project/output-only-03-multiple-matches/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch12-an-io-project/output-only-03-multiple-matches/output.txt}}
 ```
 
 <!--
@@ -766,10 +605,14 @@ word that isn’t anywhere in the poem, such as “monomorphization”:
 Et enfin, assurons-nous que nous n'obtenons aucune ligne lorsque nous cherchons
 un mot qui n'est nulle part dans le poème, comme “monomorphization” :
 
-```text
-$ cargo run monomorphization poem.txt
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running `target/debug/minigrep monomorphization poem.txt`
+<!--
+```console
+{{#include ../listings/ch12-an-io-project/output-only-04-no-matches/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch12-an-io-project/output-only-04-no-matches/output.txt}}
 ```
 
 <!--
