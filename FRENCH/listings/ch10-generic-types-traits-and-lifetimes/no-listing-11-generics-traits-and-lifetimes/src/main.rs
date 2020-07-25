@@ -2,7 +2,7 @@ fn main() {
     let string1 = String::from("abcd");
     let string2 = "xyz";
 
-    let result = la_plus_longue_avec_annonce(
+    let resultat = la_plus_longue_avec_annonce(
         string1.as_str(),
         string2,
         "Aujourd'hui, c'est l'anniversaire de quelqu'un !",

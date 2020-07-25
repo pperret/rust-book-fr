@@ -2,7 +2,7 @@ fn main() {
     let string1 = String::from("abcd");
     let string2 = "xyz";
 
-    let result = la_plus_longue(string1.as_str(), string2);
+    let resultat = la_plus_longue(string1.as_str(), string2);
     println!("La chaîne la plus longue est {}", resultat);
 }
 
