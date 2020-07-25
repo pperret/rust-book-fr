@@ -7,7 +7,7 @@ fn le_plus_grand<T>(liste: &[T]) -> &T {
         }
     }
 
-    element
+    le_plus_grand
 }
 
 fn main() {
