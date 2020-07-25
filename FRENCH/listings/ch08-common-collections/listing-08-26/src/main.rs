@@ -7,7 +7,7 @@ fn main() {
     let mut tableau = HashMap::new();
 
     for mot in texte.split_whitespace() {
-        let compteur = map.entry(mot).or_insert(0);
+        let compteur = tableau.entry(mot).or_insert(0);
         *compteur += 1;
     }
 
