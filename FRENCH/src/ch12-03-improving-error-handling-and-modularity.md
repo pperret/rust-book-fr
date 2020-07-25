@@ -204,38 +204,12 @@ définir dans *src/main.rs* pour le moment.
 
 <!--
 ```rust,ignore
-fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    let (query, filename) = parse_config(&args);
-
-    // --snip--
-}
-
-fn parse_config(args: &[String]) -> (&str, &str) {
-    let query = &args[1];
-    let filename = &args[2];
-
-    (query, filename)
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-05/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    let (recherche, nom_fichier) = interpreter_config(&args);
-
-    // -- partie masquée ici --
-}
-
-fn interpreter_config(args: &[String]) -> (&str, &str) {
-    let recherche = &args[1];
-    let nom_fichier = &args[2];
-
-    (recherche, nom_fichier)
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-05/src/main.rs:here}}
 ```
 
 <!--
@@ -346,66 +320,12 @@ L'encart 12-6 montre les améliorations apportées à la fonction
 
 <!--
 ```rust,should_panic
-# use std::env;
-# use std::fs;
-#
-fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    let config = parse_config(&args);
-
-    println!("Searching for {}", config.query);
-    println!("In file {}", config.filename);
-
-    let contents = fs::read_to_string(config.filename)
-        .expect("Something went wrong reading the file");
-
-    // --snip--
-}
-
-struct Config {
-    query: String,
-    filename: String,
-}
-
-fn parse_config(args: &[String]) -> Config {
-    let query = args[1].clone();
-    let filename = args[2].clone();
-
-    Config { query, filename }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-06/src/main.rs:here}}
 ```
 -->
 
 ```rust,should_panic
-# use std::env;
-# use std::fs;
-#
-fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    let config = interpreter_config(&args);
-
-    println!("On recherche : {}", config.recherche);
-    println!("Dans le fichier : {}", config.nom_fichier);
-
-    let contenu  = fs::read_to_string(config.nom_fichier)
-        .expect("Quelque chose s'est mal passé lors de la lecture du fichier");
-
-    // -- partie masquée ici --
-}
-
-struct Config {
-    recherche: String,
-    nom_fichier: String,
-}
-
-fn interpreter_config(args: &[String]) -> Config {
-    let recherche = args[1].clone();
-    let nom_fichier = args[2].clone();
-
-    Config { recherche, nom_fichier }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-06/src/main.rs:here}}
 ```
 
 <!--
@@ -566,60 +486,12 @@ que nous devons faire pour cela.
 
 <!--
 ```rust,should_panic
-# use std::env;
-#
-fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    let config = Config::new(&args);
-
-    // --snip--
-}
-
-# struct Config {
-#     query: String,
-#     filename: String,
-# }
-#
-// --snip--
-
-impl Config {
-    fn new(args: &[String]) -> Config {
-        let query = args[1].clone();
-        let filename = args[2].clone();
-
-        Config { query, filename }
-    }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-07/src/main.rs:here}}
 ```
 -->
 
 ```rust,should_panic
-# use std::env;
-#
-fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    let config = Config::new(&args);
-
-    // -- partie masquée ici --
-}
-
-# struct Config {
-#     recherche: String,
-#     nom_fichier: String,
-# }
-#
-// -- partie masquée ici --
-
-impl Config {
-    fn new(args: &[String]) -> Config {
-        let recherche = args[1].clone();
-        let nom_fichier = args[2].clone();
-
-        Config { recherche, nom_fichier }
-    }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-07/src/main.rs:here}}
 ```
 
 <!--
@@ -662,14 +534,14 @@ erreurs. Rappellez-vous que la tentative d'accéder aux valeurs dans le vecteur
 moins de trois éléments. Essayez de lancer le programme sans aucun argument ;
 cela donnera quelque chose comme ceci :
 
-```text
-$ cargo run
-   Compiling minigrep v0.1.0 (file:///projects/minigrep)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running `target/debug/minigrep`
-thread 'main' panicked at 'index out of bounds: the len is 1
-but the index is 1', src/main.rs:25:21
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
+<!--
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-07/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-07/output.txt}}
 ```
 
 <!--
@@ -709,14 +581,13 @@ afficher un meilleur message d'erreur que le message `index out of bounds`.
 
 <!--
 ```rust,ignore
-// --snip--
-fn new(args: &[String]) -> Config {
-    if args.len() < 3 {
-        panic!("not enough arguments");
-    }
-    // --snip--
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-08/src/main.rs:here}}
 ```
 -->
+
+```rust,ignore
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-08/src/main.rs:here}}
+```
 
 ```rust,ignore
 // -- partie masquée ici --
@@ -764,23 +635,13 @@ Avec ces quelques lignes de code en plus dans `new`, lançons le programme sans
 aucun argument à nouveau pour voir à quoi ressemble désormais l'erreur :
 
 <!--
-```text
-$ cargo run
-   Compiling minigrep v0.1.0 (file:///projects/minigrep)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running `target/debug/minigrep`
-thread 'main' panicked at 'not enough arguments', src/main.rs:26:13
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-08/output.txt}}
 ```
 -->
 
-```text
-$ cargo run
-   Compiling minigrep v0.1.0 (file:///projects/minigrep)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running `target/debug/minigrep`
-thread 'main' panicked at 'il n'y a pas assez d'arguments', src/main.rs:26:13
-note: Run with `RUST_BACKTRACE=1` for a backtrace.
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-08/output.txt}}
 ```
 
 <!--
@@ -848,34 +709,12 @@ pas aussi le `main`, ce que nous allons faire dans le prochain encart.
 
 <!--
 ```rust,ignore
-impl Config {
-    fn new(args: &[String]) -> Result<Config, &'static str> {
-        if args.len() < 3 {
-            return Err("not enough arguments");
-        }
-
-        let query = args[1].clone();
-        let filename = args[2].clone();
-
-        Ok(Config { query, filename })
-    }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-09/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-impl Config {
-    fn new(args: &[String]) -> Result<Config, &'static str> {
-        if args.len() < 3 {
-            return Err("pas assez d'arguments");
-        }
-
-        let recherche = args[1].clone();
-        let nom_fichier = args[2].clone();
-
-        Ok(Config { recherche, nom_fichier })
-    }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-09/src/main.rs:here}}
 ```
 
 <!--
@@ -956,32 +795,12 @@ terminé dans un état d'erreur.
 
 <!--
 ```rust,ignore
-use std::process;
-
-fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    let config = Config::new(&args).unwrap_or_else(|err| {
-        println!("Problem parsing arguments: {}", err);
-        process::exit(1);
-    });
-
-    // --snip--
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-10/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-use std::process;
-
-fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    let config = Config::new(&args).unwrap_or_else(|err| {
-        println!("Problème rencontré lors de l'interprétation des arguments : {}", err);
-        process::exit(1);
-    });
-
-    // -- partie masquée ici --
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-10/src/main.rs:here}}
 ```
 
 <!--
@@ -1045,21 +864,13 @@ sur `panic!` que nous avons utilisé à l'encart 12-8, mais nous n'avons plus to
 le texte en plus. Essayons cela :
 
 <!--
-```text
-$ cargo run
-   Compiling minigrep v0.1.0 (file:///projects/minigrep)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.48 secs
-     Running `target/debug/minigrep`
-Problem parsing arguments: not enough arguments
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-10/output.txt}}
 ```
 -->
 
-```text
-$ cargo run
-   Compiling minigrep v0.1.0 (file:///projects/minigrep)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.48 secs
-     Running `target/debug/minigrep`
-Problème rencontré lors de l'interprétation des arguments : as assez d'arguments
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-10/output.txt}}
 ```
 
 <!--
@@ -1112,44 +923,12 @@ continuons à définir la fonction dans *src/main.rs*.
 
 <!--
 ```rust,ignore
-fn main() {
-    // --snip--
-
-    println!("Searching for {}", config.query);
-    println!("In file {}", config.filename);
-
-    run(config);
-}
-
-fn run(config: Config) {
-    let contents = fs::read_to_string(config.filename)
-        .expect("Something went wrong reading the file");
-
-    println!("With text:\n{}", contents);
-}
-
-// --snip--
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-11/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-fn main() {
-    // -- partie masquée ici --
-
-    println!("On recherche : {}", config.recherche);
-    println!("Dans le fichier : {}", config.nom_fichier);
-
-    run(config);
-}
-
-fn run(config: Config) {
-    let contenu = fs::read_to_string(config.nom_fichier)
-        .expect("Quelque chose s'est mal passé lors de la lecture du fichier");
-
-    println!("Dans le texte :\n{}", contents);
-}
-
-// -- partie masquée ici --
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-11/src/main.rs:here}}
 ```
 
 <!--
@@ -1203,32 +982,12 @@ nous devons appliquer à la signature et au corps du `run`.
 
 <!--
 ```rust,ignore
-use std::error::Error;
-
-// --snip--
-
-fn run(config: Config) -> Result<(), Box<dyn Error>> {
-    let contents = fs::read_to_string(config.filename)?;
-
-    println!("With text:\n{}", contents);
-
-    Ok(())
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-12/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-use std::error::Error;
-
-// -- partie masquée ici --
-
-fn run(config: Config) -> Result<(), Box<dyn Error>> {
-    let contenu = fs::read_to_string(config.nom_fichier)?;
-
-    println!("Dans le texte :\n{}", contenu);
-
-    Ok(())
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-12/src/main.rs:here}}
 ```
 
 <!--
@@ -1308,15 +1067,14 @@ When you run this code, it will compile but will display a warning:
 Lorsque vous exécutez ce code, il va se compiler mais il va afficher un
 avertissement :
 
-```text
-warning: unused `std::result::Result` that must be used
-  -- > src/main.rs:17:5
-   |
-17 |     run(config);
-   |     ^^^^^^^^^^^^
-   |
-   = note: #[warn(unused_must_use)] on by default
-   = note: this `Result` may be an `Err` variant, which should be handled
+<!--
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-12/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-12/output.txt}}
 ```
 
 <!--
@@ -1355,34 +1113,12 @@ similaire à celle que nous avons utilisé avec `Config::new` dans l'encart
 
 <!--
 ```rust,ignore
-fn main() {
-    // --snip--
-
-    println!("Searching for {}", config.query);
-    println!("In file {}", config.filename);
-
-    if let Err(e) = run(config) {
-        println!("Application error: {}", e);
-
-        process::exit(1);
-    }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/no-listing-01-handling-errors-in-main/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-fn main() {
-    // -- partie masquée ici --
-
-    println!("On recherche : {}", config.recherche);
-    println!("Dans le fichier : {}", config.nom_fichier);
-
-    if let Err(e) = run(config) {
-        println!("Erreur applicative : {}", e);
-
-        process::exit(1);
-    }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/no-listing-01-handling-errors-in-main/src/main.rs:here}}
 ```
 
 <!--
@@ -1467,44 +1203,12 @@ dans l'encart 12-14.
 
 <!--
 ```rust,ignore
-use std::error::Error;
-use std::fs;
-
-pub struct Config {
-    pub query: String,
-    pub filename: String,
-}
-
-impl Config {
-    pub fn new(args: &[String]) -> Result<Config, &'static str> {
-        // --snip--
-    }
-}
-
-pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
-    // --snip--
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-13/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore
-use std::error::Error;
-use std::fs;
-
-pub struct Config {
-    pub recherche: String,
-    pub nom_fichier: String,
-}
-
-impl Config {
-    pub fn new(args: &[String]) -> Result<Config, &'static str> {
-        // -- partie masquée ici --
-    }
-}
-
-pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
-    // -- partie masquée ici --
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-13/src/lib.rs:here}}
 ```
 
 <!--
@@ -1542,32 +1246,12 @@ l'encart 12-14.
 
 <!--
 ```rust,ignore
-use std::env;
-use std::process;
-
-use minigrep::Config;
-
-fn main() {
-    // --snip--
-    if let Err(e) = minigrep::run(config) {
-        // --snip--
-    }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-14/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-use std::env;
-use std::process;
-
-use minigrep::Config;
-
-fn main() {
-    // -- partie masquée ici --
-    if let Err(e) = minigrep::run(config) {
-        // -- partie masquée ici --
-    }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-14/src/main.rs:here}}
 ```
 
 <!--
