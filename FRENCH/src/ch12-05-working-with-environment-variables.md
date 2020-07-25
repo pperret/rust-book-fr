@@ -62,78 +62,12 @@ tests, comme dans l'encart 12-20.
 
 <!--
 ```rust
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn case_sensitive() {
-        let query = "duct";
-        let contents = "\
-Rust:
-safe, fast, productive.
-Pick three.
-Duct tape.";
-
-        assert_eq!(
-            vec!["safe, fast, productive."],
-            search(query, contents)
-        );
-    }
-
-    #[test]
-    fn case_insensitive() {
-        let query = "rUsT";
-        let contents = "\
-Rust:
-safe, fast, productive.
-Pick three.
-Trust me.";
-
-        assert_eq!(
-            vec!["Rust:", "Trust me."],
-            search_case_insensitive(query, contents)
-        );
-    }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-20/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn sensible_casse() {
-        let recherche = "duct";
-        let contenu = "\
-Rust:
-sécurité, rapidité, productivité.
-Obtenez les trois en même temps.
-Duck tape.";
-
-        assert_eq!(
-            vec!["sécurité, rapidité, productivité."],
-            rechercher(recherche, contenu)
-        );
-    }
-
-    #[test]
-    fn insensible_casse() {
-        let recherche = "rUsT";
-        let contenu = "\
-Rust:
-sécurité, rapidité, productivité.
-Obtenez les trois en même temps.
-C'est pas rustique.";
-
-        assert_eq!(
-            vec!["Rust:", "C'est pas rustique."],
-            rechercher_insensible_casse(recherche, contenu)
-        );
-    }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-20/src/lib.rs:here}}
 ```
 
 <!--
@@ -209,38 +143,14 @@ même casse lorsque nous vérifierons si la ligne contient la recherche.
 
 <span class="filename">Fichier : src/lib.rs</span>
 
-<!-- markdownlint-disable -->
 <!--
 ```rust
-pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    let query = query.to_lowercase();
-    let mut results = Vec::new();
-
-    for line in contents.lines() {
-        if line.to_lowercase().contains(&query) {
-            results.push(line);
-        }
-    }
-
-    results
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-21/src/lib.rs:here}}
 ```
 -->
-<!-- markdownlint-enable -->
 
 ```rust
-pub fn rechercher_insensible_casse<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
-    let recherche = recherche.to_lowercase();
-    let mut resultats = Vec::new();
-
-    for ligne in contenu.lines() {
-        if ligne.to_lowercase().contains(&recherche) {
-            resultats.push(ligne);
-        }
-    }
-
-    resultats
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-21/src/lib.rs:here}}
 ```
 
 <!--
@@ -256,7 +166,10 @@ ligne avant de les comparer</span>
 First, we lowercase the `query` string and store it in a shadowed variable with
 the same name. Calling `to_lowercase` on the query is necessary so no matter
 whether the user’s query is `"rust"`, `"RUST"`, `"Rust"`, or `"rUsT"`, we’ll
-treat the query as if it were `"rust"` and be insensitive to the case.
+treat the query as if it were `"rust"` and be insensitive to the case. While
+`to_lowercase` will handle basic Unicode, it won't be 100% accurate. If we were
+writing a real application, we'd want to do a bit more work here, but this section
+is about environment variables, not Unicode, so we'll leave it at that here.
 -->
 
 D'abord, nous obtenons la chaîne de caractères `recherche` en minuscule et nous
@@ -264,7 +177,11 @@ l'enregistrons dans une variable masquée avec le même nom. L'appel à
 `to_lowercase` sur la recherche est nécessaire afin que quel que soit la
 recherche de l'utilisateur, comme `"rust"`, `"RUST"`, `"Rust"`, ou `"rUsT"`,
 nous traitons la recherche comme si elle était `"rust"` et par conséquent elle
-est insensible à la casse.
+est insensible à la casse. La méthode `to_lowercase` devrait gérer de l'Unicode
+de base, mais ne sera pas fiable à 100%. Si nous avions écris une application
+sérieuse, nous aurions dû faire plus de choses à ce propos, toutefois la section
+actuelle traite des variables d'environnement et non pas de la gestion de
+l'Unicode, donc nous allons conserver ce code simplifié.
 
 <!--
 Note that `query` is now a `String` rather than a string slice, because calling
@@ -305,21 +222,13 @@ Let’s see if this implementation passes the tests:
 Voyons si cette implémentation passe les tests :
 
 <!--
-```text
-running 2 tests
-test tests::case_insensitive ... ok
-test tests::case_sensitive ... ok
-
-test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-21/output.txt}}
 ```
 -->
 
-```text
-running 2 tests
-test tests::insensible_casse ... ok
-test tests::sensible_casse ... ok
-
-test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-21/output.txt}}
 ```
 
 <!--
@@ -344,21 +253,13 @@ pour le moment :
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
-pub struct Config {
-    pub query: String,
-    pub filename: String,
-    pub case_sensitive: bool,
-}
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-22/src/lib.rs:here}}
 ```
 -->
 
-```rust
-pub struct Config {
-    pub recherche: String,
-    pub nom_fichier: String,
-    pub sensible_casse: bool,
-}
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-22/src/lib.rs:here}}
 ```
 
 <!--
@@ -381,80 +282,14 @@ l'encart 12-22. Notez que cela ne se compile pas encore.
 
 <span class="filename">Fichier : src/lib.rs</span>
 
-<!-- markdownlint-disable -->
 <!--
-```rust
-# use std::error::Error;
-# use std::fs::{self, File};
-# use std::io::prelude::*;
-#
-# pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-#      vec![]
-# }
-#
-# pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-#      vec![]
-# }
-#
-# pub struct Config {
-#     query: String,
-#     filename: String,
-#     case_sensitive: bool,
-# }
-#
-pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
-    let contents = fs::read_to_string(config.filename)?;
-
-    let results = if config.case_sensitive {
-        search(&config.query, &contents)
-    } else {
-        search_case_insensitive(&config.query, &contents)
-    };
-
-    for line in results {
-        println!("{}", line);
-    }
-
-    Ok(())
-}
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-22/src/lib.rs:there}}
 ```
 -->
-<!-- markdownlint-enable -->
 
-```rust
-# use std::error::Error;
-# use std::fs::{self, File};
-# use std::io::prelude::*;
-#
-# pub fn rechercher<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
-#      vec![]
-# }
-#
-# pub fn rechercher_insensible_casse<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
-#      vec![]
-# }
-#
-# pub struct Config {
-#     recherche: String,
-#     nom_fichier: String,
-#     sensible_casse: bool,
-# }
-#
-pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
-    let contenu = fs::read_to_string(config.nom_fichier)?;
-
-    let resultat = if config.sensible_casse {
-        rechercher(&config.recherche, &contenu)
-    } else {
-        rechercher_insensible_casse(&config.recherche, &contenu)
-    };
-
-    for ligne in resultat {
-        println!("{}", ligne);
-    }
-
-    Ok(())
-}
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-22/src/lib.rs:there}}
 ```
 
 <!--
@@ -490,56 +325,12 @@ d'environnement `MINIGREP_INSENSIBLE_CASSE`, comme dans l'encart 12-23.
 
 <!--
 ```rust
-use std::env;
-# struct Config {
-#     query: String,
-#     filename: String,
-#     case_sensitive: bool,
-# }
-
-// --snip--
-
-impl Config {
-    pub fn new(args: &[String]) -> Result<Config, &'static str> {
-        if args.len() < 3 {
-            return Err("not enough arguments");
-        }
-
-        let query = args[1].clone();
-        let filename = args[2].clone();
-
-        let case_sensitive = env::var("CASE_INSENSITIVE").is_err();
-
-        Ok(Config { query, filename, case_sensitive })
-    }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-23/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-use std::env;
-# struct Config {
-#     recherche: String,
-#     nom_fichier: String,
-#     sensible_casse: bool,
-# }
-
-// -- partie masquée ici --
-
-impl Config {
-    pub fn new(args: &[String]) -> Result<Config, &'static str> {
-        if args.len() < 3 {
-            return Err("il n'y a pas assez d'arguments");
-        }
-
-        let recherche = args[1].clone();
-        let nom_fichier = args[2].clone();
-
-        let sensible_casse = env::var("MINIGREP_INSENSIBLE_CASSE").is_err();
-
-        Ok(Config { recherche, nom_fichier, sensible_casse })
-    }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-23/src/lib.rs:here}}
 ```
 
 <!--
@@ -608,13 +399,14 @@ Faisons un essai ! D'abord, nous allons lancer notre programme avec la variable
 d'environnement non définie et avec la recherche `to`, qui devrait trouver
 toutes les lignes qui contiennent le mot “to” en minuscule :
 
-```text
-$ cargo run to poem.txt
-   Compiling minigrep v0.1.0 (file:///projects/minigrep)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running `target/debug/minigrep to poem.txt`
-Are you nobody, too?
-How dreary to be somebody!
+<!--
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-23/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch12-an-io-project/listing-12-23/output.txt}}
 ```
 
 <!--
@@ -626,23 +418,40 @@ On dirait que cela fonctionne ! Maintenant, lançons le programme avec
 `MINIGREP_INSENSIBLE_CASSE` définie à `1` mais avec la même recherche `to`.
 
 <!--
-If you’re using PowerShell, you will need to set the environment variable and
-run the program in two commands rather than one:
+If you're using PowerShell, you will need to set the environment
+variable and run the program as separate commands:
 -->
 
 Si vous utilisez PowerShell, vous allez avoir besoin d'affecter la variable
-d'environnement dans une commande séparée au lieu d'une seule :
+d'environnement puis exécuter le programme avec deux commande séparées :
 
 <!--
-```text
-$ $env:CASE_INSENSITIVE=1
-$ cargo run to poem.txt
+```console
+PS> $Env:CASE_INSENSITIVE=1; cargo run to poem.txt
 ```
 -->
 
-```text
-$ $env:MINIGREP_INSENSIBLE_CASSE=1
-$ cargo run to poem.txt
+```console
+PS> $Env:MINIGREP_INSENSIBLE_CASSE=1; cargo run to poem.txt
+```
+
+<!--
+This will make `CASE_INSENSITIVE` persist for the remainder of your shell
+session. It can be unset with the `Remove-Item` cmdlet:
+-->
+
+Cela va faire persister la variable `MINIGREP_INSENSIBLE_CASSE` pour la durée de
+votre session de terminal. Elle peut être désaffectée avec la cmdlet
+`Remove-Item` :
+
+<!--
+```console
+PS> Remove-Item Env:CASE_INSENSITIVE
+```
+-->
+
+```console
+PS> Remove-Item Env:MINIGREP_INSENSIBLE_CASSE
 ```
 
 <!--
@@ -651,6 +460,26 @@ We should get lines that contain “to” that might have uppercase letters:
 
 Nous devrions trouver les lignes qui contiennent “to” qui ont des lettres
 majuscules :
+
+<!--
+<!-- manual-regeneration
+cd listings/ch12-an-io-project/listing-12-23
+CASE_INSENSITIVE=1 cargo run to poem.txt
+can't extract because of the environment variable
+-- >
+-->
+
+<!--
+```console
+$ CASE_INSENSITIVE=1 cargo run to poem.txt
+    Finished dev [unoptimized + debuginfo] target(s) in 0.0s
+     Running `target/debug/minigrep to poem.txt`
+Are you nobody, too?
+How dreary to be somebody!
+To tell your name the livelong day
+To an admiring bog!
+```
+-->
 
 ```text
 $ CASE_INSENSITIVE=1 cargo run to poem.txt
