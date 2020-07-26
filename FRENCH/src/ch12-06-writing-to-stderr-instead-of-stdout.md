@@ -15,7 +15,7 @@
 
 <!--
 At the moment, we’re writing all of our output to the terminal using the
-`println!` function. Most terminals provide two kinds of output: *standard
+`println!` macro. Most terminals provide two kinds of output: *standard
 output* (`stdout`) for general information and *standard error* (`stderr`)
 for error messages. This distinction enables users to choose to direct the
 successful output of a program to a file but still print error messages to the
@@ -23,7 +23,7 @@ screen.
 -->
 
 Pour l'instant, nous avons écrit toutes nos sorties du terminal en utilisant
-la fonction `println!`. La plupart des terminaux fournissent deux genres de
+la macro `println!`. La plupart des terminaux fournissent deux genres de
 sorties : la *sortie standard* (`stdout`) pour les informations générales
 et *la sortie d'erreur standard* (`stderr`) pour les messages d'erreur. Cette
 distinction permet à l'utilisateur de choisir de rediriger la sortie des
@@ -31,11 +31,11 @@ réussites d'un programme vers un fichier mais continuer à afficher les message
 d'erreur à l'écran.
 
 <!--
-The `println!` function is only capable of printing to standard output, so we
+The `println!` macro is only capable of printing to standard output, so we
 have to use something else to print to standard error.
 -->
 
-La fonction `println!` ne peut écrire que sur la sortie standard, donc nous
+La macro `println!` ne peut écrire que sur la sortie standard, donc nous
 devons utiliser autre chose pour écrire sur la sortie d'erreur standard.
 
 <!--
@@ -87,12 +87,12 @@ sortie standard. Nous ne fournissons aucun argument, ce qui va causer une
 erreur :
 
 <!--
-```text
+```console
 $ cargo run > output.txt
 ```
 -->
 
-```text
+```console
 $ cargo run > sortie.txt
 ```
 
@@ -159,38 +159,12 @@ endroits où nous appelons `println!` afin d'utiliser `eprintln!` à la place.
 
 <!--
 ```rust,ignore
-fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    let config = Config::new(&args).unwrap_or_else(|err| {
-        eprintln!("Problem parsing arguments: {}", err);
-        process::exit(1);
-    });
-
-    if let Err(e) = minigrep::run(config) {
-        eprintln!("Application error: {}", e);
-
-        process::exit(1);
-    }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-24/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    let config = Config::new(&args).unwrap_or_else(|err| {
-        eprintln!("Problème rencontré lors de l'interprétation des arguments : {}", err);
-        process::exit(1);
-    });
-
-    if let Err(e) = minigrep::run(config) {
-        eprintln!("Erreur applicative : {}", e);
-
-        process::exit(1);
-    }
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-24/src/main.rs:here}}
 ```
 
 <!--
@@ -240,12 +214,12 @@ Exécutons le programme à nouveau avec des arguments qui ne causent pas d'erreu
 mais nous continuons à rediriger la sortie standard, comme ceci :
 
 <!--
-```text
+```console
 $ cargo run to poem.txt > output.txt
 ```
 -->
 
-```text
+```console
 $ cargo run to poem.txt > sortie.txt
 ```
 
