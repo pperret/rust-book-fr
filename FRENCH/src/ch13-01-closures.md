@@ -80,26 +80,12 @@ qui lui a été donné :
 
 <!--
 ```rust
-use std::thread;
-use std::time::Duration;
-
-fn simulated_expensive_calculation(intensity: u32) -> u32 {
-    println!("calculating slowly...");
-    thread::sleep(Duration::from_secs(2));
-    intensity
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-01/src/main.rs:here}}
 ```
 -->
 
 ```rust
-use std::thread;
-use std::time::Duration;
-
-fn simuler_gros_calcul(intensite: u32) -> u32 {
-    println!("calcul très lent ...");
-    thread::sleep(Duration::from_secs(2));
-    intensite
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-01/src/main.rs:here}}
 ```
 
 <!--
@@ -159,30 +145,12 @@ fonction `main` que nous allons utiliser.
 
 <!--
 ```rust
-fn main() {
-    let simulated_user_specified_value = 10;
-    let simulated_random_number = 7;
-
-    generate_workout(
-        simulated_user_specified_value,
-        simulated_random_number
-    );
-}
-# fn generate_workout(intensity: u32, random_number: u32) {}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-02/src/main.rs:here}}
 ```
 -->
 
 ```rust
-fn main() {
-    let valeur_utilisateur_simule = 10;
-    let nombre_aleatoire_simule = 7;
-
-    generer_exercices(
-        valeur_utilisateur_simule,
-        nombre_aleatoire_simule
-    );
-}
-# fn generer_exercices(intensite: u32, nombre_aleatoire: u32) {}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-02/src/main.rs:here}}
 ```
 
 <!--
@@ -231,70 +199,12 @@ changements de code dans cet exemple sera appliqué à cette fonction :
 
 <!--
 ```rust
-# use std::thread;
-# use std::time::Duration;
-#
-# fn simulated_expensive_calculation(num: u32) -> u32 {
-#     println!("calculating slowly...");
-#     thread::sleep(Duration::from_secs(2));
-#     num
-# }
-#
-fn generate_workout(intensity: u32, random_number: u32) {
-    if intensity < 25 {
-        println!(
-            "Today, do {} pushups!",
-            simulated_expensive_calculation(intensity)
-        );
-        println!(
-            "Next, do {} situps!",
-            simulated_expensive_calculation(intensity)
-        );
-    } else {
-        if random_number == 3 {
-            println!("Take a break today! Remember to stay hydrated!");
-        } else {
-            println!(
-                "Today, run for {} minutes!",
-                simulated_expensive_calculation(intensity)
-            );
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-03/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# use std::thread;
-# use std::time::Duration;
-#
-# fn simuler_gros_calcul(nombre: u32) -> u32 {
-#     println!("calcul très lent ...");
-#     thread::sleep(Duration::from_secs(2));
-#     nombre
-# }
-#
-fn generer_exercices(intensite: u32, nombre_aleatoire: u32) {
-    if intensite < 25 {
-        println!(
-            "Aujourd'hui, faire {} pompes !",
-            simuler_gros_calcul(intensite)
-        );
-        println!(
-            "Ensuite, faire {} abdominaux !",
-            simuler_gros_calcul(intensite)
-        );
-    } else {
-        if nombre_aleatoire == 3 {
-            println!("Faites une pause aujourd'hui ! Rappelez-vous de bien vous hydrater !");
-        } else {
-            println!(
-                "Aujourd'hui, courrez pendant {} minutes !",
-                simuler_gros_calcul(intensite)
-            );
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-03/src/main.rs:here}}
 ```
 
 <!--
@@ -397,75 +307,12 @@ Tout d'abord, nous allons essayer d'extraire l'appel en double à la fonction
 
 <!--
 ```rust
-# use std::thread;
-# use std::time::Duration;
-#
-# fn simulated_expensive_calculation(num: u32) -> u32 {
-#     println!("calculating slowly...");
-#     thread::sleep(Duration::from_secs(2));
-#     num
-# }
-#
-fn generate_workout(intensity: u32, random_number: u32) {
-    let expensive_result =
-        simulated_expensive_calculation(intensity);
-
-    if intensity < 25 {
-        println!(
-            "Today, do {} pushups!",
-            expensive_result
-        );
-        println!(
-            "Next, do {} situps!",
-            expensive_result
-        );
-    } else {
-        if random_number == 3 {
-            println!("Take a break today! Remember to stay hydrated!");
-        } else {
-            println!(
-                "Today, run for {} minutes!",
-                expensive_result
-            );
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-04/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# use std::thread;
-# use std::time::Duration;
-#
-# fn simuler_gros_calcul(nombre: u32) -> u32 {
-#     println!("calcul très lent ...");
-#     thread::sleep(Duration::from_secs(2));
-#     nombre
-# }
-#
-fn generer_exercices(intensite: u32, nombre_aleatoire: u32) {
-    let resultat_lent = simuler_gros_calcul(intensite);
-
-    if intensite < 25 {
-        println!(
-            "Aujourd'hui, faire {} pompes !",
-            resultat_lent
-        );
-        println!(
-            "Ensuite, faire {} abdominaux !",
-            resultat_lent
-        );
-    } else {
-        if nombre_aleatoire == 3 {
-            println!("Faites une pause aujourd'hui ! Rappelez-vous de bien vous hydrater !");
-        } else {
-            println!(
-                "Aujourd'hui, courrez pendant {} minutes !",
-                resultat_lent
-            );
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-04/src/main.rs:here}}
 ```
 
 <!--
@@ -529,28 +376,12 @@ la fermeture que nous introduisons ici.
 
 <!--
 ```rust
-# use std::thread;
-# use std::time::Duration;
-#
-let expensive_closure = |num| {
-    println!("calculating slowly...");
-    thread::sleep(Duration::from_secs(2));
-    num
-};
-# expensive_closure(5);
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-05/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# use std::thread;
-# use std::time::Duration;
-#
-let fermeture_lente = |nombre| {
-    println!("calcul très lent ...");
-    thread::sleep(Duration::from_secs(2));
-    nombre
-};
-# fermeture_lente(5);
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-05/src/main.rs:here}}
 ```
 
 <!--
@@ -633,70 +464,12 @@ arguments que nous voulons utiliser pour cet appel, comme dans l'encart 13-6.
 
 <!--
 ```rust
-# use std::thread;
-# use std::time::Duration;
-#
-fn generate_workout(intensity: u32, random_number: u32) {
-    let expensive_closure = |num| {
-        println!("calculating slowly...");
-        thread::sleep(Duration::from_secs(2));
-        num
-    };
-
-    if intensity < 25 {
-        println!(
-            "Today, do {} pushups!",
-            expensive_closure(intensity)
-        );
-        println!(
-            "Next, do {} situps!",
-            expensive_closure(intensity)
-        );
-    } else {
-        if random_number == 3 {
-            println!("Take a break today! Remember to stay hydrated!");
-        } else {
-            println!(
-                "Today, run for {} minutes!",
-                expensive_closure(intensity)
-            );
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-06/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# use std::thread;
-# use std::time::Duration;
-#
-fn generer_exercices(intensite: u32, nombre_aleatoire: u32) {
-    let fermeture_lente = |nombre| {
-        println!("calcul très lent ...");
-        thread::sleep(Duration::from_secs(2));
-        nombre
-    };
-
-    if intensite < 25 {
-        println!(
-            "Aujourd'hui, faire {} pompes !",
-            fermeture_lente(intensite)
-        );
-        println!(
-            "Ensuite, faire {} abdominaux !",
-            fermeture_lente(intensite)
-        );
-    } else {
-        if nombre_aleatoire == 3 {
-            println!("Faites une pause aujourd'hui ! Rappelez-vous de bien vous hydrater !");
-        } else {
-            println!(
-                "Aujourd'hui, courrez pendant {} minutes !",
-                fermeture_lente(intensite)
-            );
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-06/src/main.rs:here}}
 ```
 
 <!--
@@ -802,26 +575,12 @@ avons défini dans l'encart 13-5 ressemblerait à l'encart 13-7.
 
 <!--
 ```rust
-# use std::thread;
-# use std::time::Duration;
-#
-let expensive_closure = |num: u32| -> u32 {
-    println!("calculating slowly...");
-    thread::sleep(Duration::from_secs(2));
-    num
-};
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-07/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# use std::thread;
-# use std::time::Duration;
-#
-let fermeture_lente = |nombre: u32| -> u32 {
-    println!("calcul très lent ...");
-    thread::sleep(Duration::from_secs(2));
-    nombre
-};
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-07/src/main.rs:here}}
 ```
 
 <!--
@@ -870,7 +629,9 @@ The first line shows a function definition, and the second line shows a fully
 annotated closure definition. The third line removes the type annotations from
 the closure definition, and the fourth line removes the brackets, which are
 optional because the closure body has only one expression. These are all valid
-definitions that will produce the same behavior when they’re called.
+definitions that will produce the same behavior when they’re called. Calling
+the closures is required for `add_one_v3` and `add_one_v4` to be able to
+compile because the types will be inferred from their usage.
 -->
 
 La première ligne affiche la définition d'une fonction et la deuxième ligne une
@@ -878,7 +639,9 @@ définition d'une fermeture entièrement annotée. La troisième ligne supprime 
 annotations de type de la définition de la fermeture, et la quatrième ligne
 supprime les accolades qui sont facultatives, parce que le corps d'une fermeture
 n'a qu'une seule expression. Ce sont toutes des définitions valides qui
-suivront le même comportement lorsqu'on les appellera.
+suivront le même comportement lorsqu'on les appellera. L'appel aux fermetures
+est nécessaire pour que `ajouter_un_v3` et `ajouter_un_v4` puisse être compilés
+car les types seront déduits en fonction de leur utilisation.
 
 <!--
 Closure definitions will have one concrete type inferred for each of their
@@ -907,18 +670,12 @@ deuxième fois, nous obtiendrons une erreur :
 
 <!--
 ```rust,ignore,does_not_compile
-let example_closure = |x| x;
-
-let s = example_closure(String::from("hello"));
-let n = example_closure(5);
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-08/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-let fermeture_exemple = |x| x;
-
-let s = fermeture_exemple(String::from("hello"));
-let n = fermeture_exemple(5);
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-08/src/main.rs:here}}
 ```
 
 <!--
@@ -936,29 +693,13 @@ The compiler gives us this error:
 Le compilateur nous renvoie l'erreur suivante :
 
 <!--
-```text
-error[E0308]: mismatched types
- -- > src/main.rs
-  |
-  | let n = example_closure(5);
-  |                         ^ expected struct `std::string::String`, found
-  integer
-  |
-  = note: expected type `std::string::String`
-             found type `{integer}`
+```console
+{{#include ../listings/ch13-functional-features/listing-13-08/output.txt}}
 ```
 -->
 
-```text
-error[E0308]: mismatched types
- -- > src/main.rs
-  |
-  | let n = fermeture_exemple(5);
-  |                           ^ expected struct `std::string::String`, found
-  integer
-  |
-  = note: expected type `std::string::String`
-             found type `{integer}`
+```console
+{{#include ../listings/ch13-functional-features/listing-13-08/output.txt}}
 ```
 
 <!--
@@ -1075,22 +816,12 @@ fermeture et une valeur de résultat optionnelle :
 
 <!--
 ```rust
-struct Cacher<T>
-    where T: Fn(u32) -> u32
-{
-    calculation: T,
-    value: Option<u32>,
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-09/src/main.rs:here}}
 ```
 -->
 
 ```rust
-struct Cache<T>
-    where T: Fn(u32) -> u32
-{
-    calcul: T,
-    valeur: Option<u32>,
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-09/src/main.rs:here}}
 ```
 
 <!--
@@ -1161,66 +892,12 @@ l'encart 13-10 :
 
 <!--
 ```rust
-# struct Cacher<T>
-#     where T: Fn(u32) -> u32
-# {
-#     calculation: T,
-#     value: Option<u32>,
-# }
-#
-impl<T> Cacher<T>
-    where T: Fn(u32) -> u32
-{
-    fn new(calculation: T) -> Cacher<T> {
-        Cacher {
-            calculation,
-            value: None,
-        }
-    }
-
-    fn value(&mut self, arg: u32) -> u32 {
-        match self.value {
-            Some(v) => v,
-            None => {
-                let v = (self.calculation)(arg);
-                self.value = Some(v);
-                v
-            },
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-10/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# struct Cache<T>
-#     where T: Fn(u32) -> u32
-# {
-#     calcul: T,
-#     valeur: Option<u32>,
-# }
-#
-impl<T> Cache<T>
-    where T: Fn(u32) -> u32
-{
-    fn new(calcul: T) -> Cache<T> {
-        Cache {
-            calcul,
-            valeur: None,
-        }
-    }
-
-    fn valeur(&mut self, arg: u32) -> u32 {
-        match self.valeur {
-            Some(v) => v,
-            None => {
-                let v = (self.calcul)(arg);
-                self.valeur = Some(v);
-                v
-            },
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-10/src/main.rs:here}}
 ```
 
 <!--
@@ -1294,128 +971,12 @@ L'encart 13-11 montre comment utiliser cette structure `Cache` dans la fonction
 
 <!--
 ```rust
-# use std::thread;
-# use std::time::Duration;
-#
-# struct Cacher<T>
-#     where T: Fn(u32) -> u32
-# {
-#     calculation: T,
-#     value: Option<u32>,
-# }
-#
-# impl<T> Cacher<T>
-#     where T: Fn(u32) -> u32
-# {
-#     fn new(calculation: T) -> Cacher<T> {
-#         Cacher {
-#             calculation,
-#             value: None,
-#         }
-#     }
-#
-#     fn value(&mut self, arg: u32) -> u32 {
-#         match self.value {
-#             Some(v) => v,
-#             None => {
-#                 let v = (self.calculation)(arg);
-#                 self.value = Some(v);
-#                 v
-#             },
-#         }
-#     }
-# }
-#
-fn generate_workout(intensity: u32, random_number: u32) {
-    let mut expensive_result = Cacher::new(|num| {
-        println!("calculating slowly...");
-        thread::sleep(Duration::from_secs(2));
-        num
-    });
-
-    if intensity < 25 {
-        println!(
-            "Today, do {} pushups!",
-            expensive_result.value(intensity)
-        );
-        println!(
-            "Next, do {} situps!",
-            expensive_result.value(intensity)
-        );
-    } else {
-        if random_number == 3 {
-            println!("Take a break today! Remember to stay hydrated!");
-        } else {
-            println!(
-                "Today, run for {} minutes!",
-                expensive_result.value(intensity)
-            );
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-11/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# use std::thread;
-# use std::time::Duration;
-#
-# struct Cache<T>
-#     where T: Fn(u32) -> u32
-# {
-#     calcul: T,
-#     valeur: Option<u32>,
-# }
-#
-# impl<T> Cache<T>
-#     where T: Fn(u32) -> u32
-# {
-#     fn new(calcul: T) -> Cache<T> {
-#         Cache {
-#             calcul,
-#             valeur: None,
-#         }
-#     }
-#
-#     fn valeur(&mut self, arg: u32) -> u32 {
-#         match self.valeur {
-#             Some(v) => v,
-#             None => {
-#                 let v = (self.calcul)(arg);
-#                 self.valeur = Some(v);
-#                 v
-#             },
-#         }
-#     }
-# }
-#
-fn generer_exercices(intensite: u32, nombre_aleatoire: u32) {
-    let mut resultat_lent = Cache::new(|nombre| {
-        println!("calcul très lent ...");
-        thread::sleep(Duration::from_secs(2));
-        nombre
-    });
-
-    if intensite < 25 {
-        println!(
-            "Aujourd'hui, faire {} pompes !",
-            resultat_lent.valeur(intensite)
-        );
-        println!(
-            "Ensuite, faire {} abdominaux !",
-            resultat_lent.valeur(intensite)
-        );
-    } else {
-        if nombre_aleatoire == 3 {
-            println!("Faites une pause aujourd'hui ! Rappelez-vous de bien vous hydrater !");
-        } else {
-            println!(
-                "Aujourd'hui, courrez pendant {} minutes !",
-                resultat_lent.valeur(intensite)
-            );
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-11/src/main.rs:here}}
 ```
 
 <!--
@@ -1489,28 +1050,12 @@ toujours la même valeur, indépendamment du paramètre `arg` de la méthode
 
 <!--
 ```rust,ignore,panics
-#[test]
-fn call_with_different_values() {
-    let mut c = Cacher::new(|a| a);
-
-    let v1 = c.value(1);
-    let v2 = c.value(2);
-
-    assert_eq!(v2, 2);
-}
+{{#rustdoc_include ../listings/ch13-functional-features/no-listing-01-failing-cacher-test/src/lib.rs:here}}
 ```
 -->
 
-```rust,ignore
-#[test]
-fn appel_avec_differentes_valeurs() {
-    let mut c = Cache::new(|a| a);
-
-    let v1 = c.valeur(1);
-    let v2 = c.valeur(2);
-
-    assert_eq!(v2, 2);
-}
+```rust,ignore,panics
+{{#rustdoc_include ../listings/ch13-functional-features/no-listing-01-failing-cacher-test/src/lib.rs:here}}
 ```
 
 <!--
@@ -1534,21 +1079,15 @@ Run this test with the `Cacher` implementation in Listing 13-9 and Listing
 Exécutez ce test avec l'implémentation de `Cache` de l'encart 13-9 et de
 l'encart 13-10, et le test échouera sur le `assert_eq!` avec ce message :
 
-<!-- markdownlint-disable -->
 <!--
-```text
-thread 'call_with_different_values' panicked at 'assertion failed: `(left == right)`
-  left: `1`,
- right: `2`', src/main.rs
+```console
+{{#include ../listings/ch13-functional-features/no-listing-01-failing-cacher-test/output.txt}}
 ```
 -->
 
-```text
-thread 'appel_avec_differentes_valeurs' panicked at 'assertion failed: `(left == right)`
-  left: `1`,
- right: `2`', src/main.rs
+```console
+{{#include ../listings/ch13-functional-features/no-listing-01-failing-cacher-test/output.txt}}
 ```
-<!-- markdownlint-restore -->
 
 <!--
 The problem is that the first time we called `c.value` with 1, the `Cacher`
@@ -1631,28 +1170,12 @@ fermeture :
 
 <!--
 ```rust
-fn main() {
-    let x = 4;
-
-    let equal_to_x = |z| z == x;
-
-    let y = 4;
-
-    assert!(equal_to_x(y));
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-12/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let x = 4;
-
-    let egal_a_x = |z| z == x;
-
-    let y = 4;
-
-    assert!(egal_a_x(y));
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-12/src/main.rs}}
 ```
 
 <!--
@@ -1689,28 +1212,12 @@ avec l'exemple suivant, notre code ne se compilera pas :
 
 <!--
 ```rust,ignore,does_not_compile
-fn main() {
-    let x = 4;
-
-    fn equal_to_x(z: i32) -> bool { z == x }
-
-    let y = 4;
-
-    assert!(equal_to_x(y));
-}
+{{#rustdoc_include ../listings/ch13-functional-features/no-listing-02-functions-cant-capture/src/main.rs}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-fn main() {
-    let x = 4;
-
-    fn egal_a_x(z: i32) -> bool { z == x }
-
-    let y = 4;
-
-    assert!(egal_a_x(y));
-}
+{{#rustdoc_include ../listings/ch13-functional-features/no-listing-02-functions-cant-capture/src/main.rs}}
 ```
 
 <!--
@@ -1720,23 +1227,13 @@ We get an error:
 Nous obtenons l'erreur suivante :
 
 <!--
-```text
-error[E0434]: can't capture dynamic environment in a fn item; use the || { ...
-} closure form instead
- -- > src/main.rs
-  |
-4 |     fn equal_to_x(z: i32) -> bool { z == x }
-  |                                          ^
+```console
+{{#include ../listings/ch13-functional-features/no-listing-02-functions-cant-capture/output.txt}}
 ```
 -->
 
-```text
-error[E0434]: can't capture dynamic environment in a fn item; use the || { ...
-} closure form instead
- -- > src/main.rs
-  |
-4 |     fn egal_a_x(z: i32) -> bool { z == x }
-  |                                        ^
+```console
+{{#include ../listings/ch13-functional-features/no-listing-02-functions-cant-capture/output.txt}}
 ```
 
 <!--
@@ -1851,32 +1348,12 @@ plutôt que déplacés ; notez aussi que ce code ne compile pas encore.
 
 <!--
 ```rust,ignore,does_not_compile
-fn main() {
-    let x = vec![1, 2, 3];
-
-    let equal_to_x = move |z| z == x;
-
-    println!("can't use x here: {:?}", x);
-
-    let y = vec![1, 2, 3];
-
-    assert!(equal_to_x(y));
-}
+{{#rustdoc_include ../listings/ch13-functional-features/no-listing-03-move-closures/src/main.rs}}
 ```
 -->
 
-```rust,ignore
-fn main() {
-    let x = vec![1, 2, 3];
-
-    let egal_a_x = move |z| z == x;
-
-    println!("On ne peut pas utiliser x ici : {:?}", x);
-
-    let y = vec![1, 2, 3];
-
-    assert!(egal_a_x(y));
-}
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch13-functional-features/no-listing-03-move-closures/src/main.rs}}
 ```
 
 <!--
@@ -1886,33 +1363,13 @@ We receive the following error:
 Nous obtenons l'erreur suivante :
 
 <!--
-```text
-error[E0382]: use of moved value: `x`
- -- > src/main.rs:6:40
-  |
-4 |     let equal_to_x = move |z| z == x;
-  |                      -------- value moved (into closure) here
-5 |
-6 |     println!("can't use x here: {:?}", x);
-  |                                        ^ value used here after move
-  |
-  = note: move occurs because `x` has type `std::vec::Vec<i32>`, which does not
-  implement the `Copy` trait
+```console
+{{#include ../listings/ch13-functional-features/no-listing-03-move-closures/output.txt}}
 ```
 -->
 
-```text
-error[E0382]: use of moved value: `x`
- --> src/main.rs:6:40
-  |
-4 |     let egal_a_x = move |z| z == x;
-  |                    -------- value moved (into closure) here
-5 |
-6 |     println!("On ne peut pas utiliser x ici : {:?}", x);
-  |                                                      ^ value used here after move
-  |
-  = note: move occurs because `x` has type `std::vec::Vec<i32>`, which does not
-  implement the `Copy` trait
+```console
+{{#include ../listings/ch13-functional-features/no-listing-03-move-closures/output.txt}}
 ```
 
 <!--
