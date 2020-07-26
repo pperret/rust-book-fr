@@ -135,7 +135,7 @@ Ensuite, nous créons un dossier *src/salle_a_manger* et un fichier
 
 <!--
 ```rust
-{{# rustdoc_include ../listings/ch07-managing-growing-projects/no-listing-02-extracting-hosting/src/front_of_house/hosting.rs}}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/no-listing-02-extracting-hosting/src/front_of_house/hosting.rs}}
 ```
 -->
 
