@@ -33,16 +33,12 @@ sur `Vec<T>`. Ce code en lui-même ne fait rien d'utile.
 
 <!--
 ```rust
-let v1 = vec![1, 2, 3];
-
-let v1_iter = v1.iter();
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-13/src/main.rs:here}}
 ```
 -->
 
 ```rust
-let v1 = vec![1, 2, 3];
-
-let v1_iter = v1.iter();
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-13/src/main.rs:here}}
 ```
 
 <!--
@@ -78,24 +74,12 @@ est utilisé à chaque itération de la boucle, qui affiche chaque valeur.
 
 <!--
 ```rust
-let v1 = vec![1, 2, 3];
-
-let v1_iter = v1.iter();
-
-for val in v1_iter {
-    println!("Got: {}", val);
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-14/src/main.rs:here}}
 ```
 -->
 
 ```rust
-let v1 = vec![1, 2, 3];
-
-let v1_iter = v1.iter();
-
-for val in v1_iter {
-    println!("On a : {}", val);
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-14/src/main.rs:here}}
 ```
 
 <!--
@@ -209,39 +193,19 @@ On peut appeler la méthode `next` directement sur les itérateurs ; l'encart
 l'itérateur créé à partir du vecteur.
 
 <!--
-<span class="filename">Fichier : src/lib.rs</span>
+<span class="filename">Filename: src/lib.rs</span>
 -->
 
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
 ```rust
-#[test]
-fn iterator_demonstration() {
-    let v1 = vec![1, 2, 3];
-
-    let mut v1_iter = v1.iter();
-
-    assert_eq!(v1_iter.next(), Some(&1));
-    assert_eq!(v1_iter.next(), Some(&2));
-    assert_eq!(v1_iter.next(), Some(&3));
-    assert_eq!(v1_iter.next(), None);
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-15/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-#[test]
-fn demo_iterateur() {
-    let v1 = vec![1, 2, 3];
-
-    let mut v1_iter = v1.iter();
-
-    assert_eq!(v1_iter.next(), Some(&1));
-    assert_eq!(v1_iter.next(), Some(&2));
-    assert_eq!(v1_iter.next(), Some(&3));
-    assert_eq!(v1_iter.next(), None);
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-15/src/lib.rs:here}}
 ```
 
 <!--
@@ -326,22 +290,19 @@ retourne le total une fois l'itération terminée. L'encart 13-16 a un test
 illustrant une utilisation de la méthode `sum` :
 
 <!--
-<span class="filename">Fichier : src/lib.rs</span>
+<span class="filename">Filename: src/lib.rs</span>
 -->
 
 <span class="filename">Fichier : src/lib.rs</span>
 
+<!--
 ```rust
-#[test]
-fn iterator_sum() {
-    let v1 = vec![1, 2, 3];
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-16/src/lib.rs:here}}
+```
+-->
 
-    let v1_iter = v1.iter();
-
-    let total: i32 = v1_iter.sum();
-
-    assert_eq!(total, 6);
-}
+```rust
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-16/src/lib.rs:here}}
 ```
 
 <!--
@@ -396,15 +357,19 @@ dans lequel chaque élément du vecteur a été incrémenté de 1. Cependant, ce
 déclenche un avertissement :
 
 <!--
-<span class="filename">Fichier : src/main.rs</span>
+<span class="filename">Filename: src/main.rs</span>
 -->
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
 ```rust,not_desired_behavior
-let v1: Vec<i32> = vec![1, 2, 3];
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-17/src/main.rs:here}}
+```
+-->
 
-v1.iter().map(|x| x + 1);
+```rust,not_desired_behavior
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-17/src/main.rs:here}}
 ```
 
 <!--
@@ -421,15 +386,14 @@ The warning we get is this:
 
 Voici l'avertissement que nous obtenons :
 
-```text
-warning: unused `std::iter::Map` which must be used: iterator adaptors are lazy
-and do nothing unless consumed
- -- > src/main.rs:4:5
-  |
-4 |     v1.iter().map(|x| x + 1);
-  |     ^^^^^^^^^^^^^^^^^^^^^^^^^
-  |
-  = note: #[warn(unused_must_use)] on by default
+<!--
+```console
+{{#include ../listings/ch13-functional-features/listing-13-17/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch13-functional-features/listing-13-17/output.txt}}
 ```
 
 <!--
@@ -465,17 +429,19 @@ l'itérateur qui sont retournés par l'appel à `map` sur un vecteur. Ce vecteur
 finira par contenir chaque élément du vecteur original incrémenté de 1.
 
 <!--
-<span class="filename">Fichier : src/main.rs</span>
+<span class="filename">Filename: src/main.rs</span>
 -->
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
 ```rust
-let v1: Vec<i32> = vec![1, 2, 3];
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-18/src/main.rs:here}}
+```
+-->
 
-let v2: Vec<_> = v1.iter().map(|x| x + 1).collect();
-
-assert_eq!(v2, vec![2, 3, 4]);
+```rust
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-18/src/main.rs:here}}
 ```
 
 <!--
@@ -536,77 +502,19 @@ collection d'instances de la structure `Chaussure`. Il ne retournera que les
 chaussures avec la pointure demandée.
 
 <!--
-<span class="filename">Fichier : src/lib.rs</span>
+<span class="filename">Filename: src/lib.rs</span>
 -->
 
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
 ```rust
-#[derive(PartialEq, Debug)]
-struct Shoe {
-    size: u32,
-    style: String,
-}
-
-fn shoes_in_my_size(shoes: Vec<Shoe>, shoe_size: u32) -> Vec<Shoe> {
-    shoes.into_iter()
-        .filter(|s| s.size == shoe_size)
-        .collect()
-}
-
-#[test]
-fn filters_by_size() {
-    let shoes = vec![
-        Shoe { size: 10, style: String::from("sneaker") },
-        Shoe { size: 13, style: String::from("sandal") },
-        Shoe { size: 10, style: String::from("boot") },
-    ];
-
-    let in_my_size = shoes_in_my_size(shoes, 10);
-
-    assert_eq!(
-        in_my_size,
-        vec![
-            Shoe { size: 10, style: String::from("sneaker") },
-            Shoe { size: 10, style: String::from("boot") },
-        ]
-    );
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-19/src/lib.rs}}
 ```
 -->
 
 ```rust
-#[derive(PartialEq, Debug)]
-struct Chaussure {
-    pointure: u32,
-    style: String,
-}
-
-fn chaussures_a_la_pointure(chaussures: Vec<Shoe>, pointure_chaussure: u32) -> Vec<Chaussure> {
-    chaussures.into_iter()
-              .filter(|s| s.pointure == pointure_chaussure)
-              .collect()
-}
-
-#[test]
-fn filtres_par_pointure() {
-    let chaussures = vec![
-        Chaussure { pointure: 40, style: String::from("baskets") },
-        Chaussure { pointure: 42, style: String::from("sandale") },
-        Chaussure { pointure: 40, style: String::from("bottes") },
-    ];
-
-    let a_ma_pointure = chaussures_a_la_pointure(chaussures, 40);
-
-    assert_eq!(
-        a_ma_pointure,
-        vec![
-            Chaussure { pointure: 40, style: String::from("baskets") },
-            Chaussure { pointure: 40, style: String::from("bottes") },
-        ]
-    );
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-19/src/lib.rs}}
 ```
 
 <!--
@@ -708,35 +616,19 @@ L'encart 13-20 montre la définition de la structure `Compteur` et une fonction
 associée `new` pour créer des instances de `Compteur` :
 
 <!--
-<span class="filename">Fichier : src/lib.rs</span>
+<span class="filename">Filename: src/lib.rs</span>
 -->
 
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
 ```rust
-struct Counter {
-    count: u32,
-}
-
-impl Counter {
-    fn new() -> Counter {
-        Counter { count: 0 }
-    }
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-20/src/lib.rs}}
 ```
 -->
 
 ```rust
-struct Compteur {
-    compteur: u32,
-}
-
-impl Compteur {
-    fn new() -> Compteur {
-        Compteur { compteur: 0 }
-    }
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-20/src/lib.rs}}
 ```
 
 <!--
@@ -775,51 +667,19 @@ en définissant le corps de la méthode `next` pour préciser ce que nous voulon
 qu'il se passe quand cet itérateur est utilisé, comme dans l'encart 13-21 :
 
 <!--
-<span class="filename">Fichier : src/lib.rs</span>
+<span class="filename">Filename: src/lib.rs</span>
 -->
 
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
 ```rust
-# struct Counter {
-#     count: u32,
-# }
-#
-impl Iterator for Counter {
-    type Item = u32;
-
-    fn next(&mut self) -> Option<Self::Item> {
-        self.count += 1;
-
-        if self.count < 6 {
-            Some(self.count)
-        } else {
-            None
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-21/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# struct Compteur {
-#     compteur: u32,
-# }
-#
-impl Iterator for Compteur {
-    type Item = u32;
-
-    fn next(&mut self) -> Option<Self::Item> {
-        self.compteur += 1;
-
-        if self.compteur < 6 {
-            Some(self.compteur)
-        } else {
-            None
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-21/src/lib.rs:here}}
 ```
 
 <!--
@@ -842,16 +702,18 @@ préoccupez pas des types associés, nous les aborderons au chapitre 19.
 
 <!--
 We want our iterator to add 1 to the current state, so we initialized `count`
-to 0 so it would return 1 first. If the value of `count` is less than 6, `next`
-will return the current value wrapped in `Some`, but if `count` is 6 or higher,
-our iterator will return `None`.
+to 0 so it would return 1 first. If the value of `count` is less than 5, `next`
+will increment `count` and return the current value wrapped in `Some`. Once
+`count` is 5, our iterator will stop incrementing `count` and always return
+`None`.
 -->
 
 Nous voulons que notre itérateur ajoute 1 à l'état courant, donc nous avons
 initialisé `compteur` à 0 pour qu'il retourne 1 lors du premier appel à `next`.
-Si la valeur de `compteur` est strictement inférieure à 6, `next` renverra la
-valeur courante intégrée dans un `Some`, mais si `compteur` vaut 6 ou plus,
-notre itérateur renverra `None`.
+Si la valeur de `compteur` est strictement inférieure à 5, `next` va incrémenter
+`compteur` puis va retourner valeur courante intégrée dans un `Some`. Une fois
+que `compteur` vaudra 5, notre itérateur va arrêter d'incrémenter `compteur` et
+retournera toujours `None`.
 
 <!--
 #### Using Our `Counter` Iterator’s `next` Method
@@ -873,81 +735,19 @@ directement la méthode `next`, comme nous l'avons fait avec l'itérateur créé
 partir d'un vecteur dans l'encart 13-15.
 
 <!--
-<span class="filename">Fichier : src/lib.rs</span>
+<span class="filename">Filename: src/lib.rs</span>
 -->
 
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
 ```rust
-# struct Counter {
-#     count: u32,
-# }
-#
-# impl Iterator for Counter {
-#     type Item = u32;
-#
-#     fn next(&mut self) -> Option<Self::Item> {
-#         self.count += 1;
-#
-#         if self.count < 6 {
-#             Some(self.count)
-#         } else {
-#             None
-#         }
-#     }
-# }
-#
-#[test]
-fn calling_next_directly() {
-    let mut counter = Counter::new();
-
-    assert_eq!(counter.next(), Some(1));
-    assert_eq!(counter.next(), Some(2));
-    assert_eq!(counter.next(), Some(3));
-    assert_eq!(counter.next(), Some(4));
-    assert_eq!(counter.next(), Some(5));
-    assert_eq!(counter.next(), None);
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-22/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# struct Compteur {
-#     compteur: u32,
-# }
-#
-# impl Compteur {
-#     fn new() -> Compteur {
-#         Compteur { compteur: 0 }
-#     }
-# }
-#
-# impl Iterator for Compteur {
-#     type Item = u32;
-#
-#     fn next(&mut self) -> Option<Self::Item> {
-#         self.compteur += 1;
-#
-#         if self.count < 6 {
-#             Some(self.compteur)
-#         } else {
-#             None
-#         }
-#     }
-# }
-#
-#[test]
-fn appel_direct_a_next() {
-    let mut compteur = Counter::new();
-
-    assert_eq!(compteur.next(), Some(1));
-    assert_eq!(compteur.next(), Some(2));
-    assert_eq!(compteur.next(), Some(3));
-    assert_eq!(compteur.next(), Some(4));
-    assert_eq!(compteur.next(), Some(5));
-    assert_eq!(compteur.next(), None);
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-22/src/lib.rs:here}}
 ```
 
 <!--
@@ -1002,84 +802,19 @@ divisibles par 3 et additionner toutes les valeurs résultantes ensemble, nous
 pourrions le faire, comme le montre le test dans l'encart 13-23 :
 
 <!--
-<span class="filename">Fichier : src/lib.rs</span>
+<span class="filename">Filename: src/lib.rs</span>
 -->
 
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
 ```rust
-# struct Counter {
-#     count: u32,
-# }
-#
-# impl Counter {
-#     fn new() -> Counter {
-#         Counter { count: 0 }
-#     }
-# }
-#
-# impl Iterator for Counter {
-#     // Our iterator will produce u32s
-#     type Item = u32;
-#
-#     fn next(&mut self) -> Option<Self::Item> {
-#         // increment our count. This is why we started at zero.
-#         self.count += 1;
-#
-#         // check to see if we've finished counting or not.
-#         if self.count < 6 {
-#             Some(self.count)
-#         } else {
-#             None
-#         }
-#     }
-# }
-#
-#[test]
-fn using_other_iterator_trait_methods() {
-    let sum: u32 = Counter::new().zip(Counter::new().skip(1))
-                                 .map(|(a, b)| a * b)
-                                 .filter(|x| x % 3 == 0)
-                                 .sum();
-    assert_eq!(18, sum);
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-23/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# struct Compteur {
-#     compteur: u32,
-# }
-#
-# impl Compteur {
-#     fn new() -> Compteur {
-#         Compteur { compteur: 0 }
-#     }
-# }
-#
-# impl Iterator for Compteur {
-#     type Item = u32;
-#
-#     fn next(&mut self) -> Option<Self::Item> {
-#         self.compteur += 1;
-#
-#         if self.compteur < 6 {
-#             Some(self.compteur)
-#         } else {
-#             None
-#         }
-#     }
-# }
-#
-#[test]
-fn utilisation_des_autres_methodes_du_trait_iterator() {
-    let somme: u32 = Counter::new().zip(Compteur::new().skip(1))
-                                   .map(|(a, b)| a * b)
-                                   .filter(|x| x % 3 == 0)
-                                   .sum();
-    assert_eq!(18, somme);
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-23/src/lib.rs:here}}
 ```
 
 <!--
