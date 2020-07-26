@@ -74,7 +74,7 @@ le moment; nous allons l'expliquer un peu plus tard.
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-03/src/lib.rs}}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-03/src/lib.rs}}
 ```
 -->
 
@@ -279,7 +279,7 @@ utilisons le mot-clé `pub` sur le module `accueil`, comme dans l'encart 7-5.
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-05/src/lib.rs}}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-05/src/lib.rs}}
 ```
 -->
 
@@ -361,7 +361,7 @@ mot-clé `pub` devant sa définition, comme dans l'encart 7-7.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-07/src/lib.rs:here}}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-07/src/lib.rs:here}}
 ```
 -->
 
@@ -469,7 +469,7 @@ commençant le chemin de `servir_commande` avec `super` :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-08/src/lib.rs:here}}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-08/src/lib.rs:here}}
 ```
 -->
 
@@ -545,7 +545,7 @@ obtiendront.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-09/src/lib.rs}}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-09/src/lib.rs}}
 ```
 -->
 
@@ -611,7 +611,7 @@ seront publiques. Nous avons simplement besoin d'un `pub` devant le mot-clé
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-10/src/lib.rs}}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-10/src/lib.rs}}
 ```
 -->
 

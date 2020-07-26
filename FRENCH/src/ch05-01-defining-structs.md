@@ -36,7 +36,7 @@ compte d'utilisateur.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-01/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-01/src/main.rs:here}}
 ```
 -->
 
@@ -76,7 +76,7 @@ déclarer un utilisateur précis comme dans l'encart 5-2.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-02/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-02/src/main.rs:here}}
 ```
 -->
 
@@ -110,7 +110,7 @@ d'une instance mutable de `Utilisateur`.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-03/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-03/src/main.rs:here}}
 ```
 -->
 
@@ -151,7 +151,7 @@ prend la valeur `true` et le `nombre_de_connexions` prend la valeur `1`.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-04/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-04/src/main.rs:here}}
 ```
 -->
 
@@ -202,7 +202,7 @@ sorte qu'elle se comporte exactement de la même façon sans avoir à répéter
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-05/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-05/src/main.rs:here}}
 ```
 -->
 
@@ -263,7 +263,7 @@ l'encart 5-2.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-06/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-06/src/main.rs:here}}
 ```
 -->
 
@@ -292,7 +292,7 @@ devraient avoir la même valeur que dans l'instance précisée.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-07/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-07/src/main.rs:here}}
 ```
 -->
 
@@ -356,7 +356,7 @@ définition et une utilisation de deux structures tuples nommées `Couleur` et
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/no-listing-01-tuple-structs/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/no-listing-01-tuple-structs/src/main.rs:here}}
 ```
 -->
 

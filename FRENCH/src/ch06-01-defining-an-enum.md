@@ -50,7 +50,7 @@ qu'elle peut avoir, `V4` et `V6`. Ce sont les variantes de l'énumération :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-01-defining-enums/src/main.rs:def}}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-01-defining-enums/src/main.rs:def}}
 ```
 -->
 
@@ -80,7 +80,7 @@ Nous pouvons créer des instances de chacune des deux variantes de
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-01-defining-enums/src/main.rs:instance}}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-01-defining-enums/src/main.rs:instance}}
 ```
 -->
 
@@ -105,7 +105,7 @@ pouvons, par exemple, définir une fonction qui accepte n'importe quelle
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-01-defining-enums/src/main.rs:fn}}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-01-defining-enums/src/main.rs:fn}}
 ```
 -->
 
@@ -121,7 +121,7 @@ Et nous pouvons appeler cette fonction avec chacune des variantes :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-01-defining-enums/src/main.rs:fn_call}}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-01-defining-enums/src/main.rs:fn_call}}
 ```
 -->
 
@@ -144,7 +144,7 @@ résoudre ce problème comme dans l'encart 6-1.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-01/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-01/src/main.rs:here}}
 ```
 -->
 
@@ -197,7 +197,7 @@ que chacune des variantes `V4` et `V6` auront des valeurs associées de type
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-02-enum-with-data/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-02-enum-with-data/src/main.rs:here}}
 ```
 -->
 
@@ -233,7 +233,7 @@ facilement :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-03-variants-with-different-data/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-03-variants-with-different-data/src/main.rs:here}}
 ```
 -->
 
@@ -336,7 +336,7 @@ grande diversité de types dans ses variantes.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-02/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-02/src/main.rs:here}}
 ```
 -->
 
@@ -393,7 +393,7 @@ stocker les mêmes données que celles stockées par les variantes précédentes
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-04-structs-similar-to-message-enum/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-04-structs-similar-to-message-enum/src/main.rs:here}}
 ```
 -->
 
@@ -433,7 +433,7 @@ peut aussi définir des méthodes sur des énumérations. Voici une méthode app
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-05-methods-on-enums/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-05-methods-on-enums/src/main.rs:here}}
 ```
 -->
 
@@ -625,7 +625,7 @@ de caractères :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-06-option-examples/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-06-option-examples/src/main.rs:here}}
 ```
 -->
 
@@ -671,7 +671,7 @@ code suivant ne se compile pas car il essaye d'additionner un `i8` et une
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-07-cant-use-option-directly/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-07-cant-use-option-directly/src/main.rs:here}}
 ```
 -->
 

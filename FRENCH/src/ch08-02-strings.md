@@ -124,7 +124,7 @@ dans l'encart 8-11.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-11/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-11/src/main.rs:here}}
 ```
 -->
 
@@ -155,7 +155,7 @@ L'encart 8-12 nous montre deux exemples.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-12/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-12/src/main.rs:here}}
 ```
 -->
 
@@ -189,7 +189,7 @@ Nous pouvons aussi utiliser la fonction `String::from` pour créer une `String`
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-13/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-13/src/main.rs:here}}
 ```
 -->
 
@@ -229,7 +229,7 @@ le voyons dans l'encart 8-14.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-14/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-14/src/main.rs:here}}
 ```
 -->
 
@@ -284,7 +284,7 @@ ajouter une slice de chaîne de caractères, comme dans l'encart 8-15.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-15/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-15/src/main.rs:here}}
 ```
 -->
 
@@ -315,7 +315,7 @@ montre une situation où il serait regrettable si nous ne pouvions plus utiliser
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-16/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-16/src/main.rs:here}}
 ```
 -->
 
@@ -352,7 +352,7 @@ utilisant la méthode `push`.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-17/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-17/src/main.rs:here}}
 ```
 -->
 
@@ -391,7 +391,7 @@ Une façon de faire cela est d'utiliser l'opérateur `+`, comme dans l'encart
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-18/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-18/src/main.rs:here}}
 ```
 -->
 
@@ -510,7 +510,7 @@ comportement de l'opérateur `+` devient difficile à utiliser :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/no-listing-01-concat-multiple-strings/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/no-listing-01-concat-multiple-strings/src/main.rs:here}}
 ```
 -->
 
@@ -530,7 +530,7 @@ caractères plus complexes, nous pouvons utiliser la macro `format!` :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/no-listing-02-format/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/no-listing-02-format/src/main.rs:here}}
 ```
 -->
 
@@ -573,7 +573,7 @@ allez avoir une erreur. Nous tentons cela dans le code invalide de l'encart
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-19/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-19/src/main.rs:here}}
 ```
 -->
 
@@ -633,7 +633,7 @@ l'encart 8-14. Premièrement, celle-ci :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-14/src/main.rs:spanish}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-14/src/main.rs:spanish}}
 ```
 -->
 
@@ -656,7 +656,7 @@ majuscule cyrillique Ze, et non pas le nombre arabe 3.)
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-14/src/main.rs:russian}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-14/src/main.rs:russian}}
 ```
 -->
 

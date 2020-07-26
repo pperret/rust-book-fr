@@ -323,7 +323,7 @@ Voici un exemple montrant l'utilisation de nombres à virgule flottante :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-06-floating-point/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-06-floating-point/src/main.rs}}
 ```
 -->
 
@@ -365,7 +365,7 @@ instruction `let` :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-07-numeric-operations/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-07-numeric-operations/src/main.rs}}
 ```
 -->
 
@@ -408,7 +408,7 @@ Par exemple :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-08-boolean/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-08-boolean/src/main.rs}}
 ```
 -->
 
@@ -454,7 +454,7 @@ contrairement aux chaînes, qui utilisent des guillemets doubles.)
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-09-char/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-09-char/src/main.rs}}
 ```
 -->
 
@@ -536,7 +536,7 @@ optionnel :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-10-tuples/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-10-tuples/src/main.rs}}
 ```
 -->
 
@@ -563,7 +563,7 @@ déstructurer ce tuple, comme ceci :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-11-destructuring-tuples/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-11-destructuring-tuples/src/main.rs}}
 ```
 -->
 
@@ -603,7 +603,7 @@ l'indice de la valeur que nous souhaitons obtenir. Par exemple :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-12-tuple-indexing/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-12-tuple-indexing/src/main.rs}}
 ```
 -->
 
@@ -655,7 +655,7 @@ liste séparée par des virgules entre des crochets :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-13-arrays/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-13-arrays/src/main.rs}}
 ```
 -->
 
@@ -792,7 +792,7 @@ aux éléments d'un tableau en utilisant l'indexation, comme ceci :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-14-array-indexing/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-14-array-indexing/src/main.rs}}
 ```
 -->
 
@@ -835,7 +835,7 @@ exécuté :
 
 <!--
 ```rust,ignore,panics
-{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-15-invalid-array-access/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-15-invalid-array-access/src/main.rs}}
 ```
 -->
 

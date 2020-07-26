@@ -280,7 +280,7 @@ est en vigueur :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-01/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/listing-04-01/src/main.rs:here}}
 ```
 -->
 
@@ -416,7 +416,7 @@ Ce type de chaîne de caractères *peut* être mutable :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-01-can-mutate-string/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-01-can-mutate-string/src/main.rs:here}}
 ```
 -->
 
@@ -524,7 +524,7 @@ de chaîne de caractères :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-02-string-scope/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-02-string-scope/src/main.rs:here}}
 ```
 -->
 
@@ -588,7 +588,7 @@ manières en Rust. Regardons un exemple avec un entier dans l'encart 4-2 :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-02/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/listing-04-02/src/main.rs:here}}
 ```
 -->
 
@@ -626,7 +626,7 @@ Maintenant, essayons une nouvelle version avec `String` :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-03-string-move/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-03-string-move/src/main.rs:here}}
 ```
 -->
 
@@ -788,7 +788,7 @@ cela ne va pas fonctionner :
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-04-cant-use-after-move/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-04-cant-use-after-move/src/main.rs:here}}
 ```
 -->
 
@@ -894,7 +894,7 @@ Voici un exemple d'utilisation de la méthode `clone` :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-05-clone/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-05-clone/src/main.rs:here}}
 ```
 -->
 
@@ -937,7 +937,7 @@ est correct :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-06-copy/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-06-copy/src/main.rs:here}}
 ```
 -->
 
@@ -1050,7 +1050,7 @@ portée :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-03/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/listing-04-03/src/main.rs}}
 ```
 -->
 
@@ -1101,7 +1101,7 @@ exemple avec des annotations similaires à celles de l'encart 4-3 :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-04/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/listing-04-04/src/main.rs}}
 ```
 -->
 
@@ -1159,7 +1159,7 @@ Il est possible de retourner plusieurs valeurs à l'aide d'un tuple, comme ceci�
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-05/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/listing-04-05/src/main.rs}}
 ```
 -->
 

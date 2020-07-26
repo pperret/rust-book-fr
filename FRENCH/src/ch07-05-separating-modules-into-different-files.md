@@ -38,7 +38,7 @@ la racine de la crate est *src/main.rs*.
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-21-and-22/src/lib.rs}}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-21-and-22/src/lib.rs}}
 ```
 -->
 
@@ -70,7 +70,7 @@ Et *src/salle_a_manger.rs* contiendra la définition du corps du module
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-21-and-22/src/front_of_house.rs}}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-21-and-22/src/front_of_house.rs}}
 ```
 -->
 
@@ -109,7 +109,7 @@ le même nom que le module. Pour continuer avec notre exemple et déplacer
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch07-managing-growing-projects/no-listing-02-extracting-hosting/src/front_of_house.rs}}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/no-listing-02-extracting-hosting/src/front_of_house.rs}}
 ```
 -->
 

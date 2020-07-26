@@ -73,7 +73,7 @@ contient du code :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-24-comments-end-of-line/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-24-comments-end-of-line/src/main.rs}}
 ```
 -->
 
@@ -97,7 +97,7 @@ commentaire sur une ligne séparée au-dessus du code qu'il annote :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-25-comments-above-line/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-25-comments-above-line/src/main.rs}}
 ```
 -->
 

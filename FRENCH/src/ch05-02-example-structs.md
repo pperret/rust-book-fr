@@ -35,7 +35,7 @@ certaine manière dans le *src/main.rs* de notre projet.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-08/src/main.rs:all}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-08/src/main.rs:all}}
 ```
 -->
 
@@ -86,7 +86,7 @@ Le problème de ce code se voit dans la signature de `aire` :
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-08/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-08/src/main.rs:here}}
 ```
 -->
 
@@ -131,7 +131,7 @@ tuples.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-09/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-09/src/main.rs}}
 ```
 -->
 
@@ -204,7 +204,7 @@ de donnée nommé dont ses éléments sont aussi nommés, comme le montre l'enca
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-10/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-10/src/main.rs}}
 ```
 -->
 
@@ -289,7 +289,7 @@ dans les chapitres précédents. Cependant, cela ne fonctionne pas.
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-11/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-11/src/main.rs}}
 ```
 -->
 
@@ -437,7 +437,7 @@ avant la définition de la structure, comme le montre l'encart 5-12.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-12/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-12/src/main.rs}}
 ```
 -->
 

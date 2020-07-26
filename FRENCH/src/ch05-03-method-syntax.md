@@ -47,7 +47,7 @@ l'encart 5-13.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-13/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-13/src/main.rs}}
 ```
 -->
 
@@ -267,7 +267,7 @@ programme de l'encart 5-14 une fois qu'on aura défini la méthode
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-14/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-14/src/main.rs}}
 ```
 -->
 
@@ -344,7 +344,7 @@ montre l'encart 5-15.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-15/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-15/src/main.rs:here}}
 ```
 -->
 
@@ -416,7 +416,7 @@ d'un `Rectangle` carré plutôt que d'avoir à indiquer la même valeur deux foi
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/no-listing-03-associated-functions/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/no-listing-03-associated-functions/src/main.rs:here}}
 ```
 -->
 
@@ -455,7 +455,7 @@ bloc `impl`.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-16/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-16/src/main.rs:here}}
 ```
 -->
 

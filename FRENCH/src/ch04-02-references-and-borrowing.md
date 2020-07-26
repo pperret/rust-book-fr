@@ -34,7 +34,7 @@ valeur :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-07-reference/src/main.rs:all}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-07-reference/src/main.rs:all}}
 ```
 -->
 
@@ -101,7 +101,7 @@ Regardons de plus près l'appel à la fonction :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-07-reference/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-07-reference/src/main.rs:here}}
 ```
 -->
 
@@ -131,7 +131,7 @@ explicatifs :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-08-reference-with-annotations/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-08-reference-with-annotations/src/main.rs:here}}
 ```
 -->
 
@@ -182,7 +182,7 @@ fonctionne pas !
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-06/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/listing-04-06/src/main.rs}}
 ```
 -->
 
@@ -243,7 +243,7 @@ modification :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-09-fixes-listing-04-06/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-09-fixes-listing-04-06/src/main.rs}}
 ```
 -->
 
@@ -279,7 +279,7 @@ suivant va échouer :
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-10-multiple-mut-not-allowed/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-10-multiple-mut-not-allowed/src/main.rs:here}}
 ```
 -->
 
@@ -355,7 +355,7 @@ portée, pour nous permettre d'avoir plusieurs références mutables, mais pas
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-11-muts-in-separate-scopes/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-11-muts-in-separate-scopes/src/main.rs:here}}
 ```
 -->
 
@@ -373,7 +373,7 @@ Ce code va mener à une erreur :
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-12-immutable-and-mutable-not-allowed/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-12-immutable-and-mutable-not-allowed/src/main.rs:here}}
 ```
 -->
 
@@ -426,7 +426,7 @@ référence immuable est située avant l'introduction de la référence mutable�
 
 <!--
 ```rust,edition2018
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-13-reference-scope-ends/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-13-reference-scope-ends/src/main.rs:here}}
 ```
 -->
 
@@ -499,7 +499,7 @@ erreur au moment de la compilation :
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-14-dangling-reference/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-14-dangling-reference/src/main.rs}}
 ```
 -->
 
@@ -569,7 +569,7 @@ de `pendouille` :
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-15-dangling-reference-annotated/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-15-dangling-reference-annotated/src/main.rs:here}}
 ```
 -->
 
@@ -597,7 +597,7 @@ Ici la solution est de renvoyer la `String` directement :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-16-no-dangle/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-16-no-dangle/src/main.rs:here}}
 ```
 -->
 
