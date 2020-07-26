@@ -46,38 +46,12 @@ l'encart 12-23 à la fin du chapitre 12 :
 
 <!--
 ```rust,ignore
-impl Config {
-    pub fn new(args: &[String]) -> Result<Config, &'static str> {
-        if args.len() < 3 {
-            return Err("not enough arguments");
-        }
-
-        let query = args[1].clone();
-        let filename = args[2].clone();
-
-        let case_sensitive = env::var("CASE_INSENSITIVE").is_err();
-
-        Ok(Config { query, filename, case_sensitive })
-    }
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-12-23-reproduced/src/lib.rs:ch13}}
 ```
 -->
 
 ```rust,ignore
-impl Config {
-    pub fn new(args: &[String]) -> Result<Config, &'static str> {
-        if args.len() < 3 {
-            return Err("il n'y a pas assez d'arguments");
-        }
-
-        let recherche = args[1].clone();
-        let nom_fichier = args[2].clone();
-
-        let sensible_casse = env::var("MINIGREP_INSENSIBLE_CASSE").is_err();
-
-        Ok(Config { recherche, nom_fichier, sensible_casse })
-    }
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-12-23-reproduced/src/lib.rs:ch13}}
 ```
 
 <!--
@@ -157,30 +131,12 @@ ressembler à ceci :
 
 <!--
 ```rust,ignore
-fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    let config = Config::new(&args).unwrap_or_else(|err| {
-        eprintln!("Problem parsing arguments: {}", err);
-        process::exit(1);
-    });
-
-    // --snip--
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-12-24-reproduced/src/main.rs:ch13}}
 ```
 -->
 
 ```rust,ignore
-fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    let config = Config::new(&args).unwrap_or_else(|err| {
-        eprintln!("Problème rencontré lors de l'interprétation des arguments : {}", err);
-        process::exit(1);
-    });
-
-    // -- partie masquée ici --
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-12-24-reproduced/src/main.rs:ch13}}
 ```
 
 <!--
@@ -201,26 +157,12 @@ que nous mettions également à jour `Config::new`.
 
 <!--
 ```rust,ignore
-fn main() {
-    let config = Config::new(env::args()).unwrap_or_else(|err| {
-        eprintln!("Problem parsing arguments: {}", err);
-        process::exit(1);
-    });
-
-    // --snip--
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-25/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-fn main() {
-    let config = Config::new(env::args()).unwrap_or_else(|err| {
-        eprintln!("Problème rencontré lors de l'interprétation des arguments : {}", err);
-        process::exit(1);
-    });
-
-    // -- partie masquée ici --
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-25/src/main.rs:here}}
 ```
 
 <!--
@@ -263,16 +205,12 @@ encore car nous devons mettre à jour le corps de la fonction.
 
 <!--
 ```rust,ignore
-impl Config {
-    pub fn new(mut args: std::env::Args) -> Result<Config, &'static str> {
-        // --snip--
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-26/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore
-impl Config {
-    pub fn new(mut args: std::env::Args) -> Result<Config, &'static str> {
-        // -- partie masquée ici --
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-26/src/lib.rs:here}}
 ```
 
 <!--
@@ -326,66 +264,12 @@ met à jour le code de l'encart 12-23 afin d'utiliser la méthode `next` :
 
 <!--
 ```rust
-# fn main() {}
-# use std::env;
-#
-# struct Config {
-#     query: String,
-#     filename: String,
-#     case_sensitive: bool,
-# }
-#
-impl Config {
-    pub fn new(mut args: std::env::Args) -> Result<Config, &'static str> {
-        args.next();
-
-        let query = match args.next() {
-            Some(arg) => arg,
-            None => return Err("Didn't get a query string"),
-        };
-
-        let filename = match args.next() {
-            Some(arg) => arg,
-            None => return Err("Didn't get a file name"),
-        };
-
-        let case_sensitive = env::var("CASE_INSENSITIVE").is_err();
-
-        Ok(Config { query, filename, case_sensitive })
-    }
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-27/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# fn main() {}
-# use std::env;
-#
-# struct Config {
-#     recherche: String,
-#     nom_fichier: String,
-#     sensible_casse: bool,
-# }
-#
-impl Config {
-    pub fn new(mut args: std::env::Args) -> Result<Config, &'static str> {
-        args.next();
-
-        let recherche = match args.next() {
-            Some(arg) => arg,
-            None => return Err("nous n'avons pas de chaîne de caractères"),
-        };
-
-        let nom_fichier = match args.next() {
-            Some(arg) => arg,
-            None => return Err("nous n'avons pas de nom de fichier"),
-        };
-
-        let sensible_casse = env::var("MINIGREP_INSENSIBLE_CASSE").is_err();
-
-        Ok(Config { recherche, nom_fichier, sensible_casse })
-    }
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-27/src/lib.rs:here}}
 ```
 
 <!--
@@ -438,32 +322,12 @@ l'encart 13-28, comme elle l'était dans l'encart 12-19 à la fin du chapitre 12
 
 <!--
 ```rust,ignore
-pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    let mut results = Vec::new();
-
-    for line in contents.lines() {
-        if line.contains(query) {
-            results.push(line);
-        }
-    }
-
-    results
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-19/src/lib.rs:ch13}}
 ```
 -->
 
 ```rust,ignore
-pub fn rechercher<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
-    let mut resultats = Vec::new();
-
-    for ligne in contenu.lines() {
-        if ligne.contains(recherche) {
-            resultats.push(ligne);
-        }
-    }
-
-    resultats
-}
+{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-19/src/lib.rs:ch13}}
 ```
 
 <!--
@@ -499,20 +363,12 @@ vecteur `resultats`. L'encart 13-29 montre ce changement :
 
 <!--
 ```rust,ignore
-pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    contents.lines()
-        .filter(|line| line.contains(query))
-        .collect()
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-29/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore
-pub fn rechercher<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
-    contenu.lines()
-        .filter(|ligne| ligne.contains(recherche))
-        .collect()
-}
+{{#rustdoc_include ../listings/ch13-functional-features/listing-13-29/src/lib.rs:here}}
 ```
 
 <!--
