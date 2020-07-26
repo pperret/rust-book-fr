@@ -36,7 +36,7 @@ Pour créer un nouveau vecteur vide, nous pouvons appeler la fonction
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-01/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-01/src/main.rs:here}}
 ```
 -->
 
@@ -96,7 +96,7 @@ données”][data-types]<!-- ignore --> du chapitre 3.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-02/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-02/src/main.rs:here}}
 ```
 -->
 
@@ -138,7 +138,7 @@ la méthode `push`, comme dans l'encart 8-3.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-03/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-03/src/main.rs:here}}
 ```
 -->
 
@@ -183,7 +183,7 @@ portée, comme précisé dans l'encart 8-4.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-04/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-04/src/main.rs:here}}
 ```
 -->
 
@@ -241,7 +241,7 @@ soit la syntaxe d'indexation, soit avec la méthode `get`.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-05/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-05/src/main.rs:here}}
 ```
 -->
 
@@ -288,7 +288,7 @@ essaye d'accéder à l'élément à l'indice 100, comme dans l'encart 8-6.
 
 <!--
 ```rust,should_panic,panics
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-06/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-06/src/main.rs:here}}
 ```
 -->
 
@@ -362,7 +362,7 @@ d'utiliser cet élément plus tard dans la fonction :
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-07/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-07/src/main.rs:here}}
 ```
 -->
 
@@ -444,7 +444,7 @@ les afficher.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-08/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-08/src/main.rs:here}}
 ```
 -->
 
@@ -472,7 +472,7 @@ l'encart 8-9 va ajouter `50` à chacun des éléments.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-09/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-09/src/main.rs:here}}
 ```
 -->
 
@@ -543,7 +543,7 @@ cette technique est dans l'encart 8-10.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch08-common-collections/listing-08-10/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-10/src/main.rs:here}}
 ```
 -->
 

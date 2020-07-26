@@ -18,7 +18,7 @@ Imaginons le programme dans l'encart 6-6 qui fait un `match` sur une valeur
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-06/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-06/src/main.rs:here}}
 ```
 -->
 
@@ -57,7 +57,7 @@ utilisant `if let`. Le code suivant se comporte comme le `match` de l'encart
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-12-if-let/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-12-if-let/src/main.rs:here}}
 ```
 -->
 
@@ -117,7 +117,7 @@ une expression `match` comme ceci :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-13-count-and-announce-match/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-13-count-and-announce-match/src/main.rs:here}}
 ```
 -->
 
@@ -133,7 +133,7 @@ Ou nous pourrions utiliser une expression `if let`/`else` comme ceci :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-14-count-and-announce-if-let-else/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-14-count-and-announce-if-let-else/src/main.rs:here}}
 ```
 -->
 

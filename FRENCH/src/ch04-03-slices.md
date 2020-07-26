@@ -63,7 +63,7 @@ fin du mot. Essayons cela, dans l'encart 4-7 :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-07/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/listing-04-07/src/main.rs:here}}
 ```
 -->
 
@@ -91,7 +91,7 @@ tableau d'octets en utilisant la méthode `as_bytes` :
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-07/src/main.rs:as_bytes}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/listing-04-07/src/main.rs:as_bytes}}
 ```
 -->
 
@@ -108,7 +108,7 @@ méthode `iter` :
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-07/src/main.rs:iter}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/listing-04-07/src/main.rs:iter}}
 ```
 -->
 
@@ -160,7 +160,7 @@ utilisant `s.len()` :
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-07/src/main.rs:inside_for}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/listing-04-07/src/main.rs:inside_for}}
 ```
 -->
 
@@ -192,7 +192,7 @@ dans l'encart 4-8 qui utilise la fonction `premier_mot` de l'encart 4-7 :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-08/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/listing-04-08/src/main.rs:here}}
 ```
 -->
 
@@ -278,7 +278,7 @@ une partie d'une `String`, et ressemble à ceci :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-17-slice/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-17-slice/src/main.rs:here}}
 ```
 -->
 
@@ -457,7 +457,7 @@ s'écrit `&str` :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-18-first-word-slice/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-18-first-word-slice/src/main.rs:here}}
 ```
 -->
 
@@ -536,7 +536,7 @@ erreur de compilation :
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-19-slice-error/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-19-slice-error/src/main.rs:here}}
 ```
 -->
 
@@ -646,7 +646,7 @@ cela nous permet d'utiliser la même fonction sur les `&String` et aussi les
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-09/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/listing-04-09/src/main.rs:here}}
 ```
 -->
 
@@ -683,7 +683,7 @@ aucune fonctionnalité :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch04-understanding-ownership/listing-04-09/src/main.rs:usage}}
+{{#rustdoc_include ../listings-sources/ch04-understanding-ownership/listing-04-09/src/main.rs:usage}}
 ```
 -->
 

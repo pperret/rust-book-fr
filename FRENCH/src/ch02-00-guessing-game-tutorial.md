@@ -119,7 +119,7 @@ programme *“Hello, world!”* pour vous. Ouvrez le fichier *src/main.rs* :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/no-listing-01-cargo-new/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch02-guessing-game-tutorial/no-listing-01-cargo-new/src/main.rs}}
 ```
 -->
 
@@ -189,7 +189,7 @@ code de l'encart 2-1 dans le fichier *src/main.rs*.
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:all}}
+{{#rustdoc_include ../listings-sources/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:all}}
 ```
 -->
 
@@ -220,7 +220,7 @@ de pouvoir l'utiliser. La bibliothèque `io` provient de la bibliothèque standa
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:io}}
+{{#rustdoc_include ../listings-sources/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:io}}
 ```
 -->
 
@@ -259,7 +259,7 @@ du programme :
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:main}}
+{{#rustdoc_include ../listings-sources/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:main}}
 ```
 -->
 
@@ -286,7 +286,7 @@ affiche une chaîne de caractères à l'écran :
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:print}}
+{{#rustdoc_include ../listings-sources/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:print}}
 ```
 -->
 
@@ -316,7 +316,7 @@ Ensuite, on crée un endroit où stocker la saisie de l'utilisateur, comme ceci�
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:string}}
+{{#rustdoc_include ../listings-sources/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:string}}
 ```
 -->
 
@@ -451,7 +451,7 @@ module `io` :
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:read}}
+{{#rustdoc_include ../listings-sources/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:read}}
 ```
 -->
 
@@ -550,7 +550,7 @@ de code. Cette nouvelle partie rajoute cette méthode :
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:expect}}
+{{#rustdoc_include ../listings-sources/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:expect}}
 ```
 -->
 
@@ -728,7 +728,7 @@ Mis à part l'accolade fermante, il ne nous reste plus qu'une seule ligne à
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:print_guess}}
+{{#rustdoc_include ../listings-sources/ch02-guessing-game-tutorial/listing-02-01/src/main.rs:print_guess}}
 ```
 -->
 
@@ -1291,7 +1291,7 @@ l'encart 2-3.
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-03/src/main.rs:all}}
+{{#rustdoc_include ../listings-sources/ch02-guessing-game-tutorial/listing-02-03/src/main.rs:all}}
 ```
 -->
 
@@ -1465,7 +1465,7 @@ que le code ne se compile pas encore, nous allons l'expliquer par la suite.
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-04/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch02-guessing-game-tutorial/listing-02-04/src/main.rs:here}}
 ```
 -->
 
@@ -1636,7 +1636,7 @@ supplémentaire dans le corps de la fonction `main` :
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/no-listing-03-convert-string-to-number/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch02-guessing-game-tutorial/no-listing-03-convert-string-to-number/src/main.rs:here}}
 ```
 -->
 
@@ -1858,7 +1858,7 @@ donner aux utilisateurs plus de chances de deviner le nombre :
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/no-listing-04-looping/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch02-guessing-game-tutorial/no-listing-04-looping/src/main.rs:here}}
 ```
 -->
 
@@ -1996,7 +1996,7 @@ l'instruction `break` :
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/no-listing-05-quitting/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch02-guessing-game-tutorial/no-listing-05-quitting/src/main.rs:here}}
 ```
 -->
 
@@ -2042,7 +2042,7 @@ continuer à essayer de deviner. Nous pouvons faire ceci en modifiant la ligne o
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-05/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch02-guessing-game-tutorial/listing-02-05/src/main.rs:here}}
 ```
 -->
 
@@ -2195,7 +2195,7 @@ affiche le nombre secret. L'encart 2-6 représente le code final.
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-06/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch02-guessing-game-tutorial/listing-02-06/src/main.rs}}
 ```
 -->
 
