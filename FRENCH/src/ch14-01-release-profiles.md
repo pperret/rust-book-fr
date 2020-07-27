@@ -45,11 +45,29 @@ These profile names might be familiar from the output of your builds:
 Ces noms de profils vous rappellent peut-être quelque chose sur la sortie
 standard de vos compilations :
 
-```text
+<!--
+<!-- manual-regeneration
+anywhere, run:
+cargo build
+cargo build --release
+and ensure output below is accurate
+-- >
+-->
+
+<!--
+```console
 $ cargo build
-    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+    Finished dev [unoptimized + debuginfo] target(s) in 0.0s
 $ cargo build --release
-    Finished release [optimized] target(s) in 0.0 secs
+    Finished release [optimized] target(s) in 0.0s
+```
+-->
+
+```console
+$ cargo build
+    Finished dev [unoptimized + debuginfo] target(s) in 0.0s
+$ cargo build --release
+    Finished release [optimized] target(s) in 0.0s
 ```
 
 <!--
@@ -80,6 +98,16 @@ des profils `dev` et `release` :
 -->
 
 <span class="filename">Fichier : Cargo.toml</span>
+
+<!--
+```toml
+[profile.dev]
+opt-level = 0
+
+[profile.release]
+opt-level = 3
+```
+-->
 
 ```toml
 [profile.dev]
@@ -133,6 +161,13 @@ lignes à notre fichier *Cargo.toml* :
 
 <span class="filename">Fichier : Cargo.toml</span>
 
+<!--
+```toml
+[profile.dev]
+opt-level = 1
+```
+-->
+
 ```toml
 [profile.dev]
 opt-level = 1
@@ -153,9 +188,9 @@ pas autant que dans une compilation de publication.
 
 <!--
 For the full list of configuration options and defaults for each profile, see
-[Cargo’s documentation](https://doc.rust-lang.org/cargo/reference/manifest.html#the-profile-sections).
+[Cargo’s documentation](https://doc.rust-lang.org/cargo/reference/profiles.html).
 -->
 
 Pour la liste complète des options de configuration et leurs valeurs par défaut
 pour chaque profil, rendez-vous à la
-[documentation de cargo](https://doc.rust-lang.org/cargo/reference/manifest.html#the-profile-sections).
+[documentation de cargo](https://doc.rust-lang.org/cargo/reference/profiles.html).
