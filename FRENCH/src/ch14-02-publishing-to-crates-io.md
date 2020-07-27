@@ -87,36 +87,12 @@ fonction `ajouter_un` dans une crate nommée `ma_crate` :
 
 <!--
 ```rust,ignore
-/// Adds one to the number given.
-///
-/// # Examples
-///
-/// ```
-/// let arg = 5;
-/// let answer = my_crate::add_one(arg);
-///
-/// assert_eq!(6, answer);
-/// ```
-pub fn add_one(x: i32) -> i32 {
-    x + 1
-}
+{{#rustdoc_include ../listings-sources/ch14-more-about-cargo/listing-14-01/src/lib.rs}}
 ```
 -->
 
 ```rust,ignore
-/// Ajoute 1 au nombre donné.
-///
-/// # Exemples
-///
-/// ```
-/// let argument = 5;
-/// let reponse = ma_crate::ajouter_un(argument);
-///
-/// assert_eq!(6, reponse);
-/// ```
-pub fn ajouter_un(x: i32) -> i32 {
-    x + 1
-}
+{{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-01/src/lib.rs}}
 ```
 
 <!--
@@ -257,6 +233,14 @@ documentation de la fonction `ajouter_un` de l'encart 14-1, nous verrons une
 section dans les résultats de tests comme celle-ci :
 
 <!--
+<!-- manual-regeneration
+cd listings/ch14-more-about-cargo/listing-14-01/
+cargo test
+copy just the doc-tests section below
+-- >
+-->
+
+<!--
 ```text
    Doc-tests my_crate
 
@@ -328,24 +312,12 @@ fichier *src/lib.rs*, comme dans l'encart 14-2 :
 
 <!--
 ```rust,ignore
-//! # My Crate
-//!
-//! `my_crate` is a collection of utilities to make performing certain
-//! calculations more convenient.
-
-/// Adds one to the number given.
-// --snip--
+{{#rustdoc_include ../listings-sources/ch14-more-about-cargo/listing-14-02/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore
-//! # Ma crate
-//!
-//! `ma_crate` est un regroupement d'utilitaires pour rendre plus pratique
-//! certains calculs.
-
-/// Ajoute 1 au nombre donné.
-// -- partie masquée ici --
+{{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-02/src/lib.rs:here}}
 ```
 
 <!--
@@ -492,72 +464,12 @@ modules : un module `types` qui contient deux énumérations `CouleurPrimaire` 
 
 <!--
 ```rust
-//! # Art
-//!
-//! A library for modeling artistic concepts.
-
-pub mod kinds {
-    /// The primary colors according to the RYB color model.
-    pub enum PrimaryColor {
-        Red,
-        Yellow,
-        Blue,
-    }
-
-    /// The secondary colors according to the RYB color model.
-    pub enum SecondaryColor {
-        Orange,
-        Green,
-        Purple,
-    }
-}
-
-pub mod utils {
-    use crate::kinds::*;
-
-    /// Combines two primary colors in equal amounts to create
-    /// a secondary color.
-    pub fn mix(c1: PrimaryColor, c2: PrimaryColor) -> SecondaryColor {
-        // --snip--
-#         SecondaryColor::Orange
-    }
-}
-# fn main() {}
+{{#rustdoc_include ../listings-sources/ch14-more-about-cargo/listing-14-03/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-//! # Art
-//!
-//! Une bibliothèque pour modéliser des concepts artistiques.
-
-pub mod types {
-    /// Les couleurs primaires du modèle RJB.
-    pub enum CouleurPrimaire {
-        Rouge,
-        Jaune,
-        Bleu,
-    }
-
-    /// Les couleurs secondaires du modèle RJB.
-    pub enum CouleurSecondaire {
-        Orange,
-        Vert,
-        Violet,
-    }
-}
-
-pub mod utilitaires {
-    use crate::types::*;
-
-    /// Combine deux couleurs primaires dans les mêmes quantités pour
-    /// créer une couleur secondaire.
-    pub fn mixer(c1: CouleurPrimaire, c2: CouleurSecondaire) -> CouleurSecondaire {
-        // -- partie masquée ici --
-#         CouleurSecondaire::Orange
-    }
-}
-# fn main() {}
+{{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-03/src/lib.rs:here}}
 ```
 
 <!--
@@ -626,26 +538,12 @@ montre un exemple d'une crate qui utilise les éléments `CouleurPrimaire` et
 
 <!--
 ```rust,ignore
-use art::kinds::PrimaryColor;
-use art::utils::mix;
-
-fn main() {
-    let red = PrimaryColor::Red;
-    let yellow = PrimaryColor::Yellow;
-    mix(red, yellow);
-}
+{{#rustdoc_include ../listings-sources/ch14-more-about-cargo/listing-14-04/src/main.rs}}
 ```
 -->
 
 ```rust,ignore
-use art::types::CouleurPrimaire;
-use art::utilitaires::mixer;
-
-fn main() {
-    let rouge = CouleurPrimaire::Rouge;
-    let jaune = CouleurPrimaire::Jaune;
-    mixer(rouge, jaune);
-}
+{{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-04/src/main.rs}}
 ```
 
 <!--
@@ -700,40 +598,12 @@ pour ré-exporter les éléments au niveau supérieur, comme montré dans l'enca
 
 <!--
 ```rust,ignore
-//! # Art
-//!
-//! A library for modeling artistic concepts.
-
-pub use self::kinds::PrimaryColor;
-pub use self::kinds::SecondaryColor;
-pub use self::utils::mix;
-
-pub mod kinds {
-    // --snip--
-}
-
-pub mod utils {
-    // --snip--
-}
+{{#rustdoc_include ../listings-sources/ch14-more-about-cargo/listing-14-05/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore
-//! # Art
-//!
-//! Une bibliothèque pour modéliser des concepts artistiques.
-
-pub use self::types::CouleurPrimaire;
-pub use self::types::CouleurSecondaire;
-pub use self::utilitaires::mixer;
-
-pub mod types {
-    // -- partie masquée ici --
-}
-
-pub mod utilitaires {
-    // -- partie masquée ici --
-}
+{{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-05/src/lib.rs:here}}
 ```
 
 <!--
@@ -793,22 +663,12 @@ mais ils peuvent maintenant utiliser la structure plus pratique de l'encart
 
 <!--
 ```rust,ignore
-use art::PrimaryColor;
-use art::mix;
-
-fn main() {
-    // --snip--
-}
+{{#rustdoc_include ../listings-sources/ch14-more-about-cargo/listing-14-06/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-use art::CouleurPrimaire;
-use art::mixer;
-
-fn main() {
-    // -- partie masquée ici --
-}
+{{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-06/src/main.rs:here}}
 ```
 
 <!--
@@ -875,12 +735,12 @@ jeton d'API (NdT : *API key*). Ensuite, lancez la commande `cargo login` avec
 votre clé d'API, comme ceci :
 
 <!--
-```text
+```console
 $ cargo login abcdefghijklmnopqrstuvwxyz012345
 ```
 -->
 
-```text
+```console
 $ cargo login abcdefghijklmnopqrstuvwxyz012345
 ```
 
@@ -964,23 +824,31 @@ publier la crate à ce stade, vous allez avoir un avertissement suivi par une
 erreur :
 
 <!--
-```text
+<!-- manual-regeneration
+cd listings/ch14-more-about-cargo/listing-14-01/
+cargo publish
+copy just the relevant lines below
+-- >
+-->
+
+<!--
+```console
 $ cargo publish
-    Updating registry `https://github.com/rust-lang/crates.io-index`
-warning: manifest has no description, license, license-file, documentation,
-homepage or repository.
+    Updating crates.io index
+warning: manifest has no description, license, license-file, documentation, homepage or repository.
+See https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info.
 --snip--
-error: api errors: missing or empty metadata fields: description, license.
+error: api errors (status 200 OK): missing or empty metadata fields: description, license. Please see https://doc.rust-lang.org/cargo/reference/manifest.html for how to upload metadata
 ```
 -->
 
-```text
+```console
 $ cargo publish
-    Updating registry `https://github.com/rust-lang/crates.io-index`
-warning: manifest has no description, license, license-file, documentation,
-homepage or repository.
+    Updating crates.io index
+warning: manifest has no description, license, license-file, documentation, homepage or repository.
+See https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info.
 -- partie masquée ici --
-error: api errors: missing or empty metadata fields: description, license.
+error: api errors (status 200 OK): missing or empty metadata fields: description, license. Please see https://doc.rust-lang.org/cargo/reference/manifest.html for how to upload metadata
 ```
 
 <!--
@@ -1011,6 +879,10 @@ La [Linux Foundation’s Software Package Data Exchange (SPDX)][spdx] liste les
 identifications que vous pouvez utiliser pour cette valeur. Par exemple, pour
 renseigner que votre crate est sous la licence MIT, ajoutez l'identifiant
 `MIT` :
+
+<!--
+[spdx]: http://spdx.org/licenses/
+-->
 
 [spdx]: http://spdx.org/licenses/
 
@@ -1161,27 +1033,35 @@ Lancez la commande `cargo publish` à nouveau. Elle devrait fonctionner à
 présent :
 
 <!--
-```text
+<!-- manual-regeneration
+go to some valid crate, publish a new version
+cargo publish
+copy just the relevant lines below
+-- >
+-->
+
+<!--
+```console
 $ cargo publish
- Updating registry `https://github.com/rust-lang/crates.io-index`
-Packaging guessing_game v0.1.0 (file:///projects/guessing_game)
-Verifying guessing_game v0.1.0 (file:///projects/guessing_game)
-Compiling guessing_game v0.1.0
+    Updating crates.io index
+   Packaging guessing_game v0.1.0 (file:///projects/guessing_game)
+   Verifying guessing_game v0.1.0 (file:///projects/guessing_game)
+   Compiling guessing_game v0.1.0
 (file:///projects/guessing_game/target/package/guessing_game-0.1.0)
- Finished dev [unoptimized + debuginfo] target(s) in 0.19 secs
-Uploading guessing_game v0.1.0 (file:///projects/guessing_game)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.19s
+   Uploading guessing_game v0.1.0 (file:///projects/guessing_game)
 ```
 -->
 
-```text
+```console
 $ cargo publish
- Updating registry `https://github.com/rust-lang/crates.io-index`
-Packaging jeu_du_plus_ou_du_moins v0.1.0 (file:///projects/jeu_du_plus_ou_du_moins)
-Verifying jeu_du_plus_ou_du_moins v0.1.0 (file:///projects/jeu_du_plus_ou_du_moins)
-Compiling jeu_du_plus_ou_du_moins v0.1.0
+    Updating crates.io index
+   Packaging jeu_du_plus_ou_du_moins v0.1.0 (file:///projects/jeu_du_plus_ou_du_moins)
+   Verifying jeu_du_plus_ou_du_moins v0.1.0 (file:///projects/jeu_du_plus_ou_du_moins)
+   Compiling jeu_du_plus_ou_du_moins v0.1.0
 (file:///projects/jeu_du_plus_ou_du_moins/target/package/jeu_du_plus_ou_du_moins-0.1.0)
- Finished dev [unoptimized + debuginfo] target(s) in 0.19 secs
-Uploading jeu_du_plus_ou_du_moins v0.1.0 (file:///projects/jeu_du_plus_ou_du_moins)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.19s
+   Uploading jeu_du_plus_ou_du_moins v0.1.0 (file:///projects/jeu_du_plus_ou_du_moins)
 ```
 
 <!--
@@ -1262,7 +1142,13 @@ want to yank:
 Pour déprécier une version d'une crate, lancez `cargo yank` et renseignez quelle
 version vous voulez déprécier :
 
-```text
+<!--
+```console
+$ cargo yank --vers 1.0.1
+```
+-->
+
+```console
 $ cargo yank --vers 1.0.1
 ```
 
@@ -1274,7 +1160,13 @@ to start depending on a version again:
 Si vous ajoutez `--undo` à la commande, vous pouvez aussi annuler une
 dépréciation et permettre à nouveaux aux projets de dépendre de cette version :
 
-```text
+<!--
+```console
+$ cargo yank --vers 1.0.1 --undo
+```
+-->
+
+```console
 $ cargo yank --vers 1.0.1 --undo
 ```
 
