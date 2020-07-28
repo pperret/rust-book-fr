@@ -110,11 +110,14 @@ L'encart 15-1 nous montre comment utiliser une boite pour stocker une valeur
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
 ```rust
-fn main() {
-    let b = Box::new(5);
-    println!("b = {}", b);
-}
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-01/src/main.rs}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-01/src/main.rs}}
 ```
 
 <!--
@@ -283,18 +286,12 @@ pas encore de taille connue, ce que nous allons voir ensuite.
 
 <!--
 ```rust,ignore,does_not_compile
-enum List {
-    Cons(i32, List),
-    Nil,
-}
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-02/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-enum List {
-    Cons(i32, List),
-    Nil,
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-02/src/main.rs:here}}
 ```
 
 <!--
@@ -332,12 +329,14 @@ code dans l'encart 15-3 :
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
 ```rust,ignore,does_not_compile
-use crate::List::{Cons, Nil};
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-03/src/main.rs:here}}
+```
+-->
 
-fn main() {
-    let list = Cons(1, Cons(2, Cons(3, Nil)));
-}
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-03/src/main.rs:here}}
 ```
 
 <!--
@@ -369,17 +368,14 @@ Listing 15-4:
 Si nous essayons de compiler le code de l'encart 15-3, nous avons l'erreur de
 l'encart 15-4 :
 
-```text
-error[E0072]: recursive type `List` has infinite size
- -- > src/main.rs:1:1
-  |
-1 | enum List {
-  | ^^^^^^^^^ recursive type has infinite size
-2 |     Cons(i32, List),
-  |               ----- recursive without indirection
-  |
-  = help: insert indirection (e.g., a `Box`, `Rc`, or `&`) at some point to
-  make `List` representable
+<!--
+```console
+{{#include ../listings-sources/ch15-smart-pointers/listing-15-03/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch15-smart-pointers/listing-15-03/output.txt}}
 ```
 
 <!--
@@ -423,22 +419,12 @@ chapitre 6 :
 
 <!--
 ```rust
-enum Message {
-    Quit,
-    Move { x: i32, y: i32 },
-    Write(String),
-    ChangeColor(i32, i32, i32),
-}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-02/src/main.rs:here}}
 ```
 -->
 
 ```rust
-enum Message {
-    Quitter,
-    Deplacer { x: i32, y: i32 },
-    Ecrire(String),
-    ChangerCouleur(i32, i32, i32),
-}
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-02/src/main.rs:here}}
 ```
 
 <!--
@@ -514,9 +500,20 @@ Rust ne peut pas calculer la quantité d'espace à allouer pour les types
 définis récursivement, donc le compilateur déclenche l'erreur de l'encart
 15-4. Mais l'erreur renferme cette suggestion très utile :
 
+<!--
+<!-- manual-regeneration
+after doing automatic regeneration, look at listings/ch15-smart-pointers/listing-15-03/output.txt and copy the relevant line
+-- >
+-->
+
+<!--
 ```text
-  = help: insert indirection (e.g., a `Box`, `Rc`, or `&`) at some point to
-  make `List` representable
+  = help: insert indirection (e.g., a `Box`, `Rc`, or `&`) at some point to make `List` representable
+```
+-->
+
+```text
+  = help: insert indirection (e.g., a `Box`, `Rc`, or `&`) at some point to make `List` representable
 ```
 
 <!--
@@ -566,20 +563,14 @@ va se compiler :
 
 <span class="filename">Filename : src/main.rs</span>
 
+<!--
 ```rust
-enum List {
-    Cons(i32, Box<List>),
-    Nil,
-}
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-05/src/main.rs}}
+```
+-->
 
-use crate::List::{Cons, Nil};
-
-fn main() {
-    let list = Cons(1,
-        Box::new(Cons(2,
-            Box::new(Cons(3,
-                Box::new(Nil))))));
-}
+```rust
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-05/src/main.rs}}
 ```
 
 <!--
