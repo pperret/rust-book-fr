@@ -65,35 +65,47 @@ permettait de rechercher dans des fichiers. Si nous voulons installer
 `ripgrep`, nous pouvons faire comme ceci :
 
 <!--
-```text
+<!-- manual-regeneration
+cargo install something you don't have, copy relevant output below
+-- >
+-->
+
+<!--
+```console
 $ cargo install ripgrep
-Updating registry `https://github.com/rust-lang/crates.io-index`
- Downloading ripgrep v0.3.2
- --snip--
-   Compiling ripgrep v0.3.2
-    Finished release [optimized + debuginfo] target(s) in 97.91 secs
+    Updating crates.io index
+  Downloaded ripgrep v11.0.2
+  Downloaded 1 crate (243.3 KB) in 0.88s
+  Installing ripgrep v11.0.2
+--snip--
+   Compiling ripgrep v11.0.2
+    Finished release [optimized] target(s) in 3m 10s
   Installing ~/.cargo/bin/rg
+   Installed package `ripgrep v11.0.2` (executable `rg`)
 ```
 -->
 
-```text
+```console
 $ cargo install ripgrep
-Updating registry `https://github.com/rust-lang/crates.io-index`
- Downloading ripgrep v0.3.2
- -- partie masquée ici --
-   Compiling ripgrep v0.3.2
-    Finished release [optimized + debuginfo] target(s) in 97.91 secs
+    Updating crates.io index
+  Downloaded ripgrep v11.0.2
+  Downloaded 1 crate (243.3 KB) in 0.88s
+  Installing ripgrep v11.0.2
+-- partie masquée ici --
+   Compiling ripgrep v11.0.2
+    Finished release [optimized] target(s) in 3m 10s
   Installing ~/.cargo/bin/rg
+   Installed package `ripgrep v11.0.2` (executable `rg`)
 ```
 
 <!--
-The last line of the output shows the location and the name of the installed
-binary, which in the case of `ripgrep` is `rg`. As long as the installation
-directory is in your `$PATH`, as mentioned previously, you can then run `rg
---help` and start using a faster, rustier tool for searching files!
+The second-to-last line of the output shows the location and the name of the
+installed binary, which in the case of `ripgrep` is `rg`. As long as the
+installation directory is in your `$PATH`, as mentioned previously, you can
+then run `rg --help` and start using a faster, rustier tool for searching files!
 -->
 
-La dernière ligne de la sortie nous montre l'emplacement et le nom du
+L'avant-dernière ligne de la sortie nous montre l'emplacement et le nom du
 binaire installé, qui est `rg` dans le cas de `ripgrep`. Tel que mentionné
 précédemment, du moment que le dossier d'installation est dans votre `$PATH`,
 vous pouvez ensuite lancer `rg --help` et commencer à utiliser un outil en Rust
