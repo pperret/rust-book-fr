@@ -20,7 +20,7 @@ provide an implementation for the `Drop` trait on any type, and the code you
 specify can be used to release resources like files or network connections.
 We’re introducing `Drop` in the context of smart pointers because the
 functionality of the `Drop` trait is almost always used when implementing a
-smart pointer. For example, `Box<T>` customizes `Drop` to deallocate the space
+smart pointer. For example, when a `Box<T>` is dropped it will deallocate the space
 on the heap that the box points to.
 -->
 
@@ -30,10 +30,10 @@ d'une portée. Vous pouvez fournir une implémentation du trait `Drop` sur
 n'importe quel type, et le code que vous renseignez peut être utilisé pour
 libérer des ressources comme des fichiers ou des connections réseau. Nous
 présentons `Drop` dans le contexte des pointeurs intelligents car la
-fonctionnalité du trait `Drop` est quasiment utilisé systématiquement utilisé
-lorsque nous implémentons un pointeur intelligent. Par exemple, `Box<T>`
-personnalise `Drop` pour désallouer l'espace occupé sur le tas sur lequel la
-boite pointe.
+fonctionnalité du trait `Drop` est quasiment systématiquement utilisé
+lorsque nous implémentons un pointeur intelligent. Par exemple, lorsqu'une
+`Box<T>` est libérée, elle va désallouer l'espace occupé sur le tas sur lequel
+la boite pointe.
 
 <!--
 In some languages, the programmer must call code to free memory or resources
@@ -88,41 +88,12 @@ fonction `drop`.
 
 <!--
 ```rust
-struct CustomSmartPointer {
-    data: String,
-}
-
-impl Drop for CustomSmartPointer {
-    fn drop(&mut self) {
-        println!("Dropping CustomSmartPointer with data `{}`!", self.data);
-    }
-}
-
-fn main() {
-    let c = CustomSmartPointer { data: String::from("my stuff") };
-    let d = CustomSmartPointer { data: String::from("other stuff") };
-    println!("CustomSmartPointers created.");
-}
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-14/src/main.rs}}
 ```
 -->
 
 ```rust
-struct PointeurPerso {
-    donnee: String,
-}
-
-impl Drop for PointeurPerso {
-    fn drop(&mut self) {
-        println!(   "Nettoyage d'un PointeurPerso avec la donnée `{}` !",
-                    self.donnee);
-    }
-}
-
-fn main() {
-    let c = PointeurPerso { donnee: String::from("des trucs") };
-    let d = PointeurPerso { donnee: String::from("d'autres trucs") };
-    println!("PointeurPerso créés");
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-14/src/main.rs}}
 ```
 
 <!--
@@ -171,17 +142,13 @@ When we run this program, we’ll see the following output:
 Lorsque nous exécutons ce programme, nous devrions voir la sortie suivante :
 
 <!--
-```text
-CustomSmartPointers created.
-Dropping CustomSmartPointer with data `other stuff`!
-Dropping CustomSmartPointer with data `my stuff`!
+```console
+{{#include ../listings/ch15-smart-pointers/listing-15-14/output.txt}}
 ```
 -->
 
-```text
-PointeurPerso créés
-Nettoyage d'un PointeurPerso avec la donnée `d'autres trucs` !
-Nettoyage d'un PointeurPerso avec la donnée `des trucs` !
+```console
+{{#include ../listings/ch15-smart-pointers/listing-15-14/output.txt}}
 ```
 
 <!--
@@ -247,22 +214,12 @@ aurons une erreur de compilation :
 
 <!--
 ```rust,ignore,does_not_compile
-fn main() {
-    let c = CustomSmartPointer { data: String::from("some data") };
-    println!("CustomSmartPointer created.");
-    c.drop();
-    println!("CustomSmartPointer dropped before the end of main.");
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-15/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-fn main() {
-    let c = PointeurPerso { donnee: String::from("des trucs") };
-    println!("PointeurPerso créé");
-    c.drop();
-    println!("PointeurPerso libéré avant la fin du main");
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-15/src/main.rs:here}}
 ```
 
 <!--
@@ -279,12 +236,14 @@ When we try to compile this code, we’ll get this error:
 
 Lorsque nous essayons de compiler ce code, nous obtenons l'erreur suivante :
 
-```text
-error[E0040]: explicit use of destructor method
-  -- > src/main.rs:14:7
-   |
-14 |     c.drop();
-   |       ^^^^ explicit destructor calls not allowed
+<!--
+```console
+{{#include ../listings/ch15-smart-pointers/listing-15-15/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch15-smart-pointers/listing-15-15/output.txt}}
 ```
 
 <!--
@@ -345,43 +304,12 @@ la fonction `drop`, comme dans l'encart 15-16 :
 
 <!--
 ```rust
-# struct CustomSmartPointer {
-#     data: String,
-# }
-#
-# impl Drop for CustomSmartPointer {
-#     fn drop(&mut self) {
-#         println!("Dropping CustomSmartPointer with data `{}`!", self.data);
-#     }
-# }
-#
-fn main() {
-    let c = CustomSmartPointer { data: String::from("some data") };
-    println!("CustomSmartPointer created.");
-    drop(c);
-    println!("CustomSmartPointer dropped before the end of main.");
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-16/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# struct PointeurPerso {
-#     donnee: String,
-# }
-#
-# impl Drop for PointeurPerso {
-#     fn drop(&mut self) {
-#         println!( "Nettoyage d'un PointeurPerso avec la donnée `{}` !",
-#                   self.donnee);
-#     }
-# }
-#
-fn main() {
-    let c = PointeurPerso { donnee: String::from("des trucs") };
-    println!("PointeurPerso créé");
-    drop(c);
-    println!("PointeurPerso libéré avant la fin du main");
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-16/src/main.rs:here}}
 ```
 
 <!--
@@ -399,17 +327,13 @@ Running this code will print the following:
 L'exécution de code va afficher ceci :
 
 <!--
-```text
-CustomSmartPointer created.
-Dropping CustomSmartPointer with data `some data`!
-CustomSmartPointer dropped before the end of main.
+```console
+{{#include ../listings/ch15-smart-pointers/listing-15-16/output.txt}}
 ```
 -->
 
-```text
-PointeurPerso créé
-Nettoyage d'un CustomSmartPointer avec la donnée `des trucs` !
-PointeurPerso libéré avant la fin du main
+```console
+{{#include ../listings/ch15-smart-pointers/listing-15-16/output.txt}}
 ```
 
 <!--
