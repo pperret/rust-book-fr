@@ -44,9 +44,9 @@ qui se comporte comme `Box<T>`, et voir pourquoi l'opérateur de déréférencem
 ne fonctionne pas comme une référence sur notre type fraîchement défini. Nous
 allons découvrir comment implémenter le trait `Deref` de manière à ce qu'il soit
 possible que les pointeurs intelligents fonctionnent comme les références.
-Ensuite nous verons la fonctionnalité de *coercition de déréférencement* de Rust
-et voir comment elle nous permet de travailler à la fois avec des références et
-des pointeurs intelligents.
+Ensuite nous verons la fonctionnalité d'*extrapolation de déréférencement* de
+Rust et voir comment elle nous permet de travailler à la fois avec des
+références et des pointeurs intelligents.
 
 <!--
 > Note: there’s one big difference between the `MyBox<T>` type we’re about to
@@ -85,14 +85,14 @@ ensuite l'opérateur de déréférencement pour suivre la référence vers la do
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
 ```rust
-fn main() {
-    let x = 5;
-    let y = &x;
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-06/src/main.rs}}
+```
+-->
 
-    assert_eq!(5, x);
-    assert_eq!(5, *y);
-}
+```rust
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-06/src/main.rs}}
 ```
 
 <!--
@@ -128,15 +128,14 @@ error:
 Si nous avions essayé d'écrire `assert_eq!(5, y);` à la place, nous aurions
 obtenu cette erreur de compilation :
 
-```text
-error[E0277]: can't compare `{integer}` with `&{integer}`
- -- > src/main.rs:6:5
-  |
-6 |     assert_eq!(5, y);
-  |     ^^^^^^^^^^^^^^^^^ no implementation for `{integer} == &{integer}`
-  |
-  = help: the trait `std::cmp::PartialEq<&{integer}>` is not implemented for
-  `{integer}`
+<!--
+```console
+{{#include ../listings-sources/ch15-smart-pointers/output-only-01-comparing-to-reference/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch15-smart-pointers/output-only-01-comparing-to-reference/output.txt}}
 ```
 
 <!--
@@ -170,14 +169,14 @@ montré dans l'encart 15-7 :
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
 ```rust
-fn main() {
-    let x = 5;
-    let y = Box::new(x);
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-07/src/main.rs}}
+```
+-->
 
-    assert_eq!(5, x);
-    assert_eq!(5, *y);
-}
+```rust
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-07/src/main.rs}}
 ```
 
 <!--
@@ -190,7 +189,7 @@ déréférencement sur un `Box<i32>`</span>
 
 <!--
 The only difference between Listing 15-7 and Listing 15-6 is that here we set
-`y` to be an instance of a box pointing to the value in `x` rather than a
+`y` to be an instance of a box pointing to a copied value of `x` rather than a
 reference pointing to the value of `x`. In the last assertion, we can use the
 dereference operator to follow the box’s pointer in the same way that we did
 when `y` was a reference. Next, we’ll explore what is special about `Box<T>`
@@ -198,12 +197,13 @@ that enables us to use the dereference operator by defining our own box type.
 -->
 
 La seule différence entre l'encart 15-7 et l'encart 15-6 est qu'ici nous avons
-fait en sorte que `y` soit une instance de boite qui pointe sur la valeur de
-`x`. Dans la dernière assertion, nous pouvons utiliser l'opérateur de
-déréférencement pour suivre le pointeur de la boite de la même manière que nous
-l'avons fait lorsque `y` était une référence. Maintenant, nous allons regarder
-ce qu'il y a de si spécial dans `Box<T>` qui nous permet d'utiliser l'opérateur
-de déréférencement en définissant notre propre type de boite.
+fait en sorte que `y` soit une instance de boite qui pointe sur une copie de la
+valeur de `x` plutôt qu'avoir une référence vers la valeur de `x`. Dans la
+dernière assertion, nous pouvons utiliser l'opérateur de déréférencement pour
+suivre le pointeur de la boite de la même manière que nous l'avons fait lorsque
+`y` était une référence. Maintenant, nous allons regarder ce qu'il y a de si
+spécial dans `Box<T>` qui nous permet d'utiliser l'opérateur de déréférencement
+en définissant notre propre type de boite.
 
 <!--
 ### Defining Our Own Smart Pointer
@@ -242,24 +242,12 @@ fonction `new` définie sur `Box<T>`.
 
 <!--
 ```rust
-struct MyBox<T>(T);
-
-impl<T> MyBox<T> {
-    fn new(x: T) -> MyBox<T> {
-        MyBox(x)
-    }
-}
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-08/src/main.rs:here}}
 ```
 -->
 
 ```rust
-struct MaBoite<T>(T);
-
-impl<T> MaBoite<T> {
-    fn new(x: T) -> MaBoite<T> {
-        MaBoite(x)
-    }
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-08/src/main.rs:here}}
 ```
 
 <!--
@@ -301,24 +289,12 @@ comment déréférencer `MaBoite`.
 
 <!--
 ```rust,ignore,does_not_compile
-fn main() {
-    let x = 5;
-    let y = MyBox::new(x);
-
-    assert_eq!(5, x);
-    assert_eq!(5, *y);
-}
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-09/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-fn main() {
-    let x = 5;
-    let y = MaBoite::new(x);
-
-    assert_eq!(5, x);
-    assert_eq!(5, *y);
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-09/src/main.rs:here}}
 ```
 
 <!--
@@ -336,21 +312,13 @@ Here’s the resulting compilation error:
 Voici l'erreur de compilation qui en résulte :
 
 <!--
-```text
-error[E0614]: type `MyBox<{integer}>` cannot be dereferenced
-  -- > src/main.rs:14:19
-   |
-14 |     assert_eq!(5, *y);
-   |                   ^^
+```console
+{{#include ../listings-sources/ch15-smart-pointers/listing-15-09/output.txt}}
 ```
 -->
 
-```text
-error[E0614]: type `MaBoite<{integer}>` cannot be dereferenced
-  -- > src/main.rs:14:19
-   |
-14 |     assert_eq!(5, *y);
-   |                   ^^
+```console
+{{#include ../listings/ch15-smart-pointers/listing-15-09/output.txt}}
 ```
 
 <!--
@@ -392,30 +360,12 @@ référence vers la donnée interne. L'encart 15-10 contient une implémentation
 
 <!--
 ```rust
-use std::ops::Deref;
-
-# struct MyBox<T>(T);
-impl<T> Deref for MyBox<T> {
-    type Target = T;
-
-    fn deref(&self) -> &T {
-        &self.0
-    }
-}
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-10/src/main.rs:here}}
 ```
 -->
 
 ```rust
-use std::ops::Deref;
-
-# struct MaBoite<T>(T);
-impl<T> Deref for MaBoite<T> {
-    type Target = T;
-
-    fn deref(&self) -> &T {
-        &self.0
-    }
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-10/src/main.rs:here}}
 ```
 
 <!--
@@ -468,6 +418,12 @@ code:
 
 Lorsque nous avons précisé `*y` dans l'encart 15-9, Rust fait tourner ce code en
 coulisses :
+
+<!--
+```rust,ignore
+*(y.deref())
+```
+-->
 
 ```rust,ignore
 *(y.deref())
@@ -522,28 +478,32 @@ qui correspond au `5` du `assert_eq!` de l'encart 15-9.
 ### Implicit Deref Coercions with Functions and Methods
 -->
 
-### Coercition de déréférencement implicite avec les fonctions et les méthodes
+### Extrapolation de déréférencement implicite avec les fonctions et les méthodes
 
 <!--
 *Deref coercion* is a convenience that Rust performs on arguments to functions
-and methods. Deref coercion converts a reference to a type that implements
-`Deref` into a reference to a type that `Deref` can convert the original type
-into. Deref coercion happens automatically when we pass a reference to a
-particular type’s value as an argument to a function or method that doesn’t
-match the parameter type in the function or method definition. A sequence of
-calls to the `deref` method converts the type we provided into the type the
-parameter needs.
+and methods. Deref coercion works only on types that implement the `Deref`
+trait. Deref coercion converts such a type into a reference to another type.
+For example, deref coercion can convert `&String` to `&str` because `String`
+implements the `Deref` trait such that it returns `str`. Deref coercion happens
+automatically when we pass a reference to a particular type’s value as an
+argument to a function or method that doesn’t match the parameter type in the
+function or method definition. A sequence of calls to the `deref` method
+converts the type we provided into the type the parameter needs.
 -->
 
-La *coercition de déréférencement* est une commodité que Rust applique sur les
-arguments des fonctions et des méthodes. La coercition de déréférencement
-convertit une référence, d'un type qui implémente `Deref`, dans un type que
-`Deref` peut convertir dans le type original. La coercition de déréférencement
-s'applique automatiquement lorsque nous passons une référence vers une valeur
-d'un type particulier en argument d'une fonction ou d'une méthode qui ne
-correspond pas à ce type de paramètre dans la définition de la fonction ou de la
-méthode. Une série d'appels à la méthode `deref` convertit le type que nous
-donnons dans le type que le paramètre nécessite.
+L'*extrapolation de déréférencement* est une commodité que Rust applique sur les
+arguments des fonctions et des méthodes. L'extrapolation de déréférencement
+fonctionne uniquement avec un type qui implémente le trait `Deref`.
+L'extrapolation de déréférencement convertit ce type en une référence vers un
+autre type. Par exemple, l'extrapolation de déréférencement peut convertir
+`&String` en `&str` car `String` implémente le trait `Deref` de sorte qu'il
+puisse retourner `str`. L'extrapolation de déréférencement s'applique
+automatiquement lorsque nous passons une référence vers une valeur d'un type
+particulier en argument d'une fonction ou d'une méthode qui ne correspond pas à
+ce type de paramètre dans la définition de la fonction ou de la méthode. Une
+série d'appels à la méthode `deref` convertit le type que nous donnons dans le
+type que le paramètre nécessite.
 
 <!--
 Deref coercion was added to Rust so that programmers writing function and
@@ -552,10 +512,10 @@ with `&` and `*`. The deref coercion feature also lets us write more code that
 can work for either references or smart pointers.
 -->
 
-La coercition de déréférencement a été ajouté à Rust afin de permettre aux
+L'extrapolation de déréférencement a été ajouté à Rust afin de permettre aux
 développeurs d'écrire des appels de fonctions et de méthodes qui n'ont pas
 besoin d'indiquer explicitement les références et les déréférencements avec `&`
-et `*`. La fonctionnalité de coercition de déréférencement nous permet aussi
+et `*`. La fonctionnalité d'extrapolation de déréférencement nous permet aussi
 d'écrire plus de code qui peut fonctionner à la fois pour les références ou pour
 les pointeurs intelligents.
 
@@ -566,7 +526,7 @@ Listing 15-8 as well as the implementation of `Deref` that we added in Listing
 parameter:
 -->
 
-Pour voir la coercition de déréférencement en action, utilisons le type
+Pour voir l'extrapolation de déréférencement en action, utilisons le type
 `MaBoite<T>` que nous avons défini dans l'encart 15-8 ainsi que l'implémentation
 de `Deref` que nous avons ajouté dans l'encart 15-10. L'encart 15-11 montre la
 définition d'une fonction qui a un paramètre qui est une slice de chaîne de
@@ -580,16 +540,12 @@ caractères :
 
 <!--
 ```rust
-fn hello(name: &str) {
-    println!("Hello, {}!", name);
-}
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-11/src/main.rs:here}}
 ```
 -->
 
 ```rust
-fn saluer(nom: &str) {
-    println!("Salutations, {} !", nom);
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-11/src/main.rs:here}}
 ```
 
 <!--
@@ -607,7 +563,7 @@ with a reference to a value of type `MyBox<String>`, as shown in Listing 15-12:
 -->
 
 Nous pouvons appeler la fonction `saluer` avec une slice de chaîne de caractères
-en argument, comme par exemple `saluer("Rust");`. La coercition de
+en argument, comme par exemple `saluer("Rust");`. L'extrapolation de
 déréférencement rend possible l'appel de `saluer` avec une référence à une
 valeur du type `MaBoite<String>`, comme dans l'encart 15-12 :
 
@@ -619,62 +575,12 @@ valeur du type `MaBoite<String>`, comme dans l'encart 15-12 :
 
 <!--
 ```rust
-# use std::ops::Deref;
-#
-# struct MyBox<T>(T);
-#
-# impl<T> MyBox<T> {
-#     fn new(x: T) -> MyBox<T> {
-#         MyBox(x)
-#     }
-# }
-#
-# impl<T> Deref for MyBox<T> {
-#     type Target = T;
-#
-#     fn deref(&self) -> &T {
-#         &self.0
-#     }
-# }
-#
-# fn hello(name: &str) {
-#     println!("Hello, {}!", name);
-# }
-#
-fn main() {
-    let m = MyBox::new(String::from("Rust"));
-    hello(&m);
-}
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-12/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# use std::ops::Deref;
-#
-# struct MaBoite<T>(T);
-#
-# impl<T> MaBoite<T> {
-#     fn new(x: T) -> MaBoite<T> {
-#         MaBoite(x)
-#     }
-# }
-#
-# impl<T> Deref for MaBoite<T> {
-#     type Target = T;
-#
-#     fn deref(&self) -> &T {
-#         &self.0
-#     }
-# }
-#
-# fn saluer(nom: &str) {
-#     println!("Salutations, {} !", nom);
-# }
-#
-fn main() {
-    let m = MaBoite::new(String::from("Rust"));
-    saluer(&m);
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-12/src/main.rs:here}}
 ```
 
 <!--
@@ -683,7 +589,7 @@ fn main() {
 -->
 
 <span class="caption">Encart 15-12 : appel à `saluer` avec une référence à une
-valeur du type `MaBoite<String>`, qui fonctionne grâce à la coercition de
+valeur du type `MaBoite<String>`, qui fonctionne grâce à l'extrapolation de
 déréférencement</span>
 
 <!--
@@ -711,9 +617,9 @@ Listing 15-13 instead of the code in Listing 15-12 to call `hello` with a value
 of type `&MyBox<String>`.
 -->
 
-Si Rust n'avait pas implémenté la coercition de déréférencement, nous aurions dû
-écrire le code de l'encart 15-13 au lieu du code de l'encart 15-12 pour appeler
-`saluer` avec une valeur du type `&MaBoite<String>`.
+Si Rust n'avait pas implémenté l'extrapolation de déréférencement, nous aurions
+dû écrire le code de l'encart 15-13 au lieu du code de l'encart 15-12 pour
+appeler `saluer` avec une valeur du type `&MaBoite<String>`.
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -723,62 +629,12 @@ Si Rust n'avait pas implémenté la coercition de déréférencement, nous aurio
 
 <!--
 ```rust
-# use std::ops::Deref;
-#
-# struct MyBox<T>(T);
-#
-# impl<T> MyBox<T> {
-#     fn new(x: T) -> MyBox<T> {
-#         MyBox(x)
-#     }
-# }
-#
-# impl<T> Deref for MyBox<T> {
-#     type Target = T;
-#
-#     fn deref(&self) -> &T {
-#         &self.0
-#     }
-# }
-#
-# fn hello(name: &str) {
-#     println!("Hello, {}!", name);
-# }
-#
-fn main() {
-    let m = MyBox::new(String::from("Rust"));
-    hello(&(*m)[..]);
-}
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-13/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# use std::ops::Deref;
-#
-# struct MaBoite<T>(T);
-#
-# impl<T> MaBoite<T> {
-#     fn new(x: T) -> MaBoite<T> {
-#         MaBoite(x)
-#     }
-# }
-#
-# impl<T> Deref for MaBoite<T> {
-#     type Target = T;
-#
-#     fn deref(&self) -> &T {
-#         &self.0
-#     }
-# }
-#
-# fn saluer(nom: &str) {
-#     println!("Salutations, {} !", nom);
-# }
-#
-fn main() {
-    let m = MaBoite::new(String::from("Rust"));
-    saluer(&(*m)[..]);
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-13/src/main.rs:here}}
 ```
 
 <!--
@@ -787,7 +643,7 @@ didn’t have deref coercion</span>
 -->
 
 <span class="caption">Encart 15-13 : le code que nous aurions dû écrire si Rust
-n'avait pas de coercition de déréférencement</span>
+n'avait pas d'extrapolation de déréférencement</span>
 
 <!--
 The `(*m)` dereferences the `MyBox<String>` into a `String`. Then the `&` and
@@ -800,9 +656,9 @@ allows Rust to handle these conversions for us automatically.
 Le `(*m)` déréférence la `MaBoite<String>` en une `String`. Ensuite le `&` et le
 `[..]` créent une slice de chaîne de caractères à partir de la `String` qui est
 égale à l'intégralité du contenu de la `String`, ceci afin de correspondre à la
-signature de `saluer`. Le code sans la coercition de déréférencement est bien
+signature de `saluer`. Le code sans l'extrapolation de déréférencement est bien
 plus difficile à lire, écrire et comprendre avec la présence de tous ces
-symboles. La coercition de déréférencement permet à Rust d'automatiser ces
+symboles. L'extrapolation de déréférencement permet à Rust d'automatiser ces
 convertions pour nous.
 
 <!--
@@ -817,14 +673,14 @@ Lorsque le trait `Deref` est défini pour les types concernés, Rust va analyser
 les types et utiliser `Deref::deref` autant de fois que nécessaire pour obtenir
 une référence qui correspond au type du paramètre. Le nombre de fois qu'il est
 nécessaire d'insérer `Deref::deref` est résolu au moment de la compilation,
-ainsi il n'y a pas de surcoût au moment de l'exécution pour bénéficier de la
-coercition de déréférencement !
+ainsi il n'y a pas de surcoût au moment de l'exécution pour bénéficier de
+l'extrapolation de déréférencement !
 
 <!--
 ### How Deref Coercion Interacts with Mutability
 -->
 
-### L'interaction de la coercition de déréférencement avec la mutabilité
+### L'interaction de l'extrapolation de déréférencement avec la mutabilité
 
 <!--
 Similar to how you use the `Deref` trait to override the `*` operator on
@@ -842,7 +698,7 @@ Rust does deref coercion when it finds types and trait implementations in three
 cases:
 -->
 
-Rust procède à la coercition de déréférencement lorsqu'il trouve des types et
+Rust procède à l'extrapolation de déréférencement lorsqu'il trouve des types et
 des implémentations de traits dans trois cas :
 
 <!--
@@ -865,7 +721,7 @@ happens for mutable references.
 Les deux premiers cas sont exactement les mêmes, sauf pour la mutabilité. Le
 premier cas signifie que si vous avez un `&T` et que `T` implémente `Deref` pour
 le type `U`, vous pouvez obtenir un `&U` de manière transparente. Le second cas
-signifie que la même coercition de déréférencement se déroule pour les
+signifie que la même extrapolation de déréférencement se déroule pour les
 références mutables.
 
 <!--
@@ -875,19 +731,20 @@ never coerce to mutable references. Because of the borrowing rules, if you have
 a mutable reference, that mutable reference must be the only reference to that
 data (otherwise, the program wouldn’t compile). Converting one mutable
 reference to one immutable reference will never break the borrowing rules.
-Converting an immutable reference to a mutable reference would require that
-there is only one immutable reference to that data, and the borrowing rules
-don’t guarantee that. Therefore, Rust can’t make the assumption that converting
-an immutable reference to a mutable reference is possible.
+Converting an immutable reference to a mutable reference would require that the
+initial immutable reference is the only immutable reference to that data, but
+the borrowing rules don’t guarantee that. Therefore, Rust can’t make the
+assumption that converting an immutable reference to a mutable reference is
+possible.
 -->
 
-Le troisième cas est plus ardue : Rust va aussi procéder à une coercition de
+Le troisième cas est plus ardue : Rust va aussi procéder à une extrapolation de
 déréférencement d'une référence immuable vers une référence mutable. A cause des
 règles d'emprunt, si vous avez une référence mutable, cette référence mutable
 doit être la seule référence vers cette donnée (autrement, le programme ne peut
 pas être compilé). Convertir une référence mutable vers une référence immuable
 ne va jamais casser les règles d'emprunt. Convertir une référence immuable vers
-une référence mutable nécessite qu'il n'y ait qu'une seule référence immuable
-vers cette donnée, et les règles d'emprunt n'empêchent pas cela. Ainsi, Rust ne
-peut pas déduire que la conversion d'une référence immuable vers une référence
-mutable soit possible.
+une référence mutable nécessite que la référence immuable initiale soit la seule
+référence immuable vers cette donnée, mais les règles d'emprunt n'empêchent pas
+cela. Ainsi, Rust ne peut pas déduire que la conversion d'une référence immuable
+vers une référence mutable soit possible.
