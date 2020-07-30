@@ -49,8 +49,8 @@ starting with the definition of the `List` enum and a `tail` method in Listing
 -->
 
 Voyons comment une boucle de références peut exister et comment l'éviter, en
-commençant par la définition de l'énumération `List` et la méthode `tail` de
-l'encart 15-25 :
+commençant par la définition de l'énumération `List` et la méthode `parcourir`
+de l'encart 15-25 :
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -58,29 +58,14 @@ l'encart 15-25 :
 
 <span class="filename">Fichier : src/main.rs</span>
 
-<!-- Hidden fn main is here to disable the automatic wrapping in fn main that
-doc tests do; the `use List` fails if this listing is put within a main -->
+<!--
+```rust
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-25/src/main.rs}}
+```
+-->
 
 ```rust
-# fn main() {}
-use std::rc::Rc;
-use std::cell::RefCell;
-use crate::List::{Cons, Nil};
-
-#[derive(Debug)]
-enum List {
-    Cons(i32, RefCell<Rc<List>>),
-    Nil,
-}
-
-impl List {
-    fn tail(&self) -> Option<&RefCell<Rc<List>>> {
-        match self {
-            Cons(_, item) => Some(item),
-            Nil => None,
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-25/src/main.rs}}
 ```
 
 <!--
@@ -106,8 +91,8 @@ Le second élément dans la variante `Cons` est maintenant un
 `RefCell<Rc<List>>`, ce qui signifie qu'au lieu de pouvoir modifier la valeur
 `i32` comme nous l'avions fait dans l'encart 15-24, nous modifions ce sur quoi
 une variante `Cons` pointe (qui reste une valeur `List`). Nous ajoutons
-également une méthode `tail` pour nous faciliter l'accès au second élément si
-nous avons une variante `Cons`.
+également une méthode `parcourir` pour nous faciliter l'accès au second élément
+si nous avons une variante `Cons`.
 
 <!--
 In Listing 15-26, we’re adding a `main` function that uses the definitions in
@@ -132,92 +117,12 @@ références à différents endroits du processus.
 
 <!--
 ```rust
-# use crate::List::{Cons, Nil};
-# use std::rc::Rc;
-# use std::cell::RefCell;
-# #[derive(Debug)]
-# enum List {
-#     Cons(i32, RefCell<Rc<List>>),
-#     Nil,
-# }
-#
-# impl List {
-#     fn tail(&self) -> Option<&RefCell<Rc<List>>> {
-#         match self {
-#             Cons(_, item) => Some(item),
-#             Nil => None,
-#         }
-#     }
-# }
-#
-fn main() {
-    let a = Rc::new(Cons(5, RefCell::new(Rc::new(Nil))));
-
-    println!("a initial rc count = {}", Rc::strong_count(&a));
-    println!("a next item = {:?}", a.tail());
-
-    let b = Rc::new(Cons(10, RefCell::new(Rc::clone(&a))));
-
-    println!("a rc count after b creation = {}", Rc::strong_count(&a));
-    println!("b initial rc count = {}", Rc::strong_count(&b));
-    println!("b next item = {:?}", b.tail());
-
-    if let Some(link) = a.tail() {
-        *link.borrow_mut() = Rc::clone(&b);
-    }
-
-    println!("b rc count after changing a = {}", Rc::strong_count(&b));
-    println!("a rc count after changing a = {}", Rc::strong_count(&a));
-
-    // Uncomment the next line to see that we have a cycle;
-    // it will overflow the stack
-    // println!("a next item = {:?}", a.tail());
-}
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-26/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# use crate::List::{Cons, Nil};
-# use std::rc::Rc;
-# use std::cell::RefCell;
-# #[derive(Debug)]
-# enum List {
-#     Cons(i32, RefCell<Rc<List>>),
-#     Nil,
-# }
-#
-# impl List {
-#     fn tail(&self) -> Option<&RefCell<Rc<List>>> {
-#         match self {
-#             Cons(_, item) => Some(item),
-#             Nil => None,
-#         }
-#     }
-# }
-#
-fn main() {
-    let a = Rc::new(Cons(5, RefCell::new(Rc::new(Nil))));
-
-    println!("compteur initial de a = {}", Rc::strong_count(&a));
-    println!("prochain élément de a = {:?}", a.tail());
-
-    let b = Rc::new(Cons(10, RefCell::new(Rc::clone(&a))));
-
-    println!("compteur de a après création de b = {}", Rc::strong_count(&a));
-    println!("compteur initial de b = {}", Rc::strong_count(&b));
-    println!("prochain élément de b = {:?}", b.tail());
-
-    if let Some(lien) = a.tail() {
-        *lien.borrow_mut() = Rc::clone(&b);
-    }
-
-    println!("compteur de b après avoir changé a = {}", Rc::strong_count(&b));
-    println!("compteur de a après avoir changé a = {}", Rc::strong_count(&a));
-
-    // Décommentez la ligne suivante pour constater que nous sommes dans
-    // une boucle de références, cela fera déborder la pile
-    // println!("prochain élément de a = {:?}", a.tail());
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-26/src/main.rs:here}}
 ```
 
 <!--
@@ -249,8 +154,8 @@ from an `Rc<List>` that holds a `Nil` value to the `Rc<List>` in `b`.
 -->
 
 Nous modifions `a` afin qu'elle pointe sur `b` au lieu de `Nil`, ce qui crée
-une boucle. Nous faisons ceci en utilisant la méthode `tail` pour obtenir une
-référence au `RefCell<Rc<List>>` présent dans `a`, que nous plaçons dans la
+une boucle. Nous faisons ceci en utilisant la méthode `parcourir` pour obtenir
+une référence au `RefCell<Rc<List>>` présent dans `a`, que nous plaçons dans la
 variable `link`. Ensuite nous utilisons la méthode `borrow_mut` sur le
 `RefCell<Rc<List>>` pour changer la valeur présente en son sein par une
 `Rc<List>` qui stocke une valeur `Nil` vers le `Rc<List>` présent dans `b`.
@@ -264,25 +169,13 @@ Lorsque nous exécutons ce code, en gardant le dernier `println!` commenté
 pour le moment, nous obtenons ceci :
 
 <!--
-```text
-a initial rc count = 1
-a next item = Some(RefCell { value: Nil })
-a rc count after b creation = 2
-b initial rc count = 1
-b next item = Some(RefCell { value: Cons(5, RefCell { value: Nil }) })
-b rc count after changing a = 2
-a rc count after changing a = 2
+```console
+{{#include ../listings-sources/ch15-smart-pointers/listing-15-26/output.txt}}
 ```
 -->
 
-```text
-compteur initial de a = 1
-prochain élément de a = Some(RefCell { value: Nil })
-compteur de a après création de b = = 2
-compteur initial de b = 1
-prochain élément de b = Some(RefCell { value: Cons(5, RefCell { value: Nil }) })
-compteur de b après avoir changé a = 2
-compteur de a après avoir changé a = 2
+```console
+{{#include ../listings/ch15-smart-pointers/listing-15-26/output.txt}}
 ```
 
 <!--
@@ -447,9 +340,9 @@ anything with the value that a `Weak<T>` is pointing to, you must make sure the
 value still exists. Do this by calling the `upgrade` method on a `Weak<T>`
 instance, which will return an `Option<Rc<T>>`. You’ll get a result of `Some`
 if the `Rc<T>` value has not been dropped yet and a result of `None` if the
-`Rc<T>` value has been dropped. Because `upgrade` returns an `Option<T>`, Rust
-will ensure that the `Some` case and the `None` case are handled, and there
-won’t be an invalid pointer.
+`Rc<T>` value has been dropped. Because `upgrade` returns an `Option<Rc<T>>`,
+Rust will ensure that the `Some` case and the `None` case are handled, and
+there won’t be an invalid pointer.
 -->
 
 Comme la valeur contenue dans une référence `Weak<T>` peut être libérée, pour
@@ -457,9 +350,9 @@ pouvoir faire quelque chose avec cette valeur, vous devez vous assurer qu'elle
 existe toujours. Vous pouvez faire ceci en appelant la méthode `upgrade` sur
 une instance `Weak<T>`, qui va retourner une `Option<Rc<T>>`. Ce résultat
 retournera `Some` si la valeur `Rc<T>` n'a pas encore été libérée, et un `None`
-si la valeur `Rc<T>` a été libérée. Comme `upgrade` retourne une `Option<T>`,
-Rust va s'assurer que les cas de `Some` et de `None` sont bien gérés, et qu'il
-n'existe pas de pointeur invalide.
+si la valeur `Rc<T>` a été libérée. Comme `upgrade` retourne une
+`Option<Rc<T>>`, Rust va s'assurer que les cas de `Some` et de `None` sont bien
+gérés, et qu'il n'existe pas de pointeur invalide.
 
 <!--
 As an example, rather than using a list whose items know only about the next
@@ -495,26 +388,12 @@ propre valeur ainsi que les références vers ses `Noeud` enfants :
 
 <!--
 ```rust
-use std::rc::Rc;
-use std::cell::RefCell;
-
-#[derive(Debug)]
-struct Node {
-    value: i32,
-    children: RefCell<Vec<Rc<Node>>>,
-}
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-27/src/main.rs:here}}
 ```
 -->
 
 ```rust
-use std::rc::Rc;
-use std::cell::RefCell;
-
-#[derive(Debug)]
-struct Noeud {
-    valeur: i32,
-    enfants: RefCell<Vec<Rc<Noeud>>>,
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-27/src/main.rs:here}}
 ```
 
 <!--
@@ -550,50 +429,12 @@ enfant, comme dans l'encart 15-27 :
 
 <!--
 ```rust
-# use std::rc::Rc;
-# use std::cell::RefCell;
-#
-# #[derive(Debug)]
-# struct Node {
-#     value: i32,
-#    children: RefCell<Vec<Rc<Node>>>,
-# }
-#
-fn main() {
-    let leaf = Rc::new(Node {
-        value: 3,
-        children: RefCell::new(vec![]),
-    });
-
-    let branch = Rc::new(Node {
-        value: 5,
-        children: RefCell::new(vec![Rc::clone(&leaf)]),
-    });
-}
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-27/src/main.rs:there}}
 ```
 -->
 
 ```rust
-# use std::rc::Rc;
-# use std::cell::RefCell;
-#
-# #[derive(Debug)]
-# struct Noeud {
-#     valeur: i32,
-#     enfants: RefCell<Vec<Rc<Noeud>>>,
-# }
-#
-fn main() {
-    let feuille = Rc::new(Noeud {
-        valeur: 3,
-        enfants: RefCell::new(vec![]),
-    });
-
-    let branche = Rc::new(Noeud {
-        valeur: 5,
-        enfants: RefCell::new(vec![Rc::clone(&feuille)]),
-    });
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-27/src/main.rs:there}}
 ```
 
 <!--
@@ -675,28 +516,12 @@ la définition de notre structure `Noeud` devrait ressembler à ceci :
 
 <!--
 ```rust
-use std::rc::{Rc, Weak};
-use std::cell::RefCell;
-
-#[derive(Debug)]
-struct Node {
-    value: i32,
-    parent: RefCell<Weak<Node>>,
-    children: RefCell<Vec<Rc<Node>>>,
-}
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-28/src/main.rs:here}}
 ```
 -->
 
 ```rust
-use std::rc::{Rc, Weak};
-use std::cell::RefCell;
-
-#[derive(Debug)]
-struct Noeud {
-    valeur: i32,
-    parent: RefCell<Weak<Noeud>>,
-    enfants: RefCell<Vec<Rc<Noeud>>>,
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-28/src/main.rs:here}}
 ```
 
 <!--
@@ -718,68 +543,12 @@ moyen de pointer vers son parent, `branche` :
 
 <!--
 ```rust
-# use std::rc::{Rc, Weak};
-# use std::cell::RefCell;
-#
-# #[derive(Debug)]
-# struct Node {
-#     value: i32,
-#     parent: RefCell<Weak<Node>>,
-#     children: RefCell<Vec<Rc<Node>>>,
-# }
-#
-fn main() {
-    let leaf = Rc::new(Node {
-        value: 3,
-        parent: RefCell::new(Weak::new()),
-        children: RefCell::new(vec![]),
-    });
-
-    println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
-
-    let branch = Rc::new(Node {
-        value: 5,
-        parent: RefCell::new(Weak::new()),
-        children: RefCell::new(vec![Rc::clone(&leaf)]),
-    });
-
-    *leaf.parent.borrow_mut() = Rc::downgrade(&branch);
-
-    println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
-}
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-28/src/main.rs:there}}
 ```
 -->
 
 ```rust
-# use std::rc::{Rc, Weak};
-# use std::cell::RefCell;
-#
-# #[derive(Debug)]
-# struct Noeud {
-#     valeur: i32,
-#     parent: RefCell<Weak<Node>>,
-#     enfants: RefCell<Vec<Rc<Node>>>,
-# }
-#
-fn main() {
-    let feuille = Rc::new(Noeud {
-        valeur: 3,
-        parent: RefCell::new(Weak::new()),
-        enfants: RefCell::new(vec![]),
-    });
-
-    println!("parent de la feuille = {:?}", feuille.parent.borrow().upgrade());
-
-    let branche = Rc::new(Noeud {
-        valeur: 5,
-        parent: RefCell::new(Weak::new()),
-        enfants: RefCell::new(vec![Rc::clone(&feuille)]),
-    });
-
-    *feuille.parent.borrow_mut() = Rc::downgrade(&branche);
-
-    println!("parent de la feuille = {:?}", feuille.parent.borrow().upgrade());
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-28/src/main.rs:there}}
 ```
 
 <!--
@@ -909,114 +678,12 @@ dans l'encart 15-29 :
 
 <!--
 ```rust
-# use std::rc::{Rc, Weak};
-# use std::cell::RefCell;
-#
-# #[derive(Debug)]
-# struct Node {
-#     value: i32,
-#     parent: RefCell<Weak<Node>>,
-#     children: RefCell<Vec<Rc<Node>>>,
-# }
-#
-fn main() {
-    let leaf = Rc::new(Node {
-        value: 3,
-        parent: RefCell::new(Weak::new()),
-        children: RefCell::new(vec![]),
-    });
-
-    println!(
-        "leaf strong = {}, weak = {}",
-        Rc::strong_count(&leaf),
-        Rc::weak_count(&leaf),
-    );
-
-    {
-        let branch = Rc::new(Node {
-            value: 5,
-            parent: RefCell::new(Weak::new()),
-            children: RefCell::new(vec![Rc::clone(&leaf)]),
-        });
-
-        *leaf.parent.borrow_mut() = Rc::downgrade(&branch);
-
-        println!(
-            "branch strong = {}, weak = {}",
-            Rc::strong_count(&branch),
-            Rc::weak_count(&branch),
-        );
-
-        println!(
-            "leaf strong = {}, weak = {}",
-            Rc::strong_count(&leaf),
-            Rc::weak_count(&leaf),
-        );
-    }
-
-    println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
-    println!(
-        "leaf strong = {}, weak = {}",
-        Rc::strong_count(&leaf),
-        Rc::weak_count(&leaf),
-    );
-}
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-29/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# use std::rc::{Rc, Weak};
-# use std::cell::RefCell;
-#
-# #[derive(Debug)]
-# struct Noeud {
-#     valeur: i32,
-#     parent: RefCell<Weak<Noeud>>,
-#     enfants: RefCell<Vec<Rc<Noeud>>>,
-# }
-#
-fn main() {
-    let feuille = Rc::new(Noeud {
-        valeur: 3,
-        parent: RefCell::new(Weak::new()),
-        enfants: RefCell::new(vec![]),
-    });
-
-    println!(
-        "feuille : strong = {}, weak = {}",
-        Rc::strong_count(&feuille),
-        Rc::weak_count(&feuille),
-    );
-
-    {
-        let branche = Rc::new(Noeud {
-            valeur: 5,
-            parent: RefCell::new(Weak::new()),
-            enfants: RefCell::new(vec![Rc::clone(&feuille)]),
-        });
-
-        *feuille.parent.borrow_mut() = Rc::downgrade(&branche);
-
-        println!(
-            "branche : strong = {}, weak = {}",
-            Rc::strong_count(&branche),
-            Rc::weak_count(&branche),
-        );
-
-        println!(
-            "feuille : strong = {}, weak = {}",
-            Rc::strong_count(&feuille),
-            Rc::weak_count(&feuille),
-        );
-    }
-
-    println!("parent de la feuille = {:?}", feuille.parent.borrow().upgrade());
-    println!(
-        "feuille : strong = {}, weak = {}",
-        Rc::strong_count(&feuille),
-        Rc::weak_count(&feuille),
-    );
-}
+{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-29/src/main.rs:here}}
 ```
 
 <!--
@@ -1137,8 +804,6 @@ Si ce chapitre a éveillé votre curiosité et que vous souhaitez mettre en œuv
 vos propres pointeurs intelligents, visitez [“The Rustonomicon”][nomicon] pour
 en savoir plus.
 
-[nomicon]: https://doc.rust-lang.org/stable/nomicon/
-
 <!--
 Next, we’ll talk about concurrency in Rust. You’ll even learn about a few new
 smart pointers.
@@ -1146,3 +811,9 @@ smart pointers.
 
 Au chapitre suivant, nous allons parler de concurrence en Rust. Vous
 découvrirez peut-être même quelques nouveaux pointeurs intelligents ...
+
+<!--
+[nomicon]: ../nomicon/index.html
+-->
+
+[nomicon]: https://doc.rust-lang.org/nomicon/index.html
