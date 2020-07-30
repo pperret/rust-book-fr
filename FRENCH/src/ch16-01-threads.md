@@ -193,42 +193,12 @@ et un autre texte à partir d'une nouvelle tâche :
 
 <!--
 ```rust
-use std::thread;
-use std::time::Duration;
-
-fn main() {
-    thread::spawn(|| {
-        for i in 1..10 {
-            println!("hi number {} from the spawned thread!", i);
-            thread::sleep(Duration::from_millis(1));
-        }
-    });
-
-    for i in 1..5 {
-        println!("hi number {} from the main thread!", i);
-        thread::sleep(Duration::from_millis(1));
-    }
-}
+{{#rustdoc_include ../listings-sources/ch16-fearless-concurrency/listing-16-01/src/main.rs}}
 ```
 -->
 
 ```rust
-use std::thread;
-use std::time::Duration;
-
-fn main() {
-    thread::spawn(|| {
-        for i in 1..10 {
-            println!("Bonjour n°{} à partir de la nouvelle tâche !", i);
-            thread::sleep(Duration::from_millis(1));
-        }
-    });
-
-    for i in 1..5 {
-        println!("Bonjour n°{} à partir de la tâche principale !", i);
-        thread::sleep(Duration::from_millis(1));
-    }
-}
+{{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-01/src/main.rs}}
 ```
 
 <!--
@@ -250,6 +220,12 @@ Remarquez d'avec cette fonction, la nouvelle tâche s'arrêtera lorsque la tâch
 principale s'arrêtera, qu'elle ai fini ou non de s'exécuter. La sortie de ce
 programme peut être différente à chaque fois, mais il devrait ressembler à
 ceci :
+
+<!--
+<!-- Not extracting output because changes to this output aren't significant;
+the changes are likely to be due to the threads running differently rather than
+changes in the compiler -- >
+-->
 
 <!--
 ```text
@@ -353,46 +329,12 @@ bien avant que `main` se termine :
 
 <!--
 ```rust
-use std::thread;
-use std::time::Duration;
-
-fn main() {
-    let handle = thread::spawn(|| {
-        for i in 1..10 {
-            println!("hi number {} from the spawned thread!", i);
-            thread::sleep(Duration::from_millis(1));
-        }
-    });
-
-    for i in 1..5 {
-        println!("hi number {} from the main thread!", i);
-        thread::sleep(Duration::from_millis(1));
-    }
-
-    handle.join().unwrap();
-}
+{{#rustdoc_include ../listings-sources/ch16-fearless-concurrency/listing-16-02/src/main.rs}}
 ```
 -->
 
 ```rust
-use std::thread;
-use std::time::Duration;
-
-fn main() {
-    let manipulateur = thread::spawn(|| {
-        for i in 1..10 {
-            println!("Bonjour n°{} à partir de la nouvelle tâche !", i);
-            thread::sleep(Duration::from_millis(1));
-        }
-    });
-
-    for i in 1..5 {
-        println!("Bonjour n°{} à partir de la tâche principale !", i);
-        thread::sleep(Duration::from_millis(1));
-    }
-
-    manipulateur.join().unwrap();
-}
+{{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-02/src/main.rs}}
 ```
 
 <!--
@@ -417,6 +359,12 @@ une tâche signifie que cette tâche est privée d'accomplir un quelconque trava
 ou de se terminer. Comme nous avons inséré l'appel à `join` après la boucle
 `for` de la tâche principale, l'exécution de l'encart 16-2 devrait produire un
 résultat similaire à celui-ci :
+
+<!--
+<!-- Not extracting output because changes to this output aren't significant;
+the changes are likely to be due to the threads running differently rather than
+changes in the compiler -- >
+-->
 
 <!--
 ```text
@@ -477,46 +425,12 @@ Mais voyons maintenant ce qui se passe lorsque nous déplaçons le
 
 <!--
 ```rust
-use std::thread;
-use std::time::Duration;
-
-fn main() {
-    let handle = thread::spawn(|| {
-        for i in 1..10 {
-            println!("hi number {} from the spawned thread!", i);
-            thread::sleep(Duration::from_millis(1));
-        }
-    });
-
-    handle.join().unwrap();
-
-    for i in 1..5 {
-        println!("hi number {} from the main thread!", i);
-        thread::sleep(Duration::from_millis(1));
-    }
-}
+{{#rustdoc_include ../listings-sources/ch16-fearless-concurrency/no-listing-01-join-too-early/src/main.rs}}
 ```
 -->
 
 ```rust
-use std::thread;
-use std::time::Duration;
-
-fn main() {
-    let manipulateur = thread::spawn(|| {
-        for i in 1..10 {
-            println!("Bonjour n°{} à partir de la nouvelle tâche !", i);
-            thread::sleep(Duration::from_millis(1));
-        }
-    });
-
-    manipulateur.join().unwrap();
-
-    for i in 1..5 {
-        println!("Bonjour n°{} à partir de la tâche principale !", i);
-        thread::sleep(Duration::from_millis(1));
-    }
-}
+{{#rustdoc_include ../listings/ch16-fearless-concurrency/no-listing-01-join-too-early/src/main.rs}}
 ```
 
 <!--
@@ -527,6 +441,12 @@ The main thread will wait for the spawned thread to finish and then run its
 La tâche principale va attendre que la nouvelle tâche se finisse et ensuite
 exécuter sa boucle `for`, ainsi la sortie ne sera plus chevauchée, comme
 ci-dessous :
+
+<!--
+<!-- Not extracting output because changes to this output aren't significant;
+the changes are likely to be due to the threads running differently rather than
+changes in the compiler -- >
+-->
 
 <!--
 ```text
@@ -623,32 +543,12 @@ constater bientôt.
 
 <!--
 ```rust,ignore,does_not_compile
-use std::thread;
-
-fn main() {
-    let v = vec![1, 2, 3];
-
-    let handle = thread::spawn(|| {
-        println!("Here's a vector: {:?}", v);
-    });
-
-    handle.join().unwrap();
-}
+{{#rustdoc_include ../listings-sources/ch16-fearless-concurrency/listing-16-03/src/main.rs}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-use std::thread;
-
-fn main() {
-    let v = vec![1, 2, 3];
-
-    let manipulateur = thread::spawn(|| {
-        println!("Voici un vecteur : {:?}", v);
-    });
-
-    manipulateur.join().unwrap();
-}
+{{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-03/src/main.rs}}
 ```
 
 <!--
@@ -672,39 +572,13 @@ tâche, nous devrions pouvoir accéder à `v` dans cette nouvelle tâche. Mais
 lorsque nous compilons cet exemple, nous obtenons l'erreur suivante :
 
 <!--
-```text
-error[E0373]: closure may outlive the current function, but it borrows `v`,
-which is owned by the current function
- -- > src/main.rs:6:32
-  |
-6 |     let handle = thread::spawn(|| {
-  |                                ^^ may outlive borrowed value `v`
-7 |         println!("Here's a vector: {:?}", v);
-  |                                           - `v` is borrowed here
-  |
-help: to force the closure to take ownership of `v` (and any other referenced
-variables), use the `move` keyword
-  |
-6 |     let handle = thread::spawn(move || {
-  |                                ^^^^^^^
+```console
+{{#include ../listings-sources/ch16-fearless-concurrency/listing-16-03/output.txt}}
 ```
 -->
 
-```text
-error[E0373]: closure may outlive the current function, but it borrows `v`,
-which is owned by the current function
- -- > src/main.rs:6:32
-  |
-6 |     let manipulateur = thread::spawn(|| {
-  |                                      ^^ may outlive borrowed value `v`
-7 |         println!("Voici un vecteur : {:?}", v);
-  |                                             - `v` is borrowed here
-  |
-help: to force the closure to take ownership of `v` (and any other referenced
-variables), use the `move` keyword
-  |
-6 |     let manipulateur = thread::spawn(move || {
-  |                                      ^^^^^^^
+```console
+{{#include ../listings/ch16-fearless-concurrency/listing-16-03/output.txt}}
 ```
 
 <!--
@@ -735,36 +609,12 @@ L'encart 16-4 propose un scénario qui est plus encleint à avoir une référenc
 
 <!--
 ```rust,ignore,does_not_compile
-use std::thread;
-
-fn main() {
-    let v = vec![1, 2, 3];
-
-    let handle = thread::spawn(|| {
-        println!("Here's a vector: {:?}", v);
-    });
-
-    drop(v); // oh no!
-
-    handle.join().unwrap();
-}
+{{#rustdoc_include ../listings-sources/ch16-fearless-concurrency/listing-16-04/src/main.rs}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-use std::thread;
-
-fn main() {
-    let v = vec![1, 2, 3];
-
-    let manipulateur = thread::spawn(|| {
-        println!("Voici un vecteur : {:?}", v);
-    });
-
-    drop(v); // oh non, le vecteur est libéré !
-
-    handle.join().unwrap();
-}
+{{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-04/src/main.rs}}
 ```
 
 <!--
@@ -802,9 +652,14 @@ Pour corriger l'erreur de compilation de l'encart 16-3, nous pouvons appliquer
 le conseil du message d'erreur :
 
 <!--
+<!-- manual-regeneration
+after automatic regeneration, look at listings/ch16-fearless-concurrency/listing-16-03/output.txt and copy the relevant part
+-- >
+-->
+
+<!--
 ```text
-help: to force the closure to take ownership of `v` (and any other referenced
-variables), use the `move` keyword
+help: to force the closure to take ownership of `v` (and any other referenced variables), use the `move` keyword
   |
 6 |     let handle = thread::spawn(move || {
   |                                ^^^^^^^
@@ -812,8 +667,7 @@ variables), use the `move` keyword
 -->
 
 ```text
-help: to force the closure to take ownership of `v` (and any other referenced
-variables), use the `move` keyword
+help: to force the closure to take ownership of `v` (and any other referenced variables), use the `move` keyword
   |
 6 |     let manipulateur = thread::spawn(move || {
   |                                      ^^^^^^^
@@ -839,32 +693,12 @@ proposées dans l'encart 16-5 devraient se compiler et s'exécuter comme prévu�
 
 <!--
 ```rust
-use std::thread;
-
-fn main() {
-    let v = vec![1, 2, 3];
-
-    let handle = thread::spawn(move || {
-        println!("Here's a vector: {:?}", v);
-    });
-
-    handle.join().unwrap();
-}
+{{#rustdoc_include ../listings-sources/ch16-fearless-concurrency/listing-16-05/src/main.rs}}
 ```
 -->
 
 ```rust
-use std::thread;
-
-fn main() {
-    let v = vec![1, 2, 3];
-
-    let manipulateur = thread::spawn(move || {
-        println!("Voici un vecteur : {:?}", v);
-    });
-
-    manipulateur.join().unwrap();
-}
+{{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-05/src/main.rs}}
 ```
 
 <!--
@@ -894,20 +728,14 @@ ne pourrions plus appeler `drop` sur `v` dans la tâche principale. Nous
 obtiendrons à la place cette erreur de compilation :
 
 <!--
-```text
-error[E0382]: use of moved value: `v`
-  -- > src/main.rs:10:10
-   |
-6  |     let handle = thread::spawn(move || {
-   |                                ------- value moved (into closure) here
-...
-10 |     drop(v); // oh no!
-   |          ^ value used here after move
-   |
-   = note: move occurs because `v` has type `std::vec::Vec<i32>`, which does
-   not implement the `Copy` trait
+```console
+{{#include ../listings-sources/ch16-fearless-concurrency/output-only-01-move-drop/output.txt}}
 ```
 -->
+
+```console
+{{#include ../listings/ch16-fearless-concurrency/output-only-01-move-drop/output.txt}}
+```
 
 ```text
 error[E0382]: use of moved value: `v`
