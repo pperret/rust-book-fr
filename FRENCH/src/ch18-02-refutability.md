@@ -81,12 +81,12 @@ ce code ne va pas se compiler.
 
 <!--
 ```rust,ignore,does_not_compile
-let Some(x) = some_option_value;
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-08/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-let Some(x) = une_option_quelconque;
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-08/src/main.rs:here}}
 ```
 
 <!--
@@ -113,21 +113,13 @@ expliquant que nous avons essayé d'utiliser un motif réfutable là où un moti
 irréfutable est nécessaire :
 
 <!--
-```text
-error[E0005]: refutable pattern in local binding: `None` not covered
- -- >
-  |
-3 | let Some(x) = some_option_value;
-  |     ^^^^^^^ pattern `None` not covered
+```console
+{{#include ../listings-sources/ch18-patterns-and-matching/listing-18-08/output.txt}}
 ```
 -->
 
-```text
-error[E0005]: refutable pattern in local binding: `None` not covered
- -- >
-  |
-3 | let Some(x) = une_option_quelconque;
-  |     ^^^^^^^ pattern `None` not covered
+```console
+{{#include ../listings/ch18-patterns-and-matching/listing-18-08/output.txt}}
 ```
 
 <!--
@@ -156,18 +148,12 @@ comment corriger le code de l'encart 18-8.
 
 <!--
 ```rust
-# let some_option_value: Option<i32> = None;
-if let Some(x) = some_option_value {
-    println!("{}", x);
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-09/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# let une_option_quelconque: Option<i32> = None;
-if let Some(x) = une_option_quelconque {
-    println!("{}", x);
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-09/src/main.rs:here}}
 ```
 
 <!--
@@ -190,10 +176,14 @@ utiliser un motif irréfutable sans avoir d'erreur. Si nous donnons au `if let`
 un motif qui correspond toujours, comme pour `x` montré dans l'encart 18-10, le
 compilateur va lever un avertissement.
 
-```rust,ignore
-if let x = 5 {
-    println!("{}", x);
-};
+<!--
+```rust
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-10/src/main.rs:here}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-10/src/main.rs:here}}
 ```
 
 <!--
@@ -212,16 +202,14 @@ pattern:
 Rust explique que cela ne fait aucun sens d'utiliser `if let` avec un motif
 irréfutable :
 
-```text
-warning: irrefutable if-let pattern
- -- > <anon>:2:5
-  |
-2 | /     if let x = 5 {
-3 | |     println!("{}", x);
-4 | | };
-  | |_^
-  |
-  = note: #[warn(irrefutable_let_patterns)] on by default
+<!--
+```console
+{{#include ../listings-sources/ch18-patterns-and-matching/listing-18-10/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch18-patterns-and-matching/listing-18-10/output.txt}}
 ```
 
 <!--
