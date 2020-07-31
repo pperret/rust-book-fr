@@ -40,26 +40,12 @@ motifs sur des littéraux. Le code suivant vous donne quelques exemples :
 
 <!--
 ```rust
-let x = 1;
-
-match x {
-    1 => println!("one"),
-    2 => println!("two"),
-    3 => println!("three"),
-    _ => println!("anything"),
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/no-listing-01-literals/src/main.rs:here}}
 ```
 -->
 
 ```rust
-let x = 1;
-
-match x {
-    1 => println!("un"),
-    2 => println!("deux"),
-    3 => println!("trois"),
-    _ => println!("n'importe quoi"),
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/no-listing-01-literals/src/main.rs:here}}
 ```
 
 <!--
@@ -112,34 +98,12 @@ de lire la suite.
 
 <!--
 ```rust
-fn main() {
-    let x = Some(5);
-    let y = 10;
-
-    match x {
-        Some(50) => println!("Got 50"),
-        Some(y) => println!("Matched, y = {:?}", y),
-        _ => println!("Default case, x = {:?}", x),
-    }
-
-    println!("at the end: x = {:?}, y = {:?}", x, y);
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-11/src/main.rs:here}}
 ```
 -->
 
 ```rust
-fn main() {
-    let x = Some(5);
-    let y = 10;
-
-    match x {
-        Some(50) => println!("On a 50"),
-        Some(y) => println!("Correspondance, y = {:?}", y),
-        _ => println!("Cas par défaut, x = {:?}", x),
-    }
-
-    println!("A la fin : x = {:?}, y = {:?}", x, y);
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-11/src/main.rs:here}}
 ```
 
 <!--
@@ -241,24 +205,12 @@ cette branche, le code de cette branche sera exécuté :
 
 <!--
 ```rust
-let x = 1;
-
-match x {
-    1 | 2 => println!("one or two"),
-    3 => println!("three"),
-    _ => println!("anything"),
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/no-listing-02-multiple-patterns/src/main.rs:here}}
 ```
 -->
 
 ```rust
-let x = 1;
-
-match x {
-    1 | 2 => println!("un ou deux"),
-    3 => println!("trois"),
-    _ => println!("quelque chose d'autre"),
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/no-listing-02-multiple-patterns/src/main.rs:here}}
 ```
 
 <!--
@@ -285,22 +237,12 @@ présentes dans l'intervalle, cette branche va s'exécuter :
 
 <!--
 ```rust
-let x = 5;
-
-match x {
-    1..=5 => println!("one through five"),
-    _ => println!("something else"),
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/no-listing-03-ranges/src/main.rs:here}}
 ```
 -->
 
 ```rust
-let x = 5;
-
-match x {
-    1..=5 => println!("de un à cinq"),
-    _ => println!("quelque chose d'autre"),
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/no-listing-03-ranges/src/main.rs:here}}
 ```
 
 <!--
@@ -337,24 +279,12 @@ Voici un exemple d'utilisation d'intervalles de `char` :
 
 <!--
 ```rust
-let x = 'c';
-
-match x {
-    'a'..='j' => println!("early ASCII letter"),
-    'k'..='z' => println!("late ASCII letter"),
-    _ => println!("something else"),
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/no-listing-04-ranges-of-char/src/main.rs:here}}
 ```
 -->
 
 ```rust
-let x = 'c';
-
-match x {
-    'a'..='j' => println!("lettre ASCII du début"),
-    'k'..='z' => println!("lettre ASCII de la fin"),
-    _ => println!("autre chose"),
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/no-listing-04-ranges-of-char/src/main.rs:here}}
 ```
 
 <!--
@@ -399,6 +329,16 @@ nous pouvons séparer en utilisant un motif avec une instruction `let`.
 -->
 
 <span class="filename">Fichier : src/main.rs</span>
+
+<!--
+```rust
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-12/src/main.rs}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-12/src/main.rs}}
+```
 
 ```rust
 struct Point {
@@ -462,19 +402,14 @@ les variables créées dans le motif du `let` sont `x` et `y` au lieu de `a` et
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
 ```rust
-struct Point {
-    x: i32,
-    y: i32,
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-13/src/main.rs}}
+```
+-->
 
-fn main() {
-    let p = Point { x: 0, y: 7 };
-
-    let Point { x, y } = p;
-    assert_eq!(0, x);
-    assert_eq!(7, y);
-}
+```rust
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-13/src/main.rs}}
 ```
 
 <!--
@@ -526,38 +461,12 @@ de ces deux axes.
 
 <!--
 ```rust
-# struct Point {
-#     x: i32,
-#     y: i32,
-# }
-#
-fn main() {
-    let p = Point { x: 0, y: 7 };
-
-    match p {
-        Point { x, y: 0 } => println!("On the x axis at {}", x),
-        Point { x: 0, y } => println!("On the y axis at {}", y),
-        Point { x, y } => println!("On neither axis: ({}, {})", x, y),
-    }
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-14/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# struct Point {
-#     x: i32,
-#     y: i32,
-# }
-#
-fn main() {
-    let p = Point { x: 0, y: 7 };
-
-    match p {
-        Point { x, y: 0 } => println!("Sur l'axe x à la position {}", x),
-        Point { x: 0, y } => println!("Sur l'axe y à la position {}", y),
-        Point { x, y } => println!("Sur aucun des axes : ({}, {})", x, y),
-    }
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-14/src/main.rs:here}}
 ```
 
 <!--
@@ -632,74 +541,12 @@ motifs qui devraient destructurer chaque valeur interne.
 
 <!--
 ```rust
-enum Message {
-    Quit,
-    Move { x: i32, y: i32 },
-    Write(String),
-    ChangeColor(i32, i32, i32),
-}
-
-fn main() {
-    let msg = Message::ChangeColor(0, 160, 255);
-
-    match msg {
-        Message::Quit => {
-            println!("The Quit variant has no data to destructure.")
-        }
-        Message::Move { x, y } => {
-            println!(
-                "Move in the x direction {} and in the y direction {}",
-                x,
-                y
-            );
-        }
-        Message::Write(text) => println!("Text message: {}", text),
-        Message::ChangeColor(r, g, b) => {
-            println!(
-                "Change the color to red {}, green {}, and blue {}",
-                r,
-                g,
-                b
-            )
-        }
-    }
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-15/src/main.rs}}
 ```
 -->
 
 ```rust
-enum Message {
-    Quitter,
-    Deplacer { x: i32, y: i32 },
-    Ecrire(String),
-    ChangerCouleur(i32, i32, i32),
-}
-
-fn main() {
-    let message = Message::ChangerCouleur(0, 160, 255);
-
-    match message {
-        Message::Quitter => {
-            println!("La variante Quitter n'a pas de données à déstructurer.")
-        }
-        Message::Deplacer { x, y } => {
-            println!(
-                "Déplacement de {} sur l'axe x et de {} sur l'axe y",
-                x,
-                y
-            );
-        }
-        Message::Ecrire(texte) => println!("Message textuel : {}", texte),
-        Message::ChangerCouleur(r, v, b) => {
-            println!(
-                "Changement des taux de rouge à {}, de vert à {}, et de bleu à {}",
-                r,
-                v,
-                b
-            )
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-15/src/main.rs}}
 ```
 
 <!--
@@ -788,80 +635,12 @@ l'encart 18-16.
 
 <!--
 ```rust
-enum Color {
-   Rgb(i32, i32, i32),
-   Hsv(i32, i32, i32),
-}
-
-enum Message {
-    Quit,
-    Move { x: i32, y: i32 },
-    Write(String),
-    ChangeColor(Color),
-}
-
-fn main() {
-    let msg = Message::ChangeColor(Color::Hsv(0, 160, 255));
-
-    match msg {
-        Message::ChangeColor(Color::Rgb(r, g, b)) => {
-            println!(
-                "Change the color to red {}, green {}, and blue {}",
-                r,
-                g,
-                b
-            )
-        }
-        Message::ChangeColor(Color::Hsv(h, s, v)) => {
-            println!(
-                "Change the color to hue {}, saturation {}, and value {}",
-                h,
-                s,
-                v
-            )
-        }
-        _ => ()
-    }
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-16/src/main.rs}}
 ```
 -->
 
 ```rust
-enum Couleur {
-   Rvb(i32, i32, i32),
-   Tsv(i32, i32, i32),
-}
-
-enum Message {
-    Quitter,
-    Deplacer { x: i32, y: i32 },
-    Ecrire(String),
-    ChangerCouleur(Couleur),
-}
-
-fn main() {
-    let msg = Message::ChangerCouleur(Couleur::Tsv(0, 160, 255));
-
-    match msg {
-        Message::ChangerCouleur(Color::Rvb(r, v, b)) => {
-            println!(
-                "Changement des taux de rouge à {}, de vert à {}, et de bleu à {}",
-                r,
-                v,
-                b
-            )
-        }
-        Message::ChangeColor(Color::Tsv(t, s, v)) => {
-            println!(
-                "Changement des taux de teinte à {}, de saturation à {}, et de valeur à {}",
-                t,
-                s,
-                v
-            )
-        }
-        _ => ()
-    }
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-16/src/main.rs}}
 ```
 
 <!--
@@ -909,22 +688,12 @@ primitives :
 
 <!--
 ```rust
-# struct Point {
-#     x: i32,
-#     y: i32,
-# }
-#
-let ((feet, inches), Point {x, y}) = ((3, 10), Point { x: 3, y: -10 });
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/no-listing-05-destructuring-structs-and-tuples/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# struct Point {
-#     x: i32,
-#     y: i32,
-# }
-#
-let ((pieds, pouces), Point {x, y}) = ((3, 10), Point { x: 3, y: -10 });
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/no-listing-05-destructuring-structs-and-tuples/src/main.rs:here}}
 ```
 
 <!--
@@ -997,24 +766,12 @@ l'encart 18-17.
 
 <!--
 ```rust
-fn foo(_: i32, y: i32) {
-    println!("This code only uses the y parameter: {}", y);
-}
-
-fn main() {
-    foo(3, 4);
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-17/src/main.rs}}
 ```
 -->
 
 ```rust
-fn foo(_: i32, y: i32) {
-    println!("Ce code utilise uniquement le paramètre y : {}", y);
-}
-
-fn main() {
-    foo(3, 4);
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-17/src/main.rs}}
 ```
 
 <!--
@@ -1077,36 +834,12 @@ annuler le réglage et lui donner une valeur s'il est bien inexistant.
 
 <!--
 ```rust
-let mut setting_value = Some(5);
-let new_setting_value = Some(10);
-
-match (setting_value, new_setting_value) {
-    (Some(_), Some(_)) => {
-        println!("Can't overwrite an existing customized value");
-    }
-    _ => {
-        setting_value = new_setting_value;
-    }
-}
-
-println!("setting is {:?}", setting_value);
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-18/src/main.rs:here}}
 ```
 -->
 
 ```rust
-let mut valeur_du_reglage = Some(5);
-let nouvelle_valeur_du_reglage = Some(10);
-
-match (valeur_du_reglage, nouvelle_valeur_du_reglage) {
-    (Some(_), Some(_)) => {
-        println!("Vous ne pouvez pas écraser une valeur déjà existante");
-    }
-    _ => {
-        valeur_du_reglage = nouvelle_valeur_du_reglage;
-    }
-}
-
-println!("Le réglage vaut {:?}", valeur_du_reglage);
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-18/src/main.rs:here}}
 ```
 
 <!--
@@ -1159,24 +892,12 @@ ignore la seconde et quatrième valeur dans un tuple de cinq éléments.
 
 <!--
 ```rust
-let numbers = (2, 4, 8, 16, 32);
-
-match numbers {
-    (first, _, third, _, fifth) => {
-        println!("Some numbers: {}, {}, {}", first, third, fifth)
-    },
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-19/src/main.rs:here}}
 ```
 -->
 
 ```rust
-let nombres = (2, 4, 8, 16, 32);
-
-match nombres {
-    (premier, _, troisieme, _, cinquieme) => {
-        println!("Voici quelques nombres : {}, {}, {}", premier, troisieme, cinquieme)
-    },
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-19/src/main.rs:here}}
 ```
 
 <!--
@@ -1225,11 +946,14 @@ nous n'aurons qu'un seul avertissement sur une seule d'entre elles.
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
 ```rust
-fn main() {
-    let _x = 5;
-    let y = 10;
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-20/src/main.rs}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-20/src/main.rs}}
 ```
 
 <!--
@@ -1265,24 +989,12 @@ erreur.
 
 <!--
 ```rust,ignore,does_not_compile
-let s = Some(String::from("Hello!"));
-
-if let Some(_s) = s {
-    println!("found a string");
-}
-
-println!("{:?}", s);
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-21/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-let s = Some(String::from("Salutations !"));
-
-if let Some(_s) = s {
-    println!("j'ai trouvé une chaine de caractères");
-}
-
-println!("{:?}", s);
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-21/src/main.rs:here}}
 ```
 
 <!--
@@ -1308,24 +1020,12 @@ va se compiler sans aucune erreur car `s` n'est pas déplacé dans `_`.
 
 <!--
 ```rust
-let s = Some(String::from("Hello!"));
-
-if let Some(_) = s {
-    println!("found a string");
-}
-
-println!("{:?}", s);
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-22/src/main.rs:here}}
 ```
 -->
 
-```rust,ignore,does_not_compile
-let s = Some(String::from("Salutations !"));
-
-if let Some(_) = s {
-    println!("j'ai trouvé une chaine de caractères");
-}
-
-println!("{:?}", s);
+```rust
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-22/src/main.rs:here}}
 ```
 
 <!--
@@ -1370,32 +1070,12 @@ la coordonnée `x` et ignorer les valeurs des champs `y` et `z`.
 
 <!--
 ```rust
-struct Point {
-    x: i32,
-    y: i32,
-    z: i32,
-}
-
-let origin = Point { x: 0, y: 0, z: 0 };
-
-match origin {
-    Point { x, .. } => println!("x is {}", x),
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-23/src/main.rs:here}}
 ```
 -->
 
 ```rust
-struct Point {
-    x: i32,
-    y: i32,
-    z: i32,
-}
-
-let origine = Point { x: 0, y: 0, z: 0 };
-
-match origine {
-    Point { x, .. } => println!("x vaut {}", x),
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-23/src/main.rs:here}}
 ```
 
 <!--
@@ -1434,28 +1114,12 @@ L'encart 18-24 montre comment utiliser `..` avec un tuple.
 
 <!--
 ```rust
-fn main() {
-    let numbers = (2, 4, 8, 16, 32);
-
-    match numbers {
-        (first, .., last) => {
-            println!("Some numbers: {}, {}", first, last);
-        },
-    }
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-24/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let nombres = (2, 4, 8, 16, 32);
-
-    match nombres {
-        (premier, .., dernier) => {
-            println!("Voici quelques nombres : {}, {}", premier, dernier);
-        },
-    }
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-24/src/main.rs}}
 ```
 
 <!--
@@ -1496,28 +1160,12 @@ exemple d'utilisation ambigu de `..`, donc il ne se compilera pas.
 
 <!--
 ```rust,ignore,does_not_compile
-fn main() {
-    let numbers = (2, 4, 8, 16, 32);
-
-    match numbers {
-        (.., second, ..) => {
-            println!("Some numbers: {}", second)
-        },
-    }
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-25/src/main.rs}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-fn main() {
-    let nombres = (2, 4, 8, 16, 32);
-
-    match nombres {
-        (.., second, ..) => {
-            println!("Voici quelques nombres : {}", second)
-        },
-    }
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-25/src/main.rs}}
 ```
 
 <!--
@@ -1534,12 +1182,14 @@ When we compile this example, we get this error:
 
 Lorsque nous compilons cet  exemple, nous obtenons l'erreur suivante :
 
-```text
-error: `..` can only be used once per tuple or tuple struct pattern
- -- > src/main.rs:5:22
-  |
-5 |         (.., second, ..) => {
-  |                      ^^
+<!--
+```console
+{{#include ../listings-sources/ch18-patterns-and-matching/listing-18-25/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch18-patterns-and-matching/listing-18-25/output.txt}}
 ```
 
 <!--
@@ -1593,24 +1243,12 @@ procède aussi au contrôle de correspondance `if x < 5`.
 
 <!--
 ```rust
-let num = Some(4);
-
-match num {
-    Some(x) if x < 5 => println!("less than five: {}", x),
-    Some(x) => println!("{}", x),
-    None => (),
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-26/src/main.rs:here}}
 ```
 -->
 
 ```rust
-let nombre = Some(4);
-
-match nombre {
-    Some(x) if x < 5 => println!("moins que cinq : {}", x),
-    Some(x) => println!("{}", x),
-    None => (),
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-26/src/main.rs:here}}
 ```
 
 <!--
@@ -1680,34 +1318,12 @@ répondre à ce besoin.
 
 <!--
 ```rust
-fn main() {
-    let x = Some(5);
-    let y = 10;
-
-    match x {
-        Some(50) => println!("Got 50"),
-        Some(n) if n == y => println!("Matched, n = {}", n),
-        _ => println!("Default case, x = {:?}", x),
-    }
-
-    println!("at the end: x = {:?}, y = {}", x, y);
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-27/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let x = Some(5);
-    let y = 10;
-
-    match x {
-        Some(50) => println!("Nous obtenons 50"),
-        Some(n) if n == y => println!("Nous avons une correspondance, n = {}", n),
-        _ => println!("Cas par défaut, x = {:?}", x),
-    }
-
-    println!("Au final : x = {:?}, y = {}", x, y);
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-27/src/main.rs}}
 ```
 
 <!--
@@ -1764,14 +1380,14 @@ utilise `|`. La partie importante de cet exemple est que le contrôle de
 correspondance `if y` s'applique sur `4`, `5`, *et* `6`, même si `if y` semble
 s'appliquer uniquement à `6`.
 
+<!--
 ```rust
-let x = 4;
-let y = false;
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-28/src/main.rs:here}}
+```
+-->
 
-match x {
-    4 | 5 | 6 if y => println!("yes"),
-    _ => println!("no"),
-}
+```rust
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-28/src/main.rs:here}}
 ```
 
 <!--
@@ -1801,6 +1417,12 @@ La raison est que la condition `if` s'applique à tout le motif `4 | 5 | 6`, et
 pas seulement à la dernière valeur `6`. Autrement dit, la priorité d'un
 contrôle de correspondance avec un motif se comporte comme ceci :
 
+<!--
+```text
+(4 | 5 | 6) if y => ...
+```
+-->
+
 ```text
 (4 | 5 | 6) if y => ...
 ```
@@ -1810,6 +1432,12 @@ rather than this:
 -->
 
 plutôt que comme ceci :
+
+<!--
+```text
+4 | 5 | (6 if y) => ...
+```
+-->
 
 ```text
 4 | 5 | (6 if y) => ...
@@ -1854,44 +1482,12 @@ allons utiliser un nom différent.
 
 <!--
 ```rust
-enum Message {
-    Hello { id: i32 },
-}
-
-let msg = Message::Hello { id: 5 };
-
-match msg {
-    Message::Hello { id: id_variable @ 3..=7 } => {
-        println!("Found an id in range: {}", id_variable)
-    },
-    Message::Hello { id: 10..=12 } => {
-        println!("Found an id in another range")
-    },
-    Message::Hello { id } => {
-        println!("Found some other id: {}", id)
-    },
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-29/src/main.rs:here}}
 ```
 -->
 
 ```rust
-enum Message {
-    Hello { id: i32 },
-}
-
-let msg = Message::Hello { id: 5 };
-
-match msg {
-    Message::Hello { id: id_variable @ 3..=7 } => {
-        println!("Nous avons trouvé un id dans l'intervalle : {}", id_variable)
-    },
-    Message::Hello { id: 10..=12 } => {
-        println!("Nous avons trouvé un id dans un autre intervalle")
-    },
-    Message::Hello { id } => {
-        println!("Nous avons trouvé un autre id : {}", id)
-    },
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-29/src/main.rs:here}}
 ```
 
 <!--
