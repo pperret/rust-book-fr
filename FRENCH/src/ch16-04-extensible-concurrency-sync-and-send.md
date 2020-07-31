@@ -152,8 +152,8 @@ appliquer les règles de concurrence.
 Manually implementing these traits involves implementing unsafe Rust code.
 We’ll talk about using unsafe Rust code in Chapter 19; for now, the important
 information is that building new concurrent types not made up of `Send` and
-`Sync` parts requires careful thought to uphold the safety guarantees.
-[The Rustonomicon] has more information about these guarantees and how to
+`Sync` parts requires careful thought to uphold the safety guarantees. [“The
+Rustonomicon”][nomicon] has more information about these guarantees and how to
 uphold them.
 -->
 
@@ -162,8 +162,8 @@ sécurisé. Nous allons voir le code Rust non sécurisé dans le chapitre 19 ; 
 l'instant l'information à retenir est que construire de nouveaux types
 pour la concurrence constitués d'éléments qui n'implémentent pas `Send` et
 `Sync` nécessite une réflexion approfondie pour respecter les garanties de
-sécurité. [The Rustonomicon] contient plus d'informations à propos de ces
-garanties et comment les faire appliquer.
+sécurité. [“The Rustonomicon”][nomicon] contient plus d'informations à propos de
+ces garanties et comment les faire appliquer.
 
 [The Rustonomicon]: https://doc.rust-lang.org/stable/nomicon/
 
@@ -235,6 +235,8 @@ programmation orientée objet.
 <!--
 [sharing-a-mutext-between-multiple-threads]:
 ch16-03-shared-state.html#sharing-a-mutext-between-multiple-threads
+[nomicon]: ../nomicon/index.html
 -->
 
 [sharing-a-mutext-between-multiple-threads]: ch16-03-shared-state.html
+[nomicon]: https://doc.rust-lang.org/nomicon/index.html
