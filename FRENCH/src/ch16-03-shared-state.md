@@ -150,34 +150,12 @@ le contexte d'une seule tâche, comme dans l'encart 16-12 :
 
 <!--
 ```rust
-use std::sync::Mutex;
-
-fn main() {
-    let m = Mutex::new(5);
-
-    {
-        let mut num = m.lock().unwrap();
-        *num = 6;
-    }
-
-    println!("m = {:?}", m);
-}
+{{#rustdoc_include ../listings-sources/ch16-fearless-concurrency/listing-16-12/src/main.rs}}
 ```
 -->
 
 ```rust
-use std::sync::Mutex;
-
-fn main() {
-    let m = Mutex::new(5);
-
-    {
-        let mut nombre = m.lock().unwrap();
-        *nombre = 6;
-    }
-
-    println!("m = {:?}", m);
-}
+{{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-12/src/main.rs}}
 ```
 
 <!--
@@ -287,54 +265,12 @@ correctement.
 
 <!--
 ```rust,ignore,does_not_compile
-use std::sync::Mutex;
-use std::thread;
-
-fn main() {
-    let counter = Mutex::new(0);
-    let mut handles = vec![];
-
-    for _ in 0..10 {
-        let handle = thread::spawn(move || {
-            let mut num = counter.lock().unwrap();
-
-            *num += 1;
-        });
-        handles.push(handle);
-    }
-
-    for handle in handles {
-        handle.join().unwrap();
-    }
-
-    println!("Result: {}", *counter.lock().unwrap());
-}
+{{#rustdoc_include ../listings-sources/ch16-fearless-concurrency/listing-16-13/src/main.rs}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-use std::sync::Mutex;
-use std::thread;
-
-fn main() {
-    let compteur = Mutex::new(0);
-    let mut manipulateurs = vec![];
-
-    for _ in 0..10 {
-        let manipulateur = thread::spawn(move || {
-            let mut nombre = counter.lock().unwrap();
-
-            *nombre += 1;
-        });
-        manipulateurs.push(manipulateur);
-    }
-
-    for manipulateur in manipulateurs {
-        manipulateur.join().unwrap();
-    }
-
-    println!("Resultat : {}", *compteur.lock().unwrap());
-}
+{{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-13/src/main.rs}}
 ```
 
 <!--
@@ -386,33 +322,13 @@ Nous avions mentionné que cet exemple ne se compilerait pas. Découvrons
 maintenant pourquoi !
 
 <!--
-```text
-error[E0382]: use of moved value: `counter`
-  -- > src/main.rs:9:36
-   |
-9  |         let handle = thread::spawn(move || {
-   |                                    ^^^^^^^ value moved into closure here,
-in previous iteration of loop
-10 |             let mut num = counter.lock().unwrap();
-   |                           ------- use occurs due to use in closure
-   |
-   = note: move occurs because `counter` has type `std::sync::Mutex<i32>`,
-which does not implement the `Copy` trait
+```console
+{{#include ../listings-sources/ch16-fearless-concurrency/listing-16-13/output.txt}}
 ```
 -->
 
-```text
-error[E0382]: use of moved value: `compteur`
-  -- > src/main.rs:9:36
-   |
-9  |         let manipulateur = thread::spawn(move || {
-   |                                          ^^^^^^^ value moved into closure here,
-in previous iteration of loop
-10 |             let mut nombre = compteur.lock().unwrap();
-   |                              -------- use occurs due to use in closure
-   |
-   = note: move occurs because `counter` has type `std::sync::Mutex<i32>`,
-which does not implement the `Copy` trait
+```console
+{{#include ../listings/ch16-fearless-concurrency/listing-16-13/output.txt}}
 ```
 
 <!--
@@ -459,58 +375,12 @@ allons garder le mot-clé `move` dans la fermeture.
 
 <!--
 ```rust,ignore,does_not_compile
-use std::rc::Rc;
-use std::sync::Mutex;
-use std::thread;
-
-fn main() {
-    let counter = Rc::new(Mutex::new(0));
-    let mut handles = vec![];
-
-    for _ in 0..10 {
-        let counter = Rc::clone(&counter);
-        let handle = thread::spawn(move || {
-            let mut num = counter.lock().unwrap();
-
-            *num += 1;
-        });
-        handles.push(handle);
-    }
-
-    for handle in handles {
-        handle.join().unwrap();
-    }
-
-    println!("Result: {}", *counter.lock().unwrap());
-}
+{{#rustdoc_include ../listings-sources/ch16-fearless-concurrency/listing-16-14/src/main.rs}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-use std::rc::Rc;
-use std::sync::Mutex;
-use std::thread;
-
-fn main() {
-    let compteur = Rc::new(Mutex::new(0));
-    let mut manipulateurs = vec![];
-
-    for _ in 0..10 {
-        let compteur = Rc::clone(&compteur);
-        let manipulateur = thread::spawn(move || {
-            let mut nombre = compteur.lock().unwrap();
-
-            *nombre += 1;
-        });
-        manipulateurs.push(manipulateur);
-    }
-
-    for manipulateur in manipulateurs {
-        manipulateur.join().unwrap();
-    }
-
-    println!("Résultat : {}", *compteur.lock().unwrap());
-}
+{{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-14/src/main.rs}}
 ```
 
 <!--
@@ -530,37 +400,13 @@ A nouveau, nous compilons et nous obtenons ... une erreur différente ! Le
 compilateur nous en apprend beaucoup.
 
 <!--
-```text
-error[E0277]: `std::rc::Rc<std::sync::Mutex<i32>>` cannot be sent between threads safely
-  -- > src/main.rs:11:22
-   |
-11 |         let handle = thread::spawn(move || {
-   |                      ^^^^^^^^^^^^^ `std::rc::Rc<std::sync::Mutex<i32>>`
-cannot be sent between threads safely
-   |
-   = help: within `[closure@src/main.rs:11:36: 14:10
-counter:std::rc::Rc<std::sync::Mutex<i32>>]`, the trait `std::marker::Send`
-is not implemented for `std::rc::Rc<std::sync::Mutex<i32>>`
-   = note: required because it appears within the type
-`[closure@src/main.rs:11:36: 14:10 counter:std::rc::Rc<std::sync::Mutex<i32>>]`
-   = note: required by `std::thread::spawn`
+```console
+{{#include ../listings-sources/ch16-fearless-concurrency/listing-16-14/output.txt}}
 ```
 -->
 
-```text
-error[E0277]: `std::rc::Rc<std::sync::Mutex<i32>>` cannot be sent between threads safely
-  -- > src/main.rs:11:22
-   |
-11 |         let manipulateur = thread::spawn(move || {
-   |                            ^^^^^^^^^^^^^ `std::rc::Rc<std::sync::Mutex<i32>>`
-cannot be sent between threads safely
-   |
-   = help: within `[closure@src/main.rs:11:36: 14:10
-counter:std::rc::Rc<std::sync::Mutex<i32>>]`, the trait `std::marker::Send`
-is not implemented for `std::rc::Rc<std::sync::Mutex<i32>>`
-   = note: required because it appears within the type
-`[closure@src/main.rs:11:36: 14:10 counter:std::rc::Rc<std::sync::Mutex<i32>>]`
-   = note: required by `std::thread::spawn`
+```console
+{{#include ../listings/ch16-fearless-concurrency/listing-16-14/output.txt}}
 ```
 
 <!--
@@ -665,56 +511,12 @@ s'exécuter :
 
 <!--
 ```rust
-use std::sync::{Mutex, Arc};
-use std::thread;
-
-fn main() {
-    let counter = Arc::new(Mutex::new(0));
-    let mut handles = vec![];
-
-    for _ in 0..10 {
-        let counter = Arc::clone(&counter);
-        let handle = thread::spawn(move || {
-            let mut num = counter.lock().unwrap();
-
-            *num += 1;
-        });
-        handles.push(handle);
-    }
-
-    for handle in handles {
-        handle.join().unwrap();
-    }
-
-    println!("Result: {}", *counter.lock().unwrap());
-}
+{{#rustdoc_include ../listings-sources/ch16-fearless-concurrency/listing-16-15/src/main.rs}}
 ```
 -->
 
 ```rust
-use std::sync::{Mutex, Arc};
-use std::thread;
-
-fn main() {
-    let compteur = Arc::new(Mutex::new(0));
-    let mut manipulateurs = vec![];
-
-    for _ in 0..10 {
-        let compteur = Arc::clone(&compteur);
-        let manipulateur = thread::spawn(move || {
-            let mut nombre = compteur.lock().unwrap();
-
-            *nombre += 1;
-        });
-        manipulateurs.push(manipulateur);
-    }
-
-    for manipulateur in manipulateurs {
-        manipulateur.join().unwrap();
-    }
-
-    println!("Resultat : {}", *compteur.lock().unwrap());
-}
+{{#rustdoc_include ../listings/ch16-fearless-concurrency/listing-16-15/src/main.rs}}
 ```
 
 <!--
@@ -730,6 +532,12 @@ This code will print the following:
 -->
 
 Ce code va finalement afficher ceci :
+
+<!--
+<!-- Not extracting output because changes to this output aren't significant;
+the changes are likely to be due to the threads running differently rather than
+changes in the compiler -- >
+-->
 
 <!--
 ```text
