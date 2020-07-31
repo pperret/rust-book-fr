@@ -170,11 +170,13 @@ méthode nommée `afficher` :
 
 <!--
 ```rust
-pub trait Draw {
-    fn draw(&self);
-}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-03/src/lib.rs}}
 ```
 -->
+
+```rust
+{{#rustdoc_include ../listings/ch17-oop/listing-17-03/src/lib.rs}}
+```
 
 ```rust
 pub trait Affichable {
@@ -211,24 +213,12 @@ bouche-trou pour n'importe quel type au sein d'un `Box` qui implémente le trait
 
 <!--
 ```rust
-# pub trait Draw {
-#     fn draw(&self);
-# }
-#
-pub struct Screen {
-    pub components: Vec<Box<dyn Draw>>,
-}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-04/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# pub trait Affichable {
-#     fn afficher(&self);
-# }
-#
-pub struct Ecran {
-    pub composants: Vec<Box<dyn Affichable>>,
-}
+{{#rustdoc_include ../listings/ch17-oop/listing-17-04/src/lib.rs:here}}
 ```
 
 <!--
@@ -258,40 +248,12 @@ l'encart 17-5 :
 
 <!--
 ```rust
-# pub trait Draw {
-#     fn draw(&self);
-# }
-#
-# pub struct Screen {
-#     pub components: Vec<Box<dyn Draw>>,
-# }
-#
-impl Screen {
-    pub fn run(&self) {
-        for component in self.components.iter() {
-            component.draw();
-        }
-    }
-}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-05/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# pub trait Affichable {
-#     fn afficher(&self);
-# }
-#
-# pub struct Ecran {
-#     pub composants: Vec<Box<dyn Affichable>>,
-# }
-#
-impl Ecran {
-    pub fn executer(&self) {
-        for composant in self.composants.iter() {
-            composant.afficher();
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch17-oop/listing-17-05/src/lib.rs:here}}
 ```
 
 <!--
@@ -326,42 +288,12 @@ utilisant un type générique et un trait lié comme dans l'encart 17-6 :
 
 <!--
 ```rust
-# pub trait Draw {
-#     fn draw(&self);
-# }
-#
-pub struct Screen<T: Draw> {
-    pub components: Vec<T>,
-}
-
-impl<T> Screen<T>
-    where T: Draw {
-    pub fn run(&self) {
-        for component in self.components.iter() {
-            component.draw();
-        }
-    }
-}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-06/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# pub trait Affichable {
-#     fn afficher(&self);
-# }
-#
-pub struct Ecran<T: Affichable> {
-    pub composants: Vec<T>,
-}
-
-impl<T> Ecran<T>
-    where T: Affichable {
-    pub fn executer(&self) {
-        for composant in self.composants.iter() {
-            composant.afficher();
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch17-oop/listing-17-06/src/lib.rs:here}}
 ```
 
 <!--
@@ -427,40 +359,12 @@ ressembler l'implémentation, une structure `Bouton` pourrait avoir des champs
 
 <!--
 ```rust
-# pub trait Draw {
-#     fn draw(&self);
-# }
-#
-pub struct Button {
-    pub width: u32,
-    pub height: u32,
-    pub label: String,
-}
-
-impl Draw for Button {
-    fn draw(&self) {
-        // code to actually draw a button
-    }
-}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-07/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# pub trait Affichable {
-#     fn afficher(&self);
-# }
-#
-pub struct Bouton {
-    pub largeur: u32,
-    pub hauteur: u32,
-    pub libelle: String,
-}
-
-impl Affichable for Bouton {
-    fn afficher(&self) {
-        // code servant vraiment à afficher un bouton
-    }
-}
+{{#rustdoc_include ../listings/ch17-oop/listing-17-07/src/lib.rs:here}}
 ```
 
 <!--
@@ -514,36 +418,12 @@ comme dans l'encart 17-8 :
 
 <!--
 ```rust,ignore
-use gui::Draw;
-
-struct SelectBox {
-    width: u32,
-    height: u32,
-    options: Vec<String>,
-}
-
-impl Draw for SelectBox {
-    fn draw(&self) {
-        // code to actually draw a select box
-    }
-}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-08/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-use gui::Affichable;
-
-struct ListeDeroulante {
-    largeur: u32,
-    hauteur: u32,
-    options: Vec<String>,
-}
-
-impl Affichable for ListeDeroulante {
-    fn afficher(&self) {
-        // code servant vraiment à afficher une liste déroulante
-    }
-}
+{{#rustdoc_include ../listings/ch17-oop/listing-17-08/src/main.rs:here}}
 ```
 
 <!--
@@ -577,58 +457,12 @@ L'encart 17-9 montre cette implémentation :
 
 <!--
 ```rust,ignore
-use gui::{Screen, Button};
-
-fn main() {
-    let screen = Screen {
-        components: vec![
-            Box::new(SelectBox {
-                width: 75,
-                height: 10,
-                options: vec![
-                    String::from("Yes"),
-                    String::from("Maybe"),
-                    String::from("No")
-                ],
-            }),
-            Box::new(Button {
-                width: 50,
-                height: 10,
-                label: String::from("OK"),
-            }),
-        ],
-    };
-
-    screen.run();
-}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-09/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-use gui::{Ecran, Bouton};
-
-fn main() {
-    let ecran = Ecran {
-        composants: vec![
-            Box::new(ListeDeroulante {
-                largeur: 75,
-                hauteur: 10,
-                options: vec![
-                    String::from("Oui"),
-                    String::from("Peut-être"),
-                    String::from("Non")
-                ],
-            }),
-            Box::new(Bouton {
-                largeur: 50,
-                hauteur: 10,
-                libelle: String::from("OK"),
-            }),
-        ],
-    };
-
-    ecran.executer();
-}
+{{#rustdoc_include ../listings/ch17-oop/listing-17-09/src/main.rs:here}}
 ```
 
 <!--
@@ -708,32 +542,12 @@ Par exemple, l'encart 17-10 montre ce qui arrive si on essaie de créer un
 
 <!--
 ```rust,ignore,does_not_compile
-use gui::Screen;
-
-fn main() {
-    let screen = Screen {
-        components: vec![
-            Box::new(String::from("Hi")),
-        ],
-    };
-
-    screen.run();
-}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-10/src/main.rs}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-use gui::Ecran;
-
-fn main() {
-    let ecran = Ecran {
-        composants: vec![
-            Box::new(String::from("Salut")),
-        ],
-    };
-
-    ecran.executer();
-}
+{{#rustdoc_include ../listings/ch17-oop/listing-17-10/src/main.rs}}
 ```
 
 <!--
@@ -752,27 +566,13 @@ Nous aurons cette erreur parce que `String` n'implémente pas le trait
 `Affichable` :
 
 <!--
-```text
-error[E0277]: the trait bound `std::string::String: gui::Draw` is not satisfied
-  -- > src/main.rs:7:13
-   |
- 7 |             Box::new(String::from("Hi")),
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait gui::Draw is not
-   implemented for `std::string::String`
-   |
-   = note: required for the cast to the object type `gui::Draw`
+```console
+{{#include ../listings-sources/ch17-oop/listing-17-10/output.txt}}
 ```
 -->
 
-```text
-error[E0277]: the trait bound `std::string::String: gui::Affichable` is not satisfied
-  -- > src/main.rs:7:13
-   |
- 7 |             Box::new(String::from("Salut")),
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait gui::Affichable is not
-   implemented for `std::string::String`
-   |
-   = note: required for the cast to the object type `gui::Affichable`
+```console
+{{#include ../listings/ch17-oop/listing-17-10/output.txt}}
 ```
 
 <!--
@@ -950,16 +750,12 @@ de l'encart 17-4 en la faisant contenir des types qui implémentent le trait
 
 <!--
 ```rust,ignore,does_not_compile
-pub struct Screen {
-    pub components: Vec<Box<dyn Clone>>,
-}
+{{#rustdoc_include ../listings-sources/ch17-oop/no-listing-01-trait-object-of-clone/src/lib.rs}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-pub struct Ecran {
-    pub composants: Vec<Box<dyn Clone>>,
-}
+{{#rustdoc_include ../listings/ch17-oop/no-listing-01-trait-object-of-clone/src/lib.rs}}
 ```
 
 <!--
@@ -968,30 +764,14 @@ We would get this error:
 
 Nous aurions obtenu cette erreur :
 
-<!-- markdownlint-disable -->
 <!--
-```text
-error[E0038]: the trait `std::clone::Clone` cannot be made into an object
- -- > src/lib.rs:2:5
-  |
-2 |     pub components: Vec<Box<dyn Clone>>,
-  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `std::clone::Clone`
-  cannot be made into an object
-  |
-  = note: the trait cannot require that `Self : Sized`
+```console
+{{#include ../listings-sources/ch17-oop/no-listing-01-trait-object-of-clone/output.txt}}
 ```
 -->
-<!-- markdownlint-restore -->
 
-```text
-error[E0038]: the trait `std::clone::Clone` cannot be made into an object
- -- > src/lib.rs:2:5
-  |
-2 |     pub composants: Vec<Box<dyn Clone>>,
-  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `std::clone::Clone`
-  cannot be made into an object
-  |
-  = note: the trait cannot require that `Self : Sized`
+```console
+{{#include ../listings/ch17-oop/no-listing-01-trait-object-of-clone/output.txt}}
 ```
 
 <!--
