@@ -74,36 +74,12 @@ le moment; nous allons l'expliquer un peu plus tard.
 
 <!--
 ```rust,ignore,does_not_compile
-mod front_of_house {
-    mod hosting {
-        fn add_to_waitlist() {}
-    }
-}
-
-pub fn eat_at_restaurant() {
-    // Absolute path
-    crate::front_of_house::hosting::add_to_waitlist();
-
-    // Relative path
-    front_of_house::hosting::add_to_waitlist();
-}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-03/src/lib.rs}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-mod salle_a_manger {
-    mod accueil {
-        fn ajouter_a_la_liste_attente() {}
-    }
-}
-
-pub fn manger_au_restaurant() {
-    // Chemin absolu
-    crate::salle_a_manger::accueil::ajouter_a_la_liste_attente();
-
-    // Chemin relatif
-    salle_a_manger::accueil::ajouter_a_la_liste_attente();
-}
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-03/src/lib.rs}}
 ```
 
 <!--
@@ -197,37 +173,13 @@ compile pas pour le moment ! L'erreur que nous obtenons est affichée dans
 l'encart 7-4.
 
 <!--
-```text
-$ cargo build
-   Compiling restaurant v0.1.0 (file:///projects/restaurant)
-error[E0603]: module `hosting` is private
- -- > src/lib.rs:9:28
-  |
-9 |     crate::front_of_house::hosting::add_to_waitlist();
-  |                            ^^^^^^^
-
-error[E0603]: module `hosting` is private
-  -- > src/lib.rs:12:21
-   |
-12 |     front_of_house::hosting::add_to_waitlist();
-   |                     ^^^^^^^
+```console
+{{#include ../listings/ch07-managing-growing-projects/listing-07-03/output.txt}}
 ```
 -->
 
-```text
-$ cargo build
-   Compiling restaurant v0.1.0 (file:///projects/restaurant)
-error[E0603]: module `accueil` is private
- -- > src/lib.rs:9:28
-  |
-9 |     crate::salle_a_manger::accueil::ajouter_a_la_liste_attente();
-  |                            ^^^^^^^
-
-error[E0603]: module `accueil` is private
-  -- > src/lib.rs:12:21
-   |
-12 |     salle_a_manger::accueil::ajouter_a_la_liste_attente();
-   |                     ^^^^^^^
+```console
+{{#include ../listings/ch07-managing-growing-projects/listing-07-03/output.txt}}
 ```
 
 <!--
@@ -291,7 +243,7 @@ restaurant dans lequel ils travaillent.
 Rust chose to have the module system function this way so that hiding inner
 implementation details is the default. That way, you know which parts of the
 inner code you can change without breaking outer code. But you can expose inner
-parts of child modules code to outer ancestor modules by using the `pub`
+parts of child modules' code to outer ancestor modules by using the `pub`
 keyword to make an item public.
 -->
 
@@ -327,36 +279,12 @@ utilisons le mot-clé `pub` sur le module `accueil`, comme dans l'encart 7-5.
 
 <!--
 ```rust,ignore,does_not_compile
-mod front_of_house {
-    pub mod hosting {
-        fn add_to_waitlist() {}
-    }
-}
-
-pub fn eat_at_restaurant() {
-    // Absolute path
-    crate::front_of_house::hosting::add_to_waitlist();
-
-    // Relative path
-    front_of_house::hosting::add_to_waitlist();
-}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-05/src/lib.rs}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-mod salle_a_manger {
-    pub mod accueil {
-        fn ajouter_a_la_liste_attente() {}
-    }
-}
-
-pub fn manger_au_restaurant() {
-    // Chemin absolu
-    crate::salle_a_manger::accueil::ajouter_a_la_liste_attente();
-
-    // Chemin relatif
-    salle_a_manger::accueil::ajouter_a_la_liste_attente();
-}
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-05/src/lib.rs}}
 ```
 
 <!--
@@ -376,37 +304,13 @@ Malheureusement, il reste une erreur dans le code de l'encart 7-5, la voici dans
 l'encart 7-6.
 
 <!--
-```text
-$ cargo build
-   Compiling restaurant v0.1.0 (file:///projects/restaurant)
-error[E0603]: function `add_to_waitlist` is private
- -- > src/lib.rs:9:37
-  |
-9 |     crate::front_of_house::hosting::add_to_waitlist();
-  |                                     ^^^^^^^^^^^^^^^
-
-error[E0603]: function `add_to_waitlist` is private
-  -- > src/lib.rs:12:30
-   |
-12 |     front_of_house::hosting::add_to_waitlist();
-   |                              ^^^^^^^^^^^^^^^
+```console
+{{#include ../listings/ch07-managing-growing-projects/listing-07-05/output.txt}}
 ```
 -->
 
-```text
-$ cargo build
-   Compiling restaurant v0.1.0 (file:///projects/restaurant)
-error[E0603]: function `ajouter_a_la_liste_attente` is private
- -- > src/lib.rs:9:37
-  |
-9 |     crate::salle_a_manger::accueil::ajouter_a_la_liste_attente();
-  |                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-error[E0603]: function `ajouter_a_la_liste_attente` is private
-  -- > src/lib.rs:12:30
-   |
-12 |     salle_a_manger::accueil::ajouter_a_la_liste_attente();
-   |                              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+```console
+{{#include ../listings/ch07-managing-growing-projects/listing-07-05/output.txt}}
 ```
 
 <!--
@@ -457,38 +361,12 @@ mot-clé `pub` devant sa définition, comme dans l'encart 7-7.
 
 <!--
 ```rust
-mod front_of_house {
-    pub mod hosting {
-        pub fn add_to_waitlist() {}
-    }
-}
-
-pub fn eat_at_restaurant() {
-    // Absolute path
-    crate::front_of_house::hosting::add_to_waitlist();
-
-    // Relative path
-    front_of_house::hosting::add_to_waitlist();
-}
-# fn main() {}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-07/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-mod salle_a_manger {
-    pub mod accueil {
-        pub fn ajouter_a_la_liste_attente() {}
-    }
-}
-
-pub fn manger_au_restaurant() {
-    // Chemin absolu
-    crate::salle_a_manger::accueil::ajouter_a_la_liste_attente();
-
-    // Chemin relatif
-    salle_a_manger::accueil::ajouter_a_la_liste_attente();
-}
-# fn main() {}
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-07/src/lib.rs:here}}
 ```
 
 <!--
@@ -591,32 +469,12 @@ commençant le chemin de `servir_commande` avec `super` :
 
 <!--
 ```rust
-fn serve_order() {}
-
-mod back_of_house {
-    fn fix_incorrect_order() {
-        cook_order();
-        super::serve_order();
-    }
-
-    fn cook_order() {}
-}
-# fn main() {}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-08/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-fn servir_commande() {}
-
-mod cuisines {
-    fn corriger_commande_erronee() {
-        cuisiner_commande();
-        super::servir_commande();
-    }
-
-    fn cuisiner_commande() {}
-}
-# fn main() {}
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-08/src/lib.rs:here}}
 ```
 
 <!--
@@ -687,67 +545,12 @@ obtiendront.
 
 <!--
 ```rust
-mod back_of_house {
-    pub struct Breakfast {
-        pub toast: String,
-        seasonal_fruit: String,
-    }
-
-    impl Breakfast {
-        pub fn summer(toast: &str) -> Breakfast {
-            Breakfast {
-                toast: String::from(toast),
-                seasonal_fruit: String::from("peaches"),
-            }
-        }
-    }
-}
-
-pub fn eat_at_restaurant() {
-    // Order a breakfast in the summer with Rye toast
-    let mut meal = back_of_house::Breakfast::summer("Rye");
-    // Change our mind about what bread we'd like
-    meal.toast = String::from("Wheat");
-    println!("I'd like {} toast please", meal.toast);
-
-    // The next line won't compile if we uncomment it; we're not allowed
-    // to see or modify the seasonal fruit that comes with the meal
-    // meal.seasonal_fruit = String::from("blueberries");
-}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-09/src/lib.rs}}
 ```
 -->
 
 ```rust
-mod cuisines {
-    pub struct PetitDejeuner {
-        pub tartine_grillee: String,
-        fruit_de_saison: String,
-    }
-
-    impl PetitDejeuner {
-        pub fn en_ete(tartine_grillee: &str) -> PetitDejeuner {
-            PetitDejeuner {
-                tartine_grillee: String::from(tartine_grillee),
-                fruit_de_saison: String::from("pêches"),
-            }
-        }
-    }
-}
-
-pub fn manger_au_restaurant() {
-    // On commande un petit-déjeuner en été avec tartine grillée au seigle
-    let mut repas = cuisines::PetitDejeuner::en_ete("seigle");
-    // On change d'avis sur le pain que nous souhaitons
-    repas.tartine_grillée = String::from("blé");
-    println!( "Je voudrait une tartine grillée au {}, s'il vous plaît.",
-              repas.tartine_grillee);
-
-    // La prochaine ligne ne va pas se compiler si nous ne la commentons pas;
-    // car nous ne sommes pas autorisé à voir ou modifier le fruit de saison
-    // qui accompagne le repas.
-
-    // repas.fruit_de_saison = String::from("myrtilles");
-}
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-09/src/lib.rs}}
 ```
 
 <!--
@@ -808,32 +611,12 @@ seront publiques. Nous avons simplement besoin d'un `pub` devant le mot-clé
 
 <!--
 ```rust
-mod back_of_house {
-    pub enum Appetizer {
-        Soup,
-        Salad,
-    }
-}
-
-pub fn eat_at_restaurant() {
-    let order1 = back_of_house::Appetizer::Soup;
-    let order2 = back_of_house::Appetizer::Salad;
-}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-10/src/lib.rs}}
 ```
 -->
 
 ```rust
-mod cuisines {
-    pub enum AmuseBouche {
-        Soupe,
-        Salade,
-    }
-}
-
-pub fn manger_au_restaurant() {
-    let commande1 = cuisines::AmuseBouche::Soupe;
-    let commande2 = cuisines::AmuseBouche::Salade;
-}
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-10/src/lib.rs}}
 ```
 
 <!--

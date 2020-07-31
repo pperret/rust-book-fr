@@ -53,40 +53,12 @@ centimes, comme ci-dessous dans l'encart 6-3.
 
 <!--
 ```rust
-enum Coin {
-    Penny,
-    Nickel,
-    Dime,
-    Quarter,
-}
-
-fn value_in_cents(coin: Coin) -> u8 {
-    match coin {
-        Coin::Penny => 1,
-        Coin::Nickel => 5,
-        Coin::Dime => 10,
-        Coin::Quarter => 25,
-    }
-}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-03/src/main.rs:here}}
 ```
 -->
 
 ```rust
-enum USACoin {
-    Penny,
-    Nickel,
-    Dime,
-    Quarter,
-}
-
-fn valeur_en_centimes(piece: USACoin) -> u8 {
-    match piece {
-        USACoin::Penny => 1,
-        USACoin::Nickel => 5,
-        USACoin::Dime => 10,
-        USACoin::Quarter => 25,
-    }
-}
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-03/src/main.rs:here}}
 ```
 
 <!--
@@ -170,46 +142,12 @@ que la méthode est appellée avec une valeur `USACoin::Penny` mais va continuer
 
 <!--
 ```rust
-# enum Coin {
-#    Penny,
-#    Nickel,
-#    Dime,
-#    Quarter,
-# }
-#
-fn value_in_cents(coin: Coin) -> u8 {
-    match coin {
-        Coin::Penny => {
-            println!("Lucky penny!");
-            1
-        },
-        Coin::Nickel => 5,
-        Coin::Dime => 10,
-        Coin::Quarter => 25,
-    }
-}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-08-match-arm-multiple-lines/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# enum USACoin {
-#    Penny,
-#    Nickel,
-#    Dime,
-#    Quarter,
-# }
-#
-fn valeur_en_centimes(piece: USACoin) -> u8 {
-    match piece {
-        USACoin::Penny => {
-            println!("Un centime porte-bonheur !");
-            1
-        },
-        USACoin::Nickel => 5,
-        USACoin::Dime => 10,
-        USACoin::Quarter => 25,
-    }
-}
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-08-match-arm-multiple-lines/src/main.rs:here}}
 ```
 
 <!--
@@ -248,36 +186,12 @@ l'encart 6-4.
 
 <!--
 ```rust
-#[derive(Debug)] // so we can inspect the state in a minute
-enum UsState {
-    Alabama,
-    Alaska,
-    // --snip--
-}
-
-enum Coin {
-    Penny,
-    Nickel,
-    Dime,
-    Quarter(UsState),
-}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-04/src/main.rs:here}}
 ```
 -->
 
 ```rust
-#[derive(Debug)] // pour pouvoir afficher l'État
-enum USAState {
-    Alabama,
-    Alaska,
-    // -- code masqué ici --
-}
-
-enum USACoin {
-    Penny,
-    Nickel,
-    Dime,
-    Quarter(USAState),
-}
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-04/src/main.rs:here}}
 ```
 
 <!--
@@ -315,58 +229,12 @@ cette branche, comme ceci :
 
 <!--
 ```rust
-# #[derive(Debug)]
-# enum UsState {
-#    Alabama,
-#    Alaska,
-# }
-#
-# enum Coin {
-#    Penny,
-#    Nickel,
-#    Dime,
-#    Quarter(UsState),
-# }
-#
-fn value_in_cents(coin: Coin) -> u8 {
-    match coin {
-        Coin::Penny => 1,
-        Coin::Nickel => 5,
-        Coin::Dime => 10,
-        Coin::Quarter(state) => {
-            println!("State quarter from {:?}!", state);
-            25
-        },
-    }
-}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-09-variable-in-pattern/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# #[derive(Debug)]
-# enum USAState {
-#    Alabama,
-#    Alaska,
-# }
-#
-# enum USACoin {
-#    Penny,
-#    Nickel,
-#    Dime,
-#    Quarter(USAState),
-# }
-#
-fn valeur_en_centimes(piece: USACoin) -> u8 {
-    match piece {
-        USACoin::Penny => 1,
-        USACoin::Nickel => 5,
-        USACoin::Dime => 10,
-        USACoin::Quarter(etat) => {
-            println!("Il s'agit d'un Quarter de l'état de {:?} !", etat);
-            25
-        },
-    }
-}
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-09-variable-in-pattern/src/main.rs:here}}
 ```
 
 <!--
@@ -429,30 +297,12 @@ l'encart 6-5.
 
 <!--
 ```rust
-fn plus_one(x: Option<i32>) -> Option<i32> {
-    match x {
-        None => None,
-        Some(i) => Some(i + 1),
-    }
-}
-
-let five = Some(5);
-let six = plus_one(five);
-let none = plus_one(None);
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:here}}
 ```
 -->
 
 ```rust
-fn plus_un(x: Option<i32>) -> Option<i32> {
-    match x {
-        None => None,
-        Some(i) => Some(i + 1),
-    }
-}
-
-let cinq = Some(5);
-let six = plus_un(cinq);
-let none = plus_un(None);
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:here}}
 ```
 
 <!--
@@ -473,8 +323,14 @@ Examinons la première exécution de `plus_un` en détail. Lorsque nous appellon
 `plus_un(cinq)`, la variable `x` dans le corps de `plus_un` aura la valeur
 `Some(5)`. Ensuite, nous comparons cela à chaque branche du `match`.
 
+<!--
 ```rust,ignore
-None => None,
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:first_arm}}
+```
+-->
+
+```rust,ignore
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:first_arm}}
 ```
 
 <!--
@@ -485,8 +341,14 @@ next arm.
 La valeur `Some(5)` ne correspond pas au motif `None`, donc nous continuons à la
 prochaine branche.
 
+<!--
 ```rust,ignore
-Some(i) => Some(i + 1),
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:second_arm}}
+```
+-->
+
+```rust,ignore
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:second_arm}}
 ```
 
 <!--
@@ -510,8 +372,14 @@ Now let’s consider the second call of `plus_one` in Listing 6-5, where `x` is
 Maintenant, regardons le second appel à `plus_un` dans l'encart 6-5, où `x` vaut
 `None`. Nous entrons dans le `match` et nous le comparons à la première branche.
 
+<!--
 ```rust,ignore
-None => None,
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:first_arm}}
+```
+-->
+
+```rust,ignore
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:first_arm}}
 ```
 
 <!--
@@ -555,20 +423,12 @@ version de notre fonction `plus_un` a un bogue et ne va pas se compiler :
 
 <!--
 ```rust,ignore,does_not_compile
-fn plus_one(x: Option<i32>) -> Option<i32> {
-    match x {
-        Some(i) => Some(i + 1),
-    }
-}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-10-non-exhaustive-match/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-fn plus_un(x: Option<i32>) -> Option<i32> {
-    match x {
-        Some(i) => Some(i + 1),
-    }
-}
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-10-non-exhaustive-match/src/main.rs:here}}
 ```
 
 <!--
@@ -581,12 +441,14 @@ Nous n'avons pas géré le cas du `None`, donc ce code va générer un bogue.
 Heureusement, c'est un bogue que Rust sait gérer. Si nous essayons de compiler
 ce code, nous allons obtenir cette erreur :
 
-```text
-error[E0004]: non-exhaustive patterns: `None` not covered
- -- >
-  |
-6 |         match x {
-  |               ^ pattern `None` not covered
+<!--
+```console
+{{#include ../listings/ch06-enums-and-pattern-matching/no-listing-10-non-exhaustive-match/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch06-enums-and-pattern-matching/no-listing-10-non-exhaustive-match/output.txt}}
 ```
 
 <!--
@@ -595,7 +457,7 @@ pattern we forgot! Matches in Rust are *exhaustive*: we must exhaust every last
 possibility in order for the code to be valid. Especially in the case of
 `Option<T>`, when Rust prevents us from forgetting to explicitly handle the
 `None` case, it protects us from assuming that we have a value when we might
-have null, thus making the billion-dollar mistake discussed earlier.
+have null, thus making the billion-dollar mistake discussed earlier impossible.
 -->
 
 Rust sait que nous n'avons pas couvert toutes les possibilités et sait même quel
@@ -603,8 +465,8 @@ motif nous avons oublié ! Les `match` de Rust sont *exhaustifs* : nous devons
 traiter toutes les possibilités afin que le code soit valide. Dans notre cas de
 `Option<T>`, quand Rust nous empêche d'oublier de gérer explicitement le cas de
 `None`, il nous protège d'une situation où nous supposons que nous avons une
-valeur alors que nous pourrions avoir null, comme l'erreur au milliards de
-dollars que nous avons vu précédemment.
+valeur alors que nous pourrions avoir null, ce qui rend impossible l'erreur aux
+milliards de dollars que nous avons vu précédemment.
 
 <!--
 ### The `_` Placeholder
@@ -628,26 +490,12 @@ n'avons pas à le faire : nous pouvons utiliser le motif spécial `_` :
 
 <!--
 ```rust
-let some_u8_value = 0u8;
-match some_u8_value {
-    1 => println!("one"),
-    3 => println!("three"),
-    5 => println!("five"),
-    7 => println!("seven"),
-    _ => (),
-}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-11-underscore-placeholder/src/main.rs:here}}
 ```
 -->
 
 ```rust
-let une_valeur_u8 = 0u8;
-match une_valeur_u8 {
-    1 => println!("un"),
-    3 => println!("trois"),
-    5 => println!("cinq"),
-    7 => println!("sept"),
-    _ => (),
-}
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-11-underscore-placeholder/src/main.rs:here}}
 ```
 
 <!--
@@ -671,3 +519,18 @@ care about only *one* of the cases. For this situation, Rust provides `if let`.
 Cependant, l'expression `match` peut être un peu lourde dans une situation où
 nous nous préoccupons uniquement *d'un seul* cas. Pour ce cas, Rust nous propose
 d'utiliser une autre structure, `if let`.
+
+<!--
+More about patterns and matching can be found in [chapter 18][ch18-00-patterns].
+-->
+
+Vous pouvez en apprendre plus sur les motifs et le filtrage par motif au
+[chapter 18][ch18-00-patterns].
+
+<!--
+[ch18-00-patterns]:
+ch18-00-patterns.html
+-->
+
+[ch18-00-patterns]:
+ch18-00-patterns.html
