@@ -98,7 +98,7 @@ encore implémenté la crate `blog`.
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch17-oop/listing-17-11/src/main.rs:all}}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-11/src/main.rs:all}}
 ```
 -->
 
@@ -200,7 +200,7 @@ champ privé `etat` pour y loger une `Option<T>` contenant un objet trait de
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch17-oop/listing-17-12/src/lib.rs}}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-12/src/lib.rs}}
 ```
 -->
 
@@ -280,7 +280,7 @@ le bloc `Billet` de l'encart 17-13 :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch17-oop/listing-17-13/src/lib.rs:here}}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-13/src/lib.rs:here}}
 ```
 -->
 
@@ -350,7 +350,7 @@ montre l'implémentation de ceci :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch17-oop/listing-17-14/src/lib.rs:here}}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-14/src/lib.rs:here}}
 ```
 -->
 
@@ -398,7 +398,7 @@ relecture d'un billet, qui devrait changer son état de `Brouillon` à
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch17-oop/listing-17-15/src/lib.rs:here}}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-15/src/lib.rs:here}}
 ```
 -->
 
@@ -541,7 +541,7 @@ approuvé, comme le montre l'encart 17-16 :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch17-oop/listing-17-16/src/lib.rs:here}}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-16/src/lib.rs:here}}
 ```
 -->
 
@@ -601,7 +601,7 @@ l'encart 17-17 :
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch17-oop/listing-17-17/src/lib.rs:here}}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-17/src/lib.rs:here}}
 ```
 -->
 
@@ -692,7 +692,7 @@ l'encart 17-18 :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch17-oop/listing-17-18/src/lib.rs:here}}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-18/src/lib.rs:here}}
 ```
 -->
 
@@ -932,7 +932,7 @@ Considérons la première partie du `main` de l'encart 17-11 :
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch17-oop/listing-17-11/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-11/src/main.rs:here}}
 ```
 -->
 
@@ -971,7 +971,7 @@ compilera même pas. L'encart 17-19 nous propose les définitions d'une structur
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch17-oop/listing-17-19/src/lib.rs}}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-19/src/lib.rs}}
 ```
 -->
 
@@ -1062,7 +1062,7 @@ comme le propose l'encart 17-20 :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch17-oop/listing-17-20/src/lib.rs:here}}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-20/src/lib.rs:here}}
 ```
 -->
 
@@ -1136,7 +1136,7 @@ mis à jour est présenté dans l'encart 17-21 :
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch17-oop/listing-17-21/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch17-oop/listing-17-21/src/main.rs}}
 ```
 -->
 
