@@ -36,22 +36,12 @@ compte d'utilisateur.
 
 <!--
 ```rust
-struct User {
-    username: String,
-    email: String,
-    sign_in_count: u64,
-    active: bool,
-}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-01/src/main.rs:here}}
 ```
 -->
 
 ```rust
-struct Utilisateur {
-    pseudo: String,
-    email: String,
-    nombre_de_connexions: u64,
-    actif: bool,
-}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-01/src/main.rs:here}}
 ```
 
 <!--
@@ -86,36 +76,12 @@ déclarer un utilisateur précis comme dans l'encart 5-2.
 
 <!--
 ```rust
-# struct User {
-#     username: String,
-#     email: String,
-#     sign_in_count: u64,
-#     active: bool,
-# }
-#
-let user1 = User {
-    email: String::from("someone@example.com"),
-    username: String::from("someusername123"),
-    active: true,
-    sign_in_count: 1,
-};
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-02/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# struct Utilisateur {
-#     pseudo: String,
-#     email: String,
-#     nombre_de_connexions: u64,
-#     actif: bool,
-# }
-#
-let utilisateur1 = Utilisateur {
-    email: String::from("quelquun@example.com"),
-    pseudo: String::from("pseudoquelconque123"),
-    actif: true,
-    nombre_de_connexions: 1,
-};
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-02/src/main.rs:here}}
 ```
 
 <!--
@@ -144,40 +110,12 @@ d'une instance mutable de `Utilisateur`.
 
 <!--
 ```rust
-# struct User {
-#     username: String,
-#     email: String,
-#     sign_in_count: u64,
-#     active: bool,
-# }
-#
-let mut user1 = User {
-    email: String::from("someone@example.com"),
-    username: String::from("someusername123"),
-    active: true,
-    sign_in_count: 1,
-};
-
-user1.email = String::from("anotheremail@example.com");
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-03/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# struct Utilisateur {
-#     pseudo: String,
-#     email: String,
-#     nombre_de_connexions: u64,
-#     actif: bool,
-# }
-#
-let mut utilisateur1 = Utilisateur {
-    email: String::from("quelquun@example.com"),
-    pseudo: String::from("pseudoquelconque123"),
-    actif: true,
-    nombre_de_connexions: 1,
-};
-
-utilisateur1.email = String::from("unautremail@example.com");
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-03/src/main.rs:here}}
 ```
 
 <!--
@@ -213,40 +151,12 @@ prend la valeur `true` et le `nombre_de_connexions` prend la valeur `1`.
 
 <!--
 ```rust
-# struct User {
-#     username: String,
-#     email: String,
-#     sign_in_count: u64,
-#     active: bool,
-# }
-#
-fn build_user(email: String, username: String) -> User {
-    User {
-        email: email,
-        username: username,
-        active: true,
-        sign_in_count: 1,
-    }
-}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-04/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# struct Utilisateur {
-#     pseudo: String,
-#     email: String,
-#     nombre_de_connexions: u64,
-#     actif: bool,
-# }
-#
-fn creer_utilisateur(email: String, pseudo: String) -> Utilisateur {
-    Utilisateur {
-        email: email,
-        pseudo: pseudo,
-        actif: true,
-        nombre_de_connexions: 1,
-    }
-}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-04/src/main.rs:here}}
 ```
 
 <!--
@@ -292,40 +202,12 @@ sorte qu'elle se comporte exactement de la même façon sans avoir à répéter
 
 <!--
 ```rust
-# struct User {
-#     username: String,
-#     email: String,
-#     sign_in_count: u64,
-#     active: bool,
-# }
-#
-fn build_user(email: String, username: String) -> User {
-    User {
-        email,
-        username,
-        active: true,
-        sign_in_count: 1,
-    }
-}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-05/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# struct Utilisateur {
-#     pseudo: String,
-#     email: String,
-#     nombre_de_connexions: u64,
-#     actif: bool,
-# }
-#
-fn creer_utilisateur(email: String, pseudo: String) -> Utilisateur {
-    Utilisateur {
-        email,
-        pseudo,
-        actif: true,
-        nombre_de_connexions: 1,
-    }
-}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-05/src/main.rs:here}}
 ```
 
 <!--
@@ -381,50 +263,12 @@ l'encart 5-2.
 
 <!--
 ```rust
-# struct User {
-#     username: String,
-#     email: String,
-#     sign_in_count: u64,
-#     active: bool,
-# }
-#
-# let user1 = User {
-#     email: String::from("someone@example.com"),
-#     username: String::from("someusername123"),
-#     active: true,
-#     sign_in_count: 1,
-# };
-#
-let user2 = User {
-    email: String::from("another@example.com"),
-    username: String::from("anotherusername567"),
-    active: user1.active,
-    sign_in_count: user1.sign_in_count,
-};
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-06/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# struct Utilisateur {
-#     pseudo: String,
-#     email: String,
-#     nombre_de_connexions: u64,
-#     actif: bool,
-# }
-#
-# let utilisateur1 = Utilisateur {
-#     email: String::from("quelquun@example.com"),
-#     pseudo: String::from("pseudoquelconque123"),
-#     actif: true,
-#     nombre_de_connexions: 1,
-# };
-#
-let utilisateur2 = Utilisateur {
-    email: String::from("quelquundautre@example.com"),
-    pseudo: String::from("autrepseudo567"),
-    actif: utilisateur1.actif,
-    nombre_de_connexions: utilisateur1.nombre_de_connexions,
-};
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-06/src/main.rs:here}}
 ```
 
 <!--
@@ -448,48 +292,12 @@ devraient avoir la même valeur que dans l'instance précisée.
 
 <!--
 ```rust
-# struct User {
-#     username: String,
-#     email: String,
-#     sign_in_count: u64,
-#     active: bool,
-# }
-#
-# let user1 = User {
-#     email: String::from("someone@example.com"),
-#     username: String::from("someusername123"),
-#     active: true,
-#     sign_in_count: 1,
-# };
-#
-let user2 = User {
-    email: String::from("another@example.com"),
-    username: String::from("anotherusername567"),
-    ..user1
-};
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-07/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# struct Utilisateur {
-#     pseudo: String,
-#     email: String,
-#     nombre_de_connexions: u64,
-#     actif: bool,
-# }
-#
-# let utilisateur1 = Utilisateur {
-#     email: String::from("quelquun@example.com"),
-#     pseudo: String::from("pseudoquelconque123"),
-#     actif: true,
-#     nombre_de_connexions: 1,
-# };
-#
-let utilisateur2 = Utilisateur {
-    email: String::from("quelquundautre@example.com"),
-    pseudo: String::from("autrepseudo567"),
-    ..utilisateur1
-};
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-07/src/main.rs:here}}
 ```
 
 <!--
@@ -548,20 +356,12 @@ définition et une utilisation de deux structures tuples nommées `Couleur` et
 
 <!--
 ```rust
-struct Color(i32, i32, i32);
-struct Point(i32, i32, i32);
-
-let black = Color(0, 0, 0);
-let origin = Point(0, 0, 0);
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/no-listing-01-tuple-structs/src/main.rs:here}}
 ```
 -->
 
 ```rust
-struct Couleur(i32, i32, i32);
-struct Point(i32, i32, i32);
-
-let noir = Couleur(0, 0, 0);
-let origine = Point(0, 0, 0);
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/no-listing-01-tuple-structs/src/main.rs:here}}
 ```
 
 <!--
@@ -621,6 +421,8 @@ lui-même. Nous aborderons les traits au chapitre 10.
 >
 > <span class="filename">Filename: src/main.rs</span>
 >
+> <!-- CAN'T EXTRACT SEE https://github.com/rust-lang/mdBook/issues/1127 -- >
+>
 > ```rust,ignore,does_not_compile
 > struct User {
 >     username: &str,
@@ -639,21 +441,29 @@ lui-même. Nous aborderons les traits au chapitre 10.
 > }
 > ```
 >
->
 > The compiler will complain that it needs lifetime specifiers:
 >
-> ```text
+> ```console
+> $ cargo run
+>    Compiling structs v0.1.0 (file:///projects/structs)
 > error[E0106]: missing lifetime specifier
->  -- >
+>  -- > src/main.rs:2:15
 >   |
 > 2 |     username: &str,
 >   |               ^ expected lifetime parameter
 >
 > error[E0106]: missing lifetime specifier
->  -- >
+>  -- > src/main.rs:3:12
 >   |
 > 3 |     email: &str,
 >   |            ^ expected lifetime parameter
+>
+> error: aborting due to 2 previous errors
+>
+> For more information about this error, try `rustc --explain E0106`.
+> error: could not compile `structs`.
+>
+> To learn more, run the command again with --verbose.
 > ```
 >
 > In Chapter 10, we’ll discuss how to fix these errors so you can store
@@ -679,6 +489,8 @@ lui-même. Nous aborderons les traits au chapitre 10.
 >
 > <span class="filename">Fichier : src/main.rs</span>
 >
+> <!-- CAN'T EXTRACT SEE https://github.com/rust-lang/mdBook/issues/1127 -->
+>
 > ```rust,ignore,does_not_compile
 > struct Utilisateur {
 >     pseudo: &str,
@@ -699,21 +511,39 @@ lui-même. Nous aborderons les traits au chapitre 10.
 >
 > Le compilateur réclamera l'ajout des durées de vie :
 >
-> ```text
+> ```console
+> $ cargo run
+>    Compiling structs v0.1.0 (file:///projects/structs)
 > error[E0106]: missing lifetime specifier
->  -->
+>  --> src/main.rs:2:15
 >   |
 > 2 |     username: &str,
 >   |               ^ expected lifetime parameter
 >
 > error[E0106]: missing lifetime specifier
->  -->
+>  --> src/main.rs:3:12
 >   |
 > 3 |     email: &str,
 >   |            ^ expected lifetime parameter
+>
+> error: aborting due to 2 previous errors
+>
+> For more information about this error, try `rustc --explain E0106`.
+> error: could not compile `structs`.
+>
+> To learn more, run the command again with --verbose.
 > ```
 >
 > Au chapitre 10, nous aborderons la façon de corriger ces erreurs pour qu'on
 > puisse stocker des références dans des structures, mais pour le moment, nous
 > résoudrons les erreurs comme celles-ci en utilisant des types possédés comme
 > `String` plutôt que des références comme `&str`.
+
+<!--
+<!-- manual-regeneration
+for the error above
+after running update-rustc.sh:
+pbcopy < listings/ch05-using-structs-to-structure-related-data/no-listing-02-reference-in-struct/output.txt
+paste above
+add `> ` before every line -- >
+-->

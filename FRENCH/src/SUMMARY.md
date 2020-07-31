@@ -45,6 +45,8 @@
     - [Importer des chemins dans la portée via le mot-clé `use`](ch07-04-bringing-paths-into-scope-with-the-use-keyword.md)
     - [Séparer les modules dans différents fichiers](ch07-05-separating-modules-into-different-files.md)
 
-## Penser en Rust
+- [Les collections standard](ch08-00-common-collections.md)
+    - [Stocker des listes de valeurs avec des vecteurs](ch08-01-vectors.md)
+    - [Stocker du texte encodé en UTF-8 avec les Strings](ch08-02-strings.md)
 
-- [Les caractéristiques des langages orientés objet](ch17-01-what-is-oo.md)
+    - [Les caractéristiques des langages orientés objet](ch17-01-what-is-oo.md)

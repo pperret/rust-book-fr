@@ -50,18 +50,12 @@ qu'elle peut avoir, `V4` et `V6`. Ce sont les variantes de l'énumération :
 
 <!--
 ```rust
-enum IpAddrKind {
-    V4,
-    V6,
-}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-01-defining-enums/src/main.rs:def}}
 ```
 -->
 
 ```rust
-enum SorteAdresseIp {
-    V4,
-    V6,
-}
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-01-defining-enums/src/main.rs:def}}
 ```
 
 <!--
@@ -86,24 +80,12 @@ Nous pouvons créer des instances de chacune des deux variantes de
 
 <!--
 ```rust
-# enum IpAddrKind {
-#     V4,
-#     V6,
-# }
-#
-let four = IpAddrKind::V4;
-let six = IpAddrKind::V6;
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-01-defining-enums/src/main.rs:instance}}
 ```
 -->
 
 ```rust
-# enum SorteAdresseIp {
-#     V4,
-#     V6,
-# }
-#
-let quatre = SorteAdresseIp::V4;
-let six = SorteAdresseIp::V6;
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-01-defining-enums/src/main.rs:instance}}
 ```
 
 <!--
@@ -123,22 +105,12 @@ pouvons, par exemple, définir une fonction qui accepte n'importe quelle
 
 <!--
 ```rust
-# enum IpAddrKind {
-#     V4,
-#     V6,
-# }
-#
-fn route(ip_kind: IpAddrKind) { }
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-01-defining-enums/src/main.rs:fn}}
 ```
 -->
 
 ```rust
-# enum SorteAdresseIp {
-#     V4,
-#     V6,
-# }
-#
-fn router(sorte_ip: SorteAdresseIp) { }
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-01-defining-enums/src/main.rs:fn}}
 ```
 
 <!--
@@ -149,28 +121,12 @@ Et nous pouvons appeler cette fonction avec chacune des variantes :
 
 <!--
 ```rust
-# enum IpAddrKind {
-#     V4,
-#     V6,
-# }
-#
-# fn route(ip_kind: IpAddrKind) { }
-#
-route(IpAddrKind::V4);
-route(IpAddrKind::V6);
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-01-defining-enums/src/main.rs:fn_call}}
 ```
 -->
 
 ```rust
-# enum SorteAdresseIp {
-#     V4,
-#     V6,
-# }
-#
-# fn router(sorte_ip: SorteAdresseIp) { }
-#
-router(SorteAdresseIp::V4);
-router(SorteAdresseIp::V6);
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-01-defining-enums/src/main.rs:fn_call}}
 ```
 
 <!--
@@ -188,48 +144,12 @@ résoudre ce problème comme dans l'encart 6-1.
 
 <!--
 ```rust
-enum IpAddrKind {
-    V4,
-    V6,
-}
-
-struct IpAddr {
-    kind: IpAddrKind,
-    address: String,
-}
-
-let home = IpAddr {
-    kind: IpAddrKind::V4,
-    address: String::from("127.0.0.1"),
-};
-
-let loopback = IpAddr {
-    kind: IpAddrKind::V6,
-    address: String::from("::1"),
-};
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-01/src/main.rs:here}}
 ```
 -->
 
 ```rust
-enum SorteAdresseIp {
-    V4,
-    V6,
-}
-
-struct AdresseIp {
-    sorte: SorteAdresseIp,
-    adresse: String,
-}
-
-let local = AdresseIp {
-    sorte: SorteAdresseIp::V4,
-    adresse: String::from("127.0.0.1"),
-};
-
-let rebouclage = AdresseIp {
-    sorte: SorteAdresseIp::V6,
-    adresse: String::from("::1"),
-};
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-01/src/main.rs:here}}
 ```
 
 <!--
@@ -277,26 +197,12 @@ que chacune des variantes `V4` et `V6` auront des valeurs associées de type
 
 <!--
 ```rust
-enum IpAddr {
-    V4(String),
-    V6(String),
-}
-
-let home = IpAddr::V4(String::from("127.0.0.1"));
-
-let loopback = IpAddr::V6(String::from("::1"));
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-02-enum-with-data/src/main.rs:here}}
 ```
 -->
 
 ```rust
-enum AdresseIp {
-    V4(String),
-    V6(String),
-}
-
-let local = AdresseIp::V4(String::from("127.0.0.1"));
-
-let rebouclage = AdresseIp::V6(String::from("::1"));
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-02-enum-with-data/src/main.rs:here}}
 ```
 
 <!--
@@ -327,26 +233,12 @@ facilement :
 
 <!--
 ```rust
-enum IpAddr {
-    V4(u8, u8, u8, u8),
-    V6(String),
-}
-
-let home = IpAddr::V4(127, 0, 0, 1);
-
-let loopback = IpAddr::V6(String::from("::1"));
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-03-variants-with-different-data/src/main.rs:here}}
 ```
 -->
 
 ```rust
-enum AdresseIp {
-    V4(u8, u8, u8, u8),
-    V6(String),
-}
-
-let local = AdresseIp::V4(127, 0, 0, 1);
-
-let rebouclage = AdresseIp::V6(String::from("::1"));
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-03-variants-with-different-data/src/main.rs:here}}
 ```
 
 <!--
@@ -444,16 +336,12 @@ grande diversité de types dans ses variantes.
 
 <!--
 ```rust
-enum Message {
-    Quit,
-    Move { x: i32, y: i32 },
-    Write(String),
-    ChangeColor(i32, i32, i32),
-}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-02/src/main.rs:here}}
 ```
 -->
 
 ```rust
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-02/src/main.rs:here}}
 enum Message {
     Quitter,
     Deplacer { x: i32, y: i32 },
@@ -505,17 +393,12 @@ stocker les mêmes données que celles stockées par les variantes précédentes
 
 <!--
 ```rust
-struct QuitMessage; // unit struct
-struct MoveMessage {
-    x: i32,
-    y: i32,
-}
-struct WriteMessage(String); // tuple struct
-struct ChangeColorMessage(i32, i32, i32); // tuple struct
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-04-structs-similar-to-message-enum/src/main.rs:here}}
 ```
 -->
 
 ```rust
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-04-structs-similar-to-message-enum/src/main.rs:here}}
 struct MessageQuitter; // une structure unité
 struct MessageDeplacer {
     x: i32,
@@ -550,40 +433,12 @@ peut aussi définir des méthodes sur des énumérations. Voici une méthode app
 
 <!--
 ```rust
-# enum Message {
-#     Quit,
-#     Move { x: i32, y: i32 },
-#     Write(String),
-#     ChangeColor(i32, i32, i32),
-# }
-#
-impl Message {
-    fn call(&self) {
-        // method body would be defined here
-    }
-}
-
-let m = Message::Write(String::from("hello"));
-m.call();
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-05-methods-on-enums/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# enum Message {
-#     Quitter,
-#     Deplacer { x: i32, y: i32 },
-#     Ecrire(String),
-#     ChangerCouleur(i32, i32, i32),
-# }
-#
-impl Message {
-    fn appeler(&self) {
-        // le corps de la méthode sera défini ici
-    }
-}
-
-let m = Message::Ecrire(String::from("hello"));
-m.appeler();
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-05-methods-on-enums/src/main.rs:here}}
 ```
 
 <!--
@@ -721,6 +576,15 @@ standard][option]<!-- ignore --> comme ci-dessous :
 
 [option]: https://doc.rust-lang.org/std/option/enum.Option.html
 
+<!--
+```rust
+enum Option<T> {
+    Some(T),
+    None,
+}
+```
+-->
+
 ```rust
 enum Option<T> {
     Some(T),
@@ -748,7 +612,7 @@ The `<T>` syntax is a feature of Rust we haven’t talked about yet. It’s a
 generic type parameter, and we’ll cover generics in more detail in Chapter 10.
 For now, all you need to know is that `<T>` means the `Some` variant of the
 `Option` enum can hold one piece of data of any type. Here are some examples of
-using `Option` values to hold number types and string types
+using `Option` values to hold number types and string types:
 -->
 
 La syntaxe `<T>` est une fonctionnalité de Rust que nous n'avons pas encore
@@ -761,18 +625,12 @@ de caractères :
 
 <!--
 ```rust
-let some_number = Some(5);
-let some_string = Some("a string");
-
-let absent_number: Option<i32> = None;
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-06-option-examples/src/main.rs:here}}
 ```
 -->
 
 ```rust
-let un_nombre = Some(5);
-let une_chaine = Some("une chaîne");
-
-let nombre_absent: Option<i32> = None;
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-06-option-examples/src/main.rs:here}}
 ```
 
 <!--
@@ -813,18 +671,12 @@ code suivant ne se compile pas car il essaye d'additionner un `i8` et une
 
 <!--
 ```rust,ignore,does_not_compile
-let x: i8 = 5;
-let y: Option<i8> = Some(5);
-
-let sum = x + y;
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-07-cant-use-option-directly/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-let x: i8 = 5;
-let y: Option<i8> = Some(5);
-
-let somme = x + y;
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-07-cant-use-option-directly/src/main.rs:here}}
 ```
 
 <!--
@@ -834,25 +686,13 @@ If we run this code, we get an error message like this:
 Si nous lançons ce code, nous aurons un message d'erreur comme celui-ci :
 
 <!--
-```text
-error[E0277]: the trait bound `i8: std::ops::Add<std::option::Option<i8>>` is
-not satisfied
- -- >
-  |
-5 |     let sum = x + y;
-  |                 ^ no implementation for `i8 + std::option::Option<i8>`
-  |
+```console
+{{#include ../listings/ch06-enums-and-pattern-matching/no-listing-07-cant-use-option-directly/output.txt}}
 ```
 -->
 
-```text
-error[E0277]: the trait bound `i8: std::ops::Add<std::option::Option<i8>>` is
-not satisfied
- -- >
-  |
-5 |     let somme = x + y;
-  |                   ^ no implementation for `i8 + std::option::Option<i8>`
-  |
+```console
+{{#include ../listings/ch06-enums-and-pattern-matching/no-listing-07-cant-use-option-directly/output.txt}}
 ```
 
 <!--
