@@ -146,48 +146,12 @@ vrai programme devrait recevoir d'une saisie d'un utilisateur.
 
 <!--
 ```rust
-fn main() {
-    let favorite_color: Option<&str> = None;
-    let is_tuesday = false;
-    let age: Result<u8, _> = "34".parse();
-
-    if let Some(color) = favorite_color {
-        println!("Using your favorite color, {}, as the background", color);
-    } else if is_tuesday {
-        println!("Tuesday is green day!");
-    } else if let Ok(age) = age {
-        if age > 30 {
-            println!("Using purple as the background color");
-        } else {
-            println!("Using orange as the background color");
-        }
-    } else {
-        println!("Using blue as the background color");
-    }
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-01/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let couleur_favorite: Option<&str> = None;
-    let on_est_mardi = false;
-    let age: Result<u8, _> = "34".parse();
-
-    if let Some(couleur) = couleur_favorite {
-        println!("Utilisation de votre couleur favorite, {}, comme couleur de fond", couleur);
-    } else if on_est_mardi {
-        println!("Mardi, c'est le jour du vert !");
-    } else if let Ok(age) = age {
-        if age > 30 {
-            println!("Utilisation du violet comme couleur de fond");
-        } else {
-            println!("Utilisation de l'orange comme couleur de fond");
-        }
-    } else {
-        println!("Utilisation du bleu comme couleur de fond");
-    }
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-01/src/main.rs}}
 ```
 
 <!--
@@ -275,17 +239,13 @@ vecteur dans l'ordre opposé à celui dans lequel elles ont été insérées.
 
 <!--
 ```rust
-let mut stack = Vec::new();
-
-stack.push(1);
-stack.push(2);
-stack.push(3);
-
-while let Some(top) = stack.pop() {
-    println!("{}", top);
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-02/src/main.rs:here}}
 ```
 -->
+
+```rust
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-02/src/main.rs:here}}
+```
 
 ```rust
 let mut pile = Vec::new();
@@ -350,20 +310,12 @@ déstructurer, ou décomposer, un tuple comme étant une partie de la boucle `fo
 
 <!--
 ```rust
-let v = vec!['a', 'b', 'c'];
-
-for (index, value) in v.iter().enumerate() {
-    println!("{} is at index {}", value, index);
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-03/src/main.rs:here}}
 ```
 -->
 
 ```rust
-let v = vec!['a', 'b', 'c'];
-
-for (indice, valeur) in v.iter().enumerate() {
-    println!("{} est à l'indice {}", valeur, indice);
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-03/src/main.rs:here}}
 ```
 
 <!--
@@ -381,17 +333,13 @@ The code in Listing 18-3 will print the following:
 Le code de l'encart 18-3 va afficher ceci :
 
 <!--
-```text
-a is at index 0
-b is at index 1
-c is at index 2
+```console
+{{#include ../listings-sources/ch18-patterns-and-matching/listing-18-03/output.txt}}
 ```
 -->
 
-```text
-a est à l'indice 0
-b est à l'indice 1
-c est à l'indice 2
+```console
+{{#include ../listings/ch18-patterns-and-matching/listing-18-03/output.txt}}
 ```
 
 <!--
@@ -425,6 +373,12 @@ Avant d'arriver à ce chapitre, nous n'avions abordé explicitement l'utilisatio
 des motifs uniquement avec `match` et `if let`, mais en réalité, nous avons
 utilisé les motifs dans d'autres endroits, y compris les instructions `let`. Par
 exemple, considérons l'assignation à la variable suivante avec `let` :
+
+<!--
+```rust
+let x = 5;
+```
+-->
 
 ```rust
 let x = 5;
@@ -476,8 +430,14 @@ To see the pattern matching aspect of `let` more clearly, consider Listing
 Pour comprendre plus clairement l'aspect filtrage par motif de `let`, admettons
 l'encart 18-4, qui utilise un motif avec `let` pour destructurer un tuple.
 
+<!--
 ```rust
-let (x, y, z) = (1, 2, 3);
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-04/src/main.rs:here}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-04/src/main.rs:here}}
 ```
 
 <!--
@@ -513,8 +473,14 @@ une erreur de compilation. Par exemple, l'encart 18-5 montre une tentative de
 déstructurer un tuple avec trois éléments dans deux variables, ce qui ne va pas
 fonctionner.
 
+<!--
 ```rust,ignore,does_not_compile
-let (x, y) = (1, 2, 3);
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-05/src/main.rs:here}}
+```
+-->
+
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-05/src/main.rs:here}}
 ```
 
 <!--
@@ -532,15 +498,14 @@ Attempting to compile this code results in this type error:
 
 Si vous essayez de compiler ce code, vous obtiendrez cette erreur de type :
 
-```text
-error[E0308]: mismatched types
- -- > src/main.rs:2:9
-  |
-2 |     let (x, y) = (1, 2, 3);
-  |         ^^^^^^ expected a tuple with 3 elements, found one with 2 elements
-  |
-  = note: expected type `({integer}, {integer}, {integer})`
-             found type `(_, _)`
+<!--
+```console
+{{#include ../listings-sources/ch18-patterns-and-matching/listing-18-05/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch18-patterns-and-matching/listing-18-05/output.txt}}
 ```
 
 <!--
@@ -573,10 +538,14 @@ declares a function named `foo` that takes one parameter named `x` of type
 Les paramètres de fonctions peuvent aussi être des motifs. Le code de l'encart
 18-6 déclare une fonction `foo` qui prend un paramètre `x` de type `i32`.
 
+<!--
 ```rust
-fn foo(x: i32) {
-    // code goes here
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-06/src/main.rs:here}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-06/src/main.rs:here}}
 ```
 
 <!--
@@ -606,26 +575,12 @@ d'une fonction.
 
 <!--
 ```rust
-fn print_coordinates(&(x, y): &(i32, i32)) {
-    println!("Current location: ({}, {})", x, y);
-}
-
-fn main() {
-    let point = (3, 5);
-    print_coordinates(&point);
-}
+{{#rustdoc_include ../listings-sources/ch18-patterns-and-matching/listing-18-07/src/main.rs}}
 ```
 -->
 
 ```rust
-fn afficher_coordonnees(&(x, y): &(i32, i32)) {
-    println!("Coordonnées actuelles : ({}, {})", x, y);
-}
-
-fn main() {
-    let point = (3, 5);
-    afficher_coordonnees(&point);
-}
+{{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-07/src/main.rs}}
 ```
 
 <!--
