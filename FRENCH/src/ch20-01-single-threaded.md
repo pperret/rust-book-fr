@@ -76,14 +76,14 @@ un module `std::net` qui nous permet de faire ceci. Créons un nouveau projet de
 manière habituelle :
 
 <!--
-```text
+```console
 $ cargo new hello
      Created binary (application) `hello` project
 $ cd hello
 ```
 -->
 
-```text
+```console
 $ cargo new salutations
      Created binary (application) `salutations` project
 $ cd salutations
@@ -108,32 +108,12 @@ commencer. Ce code va écouter les flux TCP entrants à l'adresse
 
 <!--
 ```rust,no_run
-use std::net::TcpListener;
-
-fn main() {
-    let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
-
-    for stream in listener.incoming() {
-        let stream = stream.unwrap();
-
-        println!("Connection established!");
-    }
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-01/src/main.rs}}
 ```
 -->
 
 ```rust,no_run
-use std::net::TcpListener;
-
-fn main() {
-    let ecouteur = TcpListener::bind("127.0.0.1:7878").unwrap();
-
-    for flux in ecouteur.incoming() {
-        let flux = flux.unwrap();
-
-        println!("Connexion établie !");
-    }
-}
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-01/src/main.rs}}
 ```
 
 <!--
@@ -348,52 +328,12 @@ ressemble à l'encart 20-2.
 
 <!--
 ```rust,no_run
-use std::io::prelude::*;
-use std::net::TcpStream;
-use std::net::TcpListener;
-
-fn main() {
-    let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
-
-    for stream in listener.incoming() {
-        let stream = stream.unwrap();
-
-        handle_connection(stream);
-    }
-}
-
-fn handle_connection(mut stream: TcpStream) {
-    let mut buffer = [0; 512];
-
-    stream.read(&mut buffer).unwrap();
-
-    println!("Request: {}", String::from_utf8_lossy(&buffer[..]));
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-02/src/main.rs}}
 ```
 -->
 
 ```rust,no_run
-use std::io::prelude::*;
-use std::net::TcpStream;
-use std::net::TcpListener;
-
-fn main() {
-    let ecouteur = TcpListener::bind("127.0.0.1:7878").unwrap();
-
-    for flux in ecouteur.incoming() {
-        let flux = stream.unwrap();
-
-        gestion_connexion(flux);
-    }
-}
-
-fn gestion_connexion(mut flux: TcpStream) {
-    let mut tampon = [0; 512];
-
-    flux.read(&mut tampon).unwrap();
-
-    println!("Requête : {}", String::from_utf8_lossy(&tampon[..]));
-}
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-02/src/main.rs}}
 ```
 
 <!--
@@ -436,18 +376,19 @@ pas besoin que la “lecture” nécessite d'être mutable, mais dans ce cas nou
 avons besoin du mot-clé `mut`.
 
 <!--
-Next, we need to actually read from the stream. We do this in two steps: first,
-we declare a `buffer` on the stack to hold the data that is read in. We’ve made
-the buffer 512 bytes in size, which is big enough to hold the data of a basic
-request and sufficient for our purposes in this chapter. If we wanted to handle
-requests of an arbitrary size, buffer management would need to be more
-complicated; we’ll keep it simple for now. We pass the buffer to `stream.read`,
-which will read bytes from the `TcpStream` and put them in the buffer.
+Next, we need to actually read from the stream. We do this in two steps:
+first, we declare a `buffer` on the stack to hold the data that is read in.
+We’ve made the buffer 1024 bytes in size, which is big enough to hold the
+data of a basic request and sufficient for our purposes in this chapter. If
+we wanted to handle requests of an arbitrary size, buffer management would
+need to be more complicated; we’ll keep it simple for now. We pass the buffer
+to `stream.read`, which will read bytes from the `TcpStream` and put them in
+the buffer.
 -->
 
 Ensuite, nous devons lire les données du flux. Nous faisons cela en deux
 temps : d'abord, nous déclarons un `tampon` sur la pile pour y stocker les
-données qui seront lues. Nous avons fait en sorte que le tampon fasse 512
+données qui seront lues. Nous avons fait en sorte que le tampon fasse 1024
 octets, ce qui est suffisamment grand pour stocker les données d'un requête
 basique, ce qui est suffisant pour nos besoins dans ce chapitre. Si nous
 aurions voulu gérer des requêtes de tailles quelconques, la gestion du tampon
@@ -485,10 +426,10 @@ navigateur web, mais que la sortie de notre programme dans le terminal devrait
 ressembler à ceci :
 
 <!--
-```text
+```console
 $ cargo run
    Compiling hello v0.1.0 (file:///projects/hello)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.42 secs
+    Finished dev [unoptimized + debuginfo] target(s) in 0.42s
      Running `target/debug/hello`
 Request: GET / HTTP/1.1
 Host: 127.0.0.1:7878
@@ -503,10 +444,10 @@ Upgrade-Insecure-Requests: 1
 ```
 -->
 
-```text
+```console
 $ cargo run
    Compiling salutations v0.1.0 (file:///projects/salutations)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.42 secs
+    Finished dev [unoptimized + debuginfo] target(s) in 0.42s
      Running `target/debug/salutations`
 Requête : GET / HTTP/1.1
 Host: 127.0.0.1:7878
@@ -700,6 +641,12 @@ Here is an example response that uses HTTP version 1.1, has a status code of
 Voici un exemple de réponse qui utilise HTTP version 1.1, qui a un code de
 statut de 200, une phrase de raison à OK, pas d'entêtes, et pas de corps :
 
+<!--
+```text
+HTTP/1.1 200 OK\r\n\r\n
+```
+-->
+
 ```text
 HTTP/1.1 200 OK\r\n\r\n
 ```
@@ -725,35 +672,13 @@ l'encart 20-3.
 <span class="filename">Fichier : src/main.rs</span>
 
 <!--
-```rust
-# use std::io::prelude::*;
-# use std::net::TcpStream;
-fn handle_connection(mut stream: TcpStream) {
-    let mut buffer = [0; 512];
-
-    stream.read(&mut buffer).unwrap();
-
-    let response = "HTTP/1.1 200 OK\r\n\r\n";
-
-    stream.write(response.as_bytes()).unwrap();
-    stream.flush().unwrap();
-}
+```rust,no_run
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-03/src/main.rs:here}}
 ```
 -->
 
-```rust
-# use std::io::prelude::*;
-# use std::net::TcpStream;
-fn gestion_connexion(mut flux: TcpStream) {
-    let mut tampon = [0; 512];
-
-    tampon.read(&mut flux).unwrap();
-
-    let reponse = "HTTP/1.1 200 OK\r\n\r\n";
-
-    flux.write(reponse.as_bytes()).unwrap();
-    flux.flush().unwrap();
-}
+```rust,no_run
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-03/src/main.rs:here}}
 ```
 
 <!--
@@ -833,32 +758,12 @@ l'encart 20-4 vous montre une possibilité.
 
 <!--
 ```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Hello!</title>
-  </head>
-  <body>
-    <h1>Hello!</h1>
-    <p>Hi from Rust</p>
-  </body>
-</html>
+{{#include ../listings-sources/ch20-web-server/listing-20-04/hello.html}}
 ```
 -->
 
 ```html
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <title>Salutations !</title>
-  </head>
-  <body>
-    <h1>Salut !</h1>
-    <p>Bonjour de la part de Rust</p>
-  </body>
-</html>
+{{#include ../listings/ch20-web-server/listing-20-04/hello.html}}
 ```
 
 <!--
@@ -889,43 +794,13 @@ l'envoyer.
 <span class="filename">Fichier : src/main.rs</span>
 
 <!--
-```rust
-# use std::io::prelude::*;
-# use std::net::TcpStream;
-use std::fs;
-// --snip--
-
-fn handle_connection(mut stream: TcpStream) {
-    let mut buffer = [0; 512];
-    stream.read(&mut buffer).unwrap();
-
-    let contents = fs::read_to_string("hello.html").unwrap();
-
-    let response = format!("HTTP/1.1 200 OK\r\n\r\n{}", contents);
-
-    stream.write(response.as_bytes()).unwrap();
-    stream.flush().unwrap();
-}
+```rust,no_run
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-05/src/main.rs:here}}
 ```
 -->
 
-```rust
-# use std::io::prelude::*;
-# use std::net::TcpStream;
-use std::fs;
-// -- partie masquée ici --
-
-fn gestion_connexion(mut flux: TcpStream) {
-    let mut tampon = [0; 512];
-    flux.read(&mut tampon).unwrap();
-
-    let contenu = fs::read_to_string("salutation.html").unwrap();
-
-    let reponse = format!("HTTP/1.1 200 OK\r\n\r\n{}", contenu);
-
-    flux.write(reponse.as_bytes()).unwrap();
-    flux.flush().unwrap();
-}
+```rust,no_run
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-05/src/main.rs:here}}
 ```
 
 <!--
@@ -951,11 +826,14 @@ d'entrée/sortie, dans l'encart 12-4.
 
 <!--
 Next, we use `format!` to add the file’s contents as the body of the success
-response.
+response. To ensure a valid HTTP response, we add the `Content-Length` header
+which is set to the size of our response body, in this case the size of `hello.html`.
 -->
 
 Ensuite, nous avons utilisé `format!` pour ajouter le contenu du fichier comme
-étant le corps de la réponse avec succès.
+étant le corps de la réponse avec succès. Pour garantir que ce soit une réponse
+HTTP valide, nous avons ajouté l'entête `Content-Length` qui définit la taille
+du corps de notre réponse, qui dans ce cas est la taille de `hello.html`.
 
 <!--
 Run this code with `cargo run` and load *127.0.0.1:7878* in your browser; you
@@ -1013,55 +891,13 @@ contenu de la requête que nous recevons à une requête que nous voudrions pour
 <span class="filename">Fichier : src/main.rs</span>
 
 <!--
-```rust
-# use std::io::prelude::*;
-# use std::net::TcpStream;
-# use std::fs;
-// --snip--
-
-fn handle_connection(mut stream: TcpStream) {
-    let mut buffer = [0; 512];
-    stream.read(&mut buffer).unwrap();
-
-    let get = b"GET / HTTP/1.1\r\n";
-
-    if buffer.starts_with(get) {
-        let contents = fs::read_to_string("hello.html").unwrap();
-
-        let response = format!("HTTP/1.1 200 OK\r\n\r\n{}", contents);
-
-        stream.write(response.as_bytes()).unwrap();
-        stream.flush().unwrap();
-    } else {
-        // some other request
-    }
-}
+```rust,no_run
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-06/src/main.rs:here}}
 ```
 -->
 
-```rust
-# use std::io::prelude::*;
-# use std::net::TcpStream;
-# use std::fs;
-// -- partie masquée ici --
-
-fn gestion_connexion(mut flux: TcpStream) {
-    let mut tampon = [0; 512];
-    flux.read(&mut tampon).unwrap();
-
-    let get = b"GET / HTTP/1.1\r\n";
-
-    if tampon.starts_with(get) {
-        let contenu = fs::read_to_string("salutation.html").unwrap();
-
-        let reponse = format!("HTTP/1.1 200 OK\r\n\r\n{}", contenu);
-
-        flux.write(response.as_bytes()).unwrap();
-        flux.flush().unwrap();
-    } else {
-        // autres requêtes
-    }
-}
+```rust,no_run
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-06/src/main.rs:here}}
 ```
 
 <!--
@@ -1133,45 +969,13 @@ page s'affiche dans le navigateur, indiquant la réponse à l'utilisateur final.
 <span class="filename">Fichier : src/main.rs</span>
 
 <!--
-```rust
-# use std::io::prelude::*;
-# use std::net::TcpStream;
-# use std::fs;
-# fn handle_connection(mut stream: TcpStream) {
-# if true {
-// --snip--
-
-} else {
-    let status_line = "HTTP/1.1 404 NOT FOUND\r\n\r\n";
-    let contents = fs::read_to_string("404.html").unwrap();
-
-    let response = format!("{}{}", status_line, contents);
-
-    stream.write(response.as_bytes()).unwrap();
-    stream.flush().unwrap();
-}
-# }
+```rust,no_run
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-07/src/main.rs:here}}
 ```
 -->
 
-```rust
-# use std::io::prelude::*;
-# use std::net::TcpStream;
-# use std::fs;
-# fn gestion_connexion(mut flux: TcpStream) {
-# if true {
-// -- partie masquée ici --
-
-} else {
-    let ligne_statut = "HTTP/1.1 404 NOT FOUND\r\n\r\n";
-    let contenu = fs::read_to_string("404.html").unwrap();
-
-    let reponse = format!("{}{}", ligne_statut, contenu);
-
-    flux.write(reponse.as_bytes()).unwrap();
-    flux.flush().unwrap();
-}
-# }
+```rust,no_run
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-07/src/main.rs:here}}
 ```
 
 <!--
@@ -1205,32 +1009,12 @@ défaut utiliser le HTML d'exemple présent dans l'encart 20-8.
 
 <!--
 ```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Hello!</title>
-  </head>
-  <body>
-    <h1>Oops!</h1>
-    <p>Sorry, I don't know what you're asking for.</p>
-  </body>
-</html>
+{{#include ../listings-sources/ch20-web-server/listing-20-08/404.html}}
 ```
 -->
 
 ```html
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <title>Salutations !</title>
-  </head>
-  <body>
-    <h1>Oups !</h1>
-    <p>Désolé, je ne connaît pas ce que vous demandez.</p>
-  </body>
-</html>
+{{#include ../listings/ch20-web-server/listing-20-08/404.html}}
 ```
 
 <!--
@@ -1287,61 +1071,13 @@ gros blocs `if` et `else`.
 <span class="filename">Fichier : src/main.rs</span>
 
 <!--
-```rust
-# use std::io::prelude::*;
-# use std::net::TcpStream;
-# use std::fs;
-// --snip--
-
-fn handle_connection(mut stream: TcpStream) {
-#     let mut buffer = [0; 512];
-#     stream.read(&mut buffer).unwrap();
-#
-#     let get = b"GET / HTTP/1.1\r\n";
-    // --snip--
-
-    let (status_line, filename) = if buffer.starts_with(get) {
-        ("HTTP/1.1 200 OK\r\n\r\n", "hello.html")
-    } else {
-        ("HTTP/1.1 404 NOT FOUND\r\n\r\n", "404.html")
-    };
-
-    let contents = fs::read_to_string(filename).unwrap();
-
-    let response = format!("{}{}", status_line, contents);
-
-    stream.write(response.as_bytes()).unwrap();
-    stream.flush().unwrap();
-}
+```rust,no_run
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-09/src/main.rs:here}}
 ```
 -->
 
-```rust
-# use std::io::prelude::*;
-# use std::net::TcpStream;
-# use std::fs;
-// -- partie masquée ici --
-
-fn gestion_connexion(mut flux: TcpStream) {
-#     let mut tampon = [0; 512];
-#     flux.read(&mut tampon).unwrap();
-#
-#     let get = b"GET / HTTP/1.1\r\n";
-    // -- partie masquée ici --
-
-    let (ligne_statut, nom_fichier) = if tampon.starts_with(get) {
-        ("HTTP/1.1 200 OK\r\n\r\n", "salutation.html")
-    } else {
-        ("HTTP/1.1 404 NOT FOUND\r\n\r\n", "404.html")
-    };
-
-    let contenu = fs::read_to_string(nom_fichier).unwrap();
-
-    let reponse = format!("{}{}", ligne_statut, contenu);
-
-    flux.write(reponse.as_bytes()).unwrap();
-    flux.flush().unwrap();
-}
+```rust,no_run
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-09/src/main.rs:here}}
 ```
 
 <!--
