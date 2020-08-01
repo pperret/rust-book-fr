@@ -14,11 +14,11 @@
 ## Les fonctions et fermetures avancées
 
 <!--
-Finally, we’ll explore some advanced features related to functions and
+Next, we’ll explore some advanced features related to functions and
 closures, which include function pointers and returning closures.
 -->
 
-Enfin, nous allons explorer quelques fonctionnalités avancées liées aux
+Maintenant, nous allons explorer quelques fonctionnalités avancées liées aux
 fonctions et aux fermetures, comme les pointeurs de fonctions et retourner des
 fermetures.
 
@@ -58,36 +58,12 @@ vous pouvez le voir dans l'encart 19-27.
 
 <!--
 ```rust
-fn add_one(x: i32) -> i32 {
-    x + 1
-}
-
-fn do_twice(f: fn(i32) -> i32, arg: i32) -> i32 {
-    f(arg) + f(arg)
-}
-
-fn main() {
-    let answer = do_twice(add_one, 5);
-
-    println!("The answer is: {}", answer);
-}
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/listing-19-27/src/main.rs}}
 ```
 -->
 
 ```rust
-fn ajouter_un(x: i32) -> i32 {
-    x + 1
-}
-
-fn le_faire_deux_fois(f: fn(i32) -> i32, arg: i32) -> i32 {
-    f(arg) + f(arg)
-}
-
-fn main() {
-    let reponse = le_faire_deux_fois(ajouter_un, 5);
-
-    println!("La réponse est : {}", reponse);
-}
+{{#rustdoc_include ../listings/ch19-advanced-features/listing-19-27/src/main.rs}}
 ```
 
 <!--
@@ -160,20 +136,12 @@ chaînes de caractères, nous pouvons utiliser une fermeture, comme ceci :
 
 <!--
 ```rust
-let list_of_numbers = vec![1, 2, 3];
-let list_of_strings: Vec<String> = list_of_numbers
-    .iter()
-    .map(|i| i.to_string())
-    .collect();
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-15-map-closure/src/main.rs:here}}
 ```
 -->
 
 ```rust
-let liste_de_nombres = vec![1, 2, 3];
-let liste_de_nombres: Vec<String> = liste_de_nombres
-    .iter()
-    .map(|i| i.to_string())
-    .collect();
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-15-map-closure/src/main.rs:here}}
 ```
 
 <!--
@@ -186,20 +154,12 @@ qu'une fermeture, comme ceci :
 
 <!--
 ```rust
-let list_of_numbers = vec![1, 2, 3];
-let list_of_strings: Vec<String> = list_of_numbers
-    .iter()
-    .map(ToString::to_string)
-    .collect();
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-16-map-function/src/main.rs:here}}
 ```
 -->
 
 ```rust
-let liste_de_nombres = vec![1, 2, 3];
-let liste_de_nombres: Vec<String> = liste_de_nombres
-    .iter()
-    .map(ToString::to_string)
-    .collect();
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-16-map-function/src/main.rs:here}}
 ```
 
 <!--
@@ -238,28 +198,12 @@ de méthodes qui prennent en argument des fermetures, comme ceci :
 
 <!--
 ```rust
-enum Status {
-    Value(u32),
-    Stop,
-}
-
-let list_of_statuses: Vec<Status> =
-    (0u32..20)
-    .map(Status::Value)
-    .collect();
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-17-map-initializer/src/main.rs:here}}
 ```
 -->
 
 ```rust
-enum Statut {
-    Valeur(u32),
-    Stop,
-}
-
-let liste_de_statuts: Vec<Statut> =
-    (0u32..20)
-    .map(Statut::Valeur)
-    .collect();
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-17-map-initializer/src/main.rs:here}}
 ```
 
 <!--
@@ -308,16 +252,12 @@ se compiler :
 
 <!--
 ```rust,ignore,does_not_compile
-fn returns_closure() -> Fn(i32) -> i32 {
-    |x| x + 1
-}
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-18-returns-closure/src/lib.rs}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-fn retourne_une_fermeture() -> Fn(i32) -> i32 {
-    |x| x + 1
-}
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-18-returns-closure/src/lib.rs}}
 ```
 
 <!--
@@ -327,33 +267,13 @@ The compiler error is as follows:
 Voici l'erreur de compilation :
 
 <!--
-```text
-error[E0277]: the trait bound `std::ops::Fn(i32) -> i32 + 'static:
-std::marker::Sized` is not satisfied
- -- >
-  |
-1 | fn returns_closure() -> Fn(i32) -> i32 {
-  |                         ^^^^^^^^^^^^^^ `std::ops::Fn(i32) -> i32 + 'static`
-  does not have a constant size known at compile-time
-  |
-  = help: the trait `std::marker::Sized` is not implemented for
-  `std::ops::Fn(i32) -> i32 + 'static`
-  = note: the return type of a function must have a statically known size
+```console
+{{#include ../listings-sources/ch19-advanced-features/no-listing-18-returns-closure/output.txt}}
 ```
 -->
 
-```text
-error[E0277]: the trait bound `std::ops::Fn(i32) -> i32 + 'static:
-std::marker::Sized` is not satisfied
- -- >
-  |
-1 | fn retourne_une_fermeture() -> Fn(i32) -> i32 {
-  |                                ^^^^^^^^^^^^^^ `std::ops::Fn(i32) -> i32 + 'static`
-  does not have a constant size known at compile-time
-  |
-  = help: the trait `std::marker::Sized` is not implemented for
-  `std::ops::Fn(i32) -> i32 + 'static`
-  = note: the return type of a function must have a statically known size
+```console
+{{#include ../listings/ch19-advanced-features/no-listing-18-returns-closure/output.txt}}
 ```
 
 <!--
@@ -368,16 +288,12 @@ précédemment. Nous pouvons utiliser un objet trait :
 
 <!--
 ```rust
-fn returns_closure() -> Box<dyn Fn(i32) -> i32> {
-    Box::new(|x| x + 1)
-}
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-19-returns-closure-trait-object/src/lib.rs}}
 ```
 -->
 
 ```rust
-fn retourne_une_fermeture() -> Box<dyn Fn(i32) -> i32> {
-    Box::new(|x| x + 1)
-}
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-19-returns-closure-trait-object/src/lib.rs}}
 ```
 
 <!--
