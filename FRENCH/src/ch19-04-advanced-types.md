@@ -119,12 +119,12 @@ utilisons le mot-clé `type`. Par exemple, nous pouvons créer l'alias
 
 <!--
 ```rust
-type Kilometers = i32;
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-04-kilometers-alias/src/main.rs:here}}
 ```
 -->
 
 ```rust
-type Kilometres = i32;
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-04-kilometers-alias/src/main.rs:here}}
 ```
 
 <!--
@@ -141,14 +141,13 @@ types `Milimetres` et `Metres` que nous avons créé dans l'encart 19-15,
 
 <!--
 ```rust
-type Kilometers = i32;
-
-let x: i32 = 5;
-let y: Kilometers = 5;
-
-println!("x + y = {}", x + y);
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-04-kilometers-alias/src/main.rs:there}}
 ```
 -->
+
+```rust
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-04-kilometers-alias/src/main.rs:there}}
+```
 
 ```rust
 type Kilometres = i32;
@@ -181,6 +180,12 @@ L'utilisation principale pour les synonymes de types est de réduire la
 répétition. Par exemple, nous pourrions avoir un type un peu long comme
 celui-ci :
 
+<!--
+```rust,ignore
+Box<dyn Fn() + Send + 'static>
+```
+-->
+
 ```rust,ignore
 Box<dyn Fn() + Send + 'static>
 ```
@@ -198,30 +203,12 @@ erreurs. Imaginez avoir un projet avec plein de code comme celui dans l'encart
 
 <!--
 ```rust
-let f: Box<dyn Fn() + Send + 'static> = Box::new(|| println!("hi"));
-
-fn takes_long_type(f: Box<dyn Fn() + Send + 'static>) {
-    // --snip--
-}
-
-fn returns_long_type() -> Box<dyn Fn() + Send + 'static> {
-    // --snip--
-#     Box::new(|| ())
-}
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/listing-19-24/src/main.rs:here}}
 ```
 -->
 
 ```rust
-let f: Box<dyn Fn() + Send + 'static> = Box::new(|| println!("salut"));
-
-fn prend_un_long_type(f: Box<dyn Fn() + Send + 'static>) {
-    // -- partie masquée ici --
-}
-
-fn retourne_un_long_type() -> Box<dyn Fn() + Send + 'static> {
-    // -- partie masquée ici --
-#     Box::new(|| ())
-}
+{{#rustdoc_include ../listings/ch19-advanced-features/listing-19-24/src/main.rs:here}}
 ```
 
 <!--
@@ -243,34 +230,12 @@ remplacer tous ses cas d'emploi du type avec l'alias `Thunk`, plus court.
 
 <!--
 ```rust
-type Thunk = Box<dyn Fn() + Send + 'static>;
-
-let f: Thunk = Box::new(|| println!("hi"));
-
-fn takes_long_type(f: Thunk) {
-    // --snip--
-}
-
-fn returns_long_type() -> Thunk {
-    // --snip--
-#     Box::new(|| ())
-}
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/listing-19-25/src/main.rs:here}}
 ```
 -->
 
 ```rust
-type Thunk = Box<dyn Fn() + Send + 'static>;
-
-let f: Thunk = Box::new(|| println!("salut"));
-
-fn prend_un_long_type(f: Thunk) {
-    // -- partie masquée ici --
-}
-
-fn retourne_un_long_type() -> Thunk {
-    // -- partie masquée ici --
-#     Box::new(|| ())
-}
+{{#rustdoc_include ../listings/ch19-advanced-features/listing-19-25/src/main.rs:here}}
 ```
 
 <!--
@@ -312,17 +277,14 @@ d'entrée/sortie. De nombreuses fonctions dans `std::io` vont retourner un
 `Result<T, E>` avec `E` qui est `std::io::Error`, ces fonctions sont dans le
 trait `Write` :
 
+<!--
 ```rust
-use std::io::Error;
-use std::fmt;
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-05-write-trait/src/lib.rs}}
+```
+-->
 
-pub trait Write {
-    fn write(&mut self, buf: &[u8]) -> Result<usize, Error>;
-    fn flush(&mut self) -> Result<(), Error>;
-
-    fn write_all(&mut self, buf: &[u8]) -> Result<(), Error>;
-    fn write_fmt(&mut self, fmt: fmt::Arguments) -> Result<(), Error>;
-}
+```rust
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-05-write-trait/src/lib.rs}}
 ```
 
 <!--
@@ -333,8 +295,14 @@ alias declaration:
 Le `Result<..., Error>` est répété plein de fois. Ainsi, `std::io` a ce type de
 déclaration d'alias :
 
+<!--
 ```rust
-type Result<T> = std::result::Result<T, std::io::Error>;
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-06-result-alias/src/lib.rs:here}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-06-result-alias/src/lib.rs:here}}
 ```
 
 <!--
@@ -349,14 +317,14 @@ l'alias `std::io::Result<T>` — qui est un `Result<T, E>` avec le `E` qui est
 déjà renseigné comme étant un `std::io::Error`. Les fonctions du trait `Write`
 ressemblent finalement à ceci :
 
-```rust,ignore
-pub trait Write {
-    fn write(&mut self, buf: &[u8]) -> Result<usize>;
-    fn flush(&mut self) -> Result<()>;
+<!--
+```rust
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-06-result-alias/src/lib.rs:there}}
+```
+-->
 
-    fn write_all(&mut self, buf: &[u8]) -> Result<()>;
-    fn write_fmt(&mut self, fmt: Arguments) -> Result<()>;
-}
+```rust
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-06-result-alias/src/lib.rs:there}}
 ```
 
 <!--
@@ -391,12 +359,14 @@ préférons appeler cela le *type jamais* car il remplace le type de retour
 lorsqu'une fonction ne va jamais retourner quelque chose. Voici un exemple :
 
 <!--
-```rust,ignore
-fn bar() -> ! {
-    // --snip--
-}
+```rust
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-07-never-type/src/lib.rs:here}}
 ```
 -->
+
+```rust
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-07-never-type/src/lib.rs:here}}
+```
 
 ```rust,ignore
 fn bar() -> ! {
@@ -425,27 +395,13 @@ Souvenez-vous du code de l'encart 2-5 ; nous avons reproduit une partie de
 celui-ci dans l'encart 19-26.
 
 <!--
-```rust
-# let guess = "3";
-# loop {
-let guess: u32 = match guess.trim().parse() {
-    Ok(num) => num,
-    Err(_) => continue,
-};
-# break;
-# }
+```rust,ignore
+{{#rustdoc_include ../listings-sources/ch02-guessing-game-tutorial/listing-02-05/src/main.rs:ch19}}
 ```
 -->
 
-```rust
-# let supposition = "3";
-# loop {
-let supposition: u32 = match supposition.trim().parse() {
-    Ok(nombre) => nombre,
-    Err(_) => continue,
-};
-# break;
-# }
+```rust,ignore
+{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-05/src/main.rs:ch19}}
 ```
 
 <!--
@@ -471,12 +427,13 @@ Donc, par exemple, le code suivant ne fonctionne pas :
 
 <!--
 ```rust,ignore,does_not_compile
-let guess = match guess.trim().parse() {
-    Ok(_) => 5,
-    Err(_) => "hello",
-}
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-08-match-arms-different-types/src/main.rs:here}}
 ```
 -->
+
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-08-match-arms-different-types/src/main.rs:here}}
+```
 
 ```rust,ignore,does_not_compile
 let supposition = match supposition.trim().parse() {
@@ -535,15 +492,14 @@ Ce type "jamais" est aussi utile avec la macro `panic!`. Vous souvenez-vous que
 la fonction `unwrap` que nous appelons sur les valeurs `Option<T>` fournissent
 une valeur, ou paniquent ? Voici sa définition :
 
+<!--
 ```rust,ignore
-impl<T> Option<T> {
-    pub fn unwrap(self) -> T {
-        match self {
-            Some(val) => val,
-            None => panic!("called `Option::unwrap()` on a `None` value"),
-        }
-    }
-}
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-09-unwrap-definition/src/lib.rs:here}}
+```
+-->
+
+```rust,ignore
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-09-unwrap-definition/src/lib.rs:here}}
 ```
 
 <!--
@@ -568,20 +524,12 @@ Une des expressions qui sont du type `!` est le `loop` :
 
 <!--
 ```rust,ignore
-print!("forever ");
-
-loop {
-    print!("and ever ");
-}
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-10-loop-returns-never/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-print!("pour toujours ");
-
-loop {
-    print!("et toujours ");
-}
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-10-loop-returns-never/src/main.rs:here}}
 ```
 
 <!--
@@ -632,14 +580,12 @@ suivant, qui ne devrait pas fonctionner :
 
 <!--
 ```rust,ignore,does_not_compile
-let s1: str = "Hello there!";
-let s2: str = "How's it going?";
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-11-cant-create-str/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-let s1: str = "Salut tout le monde !";
-let s2: str = "Comment ça va ?";
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-11-cant-create-str/src/main.rs:here}}
 ```
 
 <!--
@@ -734,16 +680,12 @@ celle-ci :
 
 <!--
 ```rust,ignore
-fn generic<T>(t: T) {
-    // --snip--
-}
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-12-generic-fn-definition/src/lib.rs}}
 ```
 -->
 
 ```rust,ignore
-fn generique<T>(t: T) {
-    // -- partie masquée ici --
-}
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-12-generic-fn-definition/src/lib.rs}}
 ```
 
 <!--
@@ -754,16 +696,12 @@ is actually treated as though we had written this:
 
 <!--
 ```rust,ignore
-fn generic<T: Sized>(t: T) {
-    // --snip--
-}
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-13-generic-implicit-sized-bound/src/lib.rs}}
 ```
 -->
 
 ```rust,ignore
-fn generique<T: Sized>(t: T) {
-    // -- partie masquée ici --
-}
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-13-generic-implicit-sized-bound/src/lib.rs}}
 ```
 
 <!--
@@ -778,16 +716,12 @@ syntaxe spéciale suivante pour éviter cette restriction :
 
 <!--
 ```rust,ignore
-fn generic<T: ?Sized>(t: &T) {
-    // --snip--
-}
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-14-generic-maybe-sized/src/lib.rs}}
 ```
 -->
 
 ```rust,ignore
-fn generique<T: ?Sized>(t: &T) {
-    // -- partie masquée ici --
-}
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-14-generic-maybe-sized/src/lib.rs}}
 ```
 
 <!--
