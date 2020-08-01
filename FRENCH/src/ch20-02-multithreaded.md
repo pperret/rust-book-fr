@@ -58,63 +58,13 @@ secondes avant de répondre à nouveau.
 <span class="filename">Fichier : src/main.rs</span>
 
 <!--
-```rust
-use std::thread;
-use std::time::Duration;
-# use std::io::prelude::*;
-# use std::net::TcpStream;
-# use std::fs::File;
-// --snip--
-
-fn handle_connection(mut stream: TcpStream) {
-#     let mut buffer = [0; 512];
-#     stream.read(&mut buffer).unwrap();
-    // --snip--
-
-    let get = b"GET / HTTP/1.1\r\n";
-    let sleep = b"GET /sleep HTTP/1.1\r\n";
-
-    let (status_line, filename) = if buffer.starts_with(get) {
-        ("HTTP/1.1 200 OK\r\n\r\n", "hello.html")
-    } else if buffer.starts_with(sleep) {
-        thread::sleep(Duration::from_secs(5));
-        ("HTTP/1.1 200 OK\r\n\r\n", "hello.html")
-    } else {
-        ("HTTP/1.1 404 NOT FOUND\r\n\r\n", "404.html")
-    };
-
-    // --snip--
-}
+```rust,no_run
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-10/src/main.rs:here}}
 ```
 -->
 
-```rust
-use std::thread;
-use std::time::Duration;
-# use std::io::prelude::*;
-# use std::net::TcpStream;
-# use std::fs::File;
-// -- partie masquée ici --
-
-fn gestion_connexion(mut flux: TcpStream) {
-#     let mut tampon = [0; 512];
-#     flux.read(&mut tampon).unwrap();
-    // -- partie masquée ici --
-
-    let get = b"GET / HTTP/1.1\r\n";
-    let pause = b"GET /pause HTTP/1.1\r\n";
-
-    let (ligne_statut, nom_fichier) = if tampon.starts_with(get) {
-        ("HTTP/1.1 200 OK\r\n\r\n", "salutation.html")
-    } else if tampon.starts_with(pause) {
-        thread::sleep(Duration::from_secs(5));
-        ("HTTP/1.1 200 OK\r\n\r\n", "salutation.html")
-    } else {
-        ("HTTP/1.1 404 NOT FOUND\r\n\r\n", "404.html")
-    };
-
-    // -- partie masquée ici --
-}
+```rust,no_run
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-10/src/main.rs:here}}
 ```
 
 <!--
@@ -316,44 +266,12 @@ gérer chaque flux avec une boucle `for`.
 
 <!--
 ```rust,no_run
-# use std::thread;
-# use std::io::prelude::*;
-# use std::net::TcpListener;
-# use std::net::TcpStream;
-#
-fn main() {
-    let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
-
-    for stream in listener.incoming() {
-        let stream = stream.unwrap();
-
-        thread::spawn(|| {
-            handle_connection(stream);
-        });
-    }
-}
-# fn handle_connection(mut stream: TcpStream) {}
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-11/src/main.rs:here}}
 ```
 -->
 
 ```rust,no_run
-# use std::thread;
-# use std::io::prelude::*;
-# use std::net::TcpListener;
-# use std::net::TcpStream;
-#
-fn main() {
-    let ecouteur = TcpListener::bind("127.0.0.1:7878").unwrap();
-
-    for flux in ecouteur.incoming() {
-        let flux = flux.unwrap();
-
-        thread::spawn(|| {
-            gestion_connexion(flux);
-        });
-    }
-}
-# fn gestion_connexion(mut flux: TcpStream) {}
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-11/src/main.rs:here}}
 ```
 
 <!--
@@ -407,59 +325,13 @@ souhaitons utiliser à la place de `thread::spawn`.
 <span class="filename">Fichier : src/main.rs</span>
 
 <!--
-```rust,no_run
-# use std::thread;
-# use std::io::prelude::*;
-# use std::net::TcpListener;
-# use std::net::TcpStream;
-# struct ThreadPool;
-# impl ThreadPool {
-#    fn new(size: u32) -> ThreadPool { ThreadPool }
-#    fn execute<F>(&self, f: F)
-#        where F: FnOnce() + Send + 'static {}
-# }
-#
-fn main() {
-    let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
-    let pool = ThreadPool::new(4);
-
-    for stream in listener.incoming() {
-        let stream = stream.unwrap();
-
-        pool.execute(|| {
-            handle_connection(stream);
-        });
-    }
-}
-# fn handle_connection(mut stream: TcpStream) {}
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-12/src/main.rs:here}}
 ```
 -->
 
-```rust,no_run
-# use std::thread;
-# use std::io::prelude::*;
-# use std::net::TcpListener;
-# use std::net::TcpStream;
-# struct GroupeTaches;
-# impl GroupeTaches {
-#    fn new(taille: u32) -> GroupeTaches { GroupeTaches }
-#    fn executer<F>(&self, f: F)
-#        where F: FnOnce() + Send + 'static {}
-# }
-#
-fn main() {
-    let ecouteur = TcpListener::bind("127.0.0.1:7878").unwrap();
-    let groupe = GroupeTaches::new(4);
-
-    for flux in ecouteur.incoming() {
-        let flux = flux.unwrap();
-
-        groupe.executer(|| {
-            gestion_connexion(flux);
-        });
-    }
-}
-# fn gestion_connexion(mut flux: TcpStream) {}
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-12/src/main.rs:here}}
 ```
 
 <!--
@@ -504,31 +376,13 @@ ensuite les erreurs du compilateur lors du `cargo check` pour orienter votre
 développement. Voici la première erreur que nous obtenons :
 
 <!--
-```text
-$ cargo check
-   Compiling hello v0.1.0 (file:///projects/hello)
-error[E0433]: failed to resolve. Use of undeclared type or module `ThreadPool`
-  -- > src\main.rs:10:16
-   |
-10 |     let pool = ThreadPool::new(4);
-   |                ^^^^^^^^^^^^^^^ Use of undeclared type or module
-   `ThreadPool`
-
-error: aborting due to previous error
+```console
+{{#include ../listings-sources/ch20-web-server/listing-20-12/output.txt}}
 ```
 -->
 
-```text
-$ cargo check
-   Compiling salutations v0.1.0 (file:///projects/salutations)
-error[E0433]: failed to resolve. Use of undeclared type or module `GroupeTaches`
-  -- > src\main.rs:10:16
-   |
-10 |     let groupe = GroupeTaches::new(4);
-   |                  ^^^^^^^^^^^^^^^^^ Use of undeclared type or module
-   `GroupeTaches`
-
-error: aborting due to previous error
+```console
+{{#include ../listings/ch20-web-server/listing-20-12/output.txt}}
 ```
 
 <!--
@@ -567,12 +421,12 @@ moment :
 
 <!--
 ```rust
-pub struct ThreadPool;
+{{#rustdoc_include ../listings-sources/ch20-web-server/no-listing-01-define-threadpool-struct/src/lib.rs}}
 ```
 -->
 
 ```rust
-pub struct GroupeTaches;
+{{#rustdoc_include ../listings/ch20-web-server/no-listing-01-define-threadpool-struct/src/lib.rs}}
 ```
 
 <!--
@@ -601,12 +455,12 @@ la crate de bibliothèque soit la crate principale dans le dossier
 
 <!--
 ```rust,ignore
-use hello::ThreadPool;
+{{#rustdoc_include ../listings-sources/ch20-web-server/no-listing-01-define-threadpool-struct/src/bin/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-use salutations::GroupeTaches;
+{{#rustdoc_include ../listings/ch20-web-server/no-listing-01-define-threadpool-struct/src/bin/main.rs:here}}
 ```
 
 <!--
@@ -618,29 +472,13 @@ Ce code ne fonctionne toujours pas, mais vérifions-le à nouveau pour obtenir
 l'erreur suivante que nous devons résoudre :
 
 <!--
-```text
-$ cargo check
-   Compiling hello v0.1.0 (file:///projects/hello)
-error[E0599]: no function or associated item named `new` found for type
-`hello::ThreadPool` in the current scope
- -- > src/bin/main.rs:13:16
-   |
-13 |     let pool = ThreadPool::new(4);
-   |                ^^^^^^^^^^^^^^^ function or associated item not found in
-   `hello::ThreadPool`
+```console
+{{#include ../listings-sources/ch20-web-server/no-listing-01-define-threadpool-struct/output.txt}}
 ```
 -->
 
-```text
-$ cargo check
-   Compiling salutations v0.1.0 (file:///projects/salutations)
-error[E0599]: no function or associated item named `new` found for type
-`salutations::GroupeTaches` in the current scope
- -- > src/bin/main.rs:13:16
-   |
-13 |     let groupe = GroupeTaches::new(4);
-   |                  ^^^^^^^^^^^^^^^^^ function or associated item not found in
-   `salutations::GroupeTaches`
+```console
+{{#include ../listings/ch20-web-server/no-listing-01-define-threadpool-struct/output.txt}}
 ```
 
 <!--
@@ -665,24 +503,12 @@ ces caractéristiques :
 
 <!--
 ```rust
-pub struct ThreadPool;
-
-impl ThreadPool {
-    pub fn new(size: usize) -> ThreadPool {
-        ThreadPool
-    }
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/no-listing-02-impl-threadpool-new/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-pub struct GroupeTaches;
-
-impl GroupeTaches {
-    pub fn new(taille: usize) -> GroupeTaches {
-        GroupeTaches
-    }
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/no-listing-02-impl-threadpool-new/src/lib.rs:here}}
 ```
 
 <!--
@@ -705,52 +531,19 @@ Let’s check the code again:
 
 Vérifions à nouveau le code :
 
-<!-- markdownlint-disable -->
 <!--
-```text
-$ cargo check
-   Compiling hello v0.1.0 (file:///projects/hello)
-warning: unused variable: `size`
- -- > src/lib.rs:4:16
-  |
-4 |     pub fn new(size: usize) -> ThreadPool {
-  |                ^^^^
-  |
-  = note: #[warn(unused_variables)] on by default
-  = note: to avoid this warning, consider using `_size` instead
-
-error[E0599]: no method named `execute` found for type `hello::ThreadPool` in the current scope
-  -- > src/bin/main.rs:18:14
-   |
-18 |         pool.execute(|| {
-   |              ^^^^^^^
+```console
+{{#include ../listings-sources/ch20-web-server/no-listing-02-impl-threadpool-new/output.txt}}
 ```
 -->
-<!-- markdownlint-enable -->
 
-```text
-$ cargo check
-   Compiling salutations v0.1.0 (file:///projects/salutations)
-warning: unused variable: `taille`
- -- > src/lib.rs:4:16
-  |
-4 |     pub fn new(taille: usize) -> GroupeTaches {
-  |                ^^^^^^
-  |
-  = note: #[warn(unused_variables)] on by default
-  = note: to avoid this warning, consider using `_taille` instead
-
-error[E0599]: no method named `executer` found for type `salutations::GroupeTaches` in the current scope
-  -- > src/bin/main.rs:18:14
-   |
-18 |         groupe.executer(|| {
-   |                ^^^^^^^^
+```console
+{{#include ../listings/ch20-web-server/no-listing-02-impl-threadpool-new/output.txt}}
 ```
 
 <!--
-Now we get a warning and an error. Ignoring the warning for a moment, the error
-occurs because we don’t have an `execute` method on `ThreadPool`. Recall from
-the [“Creating a Similar Interface for a Finite Number of
+Now the error occurs because we don’t have an `execute` method on `ThreadPool`.
+Recall from the [“Creating a Similar Interface for a Finite Number of
 Threads”](#creating-a-similar-interface-for-a-finite-number-of-threads)<!--
 ignore -- > section that we decided our thread pool should have an interface
 similar to `thread::spawn`. In addition, we’ll implement the `execute` function
@@ -758,11 +551,9 @@ so it takes the closure it’s given and gives it to an idle thread in the pool
 to run.
 -->
 
-Nous avons un message d'avertissement et un autre d'erreur. Si on met de côté
-l'avertissement pour le moment, l'erreur se produit car nous n'avons pas
-implémenté de méthode `executer` sur `GroupeTaches`. Souvenez-vous que nous
-avions décidé dans la section
-[“Créer une interface similaire pour un nombre fini de
+Désormais, nous obtenons une erreur car nous n'avons pas implémenté la méthode
+`executer` sur `GroupeTaches`. Souvenez-vous que nous avions décidé dans la
+section [“Créer une interface similaire pour un nombre fini de
 tâches”](#créer-une-interface-similaire-pour-un-nombre-fini-de-tâches)<!--
 ignore --> que notre groupe de tâches devrait avoir une interface similaire à
 `thread::spawn`. C'est pourquoi nous allons implémenter la fonction `executer`
@@ -790,6 +581,15 @@ de fermeture nous allons utiliser ici. Nous savons que nous allons faire quelque
 chose de sensiblement identique à l'implémentation du `thread::spawn` de la
 bibliothèque standard, donc nous pouvons nous inspirer de ce qui est attaché à
 la signature de `thread::spawn`. La documentation nous donne ceci :
+
+<!--
+```rust,ignore
+pub fn spawn<F, T>(f: F) -> JoinHandle<T>
+    where
+        F: FnOnce() -> T + Send + 'static,
+        T: Send + 'static
+```
+-->
 
 ```rust,ignore
 pub fn spawn<F, T>(f: F) -> JoinHandle<T>
@@ -840,19 +640,13 @@ avec les liens suivants :
 
 <!--
 ```rust
-# pub struct ThreadPool;
-impl ThreadPool {
-    // --snip--
-
-    pub fn execute<F>(&self, f: F)
-        where
-            F: FnOnce() + Send + 'static
-    {
-
-    }
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/no-listing-03-define-execute/src/lib.rs:here}}
 ```
 -->
+
+```rust
+{{#rustdoc_include ../listings/ch20-web-server/no-listing-03-define-execute/src/lib.rs:here}}
+```
 
 ```rust
 # pub struct GroupeTaches;
@@ -891,61 +685,26 @@ elle ne fait rien, mais nous essayons seulement de faire en sorte que notre code
 se compile. Vérifions-le à nouveau :
 
 <!--
-```text
-$ cargo check
-   Compiling hello v0.1.0 (file:///projects/hello)
-warning: unused variable: `size`
- -- > src/lib.rs:4:16
-  |
-4 |     pub fn new(size: usize) -> ThreadPool {
-  |                ^^^^
-  |
-  = note: #[warn(unused_variables)] on by default
-  = note: to avoid this warning, consider using `_size` instead
-
-warning: unused variable: `f`
- -- > src/lib.rs:8:30
-  |
-8 |     pub fn execute<F>(&self, f: F)
-  |                              ^
-  |
-  = note: to avoid this warning, consider using `_f` instead
+```console
+{{#include ../listings-sources/ch20-web-server/no-listing-03-define-execute/output.txt}}
 ```
 -->
 
-```text
-$ cargo check
-   Compiling salutations v0.1.0 (file:///projects/salutations)
-warning: unused variable: `taille`
- -- > src/lib.rs:4:16
-  |
-4 |     pub fn new(taille: usize) -> GroupeTaches {
-  |                ^^^^^^
-  |
-  = note: #[warn(unused_variables)] on by default
-  = note: to avoid this warning, consider using `_taille` instead
-
-warning: unused variable: `f`
- -- > src/lib.rs:8:30
-  |
-8 |     pub fn executer<F>(&self, f: F)
-  |                               ^
-  |
-  = note: to avoid this warning, consider using `_f` instead
+```console
+{{#include ../listings/ch20-web-server/no-listing-03-define-execute/output.txt}}
 ```
 
 <!--
-We’re receiving only warnings now, which means it compiles! But note that if
-you try `cargo run` and make a request in the browser, you’ll see the errors in
-the browser that we saw at the beginning of the chapter. Our library isn’t
-actually calling the closure passed to `execute` yet!
+It compiles! But note that if you try `cargo run` and make a request in the
+browser, you’ll see the errors in the browser that we saw at the beginning of
+the chapter. Our library isn’t actually calling the closure passed to `execute`
+yet!
 -->
 
-Nous avons maintenant seulement des avertissements, ce qui veut dire que cela se
-compile ! Mais remarquez que si vous lancez `cargo run` et faites la requête
-dans votre navigateur web, vous verrez l'erreur dans le navigateur que nous
-avions tout au début du chapitre. Notre bibliothèque n'exécute pas encore la
-fermeture envoyée à `executer` !
+Cela se compile ! Mais remarquez que si vous lancez `cargo run` et faites la
+requête dans votre navigateur web, vous verrez l'erreur dans le navigateur que
+nous avions tout au début du chapitre. Notre bibliothèque n'exécute pas encore
+la fermeture envoyée à `executer` !
 
 <!--
 > Note: A saying you might hear about languages with strict compilers, such as
@@ -971,27 +730,25 @@ fermeture envoyée à `executer` !
 #### Valider le nombre de tâches envoyé à `new`
 
 <!--
-We’ll continue to get warnings because we aren’t doing anything with the
-parameters to `new` and `execute`. Let’s implement the bodies of these
-functions with the behavior we want. To start, let’s think about `new`. Earlier
-we chose an unsigned type for the `size` parameter, because a pool with a
-negative number of threads makes no sense. However, a pool with zero threads
-also makes no sense, yet zero is a perfectly valid `usize`. We’ll add code to
-check that `size` is greater than zero before we return a `ThreadPool` instance
-and have the program panic if it receives a zero by using the `assert!` macro,
-as shown in Listing 20-13.
+We aren’t doing anything with the parameters to `new` and `execute`. Let’s
+implement the bodies of these functions with the behavior we want. To start,
+let’s think about `new`. Earlier we chose an unsigned type for the `size`
+parameter, because a pool with a negative number of threads makes no sense.
+However, a pool with zero threads also makes no sense, yet zero is a perfectly
+valid `usize`. We’ll add code to check that `size` is greater than zero before
+we return a `ThreadPool` instance and have the program panic if it receives a
+zero by using the `assert!` macro, as shown in Listing 20-13.
 -->
 
-Nous continuons à obtenir des avertissements car nous ne faisons rien avec les
-paramètres `new` et `executer`. Implémentons le corps de ces fonctions avec le
-comportement que nous souhaitons. Pour commencer, réfléchissons à `new`.
-Précédemment, nous avions choisi un type sans signe pour le paramètre `taille`,
-car un groupe avec un nombre négatif de tâches n'a pas de sens. Cependant, un
-groupe avec aucune tâche n'a pas non plus de sens, alors que zéro est une valeur
-parfaitement valide pour `usize`. Nous allons ajouter du code pour vérifier que
-`taille` est plus grand que zéro avant de retourner une instance de
-`GroupeTaille` et faire en sorte que le programme panique s'il reçoit un zéro,
-en utilisant la macro `assert!` comme dans l'encart 20-13.
+Nous ne faisons rien avec les paramètres `new` et `executer`. Implémentons le
+corps de ces fonctions avec le comportement que nous souhaitons. Pour commencer,
+réfléchissons à `new`. Précédemment, nous avions choisi un type sans signe pour
+le paramètre `taille`, car un groupe avec un nombre négatif de tâches n'a pas de
+sens. Cependant, un groupe avec aucune tâche n'a pas non plus de sens, alors que
+zéro est une valeur parfaitement valide pour `usize`. Nous allons ajouter du
+code pour vérifier que `taille` est plus grand que zéro avant de retourner une
+instance de `GroupeTaille` et faire en sorte que le programme panique s'il
+reçoit un zéro, en utilisant la macro `assert!` comme dans l'encart 20-13.
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -1001,44 +758,12 @@ en utilisant la macro `assert!` comme dans l'encart 20-13.
 
 <!--
 ```rust
-# pub struct ThreadPool;
-impl ThreadPool {
-    /// Create a new ThreadPool.
-    ///
-    /// The size is the number of threads in the pool.
-    ///
-    /// # Panics
-    ///
-    /// The `new` function will panic if the size is zero.
-    pub fn new(size: usize) -> ThreadPool {
-        assert!(size > 0);
-
-        ThreadPool
-    }
-
-    // --snip--
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-13/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# pub struct GroupeTaches;
-impl GroupeTaches {
-    /// Crée un nouveau GroupeTaches.
-    ///
-    /// La taille est le nom de tâches présentes dans le groupe.
-    ///
-    /// # Panics
-    ///
-    /// La fonction `new` devrait paniquer si la taille vaut zéro.
-    pub fn new(taille: usize) -> GroupeTaches {
-        assert!(taille > 0);
-
-        GroupeTaches
-    }
-
-    // -- partie masquée ici --
-}
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-13/src/lib.rs:here}}
 ```
 
 <!--
@@ -1161,58 +886,12 @@ instance de `GroupeTaches` qui les contient.
 
 <!--
 ```rust,ignore,not_desired_behavior
-use std::thread;
-
-pub struct ThreadPool {
-    threads: Vec<thread::JoinHandle<()>>,
-}
-
-impl ThreadPool {
-    // --snip--
-    pub fn new(size: usize) -> ThreadPool {
-        assert!(size > 0);
-
-        let mut threads = Vec::with_capacity(size);
-
-        for _ in 0..size {
-            // create some threads and store them in the vector
-        }
-
-        ThreadPool {
-            threads
-        }
-    }
-
-    // --snip--
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-14/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore,not_desired_behavior
-use std::thread;
-
-pub struct GroupeTaches {
-    taches: Vec<thread::JoinHandle<()>>,
-}
-
-impl GroupeTaches {
-    // -- partie masquée ici --
-    pub fn new(taille: usize) -> GroupeTaches {
-        assert!(taille > 0);
-
-        let mut taches = Vec::with_capacity(taille);
-
-        for _ in 0..taille {
-            // on crée quelques tâches ici et on les stocke dans le vecteur
-        }
-
-        GroupeTaches {
-            taches
-        }
-    }
-
-    // -- partie masquée ici --
-}
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-14/src/lib.rs:here}}
 ```
 
 <!--
@@ -1375,88 +1054,12 @@ aux changements listés précédemment.
 
 <!--
 ```rust
-use std::thread;
-
-pub struct ThreadPool {
-    workers: Vec<Worker>,
-}
-
-impl ThreadPool {
-    // --snip--
-    pub fn new(size: usize) -> ThreadPool {
-        assert!(size > 0);
-
-        let mut workers = Vec::with_capacity(size);
-
-        for id in 0..size {
-            workers.push(Worker::new(id));
-        }
-
-        ThreadPool {
-            workers
-        }
-    }
-    // --snip--
-}
-
-struct Worker {
-    id: usize,
-    thread: thread::JoinHandle<()>,
-}
-
-impl Worker {
-    fn new(id: usize) -> Worker {
-        let thread = thread::spawn(|| {});
-
-        Worker {
-            id,
-            thread,
-        }
-    }
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-15/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-use std::thread;
-
-pub struct GroupeTaches {
-    operateurs: Vec<Operateur>,
-}
-
-impl GroupeTaches {
-    // -- partie masquée ici --
-    pub fn new(taille: usize) -> GroupeTaches {
-        assert!(taille > 0);
-
-        let mut operateurs = Vec::with_capacity(taille);
-
-        for id in 0..taille {
-            operateurs.push(Operateur::new(id));
-        }
-
-        GroupeTaches {
-            operateurs
-        }
-    }
-    // -- partie masquée ici --
-}
-
-struct Operateur {
-    id: usize,
-    tache: thread::JoinHandle<()>,
-}
-
-impl Operateur {
-    fn new(id: usize) -> Operateur {
-        let tache = thread::spawn(|| {});
-
-        Operateur {
-            id,
-            tache,
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-15/src/lib.rs:here}}
 ```
 
 <!--
@@ -1592,104 +1195,12 @@ d'éléments que nous enverrons dans le canal.
 
 <!--
 ```rust
-# use std::thread;
-// --snip--
-use std::sync::mpsc;
-
-pub struct ThreadPool {
-    workers: Vec<Worker>,
-    sender: mpsc::Sender<Job>,
-}
-
-struct Job;
-
-impl ThreadPool {
-    // --snip--
-    pub fn new(size: usize) -> ThreadPool {
-        assert!(size > 0);
-
-        let (sender, receiver) = mpsc::channel();
-
-        let mut workers = Vec::with_capacity(size);
-
-        for id in 0..size {
-            workers.push(Worker::new(id));
-        }
-
-        ThreadPool {
-            workers,
-            sender,
-        }
-    }
-    // --snip--
-}
-#
-# struct Worker {
-#     id: usize,
-#     thread: thread::JoinHandle<()>,
-# }
-#
-# impl Worker {
-#     fn new(id: usize) -> Worker {
-#         let thread = thread::spawn(|| {});
-#
-#         Worker {
-#             id,
-#             thread,
-#         }
-#     }
-# }
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-16/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# use std::thread;
-// -- partie masquée ici --
-use std::sync::mpsc;
-
-pub struct GroupeTaches {
-    operateurs: Vec<Operateur>,
-    envoi: mpsc::Sender<Mission>,
-}
-
-struct Mission;
-
-impl GroupeTaches {
-    // -- partie masquée ici --
-    pub fn new(taille: usize) -> GroupeTaches {
-        assert!(taille > 0);
-
-        let (envoi, reception) = mpsc::channel();
-
-        let mut operateurs = Vec::with_capacity(taille);
-
-        for id in 0..taille {
-            operateurs.push(Operateur::new(id));
-        }
-
-        GroupeTaches {
-            operateurs,
-            envoi,
-        }
-    }
-    // -- partie masquée ici --
-}
-#
-# struct Operateur {
-#     id: usize,
-#     tache: thread::JoinHandle<()>,
-# }
-#
-# impl Operateur {
-#     fn new(id: usize) -> Operateur {
-#         let tache = thread::spawn(|| {});
-#
-#         Operateur {
-#             id,
-#             tache,
-#         }
-#     }
-# }
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-16/src/lib.rs:here}}
 ```
 
 <!--
@@ -1730,80 +1241,12 @@ code de l'encart 20-17 ne se compile pas encore.
 
 <!--
 ```rust,ignore,does_not_compile
-impl ThreadPool {
-    // --snip--
-    pub fn new(size: usize) -> ThreadPool {
-        assert!(size > 0);
-
-        let (sender, receiver) = mpsc::channel();
-
-        let mut workers = Vec::with_capacity(size);
-
-        for id in 0..size {
-            workers.push(Worker::new(id, receiver));
-        }
-
-        ThreadPool {
-            workers,
-            sender,
-        }
-    }
-    // --snip--
-}
-
-// --snip--
-
-impl Worker {
-    fn new(id: usize, receiver: mpsc::Receiver<Job>) -> Worker {
-        let thread = thread::spawn(|| {
-            receiver;
-        });
-
-        Worker {
-            id,
-            thread,
-        }
-    }
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-17/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-impl GroupeTaches {
-    // -- partie masquée ici --
-    pub fn new(taille: usize) -> GroupeTaches {
-        assert!(taille > 0);
-
-        let (envoi, reception) = mpsc::channel();
-
-        let mut operateurs = Vec::with_capacity(taille);
-
-        for id in 0..taille {
-            operateurs.push(Operateur::new(id, reception));
-        }
-
-        GroupeTaches {
-            operateurs,
-            envoi,
-        }
-    }
-    // -- partie masquée ici --
-}
-
-// -- partie masquée ici --
-
-impl Operateur {
-    fn new(id: usize, reception: mpsc::Receiver<Mission>) -> Operateur {
-        let tache = thread::spawn(|| {
-            reception;
-        });
-
-        Operateur {
-            id,
-            tache,
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-17/src/lib.rs:here}}
 ```
 
 <!--
@@ -1830,33 +1273,13 @@ When we try to check this code, we get this error:
 Lorsque nous essayons de vérifier ce code, nous obtenons cette erreur :
 
 <!--
-```text
-$ cargo check
-   Compiling hello v0.1.0 (file:///projects/hello)
-error[E0382]: use of moved value: `receiver`
-  -- > src/lib.rs:27:42
-   |
-27 |             workers.push(Worker::new(id, receiver));
-   |                                          ^^^^^^^^ value moved here in
-   previous iteration of loop
-   |
-   = note: move occurs because `receiver` has type
-   `std::sync::mpsc::Receiver<Job>`, which does not implement the `Copy` trait
+```console
+{{#include ../listings-sources/ch20-web-server/listing-20-17/output.txt}}
 ```
 -->
 
-```text
-$ cargo check
-   Compiling salutations v0.1.0 (file:///projects/salutations)
-error[E0382]: use of moved value: `reception`
-  -- > src/lib.rs:27:42
-   |
-27 |             operateurs.push(Operateur::new(id, reception));
-   |                                                ^^^^^^^^^ value moved here in
-   previous iteration of loop
-   |
-   = note: move occurs because `reception` has type
-   `std::sync::mpsc::Receiver<Mission>`, which does not implement the `Copy` trait
+```console
+{{#include ../listings/ch20-web-server/listing-20-17/output.txt}}
 ```
 
 <!--
@@ -1912,118 +1335,12 @@ montre les changements que nous devons apporter.
 
 <!--
 ```rust
-# use std::thread;
-# use std::sync::mpsc;
-use std::sync::Arc;
-use std::sync::Mutex;
-// --snip--
-
-# pub struct ThreadPool {
-#     workers: Vec<Worker>,
-#     sender: mpsc::Sender<Job>,
-# }
-# struct Job;
-#
-impl ThreadPool {
-    // --snip--
-    pub fn new(size: usize) -> ThreadPool {
-        assert!(size > 0);
-
-        let (sender, receiver) = mpsc::channel();
-
-        let receiver = Arc::new(Mutex::new(receiver));
-
-        let mut workers = Vec::with_capacity(size);
-
-        for id in 0..size {
-            workers.push(Worker::new(id, Arc::clone(&receiver)));
-        }
-
-        ThreadPool {
-            workers,
-            sender,
-        }
-    }
-
-    // --snip--
-}
-
-# struct Worker {
-#     id: usize,
-#     thread: thread::JoinHandle<()>,
-# }
-#
-impl Worker {
-    fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
-        // --snip--
-#         let thread = thread::spawn(|| {
-#            receiver;
-#         });
-#
-#         Worker {
-#             id,
-#             thread,
-#         }
-    }
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-18/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# use std::thread;
-# use std::sync::mpsc;
-use std::sync::Arc;
-use std::sync::Mutex;
-// -- partie masquée ici --
-
-# pub struct GroupeTaches {
-#     operateurs: Vec<Operateur>,
-#     envoi: mpsc::Sender<Mission>,
-# }
-# struct Mission;
-#
-impl GroupeTaches {
-    // -- partie masquée ici --
-    pub fn new(taille: usize) -> GroupeTaches {
-        assert!(taille > 0);
-
-        let (envoi, reception) = mpsc::channel();
-
-        let reception = Arc::new(Mutex::new(reception));
-
-        let mut operateurs = Vec::with_capacity(taille);
-
-        for id in 0..taille {
-            operateurs.push(Operateur::new(id, Arc::clone(&reception)));
-        }
-
-        GroupeTaches {
-            operateurs,
-            envoi,
-        }
-    }
-
-    // -- partie masquée ici --
-}
-
-# struct Operateur {
-#     id: usize,
-#     tache: thread::JoinHandle<()>,
-# }
-#
-impl Operateur {
-    fn new(id: usize, reception: Arc<Mutex<mpsc::Receiver<Mission>>>) -> Operateur {
-        // -- partie masquée ici --
-#         let tache = thread::spawn(|| {
-#            reception;
-#         });
-#
-#         Operateur {
-#             id,
-#             tache,
-#         }
-    }
-}
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-18/src/lib.rs:here}}
 ```
 
 <!--
@@ -2082,58 +1399,12 @@ Voyez cela dans l'encart 20-19.
 
 <!--
 ```rust
-// --snip--
-# pub struct ThreadPool {
-#     workers: Vec<Worker>,
-#     sender: mpsc::Sender<Job>,
-# }
-# use std::sync::mpsc;
-# struct Worker {}
-
-type Job = Box<dyn FnOnce() + Send + 'static>;
-
-impl ThreadPool {
-    // --snip--
-
-    pub fn execute<F>(&self, f: F)
-        where
-            F: FnOnce() + Send + 'static
-    {
-        let job = Box::new(f);
-
-        self.sender.send(job).unwrap();
-    }
-}
-
-// --snip--
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-19/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-// -- partie masquée ici --
-# pub struct GroupeTaches {
-#     operateurs: Vec<Operateur>,
-#     envoi: mpsc::Sender<Mission>,
-# }
-# use std::sync::mpsc;
-# struct Operateur {}
-
-type Mission = Box<dyn FnOnce() + Send + 'static>;
-
-impl GroupeTaches {
-    // -- partie masquée ici --
-
-    pub fn executer<F>(&self, f: F)
-        where
-            F: FnOnce() + Send + 'static
-    {
-        let mission = Box::new(f);
-
-        self.envoi.send(mission).unwrap();
-    }
-}
-
-// -- partie masquée ici --
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-19/src/lib.rs:here}}
 ```
 
 <!--
@@ -2188,51 +1459,13 @@ un. Appliquons les changements montrés dans l'encart 20-20 à `Operateur::new`.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust,ignore,does_not_compile
-// --snip--
-
-impl Worker {
-    fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
-        let thread = thread::spawn(move || {
-            loop {
-                let job = receiver.lock().unwrap().recv().unwrap();
-
-                println!("Worker {} got a job; executing.", id);
-
-                job();
-            }
-        });
-
-        Worker {
-            id,
-            thread,
-        }
-    }
-}
+```rust
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-20/src/lib.rs:here}}
 ```
 -->
 
-```rust,ignore,does_not_compile
-// -- partie masquée ici --
-
-impl Operateur {
-    fn new(id: usize, reception: Arc<Mutex<mpsc::Receiver<Mission>>>) -> Operateur {
-        let tache = thread::spawn(move || {
-            loop {
-                let mission = reception.lock().unwrap().recv().unwrap();
-
-                println!("L'opérateur {} a obtenu une mission ; il l'exécute.", id);
-
-                mission();
-            }
-        });
-
-        Operateur {
-            id,
-            tache,
-        }
-    }
-}
+```rust
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-20/src/lib.rs:here}}
 ```
 
 <!--
@@ -2295,35 +1528,40 @@ Avec l'implémentation de cette astuce, notre groupe de tâches est en état de
 fonctionner ! Faites un `cargo run` et faites quelques requêtes :
 
 <!--
-```text
+<!-- manual-regeneration
+cd listings/ch20-web-server/listing-20-20
+cargo run
+make some requests to 127.0.0.1:7878
+Can't automate because the output depends on making requests
+-- >
+-->
+
+<!--
+```console
 $ cargo run
    Compiling hello v0.1.0 (file:///projects/hello)
-warning: field is never used: `workers`
+warning: field is never read: `workers`
  -- > src/lib.rs:7:5
   |
 7 |     workers: Vec<Worker>,
   |     ^^^^^^^^^^^^^^^^^^^^
   |
-  = note: #[warn(dead_code)] on by default
+  = note: `#[warn(dead_code)]` on by default
 
-warning: field is never used: `id`
-  -- > src/lib.rs:61:5
+warning: field is never read: `id`
+  -- > src/lib.rs:48:5
    |
-61 |     id: usize,
+48 |     id: usize,
    |     ^^^^^^^^^
-   |
-   = note: #[warn(dead_code)] on by default
 
-warning: field is never used: `thread`
-  -- > src/lib.rs:62:5
+warning: field is never read: `thread`
+  -- > src/lib.rs:49:5
    |
-62 |     thread: thread::JoinHandle<()>,
+49 |     thread: thread::JoinHandle<()>,
    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: #[warn(dead_code)] on by default
 
-    Finished dev [unoptimized + debuginfo] target(s) in 0.99 secs
-     Running `target/debug/hello`
+    Finished dev [unoptimized + debuginfo] target(s) in 1.40s
+     Running `target/debug/main`
 Worker 0 got a job; executing.
 Worker 2 got a job; executing.
 Worker 1 got a job; executing.
@@ -2337,35 +1575,31 @@ Worker 2 got a job; executing.
 ```
 -->
 
-```text
+```console
 $ cargo run
    Compiling salutations v0.1.0 (file:///projects/salutations)
-warning: field is never used: `operateurs`
+warning: field is never read: `operateurs`
  -- > src/lib.rs:7:5
   |
 7 |     operateurs: Vec<Operateur>,
   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
   |
-  = note: #[warn(dead_code)] on by default
+  = note: `#[warn(dead_code)]` on by default
 
-warning: field is never used: `id`
-  -- > src/lib.rs:61:5
+warning: field is never read: `id`
+  -- > src/lib.rs:48:5
    |
-61 |     id: usize,
+48 |     id: usize,
    |     ^^^^^^^^^
-   |
-   = note: #[warn(dead_code)] on by default
 
-warning: field is never used: `tache`
-  -- > src/lib.rs:62:5
+warning: field is never read: `tache`
+  -- > src/lib.rs:49:5
    |
-62 |     tache: thread::JoinHandle<()>,
+49 |     tache: thread::JoinHandle<()>,
    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: #[warn(dead_code)] on by default
 
-    Finished dev [unoptimized + debuginfo] target(s) in 0.99 secs
-     Running `target/debug/salutations`
+    Finished dev [unoptimized + debuginfo] target(s) in 1.40s
+     Running `target/debug/main`
 L'opérateur 0 a obtenu une mission ; il l'exécute.
 L'opérateur 2 a obtenu une mission ; il l'exécute.
 L'opérateur 1 a obtenu une mission ; il l'exécute.
@@ -2423,46 +1657,12 @@ comme dans l'encart 20-21.
 
 <!--
 ```rust,ignore,not_desired_behavior
-// --snip--
-
-impl Worker {
-    fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
-        let thread = thread::spawn(move || {
-            while let Ok(job) = receiver.lock().unwrap().recv() {
-                println!("Worker {} got a job; executing.", id);
-
-                job();
-            }
-        });
-
-        Worker {
-            id,
-            thread,
-        }
-    }
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-21/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore,not_desired_behavior
-// -- partie masquée ici --
-
-impl Operateur {
-    fn new(id: usize, reception: Arc<Mutex<mpsc::Receiver<Mission>>>) -> Operateur {
-        let tache = thread::spawn(move || {
-            while let Ok(mission) = reception.lock().unwrap().recv() {
-                println!("L'opérateur {} a obtenu une mission ; il l'exécute.", id);
-
-                mission();
-            }
-        });
-
-        Operateur {
-            id,
-            tache,
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-21/src/lib.rs:here}}
 ```
 
 <!--
@@ -2483,9 +1683,9 @@ method returns. At compile time, the borrow checker can then enforce the rule
 that a resource guarded by a `Mutex` cannot be accessed unless we hold the
 lock. But this implementation can also result in the lock being held longer
 than intended if we don’t think carefully about the lifetime of the
-`MutexGuard<T>`. Because the values in the `while` expression remain in scope
-for the duration of the block, the lock remains held for the duration of the
-call to `job()`, meaning other workers cannot receive jobs.
+`MutexGuard<T>`. Because the values in the `while let` expression remain in
+scope for the duration of the block, the lock remains held for the duration of
+the call to `job()`, meaning other workers cannot receive jobs.
 -->
 
 Ce code se compile et s'exécute mais ne se comporte pas comme nous
@@ -2499,25 +1699,24 @@ vérifier la règle qui dit qu'une ressource gardée par un `Mutex` ne peut pas
 être accessible que si nous avons ce verrou. Mais cette implémentation peut
 aussi faire en sorte que nous gardions le verrou plus longtemps que prévu si
 nous ne réfléchissons pas avec attention sur la durée de vie du
-`MutexGuard<T>`. Comme les valeurs dans l'expression du `while` restent dans la
-portée pour la durée de ce bloc, le verrou reste verrouillé pendant la durée de
-l'appel à `mission()`, ce qui signifie que les autres opérateurs ne peuvent pas
-recevoir d'autres missions.
+`MutexGuard<T>`. Comme les valeurs dans l'expression du `while let` restent dans
+la portée pour la durée de ce bloc, le verrou reste verrouillé pendant la durée
+de l'appel à `mission()`, ce qui signifie que les autres opérateurs ne peuvent
+pas recevoir d'autres missions.
 
 <!--
-By using `loop` instead and acquiring the lock and a job within the block
-rather than outside it, the `MutexGuard` returned from the `lock` method is
-dropped as soon as the `let job` statement ends. This ensures that the lock is
-held during the call to `recv`, but it is released before the call to
-`job()`, allowing multiple requests to be serviced concurrently.
+By using `loop` instead and acquiring the lock without assigning to a variable,
+the temporary `MutexGuard` returned from the `lock` method is dropped as soon
+as the `let job` statement ends. This ensures that the lock is held during the
+call to `recv`, but it is released before the call to `job()`, allowing
+multiple requests to be serviced concurrently.
 -->
 
-En utilisant `loop` à la place et en obtenant le verrou et une mission à
-l'intérieur du bloc plutôt qu'à l'extérieur, le `MutexGuard` retourné par la
-méthode `lock` est libéré dès que l'instruction `let mission` se termine. Cela
-fait en sorte que le verrou est gardé pendant l'appel à `recv`, mais il est
-libéré avant l'appel à `mission()`, ce qui permet à plusieurs requêtes qu'être
-servies en concurrence.
+En utilisant `loop` à la place et en obtenant le verrou sans l'assigner à une
+variable, le `MutexGuard` temporairement retourné par la méthode `lock` est
+libéré dès que l'instruction `let mission` se termine. Cela fait en sorte que le
+verrou est gardé pendant l'appel à `recv`, mais il est libéré avant l'appel à
+`mission()`, ce qui permet à plusieurs requêtes qu'être servies en concurrence.
 
 <!--
 [creating-type-synonyms-with-type-aliases]:
