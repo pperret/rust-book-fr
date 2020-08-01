@@ -174,6 +174,12 @@ est définie. Le chapitre 8 nous a permis de comprendre comment utiliser la
 macro `vec!` pour créer un nouveau vecteur avec des valeurs précises. Par
 exemple, la macro suivante crée un nouveau vecteur qui contient trois entiers :
 
+<!--
+```rust
+let v: Vec<u32> = vec![1, 2, 3];
+```
+-->
+
 ```rust
 let v: Vec<u32> = vec![1, 2, 3];
 ```
@@ -201,19 +207,14 @@ L'encart 19-28 montre une définition légèrement simplifiée de la macro `vec!
 
 <span class="filename">Fichier : src/lib.rs</span>
 
+<!--
 ```rust
-#[macro_export]
-macro_rules! vec {
-    ( $( $x:expr ),* ) => {
-        {
-            let mut temp_vec = Vec::new();
-            $(
-                temp_vec.push($x);
-            )*
-            temp_vec
-        }
-    };
-}
+{{#rustdoc_include ../listings/ch19-advanced-features/listing-19-28/src/lib.rs}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch19-advanced-features/listing-19-28/src/lib.rs}}
 ```
 
 <!--
@@ -287,13 +288,13 @@ de la syntaxe de motif que nous avons vu au chapitre 18 car les motifs de
 macros sont comparés à des structures de code Rust plutôt qu'à des valeurs.
 Examinons la signification des éléments du motif de l'encart 19-28 ; pour voir
 l'intégralité de la syntaxe du motif de la macro, rendez-vous
-[à la documentation].
+[à la documentation][the reference].
 
 <!--
-[the reference]: ../reference/macros.html
+[the reference]: ../reference/macros-by-example.html
 -->
 
-[à la documentation]: ../reference/macros.html
+[the reference]: https://doc.rust-lang.org/reference/macros-by-example.html
 
 <!--
 First, a set of parentheses encompasses the whole pattern. A dollar sign (`$`)
@@ -346,12 +347,26 @@ expression qui correspond. Lorsque nous faisons appel à cette macro avec
 `vec![1, 2, 3];`, le code généré qui remplace cet appel de macro ressemblera à
 ceci :
 
+<!--
 ```rust,ignore
-let mut temp_vec = Vec::new();
-temp_vec.push(1);
-temp_vec.push(2);
-temp_vec.push(3);
-temp_vec
+{
+    let mut temp_vec = Vec::new();
+    temp_vec.push(1);
+    temp_vec.push(2);
+    temp_vec.push(3);
+    temp_vec
+}
+```
+-->
+
+```rust,ignore
+{
+    let mut temp_vec = Vec::new();
+    temp_vec.push(1);
+    temp_vec.push(2);
+    temp_vec.push(3);
+    temp_vec
+}
 ```
 
 <!--
@@ -382,6 +397,10 @@ plupart des développeurs Rust vont plus *utiliser* les macros *qu'écrire* des
 macros, nous ne verrons plus à nouveau `macro_rules!` à l'avenir. Pour en
 savoir plus sur l'écriture des macros, consultez la documentation en ligne, ou
 d'autres ressources comme [“The Little Book of Rust Macros”][tlborm].
+
+<!--
+[tlborm]: https://danielkeep.github.io/tlborm/book/index.html
+-->
 
 [tlborm]: https://danielkeep.github.io/tlborm/book/index.html
 
@@ -526,16 +545,14 @@ d'écrire du code comme l'encart 19-30 en utilisant notre crate.
 
 <span class="filename">Fichier : src/main.rs</span>
 
-```rust,ignore
-use hello_macro::HelloMacro;
-use hello_macro_derive::HelloMacro;
+<!--
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/listing-19-30/src/main.rs}}
+```
+-->
 
-#[derive(HelloMacro)]
-struct Pancakes;
-
-fn main() {
-    Pancakes::hello_macro();
-}
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch19-advanced-features/listing-19-30/src/main.rs}}
 ```
 
 <!--
@@ -555,7 +572,13 @@ Ce code va afficher `Hello, Macro ! Mon nom est Pancakes !` lorsque vous en
 aurez fini. La première étape est de créer une nouvelle crate de bibliothèque,
 comme ceci :
 
-```text
+<!--
+```console
+$ cargo new hello_macro --lib
+```
+-->
+
+```console
 $ cargo new hello_macro --lib
 ```
 
@@ -571,10 +594,14 @@ Ensuite, nous allons définir le trait `HelloMacro` et sa fonction associée :
 
 <span class="filename">Fichier : src/lib.rs</span>
 
+<!--
 ```rust
-pub trait HelloMacro {
-    fn hello_macro();
-}
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-20-impl-hellomacro-for-pancakes/hello_macro/src/lib.rs}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-20-impl-hellomacro-for-pancakes/hello_macro/src/lib.rs}}
 ```
 
 <!--
@@ -588,36 +615,12 @@ fonctionnalité souhaitée, comme ceci :
 
 <!--
 ```rust,ignore
-use hello_macro::HelloMacro;
-
-struct Pancakes;
-
-impl HelloMacro for Pancakes {
-    fn hello_macro() {
-        println!("Hello, Macro! My name is Pancakes!");
-    }
-}
-
-fn main() {
-    Pancakes::hello_macro();
-}
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-20-impl-hellomacro-for-pancakes/pancakes/src/main.rs}}
 ```
 -->
 
 ```rust,ignore
-use hello_macro::HelloMacro;
-
-struct Pancakes;
-
-impl HelloMacro for Pancakes {
-    fn hello_macro() {
-        println!("Hello, Macro ! Mon nom est Pancakes !");
-    }
-}
-
-fn main() {
-    Pancakes::hello_macro();
-}
+{{#rustdoc_include ../listings/ch19-advanced-features/no-listing-20-impl-hellomacro-for-pancakes/pancakes/src/main.rs}}
 ```
 
 <!--
@@ -660,7 +663,13 @@ une crate `foo`, une crate de macro procédurale personnalisée de dérivée doi
 s'appeler `foo_derive`. Créons une nouvelle crate `hello_macro_derive` au sein
 de notre projet `hello_macro` :
 
-```text
+<!--
+```console
+$ cargo new hello_macro_derive --lib
+```
+-->
+
+```console
 $ cargo new hello_macro_derive --lib
 ```
 
@@ -708,13 +717,14 @@ de `hello_macro_derive` :
 
 <span class="filename">Fichier : hello_macro_derive/Cargo.toml</span>
 
+<!--
 ```toml
-[lib]
-proc-macro = true
+{{#include ../listings-sources/ch19-advanced-features/listing-19-31/hello_macro/hello_macro_derive/Cargo.toml:7:12}}
+```
+-->
 
-[dependencies]
-syn = "0.14.4"
-quote = "0.6.3"
+```toml
+{{#include ../listings/ch19-advanced-features/listing-19-31/hello_macro/hello_macro_derive/Cargo.toml:7:12}}
 ```
 
 <!--
@@ -735,48 +745,13 @@ fonction `impl_hello_macro`.
 <span class="filename">Fichier : hello_macro_derive/src/lib.rs</span>
 
 <!--
-This usage of `extern crate` is required for the moment with 1.31.0, see:
-https://github.com/rust-lang/rust/issues/54418
-https://github.com/rust-lang/rust/pull/54658
-https://github.com/rust-lang/rust/issues/55599
--->
-
-<!--
-```rust,ignore
-extern crate proc_macro;
-
-use crate::proc_macro::TokenStream;
-use quote::quote;
-use syn;
-
-#[proc_macro_derive(HelloMacro)]
-pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
-    // Construct a representation of Rust code as a syntax tree
-    // that we can manipulate
-    let ast = syn::parse(input).unwrap();
-
-    // Build the trait implementation
-    impl_hello_macro(&ast)
-}
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/listing-19-31/hello_macro/hello_macro_derive/src/lib.rs}}
 ```
 -->
 
-```rust,ignore
-extern crate proc_macro;
-
-use crate::proc_macro::TokenStream;
-use quote::quote;
-use syn;
-
-#[proc_macro_derive(HelloMacro)]
-pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
-    // Construit une représentation du code Rust en arborescence
-    // syntaxique que nous pouvons manipuler
-    let ast = syn::parse(input).unwrap();
-
-    // Construit l'implémentation du trait
-    impl_hello_macro(&ast)
-}
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch19-advanced-features/listing-19-31/hello_macro/hello_macro_derive/src/lib.rs}}
 ```
 
 <!--
@@ -820,6 +795,11 @@ La crate `proc_macro` est fournie par Rust, donc nous n'avons pas besoin de
 l'ajouter aux dépendances dans *Cargo.toml*. La crate `proc_macro` fournit une
 API du compilateur qui nous permet de lire et manipuler le code Rust à partir de
 notre code.
+
+<!--
+[`syn`]: https://crates.io/crates/syn
+[`quote`]: https://crates.io/crates/quote
+-->
 
 [`syn`]: https://crates.io/crates/syn
 [`quote`]: https://crates.io/crates/quote
@@ -935,7 +915,11 @@ désigne le nom) `Pancakes`. Il y a d'autres champs sur cette structure
 décrivant toutes sortes de codes Rust ; regardez la
 [documentation de `syn` pour `DeriveInput`][syn-docs] pour en savoir plus.
 
-[syn-docs]: https://docs.rs/syn/0.14.4/syn/struct.DeriveInput.html
+<!--
+[syn-docs]: https://docs.rs/syn/1.0/syn/struct.DeriveInput.html
+-->
+
+[syn-docs]: https://docs.rs/syn/1.0/syn/struct.DeriveInput.html
 
 <!--
 Soon we’ll define the `impl_hello_macro` function, which is where we’ll build
@@ -991,32 +975,12 @@ trait `HelloMacro` sur le type annoté, comme l'encart 19-33.
 
 <!--
 ```rust,ignore
-fn impl_hello_macro(ast: &syn::DeriveInput) -> TokenStream {
-    let name = &ast.ident;
-    let gen = quote! {
-        impl HelloMacro for #name {
-            fn hello_macro() {
-                println!("Hello, Macro! My name is {}", stringify!(#name));
-            }
-        }
-    };
-    gen.into()
-}
+{{#rustdoc_include ../listings-sources/ch19-advanced-features/listing-19-33/hello_macro/hello_macro_derive/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore
-fn impl_hello_macro(ast: &syn::DeriveInput) -> TokenStream {
-    let nom = &ast.ident;
-    let generation = quote! {
-        impl HelloMacro for #nom {
-            fn hello_macro() {
-                println!("Hello, Macro ! Mon nom est {}", stringify!(#nom));
-            }
-        }
-    };
-    generation.into()
-}
+{{#rustdoc_include ../listings/ch19-advanced-features/listing-19-33/hello_macro/hello_macro_derive/src/lib.rs:here}}
 ```
 
 <!--
@@ -1072,6 +1036,10 @@ nous pouvons entrer `#nom`, et `quote!` va le remplacer avec la valeur dans la
 variable `nom`. Vous pouvez même procéder à quelques répétions de façon
 similaire au fonctionnement des macros classiques. Regardez dans
 [la documentation de `quote`][quote-docs] pour une présentation plus détaillée.
+
+<!--
+[quote-docs]: https://docs.rs/quote
+-->
 
 [quote-docs]: https://docs.rs/quote
 
@@ -1130,10 +1098,14 @@ besoin d'ajouter `hello_macro` et `hello_macro_derive` comme dépendances dans l
 elles sont des dépendances classiques ; sinon, vous pouvez les renseigner comme
 dépendance locale avec `path` comme ceci :
 
+<!--
 ```toml
-[dependencies]
-hello_macro = { path = "../hello_macro" }
-hello_macro_derive = { path = "../hello_macro/hello_macro_derive" }
+{{#include ../listings-sources/ch19-advanced-features/no-listing-21-pancakes/pancakes/Cargo.toml:7:9}}
+```
+-->
+
+```toml
+{{#include ../listings/ch19-advanced-features/no-listing-21-pancakes/pancakes/Cargo.toml:7:9}}
 ```
 
 <!--
@@ -1182,6 +1154,13 @@ comme les fonctions. Voici un exemple d'utilisation d'une macro qui ressemble à
 un attribut : imaginons que vous avez un attribut `chemin` qui est une
 annotation pour des fonctions lorsque vous utilisez un environnement de
 développement d'application web :
+
+<!--
+```rust,ignore
+#[route(GET, "/")]
+fn index() {
+```
+-->
 
 ```rust,ignore
 #[chemin(GET, "/")]
@@ -1268,8 +1247,14 @@ comme ceci :
 
 [decl]: #les-macros-déclaratives-avec-macro_rules-pour-la-métaprogrammation-générale
 
+<!--
 ```rust,ignore
 let sql = sql!(SELECT * FROM posts WHERE id=1);
+```
+-->
+
+```rust,ignore
+let sql = sql!(SELECT * FROM publications WHERE id=1);
 ```
 
 <!--
@@ -1282,6 +1267,13 @@ Cette macro devrait interpréter l'instruction SQL qu'on lui envoie et vérifier
 si elle est syntaxiquement correcte, ce qui est un procédé bien plus complexe
 que ce qu'une macro `macro_rules!` peut faire. La macro `sql!` sera définie
 comme ceci :
+
+<!--
+```rust,ignore
+#[proc_macro]
+pub fn sql(input: TokenStream) -> TokenStream {
+```
+-->
 
 ```rust,ignore
 #[proc_macro]
