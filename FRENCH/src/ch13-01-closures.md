@@ -80,7 +80,7 @@ qui lui a été donné :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-01/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-01/src/main.rs:here}}
 ```
 -->
 
@@ -145,7 +145,7 @@ fonction `main` que nous allons utiliser.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-02/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-02/src/main.rs:here}}
 ```
 -->
 
@@ -199,7 +199,7 @@ changements de code dans cet exemple sera appliqué à cette fonction :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-03/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-03/src/main.rs:here}}
 ```
 -->
 
@@ -307,7 +307,7 @@ Tout d'abord, nous allons essayer d'extraire l'appel en double à la fonction
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-04/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-04/src/main.rs:here}}
 ```
 -->
 
@@ -376,7 +376,7 @@ la fermeture que nous introduisons ici.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-05/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-05/src/main.rs:here}}
 ```
 -->
 
@@ -464,7 +464,7 @@ arguments que nous voulons utiliser pour cet appel, comme dans l'encart 13-6.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-06/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-06/src/main.rs:here}}
 ```
 -->
 
@@ -575,7 +575,7 @@ avons défini dans l'encart 13-5 ressemblerait à l'encart 13-7.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-07/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-07/src/main.rs:here}}
 ```
 -->
 
@@ -670,7 +670,7 @@ deuxième fois, nous obtiendrons une erreur :
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-08/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-08/src/main.rs:here}}
 ```
 -->
 
@@ -694,7 +694,7 @@ Le compilateur nous renvoie l'erreur suivante :
 
 <!--
 ```console
-{{#include ../listings/ch13-functional-features/listing-13-08/output.txt}}
+{{#include ../listings-sources/ch13-functional-features/listing-13-08/output.txt}}
 ```
 -->
 
@@ -816,7 +816,7 @@ fermeture et une valeur de résultat optionnelle :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-09/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-09/src/main.rs:here}}
 ```
 -->
 
@@ -892,7 +892,7 @@ l'encart 13-10 :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-10/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-10/src/main.rs:here}}
 ```
 -->
 
@@ -971,7 +971,7 @@ L'encart 13-11 montre comment utiliser cette structure `Cache` dans la fonction
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-11/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-11/src/main.rs:here}}
 ```
 -->
 
@@ -1050,7 +1050,7 @@ toujours la même valeur, indépendamment du paramètre `arg` de la méthode
 
 <!--
 ```rust,ignore,panics
-{{#rustdoc_include ../listings/ch13-functional-features/no-listing-01-failing-cacher-test/src/lib.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/no-listing-01-failing-cacher-test/src/lib.rs:here}}
 ```
 -->
 
@@ -1081,7 +1081,7 @@ l'encart 13-10, et le test échouera sur le `assert_eq!` avec ce message :
 
 <!--
 ```console
-{{#include ../listings/ch13-functional-features/no-listing-01-failing-cacher-test/output.txt}}
+{{#include ../listings-sources/ch13-functional-features/no-listing-01-failing-cacher-test/output.txt}}
 ```
 -->
 
@@ -1170,7 +1170,7 @@ fermeture :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-12/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-12/src/main.rs}}
 ```
 -->
 
@@ -1212,7 +1212,7 @@ avec l'exemple suivant, notre code ne se compilera pas :
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch13-functional-features/no-listing-02-functions-cant-capture/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/no-listing-02-functions-cant-capture/src/main.rs}}
 ```
 -->
 
@@ -1228,7 +1228,7 @@ Nous obtenons l'erreur suivante :
 
 <!--
 ```console
-{{#include ../listings/ch13-functional-features/no-listing-02-functions-cant-capture/output.txt}}
+{{#include ../listings-sources/ch13-functional-features/no-listing-02-functions-cant-capture/output.txt}}
 ```
 -->
 
@@ -1348,7 +1348,7 @@ plutôt que déplacés ; notez aussi que ce code ne compile pas encore.
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch13-functional-features/no-listing-03-move-closures/src/main.rs}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/no-listing-03-move-closures/src/main.rs}}
 ```
 -->
 
@@ -1364,7 +1364,7 @@ Nous obtenons l'erreur suivante :
 
 <!--
 ```console
-{{#include ../listings/ch13-functional-features/no-listing-03-move-closures/output.txt}}
+{{#include ../listings-sources/ch13-functional-features/no-listing-03-move-closures/output.txt}}
 ```
 -->
 
