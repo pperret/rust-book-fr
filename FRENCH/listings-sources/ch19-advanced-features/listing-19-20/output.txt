@@ -1,7 +1,7 @@
 $ cargo run
    Compiling traits-example v0.1.0 (file:///projects/traits-example)
 error[E0283]: type annotations needed
-  --> src/main.rs:20:43
+  -- > src/main.rs:20:43
    |
 2  |     fn baby_name() -> String;
    |     ------------------------- required by `Animal::baby_name`
