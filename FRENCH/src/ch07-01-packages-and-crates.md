@@ -9,7 +9,7 @@ The first parts of the module system we’ll cover are packages and crates. A
 crate is a binary or library. The *crate root* is a source file that the Rust
 compiler starts from and makes up the root module of your crate (we’ll explain
 modules in depth in the [“Defining Modules to Control Scope and
-Privacy”][modules]<!-- ignore -- >) section. A *package* is one or more crates
+Privacy”][modules]<!-- ignore -- > section). A *package* is one or more crates
 that provide a set of functionality. A package contains a *Cargo.toml* file
 that describes how to build those crates.
 -->
@@ -41,7 +41,7 @@ Découvrons ce qui se passe quand nous créons un paquet. D'abord, nous utilison
 la commande `cargo new` :
 
 <!--
-```text
+```console
 $ cargo new my-project
      Created binary (application) `my-project` package
 $ ls my-project
@@ -52,7 +52,7 @@ main.rs
 ```
 -->
 
-```text
+```console
 $ cargo new mon-projet
      Created binary (application) `mon-projet` package
 $ ls mon-projet
@@ -144,10 +144,10 @@ Let’s move on and talk about the module system!
 
 Continuons d'avancer et parlons maintenant du système de modules !
 
-[modules]: ch07-02-defining-modules-to-control-scope-and-privacy.html
-
 <!--
+[modules]: ch07-02-defining-modules-to-control-scope-and-privacy.html
 [rand]: ch02-00-guessing-game-tutorial.html#generating-a-random-number
 -->
 
+[modules]: ch07-02-defining-modules-to-control-scope-and-privacy.html
 [rand]: ch02-00-guessing-game-tutorial.html#générer-le-nombre-secret

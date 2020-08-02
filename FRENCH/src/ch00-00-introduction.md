@@ -14,6 +14,11 @@
 > ebook chez [No Starch Press][nsp] à cette adresse :
 > [The Rust Programming Language][nsprust]
 
+<!--
+[nsprust]: https://nostarch.com/rust
+[nsp]: https://nostarch.com/
+-->
+
 [nsprust]: https://nostarch.com/rust
 [nsp]: https://nostarch.com/
 
@@ -421,6 +426,10 @@ Il n'y a pas de mauvaise manière de lire ce livre : si vous voulez sauter des
 Vous devrez alors peut-être revenir sur les chapitres précédents si vous
 éprouvez des difficultés. Mais faites comme bon vous semble.
 
+<!--
+<span id="ferris"></span>
+-->
+
 <span id="ferris"></span>
 
 <!--
@@ -484,6 +493,10 @@ Les fichiers du code source qui a généré ce livre en anglais sont disponibles
 sur [GitHub][book].
 
 La version française est aussi disponible sur [GitHub][book-fr].
+
+<!--
+[book]: https://github.com/rust-lang/book/tree/master/src
+-->
 
 [book]: https://github.com/rust-lang/book/tree/master/src
 [book-fr]: https://github.com/Jimskapt/rust-book-fr

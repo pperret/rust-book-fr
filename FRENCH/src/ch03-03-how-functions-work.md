@@ -35,28 +35,12 @@ qui est un exemple de définition de fonction :
 
 <!--
 ```rust
-fn main() {
-    println!("Hello, world!");
-
-    another_function();
-}
-
-fn another_function() {
-    println!("Another function.");
-}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-16-functions/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    println!("Hello, world!");
-
-    une_autre_fonction();
-}
-
-fn une_autre_fonction() {
-    println!("Une autre fonction.");
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-16-functions/src/main.rs}}
 ```
 
 <!--
@@ -97,23 +81,13 @@ apprendre plus sur les fonctions. Ajoutez l'exemple `une_autre_fonction` dans le
 *src/main.rs* et exécutez-le. Vous devriez avoir ceci :
 
 <!--
-```text
-$ cargo run
-   Compiling functions v0.1.0 (file:///projects/functions)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.28 secs
-     Running `target/debug/functions`
-Hello, world!
-Another function.
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-16-functions/output.txt}}
 ```
 -->
 
-```text
-$ cargo run
-   Compiling functions v0.1.0 (file:///projects/functions)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.28 secs
-     Running `target/debug/functions`
-Hello, world!
-Une autre fonction.
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-16-functions/output.txt}}
 ```
 
 <!--
@@ -167,24 +141,12 @@ avec Rust :
 
 <!--
 ```rust
-fn main() {
-    another_function(5);
-}
-
-fn another_function(x: i32) {
-    println!("The value of x is: {}", x);
-}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-17-functions-with-parameters/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    une_autre_fonction(5);
-}
-
-fn une_autre_fonction(x: i32) {
-    println!("La valeur de x est : {}", x);
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-17-functions-with-parameters/src/main.rs}}
 ```
 
 <!--
@@ -194,21 +156,13 @@ Try running this program; you should get the following output:
 En exécutant ce programme, vous devriez obtenir ceci :
 
 <!--
-```text
-$ cargo run
-   Compiling functions v0.1.0 (file:///projects/functions)
-    Finished dev [unoptimized + debuginfo] target(s) in 1.21 secs
-     Running `target/debug/functions`
-The value of x is: 5
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-17-functions-with-parameters/output.txt}}
 ```
 -->
 
-```text
-$ cargo run
-   Compiling functions v0.1.0 (file:///projects/functions)
-    Finished dev [unoptimized + debuginfo] target(s) in 1.21 secs
-     Running `target/debug/functions`
-La valeur de x est : 5
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-17-functions-with-parameters/output.txt}}
 ```
 
 <!--
@@ -252,26 +206,12 @@ paramètres avec des virgules, comme ceci :
 
 <!--
 ```rust
-fn main() {
-    another_function(5, 6);
-}
-
-fn another_function(x: i32, y: i32) {
-    println!("The value of x is: {}", x);
-    println!("The value of y is: {}", y);
-}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-18-functions-with-multiple-parameters/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    une_autre_fonction(5, 6);
-}
-
-fn une_autre_fonction(x: i32, y: i32) {
-    println!("La valeur de x est : {}", x);
-    println!("La valeur de y est : {}", y);
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-18-functions-with-multiple-parameters/src/main.rs}}
 ```
 
 <!--
@@ -297,23 +237,13 @@ votre fichier *src/main.rs* de votre projet *functions* par l'exemple précéden
 et lancez-le en utilisant `cargo run` :
 
 <!--
-```text
-$ cargo run
-   Compiling functions v0.1.0 (file:///projects/functions)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.31 secs
-     Running `target/debug/functions`
-The value of x is: 5
-The value of y is: 6
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-18-functions-with-multiple-parameters/output.txt}}
 ```
 -->
 
-```text
-$ cargo run
-   Compiling functions v0.1.0 (file:///projects/functions)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.31 secs
-     Running `target/debug/functions`
-La valeur de x est : 5
-La valeur de y est : 6
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-18-functions-with-multiple-parameters/output.txt}}
 ```
 
 <!--
@@ -373,10 +303,14 @@ une instruction. Dans l'encart 3-1, `let y = 6;` est une instruction.
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
 ```rust
-fn main() {
-    let y = 6;
-}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/listing-03-01/src/main.rs}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/listing-03-01/src/main.rs}}
 ```
 
 <!-- markdownlint-disable -->
@@ -411,10 +345,14 @@ essaye de le faire, car vous obtiendrez une erreur :
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
 ```rust,ignore,does_not_compile
-fn main() {
-    let x = (let y = 6);
-}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-19-statements-vs-expressions/src/main.rs}}
+```
+-->
+
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-19-statements-vs-expressions/src/main.rs}}
 ```
 
 <!--
@@ -424,16 +362,14 @@ When you run this program, the error you’ll get looks like this:
 Quand vous exécutez ce programme, l'erreur que vous obtenez devrait ressembler à
 ceci :
 
-```text
-$ cargo run
-   Compiling functions v0.1.0 (file:///projects/functions)
-error: expected expression, found statement (`let`)
- -- > src/main.rs:2:14
-  |
-2 |     let x = (let y = 6);
-  |              ^^^
-  |
-  = note: variable declaration using `let` is a statement
+<!--
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-19-statements-vs-expressions/output.txt}}
+```
+-->
+
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-19-statements-vs-expressions/output.txt}}
 ```
 
 <!--
@@ -477,30 +413,12 @@ est une expression, par exemple :
 
 <!--
 ```rust
-fn main() {
-    let x = 5;
-
-    let y = {
-        let x = 3;
-        x + 1
-    };
-
-    println!("The value of y is: {}", y);
-}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-20-blocks-are-expressions/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let x = 5;
-
-    let y = {
-        let x = 3;
-        x + 1
-    };
-
-    println!("La valeur de y est : {}", y);
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-20-blocks-are-expressions/src/main.rs}}
 ```
 
 <!--
@@ -508,6 +426,15 @@ This expression:
 -->
 
 L'expression suivante…
+
+<!--
+```rust,ignore
+{
+    let x = 3;
+    x + 1
+}
+```
+-->
 
 ```rust,ignore
 {
@@ -567,28 +494,12 @@ Voici un exemple d'une fonction qui retourne une valeur :
 
 <!--
 ```rust
-fn five() -> i32 {
-    5
-}
-
-fn main() {
-    let x = five();
-
-    println!("The value of x is: {}", x);
-}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-21-function-return-values/src/main.rs}}
 ```
 -->
 
 ```rust
-fn cinq() -> i32 {
-    5
-}
-
-fn main() {
-    let x = cinq();
-
-    println!("La valeur de x est : {}", x);
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-21-function-return-values/src/main.rs}}
 ```
 
 <!--
@@ -605,21 +516,13 @@ parfaitement valide avec Rust. Remarquez que le type de retour de la fonction a
 devrait ressembler à ceci :
 
 <!--
-```text
-$ cargo run
-   Compiling functions v0.1.0 (file:///projects/functions)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.30 secs
-     Running `target/debug/functions`
-The value of x is: 5
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-21-function-return-values/output.txt}}
 ```
 -->
 
-```text
-$ cargo run
-   Compiling functions v0.1.0 (file:///projects/functions)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.30 secs
-     Running `target/debug/functions`
-La valeur de x est : 5
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-21-function-return-values/output.txt}}
 ```
 
 <!--
@@ -635,6 +538,12 @@ type de retour de `i32`. Regardons cela plus en détail. Il y a deux éléments
 importants : premièrement, la ligne `let x = cinq();` dit que nous utilisons
 la valeur de retour de la fonction pour initialiser la variable. Comme la
 fonction `cinq` retourne un `5`, cette ligne revient à faire ceci :
+
+<!--
+```rust
+let x = 5;
+```
+-->
 
 ```rust
 let x = 5;
@@ -664,28 +573,12 @@ Regardons un autre exemple :
 
 <!--
 ```rust
-fn main() {
-    let x = plus_one(5);
-
-    println!("The value of x is: {}", x);
-}
-
-fn plus_one(x: i32) -> i32 {
-    x + 1
-}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-22-function-parameter-and-return/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let x = plus_un(5);
-
-    println!("La valeur de x est : {}", x);
-}
-
-fn plus_un(x: i32) -> i32 {
-    x + 1
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-22-function-parameter-and-return/src/main.rs}}
 ```
 
 <!--
@@ -706,28 +599,12 @@ d'une expression à une instruction, nous obtenons une erreur.
 
 <!--
 ```rust,ignore,does_not_compile
-fn main() {
-    let x = plus_one(5);
-
-    println!("The value of x is: {}", x);
-}
-
-fn plus_one(x: i32) -> i32 {
-    x + 1;
-}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-23-statements-dont-return-values/src/main.rs}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-fn main() {
-    let x = plus_un(5);
-
-    println!("La valeur de x est : {}", x);
-}
-
-fn plus_un(x: i32) -> i32 {
-    x + 1;
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-23-statements-dont-return-values/src/main.rs}}
 ```
 
 <!--
@@ -737,35 +614,13 @@ Compiling this code produces an error, as follows:
 Compiler ce code va produire une erreur, comme ci-dessous :
 
 <!--
-```text
-error[E0308]: mismatched types
- -- > src/main.rs:7:28
-  |
-7 |   fn plus_one(x: i32) -> i32 {
-  |  ____________________________^
-8 | |     x + 1;
-  | |          - help: consider removing this semicolon
-9 | | }
-  | |_^ expected i32, found ()
-  |
-  = note: expected type `i32`
-             found type `()`
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-23-statements-dont-return-values/output.txt}}
 ```
 -->
 
-```text
-error[E0308]: mismatched types
- -- > src/main.rs:7:28
-  |
-7 |   fn plus_un(x: i32) -> i32 {
-  |  ___________________________^
-8 | |     x + 1;
-  | |          - help: consider removing this semicolon
-9 | | }
-  | |_^ expected i32, found ()
-  |
-  = note: expected type `i32`
-             found type `()`
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-23-statements-dont-return-values/output.txt}}
 ```
 
 <!--
