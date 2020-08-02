@@ -13,6 +13,10 @@ Voici des ressources dans d'autres langages qu'en Français. Certaines sont
 toujours en cours de construction ; consultez [le drapeau Translation][label]
 pour les aider, ou nous informer de la création d'une nouvelle traduction !
 
+<!--
+[label]: https://github.com/rust-lang/book/issues?q=is%3Aopen+is%3Aissue+label%3ATranslations
+-->
+
 [label]: https://github.com/rust-lang/book/issues?q=is%3Aopen+is%3Aissue+label%3ATranslations
 
 <!--
@@ -24,8 +28,8 @@ pour les aider, ou nous informer de la création d'une nouvelle traduction !
 - [Italiano](https://github.com/AgeOfWar/rust-book-it)
 - [Русский](https://github.com/ruRust/rust_book_2ed)
 - [한국어](https://github.com/rinthel/rust-lang-book-ko)
-- [日本語](https://github.com/hazama-yuinyan/book)
-- [Français](https://github.com/quadrifoglio/rust-book-fr)
+- [日本語](https://github.com/rust-lang-ja/book-ja)
+- [Français](https://github.com/Jimskapt/rust-book-fr)
 - [Polski](https://github.com/paytchoo/book-pl)
 - [עברית](https://github.com/idanmel/rust-book-heb)
 - [Cebuano](https://github.com/agentzero1/book)
@@ -33,6 +37,8 @@ pour les aider, ou nous informer de la création d'une nouvelle traduction !
 - [Esperanto](https://github.com/psychoslave/Rust-libro)
 - [ελληνική](https://github.com/TChatzigiannakis/rust-book-greek)
 - [Svenska](https://github.com/sebras/book)
+- [Farsi](https://github.com/pomokhtari/rust-book-fa)
+- [Deutsch](https://github.com/rust-lang-de/rustbook-de)
 -->
 
 - [English](https://github.com/rust-lang/book)
@@ -44,7 +50,7 @@ pour les aider, ou nous informer de la création d'une nouvelle traduction !
 - [Italiano](https://github.com/AgeOfWar/rust-book-it)
 - [Русский](https://github.com/ruRust/rust_book_2ed)
 - [한국어](https://github.com/rinthel/rust-lang-book-ko)
-- [日本語](https://github.com/hazama-yuinyan/book)
+- [日本語](https://github.com/rust-lang-ja/book-ja)
 - [Polski](https://github.com/paytchoo/book-pl)
 - [עברית](https://github.com/idanmel/rust-book-heb)
 - [Cebuano](https://github.com/agentzero1/book)
@@ -52,3 +58,5 @@ pour les aider, ou nous informer de la création d'une nouvelle traduction !
 - [Esperanto](https://github.com/psychoslave/Rust-libro)
 - [ελληνική](https://github.com/TChatzigiannakis/rust-book-greek)
 - [Svenska](https://github.com/sebras/book)
+- [Farsi](https://github.com/pomokhtari/rust-book-fa)
+- [Deutsch](https://github.com/rust-lang-de/rustbook-de)
