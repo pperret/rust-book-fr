@@ -1,7 +1,7 @@
 $ cargo run
    Compiling collections v0.1.0 (file:///projects/collections)
 error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable
- --> src/main.rs:6:5
+ -- > src/main.rs:6:5
   |
 4 |     let first = &v[0];
   |                  - immutable borrow occurs here

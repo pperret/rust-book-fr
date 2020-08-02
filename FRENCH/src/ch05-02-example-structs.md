@@ -59,7 +59,7 @@ Maintenant, lancez ce programme avec `cargo run` :
 
 <!--
 ```console
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-08/output.txt}}
+{{#include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-08/output.txt}}
 ```
 -->
 
@@ -314,7 +314,7 @@ Lorsqu'on compile ce code, on obtient ce message d'erreur qui nous informe que
 
 <!--
 ```text
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-11/output.txt:3}}
+{{#include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-11/output.txt:3}}
 ```
 -->
 
@@ -355,7 +355,7 @@ Si nous continuons de lire les erreurs, nous trouvons cette remarque utile :
 
 <!--
 ```text
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-11/output.txt:9:10}}
+{{#include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-11/output.txt:9:10}}
 ```
 -->
 
@@ -390,7 +390,7 @@ informant cette fois-ci que `Rectangle` n'implémente pas `std::fmt::Debug` :
 
 <!--
 ```text
-{{#include ../listings/ch05-using-structs-to-structure-related-data/output-only-01-debug/output.txt:3}}
+{{#include ../listings-sources/ch05-using-structs-to-structure-related-data/output-only-01-debug/output.txt:3}}
 ```
 -->
 
@@ -406,7 +406,7 @@ Mais une nouvelle fois, le compilateur nous fait une remarque utile :
 
 <!--
 ```text
-{{#include ../listings/ch05-using-structs-to-structure-related-data/output-only-01-debug/output.txt:9:10}}
+{{#include ../listings-sources/ch05-using-structs-to-structure-related-data/output-only-01-debug/output.txt:9:10}}
 ```
 -->
 
@@ -464,7 +464,7 @@ texte s'affiche à l'écran :
 
 <!--
 ```console
-{{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-12/output.txt}}
+{{#include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-12/output.txt}}
 ```
 -->
 
@@ -489,7 +489,7 @@ exemple, l'affichage donnera plutôt ceci :
 
 <!--
 ```console
-{{#include ../listings/ch05-using-structs-to-structure-related-data/output-only-02-pretty-debug/output.txt}}
+{{#include ../listings-sources/ch05-using-structs-to-structure-related-data/output-only-02-pretty-debug/output.txt}}
 ```
 -->
 

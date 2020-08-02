@@ -1,7 +1,7 @@
 $ cargo run
    Compiling variables v0.1.0 (file:///projects/variables)
 error[E0384]: cannot assign twice to immutable variable `x`
- --> src/main.rs:4:5
+ -- > src/main.rs:4:5
   |
 2 |     let x = 5;
   |         -

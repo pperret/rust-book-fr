@@ -597,7 +597,7 @@ Ce code va produire l'erreur suivante :
 
 <!--
 ```console
-{{#include ../listings/ch08-common-collections/listing-08-19/output.txt}}
+{{#include ../listings-sources/ch08-common-collections/listing-08-19/output.txt}}
 ```
 -->
 
@@ -886,7 +886,7 @@ utiliserions un indice invalide pour accéder à un élément d'un vecteur :
 
 <!--
 ```console
-{{#include ../listings/ch08-common-collections/output-only-01-not-char-boundary/output.txt}}
+{{#include ../listings-sources/ch08-common-collections/output-only-01-not-char-boundary/output.txt}}
 ```
 -->
 

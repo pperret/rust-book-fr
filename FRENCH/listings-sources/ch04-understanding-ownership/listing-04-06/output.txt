@@ -1,7 +1,7 @@
 $ cargo run
    Compiling ownership v0.1.0 (file:///projects/ownership)
 error[E0596]: cannot borrow `*some_string` as mutable, as it is behind a `&` reference
- --> src/main.rs:8:5
+ -- > src/main.rs:8:5
   |
 7 | fn change(some_string: &String) {
   |                        ------- help: consider changing this to be a mutable reference: `&mut std::string::String`

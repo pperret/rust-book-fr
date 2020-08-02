@@ -87,7 +87,7 @@ Regardons le fichier *Cargo.toml* qui a été généré :
 
 <!--
 ```toml
-{{#include ../listings/ch02-guessing-game-tutorial/no-listing-01-cargo-new/Cargo.toml}}
+{{#include ../listings-sources/ch02-guessing-game-tutorial/no-listing-01-cargo-new/Cargo.toml}}
 ```
 -->
 
@@ -137,7 +137,7 @@ son exécution en une seule commande avec `cargo run` :
 
 <!--
 ```console
-{{#include ../listings/ch02-guessing-game-tutorial/no-listing-01-cargo-new/output.txt}}
+{{#include ../listings-sources/ch02-guessing-game-tutorial/no-listing-01-cargo-new/output.txt}}
 ```
 -->
 
@@ -684,7 +684,7 @@ avertissement :
 
 <!--
 ```console
-{{#include ../listings/ch02-guessing-game-tutorial/no-listing-02-without-expect/output.txt}}
+{{#include ../listings-sources/ch02-guessing-game-tutorial/no-listing-02-without-expect/output.txt}}
 ```
 -->
 
@@ -906,7 +906,7 @@ l'en-tête de section `[dependencies]` que Cargo a créé pour vous :
 
 <!--
 ```toml
-{{#include ../listings/ch02-guessing-game-tutorial/listing-02-02/Cargo.toml:9:}}
+{{#include ../listings-sources/ch02-guessing-game-tutorial/listing-02-02/Cargo.toml:9:}}
 ```
 -->
 
@@ -1004,12 +1004,13 @@ avoir ajouté la *crate* `rand` comme dépendance</span>
 
 <!--
 You may see different version numbers (but they will all be compatible with
-the code, thanks to SemVer!), and the lines may be in a different order.
+the code, thanks to SemVer!), different lines (depending on the operating system), and the lines may be in a different order.
 -->
 
 Il est possible que vous ne voyiez pas exactement les mêmes numéros de version,
 (mais ils seront compatibles avec votre code, grâce au *versionnage
-sémantique* !), et les lignes ne seront pas forcément affichées dans le même
+sémantique* !), différentes lignes (en fonction de votre système
+d'exploitation), et les lignes ne seront pas forcément affichées dans le même
 ordre.
 
 <!--
@@ -1581,7 +1582,7 @@ faire :
 
 <!--
 ```console
-{{#include ../listings/ch02-guessing-game-tutorial/listing-02-04/output.txt}}
+{{#include ../listings-sources/ch02-guessing-game-tutorial/listing-02-04/output.txt}}
 ```
 -->
 

@@ -1,7 +1,7 @@
 $ cargo run
    Compiling ownership v0.1.0 (file:///projects/ownership)
 error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immutable
-  --> src/main.rs:18:5
+  -- > src/main.rs:18:5
    |
 16 |     let word = first_word(&s);
    |                           -- immutable borrow occurs here

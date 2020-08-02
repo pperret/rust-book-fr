@@ -174,7 +174,7 @@ l'encart 7-4.
 
 <!--
 ```console
-{{#include ../listings/ch07-managing-growing-projects/listing-07-03/output.txt}}
+{{#include ../listings-sources/ch07-managing-growing-projects/listing-07-03/output.txt}}
 ```
 -->
 
@@ -305,7 +305,7 @@ l'encart 7-6.
 
 <!--
 ```console
-{{#include ../listings/ch07-managing-growing-projects/listing-07-05/output.txt}}
+{{#include ../listings-sources/ch07-managing-growing-projects/listing-07-05/output.txt}}
 ```
 -->
 

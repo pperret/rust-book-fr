@@ -57,7 +57,7 @@ déterminer quel type nous souhaitons utiliser :
 
 <!--
 ```console
-{{#include ../listings/ch03-common-programming-concepts/output-only-01-no-type-annotations/output.txt}}
+{{#include ../listings-sources/ch03-common-programming-concepts/output-only-01-no-type-annotations/output.txt}}
 ```
 -->
 
@@ -145,7 +145,7 @@ valeur entière.
 <!--
 Each variant can be either signed or unsigned and has an explicit size.
 *Signed* and *unsigned* refer to whether it’s possible for the number to be
-negative or positive—in other words, whether the number needs to have a sign
+negative—in other words, whether the number needs to have a sign
 with it (signed) or whether it will only ever be positive and can therefore be
 represented without a sign (unsigned). It’s like writing numbers on paper: when
 the sign matters, a number is shown with a plus sign or a minus sign; however,
@@ -156,13 +156,13 @@ Signed numbers are stored using [two’s complement](https://en.wikipedia.org/wi
 
 Chaque variante peut-être signée ou non signée et possède une taille explicite.
 *Signé* et *non signé* veut dire respectivement que le nombre peut prendre ou
-non des valeurs négatives ou positives — en d'autres termes, si l'on peut lui
-attribuer un signe (signé) ou s'il sera toujours positif et que l'on peut donc
-le représenter sans signe (non signé). C'est comme écrire des nombres sur du
-papier : quand le signe est important, le nombre est écrit avec un signe plus
-ou un signe moins ; en revanche, quand le nombre est forcément positif, on peut
-l'écrire sans son signe. Les nombres signés sont stockés en utilisant le
-[complément à deux](https://fr.wikipedia.org/wiki/Compl%C3%A9ment_%C3%A0_deux).
+non des valeurs négatives — en d'autres termes, si l'on peut lui attribuer un
+signe (signé) ou s'il sera toujours positif et que l'on peut donc le représenter
+sans signe (non signé). C'est comme écrire des nombres sur du papier : quand le
+signe est important, le nombre est écrit avec un signe plus ou un signe moins ;
+en revanche, quand le nombre est forcément positif, on peut l'écrire sans son
+signe. Les nombres signés sont stockés en utilisant le [complément à
+deux](https://fr.wikipedia.org/wiki/Compl%C3%A9ment_%C3%A0_deux).
 
 <!--
 Each signed variant can store numbers from -(2<sup>n - 1</sup>) to 2<sup>n -
@@ -851,7 +851,7 @@ Exécuter ce code en utilisant `cargo run` va donner le résultat suivant :
 
 <!--
 ```console
-{{#include ../listings/ch03-common-programming-concepts/no-listing-15-invalid-array-access/output.txt}}
+{{#include ../listings-sources/ch03-common-programming-concepts/no-listing-15-invalid-array-access/output.txt}}
 ```
 -->
 

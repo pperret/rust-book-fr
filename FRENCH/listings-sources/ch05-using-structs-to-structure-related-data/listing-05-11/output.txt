@@ -1,7 +1,7 @@
 $ cargo run
    Compiling structs v0.1.0 (file:///projects/structs)
 error[E0277]: `Rectangle` doesn't implement `std::fmt::Display`
-  --> src/main.rs:12:29
+  -- > src/main.rs:12:29
    |
 12 |     println!("rect1 is {}", rect1);
    |                             ^^^^^ `Rectangle` cannot be formatted with the default formatter
