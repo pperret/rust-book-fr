@@ -79,7 +79,7 @@ Les mots-clés suivants apportent actuellement les fonctionnalités décrites.
 * `pub` - denote public visibility in struct fields, `impl` blocks, or modules
 * `ref` - bind by reference
 * `return` - return from function
-* `Self` - a type alias for the type implementing a trait
+* `Self` - a type alias for the type we are defining or implementing
 * `self` - method subject or current module
 * `static` - global variable or lifetime lasting the entire program execution
 * `struct` - define a structure
@@ -87,6 +87,7 @@ Les mots-clés suivants apportent actuellement les fonctionnalités décrites.
 * `trait` - define a trait
 * `true` - Boolean true literal
 * `type` - define a type alias or associated type
+* `union` - define a [union] and is only a keyword when used in a union declaration
 * `unsafe` - denote unsafe code, functions, traits, or implementations
 * `use` - bring symbols into scope
 * `where` - denote clauses that constrain a type
@@ -128,7 +129,7 @@ Les mots-clés suivants apportent actuellement les fonctionnalités décrites.
   blocs `impl`, ou des modules
 * `ref` - lie une valeur avec une référence
 * `return` - retourne quelque chose, dans une fonction
-* `Self` - un alias de type pour le type qui implémente un trait
+* `Self` - un alias de type pour le type que nous définissons ou implementons
 * `self` - désigne le sujet d'une méthode, ou du module courant
 * `static` - une variable globale ou une durée de vie qui dure tout le long de
   l'exécution du programme
@@ -137,11 +138,19 @@ Les mots-clés suivants apportent actuellement les fonctionnalités décrites.
 * `trait` - définit un trait
 * `true` - le litéral qui vaut "vrai" pour un booléen
 * `type` - définit un alias de type ou un type associé
+* `union` - définit un [union] et n'est qu'un mot-clé lorsqu'il est utilisé dans
+  la décalation d'un union
 * `unsafe` - autorise du code, des fonctions, des traits ou des implémentations
   non sécurisées
 * `use` - importe des éléments dans la portée
 * `where` - indique des conditions pour contraindre un type
 * `while` - crée une boucle en fonction des résultats d'une expression
+
+<!--
+[union]: ../reference/items/unions.html
+-->
+
+[union]: ../reference/items/unions.html
 
 <!--
 ### Keywords Reserved for Future Use
@@ -322,5 +331,9 @@ l'édition 2015 et qui avait une fonction `try`, vous allez avoir besoin
 d'utiliser la syntaxe d'identificateur brut, `r#try` dans ce cas, pour faire
 appel à cette fonction à partir de code écrit avec l'édition 2018. Voir
 [l'annexe E][appendix-e]<!-- ignore --> pour en savoir plus les éditions.
+
+<!--
+[appendix-e]: appendix-05-editions.html
+-->
 
 [appendix-e]: appendix-05-editions.html
