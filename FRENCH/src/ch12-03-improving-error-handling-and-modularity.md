@@ -204,7 +204,7 @@ définir dans *src/main.rs* pour le moment.
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-05/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-05/src/main.rs:here}}
 ```
 -->
 
@@ -320,7 +320,7 @@ L'encart 12-6 montre les améliorations apportées à la fonction
 
 <!--
 ```rust,should_panic
-{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-06/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-06/src/main.rs:here}}
 ```
 -->
 
@@ -486,7 +486,7 @@ que nous devons faire pour cela.
 
 <!--
 ```rust,should_panic
-{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-07/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-07/src/main.rs:here}}
 ```
 -->
 
@@ -536,7 +536,7 @@ cela donnera quelque chose comme ceci :
 
 <!--
 ```console
-{{#include ../listings/ch12-an-io-project/listing-12-07/output.txt}}
+{{#include ../listings-sources/ch12-an-io-project/listing-12-07/output.txt}}
 ```
 -->
 
@@ -581,7 +581,7 @@ afficher un meilleur message d'erreur que le message `index out of bounds`.
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-08/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-08/src/main.rs:here}}
 ```
 -->
 
@@ -636,7 +636,7 @@ aucun argument à nouveau pour voir à quoi ressemble désormais l'erreur :
 
 <!--
 ```console
-{{#include ../listings/ch12-an-io-project/listing-12-08/output.txt}}
+{{#include ../listings-sources/ch12-an-io-project/listing-12-08/output.txt}}
 ```
 -->
 
@@ -709,7 +709,7 @@ pas aussi le `main`, ce que nous allons faire dans le prochain encart.
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-09/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-09/src/main.rs:here}}
 ```
 -->
 
@@ -795,7 +795,7 @@ terminé dans un état d'erreur.
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-10/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-10/src/main.rs:here}}
 ```
 -->
 
@@ -865,7 +865,7 @@ le texte en plus. Essayons cela :
 
 <!--
 ```console
-{{#include ../listings/ch12-an-io-project/listing-12-10/output.txt}}
+{{#include ../listings-sources/ch12-an-io-project/listing-12-10/output.txt}}
 ```
 -->
 
@@ -923,7 +923,7 @@ continuons à définir la fonction dans *src/main.rs*.
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-11/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-11/src/main.rs:here}}
 ```
 -->
 
@@ -982,7 +982,7 @@ nous devons appliquer à la signature et au corps du `run`.
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-12/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-12/src/main.rs:here}}
 ```
 -->
 
@@ -1069,7 +1069,7 @@ avertissement :
 
 <!--
 ```console
-{{#include ../listings/ch12-an-io-project/listing-12-12/output.txt}}
+{{#include ../listings-sources/ch12-an-io-project/listing-12-12/output.txt}}
 ```
 -->
 
@@ -1113,7 +1113,7 @@ similaire à celle que nous avons utilisé avec `Config::new` dans l'encart
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch12-an-io-project/no-listing-01-handling-errors-in-main/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch12-an-io-project/no-listing-01-handling-errors-in-main/src/main.rs:here}}
 ```
 -->
 
@@ -1203,7 +1203,7 @@ dans l'encart 12-14.
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-13/src/lib.rs:here}}
+{{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-13/src/lib.rs:here}}
 ```
 -->
 
@@ -1246,7 +1246,7 @@ l'encart 12-14.
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-14/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-14/src/main.rs:here}}
 ```
 -->
 
