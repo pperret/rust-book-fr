@@ -1,7 +1,7 @@
 $ cargo run
    Compiling chapter10 v0.1.0 (file:///projects/chapter10)
 error[E0597]: `string2` does not live long enough
- --> src/main.rs:6:44
+ -- > src/main.rs:6:44
   |
 6 |         result = longest(string1.as_str(), string2.as_str());
   |                                            ^^^^^^^ borrowed value does not live long enough
