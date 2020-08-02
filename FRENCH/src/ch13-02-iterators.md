@@ -33,7 +33,7 @@ sur `Vec<T>`. Ce code en lui-même ne fait rien d'utile.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-13/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-13/src/main.rs:here}}
 ```
 -->
 
@@ -74,7 +74,7 @@ est utilisé à chaque itération de la boucle, qui affiche chaque valeur.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-14/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-14/src/main.rs:here}}
 ```
 -->
 
@@ -200,7 +200,7 @@ l'itérateur créé à partir du vecteur.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-15/src/lib.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-15/src/lib.rs:here}}
 ```
 -->
 
@@ -297,7 +297,7 @@ illustrant une utilisation de la méthode `sum` :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-16/src/lib.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-16/src/lib.rs:here}}
 ```
 -->
 
@@ -364,7 +364,7 @@ déclenche un avertissement :
 
 <!--
 ```rust,not_desired_behavior
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-17/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-17/src/main.rs:here}}
 ```
 -->
 
@@ -388,7 +388,7 @@ Voici l'avertissement que nous obtenons :
 
 <!--
 ```console
-{{#include ../listings/ch13-functional-features/listing-13-17/output.txt}}
+{{#include ../listings-sources/ch13-functional-features/listing-13-17/output.txt}}
 ```
 -->
 
@@ -436,7 +436,7 @@ finira par contenir chaque élément du vecteur original incrémenté de 1.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-18/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-18/src/main.rs:here}}
 ```
 -->
 
@@ -509,7 +509,7 @@ chaussures avec la pointure demandée.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-19/src/lib.rs}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-19/src/lib.rs}}
 ```
 -->
 
@@ -623,7 +623,7 @@ associée `new` pour créer des instances de `Compteur` :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-20/src/lib.rs}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-20/src/lib.rs}}
 ```
 -->
 
@@ -674,7 +674,7 @@ qu'il se passe quand cet itérateur est utilisé, comme dans l'encart 13-21 :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-21/src/lib.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-21/src/lib.rs:here}}
 ```
 -->
 
@@ -742,7 +742,7 @@ partir d'un vecteur dans l'encart 13-15.
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-22/src/lib.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-22/src/lib.rs:here}}
 ```
 -->
 
@@ -809,7 +809,7 @@ pourrions le faire, comme le montre le test dans l'encart 13-23 :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch13-functional-features/listing-13-23/src/lib.rs:here}}
+{{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-23/src/lib.rs:here}}
 ```
 -->
 
