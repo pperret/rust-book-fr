@@ -1,7 +1,7 @@
 $ cargo run
    Compiling chapter10 v0.1.0 (file:///projects/chapter10)
 error[E0308]: mismatched types
- --> src/main.rs:7:38
+ -- > src/main.rs:7:38
   |
 7 |     let wont_work = Point { x: 5, y: 4.0 };
   |                                      ^^^ expected integer, found floating-point number
