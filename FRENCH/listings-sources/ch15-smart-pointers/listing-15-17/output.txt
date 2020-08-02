@@ -1,7 +1,7 @@
 $ cargo run
    Compiling cons-list v0.1.0 (file:///projects/cons-list)
 error[E0382]: use of moved value: `a`
-  --> src/main.rs:11:30
+  -- > src/main.rs:11:30
    |
 9  |     let a = Cons(5, Box::new(Cons(10, Box::new(Nil))));
    |         - move occurs because `a` has type `List`, which does not implement the `Copy` trait
