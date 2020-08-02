@@ -806,7 +806,7 @@ référence qui n'est plus en vigueur :
 
 <!--
 ```console
-{{#include ../listings/ch04-understanding-ownership/no-listing-04-cant-use-after-move/output.txt}}
+{{#include ../listings-sources/ch04-understanding-ownership/no-listing-04-cant-use-after-move/output.txt}}
 ```
 -->
 

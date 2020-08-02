@@ -82,7 +82,7 @@ apprendre plus sur les fonctions. Ajoutez l'exemple `une_autre_fonction` dans le
 
 <!--
 ```console
-{{#include ../listings/ch03-common-programming-concepts/no-listing-16-functions/output.txt}}
+{{#include ../listings-sources/ch03-common-programming-concepts/no-listing-16-functions/output.txt}}
 ```
 -->
 
@@ -157,7 +157,7 @@ En exécutant ce programme, vous devriez obtenir ceci :
 
 <!--
 ```console
-{{#include ../listings/ch03-common-programming-concepts/no-listing-17-functions-with-parameters/output.txt}}
+{{#include ../listings-sources/ch03-common-programming-concepts/no-listing-17-functions-with-parameters/output.txt}}
 ```
 -->
 
@@ -238,7 +238,7 @@ et lancez-le en utilisant `cargo run` :
 
 <!--
 ```console
-{{#include ../listings/ch03-common-programming-concepts/no-listing-18-functions-with-multiple-parameters/output.txt}}
+{{#include ../listings-sources/ch03-common-programming-concepts/no-listing-18-functions-with-multiple-parameters/output.txt}}
 ```
 -->
 
@@ -364,7 +364,7 @@ ceci :
 
 <!--
 ```console
-{{#include ../listings/ch03-common-programming-concepts/no-listing-19-statements-vs-expressions/output.txt}}
+{{#include ../listings-sources/ch03-common-programming-concepts/no-listing-19-statements-vs-expressions/output.txt}}
 ```
 -->
 
@@ -517,7 +517,7 @@ devrait ressembler à ceci :
 
 <!--
 ```console
-{{#include ../listings/ch03-common-programming-concepts/no-listing-21-function-return-values/output.txt}}
+{{#include ../listings-sources/ch03-common-programming-concepts/no-listing-21-function-return-values/output.txt}}
 ```
 -->
 
@@ -615,7 +615,7 @@ Compiler ce code va produire une erreur, comme ci-dessous :
 
 <!--
 ```console
-{{#include ../listings/ch03-common-programming-concepts/no-listing-23-statements-dont-return-values/output.txt}}
+{{#include ../listings-sources/ch03-common-programming-concepts/no-listing-23-statements-dont-return-values/output.txt}}
 ```
 -->
 

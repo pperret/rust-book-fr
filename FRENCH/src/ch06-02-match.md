@@ -443,7 +443,7 @@ ce code, nous allons obtenir cette erreur :
 
 <!--
 ```console
-{{#include ../listings/ch06-enums-and-pattern-matching/no-listing-10-non-exhaustive-match/output.txt}}
+{{#include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-10-non-exhaustive-match/output.txt}}
 ```
 -->
 

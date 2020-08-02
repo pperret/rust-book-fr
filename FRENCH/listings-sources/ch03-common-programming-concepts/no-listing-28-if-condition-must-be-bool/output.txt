@@ -1,7 +1,7 @@
 $ cargo run
    Compiling branches v0.1.0 (file:///projects/branches)
 error[E0308]: mismatched types
- --> src/main.rs:4:8
+ -- > src/main.rs:4:8
   |
 4 |     if number {
   |        ^^^^^^ expected `bool`, found integer

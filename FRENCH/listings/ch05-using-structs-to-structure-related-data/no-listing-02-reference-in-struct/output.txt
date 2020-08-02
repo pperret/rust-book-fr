@@ -3,8 +3,8 @@ $ cargo run
 error[E0106]: missing lifetime specifier
  --> src/main.rs:2:15
   |
-2 |     username: &str,
-  |               ^ expected lifetime parameter
+2 |     pseudo: &str,
+  |             ^ expected lifetime parameter
 
 error[E0106]: missing lifetime specifier
  --> src/main.rs:3:12
