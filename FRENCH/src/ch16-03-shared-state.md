@@ -461,7 +461,7 @@ Fortunately, `Arc<T>` *is* a type like `Rc<T>` that is safe to use in
 concurrent situations. The *a* stands for *atomic*, meaning it’s an *atomically
 reference counted* type. Atomics are an additional kind of concurrency
 primitive that we won’t cover in detail here: see the standard library
-documentation for `std::sync::atomic` for more details. At this point, you just
+documentation for [`std::sync::atomic`] for more details. At this point, you just
 need to know that atomics work like primitive types but are safe to share
 across threads.
 -->
@@ -470,10 +470,16 @@ Heureusement, `Arc<T>` *est* un type comme `Rc<T>` qui est sûr lors de
 situations concurrentes. Le *A* signifie *atomique*, ce qui signifie que c'est
 le type *compteur de références atomique*. L'atome est une sorte de primitive
 concurrente que nous n'allons pas aborder en détails ici : rendez-vous dans la
-documentation de la bibliothèque standard sur `std::sync::atomic` pour en
+documentation de la bibliothèque standard sur [`std::sync::atomic`] pour en
 savoir plus. Pour le moment, vous avez juste besoin de retenir que les atomes
 fonctionnent comme les types primitifs mais qui son sûrs pour l'échange entre
 les tâches.
+
+<!--
+[`std::sync::atomic`]: ../std/sync/atomic/index.html
+-->
+
+[`std::sync::atomic`]: https://doc.rust-lang.org/std/sync/atomic/index.html
 
 <!--
 You might then wonder why all primitive types aren’t atomic and why standard
