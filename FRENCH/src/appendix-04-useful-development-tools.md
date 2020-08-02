@@ -38,7 +38,13 @@ To install `rustfmt`, enter the following:
 
 Pour installer `rustfmt`, saisissez ceci :
 
-```text
+<!--
+```console
+$ rustup component add rustfmt
+```
+-->
+
+```console
 $ rustup component add rustfmt
 ```
 
@@ -51,7 +57,13 @@ Cette commande vous offre `rustfmt` et `cargo-fmt`, de la même manière que Rus
 vous installe `rustc` et `cargo`. Pour formater un projet Cargo, saisissez
 ceci :
 
-```text
+<!--
+```console
+$ cargo fmt
+```
+-->
+
+```console
 $ cargo fmt
 ```
 
@@ -64,6 +76,10 @@ on `rustfmt`, see [its documentation][rustfmt].
 L'exécution de cette commande reformate tout le code Rust dans la crate
 courante. Cela va uniquement changer le style de code, pas sa sémantique. Pour
 plus d'informations sur `rustfmt`, voyez [sa documentation][rustfmt].
+
+<!--
+[rustfmt]: https://github.com/rust-lang/rustfmt
+-->
 
 [rustfmt]: https://github.com/rust-lang/rustfmt
 
@@ -122,7 +138,7 @@ n'utilisons jamais la variable `i` dans le corps de la boucle `for`. Rust nous
 avertit de cela :
 
 <!--
-```text
+```console
 $ cargo build
    Compiling myprogram v0.1.0 (file:///projects/myprogram)
 warning: unused variable: `i`
@@ -137,7 +153,7 @@ warning: unused variable: `i`
 ```
 -->
 
-```text
+```console
 $ cargo build
    Compiling mon_programme v0.1.0 (file:///projects/mon_programme)
 warning: unused variable: `i`
@@ -164,7 +180,7 @@ variable. Nous pouvons appliquer automatiquement cette suggestion en utilisant
 l'outil `rustfix` en lançant la commande `cargo fix` :
 
 <!--
-```text
+```console
 $ cargo fix
     Checking myprogram v0.1.0 (file:///projects/myprogram)
       Fixing src/main.rs (1 fix)
@@ -172,7 +188,7 @@ $ cargo fix
 ```
 -->
 
-```text
+```console
 $ cargo fix
     Checking mon_programme v0.1.0 (file:///projects/mon_programme)
       Fixing src/main.rs (1 fix)
@@ -251,7 +267,13 @@ To install Clippy, enter the following:
 
 Pour installer Clippy, saisissez ceci :
 
-```text
+<!--
+```console
+$ rustup component add clippy
+```
+-->
+
+```console
 $ rustup component add clippy
 ```
 
@@ -261,7 +283,13 @@ To run Clippy’s lints on any Cargo project, enter the following:
 
 Pour lancer l'analyse statique de Clippy sur un projet Cargo, saisissez ceci :
 
-```text
+<!--
+```console
+$ cargo clippy
+```
+-->
+
+```console
 $ cargo clippy
 ```
 
@@ -303,6 +331,19 @@ Running `cargo clippy` on this project results in this error:
 -->
 
 L'exécution de `cargo clippy` sur ce projet va afficher cette erreur :
+
+<!--
+```text
+error: approximate value of `f{32, 64}::consts::PI` found. Consider using it directly
+ -- > src/main.rs:2:13
+  |
+2 |     let x = 3.1415;
+  |             ^^^^^^
+  |
+  = note: #[deny(clippy::approx_constant)] on by default
+  = help: for further information visit https://rust-lang-nursery.github.io/rust-clippy/master/index.html#approx_constant
+```
+-->
 
 ```text
 error: approximate value of `f{32, 64}::consts::PI` found. Consider using it directly
@@ -357,6 +398,10 @@ For more information on Clippy, see [its documentation][clippy].
 
 Pour en savoir plus Clippy, voyez [sa documentation][clippy].
 
+<!--
+[clippy]: https://github.com/rust-lang/rust-clippy
+-->
+
 [clippy]: https://github.com/rust-lang/rust-clippy
 
 <!--
@@ -379,6 +424,11 @@ Pour aider l'intégration aux IDE, le projet Rust distribue le
 langages pour communiquer entre eux. Différents clients peuvent utiliser le
 `rls`, comme [le plug-in Rust pour Visual Studio Code][vscode].
 
+<!--
+[lsp]: http://langserver.org/
+[vscode]: https://marketplace.visualstudio.com/items?itemName=rust-lang.rust
+-->
+
 [lsp]: http://langserver.org/
 [vscode]: https://marketplace.visualstudio.com/items?itemName=rust-lang.rust
 
@@ -388,7 +438,13 @@ To install the `rls`, enter the following:
 
 Pour installer le `rls`, saisissez ceci :
 
-```text
+<!--
+```console
+$ rustup component add rls
+```
+-->
+
+```console
 $ rustup component add rls
 ```
 
@@ -407,5 +463,9 @@ For more information on the `rls`, see [its documentation][rls].
 -->
 
 Pour plus d'information sur `rls`, rendez-vous [à sa documentation][rls].
+
+<!--
+[rls]: https://github.com/rust-lang/rls
+-->
 
 [rls]: https://github.com/rust-lang/rls
