@@ -43,38 +43,12 @@ qu'à utiliser `accueil::ajouter_a_la_liste_attente` pour appeler la fonction
 
 <!--
 ```rust
-mod front_of_house {
-    pub mod hosting {
-        pub fn add_to_waitlist() {}
-    }
-}
-
-use crate::front_of_house::hosting;
-
-pub fn eat_at_restaurant() {
-    hosting::add_to_waitlist();
-    hosting::add_to_waitlist();
-    hosting::add_to_waitlist();
-}
-# fn main() {}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-11/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-mod salle_a_manger {
-    pub mod accueil {
-        pub fn ajouter_a_la_liste_attente() {}
-    }
-}
-
-use crate::salle_a_manger::accueil;
-
-pub fn manger_au_restaurant() {
-    accueil::ajouter_a_la_liste_attente();
-    accueil::ajouter_a_la_liste_attente();
-    accueil::ajouter_a_la_liste_attente();
-}
-# fn main() {}
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-11/src/lib.rs:here}}
 ```
 
 <!--
@@ -118,38 +92,12 @@ chemin relatif pour obtenir le même résultat que l'encart 7-11.
 
 <!--
 ```rust
-mod front_of_house {
-    pub mod hosting {
-        pub fn add_to_waitlist() {}
-    }
-}
-
-use front_of_house::hosting;
-
-pub fn eat_at_restaurant() {
-    hosting::add_to_waitlist();
-    hosting::add_to_waitlist();
-    hosting::add_to_waitlist();
-}
-# fn main() {}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-12/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-mod salle_a_manger {
-    pub mod accueil {
-        pub fn ajouter_a_la_liste_attente() {}
-    }
-}
-
-use salle_a_manger::accueil;
-
-pub fn manger_au_restaurant() {
-    accueil::ajouter_a_la_liste_attente();
-    accueil::ajouter_a_la_liste_attente();
-    accueil::ajouter_a_la_liste_attente();
-}
-# fn main() {}
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-12/src/lib.rs:here}}
 ```
 
 <!--
@@ -187,38 +135,12 @@ pour avoir le même résultat, comme dans l'encart 7-13.
 
 <!--
 ```rust
-mod front_of_house {
-    pub mod hosting {
-        pub fn add_to_waitlist() {}
-    }
-}
-
-use crate::front_of_house::hosting::add_to_waitlist;
-
-pub fn eat_at_restaurant() {
-    add_to_waitlist();
-    add_to_waitlist();
-    add_to_waitlist();
-}
-# fn main() {}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-13/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-mod salle_a_manger {
-    pub mod accueil {
-        pub fn ajouter_a_la_liste_attente() {}
-    }
-}
-
-use crate::salle_a_manger::accueil::ajouter_a_la_liste_attente;
-
-pub fn manger_au_restaurant() {
-    ajouter_a_la_liste_attente();
-    ajouter_a_la_liste_attente();
-    ajouter_a_la_liste_attente();
-}
-# fn main() {}
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-13/src/lib.rs:here}}
 ```
 
 <!--
@@ -265,13 +187,14 @@ standard dans la portée d'une crate binaire.
 
 <span class="filename">Fichier : src/main.rs</span>
 
+<!--
 ```rust
-use std::collections::HashMap;
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-14/src/main.rs}}
+```
+-->
 
-fn main() {
-    let mut map = HashMap::new();
-    map.insert(1, 2);
-}
+```rust
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-14/src/main.rs}}
 ```
 
 <!--
@@ -312,34 +235,12 @@ sont distincts.
 
 <!--
 ```rust
-use std::fmt;
-use std::io;
-
-fn function1() -> fmt::Result {
-    // --snip--
-#     Ok(())
-}
-
-fn function2() -> io::Result<()> {
-    // --snip--
-#     Ok(())
-}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-15/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-use std::fmt;
-use std::io;
-
-fn fonction1() -> fmt::Result {
-    // -- code masqué ici --
-#     Ok(())
-}
-
-fn fonction2() -> io::Result<()> {
-    // -- code masqué ici --
-#     Ok(())
-}
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-15/src/lib.rs:here}}
 ```
 
 <!--
@@ -390,34 +291,12 @@ deux types `Result`.
 
 <!--
 ```rust
-use std::fmt::Result;
-use std::io::Result as IoResult;
-
-fn function1() -> Result {
-    // --snip--
-#     Ok(())
-}
-
-fn function2() -> IoResult<()> {
-    // --snip--
-#     Ok(())
-}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-16/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-use std::fmt::Result;
-use std::io::Result as IoResult;
-
-fn fonction1() -> Result {
-    // -- code masqué ici --
-#     Ok(())
-}
-
-fn fonction2() -> IoResult<()> {
-    // -- code masqué ici --
-#     Ok(())
-}
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-16/src/lib.rs:here}}
 ```
 
 <!--
@@ -478,38 +357,12 @@ a été remplacé par `pub use`.
 
 <!--
 ```rust
-mod front_of_house {
-    pub mod hosting {
-        pub fn add_to_waitlist() {}
-    }
-}
-
-pub use crate::front_of_house::hosting;
-
-pub fn eat_at_restaurant() {
-    hosting::add_to_waitlist();
-    hosting::add_to_waitlist();
-    hosting::add_to_waitlist();
-}
-# fn main() {}
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-17/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-mod salle_a_manger {
-    pub mod accueil {
-        pub fn ajouter_a_la_liste_attente() {}
-    }
-}
-
-pub use crate::salle_a_manger::accueil;
-
-pub fn manger_au_restaurant() {
-    accueil::ajouter_a_la_liste_attente();
-    accueil::ajouter_a_la_liste_attente();
-    accueil::ajouter_a_la_liste_attente();
-}
-# fn main() {}
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-17/src/lib.rs:here}}
 ```
 
 <!--
@@ -572,10 +425,12 @@ utilisait le paquet externe `rand` afin d'obtenir des nombres aléatoires.
 Pour pouvoir utiliser `rand` dans notre projet, nous avons ajouté cette ligne
 dans *Cargo.toml* :
 
+<!--
 <!-- When updating the version of `rand` used, also update the version of
 `rand` used in these files so they all match:
 * ch02-00-guessing-game-tutorial.md
 * ch14-03-cargo-workspaces.md
+-- >
 -->
 
 <!--
@@ -584,9 +439,14 @@ dans *Cargo.toml* :
 
 <span class="filename">Fichier : Cargo.toml</span>
 
+<!--
 ```toml
-[dependencies]
-rand = "0.5.5"
+{{#include ../listings/ch02-guessing-game-tutorial/listing-02-02/Cargo.toml:9:}}
+```
+-->
+
+```toml
+{{#include ../listings/ch02-guessing-game-tutorial/listing-02-02/Cargo.toml:9:}}
 ```
 
 <!--
@@ -601,46 +461,41 @@ télécharger le paquet `rand` et toutes ses dépendances à partir de
 
 <!--
 Then, to bring `rand` definitions into the scope of our package, we added a
-`use` line starting with the name of the package, `rand`, and listed the items
+`use` line starting with the name of the crate, `rand`, and listed the items
 we wanted to bring into scope. Recall that in the [“Generating a Random
 Number”][rand]<!-- ignore -- > section in Chapter 2, we brought the `Rng` trait
 into scope and called the `rand::thread_rng` function:
 -->
 
 Ensuite, pour importer les définitions de `rand` dans la portée de notre paquet,
-nous avons ajouté une ligne `use` qui commence avec le nom de notre paquet,
-`rand`, et nous avons listé les éléments que nous voulions importer dans notre
-portée. Dans la section [“Générer le nombre secret”][rand]<!-- ignore --> du
-chapitre 2, nous avons importé le trait `Rng` dans la portée, puis nous avons
-appelé la fonction `rand::thread_rng` :
+nous avons ajouté une ligne `use` qui commence avec le nom de la crate, `rand`,
+et nous avons listé les éléments que nous voulions importer dans notre portée.
+Dans la section [“Générer le nombre secret”][rand]<!-- ignore --> du chapitre 2,
+nous avons importé le trait `Rng` dans la portée, puis nous avons appelé la
+fonction `rand::thread_rng` :
 
 <!--
 ```rust,ignore
-use rand::Rng;
-fn main() {
-    let secret_number = rand::thread_rng().gen_range(1, 101);
-}
+{{#rustdoc_include ../listings-sources/ch02-guessing-game-tutorial/listing-02-03/src/main.rs:ch07-04}}
 ```
 -->
 
 ```rust,ignore
-use rand::Rng;
-fn main() {
-    let nombre_secret = rand::thread_rng().gen_range(1, 101);
-}
+{{#rustdoc_include ../listings/ch02-guessing-game-tutorial/listing-02-03/src/main.rs:ch07-04}}
 ```
 
 <!--
 Members of the Rust community have made many packages available at
 [crates.io](https://crates.io/), and pulling any of them into your package
 involves these same steps: listing them in your package’s *Cargo.toml* file and
-using `use` to bring items into scope.
+using `use` to bring items from their crates into scope.
 -->
 
 Les membres de la communauté Rust ont mis à disposition de nombreux paquets
 dans [crates.io](https://crates.io/), et utiliser l'un d'entre eux dans votre
 paquet implique toujours ces mêmes étapes : les lister dans le fichier
-*Cargo.toml* de votre paquet et utiliser `use` pour les importer dans la portée.
+*Cargo.toml* de votre paquet et utiliser `use` pour importer certains éléments
+de ces crates dans la portée.
 
 <!--
 Note that the standard library (`std`) is also a crate that’s external to our
@@ -656,6 +511,12 @@ nous n'avons pas à modifier le *Cargo.toml* pour y inclure `std`. Mais nous
 devons utiliser `use` pour importer les éléments qu'y se trouvent dans la portée
 de notre paquet. Par exemple, pour `HashMap` nous pourrions utiliser cette
 ligne :
+
+<!--
+```rust
+use std::collections::HashMap;
+```
+-->
 
 ```rust
 use std::collections::HashMap;
@@ -676,13 +537,13 @@ bibliothèque standard.
 ### Utiliser des chemins imbriqués pour simplifier les grandes listes de `use`
 
 <!--
-If we’re using multiple items defined in the same package or same module,
+If we’re using multiple items defined in the same crate or same module,
 listing each item on its own line can take up a lot of vertical space in our
 files. For example, these two `use` statements we had in the Guessing Game in
 Listing 2-4 bring items from `std` into scope:
 -->
 
-Si vous utilisez de nombreux éléments définis dans un même paquet ou dans un
+Si vous utilisez de nombreux éléments définis dans une même crate ou dans un
 même module, lister chaque élément sur sa propre ligne prendra beaucoup d'espace
 vertical dans vos fichiers. Par exemple, ces deux instructions `use`, que nous
 avions dans le jeu de devinettes, dans l'encart 2-4, importaient des éléments de
@@ -695,17 +556,13 @@ avions dans le jeu de devinettes, dans l'encart 2-4, importaient des éléments 
 <span class="filename">Fichier : src/main.rs</span>
 
 <!--
-```rust
-use std::io;
-use std::cmp::Ordering;
-// ---snip---
+```rust,ignore
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/no-listing-01-use-std-unnested/src/main.rs:here}}
 ```
 -->
 
-```rust
-use std::io;
-use std::cmp::Ordering;
-// --- code masqué ici ---
+```rust,ignore
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/no-listing-01-use-std-unnested/src/main.rs:here}}
 ```
 
 <!--
@@ -727,15 +584,13 @@ d'accolades autour d'une liste d'éléments du chemin, comme dans l'encart 7-18�
 <span class="filename">Fichier : src/main.rs</span>
 
 <!--
-```rust
-use std::{cmp::Ordering, io};
-// ---snip---
+```rust,ignore
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-18/src/main.rs:here}}
 ```
 -->
 
-```rust
-use std::{cmp::Ordering, io};
-// --- code masqué ici ---
+```rust,ignore
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-18/src/main.rs:here}}
 ```
 
 <!--
@@ -747,13 +602,13 @@ items with the same prefix into scope</span>
 plusieurs éléments avec le même préfixe dans la portée</span>
 
 <!--
-In bigger programs, bringing many items into scope from the same package or
+In bigger programs, bringing many items into scope from the same crate or
 module using nested paths can reduce the number of separate `use` statements
 needed by a lot!
 -->
 
 Pour des programmes plus gros, importer plusieurs éléments dans la portée pour
-le même paquet ou module en utilisant des chemins imbriqués peut réduire
+la même crate ou module en utilisant des chemins imbriqués peut réduire
 considérablement le nombre de `use` utilisés !
 
 <!--
@@ -775,9 +630,14 @@ dans la portée.
 
 <span class="filename">Fichier : src/lib.rs</span>
 
+<!--
 ```rust
-use std::io;
-use std::io::Write;
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-19/src/lib.rs}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-19/src/lib.rs}}
 ```
 
 <!--
@@ -804,8 +664,14 @@ nous pouvons utiliser `self` dans le chemin imbriqué, comme dans l'encart 7-20.
 
 <span class="filename">Fichier : src/lib.rs</span>
 
+<!--
 ```rust
-use std::io::{self, Write};
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-20/src/lib.rs}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-20/src/lib.rs}}
 ```
 
 <!--

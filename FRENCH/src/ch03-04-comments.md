@@ -23,19 +23,26 @@ Here’s a simple comment:
 
 Voici un simple commentaire :
 
+<!--
+```rust
+// hello, world
+```
+-->
+
 ```rust
 // hello, world
 ```
 
 <!--
-In Rust, comments must start with two slashes and continue until the end of the
-line. For comments that extend beyond a single line, you’ll need to include
-`//` on each line, like this:
+In Rust, the idiomatic comment style starts a comment with two slashes, and the
+comment continues until the end of the line. For comments that extend beyond a
+single line, you’ll need to include `//` on each line, like this:
 -->
 
-Avec Rust, les commentaires commencent avec deux barres obliques et continuent
-jusqu'à la fin de la ligne. Pour les commentaires qui font plus d'une seule
-ligne, vous aurez besoin d'ajouter `//` sur chaque ligne, comme ceci :
+Avec Rust, les commentaires classiques commencent avec deux barres obliques et
+continuent jusqu'à la fin de la ligne. Pour les commentaires qui font plus
+d'une seule ligne, vous aurez besoin d'ajouter `//` sur chaque ligne, comme
+ceci :
 
 <!--
 ```rust
@@ -66,16 +73,12 @@ contient du code :
 
 <!--
 ```rust
-fn main() {
-    let lucky_number = 7; // I’m feeling lucky today
-}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-24-comments-end-of-line/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let nombre_chanceux = 7; // Je me sens chanceux aujourd'hui
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-24-comments-end-of-line/src/main.rs}}
 ```
 
 <!--
@@ -94,18 +97,12 @@ commentaire sur une ligne séparée au-dessus du code qu'il annote :
 
 <!--
 ```rust
-fn main() {
-    // I’m feeling lucky today
-    let lucky_number = 7;
-}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-25-comments-above-line/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    // Je me sens chanceux aujourd'hui
-    let nombre_chanceux = 7;
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-25-comments-above-line/src/main.rs}}
 ```
 
 <!--

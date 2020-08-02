@@ -83,41 +83,13 @@ fonctions.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust,ignore
-mod front_of_house {
-    mod hosting {
-        fn add_to_waitlist() {}
-
-        fn seat_at_table() {}
-    }
-
-    mod serving {
-        fn take_order() {}
-
-        fn serve_order() {}
-
-        fn take_payment() {}
-    }
-}
+```rust
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-01/src/lib.rs:here}}
 ```
 -->
 
-```rust,ignore
-mod salle_a_manger {
-    mod accueil {
-        fn ajouter_a_la_liste_attente() {}
-
-        fn installer_a_une_table() {}
-    }
-
-    mod service {
-        fn prendre_commande() {}
-
-        fn servir_commande() {}
-
-        fn encaisser() {}
-    }
-}
+```rust
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-01/src/lib.rs:here}}
 ```
 
 <!--

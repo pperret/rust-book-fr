@@ -8,8 +8,10 @@ français.
 | ahead-of-time compilation | compilation anticipée | sigle : AOT |
 | alias | alias | - |
 | allocated | alloué | - |
+| angle bracket | chevrons | - |
 | annotate | indiquer | - |
 | Appendix | annexe | tout en minuscule (sauf en début de phrase) |
+| append | ajouter | - |
 | Application Programming Interface (API) | interface de programmation applicative (API) | - |
 | assign | assigner | - |
 | argument | argument / paramètre | - |
@@ -24,6 +26,7 @@ français.
 | boilerplate code | code standard | - |
 | boolean | booléen | - |
 | borrow | emprunt(er) | - |
+| borrow checker | vérificateur d'emprunt | - |
 | bug | bogue | - |
 | build system | système de compilation | - |
 | byte | octet | - |
@@ -32,6 +35,7 @@ français.
 | Chapter | chapitre | tout en minuscule (sauf en début de phrase) |
 | closure | fermeture | - |
 | code review | revue de code | - |
+| coercion | extrapolation | - |
 | collection | collection | - |
 | command | commande | dans un terminal |
 | commit | commit | - |
@@ -57,6 +61,8 @@ français.
 | debugging | débogage | - |
 | deep copy | copie en profondeur | - |
 | dependency | dépendance | - |
+| deref coercion | extrapolation de déréferencement | - |
+| dereference operator | opérateur de déréférencement | - |
 | dereferencing | déréférencement | - |
 | destructure | déstructurer | - |
 | DevOps | DevOps | - |
@@ -78,6 +84,7 @@ français.
 | garbage collector | ramasse-miettes | - |
 | generics | génériques / généricité | - |
 | generic type parameter | paramètre de type générique | - |
+| grapheme cluster | groupe de graphèmes  | - |
 | glob | global | opérateur |
 | global scope | portée globale | - |
 | guessing game | jeu de devinettes | - |
@@ -117,6 +124,7 @@ français.
 | machine learning | apprentissage automatique | - |
 | macro | macro | - |
 | main | main | - |
+| map | tableau associatif | - |
 | memory management | gestion de mémoire | - |
 | method | méthode | - |
 | modern | récent | - |
