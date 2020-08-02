@@ -1,7 +1,7 @@
 $ cargo run
    Compiling shared-state v0.1.0 (file:///projects/shared-state)
 error[E0277]: `std::rc::Rc<std::sync::Mutex<i32>>` cannot be sent between threads safely
-   --> src/main.rs:11:22
+   -- > src/main.rs:11:22
     |
 11  |         let handle = thread::spawn(move || {
     |                      ^^^^^^^^^^^^^ `std::rc::Rc<std::sync::Mutex<i32>>` cannot be sent between threads safely
