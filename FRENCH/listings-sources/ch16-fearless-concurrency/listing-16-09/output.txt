@@ -1,7 +1,7 @@
 $ cargo run
    Compiling message-passing v0.1.0 (file:///projects/message-passing)
 error[E0382]: borrow of moved value: `val`
-  --> src/main.rs:10:31
+  -- > src/main.rs:10:31
    |
 8  |         let val = String::from("hi");
    |             --- move occurs because `val` has type `std::string::String`, which does not implement the `Copy` trait
