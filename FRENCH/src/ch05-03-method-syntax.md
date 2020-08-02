@@ -47,50 +47,12 @@ l'encart 5-13.
 
 <!--
 ```rust
-#[derive(Debug)]
-struct Rectangle {
-    width: u32,
-    height: u32,
-}
-
-impl Rectangle {
-    fn area(&self) -> u32 {
-        self.width * self.height
-    }
-}
-
-fn main() {
-    let rect1 = Rectangle { width: 30, height: 50 };
-
-    println!(
-        "The area of the rectangle is {} square pixels.",
-        rect1.area()
-    );
-}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-13/src/main.rs}}
 ```
 -->
 
 ```rust
-#[derive(Debug)]
-struct Rectangle {
-    largeur: u32,
-    hauteur: u32,
-}
-
-impl Rectangle {
-    fn aire(&self) -> u32 {
-        self.largeur * self.hauteur
-    }
-}
-
-fn main() {
-    let rect1 = Rectangle { largeur: 30, hauteur: 50 };
-
-    println!(
-        "L'aire du rectangle est de {} pixels carrés.",
-        rect1.aire()
-    );
-}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-13/src/main.rs}}
 ```
 
 <!--
@@ -195,6 +157,7 @@ la bibliothèque que nous fournissons.
 > automatically adds in `&`, `&mut`, or `*` so `object` matches the signature of
 > the method. In other words, the following are the same:
 >
+<!-- CAN'T EXTRACT SEE BUG TODO -- >
 > ```rust
 > # #[derive(Debug,Copy,Clone)]
 > # struct Point {
@@ -242,6 +205,7 @@ la bibliothèque que nous fournissons.
 > `objet` corresponde à la signature de la méthode. Autrement dit, ces deux
 > lignes sont identiques :
 >
+<!-- CAN'T EXTRACT SEE BUG TODO -->
 > ```rust
 > # #[derive(Debug,Copy,Clone)]
 > # struct Point {
@@ -303,26 +267,12 @@ programme de l'encart 5-14 une fois qu'on aura défini la méthode
 
 <!--
 ```rust,ignore
-fn main() {
-    let rect1 = Rectangle { width: 30, height: 50 };
-    let rect2 = Rectangle { width: 10, height: 40 };
-    let rect3 = Rectangle { width: 60, height: 45 };
-
-    println!("Can rect1 hold rect2? {}", rect1.can_hold(&rect2));
-    println!("Can rect1 hold rect3? {}", rect1.can_hold(&rect3));
-}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-14/src/main.rs}}
 ```
 -->
 
 ```rust,ignore
-fn main() {
-    let rect1 = Rectangle { largeur: 30, hauteur: 50 };
-    let rect2 = Rectangle { largeur: 10, hauteur: 40 };
-    let rect3 = Rectangle { largeur: 60, hauteur: 45 };
-
-    println!("rect1 peut-il contenir rect2 ? {}", rect1.peut_contenir(&rect2));
-    println!("rect1 peut-il contenir rect3 ? {}", rect1.peut_contenir(&rect3));
-}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-14/src/main.rs}}
 ```
 
 <!--
@@ -394,40 +344,12 @@ montre l'encart 5-15.
 
 <!--
 ```rust
-# #[derive(Debug)]
-# struct Rectangle {
-#     width: u32,
-#     height: u32,
-# }
-#
-impl Rectangle {
-    fn area(&self) -> u32 {
-        self.width * self.height
-    }
-
-    fn can_hold(&self, other: &Rectangle) -> bool {
-        self.width > other.width && self.height > other.height
-    }
-}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-15/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# #[derive(Debug)]
-# struct Rectangle {
-#     largeur: u32,
-#     hauteur: u32,
-# }
-#
-impl Rectangle {
-    fn aire(&self) -> u32 {
-        self.largeur * self.hauteur
-    }
-
-    fn peut_contenir(&self, autre: &Rectangle) -> bool {
-        self.largeur > autre.largeur && self.hauteur > autre.hauteur
-    }
-}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-15/src/main.rs:here}}
 ```
 
 <!--
@@ -494,32 +416,12 @@ d'un `Rectangle` carré plutôt que d'avoir à indiquer la même valeur deux foi
 
 <!--
 ```rust
-# #[derive(Debug)]
-# struct Rectangle {
-#     width: u32,
-#     height: u32,
-# }
-#
-impl Rectangle {
-    fn square(size: u32) -> Rectangle {
-        Rectangle { width: size, height: size }
-    }
-}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/no-listing-03-associated-functions/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# #[derive(Debug)]
-# struct Rectangle {
-#     largeur: u32,
-#     hauteur: u32,
-# }
-#
-impl Rectangle {
-    fn carre(cote: u32) -> Rectangle {
-        Rectangle { largeur: cote, hauteur: cote }
-    }
-}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/no-listing-03-associated-functions/src/main.rs:here}}
 ```
 
 <!--
@@ -553,44 +455,12 @@ bloc `impl`.
 
 <!--
 ```rust
-# #[derive(Debug)]
-# struct Rectangle {
-#     width: u32,
-#     height: u32,
-# }
-#
-impl Rectangle {
-    fn area(&self) -> u32 {
-        self.width * self.height
-    }
-}
-
-impl Rectangle {
-    fn can_hold(&self, other: &Rectangle) -> bool {
-        self.width > other.width && self.height > other.height
-    }
-}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-16/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# #[derive(Debug)]
-# struct Rectangle {
-#     largeur: u32,
-#     hauteur: u32,
-# }
-#
-impl Rectangle {
-    fn aire(&self) -> u32 {
-        self.largeur * self.hauteur
-    }
-}
-
-impl Rectangle {
-    fn peut_contenir(&self, autre: &Rectangle) -> bool {
-        self.largeur > autre.largeur && self.hauteur > autre.hauteur
-    }
-}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-16/src/main.rs:here}}
 ```
 
 <!--

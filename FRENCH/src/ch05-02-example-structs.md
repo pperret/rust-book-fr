@@ -35,36 +35,12 @@ certaine manière dans le *src/main.rs* de notre projet.
 
 <!--
 ```rust
-fn main() {
-    let width1 = 30;
-    let height1 = 50;
-
-    println!(
-        "The area of the rectangle is {} square pixels.",
-        area(width1, height1)
-    );
-}
-
-fn area(width: u32, height: u32) -> u32 {
-    width * height
-}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-08/src/main.rs:all}}
 ```
 -->
 
 ```rust
-fn main() {
-    let largeur1 = 30;
-    let hauteur1 = 50;
-
-    println!(
-        "L'aire du rectangle est de {} pixels carrés.",
-        aire(largeur1, hauteur1)
-    );
-}
-
-fn aire(largeur: u32, hauteur: u32) -> u32 {
-    largeur * hauteur
-}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-08/src/main.rs:all}}
 ```
 
 <!--
@@ -82,13 +58,13 @@ Now, run this program using `cargo run`:
 Maintenant, lancez ce programme avec `cargo run` :
 
 <!--
-```text
-The area of the rectangle is 1500 square pixels.
+```console
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-08/output.txt}}
 ```
 -->
 
-```text
-L'aire du rectangle est de 1500 pixels carrés.
+```console
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-08/output.txt}}
 ```
 
 <!--
@@ -110,12 +86,12 @@ Le problème de ce code se voit dans la signature de `aire` :
 
 <!--
 ```rust,ignore
-fn area(width: u32, height: u32) -> u32 {
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-08/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-fn aire(largeur: u32, hauteur: u32) -> u32 {
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-08/src/main.rs:here}}
 ```
 
 <!--
@@ -155,34 +131,12 @@ tuples.
 
 <!--
 ```rust
-fn main() {
-    let rect1 = (30, 50);
-
-    println!(
-        "The area of the rectangle is {} square pixels.",
-        area(rect1)
-    );
-}
-
-fn area(dimensions: (u32, u32)) -> u32 {
-    dimensions.0 * dimensions.1
-}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-09/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let rect1 = (30, 50);
-
-    println!(
-        "L'aire du rectangle est de {} pixels carrés.",
-        aire(rect1)
-    );
-}
-
-fn aire(dimensions: (u32, u32)) -> u32 {
-    dimensions.0 * dimensions.1
-}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-09/src/main.rs}}
 ```
 
 <!--
@@ -250,44 +204,12 @@ de donnée nommé dont ses éléments sont aussi nommés, comme le montre l'enca
 
 <!--
 ```rust
-struct Rectangle {
-    width: u32,
-    height: u32,
-}
-
-fn main() {
-    let rect1 = Rectangle { width: 30, height: 50 };
-
-    println!(
-        "The area of the rectangle is {} square pixels.",
-        area(&rect1)
-    );
-}
-
-fn area(rectangle: &Rectangle) -> u32 {
-    rectangle.width * rectangle.height
-}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-10/src/main.rs}}
 ```
 -->
 
 ```rust
-struct Rectangle {
-    largeur: u32,
-    hauteur: u32,
-}
-
-fn main() {
-    let rect1 = Rectangle { largeur: 30, hauteur: 50 };
-
-    println!(
-        "L'aire du rectangle est de {} pixels carrés.",
-        aire(&rect1)
-    );
-}
-
-fn aire(rectangle: &Rectangle) -> u32 {
-    rectangle.largeur * rectangle.hauteur
-}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-10/src/main.rs}}
 ```
 
 <!--
@@ -367,30 +289,12 @@ dans les chapitres précédents. Cependant, cela ne fonctionne pas.
 
 <!--
 ```rust,ignore,does_not_compile
-struct Rectangle {
-    width: u32,
-    height: u32,
-}
-
-fn main() {
-    let rect1 = Rectangle { width: 30, height: 50 };
-
-    println!("rect1 is {}", rect1);
-}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-11/src/main.rs}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-struct Rectangle {
-    largeur: u32,
-    hauteur: u32,
-}
-
-fn main() {
-    let rect1 = Rectangle { largeur: 30, hauteur: 50 };
-
-    println!("rect1 est {}", rect1);
-}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-11/src/main.rs}}
 ```
 
 <!--
@@ -402,14 +306,20 @@ instance</span>
 `Rectangle`</span>
 
 <!--
-When we run this code, we get an error with this core message:
+When we compile this code, we get an error with this core message:
 -->
 
-Lorsqu'on exécute ce code, on obtient ce message d'erreur qui nous informe que
+Lorsqu'on compile ce code, on obtient ce message d'erreur qui nous informe que
 `Rectangle` n'implémente pas le trait `std::fmt::Display` :
 
+<!--
 ```text
-error[E0277]: `Rectangle` doesn't implement `std::fmt::Display`
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-11/output.txt:3}}
+```
+-->
+
+```text
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-11/output.txt:3}}
 ```
 
 <!--
@@ -443,9 +353,14 @@ If we continue reading the errors, we’ll find this helpful note:
 
 Si nous continuons de lire les erreurs, nous trouvons cette remarque utile :
 
+<!--
 ```text
-= help: the trait `std::fmt::Display` is not implemented for `Rectangle`
-= note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-11/output.txt:9:10}}
+```
+-->
+
+```text
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-11/output.txt:9:10}}
 ```
 
 Le compilateur nous informe que dans notre chaîne de formatage, on est peut-être
@@ -467,14 +382,20 @@ manière utile aux développeurs pour qu'on puisse voir sa valeur pendant qu'on
 débogue le code.
 
 <!--
-Run the code with this change. Drat! We still get an error:
+Compile the code with this change. Drat! We still get an error:
 -->
 
-Exécutez le code avec ce changement. Zut ! On a encore une erreur, nous
+Compilez le code avec ce changement. Zut ! On a encore une erreur, nous
 informant cette fois-ci que `Rectangle` n'implémente pas `std::fmt::Debug` :
 
+<!--
 ```text
-error[E0277]: `Rectangle` doesn't implement `std::fmt::Debug`
+{{#include ../listings/ch05-using-structs-to-structure-related-data/output-only-01-debug/output.txt:3}}
+```
+-->
+
+```text
+{{#include ../listings/ch05-using-structs-to-structure-related-data/output-only-01-debug/output.txt:3}}
 ```
 
 <!--
@@ -483,9 +404,14 @@ But again, the compiler gives us a helpful note:
 
 Mais une nouvelle fois, le compilateur nous fait une remarque utile :
 
+<!--
 ```text
-= help: the trait `std::fmt::Debug` is not implemented for `Rectangle`
-= note: add `#[derive(Debug)]` or manually implement `std::fmt::Debug`
+{{#include ../listings/ch05-using-structs-to-structure-related-data/output-only-01-debug/output.txt:9:10}}
+```
+-->
+
+```text
+{{#include ../listings/ch05-using-structs-to-structure-related-data/output-only-01-debug/output.txt:9:10}}
 ```
 
 Il nous conseille d'ajouter `#[derive(Debug)]` ou d'implémenter manuellement
@@ -511,32 +437,12 @@ avant la définition de la structure, comme le montre l'encart 5-12.
 
 <!--
 ```rust
-#[derive(Debug)]
-struct Rectangle {
-    width: u32,
-    height: u32,
-}
-
-fn main() {
-    let rect1 = Rectangle { width: 30, height: 50 };
-
-    println!("rect1 is {:?}", rect1);
-}
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/listing-05-12/src/main.rs}}
 ```
 -->
 
 ```rust
-#[derive(Debug)]
-struct Rectangle {
-    largeur: u32,
-    hauteur: u32,
-}
-
-fn main() {
-    let rect1 = Rectangle { largeur: 30, hauteur: 50 };
-
-    println!("rect1 est {:?}", rect1);
-}
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/listing-05-12/src/main.rs}}
 ```
 
 <!--
@@ -557,13 +463,13 @@ Maintenant, quand on exécute le programme, nous n'avons plus d'erreurs et ce
 texte s'affiche à l'écran :
 
 <!--
-```text
-rect1 is Rectangle { width: 30, height: 50 }
+```console
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-12/output.txt}}
 ```
 -->
 
-```text
-rect1 est Rectangle { largeur: 30, hauteur: 50 }
+```console
+{{#include ../listings/ch05-using-structs-to-structure-related-data/listing-05-12/output.txt}}
 ```
 
 <!--
@@ -582,19 +488,13 @@ au lieu de `{:?}` dans la chaîne de formatage. Quand on utilise `{:#?}` dans ce
 exemple, l'affichage donnera plutôt ceci :
 
 <!--
-```text
-rect1 is Rectangle {
-    width: 30,
-    height: 50
-}
+```console
+{{#include ../listings/ch05-using-structs-to-structure-related-data/output-only-02-pretty-debug/output.txt}}
 ```
 -->
 
-```text
-rect1 est Rectangle {
-    largeur: 30,
-    hauteur: 50,
-}
+```console
+{{#include ../listings/ch05-using-structs-to-structure-related-data/output-only-02-pretty-debug/output.txt}}
 ```
 
 <!--

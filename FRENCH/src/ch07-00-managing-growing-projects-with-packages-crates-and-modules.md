@@ -121,4 +121,8 @@ intéragissent, et expliquer comment les utiliser pour gérer les portées. À
 l'issue de ce chapitre, vous aurez de solides connaissances sur le système de
 modules et vous pourrez travailler avec les portées comme un pro !
 
+<!--
+[workspaces]: ch14-03-cargo-workspaces.html
+-->
+
 [workspaces]: ch14-03-cargo-workspaces.html

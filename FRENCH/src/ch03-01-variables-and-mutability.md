@@ -47,22 +47,12 @@ remplacez son code par le code suivant qui ne compile pas pour le moment :
 
 <!--
 ```rust,ignore,does_not_compile
-fn main() {
-    let x = 5;
-    println!("The value of x is: {}", x);
-    x = 6;
-    println!("The value of x is: {}", x);
-}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-01-variables-are-immutable/src/main.rs}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-fn main() {
-    let x = 5;
-    println!("La valeur de x est : {}", x);
-    x = 6;
-    println!("La valeur de x est : {}", x);
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-01-variables-are-immutable/src/main.rs}}
 ```
 
 <!--
@@ -74,27 +64,13 @@ Sauvegardez et lancez le programme en utilisant `cargo run`. Vous devriez
 avoir un message d'erreur comme celui-ci :
 
 <!--
-```text
-error[E0384]: cannot assign twice to immutable variable `x`
- -- > src/main.rs:4:5
-  |
-2 |     let x = 5;
-  |         - first assignment to `x`
-3 |     println!("The value of x is: {}", x);
-4 |     x = 6;
-  |     ^^^^^ cannot assign twice to immutable variable
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-01-variables-are-immutable/output.txt}}
 ```
 -->
 
-```text
-error[E0384]: cannot assign twice to immutable variable `x`
- --> src/main.rs:4:5
-  |
-2 |     let x = 5;
-  |         - first assignment to `x`
-3 |     println!("La valeur de x est : {}", x);
-4 |     x = 6;
-  |     ^^^^^ cannot assign twice to immutable variable
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-01-variables-are-immutable/output.txt}}
 ```
 
 <!--
@@ -180,22 +156,12 @@ Par exemple, modifions *src/main.rs* ainsi :
 
 <!--
 ```rust
-fn main() {
-    let mut x = 5;
-    println!("The value of x is: {}", x);
-    x = 6;
-    println!("The value of x is: {}", x);
-}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-02-adding-mut/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let mut x = 5;
-    println!("La valeur de x est : {}", x);
-    x = 6;
-    println!("La valeur de x est : {}", x);
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-02-adding-mut/src/main.rs}}
 ```
 
 <!--
@@ -205,23 +171,13 @@ When we run the program now, we get this:
 Lorsque nous exécutons le programme, nous obtenons :
 
 <!--
-```text
-$ cargo run
-   Compiling variables v0.1.0 (file:///projects/variables)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.30 secs
-     Running `target/debug/variables`
-The value of x is: 5
-The value of x is: 6
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-02-adding-mut/output.txt}}
 ```
 -->
 
-```text
-$ cargo run
-   Compiling variables v0.1.0 (file:///projects/variables)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.30 secs
-     Running `target/debug/variables`
-La valeur de x est : 5
-La valeur de x est : 6
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-02-adding-mut/output.txt}}
 ```
 
 <!--
@@ -327,6 +283,12 @@ nommage des constantes est de les écrire tout en majuscule avec des tirets bas
 entre les mots, et des tirets bas peuvent être ajoutés entre les nombres pour
 améliorer la lisibilité) :
 
+<!--
+```rust
+const MAX_POINTS: u32 = 100_000;
+```
+-->
+
 ```rust
 const MAX_POINTS: u32 = 100_000;
 ```
@@ -393,28 +355,12 @@ mot-clé `let` comme ci-dessous :
 
 <!--
 ```rust
-fn main() {
-    let x = 5;
-
-    let x = x + 1;
-
-    let x = x * 2;
-
-    println!("The value of x is: {}", x);
-}
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-03-shadowing/src/main.rs}}
 ```
 -->
 
 ```rust
-fn main() {
-    let x = 5;
-
-    let x = x + 1;
-
-    let x = x * 2;
-
-    println!("La valeur de x est : {}", x);
-}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-03-shadowing/src/main.rs}}
 ```
 
 <!--
@@ -433,21 +379,13 @@ pour donner à `x` la valeur finale de `12`. Lorsque nous exécutons ce programm
 nous obtenons ceci :
 
 <!--
-```text
-$ cargo run
-   Compiling variables v0.1.0 (file:///projects/variables)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.31 secs
-     Running `target/debug/variables`
-The value of x is: 12
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-03-shadowing/output.txt}}
 ```
 -->
 
-```text
-$ cargo run
-   Compiling variables v0.1.0 (file:///projects/variables)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.31 secs
-     Running `target/debug/variables`
-La valeur de x est : 12
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-03-shadowing/output.txt}}
 ```
 
 <!--
@@ -482,14 +420,12 @@ des espaces, mais que nous voulons plutôt stocker cela sous forme de nombre :
 
 <!--
 ```rust
-let spaces = "   ";
-let spaces = spaces.len();
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-04-shadowing-can-change-types/src/main.rs:here}}
 ```
 -->
 
 ```rust
-let espaces = "   ";
-let espaces = espaces.len();
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-04-shadowing-can-change-types/src/main.rs:here}}
 ```
 
 <!--
@@ -511,14 +447,12 @@ simplement réutiliser le nom `espaces`. Cependant, si nous essayons d'utiliser
 
 <!--
 ```rust,ignore,does_not_compile
-let mut spaces = "   ";
-spaces = spaces.len();
+{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-05-mut-cant-change-types/src/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-let mut espaces = "   ";
-espaces = espaces.len();
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-05-mut-cant-change-types/src/main.rs:here}}
 ```
 
 <!--
@@ -528,27 +462,13 @@ The error says we’re not allowed to mutate a variable’s type:
 L'erreur indique que nous ne pouvons pas muter le type d'une variable :
 
 <!--
-```text
-error[E0308]: mismatched types
- -- > src/main.rs:3:14
-  |
-3 |     spaces = spaces.len();
-  |              ^^^^^^^^^^^^ expected &str, found usize
-  |
-  = note: expected type `&str`
-             found type `usize`
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-05-mut-cant-change-types/output.txt}}
 ```
 -->
 
-```text
-error[E0308]: mismatched types
- -- > src/main.rs:3:14
-  |
-3 |     espaces = espaces.len();
-  |               ^^^^^^^^^^^^^ expected &str, found usize
-  |
-  = note: expected type `&str`
-             found type `usize`
+```console
+{{#include ../listings/ch03-common-programming-concepts/no-listing-05-mut-cant-change-types/output.txt}}
 ```
 
 <!--
