@@ -1,7 +1,7 @@
 $ cargo run
    Compiling chapter10 v0.1.0 (file:///projects/chapter10)
 error[E0508]: cannot move out of type `[T]`, a non-copy slice
- --> src/main.rs:2:23
+ -- > src/main.rs:2:23
   |
 2 |     let mut le_plus_grand = liste[0];
   |                             ^^^^^^^^
@@ -11,7 +11,7 @@ error[E0508]: cannot move out of type `[T]`, a non-copy slice
   |                             help: consider borrowing here: `&liste[0]`
 
 error[E0507]: cannot move out of a shared reference
- --> src/main.rs:4:18
+ -- > src/main.rs:4:18
   |
 4 |     for &element in liste {
   |         --------    ^^^^^
