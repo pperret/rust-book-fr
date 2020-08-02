@@ -113,6 +113,12 @@ nouvelle publication, et ces publications sont créées automatiquement par
 l'infrastructure de publication. Ainsi, les publications ressemblent à ceci, une
 fois par nuit :
 
+<!--
+```text
+nightly: * - - * - - *
+```
+-->
+
 ```text
 nightly: * - - * - - *
 ```
@@ -126,6 +132,14 @@ there are two releases:
 Tous les six semaines, c'est le moment de préparer une nouvelle publication ! La
 branche `beta` du dépôt Rust est alors dérivée de la branche `master` utilisée
 par nightly. Ainsi, il y a deux canaux de publications :
+
+<!--
+```text
+nightly: * - - * - - *
+                     |
+beta:                *
+```
+-->
 
 ```text
 nightly: * - - * - - *
@@ -143,6 +157,14 @@ La plupart des utilisateurs Rust n'utilisent pas activement les publications en
 beta, mais les tests en beta sur leur système d'Intégration Continue aident à
 découvrir des potentielles régressions. Pendant ce temps, il continue à avoir
 une publication nightly chaque nuit :
+
+<!--
+```text
+nightly: * - - * - - * - - * - - *
+                     |
+beta:                *
+```
+-->
 
 ```text
 nightly: * - - * - - * - - * - - *
@@ -163,6 +185,14 @@ retrouve dans une publication stable ! La correction est alors appliquée sur
 `master`, ainsi nightly est corrigé, et ensuite la correction est reportée sur
 la branche `beta`, et une nouvelle publication de beta est produite :
 
+<!--
+```text
+nightly: * - - * - - * - - * - - * - - *
+                     |
+beta:                * - - - - - - - - *
+```
+-->
+
 ```text
 nightly: * - - * - - * - - * - - * - - *
                      |
@@ -177,6 +207,16 @@ Six weeks after the first beta was created, it’s time for a stable release! Th
 Six semaines après que la première beta soit créée, c'est le moment de publier
 une version stable ! La branche `stable` est produite à partir de la branche
 `beta` :
+
+<!--
+```text
+nightly: * - - * - - * - - * - - * - - * - * - *
+                     |
+beta:                * - - - - - - - - *
+                                       |
+stable:                                *
+```
+-->
 
 ```text
 nightly: * - - * - - * - - * - - * - - * - * - *
@@ -198,6 +238,16 @@ les six semaines sont passées, nous devons aussi publier une nouvelle beta de l
 version *suivante* de Rust, la 1.6. Donc après que la branche `stable` soit
 dérivée de la `beta`, la prochaine version de la branche `beta` doit à nouveau
 être dérivée de nightly :
+
+<!--
+```text
+nightly: * - - * - - * - - * - - * - - * - * - *
+                     |                         |
+beta:                * - - - - - - - - *       *
+                                       |
+stable:                                *
+```
+-->
 
 ```text
 nightly: * - - * - - * - - * - - * - - * - * - *
@@ -322,8 +372,14 @@ Rustup facilite les changements entre les différents canaux de publication de
 Rust, de manière globale ou par projet. Par défaut, vous avez Rust stable
 d'installé. Pour installer nightly, vous pouvez saisir, par exemple :
 
-```text
-$ rustup install nightly
+<!--
+```console
+$ rustup toolchain install nightly
+```
+-->
+
+```console
+$ rustup toolchain install nightly
 ```
 
 <!--
@@ -335,6 +391,15 @@ of your authors’ Windows computer:
 Vous pouvez aussi voir avec `rustup` toutes les *toolchains* (les publications
 de Rust et leurs composants associés) que vous avez d'installées. Voici un
 exemple d'un ordinateur sous Windows d'un des auteurs du livre :
+
+<!--
+```powershell
+> rustup toolchain list
+stable-x86_64-pc-windows-msvc (default)
+beta-x86_64-pc-windows-msvc
+nightly-x86_64-pc-windows-msvc
+```
+-->
 
 ```powershell
 > rustup toolchain list
@@ -361,13 +426,13 @@ dans le dossier de ce projet pour régler `rustup` pour qu'il utilise la
 toolchain nightly lorsque vous vous trouvez dans ce dossier :
 
 <!--
-```text
+```console
 $ cd ~/projects/needs-nightly
 $ rustup override set nightly
 ```
 -->
 
-```text
+```console
 $ cd ~/projets/necessite-nightly
 $ rustup override set nightly
 ```
