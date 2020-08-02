@@ -1,0 +1,6 @@
+$ cargo run
+   Compiling functions v0.1.0 (file:///projects/functions)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.31s
+     Running `target/debug/functions`
+La valeur de x est : 5
+La valeur de x est : 6
