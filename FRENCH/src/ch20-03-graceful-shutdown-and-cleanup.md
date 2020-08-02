@@ -73,28 +73,12 @@ d'implémentation de `Drop` ; ce code ne fonctionne pas encore tout à fait.
 
 <!--
 ```rust,ignore,does_not_compile
-impl Drop for ThreadPool {
-    fn drop(&mut self) {
-        for worker in &mut self.workers {
-            println!("Shutting down worker {}", worker.id);
-
-            worker.thread.join().unwrap();
-        }
-    }
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-22/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore,does_not_compile
-impl Drop for GroupeTaches {
-    fn drop(&mut self) {
-        for operateur in &mut self.operateurs {
-            println!("Arrêt de l'opérateur {}", operateur.id);
-
-            operateur.tache.join().unwrap();
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-22/src/lib.rs:here}}
 ```
 
 <!--
@@ -128,21 +112,13 @@ Here is the error we get when we compile this code:
 Voici l'erreur que nous obtenons lorsque nous compilons ce code :
 
 <!--
-```text
-error[E0507]: cannot move out of borrowed content
-  -- > src/lib.rs:65:13
-   |
-65 |             worker.thread.join().unwrap();
-   |             ^^^^^^ cannot move out of borrowed content
+```console
+{{#include ../listings-sources/ch20-web-server/listing-20-22/output.txt}}
 ```
 -->
 
-```text
-error[E0507]: cannot move out of borrowed content
-  --> src/lib.rs:65:13
-   |
-65 |             operateur.thread.join().unwrap();
-   |             ^^^^^^^^^ cannot move out of borrowed content
+```console
+{{#include ../listings/ch20-web-server/listing-20-22/output.txt}}
 ```
 
 <!--
@@ -184,21 +160,13 @@ ceci :
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
-# use std::thread;
-struct Worker {
-    id: usize,
-    thread: Option<thread::JoinHandle<()>>,
-}
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings-sources/ch20-web-server/no-listing-04-update-worker-definition/src/lib.rs:here}}
 ```
 -->
 
-```rust
-# use std::thread;
-struct Operateur {
-    id: usize,
-    tache: Option<thread::JoinHandle<()>>,
-}
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch20-web-server/no-listing-04-update-worker-definition/src/lib.rs:here}}
 ```
 
 <!--
@@ -210,49 +178,13 @@ Maintenant, aidons-nous du compilateur pour trouver les autres endroits qui ont
 besoin de changer. En vérifiant ce code, nous obtenons deux erreurs :
 
 <!--
-```text
-error[E0599]: no method named `join` found for type
-`std::option::Option<std::thread::JoinHandle<()>>` in the current scope
-  -- > src/lib.rs:65:27
-   |
-65 |             worker.thread.join().unwrap();
-   |                           ^^^^
-
-error[E0308]: mismatched types
-  -- > src/lib.rs:89:13
-   |
-89 |             thread,
-   |             ^^^^^^
-   |             |
-   |             expected enum `std::option::Option`, found struct
-   `std::thread::JoinHandle`
-   |             help: try using a variant of the expected type: `Some(thread)`
-   |
-   = note: expected type `std::option::Option<std::thread::JoinHandle<()>>`
-              found type `std::thread::JoinHandle<_>`
+```console
+{{#include ../listings-sources/ch20-web-server/no-listing-04-update-worker-definition/output.txt}}
 ```
 -->
 
-```text
-error[E0599]: no method named `join` found for type
-`std::option::Option<std::thread::JoinHandle<()>>` in the current scope
-  -- > src/lib.rs:65:27
-   |
-65 |             operateur.tache.join().unwrap();
-   |                             ^^^^
-
-error[E0308]: mismatched types
-  -- > src/lib.rs:89:13
-   |
-89 |             tache,
-   |             ^^^^^
-   |             |
-   |             expected enum `std::option::Option`, found struct
-   `std::thread::JoinHandle`
-   |             help: try using a variant of the expected type: `Some(tache)`
-   |
-   = note: expected type `std::option::Option<std::thread::JoinHandle<()>>`
-              found type `std::thread::JoinHandle<_>`
+```console
+{{#include ../listings/ch20-web-server/no-listing-04-update-worker-definition/output.txt}}
 ```
 
 <!--
@@ -274,18 +206,13 @@ corriger cette erreur :
 
 <!--
 ```rust,ignore
-impl Worker {
-    fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
-        // --snip--
-
-        Worker {
-            id,
-            thread: Some(thread),
-        }
-    }
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/no-listing-05-fix-worker-new/src/lib.rs:here}}
 ```
 -->
+
+```rust,ignore
+{{#rustdoc_include ../listings/ch20-web-server/no-listing-05-fix-worker-new/src/lib.rs:here}}
+```
 
 ```rust,ignore
 impl Operateur {
@@ -319,32 +246,12 @@ mentionné plus tôt que nous voulions faire appel à `take` sur la valeur de
 
 <!--
 ```rust,ignore
-impl Drop for ThreadPool {
-    fn drop(&mut self) {
-        for worker in &mut self.workers {
-            println!("Shutting down worker {}", worker.id);
-
-            if let Some(thread) = worker.thread.take() {
-                thread.join().unwrap();
-            }
-        }
-    }
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/no-listing-06-fix-threadpool-drop/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore
-impl Drop for GroupeTaches {
-    fn drop(&mut self) {
-        for operateur in &mut self.operateurs {
-            println!("Arrêt de l'opérateur {}", operateur.id);
-
-            if let Some(tache) = operateur.tache.take() {
-                tache.join().unwrap();
-            }
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch20-web-server/no-listing-06-fix-threadpool-drop/src/lib.rs:here}}
 ```
 
 <!--
@@ -408,20 +315,12 @@ des instances de `Job`.
 
 <!--
 ```rust
-# struct Job;
-enum Message {
-    NewJob(Job),
-    Terminate,
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/no-listing-07-define-message-enum/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-# struct Mission;
-enum Message {
-    NouvelleMission(Mission),
-    Extinction,
-}
+{{#rustdoc_include ../listings/ch20-web-server/no-listing-07-define-message-enum/src/lib.rs:here}}
 ```
 
 <!--
@@ -451,112 +350,12 @@ plutôt que le type `Mission`, comme dans l'encart 20-23.
 
 <!--
 ```rust,ignore
-pub struct ThreadPool {
-    workers: Vec<Worker>,
-    sender: mpsc::Sender<Message>,
-}
-
-// --snip--
-
-impl ThreadPool {
-    // --snip--
-
-    pub fn execute<F>(&self, f: F)
-        where
-            F: FnOnce() + Send + 'static
-    {
-        let job = Box::new(f);
-
-        self.sender.send(Message::NewJob(job)).unwrap();
-    }
-}
-
-// --snip--
-
-impl Worker {
-    fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Message>>>) ->
-        Worker {
-
-        let thread = thread::spawn(move ||{
-            loop {
-                let message = receiver.lock().unwrap().recv().unwrap();
-
-                match message {
-                    Message::NewJob(job) => {
-                        println!("Worker {} got a job; executing.", id);
-
-                        job();
-                    },
-                    Message::Terminate => {
-                        println!("Worker {} was told to terminate.", id);
-
-                        break;
-                    },
-                }
-            }
-        });
-
-        Worker {
-            id,
-            thread: Some(thread),
-        }
-    }
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-23/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore
-pub struct GroupeTaches {
-    operateurs: Vec<Operateur>,
-    envoi: mpsc::Sender<Message>,
-}
-
-// -- partie masquée ici --
-
-impl GroupeTaches {
-    // -- partie masquée ici --
-
-    pub fn executer<F>(&self, f: F)
-        where
-            F: FnOnce() + Send + 'static
-    {
-        let mission = Box::new(f);
-
-        self.envoi.send(Message::NouvelleMission(mission)).unwrap();
-    }
-}
-
-// -- partie masquée ici --
-
-impl Operateur {
-    fn new(id: usize, reception: Arc<Mutex<mpsc::Receiver<Message>>>) ->
-        Operateur {
-
-        let tache = thread::spawn(move ||{
-            loop {
-                let message = reception.lock().unwrap().recv().unwrap();
-
-                match message {
-                    Message::NouvelleMission(mission) => {
-                        println!("L'opérateur {} a reçu une mission ; il l'exécute.", id);
-
-                        mission();
-                    },
-                    Message::Extinction => {
-                        println!("L'opérateur {} a reçu l'instruction d'arrêt.", id);
-
-                        break;
-                    },
-                }
-            }
-        });
-
-        Operateur {
-            id,
-            tache: Some(tache),
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-23/src/lib.rs:here}}
 ```
 
 <!--
@@ -606,48 +405,12 @@ pour qu'elle ressemble à l'encart 20-24.
 
 <!--
 ```rust,ignore
-impl Drop for ThreadPool {
-    fn drop(&mut self) {
-        println!("Sending terminate message to all workers.");
-
-        for _ in &mut self.workers {
-            self.sender.send(Message::Terminate).unwrap();
-        }
-
-        println!("Shutting down all workers.");
-
-        for worker in &mut self.workers {
-            println!("Shutting down worker {}", worker.id);
-
-            if let Some(thread) = worker.thread.take() {
-                thread.join().unwrap();
-            }
-        }
-    }
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-24/src/lib.rs:here}}
 ```
 -->
 
 ```rust,ignore
-impl Drop for GroupeTaches {
-    fn drop(&mut self) {
-        println!("Envoi du message d'extinction à tous les opérateurs.");
-
-        for _ in &mut self.operateurs {
-            self.envoi.send(Message::Extinction).unwrap();
-        }
-
-        println!("Arrêt de tous les opérateurs.");
-
-        for operateur in &mut self.operateurs {
-            println!("Arrêt de l'opérateur {}", operateur.id);
-
-            if let Some(tache) = operateur.tache.take() {
-                tache.join().unwrap();
-            }
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-24/src/lib.rs:here}}
 ```
 
 <!--
@@ -731,38 +494,12 @@ l'encart 20-25.
 
 <!--
 ```rust,ignore
-fn main() {
-    let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
-    let pool = ThreadPool::new(4);
-
-    for stream in listener.incoming().take(2) {
-        let stream = stream.unwrap();
-
-        pool.execute(|| {
-            handle_connection(stream);
-        });
-    }
-
-    println!("Shutting down.");
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-25/src/bin/main.rs:here}}
 ```
 -->
 
 ```rust,ignore
-fn main() {
-    let ecouteur = TcpListener::bind("127.0.0.1:7878").unwrap();
-    let groupe = GroupeTaches::new(4);
-
-    for flux in ecouteur.incoming().take(2) {
-        let flux = flux.unwrap();
-
-        groupe.execute(|| {
-            gestion_connexion(flux);
-        });
-    }
-
-    println!("Arrêt.");
-}
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-25/src/bin/main.rs:here}}
 ```
 
 <!--
@@ -803,11 +540,24 @@ requête devrait faire une erreur, et dans votre terminal vous devriez avoir une
 sortie similaire à ceci :
 
 <!--
-```text
+<!-- manual-regeneration
+cd listings/ch20-web-server/listing-20-25
+cargo run
+curl http://127.0.0.1:7878
+curl http://127.0.0.1:7878
+curl http://127.0.0.1:7878
+third request will error because server will have shut down
+copy output below
+Can't automate because the output depends on making requests
+-- >
+-->
+
+<!--
+```console
 $ cargo run
    Compiling hello v0.1.0 (file:///projects/hello)
-    Finished dev [unoptimized + debuginfo] target(s) in 1.0 secs
-     Running `target/debug/hello`
+    Finished dev [unoptimized + debuginfo] target(s) in 1.0s
+     Running `target/debug/main`
 Worker 0 got a job; executing.
 Worker 3 got a job; executing.
 Shutting down.
@@ -824,11 +574,11 @@ Shutting down worker 3
 ```
 -->
 
-```text
+```console
 $ cargo run
    Compiling salutations v0.1.0 (file:///projects/salutations)
-    Finished dev [unoptimized + debuginfo] target(s) in 1.0 secs
-     Running `target/debug/salutations`
+    Finished dev [unoptimized + debuginfo] target(s) in 1.0s
+     Running `target/debug/main`
 L'opérateur 0 a reçu une mission ; il l'exécute.
 L'opérateur 3 a reçu une mission ; il l'exécute.
 Arrêt.
@@ -910,104 +660,12 @@ Voici le code complet pour pouvoir vous y référer :
 
 <!--
 ```rust,ignore
-use hello::ThreadPool;
-
-use std::io::prelude::*;
-use std::net::TcpListener;
-use std::net::TcpStream;
-use std::fs;
-use std::thread;
-use std::time::Duration;
-
-fn main() {
-    let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
-    let pool = ThreadPool::new(4);
-
-    for stream in listener.incoming().take(2) {
-        let stream = stream.unwrap();
-
-        pool.execute(|| {
-            handle_connection(stream);
-        });
-    }
-
-    println!("Shutting down.");
-}
-
-fn handle_connection(mut stream: TcpStream) {
-    let mut buffer = [0; 512];
-    stream.read(&mut buffer).unwrap();
-
-    let get = b"GET / HTTP/1.1\r\n";
-    let sleep = b"GET /sleep HTTP/1.1\r\n";
-
-    let (status_line, filename) = if buffer.starts_with(get) {
-        ("HTTP/1.1 200 OK\r\n\r\n", "hello.html")
-    } else if buffer.starts_with(sleep) {
-        thread::sleep(Duration::from_secs(5));
-        ("HTTP/1.1 200 OK\r\n\r\n", "hello.html")
-    } else {
-        ("HTTP/1.1 404 NOT FOUND\r\n\r\n", "404.html")
-    };
-
-    let contents = fs::read_to_string(filename).unwrap();
-
-    let response = format!("{}{}", status_line, contents);
-
-    stream.write(response.as_bytes()).unwrap();
-    stream.flush().unwrap();
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-25/src/bin/main.rs:all}}
 ```
 -->
 
 ```rust,ignore
-use hello::GroupeTaches;
-
-use std::io::prelude::*;
-use std::net::TcpListener;
-use std::net::TcpStream;
-use std::fs;
-use std::thread;
-use std::time::Duration;
-
-fn main() {
-    let ecouteur = TcpListener::bind("127.0.0.1:7878").unwrap();
-    let groupe = GroupeTaches::new(4);
-
-    for flux in ecouteur.incoming().take(2) {
-        let flux = flux.unwrap();
-
-        groupe.executer(|| {
-            gestion_connexion(flux);
-        });
-    }
-
-    println!("Arrêt.");
-}
-
-fn gestion_connexion(mut flux: TcpStream) {
-    let mut tampon = [0; 512];
-    flux.read(&mut tampon).unwrap();
-
-    let get = b"GET / HTTP/1.1\r\n";
-    let pause = b"GET /pause HTTP/1.1\r\n";
-
-    let (ligne_statut, nom_fichier) = if tampon.starts_with(get) {
-        ("HTTP/1.1 200 OK\r\n\r\n", "salutation.html")
-    } else if tampon.starts_with(pause) {
-        thread::sleep(Duration::from_secs(5));
-        ("HTTP/1.1 200 OK\r\n\r\n", "salutation.html")
-    } else {
-        ("HTTP/1.1 404 NOT FOUND\r\n\r\n", "404.html")
-    };
-
-    let contenu = fs::read_to_string(nom_fichier).unwrap();
-
-    let reponse = format!("{}{}", ligne_statut, contenu);
-
-    flux.write(reponse.as_bytes()).unwrap();
-    flux.flush().unwrap();
-}
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-25/src/bin/main.rs:all}}
 ```
 
 <!--
@@ -1018,226 +676,12 @@ fn gestion_connexion(mut flux: TcpStream) {
 
 <!--
 ```rust
-use std::thread;
-use std::sync::mpsc;
-use std::sync::Arc;
-use std::sync::Mutex;
-
-enum Message {
-    NewJob(Job),
-    Terminate,
-}
-
-pub struct ThreadPool {
-    workers: Vec<Worker>,
-    sender: mpsc::Sender<Message>,
-}
-
-type Job = Box<dyn FnOnce() + Send + 'static>;
-
-impl ThreadPool {
-    /// Create a new ThreadPool.
-    ///
-    /// The size is the number of threads in the pool.
-    ///
-    /// # Panics
-    ///
-    /// The `new` function will panic if the size is zero.
-    pub fn new(size: usize) -> ThreadPool {
-        assert!(size > 0);
-
-        let (sender, receiver) = mpsc::channel();
-
-        let receiver = Arc::new(Mutex::new(receiver));
-
-        let mut workers = Vec::with_capacity(size);
-
-        for id in 0..size {
-            workers.push(Worker::new(id, Arc::clone(&receiver)));
-        }
-
-        ThreadPool {
-            workers,
-            sender,
-        }
-    }
-
-    pub fn execute<F>(&self, f: F)
-        where
-            F: FnOnce() + Send + 'static
-    {
-        let job = Box::new(f);
-
-        self.sender.send(Message::NewJob(job)).unwrap();
-    }
-}
-
-impl Drop for ThreadPool {
-    fn drop(&mut self) {
-        println!("Sending terminate message to all workers.");
-
-        for _ in &mut self.workers {
-            self.sender.send(Message::Terminate).unwrap();
-        }
-
-        println!("Shutting down all workers.");
-
-        for worker in &mut self.workers {
-            println!("Shutting down worker {}", worker.id);
-
-            if let Some(thread) = worker.thread.take() {
-                thread.join().unwrap();
-            }
-        }
-    }
-}
-
-struct Worker {
-    id: usize,
-    thread: Option<thread::JoinHandle<()>>,
-}
-
-impl Worker {
-    fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Message>>>) ->
-        Worker {
-
-        let thread = thread::spawn(move ||{
-            loop {
-                let message = receiver.lock().unwrap().recv().unwrap();
-
-                match message {
-                    Message::NewJob(job) => {
-                        println!("Worker {} got a job; executing.", id);
-
-                        job();
-                    },
-                    Message::Terminate => {
-                        println!("Worker {} was told to terminate.", id);
-
-                        break;
-                    },
-                }
-            }
-        });
-
-        Worker {
-            id,
-            thread: Some(thread),
-        }
-    }
-}
+{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-25/src/lib.rs:here}}
 ```
 -->
 
 ```rust
-use std::thread;
-use std::sync::mpsc;
-use std::sync::Arc;
-use std::sync::Mutex;
-
-enum Message {
-    NouvelleMission(Mission),
-    Extinction,
-}
-
-pub struct GroupeTaches {
-    operateurs: Vec<Operateur>,
-    envoi: mpsc::Sender<Message>,
-}
-
-type Mission = Box<dyn FnOnce() + Send + 'static>;
-
-impl GroupeTaches {
-    /// Crée un nouveau GroupeTaches.
-    ///
-    /// La taille est le nom de tâches présentes dans le groupe.
-    ///
-    /// # Panics
-    ///
-    /// La fonction `new` devrait paniquer si la taille vaut zéro.
-    pub fn new(taille: usize) -> GroupeTaches {
-        assert!(taille > 0);
-
-        let (envoi, reception) = mpsc::channel();
-
-        let reception = Arc::new(Mutex::new(reception));
-
-        let mut operateurs = Vec::with_capacity(taille);
-
-        for id in 0..taille {
-            operateurs.push(Operateur::new(id, Arc::clone(&reception)));
-        }
-
-        GroupeTaches {
-            operateurs,
-            envoi,
-        }
-    }
-
-    pub fn executer<F>(&self, f: F)
-        where
-            F: FnOnce() + Send + 'static
-    {
-        let mission = Box::new(f);
-
-        self.envoi.send(Message::NouvelleMission(mission)).unwrap();
-    }
-}
-
-impl Drop for GroupeTaches {
-    fn drop(&mut self) {
-        println!("Envoi du message d'extinction à tous les opérateurs.");
-
-        for _ in &mut self.operateurs {
-            self.envoi.send(Message::Extinction).unwrap();
-        }
-
-        println!("Arrêt de tous les opérateurs.");
-
-        for operateur in &mut self.operateurs {
-            println!("Arrêt de l'opérateur {}", operateur.id);
-
-            if let Some(tache) = operateur.tache.take() {
-                tache.join().unwrap();
-            }
-        }
-    }
-}
-
-struct Operateur {
-    id: usize,
-    tache: Option<thread::JoinHandle<()>>,
-}
-
-impl Operateur {
-    fn new(id: usize, reception: Arc<Mutex<mpsc::Receiver<Message>>>) ->
-        Operateur {
-
-        let tache = thread::spawn(move ||{
-            loop {
-                let message = reception.lock().unwrap().recv().unwrap();
-
-                match message {
-                    Message::NouvelleMission(mission) => {
-                        println!("L'opérateur {} a reçu une mission ; il l'exécute.", id);
-
-                        mission();
-                    },
-                    Message::Extinction => {
-                        println!("L'opérateur {} a reçu l'instruction d'arrêt.", id);
-
-                        break;
-                    },
-                }
-            }
-        });
-
-        Operateur {
-            id,
-            tache: Some(tache),
-        }
-    }
-}
+{{#rustdoc_include ../listings/ch20-web-server/listing-20-25/src/lib.rs:here}}
 ```
 
 <!--
