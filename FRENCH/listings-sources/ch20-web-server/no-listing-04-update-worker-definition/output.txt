@@ -1,13 +1,13 @@
 $ cargo check
     Checking hello v0.1.0 (file:///projects/hello)
 error[E0599]: no method named `join` found for type `std::option::Option<std::thread::JoinHandle<()>>` in the current scope
-  --> src/lib.rs:52:27
+  -- > src/lib.rs:52:27
    |
 52 |             worker.thread.join().unwrap();
    |                           ^^^^ method not found in `std::option::Option<std::thread::JoinHandle<()>>`
 
 error[E0308]: mismatched types
-  --> src/lib.rs:72:22
+  -- > src/lib.rs:72:22
    |
 72 |         Worker { id, thread }
    |                      ^^^^^^
