@@ -18,20 +18,12 @@ Imaginons le programme dans l'encart 6-6 qui fait un `match` sur une valeur
 
 <!--
 ```rust
-let some_u8_value = Some(0u8);
-match some_u8_value {
-    Some(3) => println!("three"),
-    _ => (),
-}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-06/src/main.rs:here}}
 ```
 -->
 
 ```rust
-let une_valeur_u8 = Some(0u8);
-match une_valeur_u8 {
-    Some(3) => println!("trois"),
-    _ => (),
-}
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-06/src/main.rs:here}}
 ```
 
 <!--
@@ -65,18 +57,12 @@ utilisant `if let`. Le code suivant se comporte comme le `match` de l'encart
 
 <!--
 ```rust
-# let some_u8_value = Some(0u8);
-if let Some(3) = some_u8_value {
-    println!("three");
-}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-12-if-let/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# let une_valeur_u8 = Some(0u8);
-if let Some(3) = une_valeur_u8 {
-    println!("trois");
-}
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-12-if-let/src/main.rs:here}}
 ```
 
 <!--
@@ -131,46 +117,12 @@ une expression `match` comme ceci :
 
 <!--
 ```rust
-# #[derive(Debug)]
-# enum UsState {
-#    Alabama,
-#    Alaska,
-# }
-#
-# enum Coin {
-#    Penny,
-#    Nickel,
-#    Dime,
-#    Quarter(UsState),
-# }
-# let coin = Coin::Penny;
-let mut count = 0;
-match coin {
-    Coin::Quarter(state) => println!("State quarter from {:?}!", state),
-    _ => count += 1,
-}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-13-count-and-announce-match/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# #[derive(Debug)]
-# enum USAState {
-#    Alabama,
-#    Alaska,
-# }
-#
-# enum USACoin {
-#    Penny,
-#    Nickel,
-#    Dime,
-#    Quarter(USAState),
-# }
-# let piece = USACoin::Penny;
-let mut compteur = 0;
-match piece {
-    USACoin::Quarter(etat) => println!("Il s'agit d'un Quarter de l'état de {:?} !", etat),
-    _ => compteur += 1,
-}
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-13-count-and-announce-match/src/main.rs:here}}
 ```
 
 <!--
@@ -181,48 +133,12 @@ Ou nous pourrions utiliser une expression `if let`/`else` comme ceci :
 
 <!--
 ```rust
-# #[derive(Debug)]
-# enum UsState {
-#    Alabama,
-#    Alaska,
-# }
-#
-# enum Coin {
-#    Penny,
-#    Nickel,
-#    Dime,
-#    Quarter(UsState),
-# }
-# let coin = Coin::Penny;
-let mut count = 0;
-if let Coin::Quarter(state) = coin {
-    println!("State quarter from {:?}!", state);
-} else {
-    count += 1;
-}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-14-count-and-announce-if-let-else/src/main.rs:here}}
 ```
 -->
 
 ```rust
-# #[derive(Debug)]
-# enum USAState {
-#    Alabama,
-#    Alaska,
-# }
-#
-# enum USACoin {
-#    Penny,
-#    Nickel,
-#    Dime,
-#    Quarter(USAState),
-# }
-# let piece = USACoin::Penny;
-let mut compteur = 0;
-if let USACoin::Quarter(etat) = piece {
-    println!("Il s'agit d'un Quarter de l'état de {:?}!", etat);
-} else {
-    compteur += 1;
-}
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-14-count-and-announce-if-let-else/src/main.rs:here}}
 ```
 
 <!--

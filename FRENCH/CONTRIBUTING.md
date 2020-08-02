@@ -7,7 +7,7 @@
 We need to coordinate us with the main English terms translations.
 
 In this purpose, please refer to the file `/FRENCH/src/translation-terms.md`
-when you need to translate a technicial term.
+when you need to translate a technical term.
 
 *(PS : see the next process `Add a translation term` on this same page)*
 
@@ -33,13 +33,25 @@ in English.
 Please limit each line of Markdown file to 80 characters (including spaces). You
 can write your file as you want, but it would be nice to use a tool like
 [https://www.dcode.fr/text-splitter](https://www.dcode.fr/text-splitter) on your
-translated paragraphs before commiting.
+translated paragraphs before committing.
 
 ### Punctuation
 
 Please use a [non-breaking space](https://en.wikipedia.org/wiki/Non-breaking_space)
 instead of space on punctuation who need this space before (like `:`, `!`, `?`,
 ...).
+
+## Tools
+
+We recommend to use the following tools :
+
+- [Microsoft Visual Studio Code](https://code.visualstudio.com/) for writing
+  code, and improve it with following extensions :
+    - [`davidanson.vscode-markdownlint`](https://marketplace.visualstudio.com/items?itemName=davidanson.vscode-markdownlint)
+    - [`moshfeu.compare-folders`](https://marketplace.visualstudio.com/items?itemName=moshfeu.compare-folders)
+    - [`rust-lang.rust`](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust)
+- [Nadaclair BonPatron.com](https://bonpatron.com/) for proofreading
+- [Deepl](https://www.deepl.com/translator) for translations
 
 ## Processes
 
@@ -76,22 +88,22 @@ instead of space on punctuation who need this space before (like `:`, `!`, `?`,
     paragraph.
       - Please quickly read following `Guidelines` currently on this page.
       - A little tip : the [deepl.com](https://www.deepl.com/) translator.
-10. (optionnal) Limit each line of your translation to 80 characters, thank to a
+10. (optional) Limit each line of your translation to 80 characters, thank to a
     tool like
     [https://www.dcode.fr/text-splitter](https://www.dcode.fr/text-splitter).
-11. (optionnal) `cd FRENCH && mdbook build && cd ..` (build the book in
+11. (optional) `cd FRENCH && mdbook build && cd ..` (build the book in
     `/FRENCH/book`). Open its index.html file in your browser, and check its
     correctness. It also should help you for next task.
-12. (optionnal) self-proofreading your work thank to services like
+12. (optional) self-proofreading your work thank to services like
     [bonpatron.fr](https://bonpatron.com).
 13. `git add -A && git commit -m "<Description of your work>"` (committing your
     work)
-14. (optionnal) `git rebase -i HEAD~<the number of commits you need to merge>`
+14. (optional) `git rebase -i HEAD~<the number of commits you need to merge>`
     (squash all your commits into one commit)
 15. `git push origin` (pushing your work on your fork)
 16. In GitHub, create a new pull request from your fork to the main translation
     repository, in order to mark your work ready for a proofreading.
-17. After someone proofreading it (and eventualy some edits), it would be
+17. After someone proofreading it (and eventually some edits), it would be
     merged on `french-release` branch.
 
 ### Update your fork with another fork

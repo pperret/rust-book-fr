@@ -78,8 +78,14 @@ If you’re using Linux or macOS, open a terminal and enter the following comman
 Si vous utilisez Linux ou macOS, ouvrez un terminal et écrivez la commande
 suivante :
 
-```text
-$ curl https://sh.rustup.rs -sSf | sh
+<!--
+```console
+$ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+```
+-->
+
+```console
+$ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 ```
 
 <!--
@@ -93,43 +99,14 @@ qui va installer la dernière version stable de Rust. Il est possible que l'on
 vous demande votre mot de passe. Si l'installation se déroule bien, vous
 devriez voir la ligne suivante s'afficher :
 
+<!--
 ```text
 Rust is installed now. Great!
 ```
-
-<!--
-If you prefer, feel free to download the script and inspect it before running
-it.
 -->
-
-Si vous préférez, vous pouvez télécharger le script et l'examiner avant de le
-lancer.
-
-<!--
-The installation script automatically adds Rust to your system PATH after your
-next login. If you want to start using Rust right away instead of restarting
-your terminal, run the following command in your shell to add Rust to your
-system PATH manually:
--->
-
-Le script d'installation va ajouter automatiquement Rust dans la variable
-*PATH* de votre système après votre prochaine connexion utilisateur.
-Si vous préférez utiliser Rust tout de suite au lieu de redémarrer votre
-terminal, lancez la commande suivante dans votre terminal pour ajouter Rust dans
-le *PATH* de votre système manuellement :
 
 ```text
-$ source $HOME/.cargo/env
-```
-
-<!--
-Alternatively, you can add the following line to your *~/.bash_profile*:
--->
-
-Vous pouvez aussi ajouter la ligne suivante dans votre *~/.bash_profile* :
-
-```text
-$ export PATH="$HOME/.cargo/bin:$PATH"
+Rust is installed now. Great!
 ```
 
 <!--
@@ -159,14 +136,16 @@ dès maintenant.
 
 ### Installer `rustup` sous Windows
 
+<!-- markdownlint-disable -->
 <!--
 On Windows, go to [https://www.rust-lang.org/tools/install][install] and follow
 the instructions for installing Rust. At some point in the installation, you’ll
 receive a message explaining that you’ll also need the C++ build tools for
 Visual Studio 2013 or later. The easiest way to acquire the build tools is to
-install [Build Tools for Visual Studio 2019][visualstudio]. The tools are in
-the Other Tools and Frameworks section.
+install [Build Tools for Visual Studio 2019][visualstudio]. When asked which
+workloads to install make sure "C++ build tools" is selected and that the Windows 10 SDK and the English language pack components are included.
 -->
+<!-- markdownlint-restore -->
 
 Sous Windows, il faut aller sur
 [https://www.rust-lang.org/tools/install][install] et suivre les instructions
@@ -174,19 +153,21 @@ pour installer Rust. À un moment donné durant l'installation, vous aurez un
 message vous expliquant qu'il va vous falloir l'outil de compilation C++
 pour Visual Studio 2013 ou plus récent. La méthode la plus facile pour obtenir
 les outils de compilation est d'installer
-[Build Tools pour Visual Studio 2019][visualstudio].
+[Build Tools pour Visual Studio 2019][visualstudio]. Lorsque vous aurez à
+sélectionner les composants à installer, assurez-vous que les "Outils de
+compilation C++" sont bien sélectionnés, et que le SDK Windows 10 et les paquets
+de langage Anglais sont bien inclus.
 
-<!-- markdownlint-disable -->
 <!--
 [install]: https://www.rust-lang.org/tools/install
-[visualstudio]: https://www.visualstudio.com/downloads/#build-tools-for-visual-studio-2019
+[visualstudio]: https://visualstudio.microsoft.com/visual-cpp-build-tools/
+
 FR translation: the website redirects to French version, we lose the "id" link.
 Fix is directly below:
 -->
-<!-- markdownlint-restore -->
 
 [install]: https://www.rust-lang.org/tools/install
-[visualstudio]: https://www.visualstudio.com/fr/downloads/#build-tools-for-visual-studio-2019
+[visualstudio]: https://visualstudio.microsoft.com/fr/visual-cpp-build-tools/
 
 <!--
 The rest of this book uses commands that work in both *cmd.exe* and PowerShell.
@@ -211,7 +192,13 @@ easy. From your shell, run the following update script:
 Après avoir installé Rust avec `rustup`, la mise à jour vers la dernière version
 est facile. Dans votre terminal, lancez le script de mise à jour suivant :
 
-```text
+<!--
+```console
+$ rustup update
+```
+-->
+
+```console
 $ rustup update
 ```
 
@@ -223,7 +210,13 @@ shell:
 Pour désinstaller Rust et `rustup`, exécutez le script de désinstallation
 suivant dans votre terminal :
 
-```text
+<!--
+```console
+$ rustup self uninstall
+```
+-->
+
+```console
 $ rustup self uninstall
 ```
 
@@ -241,7 +234,13 @@ line:
 Pour vérifier si Rust est correctement installé, ouvrez un terminal et entrez
 cette ligne :
 
-```text
+<!--
+```console
+$ rustc --version
+```
+-->
+
+```console
 $ rustc --version
 ```
 
@@ -253,6 +252,12 @@ stable version that has been released in the following format:
 Vous devriez voir le numéro de version, le *hash* de *commit*,
 et la date de *commit* de la dernière version stable qui a été publiée,
 au format suivant :
+
+<!--
+```text
+rustc x.y.z (abcabcabc yyyy-mm-dd)
+```
+-->
 
 ```text
 rustc x.y.z (abcabcabc yyyy-mm-dd)
@@ -278,9 +283,15 @@ dialoguer en ligne avec d'autres *Rustacés* (un surnom ridicule que nous nous
 donnons entre nous) qui pourront vous aider. D'autres bonnes sources de données
 sont [le forum d'utilisateurs][users] et [Stack Overflow][stackoverflow].
 
+<!--
 [discord]: https://discord.gg/rust-lang
 [users]: https://users.rust-lang.org/
-[stackoverflow]: http://stackoverflow.com/questions/tagged/rust
+[stackoverflow]: https://stackoverflow.com/questions/tagged/rust
+-->
+
+[discord]: https://discord.gg/rust-lang
+[users]: https://users.rust-lang.org/
+[stackoverflow]: https://stackoverflow.com/questions/tagged/rust
 
 <!--
 ### Local Documentation
