@@ -51,7 +51,7 @@ concerné à utiliser pour la surcharge est indiqué.
 | `&` | `&type`, `&mut type`, `&'a type`, `&'a mut type` | Borrowed pointer type | |
 | `&` | `expr & expr` | Bitwise AND | `BitAnd` |
 | `&=` | `var &= expr` | Bitwise AND and assignment | `BitAndAssign` |
-| `&&` | `expr && expr` | Logical AND | |
+| `&&` | `expr && expr` | Short-circuiting logical AND | |
 | `*` | `expr * expr` | Arithmetic multiplication | `Mul` |
 | `*=` | `var *= expr` | Arithmetic multiplication and assignment | `MulAssign` |
 | `*` | `*expr` | Dereference | |
@@ -94,7 +94,7 @@ concerné à utiliser pour la surcharge est indiqué.
 | <code>&vert;</code> | <code>pat &vert; pat</code> | Pattern alternatives | |
 | <code>&vert;</code> | <code>expr &vert; expr</code> | Bitwise OR | `BitOr` |
 | <code>&vert;=</code> | <code>var &vert;= expr</code> | Bitwise OR and assignment | `BitOrAssign` |
-| <code>&vert;&vert;</code> | <code>expr &vert;&vert; expr</code> | Logical OR | |
+| <code>&vert;&vert;</code> | <code>expr &vert;&vert; expr</code> | Short-circuiting logical OR | |
 | `?` | `expr?` | Error propagation | |
 -->
 
@@ -348,6 +348,7 @@ définition de macros et pour spécifier des attributs sur un élément.
 | `$ident` | Macro substitution |
 | `$ident:kind` | Macro capture |
 | `$(…)…` | Macro repetition |
+| `ident!(...)`, `ident!{...}`, `ident![...]` | Macro invocation |
 -->
 
 | Symbole | Explication |
@@ -357,6 +358,7 @@ définition de macros et pour spécifier des attributs sur un élément.
 | `$ident` | Substitution de macro |
 | `$ident:kind` | Capture de macro |
 | `$(…)…` | Répétition de macro |
+| `ident!(...)`, `ident!{...}`, `ident![...]` | Appel d'une macro |
 
 <!--
 Table B-7 shows symbols that create comments.
@@ -412,7 +414,6 @@ Le tableau B-8 montre des symboles utilisés avec les tuples.
 | `(expr, ...)` | Tuple expression |
 | `(type, ...)` | Tuple type |
 | `expr(expr, ...)` | Function call expression; also used to initialize tuple `struct`s and tuple `enum` variants |
-| `ident!(...)`, `ident!{...}`, `ident![...]` | Macro invocation |
 | `expr.0`, `expr.1`, etc. | Tuple indexing |
 -->
 
@@ -425,7 +426,6 @@ Le tableau B-8 montre des symboles utilisés avec les tuples.
 | `(expr, ...)` | Une expression dans un tuple |
 | `(type, ...)` | Un type dans un tuple |
 | `expr(expr, ...)` | Une expression d'appel à une fonction ; aussi utilisé pour initialiser une structure tuple ou une variante d'énumération tuple |
-| `ident!(...)`, `ident!{...}`, `ident![...]` | Appel de macro |
 | `expr.0`, `expr.1`, etc. | Utilisation d'indices sur un tuple |
 
 <!--
