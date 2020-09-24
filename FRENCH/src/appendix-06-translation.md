@@ -26,7 +26,7 @@ pour les aider, ou nous informer de la création d'une nouvelle traduction !
 - [Українська](https://github.com/pavloslav/rust-book-uk-ua)
 - [Español](https://github.com/thecodix/book), [alternate](https://github.com/ManRR/rust-book-es)
 - [Italiano](https://github.com/AgeOfWar/rust-book-it)
-- [Русский](https://github.com/ruRust/rust_book_2ed)
+- [Русский](https://github.com/rust-lang-ru/book)
 - [한국어](https://github.com/rinthel/rust-lang-book-ko)
 - [日本語](https://github.com/rust-lang-ja/book-ja)
 - [Français](https://github.com/Jimskapt/rust-book-fr)
@@ -39,6 +39,7 @@ pour les aider, ou nous informer de la création d'une nouvelle traduction !
 - [Svenska](https://github.com/sebras/book)
 - [Farsi](https://github.com/pomokhtari/rust-book-fa)
 - [Deutsch](https://github.com/rust-lang-de/rustbook-de)
+- [Turkish](https://github.com/RustDili/dokuman/tree/master/ceviriler), [online](https://rustdili.github.io/)
 -->
 
 - [English](https://github.com/rust-lang/book)
@@ -48,7 +49,7 @@ pour les aider, ou nous informer de la création d'une nouvelle traduction !
 - [Українська](https://github.com/pavloslav/rust-book-uk-ua)
 - [Español](https://github.com/thecodix/book), [alternative](https://github.com/ManRR/rust-book-es)
 - [Italiano](https://github.com/AgeOfWar/rust-book-it)
-- [Русский](https://github.com/ruRust/rust_book_2ed)
+- [Русский](https://github.com/rust-lang-ru/book)
 - [한국어](https://github.com/rinthel/rust-lang-book-ko)
 - [日本語](https://github.com/rust-lang-ja/book-ja)
 - [Polski](https://github.com/paytchoo/book-pl)
@@ -60,3 +61,4 @@ pour les aider, ou nous informer de la création d'une nouvelle traduction !
 - [Svenska](https://github.com/sebras/book)
 - [Farsi](https://github.com/pomokhtari/rust-book-fa)
 - [Deutsch](https://github.com/rust-lang-de/rustbook-de)
+- [Turkish](https://github.com/RustDili/dokuman/tree/master/ceviriler), [online](https://rustdili.github.io/)
