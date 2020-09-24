@@ -927,12 +927,12 @@ passe quelque chose de différent.
 #### Données uniquement sur la pile : la copie
 
 <!--
-There’s another wrinkle we haven’t talked about yet. This code using integers,
-part of which was shown in Listing 4-2, works and is valid:
+There’s another wrinkle we haven’t talked about yet. This code using integers – 
+part of which was shown in Listing 4-2 – works and is valid:
 -->
 
 Il y a un autre détail dont on n'a pas encore parlé. Le code suivant utilise
-des entiers, et on en a vu une partie dans l'encart 4-2 ; il fonctionne et
+des entiers - on en a vu une partie dans l'encart 4-2 - il fonctionne et
 est correct :
 
 <!--

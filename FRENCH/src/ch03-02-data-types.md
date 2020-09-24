@@ -834,12 +834,12 @@ exécuté :
 <span class="filename">Fichier : src/main.rs</span>
 
 <!--
-```rust,ignore,panics
+```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-15-invalid-array-access/src/main.rs}}
 ```
 -->
 
-```rust,ignore,panics
+```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-15-invalid-array-access/src/main.rs}}
 ```
 
