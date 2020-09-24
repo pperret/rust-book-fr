@@ -166,12 +166,12 @@ paramètres et retourne 10, ainsi qu'un test qui réussit et un test qui échoue
 
 <!--
 ```rust,panics
-{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-10/src/lib.rs}}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-10/src/lib.rs:here}}
 ```
 -->
 
 ```rust,panics
-{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-10/src/lib.rs}}
+{{#rustdoc_include ../listings/ch11-writing-automated-tests/listing-11-10/src/lib.rs:here}}
 ```
 
 <!--
