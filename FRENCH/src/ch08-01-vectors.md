@@ -386,7 +386,7 @@ Compiler ce code va nous mener à cette erreur :
 
 <!--
 ```console
-{{#include ../listings/ch08-common-collections/listing-08-07/output.txt}}
+{{#include ../listings-sources/ch08-common-collections/listing-08-07/output.txt}}
 ```
 -->
 
@@ -594,25 +594,27 @@ au chapitre 17.
 
 <!--
 Now that we’ve discussed some of the most common ways to use vectors, be sure
-to review the API documentation for all the many useful methods defined on
+to review [the API documentation][vec-api] for all the many useful methods defined on
 `Vec<T>` by the standard library. For example, in addition to `push`, a `pop`
 method removes and returns the last element. Let’s move on to the next
 collection type: `String`!
 -->
 
 Maintenant que nous avons vu les manières les plus courantes d'utiliser les
-vecteurs, prenez le temps de consulter la documentation de l'API pour découvrir
-toutes les méthodes très utiles définies dans la bibliothèque standard pour
-`Vec<T>`. Par exemple, en plus de `push`, nous avons une méthode `pop` qui
+vecteurs, prenez le temps de consulter [la documentation de l'API][vec-api] pour
+découvrir toutes les méthodes très utiles définies dans la bibliothèque standard
+pour `Vec<T>`. Par exemple, en plus de `push`, nous avons une méthode `pop` qui
 retire et retourne le dernier élément. Intéressons-nous maintenant au prochain
 type de collection : les `String` !
 
 <!--
 [data-types]: ch03-02-data-types.html#data-types
 [nomicon]: ../nomicon/vec.html
+[vec-api]: ../std/vec/struct.Vec.html
 [deref]: ch15-02-deref.html#following-the-pointer-to-the-value-with-the-dereference-operator
 -->
 
 [data-types]: ch03-02-data-types.html
 [nomicon]: https://doc.rust-lang.org/nomicon/vec.html
+[vec-api]: https://doc.rust-lang.org/std/vec/struct.Vec.html
 [deref]: ch15-02-deref.html

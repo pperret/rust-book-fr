@@ -104,7 +104,7 @@ Essayez d'exécuter ce code ; vous verrez ceci :
 
 <!--
 ```console
-{{#include ../listings/ch03-common-programming-concepts/no-listing-26-if-true/output.txt}}
+{{#include ../listings-sources/ch03-common-programming-concepts/no-listing-26-if-true/output.txt}}
 ```
 -->
 
@@ -138,7 +138,7 @@ Exécutez à nouveau le programme, et regardez le résultat :
 
 <!--
 ```console
-{{#include ../listings/ch03-common-programming-concepts/no-listing-27-if-false/output.txt}}
+{{#include ../listings-sources/ch03-common-programming-concepts/no-listing-27-if-false/output.txt}}
 ```
 -->
 
@@ -181,7 +181,7 @@ La condition `if` vaut `3` cette fois, et Rust lève une erreur :
 
 <!--
 ```console
-{{#include ../listings/ch03-common-programming-concepts/no-listing-28-if-condition-must-be-bool/output.txt}}
+{{#include ../listings-sources/ch03-common-programming-concepts/no-listing-28-if-condition-must-be-bool/output.txt}}
 ```
 -->
 
@@ -268,7 +268,7 @@ exécuté, vous devriez voir le résultat suivant :
 
 <!--
 ```console
-{{#include ../listings/ch03-common-programming-concepts/no-listing-30-else-if/output.txt}}
+{{#include ../listings-sources/ch03-common-programming-concepts/no-listing-30-else-if/output.txt}}
 ```
 -->
 
@@ -351,7 +351,7 @@ Exécutez ce code pour découvrir ce qui va se passer :
 
 <!--
 ```console
-{{#include ../listings/ch03-common-programming-concepts/listing-03-02/output.txt}}
+{{#include ../listings-sources/ch03-common-programming-concepts/listing-03-02/output.txt}}
 ```
 -->
 
@@ -406,7 +406,7 @@ Rust indique exactement où trouver le problème dans le programme :
 
 <!--
 ```console
-{{#include ../listings/ch03-common-programming-concepts/no-listing-31-arms-must-return-same-type/output.txt}}
+{{#include ../listings-sources/ch03-common-programming-concepts/no-listing-31-arms-must-return-same-type/output.txt}}
 ```
 -->
 
@@ -745,7 +745,7 @@ plus vraie). Exécuter ce code va afficher chaque élément du tableau :
 
 <!--
 ```text
-{{#include ../listings/ch03-common-programming-concepts/listing-03-04/output.txt}}
+{{#include ../listings-sources/ch03-common-programming-concepts/listing-03-04/output.txt}}
 ```
 -->
 

@@ -55,7 +55,7 @@ value.
 
 Each variant can be either signed or unsigned and has an explicit size.
 *Signed* and *unsigned* refer to whether it’s possible for the number to be
-negative or positive—in other words, whether the number needs to have a sign
+negative—in other words, whether the number needs to have a sign
 with it (signed) or whether it will only ever be positive and can therefore be
 represented without a sign (unsigned). It’s like writing numbers on paper: when
 the sign matters, a number is shown with a plus sign or a minus sign; however,
@@ -320,7 +320,7 @@ compile but exit with an error when it runs:
 
 <span class="filename">Filename: src/main.rs</span>
 
-```rust,ignore,panics
+```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-15-invalid-array-access/src/main.rs}}
 ```
 

@@ -187,18 +187,12 @@ new`</span>
 new`</span>
 
 <!--
-This file is in the [*TOML*][toml]<!-- ignore -- > (*Tom’s Obvious, Minimal
-Language*) format, which is Cargo’s configuration format.
+This file is in the [*TOML*](https://toml.io)<!-- ignore -- > (*Tom’s Obvious,
+Minimal Language*) format, which is Cargo’s configuration format.
 -->
 
-Ce fichier est au format [*TOML*][toml]<!-- ignore --> (*Tom’s Obvious, Minimal
-Language*), qui est le format de configuration de Cargo.
-
-<!--
-[toml]: https://github.com/toml-lang/toml
--->
-
-[toml]: https://github.com/toml-lang/toml
+Ce fichier est au format [*TOML*](https://toml.io)<!-- ignore --> (*Tom’s
+Obvious, Minimal Language*), qui est le format de configuration de Cargo.
 
 <!--
 The first line, `[package]`, is a section heading that indicates that the

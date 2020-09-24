@@ -1,7 +1,7 @@
 $ cargo run
    Compiling enums v0.1.0 (file:///projects/enums)
 error[E0277]: cannot add `std::option::Option<i8>` to `i8`
- --> src/main.rs:5:17
+ -- > src/main.rs:5:17
   |
 5 |     let sum = x + y;
   |                 ^ no implementation for `i8 + std::option::Option<i8>`

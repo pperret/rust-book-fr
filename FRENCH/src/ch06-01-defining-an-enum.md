@@ -687,7 +687,7 @@ Si nous lançons ce code, nous aurons un message d'erreur comme celui-ci :
 
 <!--
 ```console
-{{#include ../listings/ch06-enums-and-pattern-matching/no-listing-07-cant-use-option-directly/output.txt}}
+{{#include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-07-cant-use-option-directly/output.txt}}
 ```
 -->
 

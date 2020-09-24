@@ -205,7 +205,7 @@ Voici l'erreur :
 
 <!--
 ```console
-{{#include ../listings/ch04-understanding-ownership/listing-04-06/output.txt}}
+{{#include ../listings-sources/ch04-understanding-ownership/listing-04-06/output.txt}}
 ```
 -->
 
@@ -295,7 +295,7 @@ Voici l'erreur :
 
 <!--
 ```console
-{{#include ../listings/ch04-understanding-ownership/no-listing-10-multiple-mut-not-allowed/output.txt}}
+{{#include ../listings-sources/ch04-understanding-ownership/no-listing-10-multiple-mut-not-allowed/output.txt}}
 ```
 -->
 
@@ -389,7 +389,7 @@ Voici l'erreur :
 
 <!--
 ```console
-{{#include ../listings/ch04-understanding-ownership/no-listing-12-immutable-and-mutable-not-allowed/output.txt}}
+{{#include ../listings-sources/ch04-understanding-ownership/no-listing-12-immutable-and-mutable-not-allowed/output.txt}}
 ```
 -->
 
@@ -515,7 +515,7 @@ Voici l'erreur :
 
 <!--
 ```console
-{{#include ../listings/ch04-understanding-ownership/no-listing-14-dangling-reference/output.txt}}
+{{#include ../listings-sources/ch04-understanding-ownership/no-listing-14-dangling-reference/output.txt}}
 ```
 -->
 

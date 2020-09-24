@@ -441,7 +441,7 @@ dans *Cargo.toml* :
 
 <!--
 ```toml
-{{#include ../listings/ch02-guessing-game-tutorial/listing-02-02/Cargo.toml:9:}}
+{{#include ../listings-sources/ch02-guessing-game-tutorial/listing-02-02/Cargo.toml:9:}}
 ```
 -->
 

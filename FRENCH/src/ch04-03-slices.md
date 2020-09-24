@@ -552,7 +552,7 @@ Voici l'erreur du compilateur :
 
 <!--
 ```console
-{{#include ../listings/ch04-understanding-ownership/no-listing-19-slice-error/output.txt}}
+{{#include ../listings-sources/ch04-understanding-ownership/no-listing-19-slice-error/output.txt}}
 ```
 -->
 
