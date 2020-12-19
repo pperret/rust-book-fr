@@ -425,7 +425,7 @@ des espaces, mais que nous voulons plutôt stocker cela sous forme de nombre :
 -->
 
 ```rust
-{{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-04-shadowing-can-change-types/src/main.rs:here}}
+{{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-04-shadowing-can-change-types/src/main.rs:here}}
 ```
 
 <!--

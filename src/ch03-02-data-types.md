@@ -110,8 +110,17 @@ which you’d use `isize` or `usize` is when indexing some sort of collection.
 > of the values the type can hold. In the case of a `u8`, 256 becomes 0, 257
 > becomes 1, and so on. The program won’t panic, but the variable will have a
 > value that probably isn’t what you were expecting it to have. Relying on
-> integer overflow’s wrapping behavior is considered an error. If you want to
-> wrap explicitly, you can use the standard library type [`Wrapping`][wrapping].
+> integer overflow’s wrapping behavior is considered an error.
+>
+> To explicitly handle the possibility of overflow, you can use these families
+> of methods that the standard library provides on primitive numeric types:
+>
+> - Wrap in all modes with the `wrapping_*` methods, such as `wrapping_add`
+> - Return the `None` value if there is overflow with the `checked_*` methods
+> - Return the value and a boolean indicating whether there was overflow with
+>   the `overflowing_*` methods
+> - Saturate at the value's minimum or maximum values with `saturating_*`
+>   methods
 
 #### Floating-Point Types
 
@@ -145,7 +154,7 @@ The following code shows how you’d use each one in a `let` statement:
 ```
 
 Each expression in these statements uses a mathematical operator and evaluates
-to a single value, which is then bound to a variable. Appendix B contains a
+to a single value, which is then bound to a variable. [Appendix B][appendix_b]<!-- ignore --> contains a
 list of all operators that Rust provides.
 
 #### The Boolean Type
@@ -348,3 +357,4 @@ ch02-00-guessing-game-tutorial.html#comparing-the-guess-to-the-secret-number
 [strings]: ch08-02-strings.html#storing-utf-8-encoded-text-with-strings
 [unrecoverable-errors-with-panic]: ch09-01-unrecoverable-errors-with-panic.html
 [wrapping]: ../std/num/struct.Wrapping.html
+[appendix_b]: appendix-02-operators.md

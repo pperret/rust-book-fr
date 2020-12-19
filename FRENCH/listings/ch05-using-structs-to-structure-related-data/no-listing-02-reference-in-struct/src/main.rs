@@ -1,15 +1,15 @@
-struct User {
-    username: &str,
+struct Utilisateur {
+    pseudo: &str,
     email: &str,
-    sign_in_count: u64,
-    active: bool,
+    nombre_de_connexions: u64,
+    actif: bool,
 }
 
 fn main() {
     let user1 = User {
-        email: "someone@example.com",
-        username: "someusername123",
-        active: true,
-        sign_in_count: 1,
+        email: "quelquun@example.com",
+        pseudo: "pseudoquelconque123",
+        actif: true,
+        nombre_de_connexions: 1,
     };
 }

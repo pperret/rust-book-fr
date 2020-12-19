@@ -1,25 +1,25 @@
 #[derive(Debug)]
-enum USAState {
+enum EtatUs {
     Alabama,
     Alaska,
     // -- partie masquée ici --
 }
 
-enum USACoin {
+enum PieceUs {
     Penny,
     Nickel,
     Dime,
-    Quarter(USAState),
+    Quarter(EtatUs),
 }
 
 // ANCHOR: here
-fn valeur_en_centimes(piece: USACoin) -> u8 {
+fn valeur_en_centimes(piece: PieceUs) -> u8 {
     match piece {
-        USACoin::Penny => 1,
-        USACoin::Nickel => 5,
-        USACoin::Dime => 10,
-        USACoin::Quarter(etat) => {
-            println!("Il s'agit d'un Quarter de l'état de {:?} !", etat);
+        PieceUs::Penny => 1,
+        PieceUs::Nickel => 5,
+        PieceUs::Dime => 10,
+        PieceUs::Quarter(etat) => {
+            println!("Il s'agit d'un quarter de l'État de {:?} !", etat);
             25
         },
     }
@@ -27,5 +27,5 @@ fn valeur_en_centimes(piece: USACoin) -> u8 {
 // ANCHOR_END: here
 
 fn main() {
-    valeur_en_centimes(USACoin::Quarter(USAState::Alaska));
+    valeur_en_centimes(PieceUs::Quarter(EtatUs::Alaska));
 }

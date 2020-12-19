@@ -14,10 +14,10 @@ expressiveness of the patterns and the fact that the compiler confirms that all
 possible cases are handled.
 -->
 
-Rust a un opérateur de contrôle très puissant appelé `match`, qui
-vous permet de comparer une valeur avec une série de motifs et d'exécuter du
-code en fonction du motif qui correspond. Les motifs peuvent être constitués de
-valeurs pures, de noms de variables, de jokers, parmi tant d'autres ; le
+Rust a un opérateur de contrôle très puissant appelé `match` qui vous permet de
+comparer une valeur avec une série de motifs et d'exécuter du code en fonction
+du motif qui correspond. Les motifs peuvent être constitués de valeurs
+littérales, de noms de variables, de jokers, parmi tant d'autres ; le
 chapitre 18 va couvrir tous les différents types de motifs et ce qu'ils font. Ce
 qui fait la puissance de `match` est l'expressivité des motifs et le fait que le
 compilateur vérifie que tous les cas possibles sont bien gérés.
@@ -31,12 +31,12 @@ the value falls into the associated code block to be used during execution.
 -->
 
 Considérez l'expression `match` comme une machine à trier les pièces de
-monnaie : les pièces descendent le long d'une piste avec des trous de taille
-différente, et chaque pièce tombe dans le premier trou qu'elle
-rencontre à sa taille. De manière similaire, les valeurs parcourent tous les
-motifs dans un `match`, et au premier motif auquel la valeur “correspond”, la
-valeur va descendre dans le bloc de code correspondant afin d'être utilisée
-pendant son exécution.
+monnaie : les pièces descendent le long d'une piste avec des trous de tailles
+différentes, et chaque pièce tombe dans le premier trou à sa taille qu'elle
+rencontre. De manière similaire, les valeurs parcourent tous les motifs dans un
+`match`, et au premier motif auquel la valeur “correspond”, la valeur va
+descendre dans le bloc de code correspondant afin d'être utilisée pendant son
+exécution.
 
 <!--
 Because we just mentioned coins, let’s use them as an example using `match`! We
@@ -47,15 +47,17 @@ value in cents, as shown here in Listing 6-3.
 
 Comme nous venons de mentionner des pièces, utilisons-les avec un exemple qui
 utilise `match` ! Nous pouvons écrire une fonction qui prend en paramètre une
-pièce inconnue des Etats Unis d'Amérique (USA) et, de la même manière qu'une
+pièce inconnue des États-Unis d'Amérique et qui peut, de la même manière qu'une
 machine à trier, déterminer quelle pièce c'est et retourner sa valeur en
 centimes, comme ci-dessous dans l'encart 6-3.
 
+<!-- markdownlint-disable -->
 <!--
 ```rust
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-03/src/main.rs:here}}
 ```
 -->
+<!-- markdownlint-restore -->
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-03/src/main.rs:here}}
@@ -82,8 +84,8 @@ Décomposons le `match` dans la fonction `valeur_en_centimes`. En premier lieu,
 nous utilisons le mot-clé `match` suivi par une expression, qui dans notre cas
 est la valeur de `piece`. Cela ressemble beaucoup à une expression utilisée avec
 `if`, mais il y a une grosse différence : avec `if`, l'expression doit retourner
-un valeur booléenne, mais ici, elle peut retourner n'importe quel type. Dans cet
-exemple, `piece` est de type `USACoin`, qui est l'énumération que nous avons
+une valeur booléenne, mais ici, elle peut être de n'importe quel type. Dans cet
+exemple, `piece` est de type `PieceUs`, qui est l'énumération que nous avons
 définie à la ligne 1.
 
 <!--
@@ -95,7 +97,7 @@ is just the value `1`. Each arm is separated from the next with a comma.
 
 Ensuite, nous avons les branches du `match`. Une branche a deux parties : un
 motif et du code. La première branche a ici pour motif la valeur
-`USACoin::Penny` et ensuite l'opérateur `=>` qui sépare le motif et le code à
+`PieceUs::Penny` et ensuite l'opérateur `=>` qui sépare le motif et le code à
 exécuter. Le code dans ce cas est uniquement la valeur `1`. Chaque branche est
 séparée de la suivante par une virgule.
 
@@ -112,7 +114,7 @@ avec le motif de chaque branche, dans l'ordre. Si un motif correspond à la
 valeur, le code correspondant à ce motif est alors exécuté. Si ce motif ne
 correspond pas à la valeur, l'exécution passe à la prochaine branche, un peu
 comme dans une machine de tri de pièces. Nous pouvons avoir autant de branches
-que nous avons besoin : dans l'encart 6-3, notre `match` a quatre branches.
+que nécessaire : dans l'encart 6-3, notre `match` a quatre branches.
 
 <!--
 The code associated with each arm is an expression, and the resulting value of
@@ -121,7 +123,7 @@ entire `match` expression.
 -->
 
 Le code correspondant à chaque branche est une expression, et la valeur qui
-résulte de l'expresssion dans la branche correspondante est la valeur qui sera
+résulte de l'expression dans la branche correspondante est la valeur qui sera
 retournée par l'expression `match`.
 
 <!--
@@ -133,18 +135,20 @@ a `Coin::Penny` but would still return the last value of the block, `1`:
 -->
 
 Les accolades ne sont généralement pas utilisées si le code de la branche
-correspondante est court, comme est le cas dans l'encart 6-3 où chaque branche
-retourne simplement une valeur. Si vous voulez exécuter plusieures lignes de
+correspondante est court, comme c'est le cas dans l'encart 6-3 où chaque branche
+retourne simplement une valeur. Si vous voulez exécuter plusieurs lignes de
 code dans une branche d'un `match`, vous devez utiliser les accolades. Par
 exemple, le code suivant va afficher “Un centime porte-bonheur !” à chaque fois
-que la méthode est appellée avec une valeur `USACoin::Penny` mais va continuer
-à retourner la dernière valeur du bloc, `1` :
+que la méthode est appelée avec une valeur `PieceUs::Penny` mais va continuer à
+retourner la dernière valeur du bloc, `1` :
 
+<!-- markdownlint-disable -->
 <!--
 ```rust
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-08-match-arm-multiple-lines/src/main.rs:here}}
 ```
 -->
+<!-- markdownlint-restore -->
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-08-match-arm-multiple-lines/src/main.rs:here}}
@@ -164,7 +168,7 @@ variants.
 
 Une autre fonctionnalité intéressante des branches de `match` est qu'elles
 peuvent se lier aux valeurs qui correspondent au motif. C'est ainsi que nous
-pouvons extraire les valeurs d'une variante d'énumération.
+pouvons extraire des valeurs d'une variante d'énumération.
 
 <!--
 As an example, let’s change one of our enum variants to hold data inside it.
@@ -176,19 +180,21 @@ inside it, which we’ve done here in Listing 6-4.
 -->
 
 En guise d'exemple, changeons une de nos variantes d'énumération pour stocker
-une donnée à l'intérieur. Entre 1999 et 2008, les Etats-Unis d'Amérique ont
-frappé un côté des pièces de monnaie "Quarter" avec des décors différents pour
-chacun des 50 états. Les autres pièces n'ont pas eu de décors d'états, donc
-seul le "Quarter" a cette valeur en plus. Nous pouvons ajouter cette information
-à notre `enum` en changeant la variante `Quarter` pour y ajouter une valeur
-`USAState` qui y sera stockée à l'intérieur, comme nous l'avons fait dans
-l'encart 6-4.
+une donnée à l'intérieur. Entre 1999 et 2008, les États-Unis d'Amérique ont
+frappé un côté des *quarters* (pièces de 25 centimes) avec des dessins
+différents pour chacun des 50 États. Les autres pièces n'ont pas eu de dessins
+d'États, donc seul le *quarter* a cette valeur en plus. Nous pouvons ajouter
+cette information à notre `enum` en changeant la variante `Quarter` pour y
+ajouter une valeur `EtatUs` qui y sera stockée à l'intérieur, comme nous
+l'avons fait dans l'encart 6-4.
 
+<!-- markdownlint-disable -->
 <!--
 ```rust
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-04/src/main.rs:here}}
 ```
 -->
+<!-- markdownlint-restore -->
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-04/src/main.rs:here}}
@@ -199,8 +205,8 @@ l'encart 6-4.
 also holds a `UsState` value</span>
 -->
 
-<span class="caption">Encart 6-4 : Une énumération `USACoin` dans laquelle la
-variante `Quarter` stocke en plus une valeur de type `USAState`</span>
+<span class="caption">Encart 6-4 : Une énumération `PieceUs` dans laquelle la
+variante `Quarter` stocke en plus une valeur de type `EtatUs`</span>
 
 <!--
 Let’s imagine that a friend of ours is trying to collect all 50 state quarters.
@@ -209,9 +215,9 @@ the state associated with each quarter so if it’s one our friend doesn’t hav
 they can add it to their collection.
 -->
 
-Imaginons qu'un de vos amis essaye de récupérer tous les "Quarter" des 50 états.
-Pendant que nous trions notre monnaie en vrac par type de pièce, nous
-mentionnerons aussi le nom de l'état correspondant à chaque "Quarter" de sorte
+Imaginons qu'un de vos amis essaye de collectionner tous les *quarters* des 50
+États. Pendant que nous trions notre monnaie en vrac par type de pièce, nous
+mentionnerons aussi le nom de l'État correspondant à chaque *quarter* de sorte
 que si notre ami ne l'a pas, il puisse l'ajouter à sa collection.
 
 <!--
@@ -222,16 +228,18 @@ quarter’s state. Then we can use `state` in the code for that arm, like so:
 -->
 
 Dans l'expression `match` de ce code, nous avons ajouté une variable `etat` au
-motif qui correspond à la variante `USACoin::Quarter`. Quand on aura une
-correspondance `USACoin::Quarter`, la variable `etat` sera liée à la valeur de
-l'état de cette pièce. Ensuite, nous pourrons utiliser `etat` dans le code de
+motif qui correspond à la variante `PieceUs::Quarter`. Quand on aura une
+correspondance `PieceUs::Quarter`, la variable `etat` sera liée à la valeur de
+l'État de cette pièce. Ensuite, nous pourrons utiliser `etat` dans le code de
 cette branche, comme ceci :
 
+<!-- markdownlint-disable -->
 <!--
 ```rust
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-09-variable-in-pattern/src/main.rs:here}}
 ```
 -->
+<!-- markdownlint-restore -->
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-09-variable-in-pattern/src/main.rs:here}}
@@ -246,14 +254,14 @@ then use that binding in the `println!` expression, thus getting the inner
 state value out of the `Coin` enum variant for `Quarter`.
 -->
 
-Si nous appelons `valeur_en_centimes(USACoin::Quarter(USAState::Alaska))`,
-`piece` vaudra `USACoin::Quarter(USAState::Alaska)`. Quand nous comparons cette
-valeur avec toutes les branches du `match`, aucune d'entre elles ne
-correspondront jusqu'à ce qu'on arrive à `USACoin::Quarter(etat)`. A partir de
-ce moment, la variable `etat` aura la valeur `USAState::Alaska`. Nous pouvons
-alors utiliser cette variable dans l'expression `println!`, ce qui nous permet
-d'afficher la valeur de l'état à l'intérieur de la variante `Quarter` de la
-l'énumération `USACoin`.
+Si nous appelons `valeur_en_centimes(PieceUs::Quarter(EtatUs::Alaska))`, `piece`
+vaudra `PieceUs::Quarter(EtatUs::Alaska)`. Quand nous comparons cette valeur
+avec toutes les branches du `match`, aucune d'entre elles ne correspondra
+jusqu'à ce qu'on arrive à `PieceUs::Quarter(etat)`. À partir de ce moment, la
+variable `etat` aura la valeur `EtatUs::Alaska`. Nous pouvons alors utiliser
+cette variable dans l'expression `println!`, ce qui nous permet d'afficher la
+valeur de l'État à l'intérieur de la variante `Quarter` de l'énumération
+`PieceUs`.
 
 <!--
 ### Matching with `Option<T>`
@@ -272,7 +280,7 @@ the same.
 Dans la section précédente, nous voulions obtenir la valeur interne `T` dans le
 cas de `Some` lorsqu'on utilisait `Option<T>` ; nous pouvons aussi gérer les
 `Option<T>` en utilisant `match` comme nous l'avons fait avec l'énumération
-`USACoin` ! Au lieu de comparer des pièces, nous allons comparer les variantes
+`PieceUs` ! Au lieu de comparer des pièces, nous allons comparer les variantes
 de `Option<T>`, mais la façon d'utiliser l'expression `match` reste la même.
 
 <!--
@@ -282,8 +290,8 @@ the function should return the `None` value and not attempt to perform any
 operations.
 -->
 
-Disons que nous voulons écrire une fonction qui prend une `Option<i32>` et, si
-il y a une valeur à l'intérieur, ajouter 1 à cette valeur. S'il n'y pas de
+Disons que nous voulons écrire une fonction qui prend une `Option<i32>` et qui,
+s'il y a une valeur à l'intérieur, ajoute 1 à cette valeur. S'il n'y a pas de
 valeur à l'intérieur, la fonction retournera la valeur `None` et ne va rien
 faire de plus.
 
@@ -295,11 +303,13 @@ Listing 6-5.
 Cette fonction est très facile à écrire, grâce à `match`, et ressemblera à
 l'encart 6-5.
 
+<!-- markdownlint-disable -->
 <!--
 ```rust
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:here}}
 ```
 -->
+<!-- markdownlint-restore -->
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:here}}
@@ -319,15 +329,17 @@ Let’s examine the first execution of `plus_one` in more detail. When we call
 value `Some(5)`. We then compare that against each match arm.
 -->
 
-Examinons la première exécution de `plus_un` en détail. Lorsque nous appellons
+Examinons la première exécution de `plus_un` en détail. Lorsque nous appelons
 `plus_un(cinq)`, la variable `x` dans le corps de `plus_un` aura la valeur
 `Some(5)`. Ensuite, nous comparons cela à chaque branche du `match`.
 
+<!-- markdownlint-disable -->
 <!--
 ```rust,ignore
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:first_arm}}
 ```
 -->
+<!-- markdownlint-restore -->
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:first_arm}}
@@ -339,13 +351,15 @@ next arm.
 -->
 
 La valeur `Some(5)` ne correspond pas au motif `None`, donc nous continuons à la
-prochaine branche.
+branche suivante.
 
+<!-- markdownlint-disable -->
 <!--
 ```rust,ignore
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:second_arm}}
 ```
 -->
+<!-- markdownlint-restore -->
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:second_arm}}
@@ -358,9 +372,9 @@ code in the match arm is then executed, so we add 1 to the value of `i` and
 create a new `Some` value with our total `6` inside.
 -->
 
-Est-ce que `Some(5)` correspond au `Some(i)` ? Bien sûr ! Nous avons la
+Est-ce que `Some(5)` correspond au motif `Some(i)` ? Bien sûr ! Nous avons la
 même variante. Le `i` va prendre la valeur contenue dans le `Some`, donc `i`
-prend la valeur `5`. La code dans la branche du `match` est exécuté, donc nous
+prend la valeur `5`. Le code dans la branche du `match` est exécuté, donc nous
 ajoutons 1 à la valeur de `i` et nous créons une nouvelle valeur `Some` avec
 notre résultat `6` à l'intérieur.
 
@@ -372,11 +386,13 @@ Now let’s consider the second call of `plus_one` in Listing 6-5, where `x` is
 Maintenant, regardons le second appel à `plus_un` dans l'encart 6-5, où `x` vaut
 `None`. Nous entrons dans le `match` et nous le comparons à la première branche.
 
+<!-- markdownlint-disable -->
 <!--
 ```rust,ignore
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:first_arm}}
 ```
 -->
+<!-- markdownlint-restore -->
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:first_arm}}
@@ -388,7 +404,7 @@ It matches! There’s no value to add to, so the program stops and returns the
 arms are compared.
 -->
 
-Cela correspond ! Il n'y a pas de valeur à additionner, donc le programmme
+Cela correspond ! Il n'y a pas de valeur à additionner, donc le programme
 s'arrête et retourne la valeur `None` qui est dans le côté droit du `=>`. Comme
 la première branche correspond, les autres branches ne sont pas comparées.
 
@@ -418,14 +434,16 @@ There’s one other aspect of `match` we need to discuss. Consider this version
 of our `plus_one` function that has a bug and won’t compile:
 -->
 
-Il y a un autre point de `match` que nous devons aborder. Admettons que cette
-version de notre fonction `plus_un` a un bogue et ne va pas se compiler :
+Il y a un autre point de `match` que nous devons aborder. Examinez cette version
+de notre fonction `plus_un` qui a un bogue et ne va pas se compiler :
 
+<!-- markdownlint-disable -->
 <!--
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-10-non-exhaustive-match/src/main.rs:here}}
 ```
 -->
+<!-- markdownlint-restore -->
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-10-non-exhaustive-match/src/main.rs:here}}
@@ -441,11 +459,13 @@ Nous n'avons pas géré le cas du `None`, donc ce code va générer un bogue.
 Heureusement, c'est un bogue que Rust sait gérer. Si nous essayons de compiler
 ce code, nous allons obtenir cette erreur :
 
+<!-- markdownlint-disable -->
 <!--
 ```console
 {{#include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-10-non-exhaustive-match/output.txt}}
 ```
 -->
+<!-- markdownlint-restore -->
 
 ```console
 {{#include ../listings/ch06-enums-and-pattern-matching/no-listing-10-non-exhaustive-match/output.txt}}
@@ -462,17 +482,17 @@ have null, thus making the billion-dollar mistake discussed earlier impossible.
 
 Rust sait que nous n'avons pas couvert toutes les possibilités et sait même quel
 motif nous avons oublié ! Les `match` de Rust sont *exhaustifs* : nous devons
-traiter toutes les possibilités afin que le code soit valide. Dans notre cas de
-`Option<T>`, quand Rust nous empêche d'oublier de gérer explicitement le cas de
-`None`, il nous protège d'une situation où nous supposons que nous avons une
-valeur alors que nous pourrions avoir null, ce qui rend impossible l'erreur aux
-milliards de dollars que nous avons vu précédemment.
+traiter toutes les possibilités afin que le code soit valide. C'est notamment le
+cas avec `Option<T>` : quand Rust nous empêche d'oublier de gérer explicitement
+le cas de `None`, il nous protège d'une situation où nous supposons que nous
+avons une valeur alors que nous pourrions avoir null, ce qui rend impossible
+l'erreur à un milliard de dollars que nous avons vue précédemment.
 
 <!--
 ### The `_` Placeholder
 -->
 
-### Le caractère réservé `_`
+### Le motif générique `_`
 
 <!--
 Rust also has a pattern we can use when we don’t want to list all possible
@@ -482,17 +502,19 @@ care about the values 1, 3, 5, and 7, we don’t want to have to list out 0, 2,
 special pattern `_` instead:
 -->
 
-Rust a aussi un motif que nous pouvons utliser quand nous ne voulons pas traiter
-toutes les valeurs possibles. Par exemple, un `u8` peut être valide entre 0
-et 255. Si nous n'avons besoin que des valeurs 1, 3, 5 et 7, nous ne voulons pas
-traiter 0, 2, 4, 6, 7, 8, 9 et ainsi de suite jusqu'à 255. Heureusement, nous
-n'avons pas à le faire : nous pouvons utiliser le motif spécial `_` :
+Rust a aussi un motif que nous pouvons utiliser quand nous ne voulons pas lister
+toutes les valeurs possibles. Par exemple, les valeurs valides d'un `u8` vont de
+0 à 255. Si nous n'avons besoin que des valeurs 1, 3, 5 et 7, nous ne voulons
+pas lister 0, 2, 4, 6, 8, 9 et ainsi de suite jusqu'à 255. Heureusement, nous
+n'avons pas à le faire : nous pouvons utiliser le motif spécial `_` à la place :
 
+<!-- markdownlint-disable -->
 <!--
 ```rust
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-11-underscore-placeholder/src/main.rs:here}}
 ```
 -->
+<!-- markdownlint-restore -->
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-11-underscore-placeholder/src/main.rs:here}}
@@ -506,10 +528,12 @@ can say that we want to do nothing for all the possible values that we don’t
 list before the `_` placeholder.
 -->
 
-Le motif `_` va correspondre à toutes les valeurs. En l'ajoutant à la fin de nos
-branches, le `_` va correspondre à tous les autres cas qui ne sont pas listés
-avant. Au final, nous avons pu dire que nous ne voulons rien faire pour les
-valeurs possibles que nous ne traitons pas avant le caractère réservé `_`.
+Le motif `_` va correspondre à n'importe quelle valeur. En l'ajoutant après
+toutes nos autres branches, le `_` va correspondre à tous les cas possibles qui
+ne sont pas listés avant. Le `()` est tout simplement la valeur unité, donc rien
+n'arrivera dans le cas du `_`. Ainsi, nous pouvons dire que nous ne voulons rien
+faire pour les valeurs possibles que nous ne traitons pas avant le motif
+générique `_`.
 
 <!--
 However, the `match` expression can be a bit wordy in a situation in which we
@@ -517,15 +541,15 @@ care about only *one* of the cases. For this situation, Rust provides `if let`.
 -->
 
 Cependant, l'expression `match` peut être un peu lourde dans une situation où
-nous nous préoccupons uniquement *d'un seul* cas. Pour ce cas, Rust nous propose
-d'utiliser une autre structure, `if let`.
+nous nous préoccupons uniquement d'*un seul* cas. Pour cette situation, Rust
+nous fournit la structure de contrôle `if let`.
 
 <!--
 More about patterns and matching can be found in [chapter 18][ch18-00-patterns].
 -->
 
 Vous pouvez en apprendre plus sur les motifs et le filtrage par motif au
-[chapter 18][ch18-00-patterns].
+[chapitre 18][ch18-00-patterns].
 
 <!--
 [ch18-00-patterns]:

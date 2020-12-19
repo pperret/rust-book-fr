@@ -258,8 +258,17 @@ lorsque l'on indexe une quelconque collection.
 > of the values the type can hold. In the case of a `u8`, 256 becomes 0, 257
 > becomes 1, and so on. The program won’t panic, but the variable will have a
 > value that probably isn’t what you were expecting it to have. Relying on
-> integer overflow’s wrapping behavior is considered an error. If you want to
-> wrap explicitly, you can use the standard library type [`Wrapping`][wrapping].
+> integer overflow’s wrapping behavior is considered an error.
+>
+> To explicitly handle the possibility of overflow, you can use these families
+> of methods that the standard library provides on primitive numeric types:
+>
+> - Wrap in all modes with the `wrapping_*` methods, such as `wrapping_add`
+> - Return the `None` value if there is overflow with the `checked_*` methods
+> - Return the value and a boolean indicating whether there was overflow with
+>   the `overflowing_*` methods
+> - Saturate at the value's minimum or maximum values with `saturating_*`
+>   methods
 -->
 
 > ##### Dépassement d'entier
@@ -284,9 +293,19 @@ lorsque l'on indexe une quelconque collection.
 > 257 devient 1, et ainsi de suite. Le programme ne va paniquer, mais
 > la variable va avoir une valeur qui n'est probablement pas ce que vous
 > attendez à avoir. Se fier au comportement du rebouclage lors du
-> dépassement d'entier est considéré comme une faute. Si vous voulez reboucler
-> explicitement, vous pouvez utiliser le type [`Wrapping`][wrapping] de la
-> bibliothèque standard.
+> dépassement d'entier est considéré comme une faute.
+>
+> Pour gérer explicitement le dépassement, vous pouvez utiliser les familles
+> de méthodes suivantes qu'offrent la bibliothèque standard sur les types de
+> nombres primitifs :
+>
+> - Enveloppez les opérations avec les méthodes `wrapping_*`, comme par exemple
+>   `wrapping_add`
+> - Retourner la valeur `None` s'il y a un dépassement avec des méthodes
+>   `checked_*`
+> - Retourner la valeur et un booléen qui indique s'il y a eu un dépassement
+>   avec des méthodes `overflowing_*`
+> - Saturer à la valeur minimale ou maximale avec des méthodes `saturating_*`
 
 <!--
 #### Floating-Point Types
@@ -375,7 +394,7 @@ instruction `let` :
 
 <!--
 Each expression in these statements uses a mathematical operator and evaluates
-to a single value, which is then bound to a variable. Appendix B contains a
+to a single value, which is then bound to a variable. Appendix B][appendix_b]<!-- ignore --> contains a
 list of all operators that Rust provides.
 -->
 
@@ -896,6 +915,7 @@ ch02-00-guessing-game-tutorial.html#comparing-the-guess-to-the-secret-number
 [strings]: ch08-02-strings.html#storing-utf-8-encoded-text-with-strings
 [unrecoverable-errors-with-panic]: ch09-01-unrecoverable-errors-with-panic.html
 [wrapping]: ../std/num/struct.Wrapping.html
+[appendix_b]: appendix-02-operators.md
 -->
 
 [comparing-the-guess-to-the-secret-number]:
@@ -904,3 +924,4 @@ ch02-00-guessing-game-tutorial.html#comparer-le-nombre-saisi-au-nombre-secret
 [strings]: ch08-02-strings.html
 [unrecoverable-errors-with-panic]: ch09-01-unrecoverable-errors-with-panic.html
 [wrapping]: https://doc.rust-lang.org/std/num/struct.Wrapping.html
+[appendix_b]: appendix-02-operators.md

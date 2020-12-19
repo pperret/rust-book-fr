@@ -1,4 +1,3 @@
-// ANCHOR: here
 mod salle_a_manger {
     mod accueil {
         fn ajouter_a_la_liste_attente() {}
@@ -14,6 +13,3 @@ mod salle_a_manger {
         fn encaisser() {}
     }
 }
-// ANCHOR_END: here
-
-fn main() {}

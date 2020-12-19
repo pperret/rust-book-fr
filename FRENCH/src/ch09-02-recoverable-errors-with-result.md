@@ -1,12 +1,3 @@
-> # 🚧 Attention, peinture fraîche !
->
-> Cette page a été traduite par une seule personne et n'a pas été relue et
-> vérifiée par quelqu'un d'autre ! Les informations peuvent par exemple être
-> erronées, être formulées maladroitement, ou contenir d'autres types de fautes.
->
-> Vous pouvez contribuer à l'amélioration de cette page sur sa
-> [Pull Request](https://github.com/Jimskapt/rust-book-fr/pull/99).
-
 <!--
 ## Recoverable Errors with `Result`
 -->
@@ -23,7 +14,7 @@ file instead of terminating the process.
 
 La plupart des erreurs ne sont pas assez graves au point d'arrêter complètement
 le programme. Parfois, lorsque une fonction échoue, c'est pour une raison que
-vous pouvez facilement comprendre et agir en conséquence. Par exemple, si vous
+vous pouvez facilement comprendre et pour laquelle agir en conséquence. Par exemple, si vous
 essayez d'ouvrir un fichier et que l'opération échoue parce que le fichier
 n'existe pas, vous pourriez vouloir créer le fichier plutôt que d'arrêter le
 processus.
@@ -35,7 +26,7 @@ defined as having two variants, `Ok` and `Err`, as follows:
 -->
 
 Souvenez-vous de la section
-“[Gérer les erreurs potentielles avec le type `Result`][handle_failure]<!-- ignore -->”
+[“Gérer les erreurs potentielles avec le type `Result`”][handle_failure]<!-- ignore -->
 du chapitre 2 lorsque l'énumération `Result` pouvait avoir deux variantes, `Ok`
 et `Err`, comme ci-dessous :
 
@@ -125,13 +116,13 @@ isn’t of type `u32`, so let’s change the `let f` statement to this:
 Comment savons-nous que `File::open` retourne un `Result` ? Nous pouvons
 regarder la
 [documentation de l'API de la bibliothèque standard](https://doc.rust-lang.org/std/index.html)<!-- ignore -->,
-ou nous pouvons demander au compilateur ! Si nous faisons une annotation de type
-à `f` dont nous savons que le type de retour de la fonction n'est *pas* correcte
-et que nous essayons ensuite de compiler le code, le compilateur va nous dire
-que les types ne correspondent pas. Le message d'erreur va ensuite nous dire
-ensuite *quel est le type* de `f`. Essayons cela ! Nous savons que le retour de
-`File::open` n'est pas du type `u32`, alors essayons de changer l'instruction
-`let f` par ceci :
+ou nous pouvons demander au compilateur ! Si nous appliquons à `f` une
+annotation de type dont nous savons qu'elle n'est *pas* le type de retour de la
+fonction et que nous essayons ensuite de compiler le code, le compilateur va
+nous dire que les types ne correspondent pas. Le message d'erreur va ensuite
+nous dire *quel est le type* de `f`. Essayons cela ! Nous savons que le
+retour de `File::open` n'est pas du type `u32`, alors essayons de changer
+l'instruction `let f` par ceci :
 
 <!--
 ```rust,ignore,does_not_compile
@@ -308,7 +299,7 @@ at Listing 9-5, which adds an inner `match` expression.
 -->
 
 Le code dans l'encart 9-4 va faire un `panic!` peu importe la raison de l'échec
-de `File::open`. Ce que nous voudrions plutôt faire est de régir différemment en
+de `File::open`. Ce que nous voudrions plutôt faire est de réagir différemment en
 fonction de différents cas d'erreurs : si `File::open` a échoué parce que le
 fichier n'existe pas, nous voulons créer le fichier et renvoyer le manipulateur
 de fichier pour ce nouveau fichier. Si `File::open` échoue pour toute autre
@@ -396,7 +387,7 @@ more seasoned Rustacean might write this code instead of Listing 9-5:
 -->
 
 Cela commence à faire beaucoup de `match` ! L'expression `match` est très utile
-mais est aussi assez primitif. Dans le chapitre 13, vous allez en apprendre plus
+mais est aussi assez rudimentaire. Dans le chapitre 13, vous allez en apprendre plus
 sur les fermetures ; le type `Result<T, E>` a de nombreuses méthodes qui
 acceptent une fermeture et qui sont implémentés en utilisant des expressions
 `match`. L'utilisation de ces méthodes vont rendre votre code plus concis. Un
@@ -789,7 +780,7 @@ même manière que les expressions `match` que nous avons défini pour gérer le
 valeurs `Result` dans l'encart 9-6. Si la valeur du `Result` est un `Ok`, la
 valeur dans le `Ok` sera retournée par cette expression et le programme
 continuera. Si la valeur est une `Err`, la `Err` sera retournée par la fonction
-comme si nous avions utilisé le mot-clé `result` afin que la valeur d'erreur
+comme si nous avions utilisé le mot-clé `return` afin que la valeur d'erreur
 soit propagée au code appelant.
 
 <!--
@@ -959,14 +950,14 @@ The `?` operator can be used in functions that have a return type of
 `Result`, because it is defined to work in the same way as the `match`
 expression we defined in Listing 9-6. The part of the `match` that requires a
 return type of `Result` is `return Err(e)`, so the return type of the function
-can be a `Result` to be compatible with this `return`.
+has to be a `Result` to be compatible with this `return`.
 -->
 
 L'opérateur `?` peut être utilisé dans des fonctions qui ont un type de retour
 `Result`, car il est conçu pour fonctionner de la même manière que l'expression
 `match` que nous avons utilisé dans l'encart 9-6. La partie du `match` qui
 nécessite le type de retour `Result` est `return Err(e)`, donc le type de retour
-de cette fonction peut être `Result` pour être compatible avec ce `return`.
+de cette fonction doit être un `Result` pour être compatible avec ce `return`.
 
 <!--
 Let’s look at what happens if we use the `?` operator in the `main` function,

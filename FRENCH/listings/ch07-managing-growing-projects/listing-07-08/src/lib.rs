@@ -1,4 +1,3 @@
-// ANCHOR: here
 fn servir_commande() {}
 
 mod cuisines {
@@ -9,6 +8,3 @@ mod cuisines {
 
     fn cuisiner_commande() {}
 }
-// ANCHOR_END: here
-
-fn main() {}

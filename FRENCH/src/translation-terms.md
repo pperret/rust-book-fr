@@ -28,6 +28,7 @@ français.
 | backtrace | re-traçage | - |
 | benchmark | benchmark | - |
 | binary crate | crate binaire | s'utilise au féminin |
+| buffer overread | sur-lecture de tampon | - |
 | *n*-bit number | nombre encodé sur *n* bits | - |
 | blanket implementation | implémentation générale | - |
 | blob | blob | - |
@@ -152,7 +153,7 @@ français.
 | lifetime | durée de vie | - |
 | linker | linker | - |
 | linter | analyse statique | - |
-| literal value | valeur litérale | - |
+| literal value | valeur littérale | - |
 | Listing | encart | tout en minuscule (sauf en début de phrase) |
 | loop | boucle | - |
 | low-level | bas niveau | - |
@@ -191,7 +192,7 @@ français.
 | parallelism | parallélisme | - |
 | parallel programming | parallélisme | - |
 | parameter | paramètre | - |
-| parse | interprêter | - |
+| parse | interpréter | - |
 | PATH | PATH | - |
 | pattern | motif | - |
 | pattern-matching | filtrage par motif | - |

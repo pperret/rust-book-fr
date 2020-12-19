@@ -401,7 +401,7 @@ Au chapitre 20, nous terminerons un projet dans lequel nous allons
 implémenter en bas-niveau un serveur web multitâches !
 
 <!--
-Finally, some appendixes contain useful information about the language in a
+Finally, some appendices contain useful information about the language in a
 more reference-like format. Appendix A covers Rust’s keywords, Appendix B
 covers Rust’s operators and symbols, Appendix C covers derivable traits
 provided by the standard library, Appendix D covers some useful development

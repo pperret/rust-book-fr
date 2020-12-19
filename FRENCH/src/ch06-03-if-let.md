@@ -11,8 +11,8 @@ program in Listing 6-6 that matches on an `Option<u8>` value but only wants to
 execute code if the value is 3.
 -->
 
-La syntaxe `if let` vous permet de combiner `if` et `let` afin de gérer une
-valeur qui correspond à un motif tout en ignorant les autres possibilités.
+La syntaxe `if let` vous permet de combiner `if` et `let` afin de gérer les
+valeurs qui correspondent à un motif donné, tout en ignorant les autres.
 Imaginons le programme dans l'encart 6-6 qui fait un `match` sur une valeur
 `Option<u8>` mais n'a besoin d'exécuter du code que si la valeur est 3.
 
@@ -51,7 +51,7 @@ Instead, we could write this in a shorter way using `if let`. The following
 code behaves the same as the `match` in Listing 6-6:
 -->
 
-A la place, nous pourrions écrire le même programme de manière plus concise en
+À la place, nous pourrions écrire le même programme de manière plus concise en
 utilisant `if let`. Le code suivant se comporte comme le `match` de l'encart
 6-6 :
 
@@ -73,7 +73,7 @@ sign. It works the same way as a `match`, where the expression is given to the
 
 La syntaxe `if let` prend un motif et une expression séparés par un signe égal.
 Elle fonctionne de la même manière qu'un `match` où l'expression est donnée au
-`match` et que le motif est sa première branche.
+`match` et où le motif est sa première branche.
 
 <!--
 Using `if let` means less typing, less indentation, and less boilerplate code.
@@ -86,7 +86,7 @@ losing exhaustive checking.
 Utiliser `if let` permet d'écrire moins de code, et de moins l'indenter.
 Cependant, vous perdez la vérification de l'exhaustivité qu'assure le `match`.
 Choisir entre `match` et `if let` dépend de la situation : à vous de choisir
-un équilibre entre être concis et appliquer une vérification exhaustive.
+s'il vaut mieux être concis ou appliquer une vérification exhaustive.
 
 <!--
 In other words, you can think of `if let` as syntax sugar for a `match` that
@@ -95,7 +95,7 @@ runs code when the value matches one pattern and then ignores all other values.
 
 Autrement dit, vous pouvez considérer le `if let` comme du sucre syntaxique pour
 un `match` qui exécute du code uniquement quand la valeur correspond à un motif
-et ignore tous autres valeurs.
+donné et ignore toutes les autres valeurs.
 
 <!--
 We can include an `else` with an `if let`. The block of code that goes with the
@@ -109,11 +109,11 @@ expression like this:
 
 Nous pouvons joindre un `else` à un `if let`. Le bloc de code qui va dans le
 `else` est le même que le bloc de code qui va dans le cas `_` avec l'expression
-`match`. Souvenez-vous de la définition de l'énumération `USACoin` de l'encart
-6-4, où la variante `Quarter` avait aussi une valeur `USAState`. Si nous
-voulions compter toutes les pièces qui ne sont pas des `Quarter` que nous voyons
-passer, tout en affichant l'état des `Quarter`, nous pourrions le faire avec
-une expression `match` comme ceci :
+`match`. Souvenez-vous de la définition de l'énumération `PieceUs` de l'encart
+6-4, où la variante `Quarter` stockait aussi une valeur `EtatUs`. Si nous
+voulions compter toutes les pièces qui ne sont pas des *quarters* que nous
+voyons passer, tout en affichant l'État des *quarters*, nous pourrions le faire
+avec une expression `match` comme ceci :
 
 <!--
 ```rust
@@ -167,9 +167,9 @@ Nous avons désormais appris comment utiliser les énumérations pour créer des
 types personnalisés qui peuvent faire partie d'un jeu de valeurs recensées. Nous
 avons montré comment le type `Option<T>` de la bibliothèque standard vous aide
 à utiliser le système de types pour éviter les erreurs. Lorsque les valeurs
-d'énumération contiennent des données, vous pouvez utiliser `match`
-ou `if let` pour extraire et utiliser ces valeurs, à choisir en fonction du
-nombre de cas que vous voulez gérer.
+d'énumération contiennent des données, vous pouvez utiliser `match` ou `if let`
+pour extraire et utiliser ces valeurs, à choisir en fonction du nombre de cas
+que vous voulez gérer.
 
 <!--
 Your Rust programs can now express concepts in your domain using structs and

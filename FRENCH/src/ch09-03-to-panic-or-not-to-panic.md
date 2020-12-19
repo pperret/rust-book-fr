@@ -1,12 +1,3 @@
-> # 🚧 Attention, peinture fraîche !
->
-> Cette page a été traduite par une seule personne et n'a pas été relue et
-> vérifiée par quelqu'un d'autre ! Les informations peuvent par exemple être
-> erronées, être formulées maladroitement, ou contenir d'autres types de fautes.
->
-> Vous pouvez contribuer à l'amélioration de cette page sur sa
-> [Pull Request](https://github.com/Jimskapt/rust-book-fr/pull/102).
-
 <!--
 ## To `panic!` or Not to `panic!`
 -->
@@ -52,7 +43,7 @@ library code.
 Dans certaines situations, il est plus approprié d'écrire du code qui panique
 plutôt que de retourner un `Result`. Nous allons voir pourquoi il est approprié
 de paniquer dans les exemples, les prototypes, et les tests. Ensuite, nous
-verrons des situations dans lesquelles vous savez qu'en tant qu'humain qu'un
+verrons des situations dans lesquelles vous savez en tant qu'humain qu'un
 code ne peut pas échouer mais que le compilateur ne peut pas le déduire par
 lui-même. Puis nous allons conclure le chapitre par quelques lignes directrices
 générales pour décider s'il faut paniquer dans le code des librairies.
@@ -520,7 +511,7 @@ the `Option` and `Result` enums, we’ll talk about how generics work and how yo
 can use them in your code.
 -->
 
-Maintenant que vous avez vu les pratiques utiles que la bibliothèque standard
-utilise avec les énumérations génériques `Option` et `Result`, nous allons voir
-comment les génériques fonctionnent et comment vous pouvez les utiliser dans
-votre code.
+Maintenant que vous avez vu les pratiques utiles suivies par la bibliothèque
+standard, comme les énumérations génériques `Option` et `Result`, nous allons
+voir comment les génériques fonctionnent et comment vous pouvez les utiliser
+dans votre code.

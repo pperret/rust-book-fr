@@ -83,13 +83,13 @@ fonctions.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
-{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-01/src/lib.rs:here}}
+```rust,noplayground
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-01/src/lib.rs}}
 ```
 -->
 
-```rust
-{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-01/src/lib.rs:here}}
+```rust,noplayground
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-01/src/lib.rs}}
 ```
 
 <!--

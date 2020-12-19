@@ -1,12 +1,3 @@
-> # 🚧 Attention, peinture fraîche !
->
-> Cette page a été traduite par une seule personne et n'a pas été relue et
-> vérifiée par quelqu'un d'autre ! Les informations peuvent par exemple être
-> erronées, être formulées maladroitement, ou contenir d'autres types de fautes.
->
-> Vous pouvez contribuer à l'amélioration de cette page sur sa
-> [Pull Request](https://github.com/Jimskapt/rust-book-fr/pull/88).
-
 <!--
 ## Storing Keys with Associated Values in Hash Maps
 -->
@@ -563,10 +554,10 @@ utilisateurs de Rust qui fournissent de nombreux algorithmes de hachage
 répandus.
 
 <!--
-[^siphash]: [https://www.131002.net/siphash/siphash.pdf](https://www.131002.net/siphash/siphash.pdf)
+[^siphash]: [https://en.wikipedia.org/wiki/SipHash](https://en.wikipedia.org/wiki/SipHash)
 -->
 
-[^siphash]: [https://www.131002.net/siphash/siphash.pdf](https://www.131002.net/siphash/siphash.pdf)
+[^siphash]: [https://en.wikipedia.org/wiki/SipHash](https://en.wikipedia.org/wiki/SipHash)
 
 <!--
 ## Summary
@@ -634,7 +625,7 @@ a perfect time to discuss error handling. We’ll do that next!
 
 Nous nous lançons dans des programmes de plus en plus complexes dans lesquels
 les opérations peuvent échouer, c'est donc le moment idéal pour voir comment
-bien gérer les erreurs. C'est que nous allons faire au prochain chapitre !
+bien gérer les erreurs. C'est ce que nous allons faire au prochain chapitre !
 
 <!--
 [iterators]: ch13-02-iterators.html

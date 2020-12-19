@@ -1934,7 +1934,7 @@ You guessed: 59
 You win!
 Please input your guess.
 quit
-thread 'main' panicked at 'Please type a number!: ParseIntError { kind: InvalidDigit }', src/libcore/result.rs:999:5
+thread 'main' panicked at 'Please type a number!: ParseIntError { kind: InvalidDigit }', src/main.rs:28:47
 note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace.
 ```
 -->
@@ -1961,7 +1961,7 @@ Votre nombre : 59
 Vous avez gagné !
 Veuillez entrer un nombre.
 quitter
-thread 'main' panicked at 'Veuillez entrer un nombre !: ParseIntError { kind: InvalidDigit }', src/libcore/result.rs:785
+thread 'main' panicked at 'Veuillez entrer un nombre !: ParseIntError { kind: InvalidDigit }', src/main.rs:28:47
 note: Run with `RUST_BACKTRACE=1` for a backtrace.
 ```
 
@@ -2134,6 +2134,7 @@ foo
 ```console
 $ cargo run
    Compiling guessing_game v0.1.0 (file:///projects/guessing_game)
+    Finished dev [unoptimized + debuginfo] target(s) in 4.45s
      Running `target/debug/guessing_game`
 Guess the number!
 The secret number is: 61
@@ -2157,6 +2158,7 @@ You win!
 ```console
 $ cargo run
    Compiling jeu_du_plus_ou_du_moins v0.1.0 (file:///projects/jeu_du_plus_ou_du_moins)
+    Finished dev [unoptimized + debuginfo] target(s) in 4.45s
      Running `target/debug/jeu_du_plus_ou_du_moins`
 Devinez le nombre !
 Le nombre secret est : 61

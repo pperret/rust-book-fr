@@ -1,23 +1,23 @@
 #[derive(Debug)]
-enum USAState {
+enum EtatUs {
     Alabama,
     Alaska,
     // -- partie masquée ici --
 }
 
-enum USACoin {
+enum PieceUs {
     Penny,
     Nickel,
     Dime,
-    Quarter(USAState),
+    Quarter(EtatUs),
 }
 
 fn main() {
-    let piece = USACoin::Penny;
+    let piece = PieceUs::Penny;
     // ANCHOR: here
     let mut compteur = 0;
-    if let USACoin::Quarter(etat) = piece {
-        println!("Il s'agit d'un Quarter de l'état de {:?}!", etat);
+    if let PieceUs::Quarter(etat) = piece {
+        println!("Il s'agit d'un quarter de l'État de {:?} !", etat);
     } else {
         compteur += 1;
     }

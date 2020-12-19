@@ -360,13 +360,13 @@ mot-clé `pub` devant sa définition, comme dans l'encart 7-7.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
-{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-07/src/lib.rs:here}}
+```rust,noplayground,test_harness
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-07/src/lib.rs}}
 ```
 -->
 
-```rust
-{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-07/src/lib.rs:here}}
+```rust,noplayground,test_harness
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-07/src/lib.rs}}
 ```
 
 <!--
@@ -468,13 +468,13 @@ commençant le chemin de `servir_commande` avec `super` :
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
-{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-08/src/lib.rs:here}}
+```rust,noplayground,test_harness
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-08/src/lib.rs}}
 ```
 -->
 
-```rust
-{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-08/src/lib.rs:here}}
+```rust,noplayground,test_harness
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-08/src/lib.rs}}
 ```
 
 <!--

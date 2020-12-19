@@ -342,12 +342,12 @@ l'espérions !
 
 <!--
 The `push` method takes a single character as a parameter and adds it to the
-`String`. Listing 8-17 shows code that adds the letter *l* to a `String` using
+`String`. Listing 8-17 shows code that adds the letter "l" to a `String` using
 the `push` method.
 -->
 
 La méthode `push` prend un seul caractère en paramètre et l'ajoute au `String`.
-L'encart 8-17 nous montre du code qui ajoute la lettre *l* au `String` en
+L'encart 8-17 nous montre du code qui ajoute la lettre "l" au `String` en
 utilisant la méthode `push`.
 
 <!--

@@ -42,13 +42,13 @@ qu'à utiliser `accueil::ajouter_a_la_liste_attente` pour appeler la fonction
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
-{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-11/src/lib.rs:here}}
+```rust,noplayground,test_harness
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-11/src/lib.rs}}
 ```
 -->
 
-```rust
-{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-11/src/lib.rs:here}}
+```rust,noplayground,test_harness
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-11/src/lib.rs}}
 ```
 
 <!--
@@ -91,13 +91,13 @@ chemin relatif pour obtenir le même résultat que l'encart 7-11.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
-{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-12/src/lib.rs:here}}
+```rust,noplayground,test_harness
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-12/src/lib.rs}}
 ```
 -->
 
-```rust
-{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-12/src/lib.rs:here}}
+```rust,noplayground,test_harness
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-12/src/lib.rs}}
 ```
 
 <!--
@@ -134,13 +134,13 @@ pour avoir le même résultat, comme dans l'encart 7-13.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
-{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-13/src/lib.rs:here}}
+```rust,noplayground,test_harness
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-13/src/lib.rs}}
 ```
 -->
 
-```rust
-{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-13/src/lib.rs:here}}
+```rust,noplayground,test_harness
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-13/src/lib.rs}}
 ```
 
 <!--
@@ -356,13 +356,13 @@ a été remplacé par `pub use`.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
-{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-17/src/lib.rs:here}}
+```rust,noplayground,test_harness
+{{#rustdoc_include ../listings-sources/ch07-managing-growing-projects/listing-07-17/src/lib.rs}}
 ```
 -->
 
-```rust
-{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-17/src/lib.rs:here}}
+```rust,noplayground,test_harness
+{{#rustdoc_include ../listings/ch07-managing-growing-projects/listing-07-17/src/lib.rs}}
 ```
 
 <!--

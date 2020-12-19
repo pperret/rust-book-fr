@@ -342,12 +342,6 @@ grande diversité de types dans ses variantes.
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-02/src/main.rs:here}}
-enum Message {
-    Quitter,
-    Deplacer { x: i32, y: i32 },
-    Ecrire(String),
-    ChangerCouleur(i32, i32, i32),
-}
 ```
 
 <!--
@@ -399,13 +393,6 @@ stocker les mêmes données que celles stockées par les variantes précédentes
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-04-structs-similar-to-message-enum/src/main.rs:here}}
-struct MessageQuitter; // une structure unité
-struct MessageDeplacer {
-    x: i32,
-    y: i32,
-}
-struct MessageEcrire(String); // une structure tuple
-struct MessageChangerCouleur(i32, i32, i32); // une structure tuple
 ```
 
 <!--
