@@ -113,7 +113,6 @@ français.
 | generics | génériques / généricité | - |
 | generic type parameter | paramètre de type générique | - |
 | getter | accesseur | - |
-| grapheme cluster | groupe de graphèmes  | - |
 | glob | global | opérateur |
 | global scope | portée globale | - |
 | grapheme cluster | groupe de graphèmes  | - |

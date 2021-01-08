@@ -19,6 +19,9 @@ paquets et les *crates*. Une crate est un binaire ou une bibliothèque. Pour la
 compiler, le compilateur Rust part d'un fichier source, la racine de la *crate*,
 à partir duquel est alors créé le *module racine* de votre *crate* (nous verrons
 les modules plus en détail dans la [section suivante][modules]<!-- ignore -->).
+Un *paquet* se compose d'une ou plusieurs crates qui fournissent un ensemble de
+fonctionnalités. Un paquet contient un fichier *Cargo.toml* qui décrit comment
+construire ces crates.
 
 <!--
 Several rules determine what a package can contain. A package *must* contain
@@ -27,7 +30,7 @@ as you’d like, but it must contain at least one crate (either library or
 binary).
 -->
 
-Il y a plusieurs règles qui déterminent ce qu'un paquet peut contenir. il doit
+Il y a plusieurs règles qui déterminent ce qu'un paquet peut contenir. Il doit
 contenir une seule crate de bibliothèque, ou aucune. Il peut contenir autant de
 crates binaires que vous le souhaitez, mais il doit contenir au moins une crate
 (que ce soit une bibliothèque ou un binaire).
@@ -108,14 +111,14 @@ functionality provided by the `rand` crate is accessible through the crate’s
 name, `rand`.
 -->
 
-Une crate regroupe plusieurs fonctionnalités associées ensemble dans une
-portée afin que les fonctionnalités soient faciles à partager entre plusieurs
-projets. Par exemple, la crate `rand` que nous avons utilisé dans
-[le chapitre 2][rand]<!-- ignore --> nous permet de générer
-des nombres aléatoires. Nous pouvons utiliser cette fonctionnalité dans notre
-propre projet en important la crate `rand` dans la portée de notre projet.
-Toutes les fonctionnalités fournies par la crate `rand` seront accessibles via
-le nom de la crate, `rand`.
+Une crate regroupe plusieurs fonctionnalités associées ensemble dans une portée
+afin que les fonctionnalités soient faciles à partager entre plusieurs projets.
+Par exemple, la crate `rand` que nous avons utilisée dans
+[le chapitre 2][rand]<!-- ignore --> nous permet de générer des nombres
+aléatoires. Nous pouvons utiliser cette fonctionnalité dans notre propre projet
+en important la crate `rand` dans la portée de notre projet. Toutes les
+fonctionnalités fournies par la crate `rand` sont accessibles via le nom de la
+crate, `rand`.
 
 <!--
 Keeping a crate’s functionality in its own scope clarifies whether particular
@@ -142,7 +145,7 @@ au *trait* `Rng` de la crate `rand` via `rand::Rng`.
 Let’s move on and talk about the module system!
 -->
 
-Continuons d'avancer et parlons maintenant du système de modules !
+Poursuivons et parlons maintenant du système de modules !
 
 <!--
 [modules]: ch07-02-defining-modules-to-control-scope-and-privacy.html

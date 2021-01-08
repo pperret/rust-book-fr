@@ -105,6 +105,8 @@ portée. Ces fonctionnalités comprennent :
   tester, et partager des crates ;
 * **les *crates* :** une arborescence de modules qui fournit une bibliothèque ou
   un exécutable ;
+* **les modules** : utilisés avec le mot-clé `use`, ils vous permettent de
+  contrôler l'organisation, la portée et la visibilité des chemins ;
 * **les chemins :** une façon de nommer un élément, comme une structure, une
   fonction ou un module.
 
