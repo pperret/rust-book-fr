@@ -143,7 +143,7 @@ Lorsque nous exécutons ce programme, nous devrions voir la sortie suivante :
 
 <!--
 ```console
-{{#include ../listings/ch15-smart-pointers/listing-15-14/output.txt}}
+{{#include ../listings-sources/ch15-smart-pointers/listing-15-14/output.txt}}
 ```
 -->
 
@@ -214,7 +214,7 @@ aurons une erreur de compilation :
 
 <!--
 ```rust,ignore,does_not_compile
-{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-15/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-15/src/main.rs:here}}
 ```
 -->
 
@@ -238,7 +238,7 @@ Lorsque nous essayons de compiler ce code, nous obtenons l'erreur suivante :
 
 <!--
 ```console
-{{#include ../listings/ch15-smart-pointers/listing-15-15/output.txt}}
+{{#include ../listings-sources/ch15-smart-pointers/listing-15-15/output.txt}}
 ```
 -->
 
@@ -304,7 +304,7 @@ la fonction `drop`, comme dans l'encart 15-16 :
 
 <!--
 ```rust
-{{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-16/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-16/src/main.rs:here}}
 ```
 -->
 
@@ -328,7 +328,7 @@ L'exécution de code va afficher ceci :
 
 <!--
 ```console
-{{#include ../listings/ch15-smart-pointers/listing-15-16/output.txt}}
+{{#include ../listings-sources/ch15-smart-pointers/listing-15-16/output.txt}}
 ```
 -->
 
