@@ -12,11 +12,11 @@ impl<T> Pair<T> {
 }
 
 impl<T: Display + PartialOrd> Pair<T> {
-    fn cmp_display(&self) {
+    fn affiche_comparaison(&self) {
         if self.x >= self.y {
-            println!("The largest member is x = {}", self.x);
+            println!("Le plus grand élément est x = {}", self.x);
         } else {
-            println!("The largest member is y = {}", self.y);
+            println!("Le plus grand élément est y = {}", self.y);
         }
     }
 }

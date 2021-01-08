@@ -1,23 +1,23 @@
-fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
-    let mut largest = list[0];
+fn le_plus_grand<T: PartialOrd + Copy>(liste: &[T]) -> T {
+    let mut le_plus_grand = liste[0];
 
-    for &item in list {
-        if item > largest {
-            largest = item;
+    for &element in liste {
+        if element > le_plus_grand {
+            le_plus_grand = element;
         }
     }
 
-    largest
+    le_plus_grand
 }
 
 fn main() {
-    let number_list = vec![34, 50, 25, 100, 65];
+    let liste_de_nombres = vec![34, 50, 25, 100, 65];
 
-    let result = largest(&number_list);
-    println!("The largest number is {}", result);
+    let resultat = le_plus_grand(&liste_de_nombres);
+    println!("Le nombre le plus grand est {}", resultat);
 
-    let char_list = vec!['y', 'm', 'a', 'q'];
+    let liste_de_caracteres = vec!['y', 'm', 'a', 'q'];
 
-    let result = largest(&char_list);
-    println!("The largest char is {}", result);
+    let resultat = le_plus_grand(&liste_de_caracteres);
+    println!("Le plus grand caractère est {}", resultat);
 }

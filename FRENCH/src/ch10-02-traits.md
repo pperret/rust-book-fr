@@ -638,7 +638,7 @@ pub fn notify<T: Summary>(item1: &T, item2: &T) {
 -->
 
 ```rust,ignore
-pub fn notifier<T: Resumable>(element1: T, element2: T) {
+pub fn notifier<T: Resumable>(element1: &T, element2: &T) {
 ```
 
 <!--

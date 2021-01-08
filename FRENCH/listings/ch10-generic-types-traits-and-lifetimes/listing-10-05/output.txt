@@ -11,7 +11,7 @@ error[E0369]: binary operation `>` cannot be applied to type `&T`
 help: consider restricting type parameter `T`
   |
 1 | fn le_plus_grand<T: std::cmp::PartialOrd>(liste: &[T]) -> &T {
-  |                          ^^^^^^^^^^^^^^^^^^^^^^
+  |                   ^^^^^^^^^^^^^^^^^^^^^^
 
 error: aborting due to previous error
 
