@@ -1,5 +1,5 @@
 fn le_plus_grand<T>(liste: &[T]) -> &T {
-    let mut le_plus_grand = liste[0];
+    let mut le_plus_grand = &liste[0];
 
     for element in liste {
         if element > le_plus_grand {
