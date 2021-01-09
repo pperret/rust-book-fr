@@ -395,7 +395,7 @@ concrètes qui vont passer dans cette fonction, donc nous ne savons pas si nous
 allons exécuter le cas du `if` ou du `else`. Nous ne connaissons pas non plus les
 durées de vie des références qui vont passer dans la fonction, donc nous ne
 pouvons pas vérifier les portées comme nous l'avons fait dans les encarts 10-18
-et 10-19 pour déterminer quelle référence que nous allons retourner sera
+et 10-19 pour déterminer que la référence que nous allons retourner sera
 toujours en vigueur. Le vérificateur d'emprunt ne va pas pouvoir non plus
 déterminer cela, car il ne sait comment les durées de vie de `x` et de `y` sont
 reliées à la durée de vie de la valeur de retour. Pour résoudre cette erreur,
