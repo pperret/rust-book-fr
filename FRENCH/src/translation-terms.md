@@ -200,7 +200,7 @@ français.
 | popping off the stack | dépiler | - |
 | prelude | étape préliminaire | - |
 | primitive obsession | obsession primitive | - |
-| privacy | protection | explication de la protection des éléments d'un module |
+| privacy | visibilité | en parlant des éléments d'un module |
 | procedural macro | macro procédurale | - |
 | process | processus | - |
 | project chapter | chapitre de projet | - |

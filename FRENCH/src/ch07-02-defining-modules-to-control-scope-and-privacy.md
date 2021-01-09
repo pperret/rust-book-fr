@@ -2,7 +2,7 @@
 ## Defining Modules to Control Scope and Privacy
 -->
 
-## Définir des modules pour gérer la portée et la protection
+## Définir des modules pour gérer la portée et la visibilité
 
 <!--
 In this section, we’ll talk about modules and other parts of the module system,
@@ -14,7 +14,7 @@ focus on modules!
 
 Dans cette section, nous allons aborder les modules et les autres outils du
 système de modules, à savoir les *chemins* qui nous permettent de nommer les
-éléments; l'utilisation du mot-clé `use` qui importe un chemin dans la portée;
+éléments ; l'utilisation du mot-clé `use` qui importe un chemin dans la portée ;
 et le mot-clé `pub` qui rend publics les éléments. Nous verrons aussi le mot-clé
 `as`, les paquets externes, et l'opérateur glob. Pour commencer, penchons-nous
 sur les modules !
@@ -28,7 +28,7 @@ detail and not available for outside use (*private*).
 
 Les *modules* nous permettent de regrouper le code d'une crate pour une
 meilleure lisibilité et pour la facilité de réutilisation. Les modules
-permettent aussi de gérer la *protection* des éléments, qui précise si un
+permettent aussi de gérer la *visibilité* des éléments, qui précise si un
 élément peut être utilisé à l'extérieur du module (*c'est public*) ou s'il est
 un constituant interne et n'est pas disponible pour une utilisation externe
 (*c'est privé*).
@@ -40,7 +40,7 @@ empty to concentrate on the organization of the code, rather than actually
 implement a restaurant in code.
 -->
 
-Voici un exemple, écrivons une crate de bibliothèque qui permet de simuler un
+Voici un exemple : écrivons une crate de bibliothèque qui permet de simuler un
 restaurant. Nous allons définir les signatures des fonctions mais nous allons
 laisser leurs corps vides pour nous concentrer sur l'organisation du code,
 plutôt que de coder pour de vrai un restaurant.
@@ -55,7 +55,7 @@ work in the kitchen, dishwashers clean up, and managers do administrative work.
 
 Dans le secteur de la restauration, certaines parties d'un restaurant sont
 assimilées à la *salle à manger* et d'autres *aux cuisines*. La partie salle à
-manger est l'endroit où se trouvent les clients; c'est l'endroit où les hôtes
+manger est l'endroit où se trouvent les clients ; c'est l'endroit où les hôtes
 installent les clients, où les serveurs prennent les commandes et encaissent les
 clients, et où les barmans préparent des boissons. Dans la partie cuisines, nous
 retrouvons les chefs et les cuisiniers qui travaillent dans la cuisine, mais
@@ -72,7 +72,7 @@ Listing 7-1 into *src/lib.rs* to define some modules and function signatures.
 Pour organiser notre crate de la même manière qu'un vrai restaurant, nous
 pouvons organiser les fonctions avec des modules imbriqués. Créez une nouvelle
 bibliothèque qui s'appelle `restaurant` en utilisant
-`cargo new --lib restaurant`; puis écrivez le code de l'encart 7-1 dans
+`cargo new --lib restaurant` ; puis écrivez le code de l'encart 7-1 dans
 *src/lib.rs* afin de définir quelques modules et quelques signatures de
 fonctions.
 
@@ -204,8 +204,8 @@ aussi que certains modules sont les *frères* d'autres modules, ce qui veut dire
 qu'ils sont définis dans le même module (`accueil` et `service` sont définis
 dans `salle_a_manger`). Pour prolonger la métaphore familiale, si le module A
 est contenu dans le module B, on dit que le module A est *l'enfant* du module B
-et que ce module B est le *parent* du module A. Notez aussi que tout le module
-implicite `crate` est le parent de toute cette arborescence.
+et que ce module B est le *parent* du module A. Notez aussi que le module
+implicite nommé `crate` est le parent de toute cette arborescence.
 
 <!--
 The module tree might remind you of the filesystem’s directory tree on your
@@ -215,7 +215,7 @@ need a way to find our modules.
 -->
 
 L'arborescence des modules peut rappeler les dossiers du système de fichiers de
-votre ordinateur; et c'est une excellente comparaison ! Comme les dossier dans
+votre ordinateur ; et c'est une excellente comparaison ! Comme les dossiers dans
 un système de fichiers, vous utilisez les modules pour organiser votre code. Et
 comme pour les fichiers dans un dossier, nous avons besoin d'un moyen de trouver
 nos modules.
