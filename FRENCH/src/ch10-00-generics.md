@@ -109,7 +109,7 @@ Consider a short program that finds the largest number in a list, as shown in
 Listing 10-1.
 -->
 
-Imaginons un petit programme qui trouve le nombre le gros dans une liste, comme
+Imaginons un petit programme qui trouve le nombre le grand dans une liste, comme
 dans l'encart 10-1.
 
 <!--
@@ -133,7 +133,7 @@ dans l'encart 10-1.
 of numbers</span>
 -->
 
-<span class="caption">Encart 10-1 : le code pour trouver le nombre le plus gros
+<span class="caption">Encart 10-1 : le code pour trouver le nombre le plus grand
 dans une liste de nombres</span>
 
 <!--
@@ -149,7 +149,7 @@ hold the largest number, which in this case is 100.
 
 Ce code enregistre une liste d'entiers dans la variable `liste_de_nombres` et
 place le premier nombre de la liste dans une variable qui s'appelle
-`le_plus_gros`. Ensuite, il parcourt tous les nombres dans la liste, et si le
+`le_plus_grand`. Ensuite, il parcourt tous les nombres dans la liste, et si le
 nombre courant est plus grand que le nombre stocké dans `le_plus_grand`, il
 remplace le nombre dans cette variable. Cependant, si le nombre courant est
 plus petit ou égal au nombre plus grand trouvé précédemment, la variable ne
