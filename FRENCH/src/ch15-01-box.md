@@ -206,7 +206,7 @@ complexes qui impliquent des types récursifs.
 #### More Information About the Cons List
 -->
 
-#### En savoir plus sur kes listes de construction
+#### En savoir plus sur les listes de construction
 
 <!--
 A *cons list* is a data structure that comes from the Lisp programming language
