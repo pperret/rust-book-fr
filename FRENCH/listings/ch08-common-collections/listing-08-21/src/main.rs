@@ -3,9 +3,9 @@ fn main() {
     use std::collections::HashMap;
 
     let equipes = vec![String::from("Bleu"), String::from("Jaune")];
-    let points_initiaux = vec![10, 50];
+    let scores_initiaux = vec![10, 50];
 
-    let mut points: HashMap<_, _> =
-        equipes.into_iter().zip(points_initiaux.into_iter()).collect();
+    let mut scores: HashMap<_, _> =
+        equipes.into_iter().zip(scores_initiaux.into_iter()).collect();
     // ANCHOR_END: here
 }

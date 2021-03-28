@@ -1,19 +1,19 @@
 fn main() {
     // ANCHOR: here
-    let hello = String::from("السلام عليكم");
-    let hello = String::from("Dobrý den");
-    let hello = String::from("Hello");
-    let hello = String::from("שָׁלוֹם");
-    let hello = String::from("नमस्ते");
-    let hello = String::from("こんにちは");
-    let hello = String::from("안녕하세요");
-    let hello = String::from("你好");
-    let hello = String::from("Olá");
+    let bonjour = String::from("السلام عليكم");
+    let bonjour = String::from("Dobrý den");
+    let bonjour = String::from("Hello");
+    let bonjour = String::from("שָׁלוֹם");
+    let bonjour = String::from("नमस्ते");
+    let bonjour = String::from("こんにちは");
+    let bonjour = String::from("안녕하세요");
+    let bonjour = String::from("你好");
+    let bonjour = String::from("Olá");
     // ANCHOR: russian
-    let hello = String::from("Здравствуйте");
+    let bonjour = String::from("Здравствуйте");
     // ANCHOR_END: russian
     // ANCHOR: spanish
-    let hello = String::from("Hola");
+    let bonjour = String::from("Hola");
     // ANCHOR_END: spanish
     // ANCHOR_END: here
 }

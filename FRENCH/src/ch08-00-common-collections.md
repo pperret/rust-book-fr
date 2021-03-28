@@ -18,15 +18,15 @@ collections that are used very often in Rust programs:
 
 La bibliothèque standard de Rust apporte quelques structures de données très
 utiles appelées *collections*. La plupart des autres types de données
-représentent une seule valeur précise, mais les collections peuvent avoir
-plusieurs valeurs. Contrairement aux tableaux et aux tuples,
-les données que ces collections contiennent sont stockées sur le tas, ce qui
-veut dire que la quantité de données n'a pas à être connue au moment de la
-compilation et peut augmenter ou diminuer pendant l'exécution du programme.
-Chaque type de collection a ses avantages et ses inconvénients, et en choisir un
-qui répond à votre besoin sur le moment est une aptitude que vous allez
-développer avec le temps. Dans ce chapitre, nous allons découvrir trois
-collections qui sont très utilisées dans les programmes Rust :
+représentent une seule valeur précise, mais les collections peuvent contenir
+plusieurs valeurs. Contrairement aux tableaux et aux tuples, les données que ces
+collections contiennent sont stockées sur le tas, ce qui veut dire que la
+quantité de données n'a pas à être connue au moment de la compilation et peut
+augmenter ou diminuer pendant l'exécution du programme. Chaque type de
+collection a ses avantages et ses inconvénients, et en choisir un qui répond à
+votre besoin sur le moment est une aptitude que vous allez développer avec le
+temps. Dans ce chapitre, nous allons découvrir trois collections qui sont très
+utilisées dans les programmes Rust :
 
 <!--
 * A *vector* allows you to store a variable number of values next to each other.
@@ -36,14 +36,14 @@ collections qui sont très utilisées dans les programmes Rust :
   particular implementation of the more general data structure called a *map*.
 -->
 
-* Le *vecteur* qui vous permet de stocker un nombre variable de valeurs l'une à
-  côté de l'autre.
-* La *String*, qui est une collection de caractères. Nous avons déjà vu le type
-  `String` précédemment, mais dans ce chapitre nous allons le découvrir en
+* Le *vecteur* qui vous permet de stocker un nombre variable de valeurs les unes
+  à côté des autres.
+* La *String*, qui est une collection de caractères. Nous avons déjà aperçu le
+  type `String` précédemment, mais dans ce chapitre, nous allons l'étudier en
   détail.
 * La *table de hachage* qui vous permet d'associer une valeur à une clé précise.
-  C'est une implémentation spécifique d'une structure de données plus générique :
-  le *tableau associatif*.
+  C'est une implémentation spécifique d'une structure de données plus
+  générique : le *tableau associatif*.
 
 <!--
 To learn about the other kinds of collections provided by the standard library,
@@ -64,5 +64,5 @@ We’ll discuss how to create and update vectors, strings, and hash maps, as wel
 as what makes each special.
 -->
 
-Nous allons voir comment créer et modifier les vecteurs, les String, et les
+Nous allons voir comment créer et modifier les vecteurs, les Strings et les
 tables de hachage, et étudier leurs différences.

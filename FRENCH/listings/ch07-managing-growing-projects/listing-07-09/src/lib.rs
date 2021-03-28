@@ -19,11 +19,11 @@ pub fn manger_au_restaurant() {
     let mut repas = cuisines::PetitDejeuner::en_ete("seigle");
     // On change d'avis sur le pain que nous souhaitons
     repas.tartine_grillee = String::from("blé");
-    println!( "Je voudrait une tartine grillée au {}, s'il vous plaît.",
+    println!( "Je voudrais une tartine grillée au {}, s'il vous plaît.",
               repas.tartine_grillee);
 
-    // La prochaine ligne ne va pas se compiler si nous ne la commentons pas;
-    // car nous ne sommes pas autorisé à voir ou modifier le fruit de saison
+    // La prochaine ligne ne va pas se compiler si nous ne la commentons pas,
+    // car nous ne sommes pas autorisés à voir ou modifier le fruit de saison
     // qui accompagne le repas.
 
     // repas.fruit_de_saison = String::from("myrtilles");

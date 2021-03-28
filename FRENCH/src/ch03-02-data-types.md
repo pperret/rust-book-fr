@@ -394,12 +394,12 @@ instruction `let` :
 
 <!--
 Each expression in these statements uses a mathematical operator and evaluates
-to a single value, which is then bound to a variable. Appendix B][appendix_b]<!-- ignore --> contains a
+to a single value, which is then bound to a variable. [Appendix B][appendix_b]<!-- ignore -- > contains a
 list of all operators that Rust provides.
 -->
 
 Chaque expression de ces instructions utilise un opérateur mathématique et
-calcule une valeur unique, qui est ensuite attribuée à une variable. L'annexe B
+calcule une valeur unique, qui est ensuite attribuée à une variable. [L'annexe B][appendix_b]<!-- ignore --> 
 présente une liste de tous les opérateurs que Rust fournit.
 
 <!--

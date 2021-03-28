@@ -54,17 +54,18 @@ about `pub`. Note that this example won’t compile just yet; we’ll explain wh
 in a bit.
 -->
 
-Reprenons notre exemple de l'encart 7-1. Comment utiliserions-nous la fonction
-`ajouter_a_la_liste_attente` ? Cela revient à se demander : quel est le chemin
-de la fonction `ajouter_a_la_liste_attente` ? Dans l'encart 7-3, nous avons un
-peu simplifié notre code en enlevant quelques modules et quelques fonctions.
-Nous allons voir deux façons d'appeler la fonction `ajouter_a_la_liste_attente`
-à partir d'une nouvelle fonction `manger_au_restaurant` définie dans la crate
-racine. La fonction `manger_au_restaurant` fait partie de l'API publique de
-notre crate de bibliothèque, donc nous la marquons avec le mot-clé `pub`. Dans
-la section [”Exposer les chemins avec le mot-clé `pub`”][pub]<!-- ignore -->,
-nous en apprendrons plus sur `pub`. Notez que cet exemple ne se compile pas pour
-le moment; nous allons l'expliquer un peu plus tard.
+Reprenons notre exemple de l'encart 7-1. Comment pouvons-nous appeler la
+fonction `ajouter_a_la_liste_attente` ? Cela revient à se demander : quel est le
+chemin de la fonction `ajouter_a_la_liste_attente` ? Dans l'encart 7-3, nous
+avons un peu simplifié notre code en enlevant quelques modules et quelques
+fonctions. Nous allons voir deux façons d'appeler la fonction
+`ajouter_a_la_liste_attente` à partir d'une nouvelle fonction
+`manger_au_restaurant` définie à la racine de la crate. La fonction
+`manger_au_restaurant` fait partie de l'API publique de notre crate de
+bibliothèque, donc nous la marquons avec le mot-clé `pub`. Dans la section
+[”Exposer les chemins avec le mot-clé `pub`”][pub]<!-- ignore -->, nous en
+apprendrons plus sur `pub`. Notez que cet exemple ne se compile pas pour le
+moment ; nous allons l'expliquer un peu plus tard.
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -113,10 +114,10 @@ is like using `/` to start from the filesystem root in your shell.
 
 Après `crate`, nous ajoutons chacun des modules successifs jusqu'à
 `ajouter_a_la_liste_attente`. Nous pouvons faire l'analogie avec un système de
-fichiers qui a la même structure, où nous pourrions utiliser le chemin
+fichiers qui aurait la même structure, où nous pourrions utiliser le chemin
 `/salle_a_manger/accueil/ajouter_a_la_liste_attente` pour lancer le programme
-`ajouter_a_la_liste_attente`; utiliser le nom `crate` pour partir de la crate
-racine revient à utiliser `/` pour partir de la racine de votre système de
+`ajouter_a_la_liste_attente` ; utiliser le nom `crate` pour partir de la racine
+de la crate revient à utiliser `/` pour partir de la racine de votre système de
 fichiers dans votre invite de commande.
 
 <!--
@@ -160,7 +161,7 @@ Cependant, si nous avions déplacé uniquement la fonction `manger_au_restaurant
 dans un module `repas` séparé, le chemin absolu de l'appel à
 `ajouter_a_la_liste_attente` restera le même, mais le chemin relatif aura besoin
 d'être mis à jour. Notre préférence est d'utiliser un chemin absolu car il est
-plus facile de déplacer les codes de définitions et les appels aux éléments
+plus facile de déplacer les définitions de code et les appels aux éléments
 indépendamment les uns des autres.
 
 <!--
@@ -210,7 +211,7 @@ make an item like a function or struct private, you put it in a module.
 -->
 
 Les modules ne servent pas uniquement à organiser votre code. Ils définissent
-aussi les *limites de protection* de Rust : le code externe n'est pas autorisé
+aussi les *limites de visibilité* de Rust : le code externe n'est pas autorisé
 à connaître, à appeler ou à se fier à des éléments internes au module. Donc, si
 vous voulez rendre un élément privé comme une fonction ou une structure, vous
 devez le placer dans un module.
@@ -227,17 +228,17 @@ goes on in there is private to restaurant customers, but office managers can
 see and do everything in the restaurant in which they operate.
 -->
 
-La protection avec Rust fait en sorte que tous les éléments (fonctions,
+La visibilité en Rust fait en sorte que tous les éléments (fonctions,
 méthodes, structures, énumérations, modules et constantes) sont privés par
 défaut. Les éléments dans un module parent ne peuvent pas utiliser les éléments
 privés dans les modules enfants, mais les éléments dans les modules enfants
 peuvent utiliser les éléments dans les modules parents. C'est parce que les
 modules enfants englobent et cachent les détails de leur implémentation, mais
 les modules enfants peuvent voir dans quel contexte ils sont définis. Pour
-continuer la métaphore du restaurant, considérez que les règles de protection
-sont comme les cuisines d'un restaurant : ce qui s'y passe n'est pas connu des
-clients, mais les gestionnaires peuvent tout voir et tout faire dans le
-restaurant dans lequel ils travaillent.
+continuer la métaphore du restaurant, considérez que les règles de visibilité de
+Rust fonctionnent comme les cuisines d'un restaurant : ce qui s'y passe n'est
+pas connu des clients, mais les gestionnaires peuvent tout voir et tout faire
+dans le restaurant dans lequel ils travaillent.
 
 <!--
 Rust chose to have the module system function this way so that hiding inner
@@ -251,7 +252,7 @@ Rust a décidé de faire fonctionner le système de modules de façon à ce que 
 détails d'implémentation interne sont cachés par défaut. Ainsi, vous savez
 quelles parties du code interne vous pouvez changer sans casser le code externe.
 Mais vous pouvez exposer aux parents des parties internes des modules enfants en
-utilisant le mot-clé `pub` afin de les rendre public.
+utilisant le mot-clé `pub` afin de les rendre publiques.
 
 <!--
 ### Exposing Paths with the `pub` Keyword
@@ -342,7 +343,7 @@ modules.
 -->
 
 Les erreurs dans l'encart 7-6 nous informent que la fonction
-`ajouter_a_la_liste_attente` est privée. Les règles de protection s'appliquent
+`ajouter_a_la_liste_attente` est privée. Les règles de visibilité s'appliquent
 aussi bien aux modules qu'aux structures, énumérations, fonctions et méthodes.
 
 <!--
@@ -385,9 +386,9 @@ double-check why adding the `pub` keyword lets us use these paths in
 `add_to_waitlist` with respect to the privacy rules.
 -->
 
-Maintenant, le code va compiler ! Analysons les chemins relatifs et absolus et
+Maintenant, le code va compiler ! Analysons les chemins relatif et absolu et
 vérifions pourquoi l'ajout du mot-clé `pub` nous permet d'utiliser ces chemins
-dans `ajouter_a_la_liste_attente` tout en respectant les règles de protection.
+dans `ajouter_a_la_liste_attente` tout en respectant les règles de visibilité.
 
 <!--
 In the absolute path, we start with `crate`, the root of our crate’s module
@@ -401,10 +402,10 @@ with `pub`. We can access the parent module of `hosting`, so we can access
 can access its parent module, so this function call works!
 -->
 
-Dans le chemin absolu, nous commençons avec `crate`, la racine de notre
-arborescence de modules de notre crate. Ensuite, le module `salle_a_manger` est
-défini dans la crate racine. Le module `salle_a_manger` n'est pas public, mais
-comme la fonction `manger_au_restaurant` est définie dans le même module que
+Dans le chemin absolu, nous commençons avec `crate`, la racine de l'arborescence
+de modules de notre crate. Ensuite, le module `salle_a_manger` est défini à la
+racine de la crate. Le module `salle_a_manger` n'est pas public, mais comme la
+fonction `manger_au_restaurant` est définie dans le même module que
 `salle_a_manger` (car `manger_au_restaurant` et `salle_a_manger` sont frères),
 nous pouvons utiliser `salle_a_manger` à partir de `manger_au_restaurant`.
 Ensuite, nous avons le module `accueil`, défini avec `pub`. Nous pouvons accéder
@@ -424,10 +425,10 @@ function call is valid!
 -->
 
 Dans le chemin relatif, le fonctionnement est le même que le chemin absolu sauf
-pour la première étape : plutôt que de démarrer de la crate racine, le chemin
-commence à partir de `salle_a_manger`. Le module `salle_a_manger` est défini
-dans le même module que `manger_au_restaurant`, donc le chemin relatif qui
-commence à partir du module où est défini `manger_au_restaurant` fonctionne
+pour la première étape : plutôt que de démarrer de la racine de la crate, le
+chemin commence à partir de `salle_a_manger`. Le module `salle_a_manger` est
+défini dans le même module que `manger_au_restaurant`, donc le chemin relatif
+qui commence à partir du module où est défini `manger_au_restaurant` fonctionne
 bien. Ensuite, comme `accueil` et `ajouter_a_la_liste_attente` sont définis avec
 `pub`, le reste du chemin fonctionne, et cet appel à la fonction est donc
 valide !
@@ -446,7 +447,7 @@ the `..` syntax. Why would we want to do this?
 
 Nous pouvons aussi créer des chemins relatifs qui commencent à partir du module
 parent en utilisant `super` au début du chemin. C'est comme débuter un chemin
-dans le système de fichiers avec la syntaxe `..`. Mais pourquoi voudrions-nous
+dans un système de fichiers avec la syntaxe `..`. Mais pourquoi voudrions-nous
 faire cela ?
 
 <!--
@@ -502,8 +503,8 @@ dans notre cas est `crate`, la racine. De là, nous cherchons `servir_commande`
 et nous la trouvons. Avec succès ! Nous pensons que le module `cuisines` et la
 fonction `servir_commande` vont toujours garder la même relation et devrons être
 déplacés ensemble si nous réorganisons l'arborescence de modules de la crate.
-Ainsi, nous avons utilisé `super` pour avoir moins de code à mettre à jour le
-code à l'avenir si le code est déplacé dans un module différent.
+Ainsi, nous avons utilisé `super` pour avoir moins de code à mettre à jour à
+l'avenir si ce code est déplacé dans un module différent.
 
 <!--
 ### Making Structs and Enums Public
@@ -587,11 +588,11 @@ have such a function, we couldn’t create an instance of `Breakfast` in
 -->
 
 Aussi, remarquez que comme `cuisines::PetitDejeuner` a un champ privé, la
-structure a besoin de fournir une fonction publique qui construit une instance
-de `PetitDejeuner` (que nous avons nommé `en_ete` ici). Si `PetitDejeuner`
-n'avait pas une fonction comme celle-ci, nous ne pourrions pas créer une
-instance de `PetitDejeuner` dans `manger_au_restaurant` car nous ne pourrions
-pas donner une valeur au champ privé `fruit_de_saison` dans
+structure a besoin de fournir une fonction associée publique qui construit une
+instance de `PetitDejeuner` (que nous avons nommée `en_ete` ici). Si
+`PetitDejeuner` n'avait pas une fonction comme celle-ci, nous ne pourrions pas
+créer une instance de `PetitDejeuner` dans `manger_au_restaurant` car nous ne
+pourrions pas donner une valeur au champ privé `fruit_de_saison` dans
 `manger_au_restaurant`.
 
 <!--
@@ -641,7 +642,7 @@ les variantes `Soupe` et `Salade` dans `manger_au_restaurant`. Les énumération
 ne sont pas très utiles si elles n'ont pas leurs variantes publiques ; et cela
 serait pénible d'avoir à marquer toutes les variantes de l'énumération avec
 `pub`, donc par défaut les variantes d'énumérations sont publiques. Les
-structures peuvent être utiles sans avoir de champs publics, donc les champs des
+structures sont souvent utiles sans avoir de champs publics, donc les champs des
 structures sont tous privés par défaut, sauf si ces éléments sont marqués d'un
 `pub`.
 
@@ -651,7 +652,7 @@ our last module system feature: the `use` keyword. We’ll cover `use` by itself
 first, and then we’ll show how to combine `pub` and `use`.
 -->
 
-Il y a encore une chose que nous n'avons pas abordé concernant `pub`, et c'est
+Il y a encore une chose que nous n'avons pas abordée concernant `pub`, et c'est
 la dernière fonctionnalité du système de modules : le mot-clé `use`. Nous
 commencerons par parler de l'utilisation de `use` de manière générale, puis nous
 verrons comment combiner `pub` et `use`.

@@ -16,10 +16,10 @@ coming from other programming languages.
 Nous avons déjà parlé des chaînes de caractères dans le chapitre 4, mais nous
 allons à présent les analyser plus en détail. Les nouveaux Rustacés bloquent
 souvent avec les chaînes de caractères pour trois raisons : la tendance de Rust
-à prévenir les erreurs, le fait que les chaînes de caractères sont des structures de
-données plus compliquées que ne le pensent la plupart des développeurs, et
-l'UTF-8. Ces raisons cumulées rendent les choses compliquées lorsque vous
-venez d'un autre langage de programmation.
+à prévenir les erreurs, le fait que les chaînes de caractères sont des
+structures de données plus compliquées que ne le pensent la plupart des
+développeurs, et l'UTF-8. Ces raisons cumulées rendent les choses compliquées
+lorsque vous venez d'un autre langage de programmation.
 
 <!--
 It’s useful to discuss strings in the context of collections because strings
@@ -33,14 +33,14 @@ complicated by the differences between how people and computers interpret
 -->
 
 Il est pertinent de présenter les chaînes de caractères comme des collections
-car les chaînes de caractères sont en réalité des ensembles d'octets, avec
-quelques méthodes supplémentaires qui sont utiles lorsque ces octets sont
-considérés comme du texte. Dans cette section, nous allons voir les points
-communs entre le fonctionnement des `String` et celui des autres collections,
-comme la création, la modification, et la lecture. Nous verrons les raisons pour
-lesquelles les `String` sont différents des autres collections, en particulier
-pourquoi l'indexation d'un `String` est compliquée à cause de la façon dont les
-gens et les ordinateurs interprètent les données d'une `String`.
+car les chaînes de caractères sont en réalité des suites d'octets, avec quelques
+méthodes supplémentaires qui sont utiles lorsque ces octets sont considérés
+comme du texte. Dans cette section, nous allons voir les points communs entre le
+fonctionnement des `String` et celui des autres collections, comme la création,
+la modification et la lecture. Nous verrons les raisons pour lesquelles les
+`String` sont différentes des autres collections, en particulier pourquoi
+l'indexation d'une `String` est compliquée à cause des différences entre la
+façon dont les gens et les ordinateurs interprètent les données d'une `String`.
 
 <!--
 ### What Is a String?
@@ -61,9 +61,9 @@ Nous allons d'abord définir ce que nous entendons par le terme *chaîne de
 caractères*. Rust a un seul type de chaînes de caractères dans le noyau du
 langage, qui est la slice de chaîne de caractères `str` qui est habituellement
 utilisée sous sa forme empruntée, `&str`. Dans le chapitre 4, nous avons abordé
-les *slices de chaîne de caractères*, qui sont des références à une partie des
-données d'une chaîne de caractères encodée en UTF-8 qui sont stockés autre part.
-Les chaînes de caractères pures, par exemple, sont stockées dans le binaire du
+les *slices de chaînes de caractères*, qui sont des références à des données
+d'une chaîne de caractères encodée en UTF-8 qui sont stockées autre part. Les
+littéraux de chaînes de caractères, par exemple, sont stockés dans le binaire du
 programme et sont des slices de chaînes de caractères.
 
 <!--
@@ -98,13 +98,14 @@ API documentation for more about how to use them and when each is appropriate.
 La bibliothèque standard de Rust apporte aussi un certain nombre d'autres types
 de chaînes de caractères, comme `OsString`, `OsStr`, `CString`, et `CStr`. Les
 crates de bibliothèque peuvent fournir encore plus de solutions pour stocker des
-chaînes de caractères. Avez vous remarqué que ces noms finissent tous par `String`
-ou `Str` ? Cela fait référence aux variantes possédées et empruntées, comme les
-types `String` et `str` que nous avons vu précédemment. Ces types de chaînes de
-caractères peuvent stocker leur texte dans de différents encodages, ou le
-stocker en mémoire de manière différente, par exemple. Nous n'allons pas traiter
-ces autres types de chaînes de caractères dans ce chapitre ; référez-vous à
-la documentation de leur API pour en savoir plus sur leur utilisation et leur utilité.
+chaînes de caractères. Avez-vous remarqué que ces noms finissent tous par
+`String` ou `Str` ? Cela fait référence aux variantes possédées et empruntées,
+comme les types `String` et `str` que nous avons vus précédemment. Ces types de
+chaînes de caractères peuvent stocker leur texte dans de différents encodages,
+ou le stocker en mémoire de manière différente, par exemple. Nous n'allons pas
+traiter de ces autres types de chaînes de caractères dans ce chapitre ;
+référez-vous à la documentation de leur API pour en savoir plus sur leur
+utilisation et leur utilité.
 
 <!--
 ### Creating a New String
@@ -146,11 +147,11 @@ that implements the `Display` trait, as string literals do. Listing 8-12 shows
 two examples.
 -->
 
-Cette ligne créée une nouvelle `String` vide qui s'appelle `s`, dans laquelle
-nous pouvons ensuite y charger des données. Parfois, nous aurons quelques
-données initiales que nous voudrions ajouter dans la `String`. Pour cela, nous
-utilisons la méthode `to_string`, qui est disponible sur tous les types qui
-implémentent le trait `Display`, comme le font les chaînes de caractères pures.
+Cette ligne crée une nouvelle `String` vide qui s'appelle `s`, dans laquelle
+nous pouvons ensuite charger des données. Souvent, nous aurons quelques données
+initiales que nous voudrions ajouter dans la `String`. Pour cela, nous utilisons
+la méthode `to_string`, qui est disponible sur tous les types qui implémentent
+le trait `Display`, comme le font les littéraux de chaînes de caractères.
 L'encart 8-12 nous montre deux exemples.
 
 <!--
@@ -169,7 +170,7 @@ L'encart 8-12 nous montre deux exemples.
 -->
 
 <span class="caption">Encart 8-12 : Utilisation de la méthode `to_string` pour
-créer un `String` à partir d'une chaîne de caractères pure</span>
+créer une `String` à partir d'un littéral de chaîne</span>
 
 <!--
 This code creates a string containing `initial contents`.
@@ -184,8 +185,8 @@ that uses `to_string`.
 -->
 
 Nous pouvons aussi utiliser la fonction `String::from` pour créer une `String`
-à partir d'une chaîne de caractères pure. Le code dans l'encart 8-13 est
-équivalent au code dans l'encart 8-12 qui utilisait `to_string`.
+à partir d'un littéral de chaîne. Le code dans l'encart 8-13 est équivalent au
+code dans l'encart 8-12 qui utilisait `to_string`.
 
 <!--
 ```rust
@@ -203,7 +204,7 @@ a `String` from a string literal</span>
 -->
 
 <span class="caption">Encart 8-13 : Utilisation de la fonction `String::from`
-afin de créer une `String` à partir d'une chaîne de caractères pure</span>
+afin de créer une `String` à partir d'un littéral de chaîne</span>
 
 <!--
 Because strings are used for so many things, we can use many different generic
@@ -213,10 +214,10 @@ redundant, but they all have their place! In this case, `String::from` and
 -->
 
 Comme les chaînes de caractères sont utilisées pour de nombreuses choses, nous
-pouvons utiliser beaucoup d'APIs génériques pour les chaînes de caractères.
+pouvons utiliser beaucoup d'API génériques pour les chaînes de caractères.
 Certaines d'entre elles peuvent paraître redondantes, mais elles ont toutes
-leur place ! Dans notre cas, `String::from` et `to_string` font la même
-chose, donc votre choix est une question de goût.
+leur place ! Dans notre cas, `String::from` et `to_string` font la même chose,
+donc votre choix est une question de goût.
 
 <!--
 Remember that strings are UTF-8 encoded, so we can include any properly encoded
@@ -224,8 +225,8 @@ data in them, as shown in Listing 8-14.
 -->
 
 Souvenez-vous que les chaînes de caractères sont encodées en UTF-8, donc nous
-pouvons y intégrer n'importe quelle donnée valide, comme nous
-le voyons dans l'encart 8-14.
+pouvons y intégrer n'importe quelle donnée valide, comme nous le voyons dans
+l'encart 8-14.
 
 <!--
 ```rust
@@ -242,8 +243,8 @@ le voyons dans l'encart 8-14.
 strings</span>
 -->
 
-<span class="caption">Encart 8-14 : Stockage de texte dans différents langages
-dans des chaînes de caractères</span>
+<span class="caption">Encart 8-14 : Stockage de salutations dans différentes
+langues dans des chaînes de caractères</span>
 
 <!--
 All of these are valid `String` values.
@@ -264,9 +265,9 @@ use the `+` operator or the `format!` macro to concatenate `String` values.
 -->
 
 Une `String` peut s'agrandir et son contenu peut changer, exactement comme le
-contenu d'un `Vec<T>`, si vous utilisez `push` pour y rajouter des données à
-l'intérieur. De plus, vous pouvez correctement utiliser l'opérateur `+` ou la
-macro `format!` pour concatener des valeurs `String`.
+contenu d'un `Vec<T>`, si on y ajoute des données. De plus, vous pouvez aisément
+utiliser l'opérateur `+` ou la macro `format!` pour concaténer des valeurs
+`String`.
 
 <!--
 #### Appending to a String with `push_str` and `push`
@@ -279,7 +280,7 @@ We can grow a `String` by using the `push_str` method to append a string slice,
 as shown in Listing 8-15.
 -->
 
-Nous pouvons agrandir un `String` en utilisant la méthode `push_str` pour
+Nous pouvons agrandir une `String` en utilisant la méthode `push_str` pour
 ajouter une slice de chaîne de caractères, comme dans l'encart 8-15.
 
 <!--
@@ -298,7 +299,7 @@ using the `push_str` method</span>
 -->
 
 <span class="caption">Encart 8-15 : Ajout d'une slice de chaîne de caractères
-dans un `String` en utilisant la méthode `push_str`</span>
+dans une `String` en utilisant la méthode `push_str`</span>
 
 <!--
 After these two lines, `s` will contain `foobar`. The `push_str` method takes a
@@ -307,11 +308,11 @@ parameter. For example, the code in Listing 8-16 shows that it would be
 unfortunate if we weren’t able to use `s2` after appending its contents to `s1`.
 -->
 
-A l'issue de ces deux lignes, `s` va contenir `foobar`. La méthode `push_str`
+À l'issue de ces deux lignes, `s` va contenir `foobar`. La méthode `push_str`
 prend une slice de chaîne de caractères car nous ne souhaitons pas forcément
 prendre possession du paramètre. Par exemple, le code de l'encart 8-16 nous
-montre une situation où il serait regrettable si nous ne pouvions plus utiliser
-`s2` après avoir ajouté son contenu dans `s1`.
+montre une situation où il serait regrettable de ne plus pouvoir utiliser `s2`
+après avoir ajouté son contenu dans `s1`.
 
 <!--
 ```rust
@@ -346,9 +347,9 @@ The `push` method takes a single character as a parameter and adds it to the
 the `push` method.
 -->
 
-La méthode `push` prend un seul caractère en paramètre et l'ajoute au `String`.
-L'encart 8-17 nous montre du code qui ajoute la lettre "l" au `String` en
-utilisant la méthode `push`.
+La méthode `push` prend un seul caractère en paramètre et l'ajoute à la
+`String`. L'encart 8-17 nous montre du code qui ajoute la lettre "l" à une
+`String` en utilisant la méthode `push`.
 
 <!--
 ```rust
@@ -365,8 +366,8 @@ utilisant la méthode `push`.
 using `push`</span>
 -->
 
-<span class="caption">Encart 8-17 : Ajout d'un unique caractère à la valeur d'une
-`String` en utilisant `push`</span>
+<span class="caption">Encart 8-17 : Ajout d'un unique caractère à la valeur
+d'une `String` en utilisant `push`</span>
 
 <!--
 As a result of this code, `s` will contain `lol`.
@@ -385,7 +386,7 @@ Often, you’ll want to combine two existing strings. One way is to use the `+`
 operator, as shown in Listing 8-18.
 -->
 
-Parfois, vous aurez besoin de combiner deux chaînes de caractères existantes.
+Souvent, vous aurez besoin de combiner deux chaînes de caractères existantes.
 Une façon de faire cela est d'utiliser l'opérateur `+`, comme dans l'encart
 8-18.
 
@@ -404,8 +405,8 @@ Une façon de faire cela est d'utiliser l'opérateur `+`, comme dans l'encart
 `String` values into a new `String` value</span>
 -->
 
-<span class="caption">Encart 8-18 : Utilisation de l'opérateur `+` pour
-combiner deux valeurs de `String`</span>
+<span class="caption">Encart 8-18 : Utilisation de l'opérateur `+` pour combiner
+deux valeurs de `String`</span>
 
 <!--
 The string `s3` will contain `Hello, world!` as a result of this code. The
@@ -445,7 +446,7 @@ Ce n'est pas exactement la même signature que celle de la bibliothèque
 standard : dans la bibliothèque standard, `add` est défini avec des types
 génériques. Ici, nous voyons la signature de `add` avec des types concrets à la
 place des génériques, ce qui se passe lorsque nous utilisons cette méthode avec
-des valeurs de type `String`. Nous verrons les génériques au chapitre 10. Cette
+des valeurs de type `String`. Nous verrons la généricité au chapitre 10. Cette
 signature nous donne les éléments dont nous avons besoin pour comprendre les
 subtilités de l'opérateur `+`.
 
@@ -458,11 +459,12 @@ the second parameter to `add`. So why does Listing 8-18 compile?
 -->
 
 Premièrement, `s2` a un `&`, ce qui veut dire que nous ajoutons une *référence*
-vers la seconde chaîne de caractères en raison du paramètre `s` dans la fonction
-`add` : nous pouvons seulement ajouter une `&str` à une `String` ; nous ne
-pouvons pas ajouter deux valeurs de type `String` ensemble. Mais attendez — le
-type de `&s2` est `&String`, et non pas `&str`, comme c'est écrit dans le second
-paramètre de `add`. Donc pourquoi est-ce que le code l'encart 8-18 se compile ?
+vers la seconde chaîne de caractères à la première chaîne en raison du paramètre
+`s` de la fonction `add` : nous pouvons seulement ajouter un `&str` à une
+`String` ; nous ne pouvons pas ajouter deux valeurs de type `String` ensemble.
+Mais attendez — le type de `&s2` est `&String`, et non pas `&str`, comme c'est
+écrit dans le second paramètre de `add`. Alors pourquoi est-ce que le code de
+l'encart 8-18 se compile ?
 
 <!--
 The reason we’re able to use `&s2` in the call to `add` is that the compiler
@@ -474,10 +476,10 @@ after this operation.
 -->
 
 La raison pour laquelle nous pouvons utiliser `&s2` dans l'appel à `add` est que
-le compilateur peut *extrapoler* l'argument `&String` en un `&str`. Lorsque
-nous appelons la méthode `add`, Rust va utiliser une *extrapolation de
+le compilateur peut *extrapoler* l'argument `&String` en un `&str`. Lorsque nous
+appelons la méthode `add`, Rust va utiliser une *extrapolation de
 déréférencement*, qui transforme ici `&s2` en `&s2[..]`. Nous verrons plus en
-détails l'extrapolation de déréférencement au chapitre 15. Comme `add` ne prend
+détail l'extrapolation de déréférencement au chapitre 15. Comme `add` ne prend
 pas possession du paramètre `s`, `s2` sera toujours une `String` valide après
 cette opération.
 
@@ -496,7 +498,8 @@ Ensuite, nous pouvons constater que la signature de `add` prend possession de
 `self`, car `self` n'a *pas* de `&`. Cela signifie que `s1` dans l'encart 8-18
 va être déplacé dans l'appel à `add` et ne sera plus en vigueur après cela. Donc
 bien que `let s3 = s1 + &s2` semble copier les deux chaînes de caractères pour
-en créer une nouvelle, cette instruction va en réalité prendre possession du
+en créer une nouvelle, cette instruction va en réalité prendre possession de
+`s1`, y ajouter une copie du contenu de `s2` et nous redonner la possession du
 résultat. Autrement dit, cela semble faire beaucoup de copies mais en réalité
 non ; son implémentation est plus efficace que la copie.
 
@@ -524,9 +527,9 @@ characters, it’s difficult to see what’s going on. For more complicated stri
 combining, we can use the `format!` macro:
 -->
 
-Au final, `s` vaudra `tic-tac-toe`. Avec tous les caractères `+`et `"`, il est
-difficile de visualiser ce qu'il se passe. Pour une combinaison de chaînes de
-caractères plus complexes, nous pouvons utiliser la macro `format!` :
+Au final, `s` vaudra `tic-tac-toe`. Avec tous les caractères `+` et `"`, il est
+difficile de visualiser ce qui se passe. Pour une combinaison de chaînes de
+caractères plus complexe, nous pouvons utiliser la macro `format!` :
 
 <!--
 ```rust
@@ -547,15 +550,15 @@ easier to read and doesn’t take ownership of any of its parameters.
 
 Ce code assigne lui aussi à `s` la valeur `tic-tac-toe`. La macro `format!`
 fonctionne de la même manière que `println!`, mais au lieu d'afficher son
-résultat à l'écran, elle retourne un `String` avec son contenu. La version du
-code qui utilise `format!` est plus facile à lire et ne prends pas possession de
+résultat à l'écran, elle retourne une `String` avec son contenu. La version du
+code qui utilise `format!` est plus facile à lire et ne prend pas possession de
 ses paramètres.
 
 <!--
 ### Indexing into Strings
 -->
 
-### L'indexation des `String`
+### L'indexation des Strings
 
 <!--
 In many other programming languages, accessing individual characters in a
@@ -565,11 +568,10 @@ get an error. Consider the invalid code in Listing 8-19.
 -->
 
 Dans de nombreux autres langages de programmation, l'accès individuel aux
-caractères d'une chaîne de caractères en utilisant leur indice est une
-opération valide et courante. Cependant, si vous essayez d'accéder à des
-éléments d'une `String` en utilisant la syntaxe des indices avec Rust, vous
-allez avoir une erreur. Nous tentons cela dans le code invalide de l'encart
-8-19.
+caractères d'une chaîne de caractères en utilisant leur indice est une opération
+valide et courante. Cependant, si vous essayez d'accéder à des éléments d'une
+`String` en utilisant la syntaxe d'indexation avec Rust, vous allez avoir une
+erreur. Nous tentons cela dans le code invalide de l'encart 8-19.
 
 <!--
 ```rust,ignore,does_not_compile
@@ -586,7 +588,7 @@ allez avoir une erreur. Nous tentons cela dans le code invalide de l'encart
 String</span>
 -->
 
-<span class="caption">Encart 8-19 : Essai d'utilisation de la syntaxe
+<span class="caption">Encart 8-19 : Tentative d'utilisation de la syntaxe
 d'indexation avec une `String`</span>
 
 <!--
@@ -612,15 +614,15 @@ memory.
 -->
 
 L'erreur et la remarque nous expliquent le problème : les `String` de Rust
-n'acceptent pas l'utilisation des indices. Mais pourquoi ? Pour répondre à
-cette question, nous avons besoin de savoir comment Rust enregistre les chaînes
-de caractères dans la mémoire.
+n'acceptent pas l'utilisation des indices. Mais pourquoi ? Pour répondre à cette
+question, nous avons besoin de savoir comment Rust enregistre les chaînes de
+caractères dans la mémoire.
 
 <!--
 #### Internal Representation
 -->
 
-#### Représentation du fonctionnement interne
+#### Représentation interne
 
 <!--
 A `String` is a wrapper over a `Vec<u8>`. Let’s look at some of our properly
@@ -649,10 +651,10 @@ Cyrillic letter Ze, not the Arabic number 3.)
 -->
 
 Dans ce cas-ci, `len` vaudra 4, ce qui veut dire que le vecteur qui stocke la
-chaîne “Hola” a une taille de 4 octets. Chacune des lettres prends 1 octet
-lorsqu'elles sont encodées en UTF-8. Mais que se passe-t-il à la ligne
-suivante ? (Notez que cette chaîne de caractères commence avec la lettre
-majuscule cyrillique Ze, et non pas le nombre arabe 3.)
+chaîne “Hola” a une taille de 4 octets. Chacune des lettres prend 1 octet
+lorsqu'elles sont encodées en UTF-8. Mais qu'en est-il de la ligne suivante ?
+(Notez que cette chaîne de caractères commence avec la lettre majuscule
+cyrillique Zé, et non pas le chiffre arabe 3.)
 
 <!--
 ```rust
@@ -672,13 +674,13 @@ an index into the string’s bytes will not always correlate to a valid Unicode
 scalar value. To demonstrate, consider this invalid Rust code:
 -->
 
-Si vous vous demandez la longueur de la chaîne de caractères, vous vous direz
+Si on vous demandait la longueur de la chaîne de caractères, vous répondriez
 probablement 12. Cependant, la réponse de Rust sera 24 : c'est le nombre
 d'octets nécessaires pour encoder “Здравствуйте” en UTF-8, car chaque valeur
 scalaire Unicode dans cette chaîne de caractères prend 2 octets en mémoire.
 Par conséquent, un indice dans les octets de la chaîne de caractères ne
-correspondra pas forcément à une valeur unicode valide. Pour démontrer cela,
-utilisons ce code Rust invalide :
+correspondra pas forcément à une valeur scalaire Unicode valide. Pour démontrer
+cela, utilisons ce code Rust invalide :
 
 <!--
 ```rust,ignore,does_not_compile
@@ -688,8 +690,8 @@ let answer = &hello[0];
 -->
 
 ```rust,ignore,does_not_compile
-let hello = "Здравствуйте";
-let answer = &hello[0];
+let bonjour = "Здравствуйте";
+let reponse = &bonjour[0];
 ```
 
 <!--
@@ -706,25 +708,25 @@ Rust doesn’t compile this code at all and prevents misunderstandings early in
 the development process.
 -->
 
-Quelle sera la valeur de `answer` ? Est-ce que ce sera `З`, la première
-lettre ?  Lorsqu'il est encodé en UTF-8, le premier octet de `З` est `208` et
-le second est `151`, donc en vérité `answer` vaudra `208`, mais `208` n'est pas
-un caractère valide à lui seul. Renvoyer `208` n'est pas ce qu'un utilisateur
+Quelle serait la valeur de `reponse` ? Est-ce que ce serait `З`, la première
+lettre ? Lorsqu'il est encodé en UTF-8, le premier octet de `З` est `208` et le
+second est `151`, donc en vérité `reponse` vaudrait `208`, mais `208` n'est pas
+un caractère valide à lui seul. Retourner `208` n'est pas ce qu'un utilisateur
 attend s'il demande la première lettre de cette chaîne de caractères ;
 cependant, c'est la seule valeur que Rust a à l'indice 0 des octets. Les
-utilisateurs ne souhaitent généralement pas obtenir la valeur en octets, même si
-la chaîne de caractères contient uniquement des lettres latines : si
-`&"hello"[0]` était un code valide qui retournerait la valeur de l'octet, il
+utilisateurs ne souhaitent généralement pas obtenir la valeur d'un octet, même
+si la chaîne de caractères contient uniquement des lettres latines : si
+`&"hello"[0]` était un code valide qui retournait la valeur de l'octet, il
 retournerait `104` et non pas `h`. Pour éviter de retourner une valeur
 inattendue et générer des bogues qui ne seraient pas découverts immédiatement,
-Rust ne va pas compiler ce code et ainsi éviter des erreurs dès le début du
+Rust ne va pas compiler ce code et va ainsi éviter des erreurs dès le début du
 processus de développement.
 
 <!--
 #### Bytes and Scalar Values and Grapheme Clusters! Oh My!
 -->
 
-#### Les valeurs des octets et des scalaires et les groupes de graphèmes !
+#### Des octets, des valeurs scalaires et des groupes de graphèmes !? Oh mon Dieu !
 
 <!--
 Another point about UTF-8 is that there are actually three relevant ways to
@@ -733,17 +735,17 @@ clusters (the closest thing to what we would call *letters*).
 -->
 
 Un autre problème avec l'UTF-8 est qu'il a en fait trois manières pertinentes
-pour considérer les chaînes de caractères avec Rust : comme des octets, comme
-des valeurs scalaires et comme des groupes de graphèmes (la chose qui se
-rapproche le plus de ce que nous pourrions appeler des *lettres*).
+de considérer les chaînes de caractères avec Rust : comme des octets, comme
+des valeurs scalaires ou comme des groupes de graphèmes (ce qui se rapproche le
+plus de ce que nous pourrions appeler des *lettres*).
 
 <!--
 If we look at the Hindi word “नमस्ते” written in the Devanagari script, it is
 stored as a vector of `u8` values that looks like this:
 -->
 
-Si l'on considère le mot en Hindi “नमस्ते” écrit dans le style Devanagari, il est
-stocké comme un vecteur de valeurs `u8` qui sont les suivants :
+Si l'on considère le mot hindi “नमस्ते” écrit en écriture devanagari, il est
+stocké comme un vecteur de valeurs `u8` qui sont les suivantes :
 
 <!--
 ```text
@@ -784,10 +786,10 @@ them as grapheme clusters, we’d get what a person would call the four letters
 that make up the Hindi word:
 -->
 
-Nous avons six valeurs `char` ici, mais la quatrième et sixième valeur ne sont
-pas des lettres : ce sont des signes diacritiques qui n'ont pas de sens employés seuls.
-Enfin, si nous les voyons comme des groupes de graphèmes, on obtient ce qu'une
-personne pourrait appeler les quatre lettres qui constituent le mot Hindi :
+Nous avons six valeurs `char` ici, mais les quatrième et sixième valeurs ne sont
+pas des lettres : ce sont des signes diacritiques qui n'ont pas de sens employés
+seuls. Enfin, si nous les voyons comme des groupes de graphèmes, on obtient ce
+qu'on pourrait appeler les quatre lettres qui constituent le mot hindi :
 
 <!--
 ```text
@@ -807,7 +809,7 @@ what human language the data is in.
 
 Rust fournit différentes manières d'interpréter les données brutes des chaînes
 de caractères que les ordinateurs stockent afin que chaque programme puisse
-choisir l'interprétation dont il a besoin, peu importe dans quel langage humain
+choisir l'interprétation dont il a besoin, peu importe la langue dans laquelle
 sont les données.
 
 <!--
@@ -819,10 +821,11 @@ index to determine how many valid characters there were.
 -->
 
 Une dernière raison pour laquelle Rust ne nous autorise pas à indexer une
-`String` comme caractère est que les opérations d'indexation sont censés prendre
-un temps constant (O(1)). Mais il n'est pas possible de garantir cette
-performance avec une `String`, car Rust devrait parcourir le contenu depuis le
-début jusqu'à l'indice pour déterminer combien il y a de caractères valides.
+`String` pour récupérer un caractère est que les opérations d'indexation sont
+censées prendre un temps constant (O(1)). Mais il n'est pas possible de garantir
+cette performance avec une `String`, car Rust devrait parcourir le contenu
+depuis le début jusqu'à l'indice pour déterminer combien il y a de caractères
+valides.
 
 <!--
 ### Slicing Strings
@@ -840,16 +843,15 @@ rather than indexing using `[]` with a single number, you can use `[]` with a
 range to create a string slice containing particular bytes:
 -->
 
-L'utilisation des indices sur une chaîne de caractères est souvent une mauvaise
-idée car le type de retour de l'opération n'est pas toujours évident : une
-valeur en octets, en caractères, un groupe de graphèmes, ou une slice de chaîne
-de caractères. C'est pourquoi Rust vous demande d'être plus précis si vous avez
-vraiment besoin d'utiliser des indices pour créer un déoupage de chaîne de
-caractères. Afin d'être plus précis sur l'utilisation des indices et que vous
-souhaitez obtenir une slice de chaine de caractères, vous pouvez utiliser `[]`
-avec une intervalle d'indices pour créer une slice de chaîne de caractères
-contenant des octets bien précis, plutôt que d'utiliser `[]` avec un seul
-nombre :
+L'indexation sur une chaîne de caractères est souvent une mauvaise idée car le
+type de retour de l'opération n'est pas toujours évident : un octet, un
+caractère, un groupe de graphèmes ou une slice de chaîne de caractères ? C'est
+pourquoi Rust vous demande d'être plus explicite si vous avez vraiment besoin
+d'utiliser des indices pour créer des slices de chaînes. Afin d'expliciter votre
+utilisation d'indices et d'indiquer que vous souhaitez obtenir une slice de
+chaîne de caractères, vous pouvez utiliser `[]` avec un intervalle d'indices
+pour créer une slice de chaîne contenant des octets bien précis, plutôt que
+d'utiliser `[]` avec un seul nombre :
 
 <!--
 ```rust
@@ -860,9 +862,9 @@ let s = &hello[0..4];
 -->
 
 ```rust
-let hello = "Здравствуйте";
+let bonjour = "Здравствуйте";
 
-let s = &hello[0..4];
+let s = &bonjour[0..4];
 ```
 
 <!--
@@ -871,18 +873,18 @@ Earlier, we mentioned that each of these characters was 2 bytes, which means
 `s` will be `Зд`.
 -->
 
-Ici, `s` sera un `&str` qui contiendra les 4 premiers octets de la chaine de
+Ici, `s` sera un `&str` qui contiendra les 4 premiers octets de la chaîne de
 caractères. Précédemment, nous avions mentionné que chacun de ces caractères
-étaient encodés sur 2 octets, ce qui veut dire que `s` vaudra `Зд`.
+était encodé sur 2 octets, ce qui veut dire que `s` vaudra `Зд`.
 
 <!--
 What would happen if we used `&hello[0..1]`? The answer: Rust would panic at
 runtime in the same way as if an invalid index were accessed in a vector:
 -->
 
-Que se serait-il passé si nous avions utilisé `&hello[0..1]` ? Réponse : Rust
-aurait paniqué au moment de l'exécution de la même façon que si nous
-utiliserions un indice invalide pour accéder à un élément d'un vecteur :
+Que se passerait-il si nous utilisions `&bonjour[0..1]` ? Réponse : Rust aurait
+paniqué au moment de l'exécution de la même façon que si nous utilisions un
+indice invalide pour accéder à un élément d'un vecteur :
 
 <!--
 ```console
@@ -912,7 +914,7 @@ cela peut provoquer un plantage de votre programme.
 Fortunately, you can access elements in a string in other ways.
 -->
 
-Heureusement, il existe d'autres manières d'accéder aux éléments d'une chaine
+Heureusement, il existe d'autres manières d'accéder aux éléments d'une chaîne
 de caractères.
 
 <!--
@@ -922,10 +924,10 @@ out and returns six values of type `char`, and you can iterate over the result
 to access each element:
 -->
 
-Si vous avez besoin de faire des opérations sur les valeurs scalaires Unicodes
+Si vous avez besoin de faire des opérations sur les valeurs scalaires Unicode
 une par une, la meilleure façon de procéder est d'utiliser la méthode `chars`.
-Utiliser `chars` sur “नमस्ते” sépare et retourne six valeurs de type `char`, et
-vous pouvez itérer sur le résultat pour accéder sur chaque élément :
+Appeler `chars` sur “नमस्ते” sépare et retourne six valeurs de type `char`, et
+vous pouvez itérer sur le résultat pour accéder à chaque élément :
 
 <!--
 ```rust
@@ -993,7 +995,7 @@ for b in "नमस्ते".bytes() {
 This code will print the 18 bytes that make up this `String`:
 -->
 
-Ce code va imprimer les 18 octets qui constituent cette `String` :
+Ce code va afficher les 18 octets qui constituent cette `String` :
 
 <!--
 ```text
@@ -1027,7 +1029,7 @@ provided by the standard library. Crates are available on
 [crates.io](https://crates.io/) if this is the functionality you need.
 -->
 
-L'obtention des groupes de graphèmes à partir des chaines de caractères est
+L'obtention des groupes de graphèmes à partir de chaînes de caractères est
 complexe, donc cette fonctionnalité n'est pas fournie par la bibliothèque
 standard. Des crates sont disponibles sur [crates.io](https://crates.io/) si
 c'est la fonctionnalité dont vous avez besoin.
@@ -1049,19 +1051,18 @@ from having to handle errors involving non-ASCII characters later in your
 development life cycle.
 -->
 
-Pour résumer, les chaînes de caractères sont complexes. De nombreux langages
+Pour résumer, les chaînes de caractères sont complexes. Les différents langages
 de programmation ont fait différents choix sur la façon de présenter cette
 complexité aux développeurs. Rust a choisi d'appliquer par défaut la gestion
 rigoureuse des données de `String` pour tous les programmes Rust, ce qui veut
 dire que les développeurs doivent réfléchir davantage à la gestion des données
 UTF-8. Ce compromis révèle davantage la complexité des chaînes de caractères par
-rapport à ce que les autres langages de programmation laissent paraître, mais vous
-évite d'avoir à gérer plus tard dans votre cycle de développement des erreurs à
-cause de caractères non ASCII.
+rapport à ce que les autres langages de programmation laissent paraître, mais
+vous évite d'avoir à gérer plus tard dans votre cycle de développement des
+erreurs à cause de caractères non ASCII.
 
 <!--
 Let’s switch to something a bit less complex: hash maps!
 -->
 
-Changeons maintenant pour quelque chose de moins complexe : les tables de
-hachage !
+Passons maintenant à quelque chose de moins complexe : les tables de hachage !

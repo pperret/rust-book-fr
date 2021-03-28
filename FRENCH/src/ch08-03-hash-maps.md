@@ -17,9 +17,9 @@ La dernière des collections les plus courantes est la *table de hachage (hash
 map)*. Le type `HashMap<K, V>` stocke une association de clés de type `K` à des
 valeurs de type `V`. Elle fait cela via une *fonction de hachage*, qui détermine
 comment elle va ranger ces clés et valeurs dans la mémoire. De nombreux langages
-de programmation prennent en charge ce genre de structure de donnée, mais elles
-ont souvent un nom différent, comme hash, map, object, hash table, dictionary,
-ou associative array, pour n'en nommer que quelques-uns.
+de programmation prennent en charge ce genre de structure de données, mais elles
+ont souvent un nom différent, tel que hash, map, objet, table d'association,
+dictionnaire ou tableau associatif, pour n'en nommer que quelques-uns.
 
 <!--
 Hash maps are useful when you want to look up data not by using an index, as
@@ -34,8 +34,7 @@ pas en utilisant des indices, comme vous pouvez le faire avec les vecteurs, mais
 en utilisant une clé qui peut être de n'importe quel type. Par exemple, dans un
 jeu, vous pouvez consigner le score de chaque équipe dans une table de hachage
 dans laquelle chaque clé est le nom d'une équipe et la valeur est le score de
-l'équipe. Lorsque vous utilisez le nom d'une équipe, vous pouvez récupérer son
-score.
+l'équipe. Si vous avez le nom d'une équipe, vous pouvez récupérer son score.
 
 <!--
 We’ll go over the basic API of hash maps in this section, but many more goodies
@@ -46,7 +45,7 @@ As always, check the standard library documentation for more information.
 Nous allons passer en revue l'API de base des tables de hachage dans cette
 section, mais bien d'autres fonctionnalités se cachent dans les fonctions
 définies sur `HashMap<K, V>` par la bibliothèque standard. Comme d'habitude,
-regardez la documentation de la bibliothèque standard pour plus d'informations.
+consultez la documentation de la bibliothèque standard pour plus d'informations.
 
 <!--
 ### Creating a New Hash Map
@@ -61,8 +60,8 @@ Blue and Yellow. The Blue team starts with 10 points, and the Yellow team
 starts with 50.
 -->
 
-Vous pouvez créer une table de hachage vide avec `new` et ajouter des éléments
-avec `insert`. Dans l'encart 8-20, nous consignons les scores des deux équipes
+Vous pouvez créer une table de hachage vide avec `new` et y ajouter des éléments
+avec `insert`. Dans l'encart 8-20, nous consignons les scores de deux équipes
 qui s'appellent Bleu et Jaune. L'équipe Bleu commence avec 10 points, et
 l'équipe Jaune commence avec 50.
 
@@ -92,12 +91,12 @@ automatically in the prelude. Hash maps also have less support from the
 standard library; there’s no built-in macro to construct them, for example.
 -->
 
-Notez que nous devons d'abord utiliser `use` sur `HashMap` de la partie des
+Notez que nous devons d'abord importer `HashMap` via `use` depuis la partie des
 collections de la bibliothèque standard. De nos trois collections courantes,
 cette dernière est la moins utilisée, donc elle n'est pas présente dans les
 fonctionnalités importées automatiquement dans la portée par l'étape
-préliminaire. Les tables de hachages sont aussi moins gérées par la bibliothèque
-standard ; il n'y a pas de macro intégrée pour les construire, par exemple.
+préliminaire. Les tables de hachage sont aussi moins gérées par la bibliothèque
+standard ; il n'y a pas de macro intégrée pour les construire, par exemple.
 
 <!--
 Just like vectors, hash maps store their data on the heap. This `HashMap` has
@@ -109,7 +108,7 @@ must have the same type.
 Exactement comme les vecteurs, les tables de hachage stockent leurs données sur
 le tas. Cette `HashMap` a des clés de type `String` et des valeurs de type
 `i32`. Et comme les vecteurs, les tables de hachage sont homogènes : toutes les
-clés doivent être du même type, et toutes valeurs doivent aussi toutes être du
+clés doivent être du même type, et toutes les valeurs doivent aussi être du
 même type.
 
 <!--
@@ -127,14 +126,14 @@ as shown in Listing 8-21.
 
 Une autre façon de construire une table de hachage est d'utiliser les itérateurs
 et la méthode `collect` sur un vecteur de tuples, où chaque tuple représente une
-clé et sa valeur. Nous aborderons les itérateurs et leurs méthodes associées
-dans [une section du chapitre 13][iterators]<!-- ignore -->. La méthode
-`collect` regroupe les données dans quelques types de collections, dont
+clé et sa valeur. Nous aborderons en détail les itérateurs et leurs méthodes
+associées dans [une section du chapitre 13][iterators]<!-- ignore -->. La
+méthode `collect` regroupe les données dans quelques types de collections, dont
 `HashMap`. Par exemple, si nous avions les noms des équipes et les scores
 initiaux dans deux vecteurs séparés, nous pourrions utiliser la méthode `zip`
 pour créer un vecteur de tuples où “Bleu” est associé à 10, et ainsi de suite.
-Ensuite nous pourrions utiliser la méthode `collect` pour transformer ce vecteur
-de tuples en table de hachage, comme nous l'avons fait dans l'encart 8-21.
+Ensuite, nous pourrions utiliser la méthode `collect` pour transformer ce
+vecteur de tuples en table de hachage, comme dans l'encart 8-21.
 
 <!--
 ```rust
@@ -152,7 +151,7 @@ and a list of scores</span>
 -->
 
 <span class="caption">Encart 8-21 : création d'une table de hachage à partir
-d'une liste d'équipe et une liste de scores</span>
+d'une liste d'équipes et d'une liste de scores</span>
 
 <!--
 The type annotation `HashMap<_, _>` is needed here because it’s possible to
@@ -165,13 +164,13 @@ were in Listing 8-20.
 -->
 
 L'annotation de type `HashMap<_, _>` est nécessaire ici car `collect` peut
-générer plusieurs types de structures de données et Rust ne sait pas celle que
+générer plusieurs types de structures de données et Rust ne sait pas laquelle
 vous souhaitez si vous ne le précisez pas. Mais pour les paramètres qui
-correspondent aux types de clés et de valeur, nous utilisons des tirets bas, et
+correspondent aux types de clé et de valeur, nous utilisons des tirets bas, et
 Rust peut déduire les types que la table de hachage contient en fonction des
-types de données présentes dans les vecteurs. Dans l'encart 8-21, le type de la
-clé doit être une `String` et le type de la valeur doit être un `i32`, tout
-comme l'étaient les types dans l'encart 8-20.
+types des données présentes dans les vecteurs. Dans l'encart 8-21, le type des
+clés sera `String` et le type des valeurs sera `i32`, tout comme l'étaient les
+types dans l'encart 8-20.
 
 <!--
 ### Hash Maps and Ownership
@@ -214,8 +213,7 @@ they’ve been moved into the hash map with the call to `insert`.
 -->
 
 Nous ne pouvons plus utiliser les variables `nom_champ` et `valeur_champ` après
-qu'elles aient été déplacées dans la table de hachage lors de l'appel à
-`insert`.
+qu'elles ont été déplacées dans la table de hachage lors de l'appel à `insert`.
 
 <!--
 If we insert references to values into the hash map, the values won’t be moved
@@ -226,11 +224,11 @@ Lifetimes”][validating-references-with-lifetimes]<!-- ignore -- > section in
 Chapter 10.
 -->
 
-Si nous utilisons des références vers les valeurs dans la table de hachage, les
-valeurs ne vont pas être déplacées dans la table de hachage. Les valeurs sur
-lesquelles elle pointe resteront en vigueur tant que la table de hachage le sera
-aussi. Nous verrons ces problématiques dans
-[une section du chapitre 10][validating-references-with-lifetimes]<!-- ignore -->.
+Si nous insérons dans la table de hachage des références vers des valeurs, ces
+valeurs ne seront pas déplacées dans la table de hachage. Les valeurs vers
+lesquelles les références pointent doivent rester en vigueur au moins aussi
+longtemps que la table de hachage. Nous verrons ces problématiques dans [une
+section du chapitre 10][validating-references-with-lifetimes]<!-- ignore -->.
 
 <!--
 ### Accessing Values in a Hash Map
@@ -243,7 +241,7 @@ We can get a value out of the hash map by providing its key to the `get`
 method, as shown in Listing 8-23.
 -->
 
-Nous pouvons obtenir une valeur d'une table de hachage en donnant sa clé à la
+Nous pouvons obtenir une valeur d'une table de hachage en passant sa clé à la
 méthode `get`, comme dans l'encart 8-23.
 
 <!--
@@ -275,8 +273,8 @@ of the ways that we covered in Chapter 6.
 Dans notre cas, `score` aura la valeur qui est associée à l'équipe `Bleu`, et le
 résultat sera `Some(&10)`. Le résultat est encapsulé dans un `Some` car `get`
 retourne une `Option<&V>` : s'il n'y a pas de valeur pour cette clé dans la
-table de hachage, `get` va retourner `None`. Le programme doit gérer le `Option`
-d'une des manières dont nous avons parlé dans le chapitre 6.
+table de hachage, `get` va retourner `None`. Le programme doit gérer cette
+`Option` d'une des manières dont nous avons parlé au chapitre 6.
 
 <!--
 We can iterate over each key/value pair in a hash map in a similar manner as we
@@ -332,15 +330,15 @@ you could combine the old value and the new value. Let’s look at how to do eac
 of these!
 -->
 
-Bien que le nombre de clés et de valeurs puisse augmenter, chaque clé peut
-avoir seulement une seule valeur associée à elle au même moment. Lorsque vous
-souhaitez changer les données dans une table de données, vous devez choisir
-comment gérer le cas lorsque une clé a déjà une valeur qui lui est déjà
-associée. Vous pouvez soit remplacer l'ancienne valeur avec la nouvelle valeur,
-en ignorant complètement l'ancienne valeur. Vous pouvez garder l'ancienne valeur
-et ignorer la nouvelle valeur, en insérant la nouvelle valeur uniquement si la
-clé *n'a pas* déjà une valeur. Ou vous pouvez fusionner l'ancienne valeur et la
-nouvelle. Découvrons dès maintenant comment faire chacune de ces actions !
+Bien que le nombre de clés et de valeurs puisse augmenter, chaque clé ne peut
+être associée qu'à une seule valeur à la fois. Lorsque vous souhaitez modifier
+les données d'une table de hachage, vous devez choisir comment gérer le cas où
+une clé a déjà une valeur qui lui est associée. Vous pouvez remplacer l'ancienne
+valeur avec la nouvelle valeur, en ignorant complètement l'ancienne valeur. Vous
+pouvez garder l'ancienne valeur et ignorer la nouvelle valeur, en insérant la
+nouvelle valeur uniquement si la clé *n'a pas* déjà une valeur. Ou vous pouvez
+fusionner l'ancienne valeur et la nouvelle. Découvrons dès maintenant comment
+faire chacune de ces actions !
 
 <!--
 #### Overwriting a Value
@@ -359,7 +357,7 @@ team’s key both times.
 Si nous ajoutons une clé et une valeur dans une table de hachage et que nous
 ajoutons à nouveau la même clé avec une valeur différente, la valeur associée
 à cette clé sera remplacée. Même si le code dans l'encart 8-24 appelle deux
-fois `insert`, la table de hachage contiendra un seul couple de clé/valeur car
+fois `insert`, la table de hachage contiendra une seule paire de clé/valeur car
 nous ajoutons la valeur pour l'équipe `Bleu` à deux reprises.
 
 <!--
@@ -404,7 +402,7 @@ and the same for the Blue team. Using the `entry` API, the code looks like
 Listing 8-25.
 -->
 
-Il est courant de vérifier qu'une clé spécifique a déjà une valeur, et si ce
+Il est courant de vérifier si une clé spécifique a déjà une valeur, et si ce
 n'est pas le cas, de lui associer une valeur. Les tables de hachage ont une API
 spécifique pour ce cas-là qui s'appelle `entry` et qui prend en paramètre la
 clé que vous voulez vérifier. La valeur de retour de la méthode `entry` est une
@@ -441,7 +439,7 @@ logic ourselves and, in addition, plays more nicely with the borrow checker.
 -->
 
 La méthode `or_insert` sur `Entry` est conçue pour retourner une référence
-mutable vers la valeur `Entry` pour la clé correspondante si cette clé existe,
+mutable vers la valeur correspondant à la clé du `Entry` si cette clé existe,
 et sinon, d'ajouter son paramètre comme nouvelle valeur pour cette clé et
 retourner une référence mutable vers la nouvelle valeur. Cette technique est
 plus propre que d'écrire la logique nous-mêmes et, de plus, elle fonctionne
@@ -458,7 +456,7 @@ value 10.
 L'exécution du code de l'encart 8-25 va afficher `{"Jaune": 50, "Bleu": 10}`.
 Le premier appel à `entry` va ajouter la clé pour l'équipe `Jaune` avec la
 valeur `50` car l'équipe `Jaune` n'a pas encore de valeur. Le second appel à
-`entry` ne vas pas changer la table de hachage car l'équipe `Bleu` a déjà la
+`entry` ne va pas changer la table de hachage car l'équipe `Bleu` a déjà la
 valeur `10`.
 
 <!--
@@ -481,8 +479,8 @@ valeur d'une clé et ensuite la modifier en fonction de l'ancienne valeur. Par
 exemple, l'encart 8-26 contient du code qui compte combien de fois chaque mot
 apparaît dans du texte. Nous utilisons une table de hachage avec les mots comme
 clés et nous incrémentons la valeur pour compter combien de fois nous avons vu
-ce mot. Si c'est la première fois que nous voyons un mot, nous allons insérer la
-valeur `0`.
+ce mot. Si c'est la première fois que nous voyons un mot, nous allons d'abord
+insérer la valeur `0`.
 
 <!--
 ```rust
@@ -513,17 +511,17 @@ loop, so all of these changes are safe and allowed by the borrowing rules.
 
 Ce code va afficher `{"monde": 2, "bonjour": 1, "magnifique": 1, "le": 1}`. La
 méthode `or_insert` retourne une référence mutable (`&mut V`) vers la valeur de
-cette clé. Nous avons décidé de stocker la référence mutable dans la variable
-`compteur`, donc pour affecter une valeur, nous devons d'abord déréférencer
-`compteur` en utilisant l'astérisque (`*`). La référence mutable sort de la
-portée à la fin de la boucle `for`, donc tous ces changements sont sûrs et
-autorisés par les règles d'emprunt.
+cette clé. Nous stockons ici la référence mutable dans la variable `compteur`,
+donc pour affecter une valeur, nous devons d'abord déréférencer `compteur` en
+utilisant l'astérisque (`*`). La référence mutable sort de la portée à la fin de
+la boucle `for`, donc tous ces changements sont sûrs et autorisés par les règles
+d'emprunt.
 
 <!--
 ### Hashing Functions
 -->
 
-### Fonctions de hachages
+### Fonctions de hachage
 
 <!--
 By default, `HashMap` uses a “cryptographically strong”[^siphash] hashing
@@ -540,18 +538,18 @@ provide hashers implementing many common hashing algorithms.
 -->
 
 Par défaut, `HashMap` utilise une fonction de hachage
-“robuste cryptographiquement”[^siphash] qui résiste aux attaques par Déni de
-Service (DoS). Ce n'est pas l'algorithme de hachage le plus rapide qui existe,
+“robuste cryptographiquement”[^siphash] qui résiste aux attaques par déni de
+service (DoS). Ce n'est pas l'algorithme de hachage le plus rapide qui existe,
 mais le compromis entre une meilleure sécurité et la baisse de performances en
 vaut la peine. Si vous analysez la performance de votre code et que vous vous
 rendez compte que la fonction de hachage par défaut est trop lente pour vos
-besoins, vous pouvez changer pour une autre fonction en spécifiant un *hacheur*
-différent. Un hacheur est un type qui implémente le trait `BuildHasher`. Nous
-verrons les traits et comment les implémenter au chapitre 10. Vous n'avez pas
-forcément besoin d'implémenter votre propre hacheur à partir de zéro;
-[crates.io](https://crates.io/) héberge des bibliothèques partagées par d'autres
-utilisateurs de Rust qui fournissent de nombreux algorithmes de hachage
-répandus.
+besoins, vous pouvez la remplacer par une autre fonction en spécifiant un
+*hacheur* différent. Un hacheur est un type qui implémente le trait
+`BuildHasher`. Nous verrons les traits et comment les implémenter au
+chapitre 10. Vous n'avez pas forcément besoin d'implémenter votre propre hacheur
+à partir de zéro ; [crates.io](https://crates.io/) héberge des bibliothèques
+partagées par d'autres utilisateurs de Rust qui fournissent de nombreux
+algorithmes de hachage répandus.
 
 <!--
 [^siphash]: [https://en.wikipedia.org/wiki/SipHash](https://en.wikipedia.org/wiki/SipHash)
@@ -571,10 +569,10 @@ necessary in programs when you need to store, access, and modify data. Here are
 some exercises you should now be equipped to solve:
 -->
 
-Les vecteurs, String, et tables de hachage vont vous apporter de nombreuses
-fonctionnalités nécessaires à vos programmes lorsque vous avez besoin de
-stocker, accéder, et modifier des données. Voici quelques exercices pour
-lesquels vous êtes maintenant en mesure de résoudre :
+Les vecteurs, Strings, et tables de hachage vont vous apporter de nombreuses
+fonctionnalités nécessaires à vos programmes lorsque vous aurez besoin de
+stocker, accéder, et modifier des données. Voici quelques exercices que vous
+devriez maintenant être en mesure de résoudre :
 
 <!--
 * Given a list of integers, use a vector and return the mean (the average
@@ -591,20 +589,20 @@ lesquels vous êtes maintenant en mesure de résoudre :
   alphabetically.
 -->
 
-* A partir d'une liste d'entier, utiliser un vecteur et retourner la moyenne, la
-  médiane (la valeur au milieu lorsque la liste est triée), et la valeur modale
-  (la valeur qui apparaît le plus souvent ; une table de hachage sera utile dans
-  ce cas) de la liste.
-* Convertir des chaînes de caractères en Louchébem. La première syllabe de
-  chaque mot est déplacée à la fin du mot et un suffixe argotique et substituée
-  par un `l` (L minuscule), ainsi “bonjour” devient “*l*onjour*bem*”. Les mots
-  qui commencent par un L ou une voyelle remplacent la syllabe suivante par un L
-  et rétablit en fin de mot la consonne initiale avec un suffixe libre. Et
-  gardez en tête les détails à propos de l'encodage UTF-8 !
+* À partir d'une liste d'entiers, utiliser un vecteur et retourner la moyenne,
+  la médiane (la valeur au milieu lorsque la liste est triée), et le mode (la
+  valeur qui apparaît le plus souvent ; une table de hachage sera utile dans ce
+  cas) de la liste.
+* Convertir des chaînes de caractères dans une variante du louchébem.
+  La consonne initiale de chaque mot est remplacée par la lettre `l` et est
+  rétablie à la fin du mot suivie du suffixe argotique “em” ; ainsi, “bonjour”
+  devient “*l*onjour*bem*”. Si le mot commence par une voyelle, ajouter un `l`
+  au début du mot et ajouter à la fin le suffixe “muche”. Et gardez en tête les
+  détails à propos de l'encodage UTF-8 !
 * En utilisant une table de hachage et des vecteurs, créez une interface
   textuelle pour permettre à un utilisateur d'ajouter des noms d'employés dans
-  un département d'une entreprise. Par exemple, “Ajouter Sally au Bureau
-  d'Etudes” ou “Ajouter Amir au Service Commercial”. Ensuite, donnez la
+  un département d'une entreprise. Par exemple, “Ajouter Sally au bureau
+  d'études” ou “Ajouter Amir au service commercial”. Ensuite, donnez la
   possibilité à l'utilisateur de récupérer une liste de toutes les personnes
   dans un département, ou tout le monde dans l'entreprise trié par département,
   et classés dans l'ordre alphabétique dans tous les cas.
