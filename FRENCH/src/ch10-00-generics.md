@@ -53,8 +53,8 @@ differ only in the types of their parameters. We’ll also explain how to use
 generic types in struct and enum definitions.
 -->
 
-Pour commencer, nous allons voir comment récupérer une fonction pour réduire la
-redondance de code. Ensuite, nous utiliserons la même technique pour construire
+Pour commencer, nous allons voir comment extraire une fonction pour réduire la
+duplication de code. Ensuite, nous utiliserons la même technique pour construire
 une fonction générique à partir de deux fonctions qui se distinguent uniquement
 par le type de leurs paramètres. Nous allons aussi expliquer comment utiliser
 les types génériques dans les définitions de structures et d'énumérations.
@@ -67,7 +67,7 @@ those types that have a particular behavior, as opposed to just any type.
 
 Ensuite, vous apprendrez comment utiliser les *traits* pour définir un
 comportement de manière générique. Vous pouvez combiner les traits avec des
-types génériques pour contraindre un type générique à uniquement des types qui
+types génériques pour contraindre un type générique uniquement à des types qui
 ont un comportement particulier, et non pas accepter n'importe quel type.
 
 <!--
@@ -109,7 +109,7 @@ Consider a short program that finds the largest number in a list, as shown in
 Listing 10-1.
 -->
 
-Imaginons un petit programme qui trouve le nombre le grand dans une liste, comme
+Imaginons un petit programme qui trouve le nombre le plus grand dans une liste, comme
 dans l'encart 10-1.
 
 <!--
@@ -152,7 +152,7 @@ place le premier nombre de la liste dans une variable qui s'appelle
 `le_plus_grand`. Ensuite, il parcourt tous les nombres dans la liste, et si le
 nombre courant est plus grand que le nombre stocké dans `le_plus_grand`, il
 remplace le nombre dans cette variable. Cependant, si le nombre courant est
-plus petit ou égal au nombre plus grand trouvé précédemment, la variable ne
+plus petit ou égal au nombre le plus grand trouvé précédemment, la variable ne
 change pas, et le code passe au nombre suivant de la liste. Après avoir parcouru
 tous les nombres de la liste, `le_plus_grand` devrait stocker le plus grand
 nombre, qui est 100 dans notre cas.
@@ -210,7 +210,7 @@ largest number in a list abstractly.
 Pour éviter cette duplication, nous pouvons créer un niveau d'abstraction en
 définissant une fonction qui travaille avec n'importe quelle liste d'entier
 qu'on lui donne en paramètre. Cette solution rend notre code plus clair et nous
-permet toujours de trouver le nombre le plus grand dans une liste de manière
+permet d'exprimer le concept de trouver le nombre le plus grand dans une liste de manière
 abstraite.
 
 <!--
@@ -224,7 +224,7 @@ Dans l'encart 10-3, nous avons extrait le code qui trouve le nombre le plus
 grand dans une fonction qui s'appelle `le_plus_grand`. Contrairement au code de
 l'encart 10-1, qui pouvait trouver le nombre le plus grand dans seulement une
 seule liste bien définie, ce programme peut trouver le nombre le plus grand
-nombre dans deux listes différentes.
+dans deux listes différentes.
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -281,8 +281,8 @@ l'encart 10-2 à celui de l'encart 10-3 :
 2. Extraction du code dupliqué dans le corps de la fonction et ajout de
    précisions sur les entrées et les valeurs de retour de ce code dans la
    signature de la fonction.
-3. Modification des deux instances du code dupliqué pour appeler à la place la
-   fonction.
+3. Modification des deux instances du code dupliqué pour appeler la
+   fonction à la place.
 
 <!--
 Next, we’ll use these same steps with generics to reduce code duplication in
@@ -293,7 +293,7 @@ abstract types.
 
 Ensuite, nous allons utiliser les mêmes étapes avec les génériques pour réduire
 la duplication de code de différentes façons. De la même manière que le corps
-d'une fonction peut opérer sur une `liste` abstraite plutôt de valeurs
+d'une fonction peut opérer sur une `liste` abstraite plutôt que sur des valeurs
 spécifiques, les génériques permettent de travailler sur des types abstraits.
 
 <!--
