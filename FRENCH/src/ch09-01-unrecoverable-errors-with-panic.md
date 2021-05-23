@@ -41,19 +41,18 @@ erreur.
 
 > ### Dérouler la pile ou abandonner suite à un `panic!`
 >
-> Par défaut, quand un `panic` se produit, le programme commence par
-> *dérouler*, ce qui veut dire que Rust retourne en arrière dans la pile et
-> nettoie les données de chaque fonction qu'il rencontre sur son passage. Mais
-> cette marche arrière et le nettoyage demande beaucoup de travail. Une
-> alternative est *d'abandonner* immédiatement, ce qui arrête le programme sans
-> nettoyage. La mémoire qu'utilisait le programme va devoir ensuite être
-> nettoyée par le système d'exploitation. Si dans votre projet vous avez besoin
-> de construire un exécutable le plus petit possible, vous pouvez changer du
-> dévidage à l'abandon lors d'un panic en ajoutant `panic = 'abort'` aux
-> sections `[profile]` correspondantes dans votre fichier *Cargo.toml*. Par
-> exemple, si vous souhaitez abandonner lors d'un panic en mode release, ajoutez
-> ceci :
-> 
+> Par défaut, quand un *panic* se produit, le programme se met à *dérouler*, ce
+> qui veut dire que Rust retourne en arrière dans la pile et nettoie les données
+> de chaque fonction qu'il rencontre sur son passage. Mais cette marche arrière
+> et le nettoyage demandent beaucoup de travail. Une alternative est
+> *d'abandonner* immédiatement, ce qui arrête le programme sans nettoyage. La
+> mémoire qu'utilisait le programme devra ensuite être nettoyée par le système
+> d'exploitation. Si dans votre projet vous avez besoin de construire un
+> exécutable le plus petit possible, vous pouvez passer du déroulage à l'abandon
+> lors d'un panic en ajoutant `panic = 'abort'` aux sections `[profile]`
+> appropriées dans votre fichier *Cargo.toml*. Par exemple, si vous souhaitez
+> abandonner lors d'un panic en mode publication *(release)*, ajoutez ceci :
+>
 > ```toml
 > [profile.release]
 > panic = 'abort'
@@ -104,10 +103,10 @@ the panic occurred: *src/main.rs:2:5* indicates that it’s the second line,
 fifth character of our *src/main.rs* file.
 -->
 
-L'utilisation de `panic!` déclenche le message d'erreur présent dans les deux
-dernières lignes. La première ligne affiche notre message associé au panic et
+L'appel à `panic!` déclenche le message d'erreur présent dans les deux dernières
+lignes. La première ligne affiche notre message associé au panic et
 l'emplacement dans notre code source où se produit le panic : *src/main.rs:2:5*
-indique que c'est la seconde ligne et cinquième caractère de notre fichier
+indique que c'est à la seconde ligne et au cinquième caractère de notre fichier
 *src/main.rs*.
 
 <!--
@@ -123,19 +122,19 @@ backtrace is in more detail next.
 
 Dans cet exemple, la ligne indiquée fait partie de notre code, et si nous
 allons voir cette ligne, nous verrons l'appel à la macro `panic!`. Dans d'autres
-cas, l'appel de `panic!` pourrait se produire dans du code que notre
-code utilise. Le nom du fichier et la ligne indiquée par le message d'erreur
-sera alors du code de quelqu'un d'autre où la macro `panic!` est appelée, et non
+cas, l'appel de `panic!` pourrait se produire dans du code que notre code
+utilise. Le nom du fichier et la ligne indiquée par le message d'erreur seront
+alors ceux du code de quelqu'un d'autre où la macro `panic!` est appelée, et non
 pas la ligne de notre code qui nous a mené à cet appel de `panic!`. Nous pouvons
-utiliser le re-traçage des fonctions qui appellent le `panic!` pour comprendre
-la partie de notre code qui pose problème. Nous allons maintenant parler plus
-en détail de ce qu'est le re-traçage.
+utiliser le retraçage des fonctions qui ont appelé `panic!` pour repérer la
+partie de notre code qui pose problème. Nous allons maintenant parler plus en
+détail de ce qu'est le retraçage.
 
 <!--
 ### Using a `panic!` Backtrace
 -->
 
-### Utiliser le re-traçage de `panic!`
+### Utiliser le retraçage de `panic!`
 
 <!--
 Let’s look at another example to see what it’s like when a `panic!` call comes
@@ -144,8 +143,8 @@ the macro directly. Listing 9-1 has some code that attempts to access an
 element by index in a vector.
 -->
 
-Analysons un autre exemple pour voir ce qui se passe lors d'un appel de
-`panic!` qui se produit dans une bibliothèque à cause d'un bug dans notre code plutôt
+Analysons un autre exemple pour voir ce qui se passe lors d'un appel de `panic!`
+qui se produit dans une bibliothèque à cause d'un bogue dans notre code plutôt
 qu'un appel à la macro directement. L'encart 9-1 montre du code qui essaye
 d'accéder à un élément d'un vecteur via son indice :
 
@@ -170,7 +169,7 @@ d'accéder à un élément d'un vecteur via son indice :
 end of a vector, which will cause a call to `panic!`</span>
 -->
 
-<span class="caption">Encart 9-1 : tentative d'accès à un élément qui dépasse de
+<span class="caption">Encart 9-1 : tentative d'accès à un élément qui dépasse de
 l'intervalle d'un vecteur, ce qui provoque un `panic!`</span>
 
 <!--
@@ -183,8 +182,8 @@ would be correct.
 
 Ici, nous essayons d'accéder au centième élément de notre vecteur (qui est à
 l'indice 99 car l'indexation commence à zéro), mais le vecteur a seulement trois
-éléments. Dans ce cas, Rust va paniquer. Utiliser `[]` est censé retourner
-un élément, mais si vous lui donnez un indice invalide, Rust ne pourra pas
+éléments. Dans ce cas, Rust va paniquer. Utiliser `[]` est censé retourner un
+élément, mais si vous lui donnez un indice invalide, Rust ne pourra pas
 retourner un élément acceptable dans ce cas.
 
 <!--
@@ -197,14 +196,14 @@ in such a way as to read data they shouldn’t be allowed to that is stored afte
 the data structure.
 -->
 
-En C, tenter de lire en dehors de la fin d'une structure de donnée suit un
-comportement non défini. Vous pourriez récupérer quelque chose à l'emplacement
-mémoire demandé qui pourrait correspondre à l'élément demandé de la structure
-de données, même si cette partie de la mémoire n'appartient pas à cette
-structure de données. C'est ce qu'on appelle une *sur-lecture de tampon* et cela
-peut mener à une faille de sécurité si un attaquant a la possibilité de contrôler
-l'indice de telle manière qu'il puisse lire les données qui ne devraient pas
-être lisibles en dehors de la structure de données.
+En C, tenter de lire au-delà de la fin d'une structure de données suit un
+comportement indéfini. Vous pourriez récupérer la valeur à l'emplacement mémoire
+qui correspondrait à l'élément demandé de la structure de données, même si cette
+partie de la mémoire n'appartient pas à cette structure de données. C'est ce
+qu'on appelle une *lecture hors limites* et cela peut mener à des failles de
+sécurité si un attaquant a la possibilité de contrôler l'indice de telle manière
+qu'il puisse lire les données qui ne devraient pas être lisibles en dehors de la
+structure de données.
 
 <!--
 To protect your program from this sort of vulnerability, if you try to read an
@@ -227,46 +226,35 @@ refuser de continuer. Essayez et vous verrez :
 ```
 
 <!--
-This error points at a file we didn’t write, *libcore/slice/mod.rs*. That’s the
-implementation of `slice` in the Rust source code. The code that gets run when
-we use `[]` on our vector `v` is in *libcore/slice/mod.rs*, and that is where
-the `panic!` is actually happening.
+This error points at line 4 of our `main.rs` where we attempt to access index
+99. The next note line tells us that we can set the `RUST_BACKTRACE`
+environment variable to get a backtrace of exactly what happened to cause the
+error. A *backtrace* is a list of all the functions that have been called to
+get to this point. Backtraces in Rust work as they do in other languages: the
+key to reading the backtrace is to start from the top and read until you see
+files you wrote. That’s the spot where the problem originated. The lines above
+the lines mentioning your files are code that your code called; the lines below
+are code that called your code. These lines might include core Rust code,
+standard library code, or crates that you’re using. Let’s try getting a
+backtrace by setting the `RUST_BACKTRACE` environment variable to any value
+except 0. Listing 9-2 shows output similar to what you’ll see.
 -->
 
-Cette erreur se réfère à un fichier que nous n'avons pas écrit,
-*libcore/slice/mod.rs*. C'est l'implémentation de `slice` dans la bibliothèque
-standard. Le code qui est lancé quand nous utilisons `[]` sur notre vecteur `v`
-est dans *libcore/slice/mod.rs*, et c'est ici que le `panic!` se produit dans
-notre cas.
-
-<!--
-The next note line tells us that we can set the `RUST_BACKTRACE` environment
-variable to get a backtrace of exactly what happened to cause the error. A
-*backtrace* is a list of all the functions that have been called to get to this
-point. Backtraces in Rust work as they do in other languages: the key to
-reading the backtrace is to start from the top and read until you see files you
-wrote. That’s the spot where the problem originated. The lines above the lines
-mentioning your files are code that your code called; the lines below are code
-that called your code. These lines might include core Rust code, standard
-library code, or crates that you’re using. Let’s try getting a backtrace by
-setting the `RUST_BACKTRACE` environment variable to any value except 0.
-Listing 9-2 shows output similar to what you’ll see.
--->
-
-La ligne suivante nous informe que nous pouvons régler la variable
-d'environnement `RUST_BACKTRACE` pour obtenir le re-traçage de ce qui s'est
-exactement passé pour mener à cette erreur. Un *re-traçage* consiste à lister
-toutes les fonctions qui ont été appelées pour arriver jusqu'à ce point. Avec
-Rust, le re-traçage fonctionne comme il le fait dans d'autres langages : le
-secret pour lire le re-traçage est de commencer d'en haut et lire jusqu'à ce
-que vous voyiez les fichiers que vous avez écris. C'est l'endroit où s'est
-produit le problème. Les lignes avant celle qui mentionne vos fichiers
-représentent le code qu'à appelé votre code ; les lignes qui suivent
-représentent le code qui a appelé votre code. Ces lignes peuvent être du code
-du coeur de Rust, du code de la bibliothèque standard, ou des crates que vous
-utilisez. Essayons d'obtenir un re-traçage en réglant la variable
-d'environnement `RUST_BACKTRACE` à n'importe quelle valeur autre que 0. L'encart
-9-2 nous montre un retour similaire à ce que vous devriez voir :
+Cette erreur mentionne la ligne 4 de notre fichier *main.rs* où on essaie
+d'accéder à l'indice 99. La ligne suivante nous informe que nous pouvons régler
+la variable d'environnement `RUST_BACKTRACE` pour obtenir le retraçage de ce qui
+s'est exactement passé pour mener à cette erreur. Un *retraçage* consiste à
+lister toutes les fonctions qui ont été appelées pour arriver jusqu'à ce point.
+En Rust, le retraçage fonctionne comme dans d'autres langages : le secret pour
+lire le retraçage est de commencer d'en haut et lire jusqu'à ce que vous voyiez
+les fichiers que vous avez écrits. C'est l'endroit où s'est produit le problème.
+Les lignes avant celles qui mentionnent vos fichiers représentent le code qu'a
+appelé votre code ; les lignes qui suivent représentent le code qui a appelé
+votre code. Ces lignes peuvent être du code du cœur de Rust, du code de la
+bibliothèque standard, ou des crates que vous utilisez. Essayons d'obtenir un
+retraçage en réglant la variable d'environnement `RUST_BACKTRACE` à n'importe
+quelle valeur autre que 0. L'encart 9-2 nous montre un retour similaire à ce que
+vous devriez voir :
 
 <!--
 <!-- manual-regeneration
@@ -330,8 +318,8 @@ note: Some details are omitted, run with `RUST_BACKTRACE=full` for a verbose bac
 `panic!` displayed when the environment variable `RUST_BACKTRACE` is set</span>
 -->
 
-<span class="caption">Encart 9-2: le re-traçage généré par l'appel de `panic!`
-est affiché quand la variable d'environnement `RUST_BACKTRACE` est définie
+<span class="caption">Encart 9-2 : le retraçage généré par l'appel de `panic!`
+qui s'affiche quand la variable d'environnement `RUST_BACKTRACE` est définie
 </span>
 
 <!--
@@ -342,12 +330,12 @@ default when using `cargo build` or `cargo run` without the `--release` flag,
 as we have here.
 -->
 
-Cela fait beaucoup de contenu ! Ce que vous voyez sur votre machine
-peut être différent en fonction de votre système d'exploitation et de votre
-version de Rust. Pour avoir le re-traçage avec ces informations, les instructions
-de déboguage doivent être activées. Les instructions de déboguage sont activées
-par défaut quand on utilise `cargo build` ou `cargo run` sans le drapeau
-`--release`, comme c'est le cas ici.
+Cela fait beaucoup de contenu ! Ce que vous voyez sur votre machine peut être
+différent en fonction de votre système d'exploitation et de votre version de
+Rust. Pour avoir le retraçage avec ces informations, les symboles de débogage
+doivent être activés. Les symboles de débogage sont activés par défaut quand on
+utilise `cargo build` ou `cargo run` sans le drapeau `--release`, comme c'est le
+cas ici.
 
 <!--
 In the output in Listing 9-2, line 6 of the backtrace points to the line in
@@ -361,14 +349,14 @@ you’ll need to figure out what action the code is taking with what values to
 cause the panic and what the code should do instead.
 -->
 
-Dans l'encart 9-2, la ligne 6 du re-traçage nous montre la ligne de notre projet
+Dans l'encart 9-2, la ligne 6 du retraçage nous montre la ligne de notre projet
 qui provoque le problème : la ligne 4 de *src/main.rs*. Si nous ne voulons pas
 que notre programme panique, le premier endroit que nous devrions inspecter est
 l'emplacement cité par la première ligne qui mentionne du code que nous avons
 écrit. Dans l'encart 9-1, où nous avons délibérément écrit du code qui panique
-dans le but de montrer comment utiliser le re-traçage, la solution pour ne pas
-paniquer est de ne pas demander l'élément à l'indice 99 à un vecteur lorsqu'il
-n'en contient que 3. A l'avenir quand votre code paniquera, vous aurez besoin de
+dans le but de montrer comment utiliser le retraçage, la solution pour ne pas
+paniquer est de ne pas demander l'élément à l'indice 99 à un vecteur qui n'en
+contient que 3. À l'avenir, quand votre code paniquera, vous aurez besoin de
 prendre des dispositions dans votre code pour les valeurs qui font paniquer et
 de coder quoi faire lorsque cela se produit.
 

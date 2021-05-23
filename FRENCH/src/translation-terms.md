@@ -25,10 +25,10 @@ français.
 | associated function | fonction associée | - |
 | attribute | attribut | - |
 | backend | application dorsale | - |
-| backtrace | re-traçage | - |
+| backtrace | retraçage | - |
 | benchmark | benchmark | - |
 | binary crate | crate binaire | s'utilise au féminin |
-| buffer overread | sur-lecture de tampon | - |
+| buffer overread | lecture hors limites | - |
 | *n*-bit number | nombre encodé sur *n* bits | - |
 | blanket implementation | implémentation générale | - |
 | blob | blob | - |

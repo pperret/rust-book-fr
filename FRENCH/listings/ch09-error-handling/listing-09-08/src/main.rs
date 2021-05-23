@@ -3,7 +3,7 @@ use std::fs::File;
 use std::io;
 use std::io::Read;
 
-fn read_username_from_file() -> Result<String, io::Error> {
+fn lire_pseudo_depuis_fichier() -> Result<String, io::Error> {
     let mut s = String::new();
 
     File::open("hello.txt")?.read_to_string(&mut s)?;
@@ -13,5 +13,6 @@ fn read_username_from_file() -> Result<String, io::Error> {
 // ANCHOR_END: here
 
 fn main() {
-    let username = read_username_from_file().expect("Unable to get username");
+    let pseudo =
+        lire_pseudo_depuis_fichier().expect("Échec de lecture du pseudo");
 }

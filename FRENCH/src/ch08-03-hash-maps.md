@@ -524,8 +524,8 @@ d'emprunt.
 ### Fonctions de hachage
 
 <!--
-By default, `HashMap` uses a “cryptographically strong”[^siphash] hashing
-function that can provide resistance to Denial of Service (DoS) attacks. This
+By default, `HashMap` uses a hashing function called SipHash that can provide
+resistance to Denial of Service (DoS) attacks involving hash tables[^siphash]. This
 is not the fastest hashing algorithm available, but the trade-off for better
 security that comes with the drop in performance is worth it. If you profile
 your code and find that the default hash function is too slow for your
@@ -537,19 +537,19 @@ necessarily have to implement your own hasher from scratch;
 provide hashers implementing many common hashing algorithms.
 -->
 
-Par défaut, `HashMap` utilise une fonction de hachage
-“robuste cryptographiquement”[^siphash] qui résiste aux attaques par déni de
-service (DoS). Ce n'est pas l'algorithme de hachage le plus rapide qui existe,
-mais le compromis entre une meilleure sécurité et la baisse de performances en
-vaut la peine. Si vous analysez la performance de votre code et que vous vous
-rendez compte que la fonction de hachage par défaut est trop lente pour vos
-besoins, vous pouvez la remplacer par une autre fonction en spécifiant un
-*hacheur* différent. Un hacheur est un type qui implémente le trait
-`BuildHasher`. Nous verrons les traits et comment les implémenter au
-chapitre 10. Vous n'avez pas forcément besoin d'implémenter votre propre hacheur
-à partir de zéro ; [crates.io](https://crates.io/) héberge des bibliothèques
-partagées par d'autres utilisateurs de Rust qui fournissent de nombreux
-algorithmes de hachage répandus.
+Par défaut, `HashMap` utilise une fonction de hachage nommée SipHash qui résiste
+aux attaques par déni de service (DoS) envers les tables de hachage[^siphash].
+Ce n'est pas l'algorithme de hachage le plus rapide qui existe, mais le
+compromis entre une meilleure sécurité et la baisse de performances en vaut la
+peine. Si vous analysez la performance de votre code et que vous vous rendez
+compte que la fonction de hachage par défaut est trop lente pour vos besoins,
+vous pouvez la remplacer par une autre fonction en spécifiant un *hacheur*
+différent. Un hacheur est un type qui implémente le trait `BuildHasher`. Nous
+verrons les traits et comment les implémenter au chapitre 10. Vous n'avez pas
+forcément besoin d'implémenter votre propre hacheur à partir de zéro ;
+[crates.io](https://crates.io/) héberge des bibliothèques partagées par d'autres
+utilisateurs de Rust qui fournissent de nombreux algorithmes de hachage
+répandus.
 
 <!--
 [^siphash]: [https://en.wikipedia.org/wiki/SipHash](https://en.wikipedia.org/wiki/SipHash)

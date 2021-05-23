@@ -2,11 +2,12 @@
 use std::fs;
 use std::io;
 
-fn read_username_from_file() -> Result<String, io::Error> {
+fn lire_pseudo_depuis_fichier() -> Result<String, io::Error> {
     fs::read_to_string("hello.txt")
 }
 // ANCHOR_END: here
 
 fn main() {
-    let username = read_username_from_file().expect("Unable to get username");
+    let pseudo =
+        lire_pseudo_depuis_fichier().expect("Échec de lecture du pseudo");
 }

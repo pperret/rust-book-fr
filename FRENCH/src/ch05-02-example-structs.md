@@ -500,15 +500,17 @@ exemple, l'affichage donnera plutôt ceci :
 <!--
 Rust has provided a number of traits for us to use with the `derive` annotation
 that can add useful behavior to our custom types. Those traits and their
-behaviors are listed in Appendix C. We’ll cover how to implement these traits
-with custom behavior as well as how to create your own traits in Chapter 10.
+behaviors are listed in [Appendix C][app-c]<!-- ignore -- >. We’ll cover how to
+implement these traits with custom behavior as well as how to create your own
+traits in Chapter 10.
 -->
 
 Rust nous fournit un certain nombre de traits qu'on peut utiliser avec
 l'annotation `derive` qui peuvent ajouter des comportements utiles à nos propres
-types. Ces traits et leurs comportements sont listés à l'annexe C. Nous
-expliquerons comment implémenter ces traits avec des comportements personnalisés
-et comment créer vos propres traits au chapitre 10.
+types. Ces traits et leurs comportements sont listés à
+[l'annexe C][app-c]<!-- ignore -->. Nous expliquerons comment implémenter ces
+traits avec des comportements personnalisés et comment créer vos propres traits
+au chapitre 10.
 
 <!--
 Our `area` function is very specific: it only computes the area of rectangles.
@@ -524,6 +526,10 @@ structure `Rectangle`, puisque cela ne fonctionnera pas avec un autre type.
 Voyons comment on peut continuer de remanier ce code en transformant la fonction
 `aire` en *méthode* `aire` définie sur notre type `Rectangle`.
 
-<!-- [the-tuple-type]: ch03-02-data-types.html#the-tuple-type -->
+<!--
+[the-tuple-type]: ch03-02-data-types.html#the-tuple-type
+[app-c]: appendix-03-derivable-traits.md
+-->
 
 [the-tuple-type]: ch03-02-data-types.html#le-type-tuple
+[app-c]: appendix-03-derivable-traits.md

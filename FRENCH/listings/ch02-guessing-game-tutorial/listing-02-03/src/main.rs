@@ -8,7 +8,7 @@ fn main() {
     println!("Devinez le nombre !");
 
     // ANCHOR: ch07-04
-    let nombre_secret = rand::thread_rng().gen_range(1, 101);
+    let nombre_secret = rand::thread_rng().gen_range(1..101);
     // ANCHOR_END: ch07-04
 
     println!("Le nombre secret est : {}", nombre_secret);

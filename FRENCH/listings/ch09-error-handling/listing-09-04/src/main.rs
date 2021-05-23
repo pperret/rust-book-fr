@@ -5,6 +5,6 @@ fn main() {
 
     let f = match f {
         Ok(fichier) => fichier,
-        Err(erreur) => panic!("Erreur lors de l'ouverture du fichier : {:?}", erreur),
+        Err(erreur) => panic!("Erreur d'ouverture du fichier : {:?}", erreur),
     };
 }

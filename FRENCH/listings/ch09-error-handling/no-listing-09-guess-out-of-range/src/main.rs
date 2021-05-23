@@ -5,7 +5,7 @@ use std::io;
 fn main() {
     println!("Devinez le nombre !");
 
-    let nombre_secret = rand::thread_rng().gen_range(1, 101);
+    let nombre_secret = rand::thread_rng().gen_range(1..101);
 
     // ANCHOR: here
     loop {
@@ -18,7 +18,7 @@ fn main() {
 
         io::stdin()
             .read_line(&mut supposition)
-            .expect("Echec de la lecture de la saisie");
+            .expect("Échec de la lecture de la saisie");
 
         // ANCHOR: here
         let supposition: i32 = match supposition.trim().parse() {

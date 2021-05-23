@@ -20,7 +20,7 @@ Rust a des fonctionnalités pour gérer les situations dans lesquelles quelque
 chose dérape. Dans de nombreux cas, Rust exige que vous anticipiez les erreurs
 possibles et que vous preniez des dispositions avant de pouvoir compiler votre
 code. Cette exigence rend votre programme plus résiliant en s'assurant que vous
-détectiez et gérez les erreurs correctement avant même que vous ne déployez
+détectez et gérez les erreurs correctement avant même que vous ne déployiez
 votre code en production !
 
 <!--
@@ -31,10 +31,10 @@ Unrecoverable errors are always symptoms of bugs, like trying to access a
 location beyond the end of an array.
 -->
 
-Rust classe les erreurs dans deux catégories principales : les erreurs
-*récupérables* et *irrécupérables*. Les erreurs récupérables, comme lorsque un
-fichier n'est pas trouvable, il est préférable de signaler le problème à
-l'utilisateur et de relancer l'opération. Les erreurs irrécupérables sont
+Rust classe les erreurs dans deux catégories principales : les erreurs
+*récupérables* et *irrécupérables*. Pour les erreurs récupérables, comme
+lorsqu'un fichier n'est pas trouvable, il est préférable de signaler le problème
+à l'utilisateur et de relancer l'opération. Les erreurs irrécupérables sont
 toujours des symptômes de bogues, comme essayer d'accéder à un élément en dehors
 de l'intervalle de données d'un tableau.
 
@@ -55,6 +55,6 @@ fonctionnalités comme les exceptions. Rust n'a pas d'exception. À la place, il
 a les types `Result<T, E>` pour les erreurs récupérables, et la macro `panic!`
 qui arrête l'exécution quand le programme se heurte à des erreurs
 irrécupérables. Nous allons commencer ce chapitre par expliquer l'utilisation de
-`panic!`, puis ensuite nous allons voir les valeurs de retour `Result<T, E>`. De
-plus, nous allons voir les éléments à prendre en compte pour décider si nous
-devons essayer de rattraper une erreur ou alors arrêter l'exécution.
+`panic!`, puis nous allons voir les valeurs de retour `Result<T, E>`. Enfin,
+nous allons voir les éléments à prendre en compte pour décider si nous devons
+essayer de rattraper une erreur ou alors arrêter l'exécution.

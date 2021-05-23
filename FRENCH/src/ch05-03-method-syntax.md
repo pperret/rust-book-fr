@@ -157,7 +157,7 @@ la bibliothèque que nous fournissons.
 > automatically adds in `&`, `&mut`, or `*` so `object` matches the signature of
 > the method. In other words, the following are the same:
 >
-<!-- CAN'T EXTRACT SEE BUG TODO -- >
+> <!-- CAN'T EXTRACT SEE BUG https://github.com/rust-lang/mdBook/issues/1127 -- >
 > ```rust
 > # #[derive(Debug,Copy,Clone)]
 > # struct Point {
@@ -205,7 +205,7 @@ la bibliothèque que nous fournissons.
 > `objet` corresponde à la signature de la méthode. Autrement dit, ces deux
 > lignes sont identiques :
 >
-<!-- CAN'T EXTRACT SEE BUG TODO -->
+> <!-- CAN'T EXTRACT SEE BUG https://github.com/rust-lang/mdBook/issues/1127 -->
 > ```rust
 > # #[derive(Debug,Copy,Clone)]
 > # struct Point {

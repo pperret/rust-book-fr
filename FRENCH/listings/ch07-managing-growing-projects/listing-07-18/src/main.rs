@@ -8,7 +8,7 @@ use std::{cmp::Ordering, io};
 fn main() {
     println!("Devinez le nombre !");
 
-    let nombre_secret = rand::thread_rng().gen_range(1, 101);
+    let nombre_secret = rand::thread_rng().gen_range(1..101);
 
     println!("Le nombre secret est : {}", nombre_secret);
 

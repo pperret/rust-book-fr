@@ -5,7 +5,7 @@ use std::io;
 fn main() {
     println!("Devinez le nombre !");
 
-    let nombre_secret = rand::thread_rng().gen_range(1, 101);
+    let nombre_secret = rand::thread_rng().gen_range(1..101);
 
     // ANCHOR: here
     // -- partie masquée ici --

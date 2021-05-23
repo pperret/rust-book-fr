@@ -471,15 +471,14 @@ Let’s recap what we’ve learned so far about Cargo:
 
 Récapitulons ce que nous avons appris sur Cargo :
 
-<!-- markdownlint-disable -->
 <!--
 * We can build a project using `cargo build`.
 * We can build and run a project in one step using `cargo run`.
-* We can build a project without producing a binary to check for errors using `cargo check`.
+* We can build a project without producing a binary to check for errors using
+  `cargo check`.
 * Instead of saving the result of the build in the same directory as our code,
   Cargo stores it in the *target/debug* directory.
 -->
-<!-- markdownlint-restore -->
 
 * Nous pouvons compiler un projet en utilisant `cargo build`.
 * Nous pouvons compiler puis exécuter un projet en une seule fois en utilisant
@@ -565,14 +564,14 @@ déplacer dans le dossier projet et compiler :
 
 <!--
 ```console
-$ git clone someurl.com/someproject
+$ git clone example.org/someproject
 $ cd someproject
 $ cargo build
 ```
 -->
 
 ```console
-$ git clone example.com/projet_quelconque
+$ git clone example.org/projet_quelconque
 $ cd projet_quelconque
 $ cargo build
 ```

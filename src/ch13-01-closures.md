@@ -131,8 +131,9 @@ twice. Unfortunately, we’re now calling this function and waiting for the
 result in all cases, which includes the inner `if` block that doesn’t use the
 result value at all.
 
-We want to define code in one place in our program, but only *execute* that
-code where we actually need the result. This is a use case for closures!
+We want to refer to `simulated_expensive_calculation` only once in
+`generate_workout`, but defer the expensive calculation to only where
+we actually need the result. This is a use case for closures!
 
 #### Refactoring with Closures to Store Code
 
@@ -186,8 +187,8 @@ want to use, as shown in Listing 13-6.
 <span class="caption">Listing 13-6: Calling the `expensive_closure` we’ve
 defined</span>
 
-Now the expensive calculation is called in only one place, and we’re only
-executing that code where we need the results.
+Now how to perform the expensive calculation is defined in only one
+place, and we’re only executing that code where we need the results.
 
 However, we’ve reintroduced one of the problems from Listing 13-3: we’re still
 calling the closure twice in the first `if` block, which will call the
@@ -278,7 +279,7 @@ The compiler gives us this error:
 
 The first time we call `example_closure` with the `String` value, the compiler
 infers the type of `x` and the return type of the closure to be `String`. Those
-types are then locked in to the closure in `example_closure`, and we get a type
+types are then locked into the closure in `example_closure`, and we get a type
 error if we try to use a different type with the same closure.
 
 ### Storing Closures Using Generic Parameters and the `Fn` Traits
@@ -430,8 +431,8 @@ Run this test with the `Cacher` implementation in Listing 13-9 and Listing
 ```
 
 The problem is that the first time we called `c.value` with 1, the `Cacher`
-instance saved `Some(1)` in `self.value`. Thereafter, no matter what we pass in
-to the `value` method, it will always return 1.
+instance saved `Some(1)` in `self.value`. Thereafter, no matter what we pass into
+the `value` method, it will always return 1.
 
 Try modifying `Cacher` to hold a hash map rather than a single value. The keys
 of the hash map will be the `arg` values that are passed in, and the values of

@@ -274,11 +274,11 @@ bonne pratique d'insérer l'accolade ouvrante sur la même ligne que la
 déclaration de la fonction, en ajoutant une espace entre les deux.
 
 <!--
-If you want to stick to a standard style across Rust projects, you can use an 
+If you want to stick to a standard style across Rust projects, you can use an
 automatic formatter tool called `rustfmt` to format your code in a particular
 style. The Rust team has included this tool with the standard Rust distribution,
-like `rustc`, so it should already be installed on your computer! Check the online
-documentation for more details.
+like `rustc`, so it should already be installed on your computer! Check the
+online documentation for more details.
 -->
 
 Si vous souhaitez formater le code de vos projets Rust de manière standardisé,
@@ -406,13 +406,13 @@ vous devriez voir deux fichiers. Avec PowerShell sous Windows, vous devriez voir
 les trois mêmes fichiers que vous verriez en utilisant CMD.
 
 <!--
-```text
+```console
 $ ls
 main  main.rs
 ```
 -->
 
-```text
+```console
 $ ls
 main  main.rs
 ```

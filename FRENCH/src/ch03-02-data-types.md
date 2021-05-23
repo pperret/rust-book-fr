@@ -399,7 +399,7 @@ list of all operators that Rust provides.
 -->
 
 Chaque expression de ces instructions utilise un opérateur mathématique et
-calcule une valeur unique, qui est ensuite attribuée à une variable. [L'annexe B][appendix_b]<!-- ignore --> 
+calcule une valeur unique, qui est ensuite attribuée à une variable. [L'annexe B][appendix_b]<!-- ignore -->
 présente une liste de tous les opérateurs que Rust fournit.
 
 <!--
@@ -837,14 +837,14 @@ récupèrera la valeur `2` depuis l'indice `[1]` du tableau.
 
 <!--
 What happens if you try to access an element of an array that is past the end
-of the array? Say you change the example to the following code, which will
-compile but exit with an error when it runs:
+of the array? Say you change the example to the following, which uses code
+similar to the guessing game in Chapter 2 to get an array index from the user:
 -->
 
 Que se passe-t-il quand vous essayez d'accéder à un élément d'un tableau qui se
 trouve après la fin du tableau ? Imaginons que vous changiez l'exemple par le
-code suivant, qui va compiler mais qui va quitter avec une erreur quand il sera
-exécuté :
+code suivant, similaire au jeu du plus ou du moins du chapitre 2, pour demander
+un indice de tableau à l'utilisateur :
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -853,44 +853,58 @@ exécuté :
 <span class="filename">Fichier : src/main.rs</span>
 
 <!--
-```rust,ignore,does_not_compile
+```rust,ignore,panics
 {{#rustdoc_include ../listings-sources/ch03-common-programming-concepts/no-listing-15-invalid-array-access/src/main.rs}}
 ```
 -->
 
-```rust,ignore,does_not_compile
+```rust,ignore,panics
 {{#rustdoc_include ../listings/ch03-common-programming-concepts/no-listing-15-invalid-array-access/src/main.rs}}
 ```
 
 <!--
-Running this code using `cargo run` produces the following result:
+This code compiles successfully. If you run this code using `cargo run` and
+enter 0, 1, 2, 3, or 4, the program will print out the corresponding value at
+that index in the array. If you instead enter a number past the end of the
+array, such as 10, you'll see output like this:
 -->
 
-Exécuter ce code en utilisant `cargo run` va donner le résultat suivant :
+Ce code compile avec succès. Si vous exécutez ce code avec `cargo run` et que
+vous entrez 0, 1, 2, 3 ou 4, le programme affichera la valeur correspondante à
+cet indice dans le tableau. Si au contraire, vous entrez un indice après la fin
+du tableau tel que 10, ceci s'affichera :
 
 <!--
 ```console
-{{#include ../listings-sources/ch03-common-programming-concepts/no-listing-15-invalid-array-access/output.txt}}
+thread 'main' panicked at 'index out of bounds: the len is 5 but the index is 10', src/main.rs:19:19
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```
 -->
 
 ```console
-{{#include ../listings/ch03-common-programming-concepts/no-listing-15-invalid-array-access/output.txt}}
+thread 'main' panicked at 'index out of bounds: the len is 5 but the index is 10', src/main.rs:19:19
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 ```
 
 <!--
-The compilation didn’t produce any errors, but the program resulted in a
-*runtime* error and didn’t exit successfully. When you attempt to access an
+The program resulted in a *runtime* error at the point of using an invalid
+value in the indexing operation. The program exited with an error message and
+didn't execute the final `println!` statement. When you attempt to access an
 element using indexing, Rust will check that the index you’ve specified is less
-than the array length. If the index is greater than or equal to the array
-length, Rust will panic.
+than the array length. If the index is greater than or equal to the length,
+Rust will panic. This check has to happen at runtime, especially in this case,
+because the compiler can't possibly know what value a user will enter when they
+run the code later.
 -->
-
-La compilation n'a pas produit d'erreur, mais le programme a rencontré une
-erreur *à l'exécution* et ne s'est pas terminé avec succès. Quand vous essayez
+Le programme a rencontré une erreur *à l'exécution*, au moment d'utiliser une
+valeur invalide comme indice. Le programme s'est arrêté avec un message d'erreur
+et n'a pas exécuté la dernière instruction `println!`. Quand vous essayez
 d'accéder à un élément en utilisant l'indexation, Rust va vérifier que l'indice
 que vous avez demandé est plus petit que la taille du tableau. Si l'indice est
-supérieur ou égal à la taille du tableau, Rust va *paniquer*.
+supérieur ou égal à la taille du tableau, Rust va *paniquer*. Cette vérification
+doit avoir lieu à l'exécution, surtout dans ce cas, parce que le compilateur ne
+peut pas deviner la valeur qu'entrera l'utilisateur quand il exécutera le code
+plus tard.
 
 <!--
 This is the first example of Rust’s safety principles in action. In many

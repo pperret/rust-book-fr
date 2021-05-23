@@ -308,7 +308,7 @@ Autrement dit, il y a ici deux étapes importantes :
 -->
 
 * Quand `s` rentre *dans la portée*, elle est en vigueur.
-* Cela reste ainsi jusqu'à ce qu'elle *sort de la portée*.
+* Cela reste ainsi jusqu'à ce qu'elle *sorte de la portée*.
 
 <!--
 At this point, the relationship between scopes and when variables are valid is
@@ -534,8 +534,8 @@ de chaîne de caractères :
 
 <!--
 There is a natural point at which we can return the memory our `String` needs
-to the allocator: when `s` goes out of scope. When a variable goes out
-of scope, Rust calls a special function for us. This function is called `drop`,
+to the allocator: when `s` goes out of scope. When a variable goes out of
+scope, Rust calls a special function for us. This function is called [`drop`],
 and it’s where the author of `String` can put the code to return the memory.
 Rust calls `drop` automatically at the closing curly bracket.
 -->
@@ -543,9 +543,9 @@ Rust calls `drop` automatically at the closing curly bracket.
 Il y a un moment naturel où nous devons rendre la mémoire de notre
 `String` au gestionnaire : quand `s` sort de la portée. Quand une variable sort
 de la portée, Rust appelle une fonction spéciale pour nous. Cette fonction
-s'appelle `drop`, et c'est dans celle-ci que l'auteur de `String` a pu mettre le
-code pour libérer la mémoire. Rust appelle automatiquement `drop` à l'accolade
-fermante `}`.
+s'appelle [`drop`], et c'est dans celle-ci que l'auteur de `String` a pu mettre
+le code pour libérer la mémoire. Rust appelle automatiquement `drop` à
+l'accolade fermante `}`.
 
 <!--
 > Note: In C++, this pattern of deallocating resources at the end of an item’s
@@ -1192,6 +1192,7 @@ c'est ce qu'on appelle les *références*.
 [derivable-traits]: appendix-03-derivable-traits.html
 [method-syntax]: ch05-03-method-syntax.html#method-syntax
 [paths-module-tree]: ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html
+[`drop`]: ../std/ops/trait.Drop.html#tymethod.drop
 -->
 <!-- markdownlint-restore -->
 
@@ -1199,3 +1200,4 @@ c'est ce qu'on appelle les *références*.
 [derivable-traits]: appendix-03-derivable-traits.html
 [method-syntax]: ch05-03-method-syntax.html
 [paths-module-tree]: ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html
+[`drop`]: https://doc.rust-lang.org/std/ops/trait.Drop.html#tymethod.drop
