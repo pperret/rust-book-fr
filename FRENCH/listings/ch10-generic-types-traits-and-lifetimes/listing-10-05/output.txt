@@ -1,17 +1,17 @@
 $ cargo run
    Compiling chapter10 v0.1.0 (file:///projects/chapter10)
-error[E0369]: binary operation `>` cannot be applied to type `&T`
+error[E0369]: binary operation `>` cannot be applied to type `T`
  --> src/main.rs:5:17
   |
 5 |         if element > le_plus_grand {
-  |            ------- ^ ------------- &T
+  |            ------- ^ ------------- T
   |            |
-  |            &T
+  |            T
   |
 help: consider restricting type parameter `T`
   |
-1 | fn le_plus_grand<T: std::cmp::PartialOrd>(liste: &[T]) -> &T {
-  |                   ^^^^^^^^^^^^^^^^^^^^^^
+1 | fn le_plus_grand<T: std::cmp::PartialOrd>(liste: &[T]) -> T {
+  |                  ^^^^^^^^^^^^^^^^^^^^^^^
 
 error: aborting due to previous error
 

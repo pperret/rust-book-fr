@@ -68,8 +68,8 @@ just learning this concept, let’s implement this capability ourselves.
 -->
 
 Pour l'instant, le programme généré par `cargo new` ne peut pas traiter les
-arguments que nous lui donnons. Certaines bibliothèques existent sur
-[crates.io](https://crates.io/) qui peuvent vous aider à écrire un programme
+arguments que nous lui donnons. Certaines bibliothèques qui existent sur
+[crates.io](https://crates.io/) peuvent vous aider à écrire un programme
 qui prend des arguments en ligne de commande, mais comme vous apprenez
 juste ce concept, implémentons cette capacité par nous-mêmes.
 
@@ -194,10 +194,10 @@ immédiatement `collect` pour retourner un itérateur dans un vecteur qui
 contient toutes les valeurs engendrées par l'itérateur. Nous pouvons utiliser
 la fonction `collect` pour créer n'importe quel genre de collection, donc nous
 avons annoté explicitement le type de `args` pour préciser que nous attendions
-d'un vecteur de chaînes de caractères. Bien que nous n'ayons que très
+un vecteur de chaînes de caractères. Bien que nous n'ayons que très
 rarement d'annoter les types en Rust, `collect` est une fonction que vous
 aurez souvent besoin d'annoter car Rust n'est pas capable de déduire le type
-de collection vous attendiez.
+de collection que vous attendez.
 
 <!--
 Finally, we print the vector using the debug formatter, `:?`. Let’s try running
@@ -244,7 +244,7 @@ au fonctionnement de la liste d'arguments en C, qui laissent les programmes
 utiliser le nom sous lequel ils ont été invoqués dans leur exécution. C'est
 parfois pratique pour avoir accès au nom du programme dans le cas où vous
 souhaitez l'afficher dans des messages, ou changer le comportement du programme
-en fonction de ce que l'alias de la ligne de commande utilisé pour invoquer le
+en fonction de ce que l'alias de la ligne de commande utilise pour invoquer le
 programme. Mais pour les besoins de ce chapitre, nous allons l'ignorer et
 récupérer uniquement les deux arguments dont nous avons besoin.
 
@@ -274,12 +274,12 @@ le reste du programme. C'est que nous faisons dans l'encart 12-2.
 <span class="filename">Fichier : src/main.rs</span>
 
 <!--
-```rust,should_panic
+```rust,should_panic,noplayground
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-02/src/main.rs}}
 ```
 -->
 
-```rust,should_panic
+```rust,should_panic,noplayground
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-02/src/main.rs}}
 ```
 
@@ -288,7 +288,7 @@ le reste du programme. C'est que nous faisons dans l'encart 12-2.
 argument and filename argument</span>
 -->
 
-<span class="caption">Encart 12-2 : Création de variables pour récupérer la
+<span class="caption">Encart 12-2 : Création de variables pour récupérer
 les arguments recherche et nom_fichier</span>
 
 <!--
@@ -303,7 +303,7 @@ variable `filename`.
 Comme nous l'avons vu lorsque nous avons affiché le vecteur, le nom du
 programme prend la première valeur dans le vecteur, dans `args[0]`, donc nous
 allons commencer à l'indice `1`. Le premier argument que prend `minigrep` est
-la chaîne de caractères de nous recherchons, donc nous insérons la référence
+la chaîne de caractères que nous recherchons, donc nous insérons la référence
 vers le premier argument dans la variable `recherche`. Le second argument sera
 le nom du fichier, donc nous insérons une référence vers le second argument
 dans la variable `nom_fichier`.

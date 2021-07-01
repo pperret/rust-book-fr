@@ -21,7 +21,7 @@ the Rust concepts you now have under your belt.
 -->
 
 Ce chapitre est un résumé de toutes les nombreuses compétences que vous avez
-appris précédemment et une découverte de quelques fonctionnalités
+apprises précédemment et une découverte de quelques fonctionnalités
 supplémentaires de la bibliothèque standard. Nous allons construire un outil en
 ligne de commande qui interagit avec des fichiers et les entrées/sorties de la
 ligne de commande pour mettre en pratique certains concepts Rust que vous avez
@@ -60,7 +60,7 @@ successful output to a file while still seeing error messages onscreen.
 Sur la route, nous allons vous montrer comment utiliser dans votre outil en
 ligne de commande les fonctionnalités des terminaux que de nombreux outils en
 ligne de commande utilisent. Nous allons lire la valeur d'une variable
-d'environnement pour permettre à l'utilisation de configurer le comportement de
+d'environnement pour permettre à l'utilisateur de configurer le comportement de
 notre outil. Nous allons aussi afficher des messages d'erreur vers le flux
 d'erreur standard de la console (`stderr`) plutôt que la sortie standard
 (`stdout`), pour, par exemple, que l'utilisateur puisse rediriger la sortie
@@ -102,8 +102,8 @@ acquis jusqu'à présent :
 * Utiliser les vecteurs et les chaînes de caractères (les collections du
 [chapitre 8][ch8]<!-- ignore -->)
 * Gérer les erreurs ([chapitre 9][ch9]<!-- ignore -->)
-* Utiliser les traits et les durées de vie lorsque c'est approprié (
-[chapitre 10][ch10]<!-- ignore -->)
+* Utiliser les traits et les durées de vie lorsque c'est approprié
+([chapitre 10][ch10]<!-- ignore -->)
 * Ecrire les tests ([chapitre 11][ch11]<!-- ignore -->)
 
 <!--

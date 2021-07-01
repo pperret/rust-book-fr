@@ -1,4 +1,3 @@
-// ANCHOR: here
 pub fn ajouter_deux(a: i32) -> i32 {
     a + 2
 }
@@ -12,6 +11,3 @@ mod tests {
         assert_eq!(4, ajouter_deux(2));
     }
 }
-// ANCHOR_END: here
-
-fn main() {}

@@ -23,7 +23,7 @@ that has certain behavior.
 Un *trait* décrit une fonctionnalité qu'a un type particulier et qu'il peut
 partager avec d'autres types, à destination du compilateur Rust. Nous pouvons
 utiliser les traits pour définir un comportement partagé de manière abstraite.
-Nous pouvons lier ces traits à un générique pour exprimer le fait qu'il puisse
+Nous pouvons lier ces traits à un type générique pour exprimer le fait qu'il puisse
 être de n'importe quel type à condition qu'il ai un comportement donné.
 
 <!--
@@ -89,12 +89,12 @@ décrit ce comportement.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch10-generic-types-traits-and-lifetimes/listing-10-12/src/lib.rs}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-12/src/lib.rs}}
 ```
 
@@ -161,7 +161,7 @@ Maintenant que nous avons défini le comportement souhaité du trait `Resumable`
 nous pouvons maintenant l'implémenter sur les types de notre agrégateur de
 médias. L'encart 10-13 nous montre l'implémentation du trait `Resumable` sur la
 structure `ArticleDePresse` qui utilise le titre, le nom de l'auteur, et le lieu
-pour créer la valeur de retour de `resume`. Pour la structure `Tweet`, nous
+pour créer la valeur de retour de `resumer`. Pour la structure `Tweet`, nous
 définissons `resumer` avec le nom d'utilisateur suivi par le texte entier du
 tweet, en supposant que le contenu du tweet est déjà limité à 280 caractères.
 
@@ -172,12 +172,12 @@ tweet, en supposant que le contenu du tweet est déjà limité à 280 caractère
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch10-generic-types-traits-and-lifetimes/listing-10-13/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-13/src/lib.rs:here}}
 ```
 
@@ -310,7 +310,7 @@ type, et Rust ne saura pas laquelle utiliser.
 ### Default Implementations
 -->
 
-### L'implémentation par défaut
+### Implémentations par défaut
 
 <!--
 Sometimes it’s useful to have default behavior for some or all of the methods
@@ -342,12 +342,12 @@ signature de la méthode, comme nous l'avons fait dans l'encart 10-12.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch10-generic-types-traits-and-lifetimes/listing-10-14/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-14/src/lib.rs:here}}
 ```
 
@@ -357,7 +357,7 @@ default implementation of the `summarize` method</span>
 -->
 
 <span class="caption">Encart 10-14 : définition du trait `Resumable` avec une
-implémentation par défaut de la méthode `resume`</span>
+implémentation par défaut de la méthode `resumer`</span>
 
 <!--
 To use a default implementation to summarize instances of `NewsArticle` instead
@@ -409,8 +409,8 @@ implementation.
 La création d'une implémentation par défaut pour `resumer` n'a pas besoin que
 nous modifions quelque chose dans l'implémentation de `Resumable` sur `Tweet`
 dans l'encart 10-13. C'est parce que la syntaxe pour réécrire l'implémentation
-par défaut est la même que la syntaxe pour implémenter une méthode d'un trait
-qui n'a pas d'implémentation par défaut.
+par défaut est la même que la syntaxe pour implémenter une méthode qui n'a pas
+d'implémentation par défaut.
 
 <!--
 Default implementations can call other methods in the same trait, even if those
@@ -432,12 +432,12 @@ méthode `resumer` qui a une implémentation par défaut qui appelle la méthode
 `resumer_auteur` :
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch10-generic-types-traits-and-lifetimes/no-listing-03-default-impl-calls-other-methods/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-03-default-impl-calls-other-methods/src/lib.rs:here}}
 ```
 
@@ -677,7 +677,7 @@ pub fn notify(item: &(impl Summary + Display)) {
 -->
 
 ```rust,ignore
-pub fn notifier(element: &(impl Resumable + Affichable)) {
+pub fn notifier(element: &(impl Resumable + Display)) {
 ```
 
 <!--
@@ -693,7 +693,7 @@ pub fn notify<T: Summary + Display>(item: &T) {
 -->
 
 ```rust,ignore
-pub fn notifier<T: Resumable + Affichable>(element: &T) {
+pub fn notifier<T: Resumable + Display>(element: &T) {
 ```
 
 <!--
@@ -780,7 +780,7 @@ We can also use the `impl Trait` syntax in the return position to return a
 value of some type that implements a trait, as shown here:
 -->
 
-Nous pouvons aussi utiliser la syntaxe `impl Trait` à la place du retour afin
+Nous pouvons aussi utiliser la syntaxe `impl Trait` à la place du type de retour afin
 de retourner une valeur d'un type qui implémente un trait, comme ci-dessous :
 
 <!--
@@ -881,12 +881,12 @@ utilise un paramètre de type générique ! La dernière fois qu'on a essayé d
 lancer ce code, nous avions l'erreur suivante :
 
 <!--
-```text
+```console
 {{#include ../listings-sources/ch10-generic-types-traits-and-lifetimes/listing-10-05/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-05/output.txt}}
 ```
 
@@ -1054,7 +1054,7 @@ En utilisant un trait lié avec un bloc `impl` qui utilise les paramètres de ty
 générique, nous pouvons implémenter des méthodes en fonction des types
 qu'implémentent des traits particuliers. Par exemple, le type `Pair<T>` de
 l'encart 10-16 implémente toujours la fonction `new`. Mais `Pair<T>` implémente
-uniquement la méthode `affiche_comparaison` que si son type interne `T`
+la méthode `affiche_comparaison` uniquement si son type interne `T`
 implémente le trait `PartialOrd` qui active la comparaison *et* le trait
 `Display` qui permet l'affichage.
 
@@ -1065,12 +1065,12 @@ implémente le trait `PartialOrd` qui active la comparaison *et* le trait
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch10-generic-types-traits-and-lifetimes/listing-10-16/src/lib.rs}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/listing-10-16/src/lib.rs}}
 ```
 

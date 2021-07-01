@@ -89,7 +89,7 @@ tests, and how to organize tests into unit tests and integration tests.
 
 Les tests restent une discipline complexe : bien que nous ne puissions couvrir
 chaque détail sur l'écriture de bons tests en un seul chapitre, nous allons
-découvrir de la mécanique des moyens de test de Rust. Nous allons voir les
+découvrir les  mécanismes des moyens de test de Rust. Nous allons voir les
 annotations et les macros que vous pourrez utiliser lorsque vous écrirez vos
 tests, le comportement par défaut et les options disponibles pour lancer vos
 tests, et comment organiser les tests en tests unitaires et tests d'intégration.

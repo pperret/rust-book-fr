@@ -13,5 +13,3 @@ mod tests {
         assert_eq!(4, ajouter_deux(2));
     }
 }
-
-fn main() {}

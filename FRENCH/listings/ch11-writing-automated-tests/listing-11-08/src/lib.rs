@@ -1,4 +1,3 @@
-// ANCHOR: here
 pub struct Supposition {
     valeur: i32,
 }
@@ -23,6 +22,3 @@ mod tests {
         Supposition::new(200);
     }
 }
-// ANCHOR_END: here
-
-fn main() {}

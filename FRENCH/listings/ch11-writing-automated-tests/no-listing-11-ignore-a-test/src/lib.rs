@@ -1,4 +1,3 @@
-// ANCHOR: here
 #[test]
 fn it_works() {
     assert_eq!(2 + 2, 4);
@@ -9,6 +8,3 @@ fn it_works() {
 fn test_long() {
     // du code qui prend une heure à s'exécuter
 }
-// ANCHOR_END: here
-
-fn main() {}

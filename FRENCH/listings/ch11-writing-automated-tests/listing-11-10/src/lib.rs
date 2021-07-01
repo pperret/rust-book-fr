@@ -1,6 +1,3 @@
-fn main() {}
-
-// ANCHOR: here
 fn affiche_et_retourne_10(a: i32) -> i32 {
     println!("J'ai obtenu la valeur {}", a);
     10
@@ -22,4 +19,3 @@ mod tests {
         assert_eq!(5, valeur);
     }
 }
-// ANCHOR_END: here

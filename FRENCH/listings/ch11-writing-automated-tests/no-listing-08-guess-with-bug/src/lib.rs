@@ -25,5 +25,3 @@ mod tests {
         Supposition::new(200);
     }
 }
-
-fn main() {}

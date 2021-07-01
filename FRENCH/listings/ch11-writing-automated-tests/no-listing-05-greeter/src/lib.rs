@@ -1,4 +1,3 @@
-// ANCHOR: here
 pub fn accueil(nom: &str) -> String {
     format!("Salut, {} !", nom)
 }
@@ -13,6 +12,3 @@ mod tests {
         assert!(resultat.contains("Carole"));
     }
 }
-// ANCHOR_END: here
-
-fn main() {}

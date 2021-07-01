@@ -10,7 +10,7 @@ failures:
 
 ---- tests::plus_grand_que_100 stdout ----
 thread 'main' panicked at 'La supposition doit être plus grande ou égale à 1, et nous avons 200.', src/lib.rs:13:13
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace.
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 note: panic did not contain expected string
       panic message: `"La supposition doit être plus grande ou égale à 1, et nous avons 200."`,
  expected substring: `"La supposition doit être plus petite ou égale à 100"`
@@ -18,6 +18,6 @@ note: panic did not contain expected string
 failures:
     tests::plus_grand_que_100
 
-test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
 error: test failed, to rerun pass '--lib'

@@ -10,5 +10,3 @@ fn test_long() {
     // du code qui prend une heure à s'exécuter
 }
 // ANCHOR_END: here
-
-fn main() {}

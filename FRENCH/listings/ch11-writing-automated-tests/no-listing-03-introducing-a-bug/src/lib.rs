@@ -45,5 +45,3 @@ mod tests {
         assert!(!le_petit.peut_contenir(&le_grand));
     }
 }
-
-fn main() {}
