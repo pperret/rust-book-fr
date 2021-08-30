@@ -22,7 +22,7 @@ puisse être de n'importe quel type à condition qu'il ait un comportement donn�
 > languages, although with some differences.
 -->
 
-> Remarque : les traits sont similaires à ce qu'on appelle parfois les
+> Remarque : les traits sont similaires à ce qu'on appelle parfois les
 > *interfaces* dans d'autres langages, malgré quelques différences.
 
 <!--
@@ -710,9 +710,9 @@ syntax for specifying trait bounds inside a `where` clause after the function
 signature. So instead of writing this:
 -->
 
-L'utilisation de trop nombreux traits liés a aussi ses désavantages. Chaque
+L'utilisation de trop nombreux traits liés a aussi ses désavantages. Chaque type
 générique a ses propres traits liés, donc les fonctions avec plusieurs
-paramètres de types génériques peuvent aussi avoir de nombreuses informations de
+paramètres de type génériques peuvent aussi avoir de nombreuses informations de
 traits liés entre le nom de la fonction et la liste de ses paramètres, ce qui
 rend la signature de la fonction difficile à lire. Pour cette raison, Rust a une
 syntaxe alternative pour renseigner les traits liés, dans une clause `where`
@@ -725,7 +725,7 @@ fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
 -->
 
 ```rust,ignore
-fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
+fn une_fonction<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
 ```
 
 <!--
@@ -744,7 +744,7 @@ fn some_function<T, U>(t: &T, u: &U) -> i32
 -->
 
 ```rust,ignore
-fn some_function<T, U>(t: &T, u: &U) -> i32
+fn une_fonction<T, U>(t: &T, u: &U) -> i32
     where T: Display + Clone,
           U: Clone + Debug
 {
@@ -793,7 +793,7 @@ returns a `Tweet`, but the code calling this function doesn’t know that.
 -->
 
 En utilisant `impl Resumable` pour le type de retour, nous indiquons que la
-fonction `retourne_resumable`retourne un type qui implémente le trait
+fonction `retourne_resumable` retourne un type qui implémente le trait
 `Resumable` sans avoir à écrire le nom du type concret. Dans notre cas,
 `retourne_resumable` retourne un `Tweet`, mais le code qui appellera cette
 fonction ne le saura pas.
@@ -866,10 +866,10 @@ to run that code, we received this error:
 -->
 
 Maintenant que vous savez comment renseigner le comportement que vous souhaitez
-utiliser en utilisant les paramètres de types génériques liés, retournons à
-l'encart 10-5 pour corriger la définition de la fonction `le_plus_grand` qui
-utilise un paramètre de type générique ! La dernière fois qu'on a essayé de
-lancer ce code, nous avions l'erreur suivante :
+utiliser en utilisant les traits liés des paramètres de type génériques,
+retournons à l'encart 10-5 pour corriger la définition de la fonction
+`le_plus_grand` qui utilise un paramètre de type générique ! La dernière fois
+que nous avons essayé de lancer ce code, nous avions l'erreur suivante :
 
 <!--
 ```console
@@ -941,8 +941,8 @@ value out of `list[0]` and into the `largest` variable, resulting in this
 error.
 -->
 
-L'élement-clé dans ces erreurs est `cannot move out of type [T], a non-copy
-slice`(*impossible de déplacer une valeur hors du type `[T]`, slice non
+L'élément-clé dans ces erreurs est `cannot move out of type [T], a non-copy
+slice` (*impossible de déplacer une valeur hors du type `[T]`, slice non
 `Copy`*). Avec notre version non générique de la fonction `le_plus_grand`, nous
 avions essayé de trouver le plus grand `i32` ou `char`. Comme nous l'avons vu
 dans la section [“Données uniquement sur la pile : la
@@ -1045,7 +1045,7 @@ the `Display` trait that enables printing.
 -->
 
 En utilisant un trait lié avec un bloc `impl` qui utilise les paramètres de type
-générique, nous pouvons implémenter des méthodes en fonction des types qui
+génériques, nous pouvons implémenter des méthodes en fonction des types qui
 implémentent des traits particuliers. Par exemple, le type `Paire<T>` de
 l'encart 10-16 implémente toujours la fonction `new`. Mais `Paire<T>` implémente
 la méthode `afficher_comparaison` uniquement si son type interne `T` implémente
@@ -1117,7 +1117,7 @@ the `Display` trait. For example, we can turn integers into their corresponding
 Comme la bibliothèque standard a cette implémentation générale, nous pouvons
 appeler la méthode `to_string` définie par le trait `ToString` sur n'importe
 quel type qui implémente le trait `Display`. Par exemple, nous pouvons
-transformer les nombres entiers en leur `String` équivalente comme ci-dessous
+transformer les nombres entiers en leurs Strings équivalentes comme ci-dessous
 car les entiers implémentent `Display` :
 
 <!--
@@ -1173,7 +1173,7 @@ that references are valid as long as we need them to be. Let’s look at how
 lifetimes do that.
 -->
 
-Un autre type de générique que nous avons déjà utilisé est la *durée de vie*.
+Une autre sorte de générique que nous avons déjà utilisée est la *durée de vie*.
 Plutôt que de s'assurer qu'un type a le comportement que nous voulons, la durée
 de vie s'assure que les références sont en vigueur aussi longtemps que nous
 avons besoin qu'elles le soient. Nous allons voir à la page suivante comment la
