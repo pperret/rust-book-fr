@@ -225,8 +225,8 @@ This code prints `1 new tweet: horse_ebooks: of course, as you probably already
 know, people`.
 -->
 
-Ce code affichera `1 nouveau tweet : jean : Bien sûr, les amis, comme vous le
-savez probablement déjà`.
+Ce code affichera `1 nouveau tweet : horse_ebooks : Bien sûr, les amis, comme
+vous le savez probablement déjà`.
 
 <!--
 Note that because we defined the `Summary` trait and the `NewsArticle` and
@@ -314,7 +314,7 @@ Il est parfois utile d'avoir un comportement par défaut pour toutes ou une
 partie des méthodes d'un trait plutôt que de demander l'implémentation de toutes
 les méthodes sur chaque type. Ainsi, si nous implémentons le trait sur un type
 particulier, nous pouvons garder ou réécrire le comportement par défaut de
-chaque méthode. 
+chaque méthode.
 
 <!--
 Listing 10-14 shows how to specify a default string for the `summarize` method
@@ -387,7 +387,7 @@ pouvons toujours appeler la méthode `resumer` sur une instance de
 This code prints `New article available! (Read more...)`.
 -->
 
-Ce code va afficher `Nouvel article disponible ! (En savoir plus ...)`.
+Ce code va afficher `Nouvel article disponible ! (En savoir plus...)`.
 
 <!--
 Creating a default implementation for `summarize` doesn’t require us to change
@@ -479,7 +479,8 @@ supplémentaire.
 This code prints `1 new tweet: (Read more from @horse_ebooks...)`.
 -->
 
-Ce code affichera `1 nouveau tweet : (Lire plus d'éléments de @jean ...)`.
+Ce code affichera `1 nouveau tweet : (Lire plus d'éléments de
+@horse_ebooks...)`.
 
 <!--
 Note that it isn’t possible to call the default implementation from an
@@ -573,7 +574,7 @@ pub fn notify<T: Summary>(item: &T) {
 
 ```rust,ignore
 pub fn notifier<T: Resumable>(element: &T) {
-    println!("Flash-info ! {}", element.resumer());
+    println!("Flash info ! {}", element.resumer());
 }
 ```
 
@@ -716,7 +717,7 @@ paramètres de types génériques peuvent aussi avoir de nombreuses informations
 traits liés entre le nom de la fonction et la liste de ses paramètres, ce qui
 rend la signature de la fonction difficile à lire. Pour cette raison, Rust a une
 syntaxe alternative pour renseigner les traits liés, dans une instruction
-`where` après la signature de la fonction. Donc, à la place d'écrire ceci ...
+`where` après la signature de la fonction. Donc, à la place d'écrire ceci...
 
 <!--
 ```rust,ignore
@@ -771,8 +772,9 @@ We can also use the `impl Trait` syntax in the return position to return a
 value of some type that implements a trait, as shown here:
 -->
 
-Nous pouvons aussi utiliser la syntaxe `impl Trait` à la place du type de retour afin
-de retourner une valeur d'un type qui implémente un trait, comme ci-dessous :
+Nous pouvons aussi utiliser la syntaxe `impl Trait` à la place du type de retour
+afin de retourner une valeur d'un type qui implémente un trait, comme
+ci-dessous :
 
 <!--
 ```rust,ignore
@@ -1043,9 +1045,9 @@ the `Display` trait that enables printing.
 
 En utilisant un trait lié avec un bloc `impl` qui utilise les paramètres de type
 générique, nous pouvons implémenter des méthodes en fonction des types
-qu'implémentent des traits particuliers. Par exemple, le type `Pair<T>` de
-l'encart 10-16 implémente toujours la fonction `new`. Mais `Pair<T>` implémente
-la méthode `affiche_comparaison` uniquement si son type interne `T`
+qu'implémentent des traits particuliers. Par exemple, le type `Paire<T>` de
+l'encart 10-16 implémente toujours la fonction `new`. Mais `Paire<T>` implémente
+la méthode `afficher_comparaison` uniquement si son type interne `T`
 implémente le trait `PartialOrd` qui active la comparaison *et* le trait
 `Display` qui permet l'affichage.
 
