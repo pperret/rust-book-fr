@@ -1,7 +1,7 @@
 // ANCHOR: here
 pub trait Resumable {
     fn resumer(&self) -> String {
-        String::from("(En savoir plus ...)")
+        String::from("(En savoir plus...)")
     }
 }
 // ANCHOR_END: here

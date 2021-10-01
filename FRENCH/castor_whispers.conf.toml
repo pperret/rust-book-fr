@@ -1,0 +1,7 @@
+[replacements]
+comment = [
+    ["/listings/", "/listings-sources/"]
+]
+only_commented = [
+    ["/listings-sources/", "/listings/"]
+]

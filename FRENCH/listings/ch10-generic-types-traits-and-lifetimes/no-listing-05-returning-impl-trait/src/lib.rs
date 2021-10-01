@@ -31,8 +31,10 @@ impl Resumable for Tweet {
 // ANCHOR: here
 fn retourne_resumable() -> impl Resumable {
     Tweet {
-        nom_utilisateur: String::from("jean"),
-        contenu: String::from("Bien sûr, les amis, comme vous le savez probablement déjà"),
+        nom_utilisateur: String::from("horse_ebooks"),
+        contenu: String::from(
+            "Bien sûr, les amis, comme vous le savez probablement déjà",
+        ),
         reponse: false,
         retweet: false,
     }

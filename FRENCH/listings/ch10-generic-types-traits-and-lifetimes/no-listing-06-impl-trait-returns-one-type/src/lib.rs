@@ -32,16 +32,18 @@ impl Resumable for Tweet {
 fn retourne_resumable(estArticle: bool) -> impl Resumable {
     if estArticle {
         ArticleDePresse {
-            titre: String::from("Les Pinguins ont gagné la Stanley Cup Championship !"),
+            titre: String::from("Les Penguins ont remporté la Coupe Stanley !"),
             lieu: String::from("Pittsburgh, PA, USA"),
             auteur: String::from("Iceburgh"),
-            contenu: String::from("Les Pinguins de Pittsburgh sont une nouvelle fois la
-            meilleure équipe de hockey de la NHL."),
+            contenu: String::from("Les Penguins de Pittsburgh sont une nouvelle fois la meilleure \
+            équipe de hockey de la LNH."),
         }
     } else {
         Tweet {
-            nom_utilisateur: String::from("jean"),
-            contenu: String::from("Bien sûr, les amis, comme vous le savez probablement déjà"),
+            nom_utilisateur: String::from("horse_ebooks"),
+            contenu: String::from(
+                "Bien sûr, les amis, comme vous le savez probablement déjà",
+            ),
             reponse: false,
             retweet: false,
         }

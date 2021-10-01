@@ -3,7 +3,7 @@ pub trait Resumable {
     fn resumer_auteur(&self) -> String;
 
     fn resumer(&self) -> String {
-        format!("(Lire plus d'éléments de {} ...)", self.resumer_auteur())
+        format!("(Lire plus d'éléments de {}...)", self.resumer_auteur())
     }
 }
 // ANCHOR_END: here
