@@ -40,7 +40,7 @@ poème “I’m Nobody! Who are you?”.
 
 <!--
 ```text
-{{#include ../listings/ch12-an-io-project/listing-12-03/poem.txt}}
+{{#include ../listings-sources/ch12-an-io-project/listing-12-03/poem.txt}}
 ```
 -->
 
@@ -71,12 +71,12 @@ lire le fichier, comme indiqué dans l'encart 12-4.
 <span class="filename">Fichier : src/main.rs</span>
 
 <!--
-```rust,should_panic
-{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-04/src/main.rs:here}}
+```rust,should_panic,noplayground
+{{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-04/src/main.rs:here}}
 ```
 -->
 
-```rust,should_panic
+```rust,should_panic,noplayground
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-04/src/main.rs:here}}
 ```
 
@@ -130,7 +130,7 @@ second argument :
 
 <!--
 ```console
-{{#rustdoc_include ../listings/ch12-an-io-project/listing-12-04/output.txt}}
+{{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-04/output.txt}}
 ```
 -->
 

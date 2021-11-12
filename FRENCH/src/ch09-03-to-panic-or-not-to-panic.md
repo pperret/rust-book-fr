@@ -173,16 +173,24 @@ contradictoires ou manquantes qui sont fournies à votre code, ainsi qu'un ou
 plusieurs des éléments suivants :
 
 <!--
-* The bad state is not something that’s *expected* to happen occasionally.
-* Your code after this point needs to rely on not being in this bad state.
-* There’s not a good way to encode this information in the types you use.
+* The bad state is something that is unexpected, as opposed to something that
+  will likely happen occasionally, like a user entering data in the wrong
+  format.
+* Your code after this point needs to rely on not being in this bad state,
+  rather than checking for the problem at every step.
+* There’s not a good way to encode this information in the types you use. We’ll
+  work through an example of what we mean in the [“Encoding States and Behavior
+  as Types”][encoding]<!-- ignore -- > section of Chapter 17.
 -->
 
-* L'état invalide n'est pas *censé* se produire occasionnellement.
+* L'état invalide est quelque chose qui est inattendu, contrairement à quelque
+  chose qui devrait arriver occasionnellement, comme par exemple un utilisateur
+  qui saisit une donnée dans un mauvais format.
 * Après cette instruction, votre code a besoin de ne pas être dans cet état
-  invalide.
+  invalide, plutôt que d'avoir à vérifier le problème à chaque étape.
 * Il n'y a pas de bonne façon d'encoder cette information dans les types que
-  vous utilisez.
+  vous utilisez. Nous allons pratiquer ceci via un exemple dans [une section du
+  chapitre 17][encoding]<!-- ignore -->.
 
 <!--
 If someone calls your code and passes in values that don’t make sense, the best
@@ -365,7 +373,7 @@ vérification comme celle-ci dans chacune de ces fonctions.
 Instead, we can make a new type and put the validations in a function to create
 an instance of the type rather than repeating the validations everywhere. That
 way, it’s safe for functions to use the new type in their signatures and
-confidently use the values they receive. Listing 9-10 shows one way to define a
+confidently use the values they receive. Listing 9-13 shows one way to define a
 `Guess` type that will only create an instance of `Guess` if the `new` function
 receives a value between 1 and 100.
 -->
@@ -374,7 +382,7 @@ receives a value between 1 and 100.
 vérifications dans la fonction de création d'une instance de ce type plutôt que
 de répéter partout les vérifications. Il est ainsi plus sûr pour les fonctions
 d'utiliser ce nouveau type dans leurs signatures et d'utiliser avec confiance
-les valeurs qu'elles reçoivent. L'encart 9-10 montre une façon de définir un
+les valeurs qu'elles reçoivent. L'encart 9-13 montre une façon de définir un
 type `Supposition` qui ne créera une instance de `Supposition` que si la
 fonction `new` reçoit une valeur entre 1 et 100 :
 
@@ -387,20 +395,20 @@ purposes. -- >
 
 <!--
 ```rust
-{{#include ../listings/ch09-error-handling/listing-09-10/src/main.rs:here}}
+{{#include ../listings/ch09-error-handling/listing-09-13/src/main.rs:here}}
 ```
 -->
 
 ```rust
-{{#include ../listings/ch09-error-handling/listing-09-10/src/main.rs:here}}
+{{#include ../listings/ch09-error-handling/listing-09-13/src/main.rs:here}}
 ```
 
 <!--
-<span class="caption">Listing 9-10: A `Guess` type that will only continue with
+<span class="caption">Listing 9-13: A `Guess` type that will only continue with
 values between 1 and 100</span>
 -->
 
-<span class="caption">Encart 9-10 : un type `Supposition` qui ne va continuer
+<span class="caption">Encart 9-13 : un type `Supposition` qui ne va continuer
 que si la valeur est entre 1 et 100</span>
 
 <!--
@@ -515,3 +523,9 @@ can use them in your code.
 Maintenant que vous avez vu la façon dont la bibliothèque standard tire parti de
 la généricité avec les énumérations `Option` et `Result`, nous allons voir
 comment la généricité fonctionne et comment vous pouvez l'utiliser dans votre code.
+
+<!--
+[encoding]: ch17-03-oo-design-patterns.html#encoding-states-and-behavior-as-types
+-->
+
+[encoding]: ch17-03-oo-design-patterns.html

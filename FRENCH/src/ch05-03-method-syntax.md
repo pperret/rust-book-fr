@@ -65,17 +65,19 @@ structure `Rectangle`</span>
 
 <!--
 To define the function within the context of `Rectangle`, we start an `impl`
-(implementation) block. Then we move the `area` function within the `impl`
-curly brackets and change the first (and in this case, only) parameter to be
-`self` in the signature and everywhere within the body. In `main`, where we
-called the `area` function and passed `rect1` as an argument, we can instead
-use *method syntax* to call the `area` method on our `Rectangle` instance.
-The method syntax goes after an instance: we add a dot followed by the method
-name, parentheses, and any arguments.
+(implementation) block for `Rectangle`. Everything within this `impl` block
+will be associated with the `Rectangle` type. Then we move the `area` function
+within the `impl` curly brackets and change the first (and in this case, only)
+parameter to be `self` in the signature and everywhere within the body. In
+`main`, where we called the `area` function and passed `rect1` as an argument,
+we can instead use *method syntax* to call the `area` method on our `Rectangle`
+instance. The method syntax goes after an instance: we add a dot followed by
+the method name, parentheses, and any arguments.
 -->
 
 Pour définir la fonction dans le contexte de `Rectangle`, nous démarrons un bloc
-`impl` (*implémentation*). Puis nous déplaçons la fonction `aire` entre les
+`impl` (*implémentation*) pour `Rectangle`. Tout ce qui sera dans ce bloc `impl`
+sera lié au type `Rectangle`. Puis nous déplaçons la fonction `aire` entre les
 accolades du `impl` et nous remplaçons le premier paramètre (et dans notre cas,
 le seul) par `self` dans la signature et dans tout le corps. Dans `main`, où
 nous avons appelé la fonction `aire` et passé `rect1` en argument, nous pouvons
@@ -85,21 +87,28 @@ l'instance : on ajoute un point suivi du nom de la méthode et des parenthèses
 contenant les arguments s'il y en a.
 
 <!--
-In the signature for `area`, we use `&self` instead of `rectangle: &Rectangle`
-because Rust knows the type of `self` is `Rectangle` due to this method’s being
-inside the `impl Rectangle` context. Note that we still need to use the `&`
-before `self`, just as we did in `&Rectangle`. Methods can take ownership of
-`self`, borrow `self` immutably as we’ve done here, or borrow `self` mutably,
-just as they can any other parameter.
+In the signature for `area`, we use `&self` instead of `rectangle: &Rectangle`.
+The `&self` is actually short for `self: &Self`. Within an `impl` block, the
+type `Self` is an alias for the type that the `impl` block is for. Methods must
+have a parameter named `self` of type `Self` for their first parameter, so Rust
+lets you abbreviate this with only the name `self` in the first parameter spot.
+Note that we still need to use the `&` in front of the `self` shorthand to
+indicate this method borrows the `Self` instance, just as we did in `rectangle:
+&Rectangle`. Methods can take ownership of `self`, borrow `self` immutably as
+we’ve done here, or borrow `self` mutably, just as they can any other parameter.
 -->
 
 Dans la signature de `aire`, nous utilisons `&self` à la place de
-`rectangle: &Rectangle` parce que Rust sait que le type de `self` est
-`Rectangle` puisque la méthode se trouve au sein du contexte `impl Rectangle`.
-Veuillez noter qu'il nous faut quand même utiliser le `&` avant le `self`, comme
-nous l'avions fait pour `&Rectangle`. Les méthodes peuvent prendre possession de
-`self`, emprunter `self` de façon immuable comme nous l'avons fait ici, ou
-emprunter `self` de façon mutable, comme pour n'importe quel autre paramètre.
+`rectangle: &Rectangle`. Le `&self` est un raccourci pour `self: &Self`. Au
+sein d'un bloc `impl`, le type de `Self` est un alias pour le type sur lequel
+porte le `impl`. Les méthodes doivent avoir un paramètre `self` du type `Self`
+comme premier paramètre afin que Rust puisse vous permettre d'abréger en
+renseignant uniquement `self` en premier paramètre. Veuillez noter qu'il nous
+faut quand même utiliser le `&` devant le raccourci `self`, pour indiquer que
+cette méthode emprunte l'instance de `Self`, comme nous l'avions fait pour
+`rectangle: &Rectangle`. Les méthodes peuvent prendre possession de `self`,
+emprunter `self` de façon immuable comme nous l'avons fait ici, ou emprunter
+`self` de façon mutable, comme pour n'importe quel autre paramètre.
 
 <!--
 We’ve chosen `&self` here for the same reason we used `&Rectangle` in the
@@ -139,6 +148,68 @@ l'organisation. Nous avons mis tout ce qu'on pouvait faire avec une instance de
 notre type dans un bloc `impl` plutôt que d'imposer aux futurs utilisateurs de
 notre code à rechercher les fonctionnalités de `Rectangle` à divers endroits de
 la bibliothèque que nous fournissons.
+
+<!--
+Note that we can choose to give a method the same name as one of the struct’s
+fields. For example, we can define a method on `Rectangle` also named `width`:
+-->
+
+Notez que nous pourions faire en sorte qu'une méthode porte le même nom qu'un
+des champs de la structure. Par exemple, nous pourions définir une méthode sur
+`Rectangle` qui s'appelle elle aussi `largeur` :
+
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+
+<span class="filename">Fichier : src/main.rs</span>
+
+<!--
+```rust
+{{#rustdoc_include ../listings-sources/ch05-using-structs-to-structure-related-data/no-listing-06-method-field-interaction/src/main.rs:here}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch05-using-structs-to-structure-related-data/no-listing-06-method-field-interaction/src/main.rs:here}}
+```
+
+<!--
+Here, we’re choosing to make the behavior of the `width` method be that it
+returns `true` if the value in the instance’s `width` field is greater than 0,
+and `false` if the value is 0: we can use a field within a method of the same
+name for any purpose. In `main`, when we follow `rect1.width` with parentheses,
+Rust knows we mean the method `width`. When we don’t use parentheses, Rust
+knows we mean the field `width`.
+-->
+
+Ici, nous avons choisi de définir le comportement de la méthode `largeur` pour
+qu'elle retourne `true` si la valeur dans le champ `largeur` est supérieur ou
+égal à 0, et `false` si la valeur est 0 : nous pouvons utiliser un champ à
+l'intérieur d'une méthode du même nom, pour n'importe quel usage. Dans le
+`main`, lorsque nous ajoutons des parenthèses après `rect1.largeur`, Rust
+comprend que nous parlons de la méthode `largeur`. Lorsque nous n'utilisons pas
+les parenthèses, Rust sait nous parlons du champ `largeur`.
+
+<!--
+Often, but not always, methods with the same name as a field will be defined to
+only return the value in the field and do nothing else. Methods like this are
+called *getters*, and Rust does not implement them automatically for struct
+fields as some other languages do. Getters are useful because you can make the
+field private but the method public and thus enable read-only access to that
+field as part of the type’s public API. We will be discussing what public and
+private are and how to designate a field or method as public or private in
+Chapter 7.
+-->
+
+Souvent, mais pas toujours, les méthodes avec le même nom qu'un champ sont
+définies pour retourner uniquement la valeur de ce champ et ne rien faire
+d'autre. Ces méthodes sont appelées des *accesseurs*, et Rust ne les implémente
+pas automatiquement pour les champs des structures comme le font certains
+langages. Les accesseurs sont utiles pour rendre le champ privé mais rendre
+la méthode publique et ainsi donner un accès en lecture seule à ce champ dans
+l'API publique de ce type. Nous développerons les notions de publique et privé
+et comment définir un champ ou une méthode publique ou privée au chapitre 7.
 
 <!--
 > ### Where’s the `->` Operator?
@@ -379,34 +450,36 @@ fonctionnent de la même manière que les paramètres des fonctions.
 ### Les fonctions associées
 
 <!--
-Another useful feature of `impl` blocks is that we’re allowed to define
-functions within `impl` blocks that *don’t* take `self` as a parameter. These
-are called *associated functions* because they’re associated with the struct.
-They’re still functions, not methods, because they don’t have an instance of
-the struct to work with. You’ve already used the `String::from` associated
-function.
+All functions defined within an `impl` block are called *associated functions*
+because they’re associated with the type named after the `impl`. We can define
+associated functions that don’t have `self` as their first parameter (and thus
+are not methods) because they don’t need an instance of the type to work with.
+We’ve already used one function like this, the `String::from` function, that’s
+defined on the `String` type.
 -->
 
-Une autre fonctionnalité utile des blocs `impl` est qu'on peut définir des
-fonctions dans des blocs `impl` qui ne prennent *pas* `self` en paramètre. Cela
-s'appelle des *fonctions associées* parce qu'elles sont associées à la
-structure. Cela reste des fonctions, pas des méthodes, parce qu'elles ne
-s'appliquent pas à une instance de structure. Vous avez déjà utilisé la fonction
-associée `String::from`.
+Toutes les fonctions définies dans un bloc `impl` s'appellent des *fonctions
+associées* car elles sont associées au type renseigné après le `impl`. Nous
+pouvons aussi y définir des fonctions associées qui n'ont pas de `self` en
+premier paramètre (et donc ce ne sont pas des méthodes) car elles n'ont pas
+besoin d'une instance du type sur lequel elles travaillent. Nous avons déjà
+utilisé une fonction comme celle-ci, la fonction `String::from`, qui est définie
+sur le type `String`.
 
 <!--
-Associated functions are often used for constructors that will return a new
-instance of the struct. For example, we could provide an associated function
-that would have one dimension parameter and use that as both width and height,
-thus making it easier to create a square `Rectangle` rather than having to
-specify the same value twice:
+Associated functions that aren’t methods are often used for constructors that
+will return a new instance of the struct. For example, we could provide an
+associated function that would have one dimension parameter and use that as
+both width and height, thus making it easier to create a square `Rectangle`
+rather than having to specify the same value twice:
 -->
 
-Les fonctions associées sont souvent utilisées comme constructeurs qui vont
-retourner une nouvelle instance de la structure. Par exemple, on pourrait écrire
-une fonction associée qui prend une unique dimension en paramètre et l'utilise
-à la fois pour la largeur et pour la hauteur, ce qui rend plus aisé la création
-d'un `Rectangle` carré plutôt que d'avoir à indiquer la même valeur deux fois :
+Les fonctions associées qui ne ne sont pas des méthodes sont souvent utilisées
+comme constructeurs qui vont retourner une nouvelle instance de la structure.
+Par exemple, on pourrait écrire une fonction associée qui prend une unique
+dimension en paramètre et l'utilise à la fois pour la largeur et pour la
+hauteur, ce qui rend plus aisé la création d'un `Rectangle` carré plutôt que
+d'avoir à indiquer la même valeur deux fois :
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -491,19 +564,19 @@ types génériques et les traits.
 <!--
 Structs let you create custom types that are meaningful for your domain. By
 using structs, you can keep associated pieces of data connected to each other
-and name each piece to make your code clear. Methods let you specify the
-behavior that instances of your structs have, and associated functions let you
-namespace functionality that is particular to your struct without having an
-instance available.
+and name each piece to make your code clear. In `impl` blocks, you can define
+functions that are associated with your type, and methods are a kind of
+associated function that let you specify the behavior that instances of your
+structs have.
 -->
 
 Les structures vous permettent de créer des types personnalisés significatifs
 pour votre domaine. En utilisant des structures, on peut relier entre elles
 des données associées et nommer chaque donnée pour rendre le code plus clair.
-Les méthodes vous permettent de définir le comportement des instances de vos
-structures, et les fonctions associées vous permettent de cloisonner dans un
-espace de noms des fonctionnalités qui sont spécifiques à votre structure sans
-avoir besoin d'une instance disponible.
+Dans des blocs `impl`, vous pouvez définir des fonctions qui sont associées à
+votre type, et les méthodes sont un genre de fonction associée qui vous permet
+de renseigner le comportement que doivent suivre les instances de votre
+structure.
 
 <!--
 But structs aren’t the only way you can create custom types: let’s turn to

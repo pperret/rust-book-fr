@@ -322,14 +322,16 @@ avec une tabulation.
 Second, `println!` calls a Rust macro. If it called a function instead, it
 would be entered as `println` (without the `!`). We’ll discuss Rust macros in
 more detail in Chapter 19. For now, you just need to know that using a `!`
-means that you’re calling a macro instead of a normal function.
+means that you’re calling a macro instead of a normal function, and that macros
+don’t always follow the same rules as functions.
 -->
 
 Deuxièmement, `println!` fait appel à une macro Rust. S'il appelait une
 fonction à la place, cela serait écrit `println` (sans le `!`). Nous aborderons
 les macros Rust plus en détail dans le chapitre 19. Pour l'instant, vous avez
 juste à savoir qu'utiliser un `!` signifie que vous utilisez une macro plutôt
-qu'une fonction classique.
+qu'une fonction classique. Les macros ne suivent pas toujours les mêmes règles
+que les fonctions.
 
 <!--
 Third, you see the `"Hello, world!"` string. We pass this string as an argument

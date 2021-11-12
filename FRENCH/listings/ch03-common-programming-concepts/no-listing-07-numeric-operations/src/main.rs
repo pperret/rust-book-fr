@@ -10,6 +10,7 @@ fn main() {
 
     // division
     let quotient = 56.7 / 32.2;
+    let arrondi = 2 / 3; // retournera 0
 
     // modulo
     let reste = 43 % 5;

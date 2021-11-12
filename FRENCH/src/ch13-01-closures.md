@@ -340,13 +340,14 @@ le résultat dans tous les cas, ce qui inclut le bloc `if` interne qui n'utilise
 pas du tout la valeur du résultat.
 
 <!--
-We want to define code in one place in our program, but only *execute* that
-code where we actually need the result. This is a use case for closures!
+We want to refer to `simulated_expensive_calculation` only once in
+`generate_workout`, but defer the expensive calculation to only where
+we actually need the result. This is a use case for closures!
 -->
 
-Nous voulons définir ce code à un seul endroit dans notre programme, mais
-*exécuter* ce code uniquement où nous avons réellement besoin du résultat.
-C'est un cas d'utilisation des fermetures !
+Nous voulons référer à `simuler_gros_calcul` une seule fois dans
+`generer_exercices`, mais retarder le gros calcul jusqu'au moment où nous avons
+avons besoin du résultat. C'est un cas d'utilisation des fermetures !
 
 <!--
 #### Refactoring with Closures to Store Code
@@ -481,11 +482,11 @@ defined</span>
 que nous avons défini</span>
 
 <!--
-Now the expensive calculation is called in only one place, and we’re only
-executing that code where we need the results.
+Now how to perform the expensive calculation is defined in only one
+place, and we’re only executing that code where we need the results.
 -->
 
-Maintenant, le calcul lent n'est appelé qu'à un seul endroit, et nous
+Désormais, le calcul lent n'est défini qu'à un seul endroit, et nous
 n'exécutons ce code uniquement où nous avons besoin des résultats.
 
 <!--
@@ -705,7 +706,7 @@ Le compilateur nous renvoie l'erreur suivante :
 <!--
 The first time we call `example_closure` with the `String` value, the compiler
 infers the type of `x` and the return type of the closure to be `String`. Those
-types are then locked in to the closure in `example_closure`, and we get a type
+types are then locked into the closure in `example_closure`, and we get a type
 error if we try to use a different type with the same closure.
 -->
 
@@ -1091,8 +1092,8 @@ l'encart 13-10, et le test échouera sur le `assert_eq!` avec ce message :
 
 <!--
 The problem is that the first time we called `c.value` with 1, the `Cacher`
-instance saved `Some(1)` in `self.value`. Thereafter, no matter what we pass in
-to the `value` method, it will always return 1.
+instance saved `Some(1)` in `self.value`. Thereafter, no matter what we pass into
+the `value` method, it will always return 1.
 -->
 
 Le problème est que la première fois que nous avons appelé `c.valeur` avec 1,
@@ -1325,6 +1326,19 @@ utilise dans l'environnement, nous pouvons utiliser le mot-clé `move` avant la
 liste des paramètres. Cette technique est très utile lorsque vous passez une
 fermeture à une nouvelle tâche pour déplacer les données afin qu'elles
 appartiennent à la nouvelle tâche.
+
+<!--
+> Note: `move` closures may still implement `Fn` or `FnMut`, even though
+> they capture variables by move. This is because the traits implemented by a
+> closure type are determined by what the closure does with captured values,
+> not how it captures them. The `move` keyword only specifies the latter.
+-->
+
+> Remarque : les fermetures `move` peuvent toujours implémenter `Fn` ou
+> `FnMut`, même si elles capturent les variables en les déplaçant. C'est
+> possible car les traits implémentés par un type de fermeture sont déterminés
+> par ce que font ces fermetures avec les valeurs déplacées, et non pas comment
+> elles les capturent. Le mot-clé `move` ne définit que cette dernière.
 
 <!--
 We’ll have more examples of `move` closures in Chapter 16 when we talk about

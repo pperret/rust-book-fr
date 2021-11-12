@@ -7,6 +7,7 @@ error[E0658]: `let` expressions in this position are experimental
   |              ^^^^^^^^^
   |
   = note: see issue #53667 <https://github.com/rust-lang/rust/issues/53667> for more information
+  = help: you can write `matches!(<expr>, <pattern>)` instead of `let <pattern> = <expr>`
 
 error: expected expression, found statement (`let`)
  --> src/main.rs:2:14
@@ -24,9 +25,6 @@ warning: unnecessary parentheses around assigned value
   |
   = note: `#[warn(unused_parens)]` on by default
 
-error: aborting due to 2 previous errors; 1 warning emitted
-
 For more information about this error, try `rustc --explain E0658`.
-error: could not compile `functions`
-
-To learn more, run the command again with --verbose.
+warning: `functions` (bin "functions") generated 1 warning
+error: could not compile `functions` due to 2 previous errors; 1 warning emitted

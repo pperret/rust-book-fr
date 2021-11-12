@@ -492,14 +492,15 @@ des éléments d'un vecteur</span>
 To change the value that the mutable reference refers to, we have to use the
 dereference operator (`*`) to get to the value in `i` before we can use the
 `+=` operator. We’ll talk more about the dereference operator in the
-[“Following the Pointer to the Value with the Dereference Operator”][deref]
+[“Following the Pointer to the Value with the Dereference Operator”][deref]<!-- ignore -- >
 section of Chapter 15.
 -->
 
 Afin de changer la valeur vers laquelle pointe la référence mutable, nous devons
 utiliser l'opérateur de déréférencement (`*`) pour obtenir la valeur dans `i`
 avant que nous puissions utiliser l'opérateur `+=`. Nous verrons plus en détail
-l'opérateur de déréférencement dans une section du [chapitre 15][deref].
+l'opérateur de déréférencement dans une section du
+[chapitre 15][deref]<!-- ignore -->.
 
 <!--
 ### Using an Enum to Store Multiple Types
@@ -593,27 +594,27 @@ au chapitre 17.
 
 <!--
 Now that we’ve discussed some of the most common ways to use vectors, be sure
-to review [the API documentation][vec-api] for all the many useful methods defined on
-`Vec<T>` by the standard library. For example, in addition to `push`, a `pop`
-method removes and returns the last element. Let’s move on to the next
-collection type: `String`!
+to review [the API documentation][vec-api]<!-- ignore -- > for all the many
+useful methods defined on `Vec<T>` by the standard library. For example, in
+addition to `push`, a `pop` method removes and returns the last element. Let’s
+move on to the next collection type: `String`!
 -->
 
 Maintenant que nous avons vu les manières les plus courantes d'utiliser les
-vecteurs, prenez le temps de consulter [la documentation de l'API][vec-api] pour
-découvrir toutes les méthodes très utiles définies dans la bibliothèque standard
-pour `Vec<T>`. Par exemple, en plus de `push`, nous avons une méthode `pop` qui
-retire et retourne le dernier élément. Intéressons-nous maintenant au prochain
-type de collection : la `String` !
+vecteurs, prenez le temps de consulter [la documentation de
+l'API][vec-api]<!-- ignore --> pour découvrir toutes les méthodes très utiles
+définies dans la bibliothèque standard pour `Vec<T>`. Par exemple, en plus de
+`push`, nous avons une méthode `pop` qui retire et retourne le dernier élément.
+Intéressons-nous maintenant au prochain type de collection : la `String` !
 
 <!--
 [data-types]: ch03-02-data-types.html#data-types
-[nomicon]: ../nomicon/vec.html
+[nomicon]: ../nomicon/vec/vec.html
 [vec-api]: ../std/vec/struct.Vec.html
 [deref]: ch15-02-deref.html#following-the-pointer-to-the-value-with-the-dereference-operator
 -->
 
 [data-types]: ch03-02-data-types.html
-[nomicon]: https://doc.rust-lang.org/nomicon/vec.html
+[nomicon]: https://doc.rust-lang.org/nomicon/vec/vec.html
 [vec-api]: https://doc.rust-lang.org/std/vec/struct.Vec.html
 [deref]: ch15-02-deref.html

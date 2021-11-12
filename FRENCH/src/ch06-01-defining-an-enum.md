@@ -207,11 +207,22 @@ que chacune des variantes `V4` et `V6` auront des valeurs associées de type
 
 <!--
 We attach data to each variant of the enum directly, so there is no need for an
-extra struct.
+extra struct. Here it’s also easier to see another detail of how enums work:
+the name of each enum variant that we define also becomes a function that
+constructs an instance of the enum. That is, `IpAddr::V4()` is a function call
+that takes a `String` argument and returns an instance of the `IpAddr` type. We
+automatically get this constructor function defined as a result of defining the
+enum.
 -->
 
 Nous relions les données de chaque variante directement à l'énumération, donc il
-n'est pas nécessaire d'avoir une structure en plus.
+n'est pas nécessaire d'avoir une structure en plus. Ceci nous permet de voir
+plus facilement un détail de fonctionnement des énumérations : le nom de chaque
+variante d'énumération que nous définissons devient aussi une fonction qui
+construit une instance de l'énumération. Ainsi, `AdresseIp::V4()` est un appel
+de fonction qui prend une `String` en argument et qui retourne une instance du
+type `AdresseIp`. Nous obtenons automatiquement cette fonction de constructeur
+qui est définie lorsque nous définissons l'énumération.
 
 <!--
 There’s another advantage to using an enum rather than a struct: each variant
@@ -361,13 +372,13 @@ Cette énumération a quatre variantes avec des types différents :
 
 <!--
 * `Quit` has no data associated with it at all.
-* `Move` includes an anonymous struct inside it.
+* `Move` has named fields like a struct does.
 * `Write` includes a single `String`.
 * `ChangeColor` includes three `i32` values.
 -->
 
 * `Quitter` n'a pas du tout de donnée associée.
-* `Deplacer` intègre une structure anonyme.
+* `Deplacer` intègre une structure anonyme en son sein.
 * `Ecrire` intègre une seule `String`.
 * `ChangerCouleur` intègre trois valeurs de type `i32`.
 
@@ -566,16 +577,16 @@ standard][option]<!-- ignore --> comme ci-dessous :
 <!--
 ```rust
 enum Option<T> {
-    Some(T),
     None,
+    Some(T),
 }
 ```
 -->
 
 ```rust
 enum Option<T> {
-    Some(T),
     None,
+    Some(T),
 }
 ```
 
@@ -598,17 +609,20 @@ L'énumération `Option<T>` reste une énumération normale, et `Some(T)` ainsi 
 The `<T>` syntax is a feature of Rust we haven’t talked about yet. It’s a
 generic type parameter, and we’ll cover generics in more detail in Chapter 10.
 For now, all you need to know is that `<T>` means the `Some` variant of the
-`Option` enum can hold one piece of data of any type. Here are some examples of
-using `Option` values to hold number types and string types:
+`Option` enum can hold one piece of data of any type, and that each concrete
+type that gets used in place of `T` makes the overall `Option<T>` type a
+different type. Here are some examples of using `Option` values to hold number
+types and string types:
 -->
 
 La syntaxe `<T>` est une fonctionnalité de Rust que nous n'avons pas encore
 abordée. Il s'agit d'un paramètre de type générique, et nous verrons la
 généricité plus en détail au chapitre 10. Pour le moment, dites-vous que ce
 `<T>` signifie que la variante `Some` de l'énumération `Option` peut stocker un
-élément de donnée de n'importe quel type. Voici quelques exemples d'utilisation
-de valeurs de `Option` pour stocker des types de nombres et des types de chaînes
-de caractères :
+élément de donnée de n'importe quel type, et que chaque type concret qui est
+utilisé à la place du `T` transforme tout le type `Option<T>` en un type
+différent. Voici quelques exemples d'utilisation de valeurs de `Option` pour
+stocker des types de nombres et des types de chaînes de caractères :
 
 <!--
 ```rust
@@ -621,15 +635,22 @@ de caractères :
 ```
 
 <!--
-If we use `None` rather than `Some`, we need to tell Rust what type of
-`Option<T>` we have, because the compiler can’t infer the type that the `Some`
-variant will hold by looking only at a `None` value.
+The type of `some_number` is `Option<i32>`. The type of `some_string` is
+`Option<&str>`, which is a different type. Rust can infer these types because
+we’ve specified a value inside the `Some` variant. For `absent_number`, Rust
+requires us to annotate the overall `Option` type: the compiler can’t infer the
+type that the corresponding `Some` variant will hold by looking only at a
+`None` value. Here, we tell Rust that we mean for `absent_number` to be of type
+`Option<i32>`.
 -->
 
-Si nous utilisons `None` plutôt que `Some`, nous devons indiquer à Rust quel
-type de `Option<T>` nous avons, car le compilateur ne peut pas déduire le type
-que cette variante `Some` va stocker en considérant uniquement une valeur
-`None`.
+La variable `un_nombre` est du type `Option<i32>`. Mais la variable `une_chaine`
+est du type `Option<&str>`, qui est un tout autre type. Rust peut déduire ces
+types car nous avons renseigné une valeur dans la variante `Some`. Pour
+`nombre_absent`, Rust nécessite que nous annotions le type de tout le `Option` :
+le compilateur ne peut pas déduire le type qui devrait être stocké dans la
+variante `Some` à partir de la valeur `None`. Ici, nous avons renseigné à Rust
+que nous voulions que `nombre_absent` soit du type `Option<i32>`.
 
 <!--
 When we have a `Some` value, we know that a value is present and the value is

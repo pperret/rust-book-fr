@@ -1,8 +1,8 @@
 fn main() {
     // ANCHOR: here
-    let une_valeur_u8 = Some(0u8);
+    let une_valeur_u8 = Some(3u8);
     match une_valeur_u8 {
-        Some(3) => println!("trois"),
+        Some(max) => println!("Le maximum est réglé sur {}", max),
         _ => (),
     }
     // ANCHOR_END: here

@@ -1,8 +1,8 @@
 struct Utilisateur {
+    actif: bool,
     pseudo: String,
     email: String,
     nombre_de_connexions: u64,
-    actif: bool,
 }
 
 fn main() {
@@ -16,7 +16,6 @@ fn main() {
     // ANCHOR: here
     let utilisateur2 = Utilisateur {
         email: String::from("quelquundautre@example.com"),
-        pseudo: String::from("autrepseudo567"),
         ..utilisateur1
     };
     // ANCHOR_END: here

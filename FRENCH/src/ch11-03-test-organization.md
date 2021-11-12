@@ -173,17 +173,23 @@ la fonction privée `addition_interne`.
 <span class="caption">Encart 11-12 : test d'une fonction privée</span>
 
 <!--
-Note that the `internal_adder` function is not marked as `pub`, but because
-tests are just Rust code and the `tests` module is just another module, you can
-bring `internal_adder` into a test’s scope and call it. If you don’t think
+Note that the `internal_adder` function is not marked as `pub`. Tests are just
+Rust code, and the `tests` module is just another module. As we discussed in
+the [“Paths for Referring to an Item in the Module Tree”][paths]<!-- ignore -- >
+section, items in child modules can use the items in their ancestor modules. In
+this test, we bring all of the `test` module’s parent’s items into scope with
+`use super::*`, and then the test can call `internal_adder`. If you don’t think
 private functions should be tested, there’s nothing in Rust that will compel
 you to do so.
 -->
 
-Remarquez que la fonction `addition_interne` n'est pas marquée comme `pub`, car
-comme les tests sont uniquement du code Rust et que le module `test` est
-simplement un autre module, vous pouvez importer `addition_interne` dans la
-portée des tests et l'utiliser. Si vous pensez qu'une fonction privée ne doit
+Remarquez que la fonction `addition_interne` n'est pas marquée comme `pub`. Les
+tests sont uniquement du code Rust, et le module `test` est simplement un autre
+module. Comme nous l'avons vu dans [une section][paths]<:-- ignore -->, les
+éléments dans les modules enfant peuvent utiliser les éléments dans leurs
+modules parents. Dans ce test, nous importons dans la portée tous les éléments
+du parent du module `test` grâce à `use super::*;`, puis ensuite le test peut
+faire appel à `addition_interne`. Si vous pensez qu'une fonction privée ne doit
 pas être testée, il n'y a rien qui vous y force avec Rust.
 
 <!--
@@ -615,9 +621,11 @@ Et maintenant, combinons le savoir que vous avez accumulé dans ce chapitre et
 dans les chapitres précédents en travaillant sur un nouveau projet !
 
 <!--
+[paths]: ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html
 [separating-modules-into-files]:
 ch07-05-separating-modules-into-different-files.html
 -->
 
+[paths]: ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html
 [separating-modules-into-files]:
 ch07-05-separating-modules-into-different-files.html

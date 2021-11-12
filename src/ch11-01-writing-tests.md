@@ -264,7 +264,7 @@ more conveniently. These macros compare two arguments for equality or
 inequality, respectively. They’ll also print the two values if the assertion
 fails, which makes it easier to see *why* the test failed; conversely, the
 `assert!` macro only indicates that it got a `false` value for the `==`
-expression, not the values that lead to the `false` value.
+expression, not the values that led to the `false` value.
 
 In Listing 11-7, we write a function named `add_two` that adds `2` to its
 parameter and returns the result. Then we test this function using the
@@ -406,7 +406,7 @@ debug what happened instead of what we were expecting to happen.
 In addition to checking that our code returns the correct values we expect,
 it’s also important to check that our code handles error conditions as we
 expect. For example, consider the `Guess` type that we created in Chapter 9,
-Listing 9-10. Other code that uses `Guess` depends on the guarantee that `Guess`
+Listing 9-13. Other code that uses `Guess` depends on the guarantee that `Guess`
 instances will contain only values between 1 and 100. We can write a test that
 ensures that attempting to create a `Guess` instance with a value outside that
 range panics.

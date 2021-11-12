@@ -454,21 +454,19 @@ l'exemple que vous tentez de compiler doit échouer. Ferris va aussi vous aider
 
 <!-- markdownlint-disable -->
 <!--
-| Ferris                                                                 | Meaning                                          |
-|------------------------------------------------------------------------|--------------------------------------------------|
-| <img src="img/ferris/does_not_compile.svg" class="ferris-explain"/>    | This code does not compile!                      |
-| <img src="img/ferris/panics.svg" class="ferris-explain"/>              | This code panics!                                |
-| <img src="img/ferris/unsafe.svg" class="ferris-explain"/>              | This code block contains unsafe code.            |
-| <img src="img/ferris/not_desired_behavior.svg" class="ferris-explain"/>| This code does not produce the desired behavior. |
+| Ferris                                                                                                           | Meaning                                          |
+|------------------------------------------------------------------------------------------------------------------|--------------------------------------------------|
+| <img src="img/ferris/does_not_compile.svg" class="ferris-explain" alt="Ferris with a question mark"/>            | This code does not compile!                      |
+| <img src="img/ferris/panics.svg" class="ferris-explain" alt="Ferris throwing up their hands"/>                   | This code panics!                                |
+| <img src="img/ferris/not_desired_behavior.svg" class="ferris-explain" alt="Ferris with one claw up, shrugging"/> | This code does not produce the desired behavior. |
 -->
 <!-- markdownlint-restore -->
 
-| Ferris                                                                 | Signification                                    |
-|------------------------------------------------------------------------|--------------------------------------------------|
-| <img src="img/ferris/does_not_compile.svg" class="ferris-explain"/>    | Ce code ne compile pas !                         |
-| <img src="img/ferris/panics.svg" class="ferris-explain"/>              | Ce code panique !                                |
-| <img src="img/ferris/unsafe.svg" class="ferris-explain"/>              | Ce bloc de code contient du code non sécurisé.   |
-| <img src="img/ferris/not_desired_behavior.svg" class="ferris-explain"/>| Ce code ne se comporte pas comme voulu.          |
+| Ferris                                                                                                                             | Signification                           |
+|------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
+| <img src="img/ferris/does_not_compile.svg" class="ferris-explain" alt="Ferris avec un point d'interrogation"/>                     | Ce code ne compile pas !                |
+| <img src="img/ferris/panics.svg" class="ferris-explain" alt="Ferris qui lève ses bras"/>                                           | Ce code panique !                       |
+| <img src="img/ferris/not_desired_behavior.svg" class="ferris-explain" alt="Ferris avec une pince en l'air, haussant les épaules"/> | Ce code ne se comporte pas comme voulu. |
 
 <!--
 In most situations, we’ll lead you to the correct version of any code that

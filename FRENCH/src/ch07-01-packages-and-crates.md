@@ -24,14 +24,14 @@ fonctionnalités. Un paquet contient un fichier *Cargo.toml* qui décrit comment
 construire ces crates.
 
 <!--
-Several rules determine what a package can contain. A package *must* contain
-zero or one library crates, and no more. It can contain as many binary crates
+Several rules determine what a package can contain. A package can contain
+at most one library crate. It can contain as many binary crates
 as you’d like, but it must contain at least one crate (either library or
 binary).
 -->
 
-Il y a plusieurs règles qui déterminent ce qu'un paquet peut contenir. Il doit
-contenir une seule crate de bibliothèque, ou aucune. Il peut contenir autant de
+Il y a plusieurs règles qui déterminent ce qu'un paquet peut contenir. Il *doit*
+contenir au maximum une seule crate de bibliothèque. Il peut contenir autant de
 crates binaires que vous le souhaitez, mais il doit contenir au moins une crate
 (que ce soit une bibliothèque ou un binaire).
 

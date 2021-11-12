@@ -1,8 +1,8 @@
 struct Utilisateur {
+    actif: bool,
     pseudo: &str,
     email: &str,
     nombre_de_connexions: u64,
-    actif: bool,
 }
 
 fn main() {

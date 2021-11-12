@@ -38,7 +38,7 @@ apprendre dès le début vous procurera de solides bases pour débuter.
 > special meanings, and you’ll be using them to do various tasks in your Rust
 > programs; a few have no current functionality associated with them but have
 > been reserved for functionality that might be added to Rust in the future. You
-> can find a list of the keywords in [Appendix A][appendix_a].
+> can find a list of the keywords in [Appendix A][appendix_a]<!-- ignore -- >.
 -->
 
 > #### Mots-clés
@@ -50,7 +50,8 @@ apprendre dès le début vous procurera de solides bases pour débuter.
 > vous les utiliserez pour réaliser de différentes tâches dans vos programmes
 > Rust ; quelques-uns n'ont aucune fonctionnalité active pour le moment, mais
 > ont été réservés pour être ajoutés plus tard à Rust.
-> Vous pouvez trouver la liste de ces mots-clés dans [l'annexe A][appendix_a].
+> Vous pouvez trouver la liste de ces mots-clés dans
+> [l'annexe A][appendix_a]<!-- ignore -->.
 
 <!--
 [appendix_a]: appendix-01-keywords.md

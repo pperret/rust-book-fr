@@ -155,19 +155,21 @@ into scope with `use`, which is unidiomatic</span>
 <!--
 Although both Listing 7-11 and 7-13 accomplish the same task, Listing 7-11 is
 the idiomatic way to bring a function into scope with `use`. Bringing the
-function’s parent module into scope with `use` so we have to specify the parent
-module when calling the function makes it clear that the function isn’t locally
-defined while still minimizing repetition of the full path. The code in Listing
-7-13 is unclear as to where `add_to_waitlist` is defined.
+function’s parent module into scope with `use` means we have to specify the
+parent module when calling the function. Specifying the parent module when
+calling the function makes it clear that the function isn’t locally defined
+while still minimizing repetition of the full path. The code in Listing 7-13 is
+unclear as to where `add_to_waitlist` is defined.
 -->
 
 Bien que l'encart 7-11 et 7-13 accomplissent la même tâche, l'encart 7-11 est la
-façon idéale d'importer une fonction dans la portée via `use`. Le fait
-d'importer le module parent de la fonction dans notre portée avec `use`, de
-sorte que nous ayons à préciser le module parent quand nous appelons la
-fonction, précise clairement que la fonction n'est pas définie localement, tout
-en minimisant la répétition du chemin complet. Nous ne pouvons pas repérer
-facilement là où est défini `ajouter_a_la_liste_attente` dans l'encart 7-13.
+façon idéale d'importer une fonction dans la portée via `use`. L'import du
+module parent de la fonction dans notre portée avec `use` nécessite que nous
+ayons à préciser le module parent quand nous appelons la fonction. Renseigner le
+module parent lorsque nous appelons la fonction précise clairement que la
+fonction n'est pas définie localement, tout en minimisant la répétition du
+chemin complet. Nous ne pouvons pas repérer facilement là où est défini
+`ajouter_a_la_liste_attente` dans l'encart 7-13.
 
 <!--
 On the other hand, when bringing in structs, enums, and other items with `use`,

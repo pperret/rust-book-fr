@@ -51,13 +51,11 @@ pièce inconnue des États-Unis d'Amérique et qui peut, de la même manière qu
 machine à trier, déterminer quelle pièce c'est et retourner sa valeur en
 centimes, comme ci-dessous dans l'encart 6-3.
 
-<!-- markdownlint-disable -->
 <!--
 ```rust
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-03/src/main.rs:here}}
 ```
 -->
-<!-- markdownlint-restore -->
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-03/src/main.rs:here}}
@@ -142,13 +140,11 @@ exemple, le code suivant va afficher “Un centime porte-bonheur !” à chaque
 que la méthode est appelée avec une valeur `PieceUs::Penny` mais va continuer à
 retourner la dernière valeur du bloc, `1` :
 
-<!-- markdownlint-disable -->
 <!--
 ```rust
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-08-match-arm-multiple-lines/src/main.rs:here}}
 ```
 -->
-<!-- markdownlint-restore -->
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-08-match-arm-multiple-lines/src/main.rs:here}}
@@ -188,13 +184,11 @@ cette information à notre `enum` en changeant la variante `Quarter` pour y
 ajouter une valeur `EtatUs` qui y sera stockée à l'intérieur, comme nous
 l'avons fait dans l'encart 6-4.
 
-<!-- markdownlint-disable -->
 <!--
 ```rust
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-04/src/main.rs:here}}
 ```
 -->
-<!-- markdownlint-restore -->
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-04/src/main.rs:here}}
@@ -233,13 +227,11 @@ correspondance `PieceUs::Quarter`, la variable `etat` sera liée à la valeur de
 l'État de cette pièce. Ensuite, nous pourrons utiliser `etat` dans le code de
 cette branche, comme ceci :
 
-<!-- markdownlint-disable -->
 <!--
 ```rust
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-09-variable-in-pattern/src/main.rs:here}}
 ```
 -->
-<!-- markdownlint-restore -->
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-09-variable-in-pattern/src/main.rs:here}}
@@ -303,13 +295,11 @@ Listing 6-5.
 Cette fonction est très facile à écrire, grâce à `match`, et ressemblera à
 l'encart 6-5.
 
-<!-- markdownlint-disable -->
 <!--
 ```rust
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:here}}
 ```
 -->
-<!-- markdownlint-restore -->
 
 ```rust
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:here}}
@@ -333,13 +323,11 @@ Examinons la première exécution de `plus_un` en détail. Lorsque nous appelons
 `plus_un(cinq)`, la variable `x` dans le corps de `plus_un` aura la valeur
 `Some(5)`. Ensuite, nous comparons cela à chaque branche du `match`.
 
-<!-- markdownlint-disable -->
 <!--
 ```rust,ignore
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:first_arm}}
 ```
 -->
-<!-- markdownlint-restore -->
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:first_arm}}
@@ -353,13 +341,11 @@ next arm.
 La valeur `Some(5)` ne correspond pas au motif `None`, donc nous continuons à la
 branche suivante.
 
-<!-- markdownlint-disable -->
 <!--
 ```rust,ignore
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:second_arm}}
 ```
 -->
-<!-- markdownlint-restore -->
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:second_arm}}
@@ -386,13 +372,11 @@ Now let’s consider the second call of `plus_one` in Listing 6-5, where `x` is
 Maintenant, regardons le second appel à `plus_un` dans l'encart 6-5, où `x` vaut
 `None`. Nous entrons dans le `match` et nous le comparons à la première branche.
 
-<!-- markdownlint-disable -->
 <!--
 ```rust,ignore
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:first_arm}}
 ```
 -->
-<!-- markdownlint-restore -->
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/listing-06-05/src/main.rs:first_arm}}
@@ -437,13 +421,11 @@ of our `plus_one` function that has a bug and won’t compile:
 Il y a un autre point de `match` que nous devons aborder. Examinez cette version
 de notre fonction `plus_un` qui a un bogue et ne va pas se compiler :
 
-<!-- markdownlint-disable -->
 <!--
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-10-non-exhaustive-match/src/main.rs:here}}
 ```
 -->
-<!-- markdownlint-restore -->
 
 ```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-10-non-exhaustive-match/src/main.rs:here}}
@@ -459,13 +441,11 @@ Nous n'avons pas géré le cas du `None`, donc ce code va générer un bogue.
 Heureusement, c'est un bogue que Rust sait gérer. Si nous essayons de compiler
 ce code, nous allons obtenir cette erreur :
 
-<!-- markdownlint-disable -->
 <!--
 ```console
 {{#include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-10-non-exhaustive-match/output.txt}}
 ```
 -->
-<!-- markdownlint-restore -->
 
 ```console
 {{#include ../listings/ch06-enums-and-pattern-matching/no-listing-10-non-exhaustive-match/output.txt}}
@@ -489,72 +469,164 @@ avons une valeur alors que nous pourrions avoir null, ce qui rend impossible
 l'erreur à un milliard de dollars que nous avons vue précédemment.
 
 <!--
-### The `_` Placeholder
+### Catch-all Patterns and the `_` Placeholder
 -->
 
-### Le motif générique `_`
+### Les motifs génériques et le motif `_`
 
 <!--
-Rust also has a pattern we can use when we don’t want to list all possible
-values. For example, a `u8` can have valid values of 0 through 255. If we only
-care about the values 1, 3, 5, and 7, we don’t want to have to list out 0, 2,
-4, 6, 8, 9 all the way up to 255. Fortunately, we don’t have to: we can use the
-special pattern `_` instead:
+Let’s look at an example where we want to take special actions for a few
+particular values, but for all other values take one default action. Imagine
+we’re implementing a game where if you get a value of 3 on a dice roll, your
+player doesn’t move, but instead gets a new fancy hat. If you roll a 7, your
+player loses a fancy hat. For all other values, your player moves that number
+of spaces on the game board. Here’s a `match` that implements that logic, with
+the result of the dice roll hardcoded rather than a random value, and all other
+logic represented by functions without bodies because actually implementing
+them is out of scope for this example:
 -->
 
-Rust a aussi un motif que nous pouvons utiliser quand nous ne voulons pas lister
-toutes les valeurs possibles. Par exemple, les valeurs valides d'un `u8` vont de
-0 à 255. Si nous n'avons besoin que des valeurs 1, 3, 5 et 7, nous ne voulons
-pas lister 0, 2, 4, 6, 8, 9 et ainsi de suite jusqu'à 255. Heureusement, nous
-n'avons pas à le faire : nous pouvons utiliser le motif spécial `_` à la place :
+Voyons voir un exemple dans lequel nous voulons appliquer des actions spéciales
+pour certaines valeurs précises, mais une action par défaut pour toutes les
+autres valeurs. Imaginons que nous implémentons un jeu dans lequel si vous
+obtenez une valeur de 3 sur un lancé de dé, votre joueur ne se déplace pas, mais
+à la place il obtient un nouveau chapeau fataisie. Si vous obtenez un 7, votre
+joueur perd son chapeau fantaisie. Pour toutes les autres valeurs, votre joueur
+se déplace de ce nombre de cases sur le plateau du jeu. Voici un `match` qui
+implémente cette logique, avec le résultat du lancé de dé codé en dur plutôt
+qu'issu d'une génération aléatoire, et toute la logique des autres fonctions
+sont des corps vides car leur implémentation n'est pas le sujet de cet exemple :
 
-<!-- markdownlint-disable -->
 <!--
 ```rust
-{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-11-underscore-placeholder/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-15-binding-catchall/src/main.rs:here}}
 ```
 -->
-<!-- markdownlint-restore -->
 
 ```rust
-{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-11-underscore-placeholder/src/main.rs:here}}
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-15-binding-catchall/src/main.rs:here}}
 ```
 
 <!--
-The `_` pattern will match any value. By putting it after our other arms, the
-`_` will match all the possible cases that aren’t specified before it. The `()`
-is just the unit value, so nothing will happen in the `_` case. As a result, we
-can say that we want to do nothing for all the possible values that we don’t
-list before the `_` placeholder.
+For the first two arms, the patterns are the literal values 3 and 7. For the
+last arm that covers every other possible value, the pattern is the variable
+we’ve chosen to name `other`. The code that runs for the `other` arm uses the
+variable by passing it to the `move_player` function.
 -->
 
-Le motif `_` va correspondre à n'importe quelle valeur. En l'ajoutant après
-toutes nos autres branches, le `_` va correspondre à tous les cas possibles qui
-ne sont pas listés avant. Le `()` est tout simplement la valeur unité, donc rien
-n'arrivera dans le cas du `_`. Ainsi, nous pouvons dire que nous ne voulons rien
-faire pour les valeurs possibles que nous ne traitons pas avant le motif
-générique `_`.
+Dans les deux premières branches, les motifs sont les valeurs litérales 3 et 7.
+La dernière branche couvre toutes les autres valeurs possibles, le motif est la
+variable `autre`. Le code qui s'exécute pour la branche `autre` utilise la
+variable en la passant dans la fonction `deplacer_joueur`.
 
 <!--
-However, the `match` expression can be a bit wordy in a situation in which we
-care about only *one* of the cases. For this situation, Rust provides `if let`.
+This code compiles, even though we haven’t listed all the possible values a
+`u8` can have, because the last pattern will match all values not specifically
+listed. This catch-all pattern meets the requirement that `match` must be
+exhaustive. Note that we have to put the catch-all arm last because the
+patterns are evaluated in order. Rust will warn us if we add arms after a
+catch-all because those later arms would never match!
 -->
 
-Cependant, l'expression `match` peut être un peu lourde dans une situation où
-nous nous préoccupons uniquement d'*un seul* cas. Pour cette situation, Rust
-nous fournit la structure de contrôle `if let`.
+Ce code se compile, même si nous n'avons pas lité toutes les valeurs possibles
+qu'un `u8` puisse avoir, car le dernier motif va correspondre à toutes les
+valeurs qui ne sont pas spécifiquement listés. Ce motif générique répond à la
+condition qu'un `match` doive être exhaustif. Notez que nous devons placer la
+branche avec le motif générique en tout dernier, car les motifs sont évalués
+dans l'ordre. Rust va nous prévenir si nous ajoutons des branches après un motif
+générique car toutes ces autres branches ne seront jamais vérifiées !
 
 <!--
-More about patterns and matching can be found in [chapter 18][ch18-00-patterns].
+Rust also has a pattern we can use when we don’t want to use the value in the
+catch-all pattern: `_`, which is a special pattern that matches any value and
+does not bind to that value. This tells Rust we aren’t going to use the value,
+so Rust won’t warn us about an unused variable.
 -->
 
-Vous pouvez en apprendre plus sur les motifs et le filtrage par motif au
-[chapitre 18][ch18-00-patterns].
+Rust a aussi un motif que nous pouvons utiliser lorsque nous n'avons pas besoin
+d'utiliser la valeur dans le motif générique : `_`, qui est un motif spécial
+qui vérifie n'importe quelle valeur et ne récupère pas cette valeur. Ceci
+indique à Rust que nous n'allons pas utiliser la valeur, donc Rust ne va pas
+nous prévenir qu'il y a une variable non utilisée.
 
 <!--
-[ch18-00-patterns]:
-ch18-00-patterns.html
+Let’s change the rules of the game to be that if you roll anything other than
+a 3 or a 7, you must roll again. We don’t need to use the value in that case,
+so we can change our code to use `_` instead of the variable named `other`:
 -->
 
-[ch18-00-patterns]:
-ch18-00-patterns.html
+Changeons les règles du jeu pour que si nous obtenions autre chose qu'un 3 ou
+un 7, nous jetions à nouveau le dé. Nous n'avons pas besoin d'utiliser la valeur
+dans ce cas, donc nous pouvons changer notre code pour utiliser `_` au lieu de
+la variable `autre` :
+
+<!--
+```rust
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-16-underscore-catchall/src/main.rs:here}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-16-underscore-catchall/src/main.rs:here}}
+```
+
+<!--
+This example also meets the exhaustiveness requirement because we’re explicitly
+ignoring all other values in the last arm; we haven’t forgotten anything.
+-->
+
+Cet exemple répond bien aux critères d'exhaustivité car nous ignorons
+explicitement toutes les autres valeurs dans la dernière branche ; nous n'avons
+rien oublié.
+
+<!--
+If we change the rules of the game one more time, so that nothing else happens
+on your turn if you roll anything other than a 3 or a 7, we can express that
+by using the unit value (the empty tuple type we mentioned in [“The Tuple
+Type”][tuples]<!-- ignore -- > section) as the code that goes with the `_` arm:
+-->
+
+Si nous changeons à nouveau les règles du jeu, afin que rien se passe si vous
+obtenez autre chose qu'un 3 ou un 7, nous pouvons exprimer cela en utilisant la
+valeur unité (le type tuple vide que nous avons cité dans [une section
+précédente][tuples]<!-- ignore -->) dans le code de la branche `_` :
+
+<!--
+```rust
+{{#rustdoc_include ../listings-sources/ch06-enums-and-pattern-matching/no-listing-17-underscore-unit/src/main.rs:here}}
+```
+-->
+
+```rust
+{{#rustdoc_include ../listings/ch06-enums-and-pattern-matching/no-listing-17-underscore-unit/src/main.rs:here}}
+```
+
+<!--
+Here, we’re telling Rust explicitly that we aren’t going to use any other value
+that doesn’t match a pattern in an earlier arm, and we don’t want to run any
+code in this case.
+-->
+
+Ici, nous indiquons explicitement à Rust que nous n'allons pas utiliser d'autres
+valeurs qui ne correspondent pas à un motif des branches antérieures, et nous ne
+voulons lancer aucun code dans ce cas.
+
+<!--
+There’s more about patterns and matching that we’ll cover in [Chapter
+18][ch18-00-patterns]<!-- ignore -- >. For now, we’re going to move on to the
+`if let` syntax, which can be useful in situations where the `match` expression
+is a bit wordy.
+-->
+
+Il existe aussi d'autres motifs que nous allons voir dans le
+[chapitre 18][ch18-00-patterns]<!-- ignore -->. Pour l'instant, nous allons voir
+l'autre syntaxe `if let`, qui peut se rendre utile dans des cas où l'expression
+`match` est trop verbeuse.
+
+<!--
+[tuples]: ch03-02-data-types.html#the-tuple-type
+[ch18-00-patterns]: ch18-00-patterns.html
+-->
+
+[tuples]: ch03-02-data-types.html
+[ch18-00-patterns]: ch18-00-patterns.html

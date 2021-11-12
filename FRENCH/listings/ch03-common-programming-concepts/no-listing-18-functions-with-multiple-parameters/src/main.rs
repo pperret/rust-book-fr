@@ -1,8 +1,7 @@
 fn main() {
-    une_autre_fonction(5, 6);
+    afficher_mesure_avec_unite(5, 'h');
 }
 
-fn une_autre_fonction(x: i32, y: i32) {
-    println!("La valeur de x est : {}", x);
-    println!("La valeur de y est : {}", y);
+fn afficher_mesure_avec_unite(valeur: i32, unite: char) {
+    println!("La mesure est : {}{}", valeur, unite);
 }

@@ -668,7 +668,7 @@ more conveniently. These macros compare two arguments for equality or
 inequality, respectively. They’ll also print the two values if the assertion
 fails, which makes it easier to see *why* the test failed; conversely, the
 `assert!` macro only indicates that it got a `false` value for the `==`
-expression, not the values that lead to the `false` value.
+expression, not the values that led to the `false` value.
 -->
 
 Une façon courante de tester des fonctionnalités est de comparer le résultat du
@@ -1036,7 +1036,7 @@ place de ce que nous voulions qu'il se passe.
 In addition to checking that our code returns the correct values we expect,
 it’s also important to check that our code handles error conditions as we
 expect. For example, consider the `Guess` type that we created in Chapter 9,
-Listing 9-10. Other code that uses `Guess` depends on the guarantee that `Guess`
+Listing 9-13. Other code that uses `Guess` depends on the guarantee that `Guess`
 instances will contain only values between 1 and 100. We can write a test that
 ensures that attempting to create a `Guess` instance with a value outside that
 range panics.
@@ -1045,7 +1045,7 @@ range panics.
 En plus de vérifier que notre code retourne bien les valeurs que nous
 souhaitons, il est aussi important de vérifier que notre code gère bien les cas
 d'erreurs comme nous le souhaitons. Par exemple, utilisons le type `Supposition`
-que nous avons créé au chapitre 9, dans l'encart 9-10. Les autres codes qui
+que nous avons créé au chapitre 9, dans l'encart 9-13. Les autres codes qui
 utilisent `Supposition` reposent sur la garantie que les instances de
 `Supposition` contiennent uniquement des valeurs entre 1 et 100. Nous pouvons
 écrire un test qui s'assure que la création d'une instance de `Supposition`

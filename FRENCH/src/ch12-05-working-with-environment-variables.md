@@ -48,7 +48,7 @@ tests, as shown in Listing 12-20.
 
 Nous souhaitons ajouter une nouvelle fonction `rechercher_insensible_casse` que
 nous allons appeler lorsque la variable d'environnement est active. Nous allons
-continuer à suivre le processus de TDD, donc la première étape et d'écrire à
+continuer à suivre le processus de TDD, donc la première étape est d'écrire à
 nouveau un test qui échoue. Nous allons ajouter un nouveau test pour la nouvelle
 fonction `rechercher_insensible_casse` et renommer notre ancien test
 `one_result` en `sensible_casse` pour clarifier les différences entre les deux
@@ -61,12 +61,12 @@ tests, comme dans l'encart 12-20.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-20/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-20/src/lib.rs:here}}
 ```
 
@@ -87,7 +87,7 @@ search functionality that we’ve already implemented. This test should pass now
 and should continue to pass as we work on the case-insensitive search.
 -->
 
-Remarquez aussi que nous avons aussi modifié le `contenu` des anciens tests.
+Remarquez que nous avons aussi modifié le `contenu` de l'ancien test.
 Nous avons ajouté une nouvelle ligne avec le texte `"Duct tape."` en utilisant
 un D majuscule qui ne devrait pas correspondre à la recherche `"duct"` lorsque
 nous recherchons de manière à être sensible à la casse. Ce changement de
@@ -144,12 +144,12 @@ même casse lorsque nous vérifierons si la ligne contient la recherche.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-21/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-21/src/lib.rs:here}}
 ```
 
@@ -167,9 +167,9 @@ First, we lowercase the `query` string and store it in a shadowed variable with
 the same name. Calling `to_lowercase` on the query is necessary so no matter
 whether the user’s query is `"rust"`, `"RUST"`, `"Rust"`, or `"rUsT"`, we’ll
 treat the query as if it were `"rust"` and be insensitive to the case. While
-`to_lowercase` will handle basic Unicode, it won't be 100% accurate. If we were
-writing a real application, we'd want to do a bit more work here, but this section
-is about environment variables, not Unicode, so we'll leave it at that here.
+`to_lowercase` will handle basic Unicode, it won’t be 100% accurate. If we were
+writing a real application, we’d want to do a bit more work here, but this section
+is about environment variables, not Unicode, so we’ll leave it at that here.
 -->
 
 D'abord, nous obtenons la chaîne de caractères `recherche` en minuscule et nous
@@ -324,12 +324,12 @@ d'environnement `MINIGREP_INSENSIBLE_CASSE`, comme dans l'encart 12-23.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-23/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-23/src/lib.rs:here}}
 ```
 
@@ -418,7 +418,7 @@ On dirait que cela fonctionne ! Maintenant, lançons le programme avec
 `MINIGREP_INSENSIBLE_CASSE` définie à `1` mais avec la même recherche `to`.
 
 <!--
-If you're using PowerShell, you will need to set the environment
+If you’re using PowerShell, you will need to set the environment
 variable and run the program as separate commands:
 -->
 
@@ -500,7 +500,7 @@ variables.
 
 Très bien, nous avons aussi obtenu les lignes qui contiennent “To” ! Notre
 programme `minigrep` peut maintenant faire des recherches insensibles à la
-casse, pilotées par une variable d'environnement. Vous savez maintenant comment
+casse, contrôlées par une variable d'environnement. Vous savez maintenant comment
 gérer des options définies soit par des arguments en ligne de commande, soit
 par des variables d'environnement.
 
@@ -516,7 +516,7 @@ one set to case insensitive.
 
 Certains programmes permettent d'utiliser les arguments *et* les variables
 d'environnement pour un même réglage. Dans ce cas, le programme décide si l'un
-ou l'autre a la priorité. Pour vous exercer à nouveau, essayez de piloter la
+ou l'autre a la priorité. Pour vous exercer à nouveau, essayez de contrôler la
 sensibilité à la casse via un argument de ligne de commande ou une variable
 d'environnement. Vous devrez choisir si l'argument de la ligne de commande ou
 la variable d'environnement devrait être prioritaire si le programme est exécuté

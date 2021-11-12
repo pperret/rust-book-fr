@@ -330,17 +330,22 @@ programmation. Maintenant, nous allons aller plus loin en y ajoutant le type
 <!--
 To illustrate the rules of ownership, we need a data type that is more complex
 than the ones we covered in the [“Data Types”][data-types]<!-- ignore -- >
-section of Chapter 3. The types covered previously are all stored on the stack
-and popped off the stack when their scope is over, but we want to look at data
-that is stored on the heap and explore how Rust knows when to clean up that
-data.
+section of Chapter 3. The types covered previously are all a known size, can be
+stored on the stack and popped off the stack when their scope is over, and can
+be quickly and trivially copied to make a new, independent instance if another
+part of code needs to use the same value in a different scope. But we want to
+look at data that is stored on the heap and explore how Rust knows when to
+clean up that data.
 -->
 
 Pour illustrer les règles de la possession, nous avons besoin d'un type de
 donnée qui est plus complexe que ceux que nous avons rencontrés dans la section
 [“Types de données”][data-types]<!-- ignore --> du chapitre 3. Les types que
-nous avons vus précédemment sont tous stockés sur la pile et sont retirés de la
-pile quand ils sortent de la portée, mais nous voulons expérimenter le stockage
+nous avons vus précédemment ont tous une taille connue et peuvent être stockés
+sur la pile ainsi que retirés de la pile lorsque la portée n'en a plus besoin,
+et peuvent aussi être rapidement et facilement afin de constituer une nouvelle
+instance indépendante si une utrre partie du code a besoin d'utiliser la même
+valeur dans une portée différente. Mais nous voulons expérimenter le stockage
 de données sur le tas et découvrir comment Rust sait quand il doit nettoyer ces
 données.
 
@@ -363,10 +368,10 @@ program. String literals are convenient, but they aren’t suitable for every
 situation in which we may want to use text. One reason is that they’re
 immutable. Another is that not every string value can be known when we write
 our code: for example, what if we want to take user input and store it? For
-these situations, Rust has a second string type, `String`. This type is
-allocated on the heap and as such is able to store an amount of text that is
-unknown to us at compile time. You can create a `String` from a string literal
-using the `from` function, like so:
+these situations, Rust has a second string type, `String`. This type manages
+data allocated on the heap and as such is able to store an amount of text that
+is unknown to us at compile time. You can create a `String` from a string
+literal using the `from` function, like so:
 -->
 
 Nous avons déjà vu les littéraux de chaînes de caractères, quand une valeur de
@@ -376,10 +381,10 @@ utiliser du texte. Une des raisons est qu'ils sont immuables. Une autre raison
 est qu'on ne connaît pas forcément le contenu des chaînes de caractères quand
 nous écrivons notre code : par exemple, comment faire si nous voulons récupérer
 du texte saisi par l'utilisateur et l'enregistrer ? Pour ces cas-ci, Rust a un
-second type de chaîne de caractères, `String`. Ce type est alloué sur le tas et
-est ainsi capable de stocker une quantité de texte qui nous est inconnue au
-moment de la compilation. Vous pouvez créer une `String` à partir d'un littéral
-de chaîne de caractères en utilisant la fonction `from`, comme ceci :
+second type de chaîne de caractères, `String`. Ce type gère ses données sur le
+tas et est ainsi capable de stocker une quantité de texte qui nous est inconnue
+au moment de la compilation. Vous pouvez créer une `String` à partir d'un
+littéral de chaîne de caractères en utilisant la fonction `from`, comme ceci :
 
 <!--
 ```rust
@@ -535,17 +540,18 @@ de chaîne de caractères :
 <!--
 There is a natural point at which we can return the memory our `String` needs
 to the allocator: when `s` goes out of scope. When a variable goes out of
-scope, Rust calls a special function for us. This function is called [`drop`],
-and it’s where the author of `String` can put the code to return the memory.
-Rust calls `drop` automatically at the closing curly bracket.
+scope, Rust calls a special function for us. This function is called
+[`drop`][drop]<!-- ignore -- >, and it’s where the author of `String` can put
+the code to return the memory. Rust calls `drop` automatically at the closing
+curly bracket.
 -->
 
 Il y a un moment naturel où nous devons rendre la mémoire de notre
 `String` au gestionnaire : quand `s` sort de la portée. Quand une variable sort
 de la portée, Rust appelle une fonction spéciale pour nous. Cette fonction
-s'appelle [`drop`], et c'est dans celle-ci que l'auteur de `String` a pu mettre
-le code pour libérer la mémoire. Rust appelle automatiquement `drop` à
-l'accolade fermante `}`.
+s'appelle [`drop`][drop]<!-- ignore -->, et c'est dans celle-ci que l'auteur de
+`String` a pu mettre le code pour libérer la mémoire. Rust appelle
+automatiquement `drop` à l'accolade fermante `}`.
 
 <!--
 > Note: In C++, this pattern of deallocating resources at the end of an item’s
@@ -773,18 +779,18 @@ de sécurité.
 
 <!--
 To ensure memory safety, there’s one more detail to what happens in this
-situation in Rust. Instead of trying to copy the allocated memory, Rust
-considers `s1` to no longer be valid and, therefore, Rust doesn’t need to free
-anything when `s1` goes out of scope. Check out what happens when you try to
-use `s1` after `s2` is created; it won’t work:
+situation in Rust. After `let s2 = s1`, Rust considers `s1` to no longer be
+valid. Therefore, Rust doesn’t need to free anything when `s1` goes out of
+scope. Check out what happens when you try to use `s1` after `s2` is created;
+it won’t work:
 -->
 
 Pour garantir la sécurité de la mémoire, il y a un autre petit détail qui se
-produit dans cette situation avec Rust. Plutôt qu'essayer de copier la mémoire
-allouée, Rust considère que `s1` n'est plus en vigueur et donc, Rust n'a pas
-besoin de libérer quoi que ce soit lorsque `s1` sort de la portée. Regardez ce
-qu'il se passe quand vous essayez d'utiliser `s1` après que `s2` est créé,
-cela ne va pas fonctionner :
+produit dans cette situation avec Rust. Après `let s2 = s1`, Rust considère que
+`s1` n'est plus en vigueur. Par conséquent, Rust n'a pas besoin de libérer quoi
+que ce soit lorsque `s1` sort de la portée. Regardez ce qu'il se passe quand
+vous essayez d'utiliser `s1` après que `s2` est créé, cela ne va pas
+fonctionner :
 
 <!--
 ```rust,ignore,does_not_compile
@@ -999,15 +1005,16 @@ implémenter le trait, référez-vous à
 <!--
 So what types implement the `Copy` trait? You can check the documentation for
 the given type to be sure, but as a general rule, any group of simple scalar
-values can be implement `Copy`, and nothing that requires allocation or is some
-form of resource implement `Copy`. Here are some of the types that are `Copy`:
+values can implement `Copy`, and nothing that requires allocation or is some
+form of resource can implement `Copy`. Here are some of the types that
+implement `Copy`:
 -->
 
 Donc, quels sont les types qui implémentent le trait `Copy` ? Vous pouvez
 regarder dans la documentation pour un type donné pour vous en assurer, mais de
 manière générale, tout groupe de valeur scalaire peut implémenter `Copy`, et
 tout ce qui ne nécessite pas d'allocation de mémoire ou tout autre forme de
-ressource est `Copy`. Voici quelques types qui implémentent `Copy` :
+ressource qui implémente `Copy`. Voici quelques types qui implémentent `Copy` :
 
 <!--
 * All the integer types, such as `u32`.
@@ -1192,7 +1199,7 @@ c'est ce qu'on appelle les *références*.
 [derivable-traits]: appendix-03-derivable-traits.html
 [method-syntax]: ch05-03-method-syntax.html#method-syntax
 [paths-module-tree]: ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html
-[`drop`]: ../std/ops/trait.Drop.html#tymethod.drop
+[drop]: ../std/ops/trait.Drop.html#tymethod.drop
 -->
 <!-- markdownlint-restore -->
 
@@ -1200,4 +1207,4 @@ c'est ce qu'on appelle les *références*.
 [derivable-traits]: appendix-03-derivable-traits.html
 [method-syntax]: ch05-03-method-syntax.html
 [paths-module-tree]: ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html
-[`drop`]: https://doc.rust-lang.org/std/ops/trait.Drop.html#tymethod.drop
+[drop]: https://doc.rust-lang.org/std/ops/trait.Drop.html#tymethod.drop

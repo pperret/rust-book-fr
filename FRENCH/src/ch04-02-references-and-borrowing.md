@@ -112,13 +112,13 @@ Regardons de plus près l'appel à la fonction :
 <!--
 The `&s1` syntax lets us create a reference that *refers* to the value of `s1`
 but does not own it. Because it does not own it, the value it points to will
-not be dropped when the reference goes out of scope.
+not be dropped when the reference stops being used.
 -->
 
 La syntaxe `&s1` nous permet de créer une référence qui se *réfère* à la valeur
 de `s1` mais n'en prend pas possession. Et comme elle ne la possède pas, la
 valeur vers laquelle elle pointe ne sera pas libérée quand cette référence
-sortira de la portée.
+ne sera plus utilisée.
 
 <!--
 Likewise, the signature of the function uses `&` to indicate that the type of
@@ -141,29 +141,28 @@ explicatifs :
 
 <!--
 The scope in which the variable `s` is valid is the same as any function
-parameter’s scope, but we don’t drop what the reference points to when it goes
-out of scope because we don’t have ownership. When functions have references as
-parameters instead of the actual values, we won’t need to return the values in
-order to give back ownership, because we never had ownership.
+parameter’s scope, but we don’t drop what the reference points to when `s`
+stops being used because we don’t have ownership. When functions have
+references as parameters instead of the actual values, we won’t need to return
+the values in order to give back ownership, because we never had ownership.
 -->
 
 La portée dans laquelle la variable `s` est en vigueur est la même que toute
 portée d'un paramètre de fonction, mais nous ne libérons pas ce sur quoi cette
-référence pointe quand elle sort de la portée, car nous n'en prenons pas
+référence pointe quand `s` n'est plus utilisé, car nous n'en prenons pas
 possession. Lorsque les fonctions ont des références en paramètres au lieu des
 valeurs réelles, nous n'avons pas besoin de retourner les valeurs pour les
 rendre, car nous n'en avons jamais pris possession.
 
 <!--
-We call having references as function parameters *borrowing*. As in real life,
-if a person owns something, you can borrow it from them. When you’re done, you
-have to give it back.
+We call the action of creating a reference *borrowing*. As in real life, if a
+person owns something, you can borrow it from them. When you’re done, you have
+to give it back.
 -->
 
-Quand nous avons des références dans les paramètres d'une fonction, nous
-appelons cela *l'emprunt*. Comme dans la vie réelle, quand un objet appartient
-à quelqu'un, vous pouvez le lui emprunter. Et quand vous avez fini, vous devez
-le lui rendre.
+Nous appelons *l'emprunt* l'action de créer une référence. Comme dans la vie
+réelle, quand un objet appartient à quelqu'un, vous pouvez le lui emprunter. Et
+quand vous avez fini, vous devez le lui rendre.
 
 <!--
 So what happens if we try to modify something we’re borrowing? Try the code in
@@ -229,10 +228,10 @@ vers elle.
 ### Les références mutables
 
 <!--
-We can fix the error in the code from Listing 4-6 with just a small tweak:
+We can fix the error in the code from Listing 4-6 with just a few small tweaks:
 -->
 
-Nous pouvons résoudre l'erreur du code de l'encart 4-6 avec une petite
+Nous pouvons résoudre l'erreur du code de l'encart 4-6 avec quelques petite
 modification :
 
 <!--
@@ -253,22 +252,25 @@ modification :
 
 <!--
 First, we had to change `s` to be `mut`. Then we had to create a mutable
-reference with `&mut s` and accept a mutable reference with `some_string: &mut
-String`.
+reference with `&mut s` where we call the `change` function, and update the
+function signature to accept a mutable reference with `some_string: &mut
+String`. This makes it very clear that the `change` function will mutate the
+value it borrows.
 -->
 
 D'abord, nous avons dû préciser que `s` est `mut`. Ensuite, nous avons dû
-créer une référence mutable avec `&mut s` et accepter de prendre une référence
-mutable avec `texte: &mut String`.
+créer une référence mutable avec `&mut s` où nous appelons la fonction `change`
+et nous avons modifié la signature pour accepter de prendre une référence
+mutable avec `texte: &mut String`. Cela précise clairement que la fonction
+`change` va faire muter la valeur qu'elle emprunte.
 
 <!--
 But mutable references have one big restriction: you can have only one mutable
-reference to a particular piece of data in a particular scope. This code will
-fail:
+reference to a particular piece of data at a time. This code will fail:
 -->
 
 Mais les références mutables ont une grosse contrainte : vous ne pouvez avoir
-qu'une seule référence mutable pour chaque donnée dans chaque portée. Le code
+qu'une seule référence mutable pour chaque donnée au même moment. Le code
 suivant va échouer :
 
 <!--
@@ -304,14 +306,32 @@ Voici l'erreur :
 ```
 
 <!--
-This restriction allows for mutation but in a very controlled fashion. It’s
-something that new Rustaceans struggle with, because most languages let you
-mutate whenever you’d like.
+This error says that this code is invalid because we cannot borrow `s` as
+mutable more than once at a time. The first mutable borrow is in `r1` and must
+last until it’s used in the `println!`, but between the creation of that
+mutable reference and its usage, we tried to create another mutable reference
+in `r2` that borrows the same data as `r1`.
 -->
 
-Cette contrainte autorise les mutations, mais de manière très contrôlée. C'est
-quelque chose que les nouveaux Rustacés ont du mal à surmonter, car la plupart
-des langages vous permettent de modifier les données quand vous le voulez.
+Cette erreur nous explique que ce code est invalide car nous ne pouvons pas
+emprunter `s` de manière mutable plus d'une fois au même moment. Le premier
+emprunt mutable est dans `r1` et doit perdurer jusqu'à ce qu'il soit utilisé
+dans le `println!`, mais pourtant entre la création de cette référence mutable
+et son utilisation, nous avons essayé de créer une autre référence mutable dans
+`r2` qui emprunte la même donnée que dans `r1`.
+
+<!--
+The restriction preventing multiple mutable references to the same data at the
+same time allows for mutation but in a very controlled fashion. It’s something
+that new Rustaceans struggle with, because most languages let you mutate
+whenever you’d like.
+-->
+
+La limitation qui empêche d'avoir plusieurs références mutables vers la même
+donnée au même moment autorise les mutations, mais de manière très contrôlée.
+C'est quelque chose que les nouveaux Rustacés ont du mal à surmonter, car la
+plupart des langages vous permettent de modifier les données quand vous le
+voulez.
 
 <!--
 The benefit of having this restriction is that Rust can prevent data races at
@@ -415,14 +435,15 @@ autres.
 <!--
 Note that a reference’s scope starts from where it is introduced and continues
 through the last time that reference is used. For instance, this code will
-compile because the last usage of the immutable references occurs before the
-mutable reference is introduced:
+compile because the last usage of the immutable references, the `println!`,
+occurs before the mutable reference is introduced:
 -->
 
 Notez bien que la portée d'une référence commence dès qu'elle est introduite et
 se poursuit jusqu'au dernier endroit où cette référence est utilisée. Par
 exemple, le code suivant va se compiler car la dernière utilisation de la
-référence immuable est située avant l'introduction de la référence mutable :
+référence immuable, le `println!`, est située avant l'introduction de la
+référence mutable :
 
 <!--
 ```rust,edition2018
@@ -437,13 +458,19 @@ référence immuable est située avant l'introduction de la référence mutable�
 <!--
 The scopes of the immutable references `r1` and `r2` end after the `println!`
 where they are last used, which is before the mutable reference `r3` is
-created. These scopes don’t overlap, so this code is allowed.
+created. These scopes don’t overlap, so this code is allowed. The ability of
+the compiler to tell that a reference is no longer being used at a point before
+the end of the scope is called Non-Lexical Lifetimes (NLL for short), and you
+can read more about it in [The Edition Guide][nll].
 -->
 
 Les portées des références immuables `r1` et `r2` se terminent après le
 `println!` où elles sont utilisées pour la dernière fois, c'est-à-dire avant que
 la référence mutable `r3` soit créée. Ces portées ne se chevauchent pas, donc ce
-code est autorisé.
+code est autorisé. La capacité du compilateur à dire si une référence n'est plus
+utilisée à un endroit avant la fin de la portée s'appelle en Anglais les
+*Non-Lexical Lifetimes* (ou NLL), et vous pouvez en apprendre plus dans le
+[Guide de l'édition][nll].
 
 <!--
 Even though borrowing errors may be frustrating at times, remember that it’s
@@ -640,3 +667,9 @@ Next, we’ll look at a different kind of reference: slices.
 -->
 
 Ensuite, nous aborderons un autre type de référence : les *slices*.
+
+<!--
+[nll]: https://doc.rust-lang.org/edition-guide/rust-2018/ownership-and-lifetimes/non-lexical-lifetimes.html
+-->
+
+[nll]: https://doc.rust-lang.org/edition-guide/rust-2018/ownership-and-lifetimes/non-lexical-lifetimes.html

@@ -7,7 +7,7 @@ pub struct Config {
 }
 
 impl Config {
-    pub fn new(args: &[String]) -> Result<Config, &'static str> {
+    pub fn new(args: &[String]) -> Result<Config, &str> {
         if args.len() < 3 {
             return Err("il n'y a pas assez d'arguments");
         }
@@ -45,5 +45,3 @@ Obtenez les trois en même temps.";
     }
 }
 // ANCHOR_END: here
-
-fn main() {}

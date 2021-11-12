@@ -134,18 +134,18 @@ C'est un peu plus pratique que de calculer les indices par nous-mêmes.
 
 <!--
 Because the `enumerate` method returns a tuple, we can use patterns to
-destructure that tuple, just like everywhere else in Rust. So in the `for`
-loop, we specify a pattern that has `i` for the index in the tuple and `&item`
-for the single byte in the tuple. Because we get a reference to the element
-from `.iter().enumerate()`, we use `&` in the pattern.
+destructure that tuple. We’ll be discussing patterns more in Chapter 6. So in
+the `for` loop, we specify a pattern that has `i` for the index in the tuple
+and `&item` for the single byte in the tuple. Because we get a reference to the
+element from `.iter().enumerate()`, we use `&` in the pattern.
 -->
 
-Comme la méthode `enumerate` retourne un tuple, nous pouvons utiliser des motifs
-pour déstructurer ce tuple, comme nous pourrions le faire n'importe où avec
-Rust. Donc dans la boucle `for`, nous précisons un motif qui indique que nous
-définissons `i` pour l'indice au sein du tuple et `&element` pour l'octet dans
-le tuple. Comme nous obtenons une référence vers l'élément avec
-`.iter().enumerate()`, nous utilisons `&` dans le motif.
+Comme la méthode `enumerate` retourne un tuple, nous pouvons utiliser des
+motifs pour déstructurer ce tuple. Nous verrons les motifs au chapitre 6. Donc
+dans la boucle `for`, nous précisons un motif qui indique que nous définissons
+`i` pour l'indice au sein du tuple et `&element` pour l'octet dans le tuple.
+Comme nous obtenons une référence vers l'élément avec `.iter().enumerate()`,
+nous utilisons `&` dans le motif.
 
 <!--
 Inside the `for` loop, we search for the byte that represents the space by
@@ -296,7 +296,6 @@ Cela ressemble à une référence pour toute la `String`, mais avec la partie
 `[0..5]` en plus. Plutôt que d'être une référence vers toute la `String`, c'est
 une référence vers une partie de la `String`.
 
-<!-- markdownlint-disable -->
 <!--
 We can create slices using a range within brackets by specifying
 `[starting_index..ending_index]`, where `starting_index` is the first position
@@ -304,9 +303,9 @@ in the slice and `ending_index` is one more than the last position in the
 slice. Internally, the slice data structure stores the starting position and
 the length of the slice, which corresponds to `ending_index` minus
 `starting_index`. So in the case of `let world = &s[6..11];`, `world` would be
-a slice that contains a pointer to the 7th byte (counting from 1) of `s` with a length value of 5.
+a slice that contains a pointer to the byte at index 6 of `s` with a length
+value of 5.
 -->
-<!-- markdownlint-enable -->
 
 Nous pouvons créer des slices en utilisant un intervalle entre crochets en
 spécifiant `[indice_debut..indice_fin]`, où `indice_debut` est la position du
@@ -314,8 +313,8 @@ premier octet de la slice et `indice_fin` est la position juste après le dernie
 octet de la slice. En interne, la structure de données de la slice stocke la
 position de départ et la longueur de la slice, ce qui correspond à `indice_fin`
 moins `indice_debut`. Donc dans le cas de `let world = &s[6..11];`, `world` est
-une slice qui contient un pointeur vers le septième octet (en comptant à partir
-de 1) de `s` et une longueur de 5.
+une slice qui contient un pointeur vers le sixième octet de `s` et une longueur
+de 5.
 
 <!--
 Figure 4-6 shows this in a diagram.
@@ -325,7 +324,7 @@ L'illustration 4-6 montre ceci dans un schéma.
 
 <!-- markdownlint-disable -->
 <!--
-<img alt="world containing a pointer to the 6th byte of String s and a length 5" src="img/trpl04-06.svg" class="center" style="width: 50%;" />
+<img alt="world containing a pointer to the byte at index 6 of String s and a length 5" src="img/trpl04-06.svg" class="center" style="width: 50%;" />
 -->
 <!-- markdownlint-restore -->
 
@@ -341,13 +340,13 @@ une longueur de 5" src="img/trpl04-06.svg" class="center" style="width: 50%;" />
 une partie d'une `String`</span>
 
 <!--
-With Rust’s `..` range syntax, if you want to start at the first index (zero),
-you can drop the value before the two periods. In other words, these are equal:
+With Rust’s `..` range syntax, if you want to start at index zero, you can drop
+the value before the two periods. In other words, these are equal:
 -->
 
-Avec la syntaxe d'intervalle `..` de Rust, si vous voulez commencer au premier
-indice (zéro), vous pouvez ne rien mettre avant les deux points. Autrement dit,
-ces deux cas sont identiques :
+Avec la syntaxe d'intervalle `..` de Rust, si vous voulez commencer à l'indice
+zéro, vous pouvez ne rien mettre avant les deux points. Autrement dit, ces deux
+cas sont identiques :
 
 <!--
 ```rust
@@ -563,16 +562,22 @@ Voici l'erreur du compilateur :
 <!--
 Recall from the borrowing rules that if we have an immutable reference to
 something, we cannot also take a mutable reference. Because `clear` needs to
-truncate the `String`, it needs to get a mutable reference. Rust disallows
-this, and compilation fails. Not only has Rust made our API easier to use, but
-it has also eliminated an entire class of errors at compile time!
+truncate the `String`, it needs to get a mutable reference. The `println!`
+after the call to `clear` uses the reference in `word`, so the immutable
+reference must still be active at that point. Rust disallows the mutable
+reference in `clear` and the immutable reference in `word` from existing at the
+same time, and compilation fails. Not only has Rust made our API easier to use,
+but it has also eliminated an entire class of errors at compile time!
 -->
 
 Rappelons-nous que d'après les règles d'emprunt, si nous avons une référence
 immuable vers quelque chose, nous ne pouvons pas avoir une référence mutable
 en même temps. Étant donné que `clear` a besoin de modifier la `String`, il a
-besoin d'une référence mutable. Rust interdit cette situation, et la compilation
-échoue. Non seulement Rust a simplifié l'utilisation de notre API, mais il a
+besoin d'une référence mutable. Le `println!` qui a lieu après l'appel à `clear`
+utilise la référence à `mot`, donc la référence immuable sera toujours en
+vigueur à cet endroit. Rust interdit la référence mutable dans `clear` et la
+référence immuable pour `mot` au même moment, et la compilation échoue. Non
+seulement Rust a simplifié l'utilisation de notre API, mais il a
 aussi éliminé une catégorie entière d'erreurs au moment de la compilation !
 
 <!--
@@ -664,16 +669,22 @@ utilisant une slice de chaîne de caractères comme type du paramètre `s`</span
 
 <!--
 If we have a string slice, we can pass that directly. If we have a `String`, we
-can pass a slice of the entire `String`. Defining a function to take a string
-slice instead of a reference to a `String` makes our API more general and useful
-without losing any functionality:
+can pass a slice of the `String` or a reference to the `String`. This
+flexibility takes advantage of *deref coercions*, a feature we will cover in
+the [“Implicit Deref Coercions with Functions and
+Methods”][deref-coercions]<!--ignore-- > section of Chapter 15. Defining a
+function to take a string slice instead of a reference to a `String` makes our
+API more general and useful without losing any functionality:
 -->
 
 Si nous avons une slice de chaîne, nous pouvons la passer en argument
-directement. Si nous avons une `String`, nous pouvons envoyer une slice de toute
-la `String`. Définir une fonction qui prend une slice de chaîne plutôt qu'une
-référence à une `String` rend notre API plus générique et plus utile sans perdre
-aucune fonctionnalité :
+directement. Si nous avons une `String`, nous pouvons envoyer une référence ou
+une slice de la `String`. Cette flexibilité nous est offerte par
+l'*extrapolation de déréferencement*, une fonctionnalité que nous allons
+découvrir dans [une section du Chapitre 15][deref-coercions]<!--ignore-->.
+Définir une fonction qui prend une slice de chaîne plutôt qu'une référence à
+une `String` rend notre API plus générique et plus utile sans perdre aucune
+fonctionnalité :
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -791,6 +802,8 @@ ensemble dans une `struct`.
 
 <!--
 [strings]: ch08-02-strings.html#storing-utf-8-encoded-text-with-strings
+[deref-coercions]: ch15-02-deref.html#implicit-deref-coercions-with-functions-and-methods
 -->
 
 [strings]: ch08-02-strings.html
+[deref-coercions]: ch15-02-deref.html

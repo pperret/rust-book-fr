@@ -173,7 +173,7 @@ lancer le programme, et *lib.rs* renferme toute la logique des tâches à
 accomplir. Comme vous ne pouvez pas directement tester la fonction `main`, cette
 structure vous permet de tester toute la logique de votre programme en les
 déplaçant dans des fonctions dans *lib.rs*. Le seul code qui restera dans le
-*main.rs* sera suffisamment petit pour s'assurer qu'il soit correcte en le
+*main.rs* sera suffisamment petit pour s'assurer qu'il soit correct en le
 lisant. Lançons-nous dans le remaniement de notre programme en suivant cette
 procédure.
 
@@ -251,7 +251,7 @@ often, to help identify the cause of problems when they occur.
 -->
 
 Ce remaniement peut sembler excessif pour notre petit programme, mais nous
-remanions avec de manière incrémentale par de petites étapes. Après avoir fait
+remanions de manière incrémentale par de petites étapes. Après avoir fait
 ces changements, lancez à nouveau le programme pour vérifier que l'envoi des
 arguments fonctionne toujours. C'est une bonne chose de vérifier souvent lorsque
 vous avancez, pour vous aider à mieux identifier les causes de problèmes
@@ -273,7 +273,7 @@ the right abstraction yet.
 Nous pouvons appliquer une nouvelle petite étape pour améliorer la fonction
 `interpreter_config`. Pour le moment, nous retournons un tuple, mais ensuite
 nous divisons immédiatement ce tuple à nouveau en plusieurs éléments. C'est un
-signe que nous n'avons peut-être la bonne approche.
+signe que nous n'avons peut-être pas la bonne approche.
 
 <!--
 Another indicator that shows there’s room for improvement is the `config` part
@@ -319,12 +319,12 @@ L'encart 12-6 montre les améliorations apportées à la fonction
 <span class="filename">Fichier : src/main.rs</span>
 
 <!--
-```rust,should_panic
+```rust,should_panic,noplayground
 {{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-06/src/main.rs:here}}
 ```
 -->
 
-```rust,should_panic
+```rust,should_panic,noplayground
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-06/src/main.rs:here}}
 ```
 
@@ -403,7 +403,7 @@ un compromis qui en vaut la peine.
 > n'est pas un problème de copier quelques chaînes de caractères pour continuer
 > à progresser car vous allez le faire une seule fois et votre `nom_fichier` et
 > `recherche` sont très courts. Il est plus important d'avoir un programme
-> fonctionnel qui est n'est très optimisé plutôt que d'essayer d'optimiser à
+> fonctionnel qui n'est pas très optimisé plutôt que d'essayer d'optimiser à
 > outrance le code dès sa première écriture. Plus vous deviendrez expérimenté
 > en Rust, plus il sera facile de commencer par la solution la plus
 > performante, mais pour le moment, il est parfaitement acceptable de faire
@@ -485,12 +485,12 @@ que nous devons faire pour cela.
 <span class="filename">Fichier : src/main.rs</span>
 
 <!--
-```rust,should_panic
+```rust,should_panic,noplayground
 {{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-07/src/main.rs:here}}
 ```
 -->
 
-```rust,should_panic
+```rust,should_panic,noplayground
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-07/src/main.rs:here}}
 ```
 
@@ -589,15 +589,6 @@ afficher un meilleur message d'erreur que le message `index out of bounds`.
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-08/src/main.rs:here}}
 ```
 
-```rust,ignore
-// -- partie masquée ici --
-fn new(args: &[String]) -> Config {
-    if args.len() < 3 {
-        panic!("il n'y a pas assez d'arguments");
-    }
-    // -- partie masquée ici --
-```
-
 <!--
 <span class="caption">Listing 12-8: Adding a check for the number of
 arguments</span>
@@ -647,7 +638,7 @@ aucun argument à nouveau pour voir à quoi ressemble désormais l'erreur :
 <!--
 This output is better: we now have a reasonable error message. However, we also
 have extraneous information we don’t want to give to our users. Perhaps using
-the technique we used in Listing 9-10 isn’t the best to use here: a call to
+the technique we used in Listing 9-13 isn’t the best to use here: a call to
 `panic!` is more appropriate for a programming problem than a usage problem,
 [as discussed in Chapter 9][ch9-error-guidelines]<!-- ignore -- >. Instead, we
 can use the other technique you learned about in Chapter 9—[returning a
@@ -657,7 +648,7 @@ can use the other technique you learned about in Chapter 9—[returning a
 Cette sortie est meilleure : nous avons maintenant un message d'erreur
 compréhensible. Cependant, nous avons aussi des informations superflues que
 nous ne souhaitons pas afficher à nos utilisateurs. Peut-être que la technique
-que nous avons utilisé dans l'encart 9-10 n'est pas la plus appropriée dans ce
+que nous avons utilisé dans l'encart 9-13 n'est pas la plus appropriée dans ce
 cas : un appel à `panic!` est plus approprié pour un problème de développement
 qu'un problème d'utilisation, [comme nous l'avons appris au chapitre
 9][ch9-error-guidelines]<!-- ignore -->. A la place, nous pourrions utiliser
@@ -696,8 +687,8 @@ that this won’t compile until we update `main` as well, which we’ll do in th
 next listing.
 -->
 
-L'encart 12-9 nous montre les changements que nous devons faire pour à la
-valeur de retour de `Config::new` et le corps de la fonction qui doit retourner
+L'encart 12-9 nous montre les changements que nous devons apporter à la
+valeur de retour de `Config::new` et le corps de la fonction pour pouvoir retourner
 un `Result`. Notez que cela ne va pas se compiler tant que nous ne corrigeons
 pas aussi le `main`, ce que nous allons faire dans le prochain encart.
 
@@ -727,18 +718,12 @@ pas aussi le `main`, ce que nous allons faire dans le prochain encart.
 
 <!--
 Our `new` function now returns a `Result` with a `Config` instance in the
-success case and a `&'static str` in the error case. Recall from [“The Static
-Lifetime”][the-static-lifetime]<!-- ignore -- > section in Chapter 10 that
-`&'static str` is the type of string literals, which is our error message type
-for now.
+success case and a `&str` in the error case.
 -->
 
 Notre fonction `new` retourne désormais un `Result` contenant une instance de
-`Config` dans le cas d'un succès et une `&'static str` dans le cas d'une
-erreur. Pour rappel, nous avons vu dans une section du
-[chapitre 10][the-static-lifetime]<!-- ignore --> que `&'static str` est le
-type des chaînes de caractères littérales, ce qui est désormais le type de
-notre message d'erreur.
+`Config` dans le cas d'un succès et une `&str` dans le cas d'une
+erreur.
 
 <!--
 We’ve made two changes in the body of the `new` function: instead of calling
@@ -761,7 +746,7 @@ more cleanly in the error case.
 
 Retourner une valeur `Err` à partir de `Config::new` permet à la fonction
 `main` de gérer la valeur `Result` retournée par la fonction `new` et de
-terminer plus proprement le processus dans cas d'une erreur.
+terminer plus proprement le processus dans le cas d'une erreur.
 
 <!--
 #### Calling `Config::new` and Handling Errors
@@ -813,7 +798,7 @@ création d'une nouvelle `Config` échoue.
 </span>
 
 <!--
-In this listing, we’ve used a method we haven’t covered before:
+In this listing, we’ve used a method we haven’t covered in detail yet:
 `unwrap_or_else`, which is defined on `Result<T, E>` by the standard library.
 Using `unwrap_or_else` allows us to define some custom, non-`panic!` error
 handling. If the `Result` is an `Ok` value, this method’s behavior is similar
@@ -822,27 +807,27 @@ is an `Err` value, this method calls the code in the *closure*, which is an
 anonymous function we define and pass as an argument to `unwrap_or_else`. We’ll
 cover closures in more detail in [Chapter 13][ch13]<!-- ignore -- >. For now,
 you just need to know that `unwrap_or_else` will pass the inner value of the
-`Err`, which in this case is the static string `not enough arguments` that we
+`Err`, which in this case is the static string `"not enough arguments"` that we
 added in Listing 12-9, to our closure in the argument `err` that appears
 between the vertical pipes. The code in the closure can then use the `err`
 value when it runs.
 -->
 
 Dans cet encart, nous avons utilisé une méthode que nous n'avons pas encore
-abordé : `unwrap_or_else`, qui est défini sur `Result<T, E>` par la bibliothèque
-standard. L'utilisation de `unwrap_or_else` nous permet de définir une gestion
-des erreurs personnalisée, exempt de `panic!`. Si le `Result` est une valeur
-`Ok`, le comportement de cette méthode est similaire à `unwrap` : elle retourne
-la valeur à l'intérieur du `Ok`. Cependant, si la valeur est une valeur `Err`,
-cette méthode appelle le code dans la *fermeture*, qui est une fonction anonyme
-que nous définissons et passons en argument de `unwrap_or_else`. Nous verrons
-les fermetures plus en détail dans le [chapitre 13][ch13]<!-- ignore -->. Pour
-l'instant, vous avez juste à savoir que le `unwrap_or_else` va passer la valeur
-interne du `Err` (qui dans ce cas est la chaîne de caractères statique
-`pas assez d'arguments` que nous avons ajouté dans l'encart 12-9) à notre
-fermeture dans l'argument `err` qui est présent entre deux barres verticales. Le
-code dans la fermeture peut ensuite utiliser la valeur `err` lorsqu'il est
-exécuté.
+détaillé pour l'instant : `unwrap_or_else`, qui est défini sur `Result<T, E>`
+par la bibliothèque standard. L'utilisation de `unwrap_or_else` nous permet de
+définir une gestion des erreurs personnalisée, exempt de `panic!`. Si le
+`Result` est une valeur `Ok`, le comportement de cette méthode est similaire à
+`unwrap` : elle retourne la valeur à l'intérieur du `Ok`. Cependant, si la
+valeur est une valeur `Err`, cette méthode appelle le code dans la *fermeture*,
+qui est une fonction anonyme que nous définissons et passons en argument de
+`unwrap_or_else`. Nous verrons les fermetures plus en détail dans le [chapitre
+13][ch13]<!-- ignore -->. Pour l'instant, vous avez juste à savoir que le
+`unwrap_or_else` va passer la valeur interne du `Err` (qui dans ce cas est la
+chaîne de caractères statique `"pas assez d'arguments"` que nous avons ajouté
+dans l'encart 12-9) à notre fermeture dans l'argument `err` qui est présent
+entre deux barres verticales. Le code dans la fermeture peut ensuite utiliser
+la valeur `err` lorsqu'il est exécuté.
 
 <!--
 We’ve added a new `use` line to bring `process` from the standard library into
@@ -854,7 +839,7 @@ number that was passed as the exit status code. This is similar to the
 extra output. Let’s try it:
 -->
 
-Nous avons ajouté une nouvelle ligne `use` pour importer `porté` dans la portée
+Nous avons ajouté une nouvelle ligne `use` pour importer `process` dans la portée
 à partir de la bibliothèque standard. Le code dans la fermeture qui sera exécuté
 dans le cas d'une erreur fait uniquement deux lignes : nous affichons la valeur
 de `err` et nous appelons ensuite `process::exit`. La fonction `process::exit`
@@ -1026,9 +1011,9 @@ En ce qui concerne le type d'erreur, nous avons utilisé *l'objet trait*
 une instruction `use` en haut). Nous allons voir les objets trait dans le
 [chapitre 17][ch17]<!-- ignore -->. Pour l'instant, retenez juste que
 `Box<dyn Error>` signifie que la fonction va retourner un type qui implémente
-le trait `Error`, mais que nous n'avons pas à préciser quel sera précisément le
-type de la valeur de retour. Cela nous donne de la flexibilité sur les valeurs
-d'erreurs de retour qui peuvent être différentes dans différents cas d'erreurs.
+le trait `Error`, mais que nous n'avons pas à spécifier quel sera précisément le
+type de la valeur de retour. Cela nous donne la flexibilité de retourner des valeurs
+d'erreurs qui peuvent être de différents types dans différents cas d'erreurs.
 Le mot-clé `dyn` est un raccourci pour “dynamique”.
 
 <!--
@@ -1058,7 +1043,7 @@ fonction `run` était `()`, ce qui signifie que nous avons envelopper la valeur
 de type unité dans la valeur `Ok`. Cette syntaxe `Ok(())` peut sembler un peu
 étrange au départ, mais utiliser `()` de cette manière est la façon idéale
 d'indiquer que nous appelons `run` uniquement pour ses effets secondaires ; elle
-ne retourne pas de valeur que nous pourrions avoir besoin.
+ne retourne pas de valeur dont nous pourrions avoir besoin.
 
 <!--
 When you run this code, it will compile but will display a warning:
@@ -1131,7 +1116,7 @@ return the unwrapped value because it would only be `()`.
 -->
 
 Nous utilisons `if let` plutôt que `unwrap_or_else` pour vérifier si `run`
-retourne un valeure `Err` et appeler `process::exit(1)` le cas échéant. La
+retourne un valeur `Err` et appeler `process::exit(1)` le cas échéant. La
 fonction `run` ne retourne pas de valeur que nous avons besoin de `unwrap`
 comme nous l'avions fait avec le `Config::new` qui retournait une instance de
 `Config`. Comme `run` retourne `()` dans le cas d'un succès, nous nous
@@ -1161,7 +1146,7 @@ it and have a *src/main.rs* file with fewer responsibilities.
 
 Notre projet `minigrep` se présente plutôt bien pour le moment ! Maintenant,
 nous allons diviser notre fichier *src/main.rs* et déplacer du code dans le
-fichier *src/lib.rs* pour que nous puissions le tester et avoir fichier
+fichier *src/lib.rs* pour que nous puissions le tester et avoir un fichier
 *src/main.rs* qui héberge moins de fonctionnalités.
 
 <!--
@@ -1299,7 +1284,6 @@ aurait été difficile à faire avec l'ancien code, mais qui est facile avec ce
 nouveau code : nous allons écrire des tests !
 
 <!--
-[the-static-lifetime]: ch10-03-lifetime-syntax.html#the-static-lifetime
 [ch13]: ch13-00-functional-features.html
 [ch9-custom-types]: ch09-03-to-panic-or-not-to-panic.html#creating-custom-types-for-validation
 [ch9-error-guidelines]: ch09-03-to-panic-or-not-to-panic.html#guidelines-for-error-handling
@@ -1308,7 +1292,6 @@ nouveau code : nous allons écrire des tests !
 [ch9-question-mark]: ch09-02-recoverable-errors-with-result.html#a-shortcut-for-propagating-errors-the--operator
 -->
 
-[the-static-lifetime]: ch10-03-lifetime-syntax.html
 [ch13]: ch13-00-functional-features.html
 [ch9-custom-types]: ch09-03-to-panic-or-not-to-panic.html
 [ch9-error-guidelines]: ch09-03-to-panic-or-not-to-panic.html

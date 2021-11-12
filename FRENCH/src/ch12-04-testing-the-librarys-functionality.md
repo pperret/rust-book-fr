@@ -133,14 +133,18 @@ fonction `rechercher` que nous souhaitons concevoir</span>
 
 <!--
 This test searches for the string `"duct"`. The text we’re searching is three
-lines, only one of which contains `"duct"`. We assert that the value returned
-from the `search` function contains only the line we expect.
+lines, only one of which contains `"duct"` (Note that the backslash after the
+opening double quote tells Rust not to put a newline character at the beginning
+of the contents of this string literal). We assert that the value returned from
+the `search` function contains only the line we expect.
 -->
 
 Ce test recherche la chaîne de caractères `"duct"`. Le texte dans lequel nous
-recherchons fait trois lignes, et seulement une d'entre elles contient `"duct"`.
-Nous vérifions que la valeur retournée par la fonction `rechercher` contient
-seulement la ligne que nous avions prévu.
+recherchons fait trois lignes, et seulement une d'entre elles contient `"duct"`
+(remarquez que l'antislash après la double-guillet ouvrante indique à Rust de
+ne pas insérer un caractère de nouvelle ligne au début du contenu de ce litéral
+de chaîne de caractère). Nous vérifions que la valeur retournée par la fonction
+`rechercher` contient seulement la ligne que nous avions prévu.
 
 <!--
 We aren’t able to run this test and watch it fail because the test doesn’t even
@@ -153,7 +157,7 @@ containing the line `"safe, fast, productive."`
 
 Nous ne pouvons pas encore exécuter ce test et vérifier s'il échoue car même le
 test ne peut pas se compiler : la fonction `rechercher` n'existe pas encore !
-Donc pour le moment nous allons ajouter juste assez de code pour quel le test
+Donc pour le moment nous allons ajouter juste assez de code pour que le test
 puisse compiler et s'exécuter en ajoutant une définition de la fonction
 `rechercher` qui retourne un vecteur vide, comme dans l'encart 12-16. Ensuite
 le test va compiler et échouer car un vecteur vide ne correspond pas au vecteur
@@ -166,12 +170,12 @@ qui contient la ligne `"sécurité, rapidité, productivité."`
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-16/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-16/src/lib.rs:here}}
 ```
 
@@ -198,7 +202,7 @@ définie dans la signature de `rechercher` et l'utiliser sur l'argument `contenu
 et la valeur de retour. Rappelez-vous que dans le
 [chapitre 10][ch10-lifetimes]<!-- ignore --> nous avions vu que les paramètres
 de durée de vie renseignent à quelle durée de vie des arguments sont connectées
-les durées de vie des valeurs de retour. Dans notre cas, nous indiquons que le
+aux durées de vie des valeurs de retour. Dans notre cas, nous indiquons que le
 vecteur retourné devrait contenir des slices de chaînes de caractères qui sont
 des slices de l'argument `contenu` (et non pas de l'argument `recherche`).
 
@@ -345,12 +349,12 @@ l'encart 12-17. Notez que cela ne se compile pas encore.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust,ignore
+```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-17/src/lib.rs:here}}
 ```
 -->
 
-```rust,ignore
+```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-17/src/lib.rs:here}}
 ```
 
@@ -404,12 +408,12 @@ Notez qu'ici non plus nous ne pouvons pas encore compiler.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust,ignore
+```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-18/src/lib.rs:here}}
 ```
 -->
 
-```rust,ignore
+```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-18/src/lib.rs:here}}
 ```
 
@@ -454,20 +458,6 @@ le vecteur, comme dans l'encart 12-19 :
 
 ```rust,ignore
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-19/src/lib.rs:here}}
-```
-
-```rust,ignore
-pub fn rechercher<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
-    let mut resultats = Vec::new();
-
-    for ligne in contenu.lines() {
-        if ligne.contains(recherche) {
-            resultats.push(ligne);
-        }
-    }
-
-    resultats
-}
 ```
 
 <!--
@@ -532,7 +522,7 @@ from our `run` function. We need to pass the `config.query` value and the
 will print each line returned from `search`:
 -->
 
-Maintenant que la fonction `rechercher` fonctionne et est testé, nous devons
+Maintenant que la fonction `rechercher` fonctionne et est testée, nous devons
 appeler `rechercher` dans notre fonction `run`. Nous devons passer à
 `rechercher` la valeur de `config.recherche`  et le `contenu` que `run` obtient
 en lisant le fichier. Ensuite, `run` devra afficher chaque ligne retournée par
@@ -634,7 +624,7 @@ useful when you’re writing command line programs.
 
 Pour clôturer ce projet, nous allons brièvement voir comment travailler avec les
 variables d'environnement et comment écrire sur la sortie standard des erreurs,
-qui sont tous les deux utiles lorsque nous écrivez des programmes en ligne de
+qui sont tous les deux utiles lorsque vous écrivez des programmes en ligne de
 commande.
 
 <!--

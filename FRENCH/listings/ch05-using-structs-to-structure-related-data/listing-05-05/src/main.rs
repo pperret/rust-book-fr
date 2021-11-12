@@ -1,8 +1,8 @@
 struct Utilisateur {
+    actif: bool,
     pseudo: String,
     email: String,
     nombre_de_connexions: u64,
-    actif: bool,
 }
 
 // ANCHOR: here

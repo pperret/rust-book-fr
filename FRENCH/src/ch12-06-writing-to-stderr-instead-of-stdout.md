@@ -185,13 +185,13 @@ de la même manière, sans aucun argument et en redirigeant la sortie standard
 avec `>` :
 
 <!--
-```text
+```console
 $ cargo run > output.txt
 Problem parsing arguments: not enough arguments
 ```
 -->
 
-```text
+```console
 $ cargo run > sortie.txt
 Problème rencontré lors de l'interprétation des arguments : il n'y a pas assez d'arguments
 ```

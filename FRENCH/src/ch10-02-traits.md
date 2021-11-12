@@ -7,15 +7,15 @@
 <!--
 A *trait* tells the Rust compiler about functionality a particular type has and
 can share with other types. We can use traits to define shared behavior in an
-abstract way. We can use trait bounds to specify that a generic can be any type
-that has certain behavior.
+abstract way. We can use trait bounds to specify that a generic type can be any
+type that has certain behavior.
 -->
 
 Un *trait* décrit une fonctionnalité qu'a un type particulier et qu'il peut
 partager avec d'autres types, à destination du compilateur Rust. Nous pouvons
 utiliser les traits pour définir un comportement partagé de manière abstraite.
-Nous pouvons lier ces traits à un type générique pour exprimer le fait qu'il puisse
-être de n'importe quel type à condition qu'il ai un comportement donné.
+Nous pouvons lier ces traits à un type générique pour exprimer le fait qu'il
+puisse être de n'importe quel type à condition qu'il ai un comportement donné.
 
 <!--
 > Note: Traits are similar to a feature often called *interfaces* in other
@@ -1017,6 +1017,9 @@ reference to a `T` value in the slice. If we change the return type to `&T`
 instead of `T`, thereby changing the body of the function to return a
 reference, we wouldn’t need the `Clone` or `Copy` trait bounds and we could
 avoid heap allocations. Try implementing these alternate solutions on your own!
+If you get stuck with errors having to do with lifetimes, keep reading: the
+“Validating References with Lifetimes” section coming up will explain, but
+lifetimes aren’t required to solve these challenges.
 -->
 
 Une autre façon d'implémenter `le_plus_grand` est de faire en sorte que la
@@ -1025,6 +1028,10 @@ le type de retour en `&T` à la place de `T`, ainsi qu'adapter le corps de la
 fonction afin de retourner une référence, nous n'aurions alors plus besoin des
 traits liés `Clone` ou `Copy` et nous pourrions ainsi éviter l'allocation sur
 le tas. Essayez d'implémenter cette solution alternative par vous-même !
+Si vous bloquez sur des erreurs à propos des durées de vie *(lifetimes)*, lisez
+la suite : la section suivante, “La conformité des références avec les durées
+de vies” vous expliquera cela, mais les durées de vie ne sont pas nécessaires
+pour résoudre ces exercices.
 
 <!--
 ### Using Trait Bounds to Conditionally Implement Methods

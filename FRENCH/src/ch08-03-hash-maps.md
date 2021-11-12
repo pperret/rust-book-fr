@@ -119,9 +119,9 @@ the [”Processing a Series of Items with Iterators” section of Chapter
 13][iterators]<!-- ignore -- >. The `collect` method gathers data into a number
 of collection types, including `HashMap`. For example, if we had the team names
 and initial scores in two separate vectors, we could use the `zip` method to
-create a vector of tuples where “Blue” is paired with 10, and so forth. Then we
-could use the `collect` method to turn that vector of tuples into a hash map,
-as shown in Listing 8-21.
+create an iterator of tuples where “Blue” is paired with 10, and so forth. Then
+we could use the `collect` method to turn that iterator of tuples into a hash
+map, as shown in Listing 8-21.
 -->
 
 Une autre façon de construire une table de hachage est d'utiliser les itérateurs
@@ -131,9 +131,9 @@ associées dans [une section du chapitre 13][iterators]<!-- ignore -->. La
 méthode `collect` regroupe les données dans quelques types de collections, dont
 `HashMap`. Par exemple, si nous avions les noms des équipes et les scores
 initiaux dans deux vecteurs séparés, nous pourrions utiliser la méthode `zip`
-pour créer un vecteur de tuples où “Bleu” est associé à 10, et ainsi de suite.
-Ensuite, nous pourrions utiliser la méthode `collect` pour transformer ce
-vecteur de tuples en table de hachage, comme dans l'encart 8-21.
+pour créer un itérateur de tuples où “Bleu” est associé à 10, et ainsi de suite.
+Ensuite, nous pourrions utiliser la méthode `collect` pour transformer cet
+itérateur de tuples en table de hachage, comme dans l'encart 8-21.
 
 <!--
 ```rust
@@ -502,20 +502,23 @@ utilisant une table de hachage qui stocke les mots et leur quantité</span>
 
 <!--
 This code will print `{"world": 2, "hello": 1, "wonderful": 1}`. The
-`or_insert` method actually returns a mutable reference (`&mut V`) to the value
-for this key. Here we store that mutable reference in the `count` variable, so
-in order to assign to that value, we must first dereference `count` using the
-asterisk (`*`). The mutable reference goes out of scope at the end of the `for`
-loop, so all of these changes are safe and allowed by the borrowing rules.
+`split_whitespace` method iterates over sub-slices, separated by whitespace, of
+the value in `text`. The `or_insert` method returns a mutable reference (`&mut
+V`) to the value for the specified key. Here we store that mutable reference in
+the `count` variable, so in order to assign to that value, we must first
+dereference `count` using the asterisk (`*`). The mutable reference goes out of
+scope at the end of the `for` loop, so all of these changes are safe and
+allowed by the borrowing rules.
 -->
 
 Ce code va afficher `{"monde": 2, "bonjour": 1, "magnifique": 1, "le": 1}`. La
-méthode `or_insert` retourne une référence mutable (`&mut V`) vers la valeur de
-cette clé. Nous stockons ici la référence mutable dans la variable `compteur`,
-donc pour affecter une valeur, nous devons d'abord déréférencer `compteur` en
-utilisant l'astérisque (`*`). La référence mutable sort de la portée à la fin de
-la boucle `for`, donc tous ces changements sont sûrs et autorisés par les règles
-d'emprunt.
+méthode `split_whitespace` va itérer sur les sous-slices, séparées par des
+espaces vides, sur la valeur dans `texte`. La méthode `or_insert` retourne une
+référence mutable (`&mut V`) vers la valeur de la clé spécifiée. Nous stockons
+ici la référence mutable dans la variable `compteur`, donc pour affecter une
+valeur, nous devons d'abord déréférencer `compteur` en utilisant l'astérisque
+(`*`). La référence mutable sort de la portée à la fin de la boucle `for`, donc
+tous ces changements sont sûrs et autorisés par les règles d'emprunt.
 
 <!--
 ### Hashing Functions
@@ -525,16 +528,17 @@ d'emprunt.
 
 <!--
 By default, `HashMap` uses a hashing function called SipHash that can provide
-resistance to Denial of Service (DoS) attacks involving hash tables[^siphash]. This
-is not the fastest hashing algorithm available, but the trade-off for better
-security that comes with the drop in performance is worth it. If you profile
-your code and find that the default hash function is too slow for your
-purposes, you can switch to another function by specifying a different
-*hasher*. A hasher is a type that implements the `BuildHasher` trait. We’ll
-talk about traits and how to implement them in Chapter 10. You don’t
-necessarily have to implement your own hasher from scratch;
-[crates.io](https://crates.io/) has libraries shared by other Rust users that
-provide hashers implementing many common hashing algorithms.
+resistance to Denial of Service (DoS) attacks involving hash
+tables[^siphash]<!-- ignore -- >. This is not the fastest hashing algorithm
+available, but the trade-off for better security that comes with the drop in
+performance is worth it. If you profile your code and find that the default
+hash function is too slow for your purposes, you can switch to another function
+by specifying a different *hasher*. A hasher is a type that implements the
+`BuildHasher` trait. We’ll talk about traits and how to implement them in
+Chapter 10. You don’t necessarily have to implement your own hasher from
+scratch; [crates.io](https://crates.io/)<!-- ignore -- > has libraries shared by
+other Rust users that provide hashers implementing many common hashing
+algorithms.
 -->
 
 Par défaut, `HashMap` utilise une fonction de hachage nommée SipHash qui résiste
@@ -575,9 +579,9 @@ stocker, accéder, et modifier des données. Voici quelques exercices que vous
 devriez maintenant être en mesure de résoudre :
 
 <!--
-* Given a list of integers, use a vector and return the mean (the average
-  value), median (when sorted, the value in the middle position), and mode (the
-  value that occurs most often; a hash map will be helpful here) of the list.
+* Given a list of integers, use a vector and return the median (when sorted,
+  the value in the middle position) and mode (the value that occurs most often;
+  a hash map will be helpful here) of the list.
 * Convert strings to pig latin. The first consonant of each word is moved to
   the end of the word and “ay” is added, so “first” becomes “irst-fay.” Words
   that start with a vowel have “hay” added to the end instead (“apple” becomes
@@ -589,10 +593,10 @@ devriez maintenant être en mesure de résoudre :
   alphabetically.
 -->
 
-* À partir d'une liste d'entiers, utiliser un vecteur et retourner la moyenne,
-  la médiane (la valeur au milieu lorsque la liste est triée), et le mode (la
-  valeur qui apparaît le plus souvent ; une table de hachage sera utile dans ce
-  cas) de la liste.
+* À partir d'une liste d'entiers, utiliser un vecteur et retourner la médiane
+  (la valeur au milieu lorsque la liste est triée) et le mode (la valeur qui
+  apparaît le plus souvent ; une table de hachage sera utile dans ce cas) de la
+  liste.
 * Convertir des chaînes de caractères dans une variante du louchébem.
   La consonne initiale de chaque mot est remplacée par la lettre `l` et est
   rétablie à la fin du mot suivie du suffixe argotique “em” ; ainsi, “bonjour”

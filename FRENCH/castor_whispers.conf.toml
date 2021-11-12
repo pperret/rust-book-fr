@@ -3,5 +3,11 @@ comment = [
     ["/listings/", "/listings-sources/"]
 ]
 only_commented = [
-    ["/listings-sources/", "/listings/"]
+    ["/listings-sources/", "/listings/"],
+]
+
+[ignore_rows]
+only_commented = [
+    "<!-- markdownlint-disable -->",
+    "<!-- markdownlint-restore -->"
 ]

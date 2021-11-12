@@ -16,16 +16,20 @@ les outils qui leur sont associés. Vous allez avoir besoin d'une connexion
 Internet pour le téléchargement.
 
 <!--
-> Note: If you prefer not to use `rustup` for some reason, please see [the Rust
-> installation page](https://www.rust-lang.org/tools/install) for other options.
+> Note: If you prefer not to use `rustup` for some reason, please see the
+> [Other Rust Installation Methods page][install] for more options.
 -->
 
 > Note : si vous préférez ne pas utiliser `rustup` pour une raison ou une autre,
 > vous pouvez vous référer à
-> [la page d'installation de Rust][rust-installation-page]
+> [la page des autres moyens d'installation de Rust][rust-installation-page]
 > pour d'autres méthodes d'installation.
 
-[rust-installation-page]: https://www.rust-lang.org/tools/install
+<!--
+[install]: https://forge.rust-lang.org/infra/other-installation-methods.html
+-->
+
+[install]: https://forge.rust-lang.org/infra/other-installation-methods.html
 
 <!--
 The following steps install the latest stable version of the Rust compiler.
@@ -110,25 +114,46 @@ Rust is installed now. Great!
 ```
 
 <!--
-Additionally, you’ll need a linker of some kind. It’s likely one is already
-installed, but when you try to compile a Rust program and get errors indicating
-that a linker could not execute, that means a linker isn’t installed on your
-system and you’ll need to install one manually. C compilers usually come with
-the correct linker. Check your platform’s documentation for how to install a C
-compiler. Also, some common Rust packages depend on C code and will need a C
-compiler. Therefore, it might be worth installing one now.
+You will also need a linker, which is a program that Rust uses to join its
+compiled outputs into one file. It is likely you already have one. If you get
+linker errors, you should install a C compiler, which will typically include a
+linker. A C compiler is also useful because some common Rust packages depend on
+C code and will need a C compiler.
 -->
 
-De plus, vous aurez peut-être besoin d'un *linker* quelconque. Il est probable
-qu'il y en ait déjà un d'installé, mais si vous essayez de compiler un
-programme Rust et que vous avez des erreurs qui disent que le *linker* ne peut
-pas être exécuté, cela veut dire qu'il n'y a pas de *linker* d'installé sur
-votre système et que vous devrez en installer un manuellement. Les
-compilateurs C sont généralement livrés avec un bon *linker*. Référez-vous à la
-documentation de votre plateforme pour savoir comment installer un compilateur
-C. De plus, certains paquets Rust communs nécessitent du code C et auront
-besoin d'un compilateur C. C'est pourquoi cela vaut la peine d'en installer un
-dès maintenant.
+Vous aurez aussi besoin d'un *linker*, qui est un programme que Rust utilise
+pour regrouper ses multiples résultats de compilation dans un unique fichier.
+Il est probable que vous en ayez déjà un d'installé, mais si vous avez des
+erreurs à propos du *linker*, cela veut dire vous devrez installer un
+compilateur de langage C, qui inclura généralement un *linker*. Un compilateur
+est parfois utile car certains paquets Rust communs nécessitent du code C et
+auront besoin d'un compilateur C.
+
+<!--
+On macOS, you can get a C compiler by running:
+-->
+
+Sur macOS, vous pouvez obtenir un compilateur C en lançant la commande :
+
+<!--
+```console
+$ xcode-select --install
+```
+-->
+
+```console
+$ xcode-select --install
+```
+
+<!--
+Linux users should generally install GCC or Clang, according to their
+distribution’s documentation. For example, if you use Ubuntu, you can install
+the `build-essential` package.
+-->
+
+Les utilisateurs de Linux doivent généralement install GCC ou Clang, en fonction
+de la documentation de leur distribution. Par exemple, si vous utilisez Ubuntu,
+vous pouvez installer le paquet `build-essential`.
 
 <!--
 ### Installing `rustup` on Windows
@@ -142,7 +167,7 @@ the instructions for installing Rust. At some point in the installation, you’l
 receive a message explaining that you’ll also need the C++ build tools for
 Visual Studio 2013 or later. The easiest way to acquire the build tools is to
 install [Build Tools for Visual Studio 2019][visualstudio]. When asked which
-workloads to install make sure "C++ build tools" is selected and that the
+workloads to install make sure “C++ build tools” is selected and that the
 Windows 10 SDK and the English language pack components are included.
 -->
 
@@ -153,8 +178,8 @@ message vous expliquant qu'il va vous falloir l'outil de compilation C++
 pour Visual Studio 2013 ou plus récent. La méthode la plus facile pour obtenir
 les outils de compilation est d'installer
 [Build Tools pour Visual Studio 2019][visualstudio]. Lorsque vous aurez à
-sélectionner les composants à installer, assurez-vous que les "Outils de
-compilation C++" sont bien sélectionnés, et que le SDK Windows 10 et les paquets
+sélectionner les composants à installer, assurez-vous que les “Outils de
+compilation C++” sont bien sélectionnés, et que le SDK Windows 10 et les paquets
 de langage Anglais sont bien inclus.
 
 <!--

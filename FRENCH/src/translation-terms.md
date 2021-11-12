@@ -12,7 +12,6 @@ français.
 | angle bracket | chevrons | - |
 | annotate | indiquer | - |
 | anti-pattern | anti-patron | - |
-| append | ajouter | - |
 | Appendix | annexe | tout en minuscule (sauf en début de phrase) |
 | append | ajouter | - |
 | Application Programming Interface (API) | interface de programmation applicative (API) | - |
@@ -205,7 +204,6 @@ français.
 | process | processus | - |
 | project chapter | chapitre de projet | - |
 | propagate | propager | - |
-| race condition | situation de concurrence | - |
 | pushing onto the stack | empiler | - |
 | race condition | situation de concurrence | - |
 | raw identifier | identificateur brut | - |

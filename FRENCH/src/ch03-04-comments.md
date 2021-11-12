@@ -6,16 +6,16 @@
 
 <!--
 All programmers strive to make their code easy to understand, but sometimes
-extra explanation is warranted. In these cases, programmers leave notes, or
-*comments*, in their source code that the compiler will ignore but people
-reading the source code may find useful.
+extra explanation is warranted. In these cases, programmers leave *comments* in
+their source code that the compiler will ignore but people reading the source
+code may find useful.
 -->
 
 Tous les développeurs s'efforcent de rendre leur code facile à comprendre, mais
-parfois il est nécessaire d'écrire des explications supplémentaires.
-Dans ce cas, les développeurs laissent des notes, appelées *commentaires*, dans
-leur code source que le compilateur va ignorer mais qui peuvent être utiles
-pour les personnes qui lisent le code source.
+parfois il est nécessaire d'écrire des explications supplémentaires. Dans ce
+cas, les développeurs laissent des *commentaires* dans leur code source que le
+compilateur va ignorer mais qui peuvent être utiles pour les personnes qui
+lisent le code source.
 
 <!--
 Here’s a simple comment:
