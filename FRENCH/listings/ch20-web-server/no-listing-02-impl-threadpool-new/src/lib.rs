@@ -1,4 +1,3 @@
-// ANCHOR: here
 pub struct GroupeTaches;
 
 impl GroupeTaches {
@@ -6,6 +5,3 @@ impl GroupeTaches {
         GroupeTaches
     }
 }
-// ANCHOR_END: here
-
-fn main() {}

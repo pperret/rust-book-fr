@@ -21,7 +21,7 @@ features that run these independent parts are called *threads*.
 -->
 
 Dans la plupart des systèmes d'exploitation actuels, le code d'un programme
-exécuté dans un *processus*, et le système d'exploitation gère plusieurs
+est exécuté dans un *processus*, et le système d'exploitation gère plusieurs
 processus à la fois. Dans votre programme, vous pouvez vous aussi avoir des
 parties indépendantes qui s'exécutent simultanément. Les éléments qui font
 fonctionner ces parties indépendantes sont appelés les *tâches*.
@@ -53,8 +53,8 @@ comme :
 * Les situations de concurrence, durant lesquelles les tâches accèdent à une
   donnée ou ressource dans un ordre incohérent
 * Des interblocages, durant lesquels deux tâches attendent mutuellement que
-  l'autre finit d'utiliser une ressource que l'autre tâche utilise, bloquant
-  les deux tâches de progresser
+  l'autre finisse d'utiliser une ressource que l'autre tâche utilise, bloquant
+  la progression des deux tâches
 * Des bogues qui surgissent uniquement dans certaines situations et qui sont
   difficiles à reproduire et corriger durablement
 
@@ -216,7 +216,7 @@ program might be a little different every time, but it will look similar to the
 following:
 -->
 
-Remarquez d'avec cette fonction, la nouvelle tâche s'arrêtera lorsque la tâche
+Remarquez qu'avec cette fonction, la nouvelle tâche s'arrêtera lorsque la tâche
 principale s'arrêtera, qu'elle ai fini ou non de s'exécuter. La sortie de ce
 programme peut être différente à chaque fois, mais il devrait ressembler à
 ceci :
@@ -269,7 +269,7 @@ tâches se relaieront probablement, mais ce n'est pas garanti : cela dépend de
 comment votre système d'exploitation agence les tâches. Lors de cette
 exécution, la tâche principale a d'abord écris, même si l'instruction
 d'écriture de la nouvelle tâche apparaît en premier dans le code. Et même si
-nous avons demandé à la nouvelle tâche d'écrire jusqu'à ce que `i` vaut `9`,
+nous avons demandé à la nouvelle tâche d'écrire jusqu'à ce que `i` vaille `9`,
 elle l'a fait seulement jusqu'à `5`, avant que la tâche principale s'arrête.
 
 <!--
@@ -314,7 +314,7 @@ in Listing 16-1 and call `join` to make sure the spawned thread finishes before
 
 Nous pouvons régler le problème des nouvelles tâches qui ne s'exécutent pas, ou
 pas complètement, en sauvegardant la valeur de retour de `thread::spawn` dans
-une variable. Le type de retour de `thread::span` est `JoinHandle`. Un
+une variable. Le type de retour de `thread::spawn` est `JoinHandle`. Un
 `JoinHandle` est une valeur possédée qui, lorsque nous appelons la méthode
 `join` sur elle, va attendre que ses tâches finissent. L'encart 16-2 montre
 comment utiliser le `JoinHandle` de la tâche que nous avons créé dans l'encart
@@ -526,7 +526,7 @@ an attempt to create a vector in the main thread and use it in the spawned
 thread. However, this won’t yet work, as you’ll see in a moment.
 -->
 
-Remarquez dans l'encart 16-1 que la fermeture que nous donnons à `thread::span`
+Remarquez dans l'encart 16-1 que la fermeture que nous donnons à `thread::spawn`
 ne prends pas d'arguments : nous n'utilisons aucune donnée de la tâche
 principale dans le code de la nouvelle tâche. Pour utiliser des données de la
 tâche principale dans la nouvelle tâche, la fermeture de la nouvelle tâche doit
@@ -598,7 +598,7 @@ Listing 16-4 provides a scenario that’s more likely to have a reference to `v`
 that won’t be valid:
 -->
 
-L'encart 16-4 propose un scénario qui est plus encleint à avoir une référence à
+L'encart 16-4 propose un scénario qui est plus enclin à avoir une référence à
 `v` qui ne sera plus valide :
 
 <!--

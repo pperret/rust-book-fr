@@ -30,5 +30,3 @@ trait Etat {}
 struct Brouillon {}
 
 impl Etat for Brouillon {}
-
-fn main() {}

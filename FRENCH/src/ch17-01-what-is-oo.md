@@ -1,12 +1,3 @@
-> # 🚧 Attention, peinture fraîche !
->
-> Cette page a été traduite par une seule personne et n'a pas été relue et
-> vérifiée par quelqu'un d'autre ! Les informations peuvent par exemple être
-> erronées, être formulées maladroitement, ou contenir d'autres types de fautes.
->
-> Vous pouvez contribuer à l'amélioration de cette page sur sa
-> [Pull Request](https://github.com/Jimskapt/rust-book-fr/pull/220).
-
 <!--
 ## Characteristics of Object-Oriented Languages
 -->
@@ -41,13 +32,13 @@ les supporte.
 <!--
 The book *Design Patterns: Elements of Reusable Object-Oriented Software* by
 Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides (Addison-Wesley
-Professional, 1994) colloquially referred to as *The Gang of Four* book, is a
+Professional, 1994), colloquially referred to as *The Gang of Four* book, is a
 catalog of object-oriented design patterns. It defines OOP this way:
 -->
 
 Le livre *Design Patterns: Elements of Reusable Object-Oriented Software*
 d'Erich Gamma, Richard Helm, Ralph Johnson, et John Vlissides (Addison-Wesley
-Professional, 1994) que l'on surnomme le livre du *Gang of Four*, est un
+Professional, 1994), que l'on surnomme le livre du *Gang of Four*, est un
 catalogue de patrons de conception orientés objet. Il définit la POO ainsi :
 
 <!--
@@ -69,9 +60,9 @@ functionality, according to the Gang of Four’s definition of objects.
 
 Si l'on se tient à cette définition, Rust est orienté objet : les structures et
 les énumérations ont des données, et les blocs `impl` leur fournissent des
-méthodes. Bien que les structures et les énumérations avec des méthodes ne soient pas qualifiées
-d'objets, elles en ont les fonctionnalités, d'après la définition des objets par
-le *Gang of Four*.
+méthodes. Bien que les structures et les énumérations avec des méthodes ne
+soient pas qualifiées d'objets, elles en ont les fonctionnalités, d'après la
+définition des objets par le *Gang of Four*.
 
 <!--
 ### Encapsulation that Hides Implementation Details
@@ -127,12 +118,12 @@ calculée pour nous. L'encart 17-1 contient la définition de la structure
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch17-oop/listing-17-01/src/lib.rs}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-01/src/lib.rs}}
 ```
 
@@ -167,12 +158,12 @@ comme le montre l'encart 17-2 :
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch17-oop/listing-17-02/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-02/src/lib.rs:here}}
 ```
 
@@ -232,10 +223,11 @@ que la structure de données, à l'avenir. Par exemple, nous pourrions utiliser
 un `HashSet<i32>` plutôt qu'un `Vec<i32>` pour le champ `liste`. Du moment que
 les signatures des méthodes publiques `ajouter`, `retirer` et `moyenne` restent
 les mêmes, du code qui utilise `CollectionMoyennee` n'aurait pas besoin de
-changer. En revanche, si nous avions fait en sorte que `liste` soit publique, cela n'aurait pas été
-forcément le cas : `HashSet<i32>` et `Vec<i32>` ont des méthodes différentes
-pour ajouter et retirer des éléments, donc il aurait vraisemblablement fallu
-changer le code externe s'il modifiait directement `liste`.
+changer. En revanche, si nous avions fait en sorte que `liste` soit publique,
+cela n'aurait pas été forcément le cas : `HashSet<i32>` et `Vec<i32>` ont des
+méthodes différentes pour ajouter et retirer des éléments, donc il aurait
+vraisemblablement fallu changer le code externe s'il modifiait directement
+`liste`.
 
 <!--
 If encapsulation is a required aspect for a language to be considered object
@@ -340,9 +332,10 @@ objets entre eux à l'exécution s'ils partagent certaines caractéristiques.
 > des données de divers types. Pour l'héritage, ces types sont généralement des
 > classes filles (ou *sous-classes*).
 >
-> À la place, Rust utilise la généricité pour construire des abstractions des différents types et
-> traits liés possibles pour imposer des contraintes sur ce que ces types
-> doivent fournir. Cela est parfois appelé *polymorphisme paramétrique borné*.
+> À la place, Rust utilise la généricité pour construire des abstractions des
+> différents types et traits liés possibles pour imposer des contraintes sur ce
+> que ces types doivent fournir. Cela est parfois appelé *polymorphisme
+> paramétrique borné*.
 
 <!--
 Inheritance has recently fallen out of favor as a programming design solution

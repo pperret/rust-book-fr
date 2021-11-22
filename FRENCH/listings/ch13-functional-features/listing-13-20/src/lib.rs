@@ -7,5 +7,3 @@ impl Compteur {
         Compteur { compteur: 0 }
     }
 }
-
-fn main() {}

@@ -4,7 +4,7 @@ use std::ops::Deref;
 impl<T> Deref for MaBoite<T> {
     type Target = T;
 
-    fn deref(&self) -> &T {
+    fn deref(&self) -> &Self::Target {
         &self.0
     }
 }

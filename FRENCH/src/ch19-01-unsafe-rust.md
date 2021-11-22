@@ -20,9 +20,9 @@ that doesn’t enforce these memory safety guarantees: it’s called *unsafe Rus
 and works just like regular Rust, but gives us extra superpowers.
 -->
 
-Tout le code Rust dont nous avons abordé jusqu'à présent a bénéficié des
+Tout le code Rust que nous avons abordé jusqu'à présent a bénéficié des
 garanties de sécurité de la mémoire, vérifiées à la compilation. Cependant, Rust
-a un second langage caché en son sein qui n'appliquent pas ces vérifications
+a un second langage caché en son sein qui n'applique pas ces vérifications
 pour la sécurité de la mémoire : il s'appelle le *Rust non sécurisé* et
 fonctionne comme le Rust habituel, mais fournit quelques super-pouvoirs
 supplémentaires.
@@ -31,23 +31,25 @@ supplémentaires.
 Unsafe Rust exists because, by nature, static analysis is conservative. When
 the compiler tries to determine whether or not code upholds the guarantees,
 it’s better for it to reject some valid programs rather than accept some
-invalid programs. Although the code might be okay, as far as Rust is able to
-tell, it’s not! In these cases, you can use unsafe code to tell the compiler,
-“Trust me, I know what I’m doing.” The downside is that you use it at your own
-risk: if you use unsafe code incorrectly, problems due to memory unsafety, such
-as null pointer dereferencing, can occur.
+invalid programs. Although the code *might* be okay, if the Rust compiler
+doesn’t have enough information to be confident, it will reject the code. In
+these cases, you can use unsafe code to tell the compiler, “Trust me, I know
+what I’m doing.” The downside is that you use it at your own risk: if you use
+unsafe code incorrectly, problems due to memory unsafety, such as null pointer
+dereferencing, can occur.
 -->
 
-Le Rust non sécurisé existe car, par nature, l'analyse statique est conservatif.
+Le Rust non sécurisé existe car, par nature, l'analyse statique est conservative.
 Lorsque le compilateur essaye de déterminer si le code respecte ou non les
 garanties, il vaut mieux rejeter quelques programmes valides plutôt que
-d'accepter quelques programmes invalides. Bien que le code puisse être correct,
-dès que Rust n'est pas capable de le comprendre, il ne l'est plus ! Dans ce cas,
-vous pouvez utiliser du code non sécurisé pour dire au compilateur “fais-moi
-confiance, je sais ce que je fait”. La contrepartie pour cela est que vous
-l'utilisez à vos risques et périls : si vous écrivez du code non sécurisé de
-manière incorrecte, des problèmes liés à la sécurité de la mémoire peuvent se
-produire, comme le déréférencement d'un pointeur vide par exemple.
+d'accepter quelques programmes invalides. Bien que le code *puisse* être
+correct, si le compilateur Rust n'a pas assez d'information pour être sûr, il
+va refuser ce code. Dans ce cas, vous pouvez utiliser du code non sécurisé pour
+dire au compilateur “fais-moi confiance, je sais ce que je fait”. La
+contrepartie pour cela est que vous l'utilisez à vos risques et périls : si
+vous écrivez du code non sécurisé de manière incorrecte, des problèmes liés à
+la sécurité de la mémoire peuvent se produire, comme le déréférencement d'un
+pointeur vide par exemple.
 
 <!--
 Another reason Rust has an unsafe alter ego is that the underlying computer
@@ -333,12 +335,12 @@ l'opérateur de déréférencement `*` sur un pointeur brut qui nécessite un bl
 `unsafe`.
 
 <!--
-```rust,unsafe
+```rust
 {{#rustdoc_include ../listings-sources/ch19-advanced-features/listing-19-03/src/main.rs:here}}
 ```
 -->
 
-```rust,unsafe
+```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-03/src/main.rs:here}}
 ```
 
@@ -391,9 +393,9 @@ abstraction that uses unsafe code.
 -->
 
 Avec tous ces dangers, pourquoi vous risquer à utiliser les pointeurs bruts ?
-Une des utilisations majeures et lorsque nous nous interfacons avec du code
+Une des utilisations majeures est lorsque nous nous interfacons avec du code
 C, comme vous allez le découvrir dans la section suivante. Une autre
-utilisation est lorsque nous créons une abstraction sécurisée qui le
+utilisation est lorsque nous créons une abstraction sécurisée que le
 vérificateur d'emprunt ne comprends pas. Nous allons découvrir les fonctions
 non sécurisées et ensuite voir un exemple d'une abstraction sécurisée qui
 utilise du code non sécurisé.
@@ -417,7 +419,7 @@ responsibility for upholding the function’s contracts.
 
 Le second type d'opération qui nécessite un bloc `unsafe` est l'appel à des
 fonctions non sécurisées. Les fonctions et méthodes non sécurisées ressemblent
-exactement pareil que les méthodes et fonctions habituelles, mais ont un
+exactement aux méthodes et fonctions habituelles, mais ont un
 `unsafe` en plus devant le reste de leur définition. Le mot-clé `unsafe` dans
 ce cas signifie que la fonction a des exigences à respecter pour pouvoir y
 faire appel, car Rust ne peut pas garantir que nous avons rempli ces exigences.
@@ -433,12 +435,12 @@ body:
 Voici une fonction non sécurisée `dangereux`, qui ne fait rien dans son corps :
 
 <!--
-```rust,unsafe
+```rust
 {{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-01-unsafe-fn/src/main.rs:here}}
 ```
 -->
 
-```rust,unsafe
+```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-01-unsafe-fn/src/main.rs:here}}
 ```
 
@@ -626,12 +628,12 @@ quelques appels à des fonctions non sécurisées pour construire une
 implémentation de `split_at_mut` qui fonctionne.
 
 <!--
-```rust,unsafe
+```rust
 {{#rustdoc_include ../listings-sources/ch19-advanced-features/listing-19-06/src/main.rs:here}}
 ```
 -->
 
-```rust,unsafe
+```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-06/src/main.rs:here}}
 ```
 
@@ -728,12 +730,12 @@ En contre-partie, l'utilisation de `slice::from_raw_parts_mut` dans l'encart
 arbitraire dans la mémoire et crée un slice de 10 000 éléments.
 
 <!--
-```rust,unsafe
+```rust
 {{#rustdoc_include ../listings-sources/ch19-advanced-features/listing-19-07/src/main.rs:here}}
 ```
 -->
 
-```rust,unsafe
+```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-07/src/main.rs:here}}
 ```
 
@@ -751,10 +753,10 @@ that the slice this code creates contains valid `i32` values. Attempting to use
 `slice` as though it’s a valid slice results in undefined behavior.
 -->
 
-Nous ne possédons par la mémoire à cet emplacement arbitraire, et il n'y a
+Nous ne possédons pas la mémoire à cet emplacement arbitraire, et il n'y a
 aucune garantie que la slice créée par ce code contient des valeurs `i32`
-valides. La tentative d'utilisation `slice` sera soumis à un comportement
-imprévisible même si elle est une slice valide.
+valides. La tentative d'utilisation de `slice` sera soumise à un comportement
+imprévisible même si c'est une slice valide.
 
 <!--
 #### Using `extern` Functions to Call External Code
@@ -799,25 +801,13 @@ en toute sécurité revient au développeur.
 <span class="filename">Fichier : src/main.rs</span>
 
 <!--
-```rust,unsafe
+```rust
 {{#rustdoc_include ../listings-sources/ch19-advanced-features/listing-19-08/src/main.rs}}
 ```
 -->
 
-```rust,unsafe
+```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-08/src/main.rs}}
-```
-
-```rust,unsafe
-extern "C" {
-    fn abs(input: i32) -> i32;
-}
-
-fn main() {
-    unsafe {
-        println!("La valeur absolue de -3 selon le langage C : {}", abs(-3));
-    }
-}
 ```
 
 <!--
@@ -941,21 +931,19 @@ Static variables are similar to constants, which we discussed in the
 [“Differences Between Variables and
 Constants”][differences-between-variables-and-constants]<!-- ignore -- >
 section in Chapter 3. The names of static variables are in
-`SCREAMING_SNAKE_CASE` by convention, and we *must* annotate the variable’s
-type, which is `&'static str` in this example. Static variables can only store
+`SCREAMING_SNAKE_CASE` by convention. Static variables can only store
 references with the `'static` lifetime, which means the Rust compiler can
-figure out the lifetime; we don’t need to annotate it explicitly. Accessing an
-immutable static variable is safe.
+figure out the lifetime and we aren’t required to annotate it explicitly.
+Accessing an immutable static variable is safe.
 -->
 
 Les variables statiques ressemblent aux constantes, que nous avons vu dans la
 section
 [“Différences entre les variables et les constantes”][differences-between-variables-and-constants]<!-- ignore -->
 du chapitre 3. Les noms des variables statiques sont par convention en
-`SCREAMING_SNAKE_CASE`, et nous *devons* obligatoirement renseigner le type de
-la variable, qui est `&'static str` dans cet exemple. Les variables statiques
+`SCREAMING_SNAKE_CASE`. Les variables statiques
 peuvent uniquement stocker des références avec la durée de vie `'static`, ce
-qui signifie que le compilateur Rust peut comprendre sa durée de vie ; nous
+qui signifie que le compilateur Rust peut comprendre sa durée de vie et nous
 n'avons pas besoin de la renseigner explicitement. L'accès à une variable
 statique immuable est sécurisé.
 
@@ -991,12 +979,12 @@ lire et modifier la variable statique mutable `COMPTEUR`.
 <span class="filename">Fichier : src/main.rs</span>
 
 <!--
-```rust,unsafe
+```rust
 {{#rustdoc_include ../listings-sources/ch19-advanced-features/listing-19-10/src/main.rs}}
 ```
 -->
 
-```rust,unsafe
+```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-10/src/main.rs}}
 ```
 
@@ -1046,27 +1034,27 @@ différentes tâches sont sécurisées.
 ### Implémenter un trait non sécurisé
 
 <!--
-The final action that works only with `unsafe` is implementing an unsafe trait.
-A trait is unsafe when at least one of its methods has some invariant that the
-compiler can’t verify. We can declare that a trait is `unsafe` by adding the
-`unsafe` keyword before `trait` and marking the implementation of the trait as
-`unsafe` too, as shown in Listing 19-11.
+Another use case for `unsafe` is implementing an unsafe trait. A trait is
+unsafe when at least one of its methods has some invariant that the compiler
+can’t verify. We can declare that a trait is `unsafe` by adding the `unsafe`
+keyword before `trait` and marking the implementation of the trait as `unsafe`
+too, as shown in Listing 19-11.
 -->
 
-La dernière action qui fonctionne uniquement avec `unsafe` est l'implémentation
-d'un trait non sécurisé. Un trait n'est pas sécurisé lorsque au moins une de ses
-méthodes contient une invariante que le compilateur ne peut pas vérifier. Nous
-pouvons déclarer un trait qui n'est pas sécurisé en ajoutant le mot-clé `unsafe`
-devant `trait` et en marquant aussi l'implémentation du trait comme `unsafe`,
-comme dans l'encart 19-11.
+Un autre cas d'emploi de `unsafe` est l'implémentation d'un trait non sécurisé.
+Un trait n'est pas sécurisé lorsque au moins une de ses méthodes contient une
+invariante que le compilateur ne peut pas vérifier. Nous pouvons déclarer un
+trait qui n'est pas sécurisé en ajoutant le mot-clé `unsafe` devant `trait` et
+en marquant aussi l'implémentation du trait comme `unsafe`, comme dans
+l'encart 19-11.
 
 <!--
-```rust,unsafe
+```rust
 {{#rustdoc_include ../listings-sources/ch19-advanced-features/listing-19-11/src/main.rs}}
 ```
 -->
 
-```rust,unsafe
+```rust
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-11/src/main.rs}}
 ```
 
@@ -1118,19 +1106,21 @@ besoin de faire ces vérifications manuellement et les signaler avec `unsafe`.
 ### Utiliser des champs d'un Union
 
 <!--
-A `union` is similar to a `struct`, but only one declared field is used in a
-particular instance at one time. Unions are primarily used to interface with
-unions in C code. Accessing union fields is unsafe because Rust can’t guarantee
-the type of the data currently being stored in the union instance. You can
-learn more about unions in [the reference][reference].
+The final action that works only with `unsafe` is accessing fields of a
+*union*. A `union` is similar to a `struct`, but only one declared field is
+used in a particular instance at one time. Unions are primarily used to
+interface with unions in C code. Accessing union fields is unsafe because Rust
+can’t guarantee the type of the data currently being stored in the union
+instance. You can learn more about unions in [the reference][reference].
 -->
 
-Un `union` ressemble à une `struct`, mais un seul champ de ceux déclarés est
-utilisé dans une instance précise au même moment. Les unions sont principalement
-utilisés pour s'interfacer avec les unions du code C. L'accès aux champs des
-unions n'est pas sécurisé car Rust ne peut pas garantir le type de données qui
-est actuellement stockée dans l'instance de l'union. Vous pouvez en apprendre
-plus sur les unions dans [the reference][reference].
+La dernière action qui fonctionne uniquement avec `unsafe` est d'accéder aux
+champs d'un *union*. Un `union` ressemble à une `struct`, mais un seul champ de
+ceux déclarés est utilisé dans une instance précise au même moment. Les unions
+sont principalement utilisés pour s'interfacer avec les unions du code C.
+L'accès aux champs des unions n'est pas sécurisé car Rust ne peut pas garantir
+le type de données qui est actuellement stockée dans l'instance de l'union.
+Vous pouvez en apprendre plus sur les unions dans [the reference][reference].
 
 <!--
 ### When to Use Unsafe Code
@@ -1158,7 +1148,7 @@ source de problèmes lorsqu'ils surviennent.
 [dangling-references]:
 ch04-02-references-and-borrowing.html#dangling-references
 [differences-between-variables-and-constants]:
-ch03-01-variables-and-mutability.html#differences-between-variables-and-constants
+ch03-01-variables-and-mutability.html#constants
 [extensible-concurrency-with-the-sync-and-send-traits]:
 ch16-04-extensible-concurrency-sync-and-send.html#extensible-concurrency-with-the-sync-and-send-traits
 [the-slice-type]: ch04-03-slices.html#the-slice-type
@@ -1168,7 +1158,7 @@ ch16-04-extensible-concurrency-sync-and-send.html#extensible-concurrency-with-th
 [dangling-references]:
 ch04-02-references-and-borrowing.html#les-références-pendouillantes
 [differences-between-variables-and-constants]:
-ch03-01-variables-and-mutability.html#différences-entre-les-variables-et-les-constantes
+ch03-01-variables-and-mutability.html#les-constantes
 [extensible-concurrency-with-the-sync-and-send-traits]:
 ch16-04-extensible-concurrency-sync-and-send.html
 [the-slice-type]: ch04-03-slices.html#le-type-slice

@@ -23,5 +23,3 @@ impl Iterator for Compteur {
         }
     }
 }
-
-fn main() {}

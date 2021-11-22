@@ -26,5 +26,3 @@ impl GroupeTaches {
     // ANCHOR: here
 }
 // ANCHOR_END: here
-
-fn main() {}

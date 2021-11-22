@@ -208,12 +208,12 @@ L'encart 19-28 montre une définition légèrement simplifiée de la macro `vec!
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-28/src/lib.rs}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-28/src/lib.rs}}
 ```
 
@@ -386,7 +386,7 @@ effectively deprecated. With this in mind, as well as the fact that most Rust
 programmers will *use* macros more than *write* macros, we won’t discuss
 `macro_rules!` any further. To learn more about how to write macros, consult
 the online documentation or other resources, such as [“The Little Book of Rust
-Macros”][tlborm].
+Macros”][tlborm] started by Daniel Keep and continued by Lukas Wirth.
 -->
 
 Il subsiste quelques cas marginaux étranges avec `macro_rules!`. Bientôt, Rust
@@ -396,13 +396,14 @@ manière mais qui corrigera ces cas marginaux. Après cette mise à jour,
 plupart des développeurs Rust vont plus *utiliser* les macros *qu'écrire* des
 macros, nous ne verrons plus à nouveau `macro_rules!` à l'avenir. Pour en
 savoir plus sur l'écriture des macros, consultez la documentation en ligne, ou
-d'autres ressources comme [“The Little Book of Rust Macros”][tlborm].
+d'autres ressources comme [“The Little Book of Rust Macros”][tlborm], débuté
+par Daniel Keep et continué par Lukas Wirth.
 
 <!--
-[tlborm]: https://danielkeep.github.io/tlborm/book/index.html
+[tlborm]: https://veykril.github.io/tlborm/
 -->
 
-[tlborm]: https://danielkeep.github.io/tlborm/book/index.html
+[tlborm]: https://veykril.github.io/tlborm/
 
 <!--
 ### Procedural Macros for Generating Code from Attributes
@@ -595,12 +596,12 @@ Ensuite, nous allons définir le trait `HelloMacro` et sa fonction associée :
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-20-impl-hellomacro-for-pancakes/hello_macro/src/lib.rs}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-20-impl-hellomacro-for-pancakes/hello_macro/src/lib.rs}}
 ```
 
@@ -719,12 +720,12 @@ de `hello_macro_derive` :
 
 <!--
 ```toml
-{{#include ../listings-sources/ch19-advanced-features/listing-19-31/hello_macro/hello_macro_derive/Cargo.toml:7:12}}
+{{#include ../listings-sources/ch19-advanced-features/listing-19-31/hello_macro/hello_macro_derive/Cargo.toml:6:12}}
 ```
 -->
 
 ```toml
-{{#include ../listings/ch19-advanced-features/listing-19-31/hello_macro/hello_macro_derive/Cargo.toml:7:12}}
+{{#include ../listings/ch19-advanced-features/listing-19-31/hello_macro/hello_macro_derive/Cargo.toml:6:12}}
 ```
 
 <!--
@@ -931,7 +932,7 @@ they’ll get the extra functionality that we provide in the modified
 -->
 
 Bientôt, nous définirons la fonction `impl_hello_macro`, qui nous permettra de
-construire de nous code Rust que nous souhaitons injecter. Mais avant de faire
+construire le nouveau code Rust que nous souhaitons injecter. Mais avant de faire
 cela, remarquez que la sortie de notre macro derive est aussi un `TokenStream`.
 Le `TokenStream` retourné est ajouté au code que les utilisateurs de notre
 crate ont écrit, donc lorsqu'ils compilent leur crate, ils récupéreront la
@@ -1018,7 +1019,7 @@ returns a value of the required `TokenStream` type.
 -->
 
 La macro `quote!` nous permet de définir le code Rust que nous souhaitons
-retourner. Le compilateur attend quelque chose de différent en résultat que le
+retourner. Le compilateur attend quelque chose de différent en résultat que
 ce qui correspond à l'exécution de `quote!`, donc nous devons le convertir en
 `TokenStream`. Nous faisons ceci en faisant appel à la méthode `into`, qui se
 base sur cette représentation intermédiaire et retourne une valeur attendue,

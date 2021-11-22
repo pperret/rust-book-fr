@@ -214,18 +214,6 @@ corriger cette erreur :
 {{#rustdoc_include ../listings/ch20-web-server/no-listing-05-fix-worker-new/src/lib.rs:here}}
 ```
 
-```rust,ignore
-impl Operateur {
-    fn new(id: usize, reception: Arc<Mutex<mpsc::Receiver<Mission>>>) -> Operateur {
-        // -- partie masquée ici --
-
-        Operateur {
-            id,
-            tache: Some(tache),
-        }
-    }
-}
-```
 
 <!--
 The first error is in our `Drop` implementation. We mentioned earlier that we
@@ -288,7 +276,7 @@ Avec tous ces changements, notre code se compile sans aucun avertissement. Mais
 la mauvaise nouvelle est que ce code ne fonctionne pas de la façon dont nous
 souhaitons, pour l'instant. La cause se situe dans la logique des fermetures
 qui sont exécutées par les tâches des instances de `Operateur` : pour le
-moment, nous faisons faisons appel à `join`, mais cela ne va pas arrêter les
+moment, nous faisons appel à `join`, mais cela ne va pas arrêter les
 tâches car elles font une boucle infinie avec `loop` pour attendre des
 missions. Si nous essayons de nettoyer notre `GroupeTaches` avec
 l'implémentation actuelle de `drop`, la tâche principale va se bloquer à
@@ -314,12 +302,12 @@ des instances de `Job`.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch20-web-server/no-listing-07-define-message-enum/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch20-web-server/no-listing-07-define-message-enum/src/lib.rs:here}}
 ```
 
@@ -660,12 +648,12 @@ Voici le code complet pour pouvoir vous y référer :
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-25/src/bin/main.rs:all}}
+{{#rustdoc_include ../listings-sources/ch20-web-server/no-listing-08-final-code/src/bin/main.rs}}
 ```
 -->
 
 ```rust,ignore
-{{#rustdoc_include ../listings/ch20-web-server/listing-20-25/src/bin/main.rs:all}}
+{{#rustdoc_include ../listings/ch20-web-server/no-listing-08-final-code/src/bin/main.rs}}
 ```
 
 <!--
@@ -675,13 +663,13 @@ Voici le code complet pour pouvoir vous y référer :
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
-{{#rustdoc_include ../listings-sources/ch20-web-server/listing-20-25/src/lib.rs:here}}
+```rust,noplayground
+{{#rustdoc_include ../listings-sources/ch20-web-server/no-listing-08-final-code/src/lib.rs}}
 ```
 -->
 
-```rust
-{{#rustdoc_include ../listings/ch20-web-server/listing-20-25/src/lib.rs:here}}
+```rust,noplayground
+{{#rustdoc_include ../listings/ch20-web-server/no-listing-08-final-code/src/lib.rs}}
 ```
 
 <!--

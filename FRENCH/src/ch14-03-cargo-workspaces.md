@@ -105,13 +105,6 @@ cas, ce chemin est *additioneur* :
 {{#include ../listings/ch14-more-about-cargo/no-listing-01-workspace-with-adder-crate/ajout/Cargo.toml}}
 ```
 
-```toml
-[workspace]
-
-members = [
-    "additioneur",
-]
-```
 
 <!--
 Next, we’ll create the `adder` binary crate by running `cargo new` within the
@@ -210,7 +203,7 @@ Change the top-level *Cargo.toml* to specify the *add-one* path in the
 `members` list:
 -->
 
-Ensuite, créons un autre paquet, membre de l'espace de travail et appelons-la
+Ensuite, créons un autre paquet, membre de l'espace de travail et appelons-le
 `ajouter-un`. Changeons le *Cargo.toml* du niveau le plus haut pour renseigner
 le chemin vers *ajouter-un* dans la liste `members` :
 
@@ -306,12 +299,12 @@ Dans le fichier *ajouter-un/src/lib.rs*, ajoutons une fonction `ajouter_un` :
 <span class="filename">Fichier : ajouter-un/src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch14-more-about-cargo/no-listing-02-workspace-with-two-crates/add/add-one/src/lib.rs}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch14-more-about-cargo/no-listing-02-workspace-with-two-crates/ajout/ajouter-un/src/lib.rs}}
 ```
 
@@ -382,7 +375,7 @@ portée. Changez ensuite la fonction `main` pour appeler la fonction
 ```
 
 <!--
-<span class="caption">Listing 14-7: Using the `add-one` library crate from the 
+<span class="caption">Listing 14-7: Using the `add-one` library crate from the
  `adder` crate</span>
 -->
 
@@ -486,7 +479,7 @@ plus haut de l'espace de travail plutôt que d'avoir un *Cargo.lock* dans chaque
 dossier de chaque crate. Cela garantit que toutes les crates utilisent la même
 version de toutes les dépendances. Si nous ajoutons le paquet `rand` aux
 fichiers *additioneur/Cargo.toml* et *ajouter-un/Cargo.toml*, cargo va réunir
-ces deux en une seule version de `rand` et enregistrer cela dans un seul
+les deux en une seule version de `rand` et enregistrer cela dans un seul
 *Cargo.lock*. Faire en sorte que toutes les crates de l'espace de travail
 utilisent la même dépendance signifie que les crates dans l'espace de travail
 seront toujours compatibles l'une avec l'autre. Ajoutons la crate `rand` à la
@@ -520,12 +513,15 @@ utiliser la crate `rand` dans la crate `ajouter-un` :
 <!--
 We can now add `use rand;` to the *add-one/src/lib.rs* file, and building the
 whole workspace by running `cargo build` in the *add* directory will bring in
-and compile the `rand` crate:
+and compile the `rand` crate. We will get one warning because we aren’t
+referring to the `rand` we brought into scope:
 -->
 
 Nous pouvons maintenant ajouter `use rand;` au fichier *ajouter-un/src/lib.rs*,
 et compiler l'ensemble de l'espace de travail en lançant `cargo build` dans le
-dossier *ajout*, ce qui va importer et compiler la crate `rand` :
+dossier *ajout*, ce qui va importer et compiler la crate `rand`. Nous devriez
+avoir un avertissement car nous n'avons pas utilisé le `rand` que nous avons
+introduit dans la portée :
 
 <!--
 <!-- manual-regeneration
@@ -539,10 +535,20 @@ copy output below; the output updating script doesn't handle subdirectories in p
 ```console
 $ cargo build
     Updating crates.io index
-  Downloaded rand v0.5.5
+  Downloaded rand v0.8.3
    --snip--
-   Compiling rand v0.5.6
+   Compiling rand v0.8.3
    Compiling add-one v0.1.0 (file:///projects/add/add-one)
+warning: unused import: `rand`
+ -- > add-one/src/lib.rs:1:5
+  |
+1 | use rand;
+  |     ^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: 1 warning emitted
+
    Compiling adder v0.1.0 (file:///projects/add/adder)
     Finished dev [unoptimized + debuginfo] target(s) in 10.18s
 ```
@@ -551,10 +557,20 @@ $ cargo build
 ```console
 $ cargo build
     Updating crates.io index
-  Downloaded rand v0.5.5
+  Downloaded rand v0.8.3
    -- partie masquée ici --
-   Compiling rand v0.5.6
+   Compiling rand v0.8.3
    Compiling ajouter-un v0.1.0 (file:///projects/ajout/ajouter-un)
+warning: unused import: `rand`
+ --> ajouter-un/src/lib.rs:1:5
+  |
+1 | use rand;
+  |     ^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: 1 warning emitted
+
    Compiling additioneur v0.1.0 (file:///projects/ajout/additioneur)
     Finished dev [unoptimized + debuginfo] target(s) in 10.18s
 ```
@@ -592,7 +608,7 @@ error[E0432]: unresolved import `rand`
  -- > adder/src/main.rs:2:5
   |
 2 | use rand;
-  |     ^^^^ no `rand` external crate
+  |     ^^^^ no external crate `rand`
 ```
 -->
 
@@ -601,10 +617,10 @@ $ cargo build
   -- partie masquée ici --
    Compiling additioneur v0.1.0 (file:///projects/ajout/additioneur)
 error[E0432]: unresolved import `rand`
- -- > additioneur/src/main.rs:2:5
+ --> additioneur/src/main.rs:2:5
   |
 2 | use rand;
-  |     ^^^^ no `rand` external crate
+  |     ^^^^ no external crate `rand`
 ```
 
 <!--
@@ -619,7 +635,7 @@ in the workspace will be compatible with each other.
 -->
 
 Pour corriger cela, modifiez le fichier *Cargo.toml* pour le paquet
-`additioneur` et rajouter-lui aussi un dépendance à `rand`. La compilation du
+`additioneur` et indiquez que `rand` est une dépendance de cette crate aussi. La compilation du
 paquet `additioneur` va rajouter `rand` à la liste des dépendances pour
 `additioneur` dans *Cargo.lock*, mais aucune copie supplémentaire de `rand` sera
 téléchargé. Cargo s'est assuré que toutes les crates de chaque paquet de
@@ -646,15 +662,15 @@ Afin de procéder à une autre amélioration, ajoutons un test de la fonction
 <span class="filename">Filename: add-one/src/lib.rs</span>
 -->
 
-<span class="filename">Fihcier : add-one/src/lib.rs</span>
+<span class="filename">Fichier : add-one/src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch14-more-about-cargo/no-listing-04-workspace-with-tests/add/add-one/src/lib.rs}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch14-more-about-cargo/no-listing-04-workspace-with-tests/ajout/ajouter-un/src/lib.rs}}
 ```
 
@@ -684,19 +700,19 @@ $ cargo test
 running 1 test
 test tests::it_works ... ok
 
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
      Running target/debug/deps/adder-49979ff40686fa8e
 
 running 0 tests
 
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
    Doc-tests add-one
 
 running 0 tests
 
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 ```
 -->
 
@@ -710,19 +726,19 @@ $ cargo test
 running 1 test
 test tests::cela_fonctionne ... ok
 
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
      Running target/debug/deps/additioneur-49979ff40686fa8e
 
 running 0 tests
 
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
    Doc-tests ajouter-un
 
 running 0 tests
 
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 ```
 
 <!--
@@ -767,13 +783,13 @@ $ cargo test -p add-one
 running 1 test
 test tests::it_works ... ok
 
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
    Doc-tests add-one
 
 running 0 tests
 
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 ```
 -->
 
@@ -785,13 +801,13 @@ $ cargo test -p ajouter-un
 running 1 test
 test tests::cela_fonctionne ... ok
 
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
    Doc-tests ajouter-un
 
 running 0 tests
 
-test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 ```
 
 <!--
@@ -836,5 +852,5 @@ often changed at the same time.
 Au fur et à mesure que votre projet se développe, pensez à utiliser un espace
 de travail : il est plus facile de comprendre des composants individuels, plus
 petits, plutôt qu'un gros tas de code. De plus, garder les crates dans un
-espace de travail peut améliorer la collation entre elles si elles sont souvent
+espace de travail peut améliorer la coordination entre elles si elles sont souvent
 modifiées ensemble.

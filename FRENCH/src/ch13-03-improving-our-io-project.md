@@ -239,6 +239,30 @@ en itérant dessus, nous pouvons ajouter le mot-clé `mut` dans la spécificatio
 du paramètre `args` pour le rendre mutable.
 
 <!--
+We also needed to specify that the string slice error type can now only have
+the `'static` lifetime. Because we’re only ever returning string literals, this
+was true before. However, when we had a reference in the parameters, there was
+the possibility that the reference in the return type could have had the same
+lifetime as the reference in the parameters. The rules that we discussed in the
+[“Lifetime Elision”][lifetime-elision] section of Chapter 10 applied, and we
+weren’t required to annotate the lifetime of `&str`. With the change to `args`,
+the lifetime elision rules no longer apply, and we must specify the `'static`
+lifetime.
+-->
+
+Nous avons aussi besoin de préciser que le type de slice de chaîne de
+caractères d'erreur ne peut avoir que la durée de vie `'static`. Comme nous
+retournions toujours des littéraux de chaînes de caractères, c'était bien le
+cas auparavant. Cependant, lorsque nous avions une référence dans les
+paramètres, il y avait une possibilité que la référence dans le type de retour
+puisse avoir la même durée de vie que la référence dans les paramètres. Les
+règles que nous avons vu dans [une section du chapitre
+10][lifetime-elision]<!-- ignore --> s'appliquaient également, et nous n'avons
+pas besoin de préciser la durée de vie de `&str`. Avec le changement que nous
+avons fait à `args`, les règles d'élision de durée de vie ne s'appliquent plus,
+et nous devons renseigner la durée de vie `'static`.
+
+<!--
 #### Using `Iterator` Trait Methods Instead of Indexing
 -->
 
@@ -263,12 +287,12 @@ met à jour le code de l'encart 12-23 afin d'utiliser la méthode `next` :
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-27/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-27/src/lib.rs:here}}
 ```
 
@@ -432,3 +456,9 @@ performance.
 Mais ces deux implémentations sont-elles réellement équivalentes ? L'hypothèse
 intuitive pourrait être que la boucle de plus bas niveau sera plus rapide.
 Intéressons nous maintenant à leurs performances.
+
+<!--
+[lifetime-elision]: ch10-03-lifetime-syntax.html#lifetime-elision
+-->
+
+[lifetime-elision]: ch10-03-lifetime-syntax.html

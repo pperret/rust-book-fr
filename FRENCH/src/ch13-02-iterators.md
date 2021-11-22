@@ -199,12 +199,12 @@ l'itérateur créé à partir du vecteur.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-15/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-15/src/lib.rs:here}}
 ```
 
@@ -296,12 +296,12 @@ illustrant une utilisation de la méthode `sum` :
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-16/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-16/src/lib.rs:here}}
 ```
 
@@ -508,12 +508,12 @@ chaussures avec la pointure demandée.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-19/src/lib.rs}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-19/src/lib.rs}}
 ```
 
@@ -526,7 +526,7 @@ that captures `shoe_size`</span>
 fermeture capturant `pointure_chaussure`</span>
 
 <!--
-The `shoes_in_my_size` function takes ownership of a vector of shoes and a shoe
+The `shoes_in_size` function takes ownership of a vector of shoes and a shoe
 size as parameters. It returns a vector containing only shoes of the specified
 size.
 -->
@@ -536,7 +536,7 @@ chaussures et d'une pointure comme paramètres. Il retourne un vecteur contenant
 uniquement des chaussures de la pointure demandée.
 
 <!--
-In the body of `shoes_in_my_size`, we call `into_iter` to create an iterator
+In the body of `shoes_in_size`, we call `into_iter` to create an iterator
 that takes ownership of the vector. Then we call `filter` to adapt that
 iterator into a new iterator that only contains elements for which the closure
 returns `true`.
@@ -560,7 +560,7 @@ chaussures de la pointure spécifiée. Enfin, l'appel à `collect` retourne un
 vecteur qui regroupe les valeurs renvoyées par l'itérateur.
 
 <!--
-The test shows that when we call `shoes_in_my_size`, we get back only shoes
+The test shows that when we call `shoes_in_size`, we get back only shoes
 that have the same size as the value we specified.
 -->
 
@@ -622,12 +622,12 @@ associée `new` pour créer des instances de `Compteur` :
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-20/src/lib.rs}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-20/src/lib.rs}}
 ```
 
@@ -673,12 +673,12 @@ qu'il se passe quand cet itérateur est utilisé, comme dans l'encart 13-21 :
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-21/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-21/src/lib.rs:here}}
 ```
 
@@ -741,12 +741,12 @@ partir d'un vecteur dans l'encart 13-15.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-22/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-22/src/lib.rs:here}}
 ```
 
@@ -808,12 +808,12 @@ pourrions le faire, comme le montre le test dans l'encart 13-23 :
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch13-functional-features/listing-13-23/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch13-functional-features/listing-13-23/src/lib.rs:here}}
 ```
 

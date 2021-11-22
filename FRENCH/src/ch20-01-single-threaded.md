@@ -129,7 +129,7 @@ Using `TcpListener`, we can listen for TCP connections at the address
 `127.0.0.1:7878`. In the address, the section before the colon is an IP address
 representing your computer (this is the same on every computer and doesn’t
 represent the authors’ computer specifically), and `7878` is the port. We’ve
-chosen this port for two reasons: HTTP is normally accepted on this port, and
+chosen this port for two reasons: HTTP isn’t normally accepted on this port, and
 7878 is *rust* typed on a telephone.
 -->
 
@@ -137,9 +137,9 @@ En utilisant `TcpListener`, nous pouvons écouter les connexions TCP à l'adress
 `127.0.0.1:7878`. Dans cette adresse, la partie avant les double-points est une
 adresse IP qui représente votre ordinateur (c'est la même sur chaque ordinateur
 et ne représente pas précisément l'ordinateur de l'auteur), et `7878` est le
-port. Nous avons choisi ce port pour deux raisons : HTTP est habituellement
-accepté sur ce port, et 7878 correspond aux touches utilisées sur un clavier de
-téléphone pour écrire *Rust*.
+port. Nous avons choisi ce port pour deux raisons : HTTP n'est pas
+habituellement accepté sur ce port, et 7878 correspond aux touches utilisées
+sur un clavier de téléphone pour écrire *Rust*.
 
 <!--
 The `bind` function in this scenario works like the `new` function in that it
@@ -156,7 +156,7 @@ les réseaux, connecter un port à écouter se dit aussi “lier à un port”.
 <!--
 The `bind` function returns a `Result<T, E>`, which indicates that binding
 might fail. For example, connecting to port 80 requires administrator
-privileges (nonadministrators can listen only on ports higher than 1024), so if
+privileges (nonadministrators can listen only on ports higher than 1023), so if
 we tried to connect to port 80 without being an administrator, binding wouldn’t
 work. As another example, binding wouldn’t work if we ran two instances of our
 program and so had two programs listening to the same port. Because we’re
@@ -168,7 +168,7 @@ errors happen.
 La fonction `bind` retourne un `Result<T, E>`, ce qui signifie que la création
 de lien peut échouer. Par exemple, la connexion au port 80 nécessite d'être
 administrateur (les utilisateurs non-administrateur ne peuvent écouter que sur
-les ports supérieurs à 1024), donc si nous essayons de connecter un port 80
+les ports supérieurs à 1023), donc si nous essayons de connecter un port 80
 sans être administrateur, le lien ne va pas fonctionner. Un autre exemple, le
 lien ne va pas fonctionner si nous exécutons deux instances de notre programme
 et que nous avons deux programmes qui écoutent sur le même port. Comme nous
@@ -471,7 +471,7 @@ fetch */* repeatedly because it’s not getting a response from our program.
 
 En fonction de votre navigateur, vous pourriez voir une sortie légèrement
 différente. Maintenant que nous affichons les données des requêtes, nous
-pouvons constater pourquoi nous obtenons pourquoi nous obtenons plusieurs
+pouvons constater pourquoi nous obtenons plusieurs
 connexions pour un seul chargement de page dans le navigateur web en analysant
 le chemin après le `Requête : GET`. Si les connexions répétées sont toutes vers
 */*, nous pouvons constater que le navigateur essaye d'obtenir */* à répétition
@@ -754,7 +754,7 @@ l'encart 20-4 vous montre une possibilité.
 <span class="filename">Filename: hello.html</span>
 -->
 
-<span class="filename">Fichier : salutation.html</span>
+<span class="filename">Fichier : hello.html</span>
 
 <!--
 ```html
@@ -808,7 +808,7 @@ l'envoyer.
 body of the response</span>
 -->
 
-<span class="caption">Encart 20-5 : envoi du contenu de *salutation.html* dans
+<span class="caption">Encart 20-5 : envoi du contenu de *hello.html* dans
 le corps de la réponse</span>
 
 <!--
@@ -820,7 +820,7 @@ I/O project in Listing 12-4.
 
 Nous avons ajouté une ligne en haut pour importer le module de système de
 fichiers de la bibliothèque standard. Le code pour lire le contenu d'un fichier
-dans une `String` devrait vous être familier ; nous n'avons utilisé dans le
+dans une `String` devrait vous être familier ; nous l'avons utilisé dans le
 chapitre 12 lorsque nous lisions le contenu d'un fichier pour notre projet
 d'entrée/sortie, dans l'encart 12-4.
 
@@ -945,7 +945,7 @@ saw when running the code in Listing 20-1 and Listing 20-2.
 -->
 
 Exécutez ce code maintenant et demandez *127.0.0.1:7878* ; vous devriez obtenir
-le HTML de *salutation.html*. Si vous faites n'importe quelle autre requête,
+le HTML de *hello.html*. Si vous faites n'importe quelle autre requête,
 comme *127.0.0.1:7878/autre-chose*, vous allez obtenir une erreur de connexion
 comme celle que vous avez vu lorsque vous exécutiez le code l'encart 20-1 et de
 l'encart 20-2.
@@ -988,18 +988,18 @@ d'erreur s'il y autre chose que */* qui est demandé</span>
 
 <!--
 Here, our response has a status line with status code 404 and the reason
-phrase `NOT FOUND`. We’re still not returning headers, and the body of the
-response will be the HTML in the file *404.html*. You’ll need to create a
-*404.html* file next to *hello.html* for the error page; again feel free to use
-any HTML you want or use the example HTML in Listing 20-8.
+phrase `NOT FOUND`. The body of the response will be the HTML in the file
+*404.html*. You’ll need to create a *404.html* file next to *hello.html* for
+the error page; again feel free to use any HTML you want or use the example
+HTML in Listing 20-8.
 -->
 
 Ici, notre réponse a une ligne de statut avec le code de statut 404 et la
-phrase de raison `NOT FOUND`. Nous ne retournons toujours pas d'entêtes, et le
-corps de la réponse sera le HTML présent dans le fichier *404.html*. Nous aurons
-besoin de créer un fichier `404.html` à côté de *salutation.html* pour la page
-d'erreur ; n'hésitez pas à nouveau à utiliser le HTML que vous souhaitez ou à
-défaut utiliser le HTML d'exemple présent dans l'encart 20-8.
+phrase de raison `NOT FOUND`. Le corps de la réponse sera le HTML présent dans
+le fichier *404.html*. Nous aurons besoin de créer un fichier `404.html` à côté
+de *hello.html* pour la page d'erreur ; n'hésitez pas à nouveau à utiliser le
+HTML que vous souhaitez ou à défaut utiliser le HTML d'exemple présent dans
+l'encart 20-8.
 
 <!--
 <span class="filename">Filename: 404.html</span>
@@ -1033,7 +1033,7 @@ should return the contents of *hello.html*, and any other request, like
 
 Une fois ces modifications appliquées, exécutez à nouveau votre serveur. Les
 requêtes vers *127.0.0.1:7878* devraient retourner le contenu de
-*salutation.html*, et toutes les autres requêtes, comme
+*hello.html*, et toutes les autres requêtes, comme
 *127.0.0.1:7878/autre-chose*, devraient retourner le HTML d'erreur présent dans
 *404.html*.
 

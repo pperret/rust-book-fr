@@ -247,7 +247,7 @@ copy just the doc-tests section below
 running 1 test
 test src/lib.rs - add_one (line 5) ... ok
 
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.27s
 ```
 -->
 
@@ -257,7 +257,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 running 1 test
 test src/lib.rs - ajouter_un (line 5) ... ok
 
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.27s
 ```
 
 <!--
@@ -463,12 +463,12 @@ modules : un module `types` qui contient deux énumérations `CouleurPrimaire` 
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground,test_harness
 {{#rustdoc_include ../listings-sources/ch14-more-about-cargo/listing-14-03/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground,test_harness
 {{#rustdoc_include ../listings/ch14-more-about-cargo/listing-14-03/src/lib.rs:here}}
 ```
 
@@ -478,7 +478,7 @@ modules : un module `types` qui contient deux énumérations `CouleurPrimaire` 
 -->
 
 <span class="caption">Encart 14-3 : une bibliothèque `art` avec des éléments
-organisés selon les modules `types` and `utilitaires`</span>
+organisés selon les modules `types` et `utilitaires`</span>
 
 <!--
 Figure 14-3 shows what the front page of the documentation for this crate
@@ -620,7 +620,7 @@ and link re-exports on the front page, as shown in Figure 14-4, making the
 `PrimaryColor` and `SecondaryColor` types and the `mix` function easier to find.
 -->
 
-La documentation de l'API qui `cargo doc` a généré pour cette crate va
+La documentation de l'API que `cargo doc` a généré pour cette crate va
 maintenant lister et lier les ré-exportations sur la page d'accueil, comme dans
 l'illustration 14-4, ce qui rend les types `CouleurPrimaire` et
 `CouleurSecondaire` plus faciles à trouver.
@@ -772,8 +772,8 @@ to the `[package]` section of the crate’s *Cargo.toml* file.
 
 Maintenant que vous avez un compte, imaginons que vous avez une crate que vous
 souhaitez publier. Avant de la publier, vous aurez besoin d'ajouter quelques
-métadonnées à votre crate en les ajoutant à la section `[package]` de votre
-fichier *Cargo.toml* de la crate.
+métadonnées à votre crate en les ajoutant à la section `[package]` du fichier
+*Cargo.toml* de votre crate.
 
 <!--
 Your crate will need a unique name. While you’re working on a crate locally,
@@ -934,15 +934,13 @@ plusieurs identificateurs de licence séparés par `OR` pour avoir plusieurs
 licences pour votre projet.
 
 <!--
-With a unique name, the version, the author details that `cargo new` added
-when you created the crate, your description, and a license added, the
+With a unique name, the version, your description, and a license added, the
 *Cargo.toml* file for a project that is ready to publish might look like this:
 -->
 
-Avec le nom unique, la version, les informations du développeur que `cargo new`
-a ajouté lorsque vous avez créé la crate, ainsi que la description et la licence
-que vous avez ajouté, le fichier *Cargo.toml* de ce projet qui est prêt à être
-publié devrait ressembler à ceci :
+Avec le nom unique, la version, la description et la licence que vous avez
+ajouté, le fichier *Cargo.toml* de ce projet qui est prêt à être publié devrait
+ressembler à ceci :
 
 <!--
 <span class="filename">Filename: Cargo.toml</span>
@@ -955,7 +953,6 @@ publié devrait ressembler à ceci :
 [package]
 name = "guessing_game"
 version = "0.1.0"
-authors = ["Your Name <you@example.com>"]
 edition = "2018"
 description = "A fun game where you guess what number the computer has chosen."
 license = "MIT OR Apache-2.0"
@@ -968,7 +965,6 @@ license = "MIT OR Apache-2.0"
 [package]
 name = "jeu_du_plus_ou_du_moins"
 version = "0.1.0"
-authors = ["Votre nom <adresse@exemple.com>"]
 edition = "2018"
 description = "Un jeu où vous devez deviner quel nombre l'ordinateur a choisi."
 license = "MIT OR Apache-2.0"

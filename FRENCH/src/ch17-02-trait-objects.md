@@ -1,12 +1,3 @@
-> # 🚧 Attention, peinture fraîche !
->
-> Cette page a été traduite par une seule personne et n'a pas été relue et
-> vérifiée par quelqu'un d'autre ! Les informations peuvent par exemple être
-> erronées, être formulées maladroitement, ou contenir d'autres types de fautes.
->
-> Vous pouvez contribuer à l'amélioration de cette page sur sa
-> [Pull Request](https://github.com/Jimskapt/rust-book-fr/pull/231).
-
 <!--
 ## Using Trait Objects That Allow for Values of Different Types
 -->
@@ -94,10 +85,11 @@ classe `Composant` qui a une méthode `afficher`. Les autres
 classes, telles que `Bouton`, `Image` et `ListeDeroulante`, hériteraient de
 `Composant` et hériteraient ainsi de la méthode `afficher`. Elles pourraient
 toutes redéfinir la méthode `afficher` avec leur comportement personnalisé,
-mais l'environnement de développement pourrait considérer tous les types comme des instances de
-`Composant` et appeler `afficher` sur chacun d'entre eux. Mais puisque Rust n'a
-pas d'héritage, il nous faut un autre moyen de structurer la bibliothèque `gui`
-pour permettre aux utilisateurs de la prolonger avec de nouveaux types.
+mais l'environnement de développement pourrait considérer tous les types comme
+des instances de `Composant` et appeler `afficher` sur chacun d'entre eux. Mais
+puisque Rust n'a pas d'héritage, il nous faut un autre moyen de structurer la
+bibliothèque `gui` pour permettre aux utilisateurs de la prolonger avec de
+nouveaux types.
 
 <!--
 ### Defining a Trait for Common Behavior
@@ -178,19 +170,13 @@ méthode nommée `afficher` :
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch17-oop/listing-17-03/src/lib.rs}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-03/src/lib.rs}}
-```
-
-```rust
-pub trait Affichable {
-    fn afficher(&self);
-}
 ```
 
 <!--
@@ -221,12 +207,12 @@ bouche-trou pour n'importe quel type au sein d'un `Box` qui implémente le trait
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch17-oop/listing-17-04/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-04/src/lib.rs:here}}
 ```
 
@@ -256,12 +242,12 @@ l'encart 17-5 :
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch17-oop/listing-17-05/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-05/src/lib.rs:here}}
 ```
 
@@ -296,12 +282,12 @@ utilisant un type générique et un trait lié comme dans l'encart 17-6 :
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch17-oop/listing-17-06/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-06/src/lib.rs:here}}
 ```
 
@@ -367,12 +353,12 @@ ressembler l'implémentation, une structure `Bouton` pourrait avoir des champs
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch17-oop/listing-17-07/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch17-oop/listing-17-07/src/lib.rs:here}}
 ```
 
@@ -624,9 +610,10 @@ méthodes pour chaque type concret que nous utilisons à la place d'un paramètr
 de type générique. Le code résultant de la monomorphisation effectue du
 *dispatch statique*, c'est-à-dire quand le compilateur sait quelle méthode
 vous appelez à la compilation. Cela s'oppose au *dispatch dynamique*,
-c'est-à-dire quand le compilateur ne peut pas déterminer à la compilation quelle
-méthode vous appelez. Dans les cas de répartition dynamique, le compilateur émet du
-code qui devra déterminer à l'exécution quelle méthode appeler.
+c'est-à-dire quand le compilateur ne peut pas déterminer à la compilation
+quelle méthode vous appelez. Dans les cas de répartition dynamique, le
+compilateur émet du code qui devra déterminer à l'exécution quelle méthode
+appeler.
 
 <!--
 When we use trait objects, Rust must use dynamic dispatch. The compiler doesn’t
@@ -644,15 +631,15 @@ to consider.
 Quand nous utilisons des objets traits, Rust doit utiliser de la répartition
 dynamique. Le compilateur ne connaît pas tous les types qui pourraient être
 utilisés avec le code qui utilise des objets traits, donc il ne sait pas quelle
-méthode implémentée sur quel type il doit appeler. À la place, lors de l'exécution, Rust
-utilise les pointeurs à l'intérieur de l'objet trait pour savoir quelle méthode
-appeler. Il y a un coût à l'exécution lors de la recherche de cette méthode qui
-n'a pas lieu avec la répartition statique. La répartition dynamique empêche en outre
-le compilateur de choisir de remplacer un appel de méthode par le code de cette
-méthode, ce qui empêche par ricochet certaines optimisations. Cependant, cela a
-permis de rendre plus flexible le code que nous avons écrit dans l'encart 17-5
-et que nous avons pu supporter dans l'encart 17-9, donc c'est un compromis à
-envisager.
+méthode implémentée sur quel type il doit appeler. À la place, lors de
+l'exécution, Rust utilise les pointeurs à l'intérieur de l'objet trait pour
+savoir quelle méthode appeler. Il y a un coût à l'exécution lors de la
+recherche de cette méthode qui n'a pas lieu avec la répartition statique. La
+répartition dynamique empêche en outre le compilateur de choisir de remplacer
+un appel de méthode par le code de cette méthode, ce qui empêche par ricochet
+certaines optimisations. Cependant, cela a permis de rendre plus flexible le
+code que nous avons écrit dans l'encart 17-5 et que nous avons pu supporter
+dans l'encart 17-9, donc c'est un compromis à envisager.
 
 <!--
 ### Object Safety Is Required for Trait Objects
@@ -752,10 +739,10 @@ implement the `Clone` trait instead of the `Draw` trait, like this:
 -->
 
 Le compilateur vous préviendra lorsque vous essayez de faire quelque chose qui
-enfreint les règles de sûreté au sens de l'objet lors de l'utilisation des objets traits.
-Par exemple, supposons que nous avons essayé d'implémenter la structure `Ecran`
-de l'encart 17-4 en la faisant contenir des types qui implémentent le trait
-`Clone` plutôt que le trait `Affichable`, comme ceci :
+enfreint les règles de sûreté au sens de l'objet lors de l'utilisation des
+objets traits. Par exemple, supposons que nous avons essayé d'implémenter la
+structure `Ecran` de l'encart 17-4 en la faisant contenir des types qui
+implémentent le trait `Clone` plutôt que le trait `Affichable`, comme ceci :
 
 <!--
 ```rust,ignore,does_not_compile
@@ -785,25 +772,27 @@ Nous aurions obtenu cette erreur :
 
 <!--
 This error means you can’t use this trait as a trait object in this way. If
-you’re interested in more details on object safety, see [Rust RFC 255].
+you’re interested in more details on object safety, see [Rust RFC 255] or check the
+object safety section in the [Rust Reference][object-safety-reference].
 -->
 
 Cette erreur signifie que l'on ne peut pas utiliser ce trait comme d'un objet
 trait de cette façon. Si vous souhaitez connaître plus de détails sur la sûreté
-au sens de l'objet, référez-vous à la [RFC 255 de Rust][rust-rfc-255] (en
-anglais).
+au sens de l'objet, référez-vous à la [RFC 255 de Rust][Rust RFC 255] (en
+anglais) ou la section de la sécurité des objets dans la
+[référence Rust][object-safety-reference].
 
-<!-- markdownlint-disable -->
 <!--
 [Rust RFC 255]: https://github.com/rust-lang/rfcs/blob/master/text/0255-object-safety.md
 
 [performance-of-code-using-generics]:
 ch10-01-syntax.html#performance-of-code-using-generics
 [dynamically-sized]: ch19-04-advanced-types.html#dynamically-sized-types-and-the-sized-trait
+[object-safety-reference]: ../reference/items/traits.html#object-safety
 -->
-<!-- markdownlint-restore -->
 
-[rust-rfc-255]: https://github.com/rust-lang/rfcs/blob/master/text/0255-object-safety.md
+[Rust RFC 255]: https://github.com/rust-lang/rfcs/blob/master/text/0255-object-safety.md
 
 [performance-of-code-using-generics]: ch10-01-syntax.html
 [dynamically-sized]: ch19-04-advanced-types.html
+[object-safety-reference]: https://doc.rust-lang.org/reference/items/traits.html

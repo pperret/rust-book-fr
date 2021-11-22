@@ -67,5 +67,3 @@ impl Operateur {
         Operateur { id, tache }
     }
 }
-
-fn main() {}

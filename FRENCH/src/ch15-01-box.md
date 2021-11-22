@@ -50,11 +50,11 @@ principalement dans les situations suivantes :
   la compilation et que vous souhaitez une valeur d'un certain type dans un
   contexte qui nécessite de savoir exactement sa taille
 * Lorsque vous avez une grosse quantité de données et que vous souhaitez
-  transférer la possession mais vous assurer que les données ne seront pas
+  transférer la possession tout en assurant que les données ne seront pas
   copiées lorsque vous le ferez
 * Lorsque vous voulez prendre possession d'une valeur et que vous souhaitez
   seulement qu'elle soit d'un type qui implémente un trait particulier plutôt
-  que d'attendre qu'elle soit d'un type précis
+  que d'être d'un type spécique
 
 <!--
 We’ll demonstrate the first situation in the [“Enabling Recursive Types with
@@ -156,10 +156,10 @@ wouldn’t be allowed to if we didn’t have boxes.
 -->
 
 Déposer une seule valeur sur le tas n'est pas très utile, donc vous n'utiliserez
-très rarement les boites de cette manière. Laisser les valeurs comme des `i32`
+que très rarement les boites de cette manière. Laisser les valeurs comme des `i32`
 indépendantes sur la pile, où elles sont stockées par défaut, reste plus
 approprié dans la majeure partie des situations. Regardons un cas où les boites
-nous permettent de définir des types que nous pourrions par le faire si nous
+nous permettent de définir des types que nous ne pourrions pas définir si nous
 n'avions pas les boites.
 
 <!--
@@ -177,10 +177,10 @@ space a value of a recursive type needs. However, boxes have a known size, so
 by inserting a box in a recursive type definition, you can have recursive types.
 -->
 
-Au moment de la compilation, Rust a besoin de savoir combien s'espace prend un
+Au moment de la compilation, Rust a besoin de savoir combien d'espace prend un
 type. Un des types dont la taille ne peut pas être connu au moment de la
 compilation est le *type récursif*, dans lequel une valeur peut avoir une partie
-de sa définition qui a une valeur du même type qu'elle-même. Comme emboîtement
+de sa définition qui a une valeur du même type qu'elle-même. Comme cet emboîtement
 de valeurs pourrait théoriquement se poursuivre à l'infini, Rust ne sait pas
 combien d'espace une valeur d'un type récursif peut avoir besoin. Cependant, les
 boites ont une taille connue, donc en utilisant une boite dans la définition
@@ -438,11 +438,11 @@ store the largest of its variants.
 
 Pour déterminer combien d'espace allouer pour une valeur `Message`, Rust
 parcourt chaque variante pour voir quelle variante a besoin le plus d'espace.
-Rust voit que `Message::Quit` n'a pas besoin d'espace, `Message::Move` a besoin
-de suffisamment d'espace pour stocker deux valeurs `i32`, et ainsi de suite.
-Comme une seule variante sera utilisée, le plus grand espace dont une valeur
-de `Message` aura besoin sera l'espace que cela prendra de stocker la plus
-grosse de ses variantes.
+Rust voit que `Message::Quitter` n'a pas besoin d'espace, `Message::Deplacer` a
+besoin de suffisamment d'espace pour stocker deux valeurs `i32`, et ainsi de
+suite. Comme une seule variante sera utilisée, le plus grand espace dont une
+valeur de `Message` aura besoin sera l'espace que cela prendra de stocker la
+plus grosse de ses variantes.
 
 <!--
 Contrast this with what happens when Rust tries to determine how much space a
@@ -508,12 +508,18 @@ after doing automatic regeneration, look at listings/ch15-smart-pointers/listing
 
 <!--
 ```text
-  = help: insert indirection (e.g., a `Box`, `Rc`, or `&`) at some point to make `List` representable
+help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to make `List` representable
+  |
+2 |     Cons(i32, Box<List>),
+  |               ^^^^    ^
 ```
 -->
 
 ```text
-  = help: insert indirection (e.g., a `Box`, `Rc`, or `&`) at some point to make `List` representable
+help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to make `List` representable
+  |
+2 |     Cons(i32, Box<List>),
+  |               ^^^^    ^
 ```
 
 <!--
@@ -522,7 +528,7 @@ directly, we’ll change the data structure to store the value indirectly by
 storing a pointer to the value instead.
 -->
 
-Dans cette suggestion, “indirection” (NdT : redirection) signifie que plutôt de
+Dans cette suggestion, “indirection” (NdT : redirection) signifie qu'au lieu de
 stocker une valeur directement, nous devrions changer la structure des données
 pour stocker à la place un pointeur vers la valeur.
 

@@ -15,14 +15,14 @@ Un *trait* décrit une fonctionnalité qu'a un type particulier et qu'il peut
 partager avec d'autres types, à destination du compilateur Rust. Nous pouvons
 utiliser les traits pour définir un comportement partagé de manière abstraite.
 Nous pouvons lier ces traits à un type générique pour exprimer le fait qu'il
-puisse être de n'importe quel type à condition qu'il ai un comportement donné.
+puisse être de n'importe quel type à condition qu'il ait un comportement donné.
 
 <!--
 > Note: Traits are similar to a feature often called *interfaces* in other
 > languages, although with some differences.
 -->
 
-> Remarque : les traits sont similaires à ce qu'on appelle parfois les
+> Remarque : les traits sont similaires à ce qu'on appelle parfois les
 > *interfaces* dans d'autres langages, malgré quelques différences.
 
 <!--
@@ -41,8 +41,8 @@ define a set of behaviors necessary to accomplish some purpose.
 Le comportement d'un type s'exprime via les méthodes que nous pouvons appeler
 sur ce type. Différents types peuvent partager le même comportement si nous
 pouvons appeler les mêmes méthodes sur tous ces types. Définir un trait est une
-manière de grouper ensemble les signatures des méthodes pour définir un
-comportement nécessaire pour accomplir un objectif.
+manière de regrouper des signatures de méthodes pour définir un comportement
+nécessaire pour accomplir un objectif.
 
 <!--
 For example, let’s say we have multiple structs that hold various kinds and
@@ -53,7 +53,7 @@ to another tweet.
 -->
 
 Par exemple, imaginons que nous avons plusieurs structures qui stockent
-différents types et quantité de texte : une structure `ArticleDePresse`, qui
+différents types et quantités de texte : une structure `ArticleDePresse`, qui
 contient un reportage dans un endroit donné et un `Tweet` qui peut avoir jusqu'à
 280 caractères maximum et des métadonnées qui indiquent si cela est un nouveau
 tweet, un retweet, ou une réponse à un autre tweet.
@@ -68,10 +68,10 @@ need a summary from each type, and we need to request that summary by calling a
 
 Nous voulons construire une bibliothèque pour des agrégateurs de médias qui peut
 afficher le résumé des données stockées dans une instance de `ArticleDePresse`
-ou de `Tweet`. Pour cela, nous avons besoin d'un résumé pour chaque type, et
-nous pouvons demander ce résumé en appelant la méthode `resumer` sur une
-instance. L'encart 10-12 nous montre la définition d'un trait `Resumable` qui
-décrit ce comportement.
+ou de `Tweet`. Pour cela, il nous faut un résumé pour chaque type, et nous
+pouvons demander ce résumé en appelant la méthode `resumer` sur une instance.
+L'encart 10-12 nous montre la définition d'un trait `Resumable` qui décrit ce
+comportement.
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -121,7 +121,7 @@ A la fin de la signature de la méthode, au lieu de renseigner une implémentati
 entre des accolades, nous utilisons un point-virgule. Chaque type qui implémente
 ce trait doit renseigner son propre comportement dans le corps de la méthode. Le
 compilateur va s'assurer que tous les types qui ont le trait `Resumable` auront
-la méthode `resumer` défini avec cette signature précise.
+la méthode `resumer` définie avec cette signature précise.
 
 <!--
 A trait can have multiple methods in its body: the method signatures are listed
@@ -194,12 +194,12 @@ particular type.
 L'implémentation d'un trait sur un type est similaire à l'implémentation d'une
 méthode classique. La différence est que nous ajoutons le nom du trait que nous
 voulons implémenter après le `impl`, et que nous utilisons ensuite le mot-clé
-`for` ainsi que le nom du type sur lequel nous souhaitons implémenter le trait.
-A l'intérieur du bloc `impl`, nous ajoutons les signatures des méthodes
-présentes dans la définition du trait. Au lieu d'ajouter un point-virgule après
-chaque signature, nous plaçons les accolades et on remplit le corps de la
-méthode avec le comportement spécifique que nous voulons que les méthodes du
-trait suive pour type en particulier.
+`for` suivi du nom du type sur lequel nous souhaitons implémenter le trait. À
+l'intérieur du bloc `impl`, nous ajoutons les signatures des méthodes présentes
+dans la définition du trait. Au lieu d'ajouter un point-virgule après chaque
+signature, nous plaçons les accolades et on remplit le corps de la méthode avec
+le comportement spécifique que nous voulons que les méthodes du trait suivent
+pour le type en question.
 
 <!--
 After implementing the trait, we can call the methods on instances of
@@ -244,7 +244,7 @@ before `trait` in Listing 10-12.
 Remarquez que comme nous avons défini le trait `Resumable` et les types
 `ArticleDePresse` et `Tweet` dans le même fichier *lib.rs* de l'encart 10-13,
 ils sont tous dans la même portée. Disons que ce fichier *lib.rs* est utilisé
-pour une crate que nous avons appelé `agregateur` et que quelqu'un d'autre
+pour une crate que nous avons appelée `agregateur` et que quelqu'un d'autre
 souhaite utiliser les fonctionnalités de notre crate pour implémenter le trait
 `Resumable` sur une structure définie dans la portée de sa propre bibliothèque.
 Il aura d'abord besoin d'importer le trait dans sa portée. Il pourra le faire en
@@ -294,8 +294,8 @@ crate `agregateur`. Cette limitation fait partie d'une propriété des programme
 que l'on appelle la *cohérence*, et plus précisément la *règle de l'orphelin*,
 qui s'appelle ainsi car le type parent n'est pas présent. Cette règle s'assure
 que le code des autres personnes ne casse pas votre code et réciproquement.
-Sans cette règle, deux crates peuvent implémenter le même trait sur le même
-type, et Rust ne saura pas laquelle utiliser.
+Sans cette règle, deux crates pourraient implémenter le même trait sur le même
+type, et Rust ne saurait pas quelle implémentation utiliser.
 
 <!--
 ### Default Implementations
@@ -314,7 +314,7 @@ Il est parfois utile d'avoir un comportement par défaut pour toutes ou une
 partie des méthodes d'un trait plutôt que de demander l'implémentation de toutes
 les méthodes sur chaque type. Ainsi, si nous implémentons le trait sur un type
 particulier, nous pouvons garder ou réécrire le comportement par défaut de
-chaque méthode. 
+chaque méthode.
 
 <!--
 Listing 10-14 shows how to specify a default string for the `summarize` method
@@ -356,9 +356,9 @@ of defining a custom implementation, we specify an empty `impl` block with
 `impl Summary for NewsArticle {}`.
 -->
 
-Pour pouvoir utiliser l'implémentation par défaut du résumé des instances de
-`ArticleDePresse` plutôt que de devoir préciser un implémentation personnalisée,
-nous précisons un bloc `impl` vide avec `impl Resumable for ArticleDePresse {}`.
+Pour utiliser l'implémentation par défaut pour résumer des instances de
+`ArticleDePresse` au lieu de préciser une implémentation personnalisée, nous
+précisons un bloc `impl` vide avec `impl Resumable for ArticleDePresse {}`.
 
 <!--
 Even though we’re no longer defining the `summarize` method on `NewsArticle`
@@ -367,7 +367,7 @@ directly, we’ve provided a default implementation and specified that
 the `summarize` method on an instance of `NewsArticle`, like this:
 -->
 
-Même si nous n'avons pas défini directement la méthode `resumer` sur
+Même si nous ne définissons plus directement la méthode `resumer` sur
 `ArticleDePresse`, nous avons fourni une implémentation par défaut et précisé
 que `ArticleDePresse` implémente le trait `Resumable`. Par conséquent, nous
 pouvons toujours appeler la méthode `resumer` sur une instance de
@@ -398,7 +398,7 @@ implementation.
 -->
 
 La création d'une implémentation par défaut pour `resumer` n'a pas besoin que
-nous modifions quelque chose dans l'implémentation de `Resumable` sur `Tweet`
+nous modifiions quelque chose dans l'implémentation de `Resumable` sur `Tweet`
 dans l'encart 10-13. C'est parce que la syntaxe pour réécrire l'implémentation
 par défaut est la même que la syntaxe pour implémenter une méthode qui n'a pas
 d'implémentation par défaut.
@@ -415,9 +415,9 @@ a small part of it. For example, we could define the `Summary` trait to have a
 
 Les implémentations par défaut peuvent appeler d'autres méthodes du même trait,
 même si ces autres méthodes n'ont pas d'implémentation par défaut. Ainsi, un
-trait peut fournir de nombreuses fonctionnalités utiles et n'avoir besoin que
-le développeur qui l'utilise n'en ai qu'une petite partie à implémenter. Par
-exemple, nous pouvons définir le trait `Resumable` pour avoir une méthode
+trait peut fournir de nombreuses fonctionnalités utiles et n'exiger du
+développeur qui l'utilise que d'en implémenter une petite partie. Par exemple,
+nous pouvons définir le trait `Resumable` comme ayant une méthode
 `resumer_auteur` dont l'implémentation est nécessaire, et ensuite définir une
 méthode `resumer` qui a une implémentation par défaut qui appelle la méthode
 `resumer_auteur` :
@@ -462,8 +462,7 @@ Après avoir défini `resumer_auteur`, nous pouvons appeler `resumer` sur des
 instances de la structure `Tweet`, et l'implémentation par défaut de `resumer`
 va appeler `resumer_auteur`, que nous avons défini. Comme nous avons implémenté
 `resumer_auteur`, le trait `Resumable` nous a donné le comportement de la
-méthode `resumer` sans avoir besoin d'écrire aucune ligne de code
-supplémentaire.
+méthode `resumer` sans nous obliger à écrire une ligne de code supplémentaire.
 
 <!--
 ```rust,ignore
@@ -512,11 +511,11 @@ implements the `Summary` trait. To do this, we can use the `impl Trait`
 syntax, like this:
 -->
 
-Par exemple, dans l'encart 10-13, nous implémentons le trait `Resumable` sur les
-types `ArticleDePresse` et `Tweet`. Nous pouvons définir une fonction `notifier`
-qui va appeler la fonction `resumer` sur son paramètre `element`, qui est d'un
-type qui implémente le trait `Resumable`. Pour faire ceci, nous pouvons utiliser
-la syntaxe `impl Trait`, comme ceci :
+Par exemple, dans l'encart 10-13, nous avons implémenté le trait `Resumable`
+sur les types `ArticleDePresse` et `Tweet`. Nous pouvons définir une fonction
+`notifier` qui va appeler la méthode `resumer` sur son paramètre `element`, qui
+est d'un type qui implémente le trait `Resumable`. Pour faire ceci, nous
+pouvons utiliser la syntaxe `impl Trait`, comme ceci :
 
 <!--
 ```rust,ignore
@@ -561,7 +560,7 @@ this:
 
 La syntaxe `impl Trait` fonctionne bien pour des cas simples, mais est en
 réalité du sucre syntaxique pour une forme plus longue, qui s'appelle le
-*trait lié* ; qui ressemble à ceci :
+*trait lié*, qui ressemble à ceci :
 
 <!--
 ```rust,ignore
@@ -573,7 +572,7 @@ pub fn notify<T: Summary>(item: &T) {
 
 ```rust,ignore
 pub fn notifier<T: Resumable>(element: &T) {
-    println!("Flash-info ! {}", element.resumer());
+    println!("Flash info ! {}", element.resumer());
 }
 ```
 
@@ -585,7 +584,7 @@ parameter after a colon and inside angle brackets.
 
 Cette forme plus longue est équivalente à l'exemple dans la section précédente,
 mais est plus verbeuse. Nous plaçons les traits liés dans la déclaration des
-paramètres de type générique après les double-points dans les chevrons.
+paramètres de type génériques après un deux-point entre des chevrons.
 
 <!--
 The `impl Trait` syntax is convenient and makes for more concise code in simple
@@ -617,9 +616,9 @@ only possible to express using a trait bound, like this:
 -->
 
 Si nous souhaitons permettre à `element1` et `element2` d'avoir des types
-différents, l'utilisation de `impl Trait` est approprié (du moment que chacun de
-ces types implémentent `Resumable`). Mais si nous souhaitons forcer les deux
-paramètres d'être du même type, cela n'est possible à exprimer qu'avec un trait
+différents, l'utilisation de `impl Trait` est appropriée (du moment que chacun
+de ces types implémentent `Resumable`). Mais si nous souhaitons forcer les deux
+paramètres à être du même type, cela n'est possible à exprimer qu'avec un trait
 lié, comme ceci :
 
 <!--
@@ -658,8 +657,8 @@ the `notify` definition that `item` must implement both `Display` and
 Nous pouvons aussi préciser que nous attendons plus d'un trait lié. Imaginons
 que nous souhaitons que `notifier` utilise le formatage d'affichage sur
 `element` ainsi que la méthode `resumer` : nous indiquons dans la définition de
-`notify` que `element` doit implémenter `Affichable` et `Resumable`. Nous
-pouvons faire ceci avec la syntaxe `+` :
+`notify` que `element` doit implémenter à la fois `Display` et `Resumable`.
+Nous pouvons faire ceci avec la syntaxe `+` :
 
 <!--
 ```rust,ignore
@@ -699,7 +698,7 @@ Avec les deux traits liés renseignés, le corps de `notifier` va appeler
 #### Clearer Trait Bounds with `where` Clauses
 -->
 
-#### Des traits liés plus clairs avec l'instruction `where`
+#### Des traits liés plus clairs avec la clause `where`
 
 <!--
 Using too many trait bounds has its downsides. Each generic has its own trait
@@ -711,12 +710,12 @@ signature. So instead of writing this:
 -->
 
 L'utilisation de trop nombreux traits liés a aussi ses désavantages. Chaque
-générique a ses propres traits liés, donc les fonctions avec plusieurs
-paramètres de types génériques peuvent aussi avoir de nombreuses informations de
+type générique a ses propres traits liés, donc les fonctions avec plusieurs
+paramètres de type génériques peuvent aussi avoir de nombreuses informations de
 traits liés entre le nom de la fonction et la liste de ses paramètres, ce qui
 rend la signature de la fonction difficile à lire. Pour cette raison, Rust a une
-syntaxe alternative pour renseigner les traits liés, dans une instruction
-`where` après la signature de la fonction. Donc, à la place d'écrire ceci ...
+syntaxe alternative pour renseigner les traits liés, dans une clause `where`
+après la signature de la fonction. Donc, au lieu d'écrire ceci ...
 
 <!--
 ```rust,ignore
@@ -725,14 +724,14 @@ fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
 -->
 
 ```rust,ignore
-fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
+fn une_fonction<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
 ```
 
 <!--
 we can use a `where` clause, like this:
 -->
 
-... nous pouvons utiliser l'instruction `where`, comme ceci :
+... nous pouvons utiliser la clause `where`, comme ceci :
 
 <!--
 ```rust,ignore
@@ -744,7 +743,7 @@ fn some_function<T, U>(t: &T, u: &U) -> i32
 -->
 
 ```rust,ignore
-fn some_function<T, U>(t: &T, u: &U) -> i32
+fn une_fonction<T, U>(t: &T, u: &U) -> i32
     where T: Display + Clone,
           U: Clone + Debug
 {
@@ -757,7 +756,7 @@ bounds.
 -->
 
 La signature de cette fonction est moins encombrée : le nom de la fonction, la
-liste des paramètres, et le type de retour sont plus proches l'un de l'autre,
+liste des paramètres et le type de retour sont plus proches les uns des autres,
 comme une fonction sans traits liés.
 
 <!--
@@ -771,8 +770,9 @@ We can also use the `impl Trait` syntax in the return position to return a
 value of some type that implements a trait, as shown here:
 -->
 
-Nous pouvons aussi utiliser la syntaxe `impl Trait` à la place du type de retour afin
-de retourner une valeur d'un type qui implémente un trait, comme ci-dessous :
+Nous pouvons aussi utiliser la syntaxe `impl Trait` à la place du type de
+retour afin de retourner une valeur d'un type qui implémente un trait, comme
+ci-dessous :
 
 <!--
 ```rust,ignore
@@ -792,7 +792,7 @@ returns a `Tweet`, but the code calling this function doesn’t know that.
 -->
 
 En utilisant `impl Resumable` pour le type de retour, nous indiquons que la
-fonction `retourne_resumable`retourne un type qui implémente le trait
+fonction `retourne_resumable` retourne un type qui implémente le trait
 `Resumable` sans avoir à écrire le nom du type concret. Dans notre cas,
 `retourne_resumable` retourne un `Tweet`, mais le code qui appellera cette
 fonction ne le saura pas.
@@ -808,7 +808,7 @@ concisely specify that a function returns some type that implements the
 
 La capacité de retourner un type qui est uniquement caractérisé par le trait
 qu'il implémente est tout particulièrement utile dans le cas des fermetures et
-des itérateurs, que nous allons voir au chapitre 13. Les fermetures et les
+des itérateurs, que nous verrons au chapitre 13. Les fermetures et les
 itérateurs créent des types que seul le compilateur est en mesure de comprendre
 ou alors des types qui sont très longs à définir. La syntaxe `impl Trait` vous
 permet de renseigner de manière concise qu'une fonction retourne un type
@@ -822,9 +822,9 @@ return type specified as `impl Summary` wouldn’t work:
 -->
 
 Cependant, vous pouvez seulement utiliser `impl Trait` si vous retournez un
-seul type possible. Par exemple, ce code va retourner soit un `ArticleDePresse`,
-soit un `Tweet`, alors que le type de retour avec `impl Resumable` ne va pas
-fonctionner :
+seul type possible. Par exemple, ce code va retourner soit un
+`ArticleDePresse`, soit un `Tweet`, alors que le type de retour avec
+`impl Resumable` ne va pas fonctionner :
 
 <!--
 ```rust,ignore,does_not_compile
@@ -846,8 +846,8 @@ ignore -- > section of Chapter 17.
 -->
 
 Retourner soit un `ArticleDePresse`, soit un `Tweet` n'est pas autorisé à cause
-des restrictions sur comment la syntaxe `impl Trait` est implémentée dans le
-compilateur. Nous allons voir comment écrire une fonction avec ce comportement
+des restrictions sur la façon dont la syntaxe `impl Trait` est implémentée dans
+le compilateur. Nous verrons comment écrire une fonction avec ce comportement
 dans une section du
 [chapitre 17][using-trait-objects-that-allow-for-values-of-different-types]<!--
 ignore -->.
@@ -856,7 +856,7 @@ ignore -->.
 ### Fixing the `largest` Function with Trait Bounds
 -->
 
-### Résoudre la fonction `le_plus_grand` avec les traits liés
+### Corriger la fonction `le_plus_grand` avec les traits liés
 
 <!--
 Now that you know how to specify the behavior you want to use using the generic
@@ -866,10 +866,10 @@ to run that code, we received this error:
 -->
 
 Maintenant que vous savez comment renseigner le comportement que vous souhaitez
-utiliser en utilisant les paramètres de types génériques liés, retournons à
-l'encart 10-5 pour résoudre la définition de la fonction `le_plus_grand` qui
-utilise un paramètre de type générique ! La dernière fois qu'on a essayé de
-lancer ce code, nous avions l'erreur suivante :
+utiliser en utilisant les traits liés des paramètres de type génériques,
+retournons à l'encart 10-5 pour corriger la définition de la fonction
+`le_plus_grand` qui utilise un paramètre de type générique ! La dernière fois
+que nous avons essayé de lancer ce code, nous avions l'erreur suivante :
 
 <!--
 ```console
@@ -891,15 +891,15 @@ into scope because it’s in the prelude. Change the signature of `largest` to
 look like this:
 -->
 
-Dans le corps de `le_plus_grand` nous voulions comparer les deux valeurs du
+Dans le corps de `le_plus_grand`, nous voulions comparer les deux valeurs du
 type `T` en utilisant l'opérateur *plus grand que* (`>`). Comme cet opérateur
 est défini comme une méthode par défaut dans le trait de la bibliothèque
 standard `std::cmp::PartialOrd`, nous devons préciser `PartialOrd` dans les
-traits liés pour `T` afin que la fonction `le_plus_grand` puisse fonctionner sur
-les slices de n'importe quel type que nous pouvons comparer. Nous n'avons pas
-besoin d'importer `PartialOrd` dans la portée car il est importé dans l'étape
-préliminaire. Changez la signature de `le_plus_grand` par quelque chose comme
-ceci :
+traits liés pour `T` afin que la fonction `le_plus_grand` puisse fonctionner
+sur les slices de n'importe quel type que nous pouvons comparer. Nous n'avons
+pas besoin d'importer `PartialOrd` dans la portée car il est importé dans
+l'étape préliminaire. Changez la signature de `le_plus_grand` par quelque chose
+comme ceci :
 
 <!--
 ```rust,ignore
@@ -942,14 +942,17 @@ error.
 -->
 
 L'élement-clé dans ces erreurs est `cannot move out of type [T], a non-copy
-slice`. Avec notre version non générique de la fonction `le_plus_grand`, nous
+slice` (*impossible de déplacer une valeur hors du type `[T]`, slice non
+`Copy`*). Avec notre version non générique de la fonction `le_plus_grand`, nous
 avions essayé de trouver le plus grand `i32` ou `char`. Comme nous l'avons vu
-dans la section
-[“Données uniquement sur la pile : la copie”][stack-only-data-copy]<!--
-ignore --> du chapitre 4, les types comme `i32` et `char` ont une taille connue
-et peuvent être stockés sur la pile, donc ils implémentent le trait `Copy`. Par
-conséquent, nous ne pouvons pas forcément déplacer la valeur de `list[0]` dans
-notre variable `le_plus_grand`, ce qui engendre cette erreur.
+dans la section [“Données uniquement sur la pile : la
+copie”][stack-only-data-copy]<!-- ignore --> du chapitre 4, les types comme
+`i32` et `char` ont une taille connue et peuvent être stockés sur la pile, donc
+ils implémentent le trait `Copy`. Mais quand nous avons rendu générique la
+fonction `le_plus_grand`, il est devenu possible que le paramètre `liste`
+contienne des types qui n'implémentent pas le trait `Copy`. Par conséquent,
+nous ne pouvons pas forcément déplacer la valeur de `list[0]` dans notre
+variable `le_plus_grand`, ce qui engendre cette erreur.
 
 <!--
 To call this code with only those types that implement the `Copy` trait, we can
@@ -962,7 +965,7 @@ values in the slice that we pass into the function implement the `PartialOrd`
 Pour pouvoir appeler ce code avec seulement les types qui implémentent le trait
 `Copy`, nous pouvons ajouter `Copy` aux traits liés de `T` ! L'encart 10-15 nous
 montre le code complet d'une fonction générique `le_plus_grand` qui va se
-compiler tant que les types valeurs dans la slice que nous passons dans la
+compiler tant que le type des valeurs dans la slice que nous passons dans la
 fonction implémente les traits `PartialOrd` *et* `Copy`, comme le font `i32` et
 `char`.
 
@@ -1024,10 +1027,10 @@ lifetimes aren’t required to solve these challenges.
 
 Une autre façon d'implémenter `le_plus_grand` est de faire en sorte que la
 fonction retourne une référence à une valeur `T` de la slice. Si nous changeons
-le type de retour en `&T` à la place de `T`, ainsi qu'adapter le corps de la
+le type de retour en `&T` à la place de `T` et que nous adaptons le corps de la
 fonction afin de retourner une référence, nous n'aurions alors plus besoin des
 traits liés `Clone` ou `Copy` et nous pourrions ainsi éviter l'allocation sur
-le tas. Essayez d'implémenter cette solution alternative par vous-même !
+le tas. Essayez d'implémenter ces solutions alternatives par vous-même !
 Si vous bloquez sur des erreurs à propos des durées de vie *(lifetimes)*, lisez
 la suite : la section suivante, “La conformité des références avec les durées
 de vies” vous expliquera cela, mais les durées de vie ne sont pas nécessaires
@@ -1049,10 +1052,10 @@ the `Display` trait that enables printing.
 -->
 
 En utilisant un trait lié avec un bloc `impl` qui utilise les paramètres de type
-générique, nous pouvons implémenter des méthodes en fonction des types
-qu'implémentent des traits particuliers. Par exemple, le type `Pair<T>` de
-l'encart 10-16 implémente toujours la fonction `new`. Mais `Pair<T>` implémente
-la méthode `affiche_comparaison` uniquement si son type interne `T`
+génériques, nous pouvons implémenter des méthodes en fonction des types qui
+implémentent des traits particuliers. Par exemple, le type `Paire<T>` de
+l'encart 10-16 implémente toujours la fonction `new`. Mais `Paire<T>`
+implémente la méthode `afficher_comparaison` uniquement si son type interne `T`
 implémente le trait `PartialOrd` qui active la comparaison *et* le trait
 `Display` qui permet l'affichage.
 
@@ -1078,7 +1081,7 @@ generic type depending on trait bounds</span>
 -->
 
 <span class="caption">Encart 10-16 : implémentation de méthodes sur un type
-générique en fonction du trait lié</span>
+générique en fonction des traits liés</span>
 
 <!--
 We can also conditionally implement a trait for any type that implements
@@ -1089,12 +1092,13 @@ Rust standard library. For example, the standard library implements the
 block in the standard library looks similar to this code:
 -->
 
-Nous pouvons également appliquer un trait sur un type qui applique un autre
-trait. L'implémentation d'un trait sur n'importe quel type qui a un trait lié
-est appelée *implémentation générale* et est largement utilisée dans la
-bibliothèque standard Rust. Par exemple, la bibliothèque standard implémente le
-trait `ToString` sur tous les types qui implémentent le trait `Display`. Le bloc
-`impl` de la bibliothèque standard ressemble au code suivant :
+Nous pouvons également implémenter un trait sur tout type qui implémente un
+autre trait en particulier. L'implémentation d'un trait sur n'importe quel type
+qui a un trait lié est appelée *implémentation générale* et est largement
+utilisée dans la bibliothèque standard Rust. Par exemple, la bibliothèque
+standard implémente le trait `ToString` sur tous les types qui implémentent le
+trait `Display`. Le bloc `impl` de la bibliothèque standard ressemble au code
+suivant :
 
 <!--
 ```rust,ignore
@@ -1120,8 +1124,8 @@ the `Display` trait. For example, we can turn integers into their corresponding
 Comme la bibliothèque standard a cette implémentation générale, nous pouvons
 appeler la méthode `to_string` définie par le trait `ToString` sur n'importe
 quel type qui implémente le trait `Display`. Par exemple, nous pouvons
-transformer les entiers en leur équivalent dans une `String` comme ci-dessous
-car les entiers implémentent `Display` :
+transformer les nombres entiers en leur équivalent dans une `String` comme
+ci-dessous car les entiers implémentent `Display` :
 
 <!--
 ```rust
@@ -1156,18 +1160,18 @@ generics.
 -->
 
 Les traits et les traits liés nous permettent d'écrire du code qui utilise des
-paramètres de type générique pour réduire la duplication de code, mais aussi
+paramètres de type génériques pour réduire la duplication de code, mais aussi
 pour indiquer au compilateur que nous voulons que le type générique ait un
 comportement particulier. Le compilateur peut ensuite utiliser les informations
 liées aux traits pour vérifier que tous les types concrets utilisés dans notre
 code suivent le comportement souhaité. Dans les langages typés dynamiquement,
-nous aurons une erreur à l'exécution si nous appelions une méthode sur un type
+nous aurions une erreur à l'exécution si nous appelions une méthode sur un type
 qui n'implémentait pas la méthode. Mais Rust décale l'apparition de ces erreurs
 au moment de la compilation afin de nous forcer à résoudre les problèmes avant
 même que notre code soit capable de s'exécuter. De plus, nous n'avons pas besoin
 d'écrire un code qui vérifie le comportement lors de l'exécution car nous
 l'avons déjà vérifié au moment de la compilation. Cela permet d'améliorer les
-performances sans avoir à sacrifier la flexibilité des génériques.
+performances sans avoir à sacrifier la flexibilité des types génériques.
 
 <!--
 Another kind of generic that we’ve already been using is called *lifetimes*.
@@ -1176,11 +1180,11 @@ that references are valid as long as we need them to be. Let’s look at how
 lifetimes do that.
 -->
 
-Un autre type de générique que nous avons déjà utilisé est la *durée de vie*.
-Plutôt que de s'assurer qu'un type a le comportement que nous voulons, la durée
-de vie s'assure que les références sont en vigueur aussi longtemps que nous
-avons besoin qu'elles le soient. Nous allons voir à la page suivante comment la
-durée de vie fait cela.
+Une autre sorte de générique que nous avons déjà utilisée est la *durée de
+vie*. Plutôt que de s'assurer qu'un type a le comportement que nous voulons, la
+durée de vie s'assure que les références sont en vigueur aussi longtemps que
+nous avons besoin qu'elles le soient. Nous allons voir à la page suivante
+comment la durée de vie fait cela.
 
 <!-- markdownlint-disable -->
 <!--

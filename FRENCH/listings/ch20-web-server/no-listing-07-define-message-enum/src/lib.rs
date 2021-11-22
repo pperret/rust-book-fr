@@ -84,5 +84,3 @@ impl Operateur {
         }
     }
 }
-
-fn main() {}

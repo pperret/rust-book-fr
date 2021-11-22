@@ -22,5 +22,3 @@ impl Iterator for Compteur {
     }
 }
 // ANCHOR_END: here
-
-fn main() {}

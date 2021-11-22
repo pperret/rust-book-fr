@@ -77,12 +77,12 @@ section du chapitre 13, nous avons mentionné que la définition du trait
 `Iterator` ressemblait à cet encart 19-12.
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch19-advanced-features/listing-19-12/src/lib.rs}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-12/src/lib.rs}}
 ```
 
@@ -152,12 +152,12 @@ Cette syntaxe ressemble aux génériques. Donc pourquoi uniquement définir le
 trait `Iterator` avec les génériques, comme dans l'encart 19-13 ?
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch19-advanced-features/listing-19-13/src/lib.rs}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-13/src/lib.rs}}
 ```
 
@@ -348,16 +348,23 @@ personnaliser le type `Rhs` plutôt que d'utiliser celui par défaut.
 
 <!--
 We have two structs, `Millimeters` and `Meters`, holding values in different
-units. We want to add values in millimeters to values in meters and have the
-implementation of `Add` do the conversion correctly. We can implement `Add` for
-`Millimeters` with `Meters` as the `Rhs`, as shown in Listing 19-15.
+units. This thin wrapping of an existing type in another struct is known as the
+*newtype pattern*, which we describe in more detail in the [“Using the Newtype
+Pattern to Implement External Traits on External Types”][newtype]<!-- ignore
+-- > section. We want to add values in millimeters to values in meters and have
+the implementation of `Add` do the conversion correctly. We can implement `Add`
+for `Millimeters` with `Meters` as the `Rhs`, as shown in Listing 19-15.
 -->
 
 Nous avons deux structures, `Millimetres` et `Metres`, qui stockent des valeurs
-dans différentes unités. Nous voulons pouvoir additionner les valeurs en
+dans différentes unités. Ce léger enrobage d'un type existant dans une autre
+structure s'appelle le *motif newtype*, que nous décrivons plus en détail dans
+la section [Utiliser le motif newtype pour la sécurité et l'abstraction des
+types][newtype]<!-- ignore -->. Nous voulons pouvoir additionner les valeurs en
 millimètres avec les valeurs en mètres et appliquer l'implémentation de `Add`
 pour pouvoir faire la conversion correctement. Nous pouvons implémenter `Add`
-sur `Millimetres` avec `Metres` comme étant le `Rhs`, comme dans l'encart 19-15.
+sur `Millimetres` avec `Metres` comme étant le `Rhs`, comme dans l'encart
+19-15.
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -366,12 +373,12 @@ sur `Millimetres` avec `Metres` comme étant le `Rhs`, comme dans l'encart 19-15
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch19-advanced-features/listing-19-15/src/lib.rs}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch19-advanced-features/listing-19-15/src/lib.rs}}
 ```
 
@@ -381,7 +388,7 @@ sur `Millimetres` avec `Metres` comme étant le `Rhs`, comme dans l'encart 19-15
 -->
 
 <span class="caption">Encart 19-15 : implémentation du trait `Add` sur
-`Milimetres` pour pouvoir addition `Milimetres` à `Metres`</span>
+`Milimetres` pour pouvoir additionner `Milimetres` à `Metres`</span>
 
 <!--
 To add `Millimeters` and `Meters`, we specify `impl Add<Meters>` to set the
@@ -449,9 +456,9 @@ on one type. It’s also possible to implement a method directly on the type wit
 the same name as methods from traits.
 -->
 
-Il n'y a rien en Rust qui évite qu'un trait d'avoir une méthode avec le même
-nom qu'une autre méthode d'un autre trait, ni de vous empêcher d'implémenter
-d'implémenter ces deux traits sur un même type. Il est aussi possible
+Il n'y a rien en Rust qui empêche un trait d'avoir une méthode avec le même
+nom qu'une autre méthode d'un autre trait, ni ne vous empêche d'implémenter
+ces deux traits sur un même type. Il est aussi possible
 d'implémenter directement une méthode avec le même nom que celle présente dans
 les traits sur ce type.
 
@@ -840,13 +847,14 @@ implementation you want to call.
 -->
 
 Pour les fonctions associées, il n'y a pas de `destinataire` : il n'y a qu'une
-liste d'arguments. Vous pouvez utiliser la syntaxe totalement définie n'importe
-où vous faites appel à des fonctions ou des méthodes. Cependant, vous pouvez
-éviter de renseigner n'importe quelle partie de cette syntaxe que Rust peut en
-déduire à partir d'autres informations présentes dans le code. Vous avez
-seulement besoin d'utiliser cette syntaxe plus verbeuse dans les cas où il y a
-plusieurs implémentations qui utilisent le même nom et que Rust doit être aidé
-pour identifier quelle implémentation vous souhaitez appeler.
+liste d'arguments. Vous pouvez utiliser la syntaxe totalement définie à
+n'importe quel endroit où vous faites appel à des fonctions ou des méthodes.
+Cependant, vous pouvez éviter de renseigner n'importe quelle partie de cette
+syntaxe que Rust peut déduire à partir d'autres informations présentes dans le
+code. Vous avez seulement besoin d'utiliser cette syntaxe plus verbeuse dans
+les cas où il y a plusieurs implémentations qui utilisent le même nom et que
+Rust doit être aidé pour identifier quelle implémentation vous souhaitez
+appeler.
 
 <!--
 ### Using Supertraits to Require One Trait’s Functionality Within Another Trait
@@ -1055,7 +1063,7 @@ pattern, and the wrapper type is elided at compile time.
 
 Dans [une section][implementing-a-trait-on-a-type]<!-- ignore --> du chapitre
 10, nous avions mentionné la règle de l'orphelin qui énonçait que nous pouvions
-implémenter un trait sur un type à condition tant que le trait ou le type soit
+implémenter un trait sur un type à condition que le trait ou le type soit
 local à notre crate. Il est possible de contourner cette restriction en
 utilisant le *motif newtype*, ce qui implique de créer un nouveau type dans une
 structure tuple (nous avons vu les structures tuple dans la section
@@ -1132,7 +1140,7 @@ behavior—we would have to implement just the methods we do want manually.
 -->
 
 Le désavantage d'utiliser cette technique est que `Enveloppe` est un nouveau
-type, dont il n'implémente pas toutes les méthodes de la valeur qu'il possède.
+type, donc il n'implémente pas toutes les méthodes de la valeur qu'il possède.
 Il faudrait implémenter toutes les méthodes de `Vec<T>` directement sur
 `Enveloppe` afin que les méthodes délèguent à `self.0`, ce qui nous permettrait
 d'utiliser `Enveloppe` exactement comme un `Vec<T>`. Si nous voulions que le
@@ -1157,6 +1165,7 @@ interagir avec le système de type de Rust.
 
 <!-- markdownlint-disable -->
 <!--
+[newtype]: ch19-04-advanced-types.html#using-the-newtype-pattern-for-type-safety-and-abstraction
 [implementing-a-trait-on-a-type]:
 ch10-02-traits.html#implementing-a-trait-on-a-type
 [the-iterator-trait-and-the-next-method]:
@@ -1168,6 +1177,8 @@ ch10-02-traits.html#traits-defining-shared-behavior
 -->
 <!-- markdownlint-restore -->
 
+[newtype]:
+ch19-04-advanced-types.html#utiliser-le-motif-newtype-pour-la-sécurité-et-labstraction-des-types
 [implementing-a-trait-on-a-type]: ch10-02-traits.html
 [the-iterator-trait-and-the-next-method]: ch13-02-iterators.html
 [traits-defining-shared-behavior]: ch10-02-traits.html

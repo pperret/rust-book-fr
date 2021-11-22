@@ -27,14 +27,14 @@ item in the cycle will never reach 0, and the values will never be dropped.
 Les garanties de sécurité de la mémoire de Rust rendent difficile, mais pas
 impossible, la création accidentelle de mémoire qui n'est jamais nettoyée
 (aussi appelée *fuite de mémoire*). Eviter absolument les fuites de mémoire
-n'est pas une des garanties de Rust comme c'est le cas pour l'accès
-concurrent à la compilation, ce qui signifie que les fuites de mémoire ne
-sont dangereuses, pour Rust. Nous pouvons constater que Rust permet les fuites
-de mémoire en utilisant `Rc<T>` et `RefCell<T>` : il est possible de créer des
-références où les éléments se réfèrent entre eux de manière cyclique. Cela
-crée des fuites de mémoire car le compteur de références de chaque élément
-dans la boucle de références ne vaudra jamais 0, et les valeurs ne seront
-jamais libérées.
+n'est pas une des garanties de Rust, en tout cas pas comme pour l'accès
+concurrent au moment de la compilation, ce qui signifie que les fuites de
+mémoire sont sans risque pour la mémoire avec Rust. Nous pouvons constater
+que Rust permet les fuites de mémoire en utilisant `Rc<T>` et `RefCell<T>` : il
+est possible de créer des références où les éléments se réfèrent entre eux de
+manière cyclique. Cela crée des fuites de mémoire car le compteur de références
+de chaque élément dans la boucle de références ne vaudra jamais 0, et les
+valeurs ne seront jamais libérées.
 
 <!--
 ### Creating a Reference Cycle
@@ -179,30 +179,29 @@ pour le moment, nous obtenons ceci :
 ```
 
 <!--
-The reference count of the `Rc<List>` instances in both `a` and `b` are 2
-after we change the list in `a` to point to `b`. At the end of `main`, Rust
-will try to drop `b` first, which will decrease the count of the `Rc<List>`
-instance in `b` by 1.
+The reference count of the `Rc<List>` instances in both `a` and `b` are 2 after
+we change the list in `a` to point to `b`. At the end of `main`, Rust drops the
+variable `b`, which decreases the reference count of the `Rc<List>` instance
+from 2 to 1. The memory that `Rc<List>` has on the heap won’t be dropped at
+this point, because its reference count is 1, not 0. Then Rust drops `a`, which
+decreases the reference count of the `a` `Rc<List>` instance from 2 to 1 as
+well. This instance’s memory can’t be dropped either, because the other
+`Rc<List>` instance still refers to it. The memory allocated to the list will
+remain uncollected forever. To visualize this reference cycle, we’ve created a
+diagram in Figure 15-4.
 -->
 
 Les compteurs de références des instances de `Rc<List>` valent tous les deux 2
 pour `a` et `b` après avoir modifié `a` pour qu'elle pointe sur `b`. A la fin
-du `main`, Rust va nettoyer d'abord `b`, ce qui va réduire le compteur de
-l'instance `Rc<List>` de `b` de 1.
-
-<!--
-However, because `a` is still referencing the `Rc<List>` that was in `b`, that
-`Rc<List>` has a count of 1 rather than 0, so the memory the `Rc<List>` has on
-the heap won’t be dropped. The memory will just sit there with a count of 1,
-forever. To visualize this reference cycle, we’ve created a diagram in Figure
-15-4.
--->
-
-Cependant, comme `a` pointe toujours sur le `Rc<List>` qui était sur `b`, le
-compteur de son `Rc<List>` vaudra toujours 1 au lieu de 0, donc la mémoire de
-sur le tas de ce `Rc<List>` ne sera pas nettoyé. La mémoire va juste rester ici
-avec un compteur à 1, pour toujours. Pour représenter la boucle de références,
-nous avons créé un diagramme dans l'illustration 15-4.
+du `main`, Rust nettoie d'abord la variable `b`, ce qui décrémente le compteur
+de références dans l'instance `Rc<List>` de 2 à 1. La mémoire utilisée sur le
+tas par `Rc<List>` ne sera pas libérée à ce moment, car son compteur de
+références est à 1, et non pas 0. Puis, Rust libère `a`, ce qui décrémente le
+compteur `a` de références `Rc<List>` de 2 à 1, également. La mémoire de cette
+instance ne peut pas non plus être libérée car l'autre instance `Rc<List>` y
+fait toujours référence. La mémoire alouée à la liste ne sera jamais libérée.
+Pour représenter cette boucle de références, nous avons créé un diagramme dans
+l'illustration 15-4.
 
 <!--
 <img alt="Reference cycle of lists" src="img/trpl15-04.svg" class="center" />
@@ -240,11 +239,11 @@ causing it to run out of available memory.
 -->
 
 Dans ce cas, juste après que nous ayons créé la boucle de références, le
-programme se termine. Les conséquences de cette boucle ne sont désastreuses.
-Cependant, si un programme plus complexe alloue beaucoup de mémoire dans une
-boucle de références et la garde pendant longtemps, le programme va utiliser
-bien plus de mémoire qu'il a besoin et pourrait surcharger le système, qui
-devrait épuiser la mémoire disponible.
+programme se termine. Les conséquences de cette boucle ne sont pas
+désastreuses. Cependant, si un programme plus complexe alloue beaucoup de
+mémoire dans une boucle de références et la garde pendant longtemps, le
+programme va utiliser bien plus de mémoire qu'il a besoin et pourrait
+surcharger le système, qui devrait épuiser la mémoire disponible.
 
 <!--
 Creating reference cycles is not easily done, but it’s not impossible either.

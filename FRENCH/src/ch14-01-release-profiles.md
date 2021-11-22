@@ -20,7 +20,7 @@ various options for compiling code. Each profile is configured independently of
 the others.
 -->
 
-Dans Rust, les *profils de publication* sont profils prédéfinis et
+Dans Rust, les *profils de publication* sont des profils prédéfinis et
 personnalisables avec différentes configurations qui permettent au développeur
 d'avoir plus de contrôle sur différentes options de compilation du code. Chaque
 profil est configuré indépendamment des autres.

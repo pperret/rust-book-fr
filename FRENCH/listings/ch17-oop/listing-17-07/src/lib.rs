@@ -27,5 +27,3 @@ impl Affichable for Bouton {
     }
 }
 // ANCHOR_END: here
-
-fn main() {}

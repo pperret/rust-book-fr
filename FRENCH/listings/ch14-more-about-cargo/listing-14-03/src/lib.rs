@@ -27,10 +27,8 @@ pub mod utilitaires {
     pub fn mixer(c1: CouleurPrimaire, c2: CouleurPrimaire) -> CouleurSecondaire {
         // -- partie masquée ici --
         // ANCHOR_END: here
-        CouleurSecondaire::Orange
+        unimplemented!();
         // ANCHOR: here
     }
 }
 // ANCHOR_END: here
-
-fn main() {}

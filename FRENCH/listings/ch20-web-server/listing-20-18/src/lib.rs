@@ -74,5 +74,3 @@ impl Operateur {
     }
 }
 // ANCHOR_END: here
-
-fn main() {}

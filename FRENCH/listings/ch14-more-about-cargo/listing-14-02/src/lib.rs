@@ -1,3 +1,4 @@
+// ANCHOR: here
 //! # Ma crate
 //!
 //! `ma_crate` est un regroupement d'utilitaires pour rendre plus pratique

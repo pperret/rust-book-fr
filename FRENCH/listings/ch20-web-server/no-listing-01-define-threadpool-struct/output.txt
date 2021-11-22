@@ -1,14 +1,10 @@
 $ cargo check
     Checking salutations v0.1.0 (file:///projects/salutations)
-error[E0599]: no function or associated item named `new` found for type `salutations::GroupeTaches` in the current scope
+error[E0599]: no function or associated item named `new` found for struct `GroupeTaches` in the current scope
   --> src/bin/main.rs:11:28
    |
 11 |     let groupe = GroupeTaches::new(4);
-   |                                ^^^ function or associated item not found in `salutations::GroupeTaches`
-
-error: aborting due to previous error
+   |                                ^^^ function or associated item not found in `GroupeTaches`
 
 For more information about this error, try `rustc --explain E0599`.
-error: could not compile `salutations`.
-
-To learn more, run the command again with --verbose.
+error: could not compile `hello` due to previous error

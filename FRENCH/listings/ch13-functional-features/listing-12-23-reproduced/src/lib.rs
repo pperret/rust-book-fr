@@ -10,7 +10,7 @@ pub struct Config {
 
 // ANCHOR: ch13
 impl Config {
-    pub fn new(args: &[String]) -> Result<Config, &'static str> {
+    pub fn new(args: &[String]) -> Result<Config, &str> {
         if args.len() < 3 {
             return Err("il n'y a pas assez d'arguments");
         }
@@ -104,5 +104,3 @@ Trust me.";
         );
     }
 }
-
-fn main() {}

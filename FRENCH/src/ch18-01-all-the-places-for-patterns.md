@@ -247,18 +247,6 @@ vecteur dans l'ordre opposé à celui dans lequel elles ont été insérées.
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-02/src/main.rs:here}}
 ```
 
-```rust
-let mut pile = Vec::new();
-
-pile.push(1);
-pile.push(2);
-pile.push(3);
-
-while let Some(donnee_du_haut) = pile.pop() {
-    println!("{}", donnee_du_haut);
-}
-```
-
 <!--
 <span class="caption">Listing 18-2: Using a `while let` loop to print values
 for as long as `stack.pop()` returns `Some`</span>
@@ -344,17 +332,17 @@ Le code de l'encart 18-3 va afficher ceci :
 
 <!--
 We use the `enumerate` method to adapt an iterator to produce a value and that
-value’s index in the iterator, placed into a tuple. The first call to
-`enumerate` produces the tuple `(0, 'a')`. When this value is matched to the
-pattern `(index, value)`, `index` will be `0` and `value` will be `'a'`,
-printing the first line of the output.
+value’s index in the iterator, placed into a tuple. The first value produced is
+the tuple `(0, 'a')`. When this value is matched to the pattern `(index,
+value)`, `index` will be `0` and `value` will be `'a'`, printing the first line
+of the output.
 -->
 
 Nous avons utilisé la méthode `enumerate` pour produire une valeur et son indice
-à partir d'un itérateur, que nous avons placé dans un tuple. Le premier appel à
-`enumerate` va produire le tuple `(0, 'a')`. Lorsque cette valeur est adaptée au
-motif `(indice, valeur)`, `indice` vaudra `0` et `valeur` vaudra `'a'`, et
-affichera la première ligne sur la sortie.
+à partir d'un itérateur, que nous avons placé dans un tuple. La premiere valeur
+produite est le tuple `(0, 'a')`. Lorsque cette valeur est adaptée au motif
+`(indice, valeur)`, `indice` vaudra `0` et `valeur` vaudra `'a'`, et affichera
+la première ligne sur la sortie.
 
 <!--
 ### `let` Statements

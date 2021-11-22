@@ -5,14 +5,15 @@
 ## Comparaison des performances : les boucles et les itérateurs
 
 <!--
-To determine whether to use loops or iterators, you need to know which version
-of our `search` functions is faster: the version with an explicit `for` loop or
-the version with iterators.
+To determine whether to use loops or iterators, you need to know which
+implementation is faster: the version of the `search` function with an explicit
+`for` loop or the version with iterators.
 -->
 
 Pour déterminer s'il faut utiliser des boucles ou des itérateurs, nous devons
-savoir quelle version de notre fonction `rechercher` est la plus rapide : la
-version avec une boucle `for` explicite ou la version avec des itérateurs ?
+savoir quelle implémentation est la plus rapide : la version de la fonction
+`rechercher` avec une boucle `for` explicite, ou la version avec des
+itérateurs.
 
 <!--
 We ran a benchmark by loading the entire contents of *The Adventures of

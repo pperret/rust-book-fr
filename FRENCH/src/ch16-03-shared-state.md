@@ -20,7 +20,7 @@ one. Consider this part of the slogan from the Go language documentation again:
 -->
 
 L'envoi de messages est un assez bon moyen de gestion de la concurrence, mais il
-n'y a pas qu'un seul. Repensons à cette partie du slogan de la documentation du
+n'y en a pas qu'un seul. Repensons à cette partie du slogan de la documentation du
 langage Go : “ne communiquez pas en partageant la mémoire”.
 
 <!--
@@ -123,7 +123,7 @@ many people are enthusiastic about channels. However, thanks to Rust’s type
 system and ownership rules, you can’t get locking and unlocking wrong.
 -->
 
-La gestion des mutex peut devenir incroyable compliquée, c'est pourquoi tant de
+La gestion des mutex peut devenir incroyablement compliquée, c'est pourquoi tant de
 personnes sont partisanes des canaux. Cependant, grâce au système de type de
 Rust et aux règles de possession, vous ne pouvez pas vous tromper dans le
 verrouillage et déverrouillage.
@@ -224,7 +224,7 @@ Le pointeur intelligent `MutexGuard` implémente `Deref` pour pouvoir pointer
 sur la donnée interne ; ce pointeur intelligent implémente aussi `Drop` qui
 libère le verrou automatiquement lorsqu'un `MutexGuard` sort de la portée, ce
 qui arrive à la fin de la portée interne dans l'encart 16-12. Au final, nous ne
-risquons d'oublier de rendre le verrou et ainsi bloquer l'utilisation du mutex
+risquons pas d'oublier de rendre le verrou et ainsi bloquer l'utilisation du mutex
 par les autres tâches car la libération du verrou se produit automatiquement.
 
 <!--
@@ -354,18 +354,14 @@ propriétaires que nous avons vu au chapitre 15.
 In Chapter 15, we gave a value multiple owners by using the smart pointer
 `Rc<T>` to create a reference counted value. Let’s do the same here and see
 what happens. We’ll wrap the `Mutex<T>` in `Rc<T>` in Listing 16-14 and clone
-the `Rc<T>` before moving ownership to the thread. Now that we’ve seen the
-errors, we’ll also switch back to using the `for` loop, and we’ll keep the
-`move` keyword with the closure.
+the `Rc<T>` before moving ownership to the thread.
 -->
 
 Dans le chapitre 15, nous avons assigné plusieurs propriétaires à une valeur
 en utilisant le pointeur intelligent `Rc<T>` pour créer un compteur de
 référence. Faisons la même chose ici et voyons ce qui se passe. Nous allons
 intégrer le `Mutex<T>` dans un `Rc<T>` dans l'encart 16-14 et cloner le `Rc<T>`
-avant de déplacer sa possession à la tâche. Maintenant que nous avons vu les
-erreurs, nous allons aussi revenir à l'utilisation de la boucle `for` et nous
-allons garder le mot-clé `move` dans la fermeture.
+avant de déplacer sa possession à la tâche.
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -496,7 +492,7 @@ utilisant `Arc<T>` par défaut. La raison à cela est que la sécurité entre le
 tâches a un coût sur les performances que vous n'êtes prêt à payer que lorsque
 vous en avez besoin. Si vous procédez à des opérations sur des valeurs
 uniquement dans une seule tâche, votre code va s'exécuter plus vite car il n'a
-pas besoin de garantir de que les atomes fournissent.
+pas besoin d'appliquer les garanties fournies par les types atomiques.
 
 <!--
 Let’s return to our example: `Arc<T>` and `Rc<T>` have the same API, so we fix
@@ -608,7 +604,7 @@ standard library API documentation for `Mutex<T>` and `MutexGuard` offers
 useful information.
 -->
 
-Un autre détail à souligner est Rust ne peut pas vous protéger de tous les
+Un autre détail à souligner est que Rust ne peut pas vous protéger de tous les
 genres d'erreurs de logique lorsque vous utilisez `Mutex<T>`. Souvenez-vous
 que le chapitre 15 utilisait `Rc<T>` avec le risque de créer des boucles de
 références, dans lesquelles deux valeurs `Rc<T>` se référeraient l'une à

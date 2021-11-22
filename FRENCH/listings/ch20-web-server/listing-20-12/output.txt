@@ -1,14 +1,10 @@
 $ cargo check
     Checking salutations v0.1.0 (file:///projects/salutations)
-error[E0433]: failed to resolve: use of undeclared type or module `GroupeTaches`
+error[E0433]: failed to resolve: use of undeclared type `GroupeTaches`
   --> src/main.rs:10:16
    |
 10 |     let groupe = GroupeTaches::new(4);
-   |                  ^^^^^^^^^^^^ use of undeclared type or module `GroupeTaches`
-
-error: aborting due to previous error
+   |                  ^^^^^^^^^^^^ use of undeclared type `GroupeTaches`
 
 For more information about this error, try `rustc --explain E0433`.
-error: could not compile `salutations`.
-
-To learn more, run the command again with --verbose.
+error: could not compile `hello` due to previous error

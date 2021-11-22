@@ -29,7 +29,7 @@ différentes parties d'un programme s'exécutent de manière indépendente, et l
 *parallélisme*, dans lequel différentes parties d'un programme s'exécutent en
 même temps, sont devenus des pratiques de plus en plus importantes au fur et à
 mesure que les ordinateurs tirent parti de leurs processeurs multiples.
-Historiquement, le développement dans ces contextes est difficile et favorise
+Historiquement, le développement dans ces contextes était difficile et favorisait
 les erreurs : Rust compte bien changer la donne.
 
 <!--
@@ -104,7 +104,7 @@ niveau, car un langage de haut niveau offre des avantages en sacrifiant
 certains contrôles pour être plus accessibles. Cependant, les langages de bas
 niveau sont censés fournir la solution la plus performante dans n'importe
 quelle situation donnée et proposer moins de facilités sur le matériel.
-Cependant, Rust offre une gamme d'outils répondre aux problèmes de toutes les
+Cependant, Rust offre une gamme d'outils pour répondre aux problèmes de toutes les
 manières possibles pour vos besoins du moment.
 
 <!--

@@ -63,8 +63,8 @@ français.
 | cons list | liste de construction | - |
 | constant | constant / constante | - |
 | construct | instruction | - |
-| consuming adaptor | adaptateur de consommation | - |
 | constructor | constructeur | - |
+| consuming adaptor | adaptateur de consommation | - |
 | control flow construct | structure de contrôle | - |
 | core of the error | message d'erreur | - |
 | corruption | corruption / être corrompu | - |
@@ -176,6 +176,7 @@ français.
 | namespace | espace de nom | - |
 | namespacing | l'espace de nom | - |
 | nested (path) | (chemin) imbriqué | - |
+| newtype pattern | motif newtype | - |
 | nightly Rust | version expérimentale de Rust | - |
 | Note | remarque | tout en minuscule (sauf en début de phrase) |
 | numerical characters | chiffres | - |
@@ -187,8 +188,8 @@ français.
 | ownership | possession | - |
 | package manager | système de gestion de paquets | - |
 | panic | panique(r) | - |
-| parallelism | parallélisme | - |
 | parallel programming | parallélisme | - |
+| parallelism | parallélisme | - |
 | parameter | paramètre | - |
 | parse | interpréter | - |
 | PATH | PATH | - |
@@ -216,6 +217,7 @@ français.
 | release | publication | - |
 | registry | registre | - |
 | regression | régression | - |
+| release | publication | - |
 | remainder | modulo | opération `%` |
 | reproducible build | compilation reproductible | - |
 | Resource Acquisition Is Initialization (RAII) | l'acquisition d'une ressource est une initialisation (RAII) | - |
@@ -266,10 +268,10 @@ français.
 | systems-level | niveau système | - |
 | systems-level code | code système | - |
 | terminal | terminal | - |
-| thread | tâche | - |
-| token | jeton | - |
 | test double | double de test | - |
+| thread | tâche | - |
 | thread pool | groupe de tâches | - |
+| token | jeton | - |
 | trait | trait | - |
 | trait bound | trait lié | - |
 | trait object | objet trait | - |

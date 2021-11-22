@@ -331,12 +331,12 @@ faire est d'implémenter un trait `Messager` que nous allons fournir. L'encart
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-20/src/lib.rs}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-20/src/lib.rs}}
 ```
 
@@ -352,20 +352,21 @@ un certain seuil</span>
 <!--
 One important part of this code is that the `Messenger` trait has one method
 called `send` that takes an immutable reference to `self` and the text of the
-message. This is the interface our mock object needs to have. The other
-important part is that we want to test the behavior of the `set_value` method
-on the `LimitTracker`. We can change what we pass in for the `value` parameter,
-but `set_value` doesn’t return anything for us to make assertions on. We want
-to be able to say that if we create a `LimitTracker` with something that
-implements the `Messenger` trait and a particular value for `max`, when we pass
-different numbers for `value`, the messenger is told to send the appropriate
-messages.
+message. This trait is the interface our mock object needs to implement so that
+the mock can be used in the same way a real object is. The other important part
+is that we want to test the behavior of the `set_value` method on the
+`LimitTracker`. We can change what we pass in for the `value` parameter, but
+`set_value` doesn’t return anything for us to make assertions on. We want to be
+able to say that if we create a `LimitTracker` with something that implements
+the `Messenger` trait and a particular value for `max`, when we pass different
+numbers for `value`, the messenger is told to send the appropriate messages.
 -->
 
 La partie la plus importante de ce code est celle où le trait `Messager` a une
 méthode qui fait appel à `envoyer` en prenant une référence immuable à `self`
-ainsi que le texte du message. C'est l'interface que notre mock object doit
-avoir. L'autre partie importante est lorsque nous souhaitons tester le
+ainsi que le texte du message. Ce trait est l'interface que notre mock object
+doit implémenter afin que le mock puisse être utilisé de la même manière que
+l'objet réel. L'autre partie importante est lorsque nous souhaitons tester le
 comportement de la méthode `set_valeur` sur le `TraqueurDeLimite`. Nous pouvons
 changer ce que nous envoyons dans le paramètre `valeur`, mais `set_valeur` ne
 nous retourne rien qui nous permet de le vérifier. Nous voulons pouvoir dire que
@@ -465,12 +466,12 @@ However, there’s one problem with this test, as shown here:
 Cependant, il reste un problème avec ce test, qui est montré ci-dessous :
 
 <!--
-```text
+```console
 {{#include ../listings-sources/ch15-smart-pointers/listing-15-21/output.txt}}
 ```
 -->
 
-```text
+```console
 {{#include ../listings/ch15-smart-pointers/listing-15-21/output.txt}}
 ```
 
@@ -491,14 +492,14 @@ vous constaterez le message d'erreur que vous obtiendrez).
 
 <!--
 This is a situation in which interior mutability can help! We’ll store the
-`sent_messages` within a `RefCell<T>`, and then the `send` message will be
+`sent_messages` within a `RefCell<T>`, and then the `send` method will be
 able to modify `sent_messages` to store the messages we’ve seen. Listing 15-22
 shows what that looks like:
 -->
 
 C'est une situation dans laquelle la mutabilité interne peut nous aider !
-Nous allons stocker `messages_envoyes` dans une `RefCell<T>`, et ensuite le
-message de `envoyer` pourra modifier `messages_envoyes` pour stocker les
+Nous allons stocker `messages_envoyes` dans une `RefCell<T>`, et ensuite la
+méthode `envoyer` pourra modifier `messages_envoyes` pour stocker les
 messages que nous avons avons vu. L'encart 15-22 montre à quoi cela peut
 ressembler :
 
@@ -509,12 +510,12 @@ ressembler :
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch15-smart-pointers/listing-15-22/src/lib.rs:here}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch15-smart-pointers/listing-15-22/src/lib.rs:here}}
 ```
 

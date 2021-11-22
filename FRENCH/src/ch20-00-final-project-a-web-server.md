@@ -20,7 +20,7 @@ concepts we covered in the final chapters, as well as recap some earlier
 lessons.
 -->
 
-Cela a été un long voyage, mais nous avons atteint la fin de ce livre. Dans ce
+Ce fut un long voyage, mais nous avons atteint la fin de ce livre. Dans ce
 chapitre, nous allons construire un nouveau projet ensemble pour mettre en
 application certains concepts que nous avons vu dans les derniers chapitres, et
 aussi pour récapituler quelques leçons précédentes.
@@ -93,7 +93,7 @@ Toutefois, notre intention dans ce chapitre est de vous aider à apprendre, et
 non pas de se laisser aller à la facilité. Comme Rust est un langage de
 programmation de systèmes, nous pouvons choisir le niveau d'abstraction sur
 lequel nous souhaitons travailler et nous pouvons descendre à un niveau plus bas
-que ce qui est possible ou praticable dans d'autres langages. Nous allons écrire
+que ce qui est possible ou pratique dans d'autres langages. Nous allons écrire
 manuellement le serveur HTTP basique et le groupe de tâches pour que vous
 puissiez apprendre les idées et techniques générales derrière les crates que
 vous serez peut-être amenés à utiliser à l'avenir.

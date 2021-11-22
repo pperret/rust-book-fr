@@ -28,17 +28,22 @@ fn gestion_connexion(mut flux: TcpStream) {
     let pause = b"GET /pause HTTP/1.1\r\n";
 
     let (ligne_statut, nom_fichier) = if tampon.starts_with(get) {
-        ("HTTP/1.1 200 OK\r\n\r\n", "hello.html")
+        ("HTTP/1.1 200 OK", "hello.html")
     } else if tampon.starts_with(pause) {
         thread::sleep(Duration::from_secs(5));
-        ("HTTP/1.1 200 OK\r\n\r\n", "hello.html")
+        ("HTTP/1.1 200 OK", "hello.html")
     } else {
-        ("HTTP/1.1 404 NOT FOUND\r\n\r\n", "404.html")
+        ("HTTP/1.1 404 NOT FOUND", "404.html")
     };
 
     let contenu = fs::read_to_string(nom_fichier).unwrap();
 
-    let reponse = format!("{}{}", ligne_statut, contenu);
+    let reponse = format!(
+        "{}\r\nContent-Length: {}\r\n\r\n{}",
+        ligne_statut,
+        contenu.len(),
+        contenu
+    );
 
     flux.write(reponse.as_bytes()).unwrap();
     flux.flush().unwrap();

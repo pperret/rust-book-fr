@@ -23,12 +23,12 @@ data. Also, they don’t have any overhead and are the kind of pointer we use
 most often.
 -->
 
-Un *pointeur* est concept général pour une variable qui contient une adresse
+Un *pointeur* est un concept général pour une variable qui contient une adresse
 vers la mémoire. Cette adresse pointe vers d'autres données. Le type de pointeur
 le plus courant en Rust est la référence, que vous avez appris au chapitre 4.
 Les références sont marquées par le symbole `&` et empruntent la valeur sur
 laquelle ils pointent. Elles n'ont pas d'autres fonctionnalités que celle de
-pointer sur une donnée. De plus, elles n'ont pas coût sur les performances et
+pointer sur une donnée. De plus, elles n'ont aucun coût sur les performances et
 c'est le type de pointeur que nous utilisons le plus souvent.
 
 <!--
@@ -52,7 +52,7 @@ différents pointeurs intelligents définis dans bibliothèque standard
 fournissent des fonctionnalités supplémentaires à celles des références.
 Un exemple que nous allons explorer dans ce chapitre est le type de pointeur
 intelligent *compteur de références*. Ce pointeur vous permet d'avoir
-plusieurs propriétaires d'une donnée tout en gardant une trace leur nombre et,
+plusieurs propriétaires d'une donnée tout en gardant une trace de leur nombre et,
 lorsqu'il n'y en a plus, nettoyer cette donnée.
 
 <!--
@@ -104,7 +104,7 @@ intelligent de se comporter comme une référence afin que vous puissiez écrire
 du code qui fonctionne aussi bien avec des références qu'avec des pointeurs
 intelligents. Le trait `Drop` vous permet de personnaliser le code qui est
 exécuté lorsqu'une instance d'un pointeur intelligent sort de la portée. Dans
-ce chapitre, nous verrons ces deux traits et expliquer pourquoi ils sont
+ce chapitre, nous verrons ces deux traits et expliquerons pourquoi ils sont
 importants pour les pointeurs intelligents.
 
 <!--

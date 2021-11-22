@@ -287,12 +287,12 @@ nécessaire pour stocker la fermeture. Nous avons vu une solution à ce problèm
 précédemment. Nous pouvons utiliser un objet trait :
 
 <!--
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings-sources/ch19-advanced-features/no-listing-19-returns-closure-trait-object/src/lib.rs}}
 ```
 -->
 
-```rust
+```rust,noplayground
 {{#rustdoc_include ../listings/ch19-advanced-features/no-listing-19-returns-closure-trait-object/src/lib.rs}}
 ```
 
