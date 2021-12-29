@@ -5,45 +5,39 @@
 ## Qu'est-ce que la possession ?
 
 <!--
-Rust’s central feature is *ownership*. Although the feature is straightforward
-to explain, it has deep implications for the rest of the language.
--->
-
-La principale spécificité de Rust est *la possession*. Bien que cette
-fonctionnalité soit simple à expliquer, elle a de profondes conséquences sur le
-reste du langage.
-
-<!--
+*Ownership* is a set of rules that governs how a Rust program manages memory.
 All programs have to manage the way they use a computer’s memory while running.
-Some languages have garbage collection that constantly looks for no longer used
+Some languages have garbage collection that constantly looks for no-longer used
 memory as the program runs; in other languages, the programmer must explicitly
 allocate and free the memory. Rust uses a third approach: memory is managed
-through a system of ownership with a set of rules that the compiler checks at
-compile time. None of the ownership features slow down your program while it’s
-running.
+through a system of ownership with a set of rules that the compiler checks. If
+any of the rules are violated, the program won’t compile. None of the features
+of ownership will slow down your program while it’s running.
 -->
 
-Tous les programmes doivent gérer la façon dont ils utilisent la mémoire
-lorsqu'ils s'exécutent. Certains langages ont un ramasse-miettes qui scrute
-constamment la mémoire qui n'est plus utilisée pendant qu'il s'exécute ; dans
-d'autres langages, le développeur doit explicitement allouer et libérer la
-mémoire. Rust adopte une troisième approche : la mémoire est gérée avec un
-système de possession qui repose sur un jeu de règles que le compilateur vérifie
-au moment de la compilation. Aucune des fonctionnalités de possession ne
-ralentit votre programme à l'exécution.
+*La possession* est un jeu de règles qui gouvernent la gestion de la mémoire
+par un programme Rust. Tous les programmes doivent gérer la façon dont ils
+utilisent la mémoire lorsqu'ils s'exécutent. Certains langages ont un
+ramasse-miettes qui scrute constamment la mémoire qui n'est plus utilisée
+pendant qu'il s'exécute ; dans d'autres langages, le développeur doit
+explicitement allouer et libérer la mémoire. Rust adopte une troisième
+approche : la mémoire est gérée avec un système de possession qui repose sur un
+jeu de règles que le compilateur vérifie au moment de la compilation. Si une de
+ces règles a été enfreinte, le programme ne sera pas compilé. Aucune des
+fonctionnalités de la possession ne ralentit votre programme à l'exécution.
 
 <!--
 Because ownership is a new concept for many programmers, it does take some time
 to get used to. The good news is that the more experienced you become with Rust
-and the rules of the ownership system, the more you’ll be able to naturally
+and the rules of the ownership system, the easier you’ll find it to naturally
 develop code that is safe and efficient. Keep at it!
 -->
 
 Comme la possession est un nouveau principe pour de nombreux développeurs,
 cela prend un certain temps pour s'y familiariser. La bonne nouvelle est que
 plus vous devenez expérimenté avec Rust et ses règles de possession, plus vous
-développerez naturellement du code sûr et efficace. Gardez bien cela à
-l'esprit !
+développerez naturellement et facilement du code sûr et efficace. Gardez bien
+cela à l'esprit !
 
 <!--
 When you understand ownership, you’ll have a solid foundation for understanding
@@ -61,44 +55,44 @@ chaînes de caractères.
 <!--
 > ### The Stack and the Heap
 >
-> In many programming languages, you don’t have to think about the stack and
-> the heap very often. But in a systems programming language like Rust, whether
-> a value is on the stack or the heap has more of an effect on how the language
-> behaves and why you have to make certain decisions. Parts of ownership will
-> be described in relation to the stack and the heap later in this chapter, so
-> here is a brief explanation in preparation.
+> Many programming languages don’t require you to think about the stack and the
+> heap very often. But in a systems programming language like Rust, whether a
+> value is on the stack or the heap affects how the language behaves and why
+> you have to make certain decisions. Parts of ownership will be described in
+> relation to the stack and the heap later in this chapter, so here is a brief
+> explanation in preparation.
 >
-> Both the stack and the heap are parts of memory that are available to your
-> code to use at runtime, but they are structured in different ways. The stack
-> stores values in the order it gets them and removes the values in the
-> opposite order. This is referred to as *last in, first out*. Think of a stack
-> of plates: when you add more plates, you put them on top of the pile, and
-> when you need a plate, you take one off the top. Adding or removing plates
-> from the middle or bottom wouldn’t work as well! Adding data is called
-> *pushing onto the stack*, and removing data is called *popping off the stack*.
+> Both the stack and the heap are parts of memory available to your code to use
+> at runtime, but they are structured in different ways. The stack stores
+> values in the order it gets them and removes the values in the opposite
+> order. This is referred to as *last in, first out*. Think of a stack of
+> plates: when you add more plates, you put them on top of the pile, and when
+> you need a plate, you take one off the top. Adding or removing plates from
+> the middle or bottom wouldn’t work as well! Adding data is called *pushing
+> onto the stack*, and removing data is called *popping off the stack*. All
+> data stored on the stack must have a known, fixed size. Data with an unknown
+> size at compile time or a size that might change must be stored on the heap
+> instead.
 >
-> All data stored on the stack must have a known, fixed size. Data with an
-> unknown size at compile time or a size that might change must be stored on
-> the heap instead. The heap is less organized: when you put data on the heap,
-> you request a certain amount of space. The memory allocator finds an empty
-> spot in the heap that is big enough, marks it as being in use, and returns a
-> *pointer*, which is the address of that location. This process is called
-> *allocating on the heap* and is sometimes abbreviated as just *allocating*.
-> Pushing values onto the stack is not considered allocating. Because the
-> pointer is a known, fixed size, you can store the pointer on the stack, but
-> when you want the actual data, you must follow the pointer.
->
-> Think of being seated at a restaurant. When you enter, you state the number of
-> people in your group, and the staff finds an empty table that fits everyone
-> and leads you there. If someone in your group comes late, they can ask where
-> you’ve been seated to find you.
+> The heap is less organized: when you put data on the heap, you request a
+> certain amount of space. The memory allocator finds an empty spot in the heap
+> that is big enough, marks it as being in use, and returns a *pointer*, which
+> is the address of that location. This process is called *allocating on the
+> heap* and is sometimes abbreviated as just *allocating*. Pushing values onto
+> the stack is not considered allocating. Because the pointer to the heap is a
+> known, fixed size, you can store the pointer on the stack, but when you want
+> the actual data, you must follow the pointer. Think of being seated at a
+> restaurant. When you enter, you state the number of people in your group, and
+> the staff finds an empty table that fits everyone and leads you there. If
+> someone in your group comes late, they can ask where you’ve been seated to
+> find you.
 >
 > Pushing to the stack is faster than allocating on the heap because the
-> allocator never has to search for a place to store new data; that
-> location is always at the top of the stack. Comparatively, allocating space
-> on the heap requires more work, because the allocator must first find
-> a big enough space to hold the data and then perform bookkeeping to prepare
-> for the next allocation.
+> allocator never has to search for a place to store new data; that location is
+> always at the top of the stack. Comparatively, allocating space on the heap
+> requires more work, because the allocator must first find a big enough space
+> to hold the data and then perform bookkeeping to prepare for the next
+> allocation.
 >
 > Accessing data in the heap is slower than accessing data on the stack because
 > you have to follow a pointer to get there. Contemporary processors are faster
@@ -120,43 +114,43 @@ chaînes de caractères.
 > minimizing the amount of duplicate data on the heap, and cleaning up unused
 > data on the heap so you don’t run out of space are all problems that ownership
 > addresses. Once you understand ownership, you won’t need to think about the
-> stack and the heap very often, but knowing that managing heap data is why
-> ownership exists can help explain why it works the way it does.
+> stack and the heap very often, but knowing that the main purpose of ownership
+> is to manage heap data can help explain why it works the way it does.
 -->
 
 > ### La pile et le tas
 >
-> Dans de nombreux langages, il n'est pas nécessaire de se préoccuper de la
+> De nombreux langages ne nécessitent pas de se préoccuper de la
 > pile (*stack*) et du tas (*heap*). Mais dans un langage de programmation
-> système comme Rust, qu'une donnée soit sur la pile ou sur le tas influe
+> système comme Rust, si une donnée soit sur la pile ou sur le tas a une influance
 > sur le comportement du langage et explique pourquoi nous devons faire certains
 > choix. Nous décrirons plus loin dans ce chapitre comment la possession
 > fonctionne vis-à-vis de la pile et du tas, voici donc une brève explication au
 > préalable.
 >
-> La pile et le tas sont tous les deux des emplacements de la mémoire qui
-> sont à disposition de votre code lors de son exécution, mais sont organisés de
-> façon différente. La pile enregistre les valeurs dans l'ordre qu'elle les
-> reçoit et enlève les valeurs dans l'autre sens. C'est ce que l'on appelle le
-> principe de *dernier entré, premier sorti*. C'est comme une pile d'assiettes :
-> quand vous ajoutez des nouvelles assiettes, vous les déposez sur le dessus de
-> la pile, et quand vous avez besoin d'une assiette, vous en prenez une sur le
+> La pile et le tas sont tous les deux des emplacements de la mémoire à
+> disposition de votre code lors de son exécution, mais sont organisés de façon
+> différente. La pile enregistre les valeurs dans l'ordre qu'elle les reçoit et
+> enlève les valeurs dans l'autre sens. C'est ce que l'on appelle le principe
+> de *dernier entré, premier sorti*. C'est comme une pile d'assiettes : quand
+> vous ajoutez des nouvelles assiettes, vous les déposez sur le dessus de la
+> pile, et quand vous avez besoin d'une assiette, vous en prenez une sur le
 > dessus. Ajouter ou enlever des assiettes au milieu ou en bas ne serait pas
 > aussi efficace ! Ajouter une donnée sur la pile se dit *empiler* et en retirer
-> une se dit *dépiler*.
+> une se dit *dépiler*. Toutes donnée stockée dans la pile doit avoir une
+> taille connue et fixe. Les données avec une taille inconnue au moment de la
+> compilation ou une taille qui peut changer doivent plutôt être stockées sur
+> le tas.
 >
-> Toutes les données stockées dans la pile doivent avoir une taille connue et
-> fixe. Les données avec une taille inconnue au moment de la compilation ou une
-> taille qui peut changer doivent plutôt être stockées sur le tas. Le tas est
-> moins bien organisé : lorsque vous ajoutez des données sur le tas, vous
-> demandez une certaine quantité d'espace mémoire. Le gestionnaire de mémoire va
-> trouver un emplacement dans le tas qui est suffisamment grand, va le marquer
-> comme étant en cours d'utilisation, et va retourner un *pointeur*, qui est
-> l'adresse de cet emplacement. Cette procédure est appelée *allocation sur le
-> tas*, ce qu'on abrège parfois en *allocation* tout court. L'ajout de valeurs
-> sur la pile n'est pas considéré comme une allocation. Comme le pointeur a une
-> taille connue et fixe, on peut stocker ce pointeur sur la pile, mais quand on
-> veut la vraie donnée, il faut suivre le pointeur.
+> Le tas est moins bien organisé : lorsque vous ajoutez des données sur le tas,
+> vous demandez une certaine quantité d'espace mémoire. Le gestionnaire de
+> mémoire va trouver un emplacement dans le tas qui est suffisamment grand, va
+> le marquer comme étant en cours d'utilisation, et va retourner un *pointeur*,
+> qui est l'adresse de cet emplacement. Cette procédure est appelée *allocation
+> sur le tas*, ce qu'on abrège parfois en *allocation* tout court. L'ajout de
+> valeurs sur la pile n'est pas considéré comme une allocation. Comme le
+> pointeur vers le tas a une taille connue et fixe, on peut stocker ce pointeur
+> sur la pile, mais quand on veut la vraie donnée, il faut suivre le pointeur.
 >
 > C'est comme si vous vouliez manger au restaurant. Quand vous entrez, vous
 > indiquez le nombre de personnes dans votre groupe, et le personnel trouve une
@@ -195,9 +189,9 @@ chaînes de caractères.
 > quantité de données en double sur le tas, ou encore de veiller à libérer les
 > données inutilisées sur le tas pour que nous ne soyons pas à court d'espace.
 > Quand vous aurez compris la possession, vous n'aurez plus besoin de vous
-> préoccuper de la pile et du tas très souvent, mais savoir que la possession
-> existe pour gérer les données du tas peut vous aider à comprendre pourquoi
-> elle fonctionne de cette manière.
+> préoccuper de la pile et du tas très souvent, mais savoir que le but
+> principal de la possession est de gérer les données du tas peut vous aider à
+> comprendre pourquoi elle fonctionne de cette manière.
 
 <!--
 ### Ownership Rules
@@ -230,30 +224,29 @@ règles pendant que nous travaillons sur des exemples qui les illustrent :
 ### Portée de la variable
 
 <!--
-We’ve walked through an example of a Rust program already in Chapter 2. Now
-that we’re past basic syntax, we won’t include all the `fn main() {` code in
-examples, so if you’re following along, you’ll have to put the following
+Now that we’re past basic Rust syntax, we won’t include all the `fn main() {`
+code in examples, so if you’re following along, make sure to put the following
 examples inside a `main` function manually. As a result, our examples will be a
 bit more concise, letting us focus on the actual details rather than
 boilerplate code.
 -->
 
-Nous avons déjà vu un exemple de programme Rust au chapitre 2. Maintenant
+Maintenant
 que nous avons vu la syntaxe Rust de base, nous n'allons plus ajouter tout le
 code du style `fn main() {` dans les exemples, donc si vous voulez reproduire
-les exemples, vous devrez les mettre manuellement dans une fonction `main`. Par
+les exemples, assurez-vous de placer manuellement dans une fonction `main`. Par
 conséquent, nos exemples seront plus concis, nous permettant de nous concentrer
 sur les détails de la situation plutôt que sur du code normalisé.
 
 <!--
 As a first example of ownership, we’ll look at the *scope* of some variables. A
-scope is the range within a program for which an item is valid. Let’s say we
-have a variable that looks like this:
+scope is the range within a program for which an item is valid. Take the
+following variable:
 -->
 
 Pour le premier exemple de possession, nous allons analyser la *portée* de
 certaines variables. Une portée est une zone dans un programme dans laquelle un
-élément est en vigueur. Imaginons que nous ayons la variable suivante :
+élément est en vigueur. Admettons la variable suivante :
 
 <!--
 ```rust
@@ -268,15 +261,15 @@ let s = "hello";
 <!--
 The variable `s` refers to a string literal, where the value of the string is
 hardcoded into the text of our program. The variable is valid from the point at
-which it’s declared until the end of the current *scope*. Listing 4-1 has
-comments annotating where the variable `s` is valid.
+which it’s declared until the end of the current *scope*. Listing 4-1 shows a
+program with comments annotating where the variable `s` would be valid.
 -->
 
 La variable `s` fait référence à un littéral de chaîne de caractères, où la
 valeur de la chaîne est codée en dur dans notre programme. La variable est en
 vigueur à partir du moment où elle est déclarée jusqu'à la fin de la *portée*
-actuelle. L'encart 4-1 a des commentaires pour indiquer quand la variable `s`
-est en vigueur :
+actuelle. L'encart 4-1 nous présente un programme avec des commentaires pour
+indiquer quand la variable `s` est en vigueur :
 
 <!--
 ```rust
@@ -329,13 +322,13 @@ programmation. Maintenant, nous allons aller plus loin en y ajoutant le type
 
 <!--
 To illustrate the rules of ownership, we need a data type that is more complex
-than the ones we covered in the [“Data Types”][data-types]<!-- ignore -- >
-section of Chapter 3. The types covered previously are all a known size, can be
-stored on the stack and popped off the stack when their scope is over, and can
-be quickly and trivially copied to make a new, independent instance if another
+than those we covered in the [“Data Types”][data-types]<!-- ignore -- > section
+of Chapter 3. The types covered previously are all a known size, can be stored
+on the stack and popped off the stack when their scope is over, and can be
+quickly and trivially copied to make a new, independent instance if another
 part of code needs to use the same value in a different scope. But we want to
 look at data that is stored on the heap and explore how Rust knows when to
-clean up that data.
+clean up that data, and the `String` type is a great example.
 -->
 
 Pour illustrer les règles de la possession, nous avons besoin d'un type de
@@ -344,23 +337,23 @@ donnée qui est plus complexe que ceux que nous avons rencontrés dans la sectio
 nous avons vus précédemment ont tous une taille connue et peuvent être stockés
 sur la pile ainsi que retirés de la pile lorsque la portée n'en a plus besoin,
 et peuvent aussi être rapidement et facilement afin de constituer une nouvelle
-instance indépendante si une utrre partie du code a besoin d'utiliser la même
+instance indépendante si une autre partie du code a besoin d'utiliser la même
 valeur dans une portée différente. Mais nous voulons expérimenter le stockage
 de données sur le tas et découvrir comment Rust sait quand il doit nettoyer ces
-données.
+données, et le type `String` est un bon exemple.
 
 <!--
-We’ll use `String` as the example here and concentrate on the parts of `String`
-that relate to ownership. These aspects also apply to other complex data types,
-whether they are provided by the standard library or created by you. We’ll
-discuss `String` in more depth in Chapter 8.
+We’ll concentrate on the parts of `String` that relate to ownership. These
+aspects also apply to other complex data types, whether they are provided by
+the standard library or created by you. We’ll discuss `String` in more depth in
+[Chapter 8][ch8]<!-- ignore -- >.
 -->
 
-Nous allons utiliser ici `String` pour l'exemple et nous concentrer sur les
-caractéristiques de `String` qui sont liées à la possession. Ces aspects
-s'appliquent également à d'autres types de données complexes, qu'ils soient
-fournis par la bibliothèque standard ou qu'ils soient créés par vous. Nous
-verrons `String` plus en détail dans le chapitre 8.
+Nous allons nous concentrer sur les caractéristiques de `String` qui sont liées
+à la possession. Ces aspects s'appliquent également à d'autres types de données
+complexes, qu'ils soient fournis par la bibliothèque standard ou qu'ils soient
+créés par vous. Nous verrons `String` plus en détail dans le [chapitre
+8][ch8]<!-- ignore -->.
 
 <!--
 We’ve already seen string literals, where a string value is hardcoded into our
@@ -397,21 +390,21 @@ let s = String::from("hello");
 ```
 
 <!--
-The double colon (`::`) is an operator that allows us to namespace this
-particular `from` function under the `String` type rather than using some sort
-of name like `string_from`. We’ll discuss this syntax more in the [“Method
+The double colon `::` operator allows us to namespace this particular `from`
+function under the `String` type rather than using some sort of name like
+`string_from`. We’ll discuss this syntax more in the [“Method
 Syntax”][method-syntax]<!-- ignore -- > section of Chapter 5 and when we talk
 about namespacing with modules in [“Paths for Referring to an Item in the
 Module Tree”][paths-module-tree]<!-- ignore -- > in Chapter 7.
 -->
 
-Le double deux-points (`::`) est un opérateur qui nous permet d'appeler cette
-fonction spécifique dans l'espace de nom du type `String` plutôt que d'utiliser
-un nom comme `string_from`. Nous verrons cette syntaxe plus en détail dans la
-section [“Syntaxe de méthode”][method-syntax]<!-- ignore --> du chapitre 5 et
-lorsque nous aborderons les espaces de noms dans la section
-[“Les chemins pour désigner un élément dans l'arborescence de
-module”][paths-module-tree]<!-- ignore --> du chapitre 7.
+L'opérateur double deux-points `::` nous permet d'appeler cette fonction
+spécifique dans l'espace de nom du type `String` plutôt que d'utiliser un nom
+comme `string_from`. Nous verrons cette syntaxe plus en détail dans la section
+[“Syntaxe de méthode”][method-syntax]<!-- ignore --> du chapitre 5 et lorsque
+nous aborderons les espaces de noms dans la section [“Les chemins pour désigner
+un élément dans l'arborescence de module”][paths-module-tree]<!-- ignore --> du
+chapitre 7.
 
 <!--
 This kind of string *can* be mutated:
@@ -495,26 +488,27 @@ toujours ainsi dans la majorité des langages de programmation.
 
 <!--
 However, the second part is different. In languages with a *garbage collector
-(GC)*, the GC keeps track and cleans up memory that isn’t being used anymore,
-and we don’t need to think about it. Without a GC, it’s our responsibility to
-identify when memory is no longer being used and call code to explicitly return
-it, just as we did to request it. Doing this correctly has historically been a
-difficult programming problem. If we forget, we’ll waste memory. If we do it
-too early, we’ll have an invalid variable. If we do it twice, that’s a bug too.
-We need to pair exactly one `allocate` with exactly one `free`.
+(GC)*, the GC keeps track of and cleans up memory that isn’t being used
+anymore, and we don’t need to think about it. In most languages without a GC,
+it’s our responsibility to identify when memory is no longer being used and
+call code to explicitly return it, just as we did to request it. Doing this
+correctly has historically been a difficult programming problem. If we forget,
+we’ll waste memory. If we do it too early, we’ll have an invalid variable. If
+we do it twice, that’s a bug too. We need to pair exactly one `allocate` with
+exactly one `free`.
 -->
 
 Cependant, le deuxième point est différent. Dans des langages avec un
 *ramasse-miettes*, le ramasse-miettes surveille et nettoie la mémoire qui n'est
-plus utilisée, sans que nous n'ayons à nous en préoccuper. Sans un
-ramasse-miettes, c'est de notre responsabilité d'identifier quand cette mémoire
-n'est plus utilisée et d'appeler du code pour explicitement la libérer, comme
-nous l'avons fait pour la demander auparavant. Historiquement, faire ceci
-correctement a toujours été une difficulté pour les développeurs. Si nous
-oublions de le faire, nous allons gaspiller de la mémoire. Si nous le faisons
-trop tôt, nous allons avoir une variable invalide. Si nous le faisons deux fois,
-cela produit aussi un bogue. Nous devons associer exactement un `allocate` avec
-exactement un `free`.
+plus utilisée, sans que nous n'ayons à nous en préoccuper. Dans la pluspart des
+langages sans ramasse-miettes, c'est de notre responsabilité d'identifier quand
+cette mémoire n'est plus utilisée et d'appeler du code pour explicitement la
+libérer, comme nous l'avons fait pour la demander auparavant. Historiquement,
+faire ceci correctement a toujours été une difficulté pour les développeurs. Si
+nous oublions de le faire, nous allons gaspiller de la mémoire. Si nous le
+faisons trop tôt, nous allons avoir une variable invalide. Si nous le faisons
+deux fois, cela produit aussi un bogue. Nous devons associer exactement un
+`allocate` avec exactement un `free`.
 
 <!--
 Rust takes a different path: the memory is automatically returned once the
@@ -641,15 +635,14 @@ Maintenant, essayons une nouvelle version avec `String` :
 ```
 
 <!--
-This looks very similar to the previous code, so we might assume that the way
-it works would be the same: that is, the second line would make a copy of the
-value in `s1` and bind it to `s2`. But this isn’t quite what happens.
+This looks very similar, so we might assume that the way it works would be the
+same: that is, the second line would make a copy of the value in `s1` and bind
+it to `s2`. But this isn’t quite what happens.
 -->
 
-Cela ressemble beaucoup au code précédent, donc nous allons supposer que cela
-fonctionne pareil que précédemment : ainsi, la seconde ligne va faire une copie
-de la valeur de `s1` et l'assigner à `s2`. Mais ce n'est pas tout à fait ce
-qu'il se passe.
+Cela ressemble beaucoup, donc nous allons supposer que cela fonctionne pareil
+que précédemment : ainsi, la seconde ligne va faire une copie de la valeur de
+`s1` et l'assigner à `s2`. Mais ce n'est pas tout à fait ce qu'il se passe.
 
 <!--
 Take a look at Figure 4-1 to see what is happening to `String` under the
@@ -778,19 +771,17 @@ corruptions de mémoire, ce qui peut potentiellement mener à des vulnérabilit�
 de sécurité.
 
 <!--
-To ensure memory safety, there’s one more detail to what happens in this
-situation in Rust. After `let s2 = s1`, Rust considers `s1` to no longer be
-valid. Therefore, Rust doesn’t need to free anything when `s1` goes out of
-scope. Check out what happens when you try to use `s1` after `s2` is created;
-it won’t work:
+To ensure memory safety, after the line `let s2 = s1`, Rust considers `s1` as
+no longer valid. Therefore, Rust doesn’t need to free anything when `s1` goes
+out of scope. Check out what happens when you try to use `s1` after `s2` is
+created; it won’t work:
 -->
 
-Pour garantir la sécurité de la mémoire, il y a un autre petit détail qui se
-produit dans cette situation avec Rust. Après `let s2 = s1`, Rust considère que
-`s1` n'est plus en vigueur. Par conséquent, Rust n'a pas besoin de libérer quoi
-que ce soit lorsque `s1` sort de la portée. Regardez ce qu'il se passe quand
-vous essayez d'utiliser `s1` après que `s2` est créé, cela ne va pas
-fonctionner :
+Pour garantir la sécurité de la mémoire, après la ligne `let s2 = s1`, Rust
+considère que `s1` n'est plus en vigueur. Par conséquent, Rust n'a pas besoin
+de libérer quoi que ce soit lorsque `s1` sort de la portée. Regardez ce qu'il
+se passe quand vous essayez d'utiliser `s1` après que `s2` est créé, cela ne va
+pas fonctionner :
 
 <!--
 ```rust,ignore,does_not_compile
@@ -824,7 +815,7 @@ référence qui n'est plus en vigueur :
 If you’ve heard the terms *shallow copy* and *deep copy* while working with
 other languages, the concept of copying the pointer, length, and capacity
 without copying the data probably sounds like making a shallow copy. But
-because Rust also invalidates the first variable, instead of being called a
+because Rust also invalidates the first variable, instead of calling it a
 shallow copy, it’s known as a *move*. In this example, we would say that
 `s1` was *moved* into `s2`. So what actually happens is shown in Figure 4-4.
 -->
@@ -979,10 +970,10 @@ et on peut s'en passer.
 
 <!--
 Rust has a special annotation called the `Copy` trait that we can place on
-types like integers that are stored on the stack (we’ll talk more about traits
-in Chapter 10). If a type implements the `Copy` trait, an older variable is
-still usable after assignment. Rust won’t let us annotate a type with the
-`Copy` trait if the type, or any of its parts, has implemented the `Drop`
+types that are stored on the stack like integers are (we’ll talk more about
+traits in Chapter 10). If a type implements the `Copy` trait, a variable is
+still valid after assignment to another variable. Rust won’t let us annotate a
+type with `Copy` if the type, or any of its parts, has implemented the `Drop`
 trait. If the type needs something special to happen when the value goes out of
 scope and we add the `Copy` annotation to that type, we’ll get a compile-time
 error. To learn about how to add the `Copy` annotation to your type to
@@ -992,15 +983,15 @@ in Appendix C.
 
 Rust a une annotation spéciale appelée le trait `Copy` que nous pouvons utiliser
 sur des types comme les entiers qui sont stockés sur la pile (nous verrons les
-traits dans le chapitre 10). Si un type implémente le trait `Copy`, l'ancienne
-variable sera toujours utilisable après avoir été affectée. Rust ne nous
-autorisera pas à annoter un type avec le trait `Copy` si ce type, ou un de ses
-éléments, a implémenté le trait `Drop`. Si ce type a besoin que quelque chose de
-spécial se produise quand la valeur sort de la portée et que nous ajoutons
-l'annotation `Copy` sur ce type, nous aurons une erreur au moment de la
-compilation. Pour savoir comment ajouter l'annotation `Copy` sur votre type pour
-implémenter le trait, référez-vous à
-[l'annexe C][derivable-traits]<!-- ignore --> sur les traits dérivables.
+traits dans le chapitre 10). Si un type implémente le trait `Copy`, une
+variable sera toujours en vigueur après avoir été affectée à une autre
+variable. Rust ne nous autorisera pas à annoter un type avec le trait `Copy` si
+ce type, ou un de ses éléments, a implémenté le trait `Drop`. Si ce type a
+besoin que quelque chose de spécial se produise quand la valeur sort de la
+portée et que nous ajoutons l'annotation `Copy` sur ce type, nous aurons une
+erreur au moment de la compilation. Pour savoir comment ajouter l'annotation
+`Copy` sur votre type pour implémenter le trait, référez-vous à [l'annexe
+C][derivable-traits]<!-- ignore --> sur les traits dérivables.
 
 <!--
 So what types implement the `Copy` trait? You can check the documentation for
@@ -1096,12 +1087,14 @@ la possession vous empêchent de le faire.
 ### Les valeurs de retour et les portées
 
 <!--
-Returning values can also transfer ownership. Listing 4-4 is an example with
-similar annotations to those in Listing 4-3.
+Returning values can also transfer ownership. Listing 4-4 shows an example
+of a function that returns some value, with similar annotations as those in
+Listing 4-3.
 -->
 
-Retourner des valeurs peut aussi transférer leur possession. L'encart 4-4 est un
-exemple avec des annotations similaires à celles de l'encart 4-3 :
+Retourner des valeurs peut aussi transférer leur possession. L'encart 4-4
+montre un exemple d'une fonction qui retourne une valeur, avec des annotations
+similaires à celles de l'encart 4-3 :
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -1130,36 +1123,37 @@ retour</span>
 <!--
 The ownership of a variable follows the same pattern every time: assigning a
 value to another variable moves it. When a variable that includes data on the
-heap goes out of scope, the value will be cleaned up by `drop` unless the data
-has been moved to be owned by another variable.
+heap goes out of scope, the value will be cleaned up by `drop` unless ownership
+of the data has been moved to another variable.
 -->
 
 La possession d'une variable suit toujours le même schéma à chaque fois :
 assigner une valeur à une autre variable la déplace. Quand une variable qui
-contient des données sur le tas sort de la portée, la valeur sera nettoyée
-avec `drop` à moins que la donnée ait été déplacée pour être possédée par une
-autre variable.
+contient des données sur le tas sort de la portée, la valeur sera nettoyée avec
+`drop` à moins que la possession de cette donnée soit donnée à une autre
+variable.
 
 <!--
-Taking ownership and then returning ownership with every function is a bit
-tedious. What if we want to let a function use a value but not take ownership?
-It’s quite annoying that anything we pass in also needs to be passed back if we
-want to use it again, in addition to any data resulting from the body of the
-function that we might want to return as well.
+While this works, taking ownership and then returning ownership with every
+function is a bit tedious. What if we want to let a function use a value but
+not take ownership? It’s quite annoying that anything we pass in also needs to
+be passed back if we want to use it again, in addition to any data resulting
+from the body of the function that we might want to return as well.
 -->
 
-Il est un peu fastidieux de prendre la possession puis ensuite de retourner la
-possession à chaque fonction. Et qu'est-ce qu'il se passe si nous voulons
-qu'une fonction utilise une valeur, mais n'en prenne pas possession ? C'est
-assez pénible que tout ce que nous passons doit être retourné si nous voulons
-l'utiliser à nouveau, en plus de toutes les données qui découlent du corps
-de la fonction que nous voulons aussi récupérer.
+Même si cela fonctionne, il est un peu fastidieux de prendre la possession puis
+ensuite de retourner la possession à chaque fonction. Et qu'est-ce qu'il se
+passe si nous voulons qu'une fonction utilise une valeur, mais n'en prenne pas
+possession ? C'est assez pénible que tout ce que nous passons doit être
+retourné si nous voulons l'utiliser à nouveau, en plus de toutes les données
+qui découlent du corps de la fonction que nous voulons aussi récupérer.
 
 <!--
-It’s possible to return multiple values using a tuple, as shown in Listing 4-5.
+Rust does let us return multiple values using a tuple, as shown in Listing 4-5.
 -->
 
-Il est possible de retourner plusieurs valeurs à l'aide d'un tuple, comme ceci :
+Rust nous permet de retourner plusieurs valeurs à l'aide d'un tuple, comme
+ceci :
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -1185,17 +1179,19 @@ Il est possible de retourner plusieurs valeurs à l'aide d'un tuple, comme ceci�
 
 <!--
 But this is too much ceremony and a lot of work for a concept that should be
-common. Luckily for us, Rust has a feature for this concept, called
-*references*.
+common. Luckily for us, Rust has a feature for using a value without
+transferring ownership, called *references*.
 -->
 
 Mais c'est trop laborieux et beaucoup de travail pour un principe qui devrait
-être banal. Heureusement pour nous, Rust a une fonctionnalité pour ce principe,
-c'est ce qu'on appelle les *références*.
+être banal. Heureusement pour nous, Rust a une fonctionnalité pour utiliser une
+valeur sans avoir à transférer la possession, avec ce qu'on appelle les
+*références*.
 
 <!-- markdownlint-disable -->
 <!--
 [data-types]: ch03-02-data-types.html#data-types
+[ch8]: ch08-02-strings.html
 [derivable-traits]: appendix-03-derivable-traits.html
 [method-syntax]: ch05-03-method-syntax.html#method-syntax
 [paths-module-tree]: ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html
@@ -1204,6 +1200,7 @@ c'est ce qu'on appelle les *références*.
 <!-- markdownlint-restore -->
 
 [data-types]: ch03-02-data-types.html
+[ch8]: ch08-02-strings.html
 [derivable-traits]: appendix-03-derivable-traits.html
 [method-syntax]: ch05-03-method-syntax.html
 [paths-module-tree]: ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html

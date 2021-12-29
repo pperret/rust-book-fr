@@ -958,11 +958,11 @@ an `Err(e)` value. The return type of the function has to be a `Result` to be
 compatible with this `return`.
 -->
 
-L'opérateur `?` ne peut être utilisé uniquement dans des fonctions qui ont un
-type de retour compatible avec ce sur quoi le `?` est utilisé. C'est parceque
+L'opérateur `?` ne peut être utilisé uniquement que dans des fonctions qui ont un
+type de retour compatible avec ce sur quoi le `?` est utilisé. C'est parce que
 l'opérateur `?` est conçu pour retourner prématurémment une valeur de la
 fonction, de la même manière que le faisait l'expression `match` que nous avons
-défini dans l'encart 9-6. Dans l'encart 9-6, le `match` utilisait une valeur de
+définie dans l'encart 9-6. Dans l'encart 9-6, le `match` utilisait une valeur de
 type `Result`, et la branche de retour prématuré retournait une valeur de type
 `Err(e)`. Le type de retour de cette fonction doit être un `Result` pour être
 compatible avec ce `return`.
@@ -1160,10 +1160,10 @@ returns and a nonzero value if the program panics before reaching the end of
 
 Jusqu'ici, toutes les fonctions `main` que nous avons utilisé retournent `()`.
 La fonction `main` est spéciale car c'est le point d'entrée et de sortie des
-programmes exécutables, et il y a quelques limitations sur ce que peuvent être
+programmes exécutables, et il y a quelques limitations sur ce que peut être
 le type de retour pour que les programmes se comportent correctement. Les
-exécutables écris en C retournent des entiers lorsqu'ils se terminent, et les
-exécutables écris en Rust suivent également cette convention : les programmes
+exécutables écrits en C retournent des entiers lorsqu'ils se terminent, et les
+exécutables écrits en Rust suivent également cette convention : les programmes
 qui se terminent avec succès retournent l'entier `0`, et les programmes qui
 sont en erreur retournent un entier autre que `0`. Lorsque `main` retourne
 `()`, les exécutables Rust vont retourner `0` si `main` retourne quelque chose
@@ -1177,8 +1177,8 @@ code from Listing 9-10 but we’ve changed the return type of `main` to be
 code will now compile:
 -->
 
-Un autre type de retour que le `main` puisse avoir est `Result<(), E>`.
-L'encart 9-12 reprends le code de l'encart 9-10 mais nous avons changé le
+Un autre type de retour que le `main` peut avoir est `Result<(), E>`.
+L'encart 9-12 reprend le code de l'encart 9-10 mais nous avons changé le
 type de retour du `main` pour être `Result<(), Box<dyn Error>>` et nous avons
 ajouté la valeur de retour `Ok(())` à la fin. Ce code devrait maintenant
 pouvoir se compiler :
@@ -1199,7 +1199,7 @@ allows the use of the `?` operator on `Result` values</span>
 -->
 
 <span class="caption">Encart 9-12 : changement du `main` pour qu'elle retourne
-un `Result<(), E>` permet d'utiliser l'opérateur `?` sur des valeurs de type
+un `Result<(), E>` permettant d'utiliser l'opérateur `?` sur des valeurs de type
 `Result`</span>
 
 <!--
@@ -1217,7 +1217,7 @@ Le type `Box<dyn Error>` est ce qu'on appelle un objet trait, que nous verrons
 dans une section du [chapitre 17][trait-objects]<!-- ignore -->. Pour l'instant,
 vous pouvez interpréter `Box<dyn Error>` en “tout type d'erreur”. L'utilisation
 de `?` sur une valeur type `Result` dans la fonction `main` avec ce type de
-retour est donc permise, car maintenant une valeur type `Err` peut être
+retour est donc permise, car maintenant une valeur de type `Err` peut être
 retournée prématurément. Lorsqu'une fonction `main` retourne un
 `Result<(), E>`, l'exécutable va terminer son exécution avec une valeur de `0`
 si le `main` retourne `Ok(())` et va se terminer avec une valeur différente de

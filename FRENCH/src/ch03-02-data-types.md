@@ -180,13 +180,13 @@ des nombres allant de 0 à 2<sup>8</sup> − 1, c'est-à-dire de 0 à 255.
 
 <!--
 Additionally, the `isize` and `usize` types depend on the architecture of the
-computer your program is running on, which is denoted in the table as "arch":
+computer your program is running on, which is denoted in the table as “arch”:
 64 bits if you’re on a 64-bit architecture and 32 bits if you’re on a 32-bit
 architecture.
 -->
 
 De plus, les types `isize` et `usize` dépendent de l'architecture de
-l'ordinateur sur lequel votre programme va s'exécuter, d'où la ligne "archi" :
+l'ordinateur sur lequel votre programme va s'exécuter, d'où la ligne “archi” :
 64 bits si vous utilisez une architecture 64 bits, ou 32 bits si vous utilisez
 une architecture 32 bits.
 
@@ -458,7 +458,7 @@ de `if` en Rust dans la section
 #### Le type caractère
 
 <!--
-Rust’s `char` type is the language’s most primitive alphabetic type. Here's
+Rust’s `char` type is the language’s most primitive alphabetic type. Here’s
 some examples of declaring `char` values:
 -->
 
@@ -848,7 +848,7 @@ récupèrera la valeur `2` depuis l'indice `[1]` du tableau.
 ##### Accès incorrect à un élément d'un tableau
 
 <!--
-Let's see what happens if you try to access an element of an array that is past
+Let’s see what happens if you try to access an element of an array that is past
 the end of the array. Say you run this code, similar to the guessing game in
 Chapter 2, to get an array index from the user:
 -->

@@ -35,7 +35,7 @@ utilisant `cargo new variables`.
 
 <!--
 Then, in your new *variables* directory, open *src/main.rs* and replace its
-code with the following code. This code won’t compile just yet, we'll first
+code with the following code. This code won’t compile just yet, we’ll first
 examine the immutability error.
 -->
 

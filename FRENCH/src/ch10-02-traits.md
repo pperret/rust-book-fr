@@ -59,19 +59,19 @@ contient un reportage dans un endroit donné et un `Tweet` qui peut avoir jusqu'
 tweet, un retweet, ou une réponse à un autre tweet.
 
 <!--
-We want to make a media aggregator library that can display summaries of data
-that might be stored in a `NewsArticle` or `Tweet` instance. To do this, we
-need a summary from each type, and we need to request that summary by calling a
-`summarize` method on an instance. Listing 10-12 shows the definition of a
-`Summary` trait that expresses this behavior.
+We want to make a media aggregator library crate named `aggregator` that can
+display summaries of data that might be stored in a `NewsArticle` or `Tweet`
+instance. To do this, we need a summary from each type, and we’ll request
+that summary by calling a `summarize` method on an instance. Listing 10-12
+shows the definition of a public `Summary` trait that expresses this behavior.
 -->
 
-Nous voulons construire une bibliothèque pour des agrégateurs de médias qui peut
-afficher le résumé des données stockées dans une instance de `ArticleDePresse`
-ou de `Tweet`. Pour cela, il nous faut un résumé pour chaque type, et nous
-pouvons demander ce résumé en appelant la méthode `resumer` sur une instance.
-L'encart 10-12 nous montre la définition d'un trait `Resumable` qui décrit ce
-comportement.
+Nous voulons construire une crate de bibliothèque `agregateur` pour des
+agrégateurs de médias qui peut afficher le résumé des données stockées dans une
+instance de `ArticleDePresse` ou de `Tweet`. Pour cela, il nous faut un résumé
+pour chaque type, et nous allons demander ce résumé en appelant la méthode
+`resumer` sur une instance. L'encart 10-12 nous montre la définition d'un trait
+public `Resumable` qui décrit ce comportement.
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -99,15 +99,20 @@ comportement fourni par une méthode `resumer`</span>
 
 <!--
 Here, we declare a trait using the `trait` keyword and then the trait’s name,
-which is `Summary` in this case. Inside the curly brackets, we declare the
-method signatures that describe the behaviors of the types that implement this
-trait, which in this case is `fn summarize(&self) -> String`.
+which is `Summary` in this case. We’ve also declared the trait as `pub` so that
+crates depending on this crate can make use of this trait too, as we’ll see in
+a few examples. Inside the curly brackets, we declare the method signatures
+that describe the behaviors of the types that implement this trait, which in
+this case is `fn summarize(&self) -> String`.
 -->
 
 Ici, nous déclarons un trait en utilisant le mot-clé `trait` et ensuite le nom
-du trait, qui est `Resumable` dans notre cas. Entre les accolades, nous
-déclarons la signature de la méthode qui décrit le comportement des types qui
-implémentent ce trait, qui est dans notre cas `fn resumer(&self) -> String`.
+du trait, qui est `Resumable` dans notre cas. Nous avons aussi déclaré le trait
+comme `pub` afin que les crates qui dépendent de cette crate puissent
+aussi utiliser ce trait, comme nous allons le voir dans quelques exemples.
+Entre les accolades, nous déclarons la signature de la méthode qui décrit le
+comportement des types qui implémentent ce trait, qui est dans notre cas
+`fn resumer(&self) -> String`.
 
 <!--
 After the method signature, instead of providing an implementation within curly
@@ -139,22 +144,23 @@ point-virgule.
 ### Implémenter un trait sur un type
 
 <!--
-Now that we’ve defined the desired behavior using the `Summary` trait, we can
-implement it on the types in our media aggregator. Listing 10-13 shows an
-implementation of the `Summary` trait on the `NewsArticle` struct that uses the
-headline, the author, and the location to create the return value of
+Now that we’ve defined the desired signatures of the `Summary` trait’s methods,
+we can implement it on the types in our media aggregator. Listing 10-13 shows
+an implementation of the `Summary` trait on the `NewsArticle` struct that uses
+the headline, the author, and the location to create the return value of
 `summarize`. For the `Tweet` struct, we define `summarize` as the username
 followed by the entire text of the tweet, assuming that tweet content is
 already limited to 280 characters.
 -->
 
-Maintenant que nous avons défini le comportement souhaité du trait `Resumable`,
-nous pouvons maintenant l'implémenter sur les types de notre agrégateur de
-médias. L'encart 10-13 nous montre l'implémentation du trait `Resumable` sur la
-structure `ArticleDePresse` qui utilise le titre, le nom de l'auteur, et le lieu
-pour créer la valeur de retour de `resumer`. Pour la structure `Tweet`, nous
-définissons `resumer` avec le nom d'utilisateur suivi par le texte entier du
-tweet, en supposant que le contenu du tweet est déjà limité à 280 caractères.
+Maintenant que nous avons défini les signatures souhaitées des méthodes du
+trait `Resumable`, nous pouvons maintenant l'implémenter sur les types de notre
+agrégateur de médias. L'encart 10-13 montre une implémentation du trait
+`Resumable` sur la structure `ArticleDePresse` qui utilise le titre, le nom de
+l'auteur et le lieu pour créer la valeur de retour de `resumer`. Pour la
+structure `Tweet`, nous définissons `resumer` avec le nom d'utilisateur suivi
+par le texte entier du tweet, en supposant que le contenu du tweet est déjà
+limité à 280 caractères.
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -202,22 +208,30 @@ le comportement spécifique que nous voulons que les méthodes du trait suivent
 pour le type en question.
 
 <!--
-After implementing the trait, we can call the methods on instances of
-`NewsArticle` and `Tweet` in the same way we call regular methods, like this:
+Now that the library has implemented the `Summary` trait on `NewsArticle` and
+`Tweet`, users of the crate can call the trait methods on instances of
+`NewsArticle` and `Tweet` in the same way we call regular methods. The only
+difference is that the trait has to be brought into scope as well as the types
+to get the additional trait methods. Here’s an example of how a binary crate
+could use our `aggregator` library crate:
 -->
 
-Après avoir implémenté le trait, nous pouvons appeler les méthodes de
-l'instance de `ArticleDePresse` et `Tweet` comme si elles étaient des méthodes
-classiques, comme ceci :
+Maintenant que la bibliothèque a implémenté le trait `Resumable` sur
+`ArticleDePresse` et `Tweet`, les utilisateurs de cette crate peuvent appeler
+les méthodes de l'instance de `ArticleDePresse` et `Tweet` comme si elles
+étaient des méthodes classiques. La seule différence est que le trait ainsi que
+les types doivent être introduits dans la portée pour obtenir les méthodes de
+trait additionnelles. Voici un exemple de comment la crate binaire pourra
+utiliser notre crate de bibliothèque `agregateur` :
 
 <!--
 ```rust,ignore
-{{#rustdoc_include ../listings-sources/ch10-generic-types-traits-and-lifetimes/no-listing-01-calling-trait-method/src/main.rs:here}}
+{{#rustdoc_include ../listings-sources/ch10-generic-types-traits-and-lifetimes/no-listing-01-calling-trait-method/src/main.rs}}
 ```
 -->
 
 ```rust,ignore
-{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-01-calling-trait-method/src/main.rs:here}}
+{{#rustdoc_include ../listings/ch10-generic-types-traits-and-lifetimes/no-listing-01-calling-trait-method/src/main.rs}}
 ```
 
 <!--
@@ -229,50 +243,28 @@ Ce code affichera `1 nouveau tweet : jean : Bien sûr, les amis, comme vous le
 savez probablement déjà`.
 
 <!--
-Note that because we defined the `Summary` trait and the `NewsArticle` and
-`Tweet` types in the same *lib.rs* in Listing 10-13, they’re all in the same
-scope. Let’s say this *lib.rs* is for a crate we’ve called `aggregator` and
-someone else wants to use our crate’s functionality to implement the `Summary`
-trait on a struct defined within their library’s scope. They would need to
-bring the trait into their scope first. They would do so by specifying `use
-aggregator::Summary;`, which then would enable them to implement `Summary` for
-their type. The `Summary` trait would also need to be a public trait for
-another crate to implement it, which it is because we put the `pub` keyword
-before `trait` in Listing 10-12.
+Other crates that depend on the `aggregator` crate can also bring the `Summary`
+trait into scope to implement the trait on their own types. One restriction to
+note with trait implementations is that we can implement a trait on a type only
+if at least one of the trait or the type is local to our crate. For example, we
+can implement standard library traits like `Display` on a custom type like
+`Tweet` as part of our `aggregator` crate functionality, because the type
+`Tweet` is local to our `aggregator` crate. We can also implement `Summary` on
+`Vec<T>` in our `aggregator` crate, because the trait `Summary` is local to our
+`aggregator` crate.
 -->
 
-Remarquez que comme nous avons défini le trait `Resumable` et les types
-`ArticleDePresse` et `Tweet` dans le même fichier *lib.rs* de l'encart 10-13,
-ils sont tous dans la même portée. Disons que ce fichier *lib.rs* est utilisé
-pour une crate que nous avons appelée `agregateur` et que quelqu'un d'autre
-souhaite utiliser les fonctionnalités de notre crate pour implémenter le trait
-`Resumable` sur une structure définie dans la portée de sa propre bibliothèque.
-Il aura d'abord besoin d'importer le trait dans sa portée. Il pourra le faire en
-utilisant `use agregateur::Resumable;`, ce qui lui permettra ensuite
-d'implémenter `Resumable` sur le type souhaité. Le trait `Resumable` devra alors
-être un trait public aux autres crates pour qu'elles puissent l'implémenter,
-c'est pourquoi nous avons placé le mot-clé `pub` devant le `trait` dans l'encart
-10-12.
-
-<!--
-One restriction to note with trait implementations is that we can implement a
-trait on a type only if either the trait or the type is local to our crate.
-For example, we can implement standard library traits like `Display` on a
-custom type like `Tweet` as part of our `aggregator` crate functionality,
-because the type `Tweet` is local to our `aggregator` crate. We can also
-implement `Summary` on `Vec<T>` in our `aggregator` crate, because the
-trait `Summary` is local to our `aggregator` crate.
--->
-
-Il y a une limitation à souligner avec l'implémentation des traits, c'est que
-nous ne pouvons implémenter un trait sur un type qu'à condition que le trait ou
-le type soit défini localement dans notre crate. Par exemple, nous pouvons
-implémenter des traits de la bibliothèque standard comme `Display` sur un type
-personnalisé comme `Tweet` comme une fonctionnalité de notre crate `agregateur`,
-car le type `Tweet` est défini localement dans notre crate `agregateur`. Nous
-pouvons aussi implémenter `Resumable` sur `Vec<T>` dans notre crate
-`agregateur`, car le trait `Resumable` est défini localement dans notre crate
-`agregateur`.
+Les autres crates qui dépendent de la crate `agregateur` peuvent aussi importer
+dans la portée le trait `Resumable` afin d'implémenter le trait sur leurs
+propres types. Il y a une limitation à souligner avec l'implémentation des
+traits, c'est que nous ne pouvons implémenter un trait sur un type qu'à
+condition qu'au moins le trait ou le type soit défini localement dans notre
+crate. Par exemple, nous pouvons implémenter des traits de la bibliothèque
+standard comme `Display` sur un type personnalisé comme `Tweet` comme une
+fonctionnalité de notre crate `agregateur`, car le type `Tweet` est défini
+localement dans notre crate `agregateur`. Nous pouvons aussi implémenter
+`Resumable` sur `Vec<T>` dans notre crate `agregateur`, car le trait
+`Resumable` est défini localement dans notre crate `agregateur`.
 
 <!--
 But we can’t implement external traits on external types. For example, we can’t
@@ -1046,18 +1038,25 @@ pour résoudre ces exercices.
 By using a trait bound with an `impl` block that uses generic type parameters,
 we can implement methods conditionally for types that implement the specified
 traits. For example, the type `Pair<T>` in Listing 10-16 always implements the
-`new` function. But `Pair<T>` only implements the `cmp_display` method if its
-inner type `T` implements the `PartialOrd` trait that enables comparison *and*
-the `Display` trait that enables printing.
+`new` function to return a new instance of `Pair<T>` (recall from the
+[”Defining Methods”][methods]<!-- ignore -- > section of Chapter 5 that `Self`
+is a type alias for the type of the `impl` block, which in this case is
+`Pair<T>`). But in the next `impl` block, `Pair<T>` only implements the
+`cmp_display` method if its inner type `T` implements the `PartialOrd` trait
+that enables comparison *and* the `Display` trait that enables printing.
 -->
 
 En utilisant un trait lié avec un bloc `impl` qui utilise les paramètres de type
 génériques, nous pouvons implémenter des méthodes en fonction des types qui
 implémentent des traits particuliers. Par exemple, le type `Paire<T>` de
-l'encart 10-16 implémente toujours la fonction `new`. Mais `Paire<T>`
-implémente la méthode `afficher_comparaison` uniquement si son type interne `T`
-implémente le trait `PartialOrd` qui active la comparaison *et* le trait
-`Display` qui permet l'affichage.
+l'encart 10-16 implémente toujours la fonction `new` pour retourner une
+nouvelle instance de `Paire<T>` (pour rappel dans la section
+[”Définir des méthodes”][methods]<!-- ignore --> du chapitre 5 que `Self` est
+un alias de type pour le type du bloc `impl`, qui est dans ce cas le
+`Paire<T>`). Mais dans le blochain bloc `impl`, `Paire<T>` implémente la
+méthode `afficher_comparaison` uniquement si son type interne `T` implémente le
+trait `PartialOrd` qui active la comparaison *et* le trait `Display` qui permet
+l'affichage.
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -1192,6 +1191,7 @@ comment la durée de vie fait cela.
 ch04-01-what-is-ownership.html#stack-only-data-copy
 [using-trait-objects-that-allow-for-values-of-different-types]:
 ch17-02-trait-objects.html#using-trait-objects-that-allow-for-values-of-different-types
+[methods]: ch05-03-method-syntax.html#defining-methods
 -->
 <!-- markdownlint-restore -->
 
@@ -1199,3 +1199,4 @@ ch17-02-trait-objects.html#using-trait-objects-that-allow-for-values-of-differen
 ch04-01-what-is-ownership.html#données-uniquement-sur-la-pile--la-copie
 [using-trait-objects-that-allow-for-values-of-different-types]:
 ch17-02-trait-objects.html
+[methods]: ch05-03-method-syntax.html#définir-des-méthodes

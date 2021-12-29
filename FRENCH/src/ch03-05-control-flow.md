@@ -694,7 +694,7 @@ affichons la valeur de `resultat`, qui est 20 dans ce cas-ci.
 <!--
 A program will often need to evaluate a condition within a loop. While the
 condition is true, the loop runs. When the condition ceases to be true, the
-program calls `break`, stopping the loop. It's possible to implement behavior
+program calls `break`, stopping the loop. It’s possible to implement behavior
 like this using a combination of `loop`, `if`, `else`, and `break`; you could
 try that now in a program, if you’d like. However, this pattern is so common
 that Rust has a built-in language construct for it, called a `while` loop. In

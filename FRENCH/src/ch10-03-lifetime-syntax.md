@@ -30,20 +30,17 @@ utilisant des paramètres de durée de vie génériques pour s'assurer que les
 références utilisées au moment de la compilation restent bien en vigueur.
 
 <!--
-The concept of lifetimes is somewhat different from tools in other programming
-languages, arguably making lifetimes Rust’s most distinctive feature. Although
-we won’t cover lifetimes in their entirety in this chapter, we’ll discuss
-common ways you might encounter lifetime syntax so you can become familiar with
-the concepts.
+Annotating lifetimes is not even a concept most other programming languages
+have, so this is going to feel unfamiliar. Although we won’t cover lifetimes in
+their entirety in this chapter, we’ll discuss common ways you might encounter
+lifetime syntax so you can get introduced to the concept.
 -->
 
-Le concept de la durée de vie est quelque chose de radicalement différent de ce
-que l'on retrouve dans les outils des autres langages de programmation, à un
-tel point que la durée de vie est la fonctionnalité qui distingue Rust des
-autres. Bien que nous ne puissions couvrir l'intégralité de la durée de vie dans
-ce chapitre, nous allons voir les cas les plus courants où vous allez
-rencontrer la syntaxe de la durée de vie, afin de vous familiariser avec ses
-concepts.
+L'annotation de la durée de vie n'est pas un concept présent dans la pluspart
+des langages de programmation, donc cela n'est pas très familier. Bien que nous
+ne puissions couvrir l'intégralité de la durée de vie dans ce chapitre, nous
+allons voir les cas les plus courants où vous allez rencontrer la syntaxe de la
+durée de vie, pour vous introduire à ces concept.
 
 <!--
 ### Preventing Dangling References with Lifetimes
@@ -485,20 +482,22 @@ doivent tous les deux exister aussi longtemps que la durée de vie générique.
 Now let’s examine lifetime annotations in the context of the `longest`
 function. As with generic type parameters, we need to declare generic lifetime
 parameters inside angle brackets between the function name and the parameter
-list. The constraint we want to express in this signature is that all the
-references in the parameters and the return value must have the same lifetime.
-We’ll name the lifetime `'a` and then add it to each reference, as shown in
-Listing 10-22.
+list. The constraint we want to express in this signature is that the lifetimes
+of both of the parameters and the lifetime of the returned reference are
+related such that the returned reference will be valid as long as both the
+parameters are. We’ll name the lifetime `'a` and then add it to each reference,
+as shown in Listing 10-22.
 -->
 
 Maintenant, examinons les annotations de durée de vie dans contexte de la
 fonction `la_plus_longue`. Comme avec les paramètres de type génériques, nous
 devons déclarer les paramètres de durée de vie génériques dans des chevrons
 entre le nom de la fonction et la liste des paramètres. Nous souhaitons
-contraindre toutes les références dans les paramètres de cette fonction ainsi
-que sa valeur de retour aient tous la même durée de vie. Nous allons appeler la
-durée de vie `'a` et ensuite l'ajouter à chaque référence, comme nous le faisons
-dans l'encart 10-22.
+contraindre les durées de vie des deux paramètres et la durée de vie de la
+référence retournée de telle manière que la valeur retournée restera en vigueur
+tant que les deux paramètres le seront aussi. Nous allons appeler la durée de
+vie `'a` et ensuite l'ajouter à chaque référence, comme nous le faisons dans
+l'encart 10-22.
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -541,13 +540,8 @@ long as lifetime `'a`. The function signature also tells Rust that the string
 slice returned from the function will live at least as long as lifetime `'a`.
 In practice, it means that the lifetime of the reference returned by the
 `longest` function is the same as the smaller of the lifetimes of the
-references passed in. These constraints are what we want Rust to enforce.
-Remember, when we specify the lifetime parameters in this function signature,
-we’re not changing the lifetimes of any values passed in or returned. Rather,
-we’re specifying that the borrow checker should reject any values that don’t
-adhere to these constraints. Note that the `longest` function doesn’t need to
-know exactly how long `x` and `y` will live, only that some scope can be
-substituted for `'a` that will satisfy this signature.
+references passed in. These relationships are what we want Rust to use when
+analyzing this code.
 -->
 
 La signature de la fonction indique maintenant à Rust que pour la durée de vie
@@ -557,35 +551,52 @@ la fonction indique également à Rust que la slice de chaîne de caractère qui
 retournée par la fonction vivra au moins aussi longtemps que la durée de vie
 `'a`. Dans la pratique, cela veut dire que durée de vie de la référence
 retournée par la fonction `la_plus_longue` est la même que celle de la plus
-petite des durées de vies des références qu'on lui donne. Ces restrictions sont
-celles que nous voulons que Rust fasse respecter. Souvenez-vous, lorsque nous
-précisons les paramètres de durée de vie dans la signature de cette fonction,
-nous ne changons pas les durées de vies des valeurs qui lui sont envoyées ou
-qu'elle retourne. Ce que nous faisons, c'est plutôt indiquer au vérificateur
-d'emprunt qu'il doit rejeter toute valeur qui ne répond pas à ces conditions.
-Notez que la fonction `la_plus_longue` n'a pas besoin de savoir exactement
-combien de temps `x` et `y` vont exister, mais seulement que cette portée peut
-être substituée par `'a`, qui satisfera cette signature.
+petite des durées de vies des références qu'on lui donne. Cette relation est ce
+que nous voulons que Rust mette en place lorsqu'il analysera ce code.
+
+<!--
+Remember, when we specify the lifetime parameters in this function signature,
+we’re not changing the lifetimes of any values passed in or returned. Rather,
+we’re specifying that the borrow checker should reject any values that don’t
+adhere to these constraints. Note that the `longest` function doesn’t need to
+know exactly how long `x` and `y` will live, only that some scope can be
+substituted for `'a` that will satisfy this signature.
+-->
+
+Souvenez-vous, lorsque nous précisons les paramètres de durée de vie dans la
+signature de cette fonction, nous ne changons pas les durées de vies des
+valeurs qui lui sont envoyées ou qu'elle retourne. Ce que nous faisons, c'est
+plutôt indiquer au vérificateur d'emprunt qu'il doit rejeter toute valeur qui
+ne répond pas à ces conditions. Notez que la fonction `la_plus_longue` n'a pas
+besoin de savoir exactement combien de temps `x` et `y` vont exister, mais
+seulement que cette portée peut être substituée par `'a`, qui satisfera cette
+signature.
 
 <!--
 When annotating lifetimes in functions, the annotations go in the function
-signature, not in the function body. Rust can analyze the code within the
-function without any help. However, when a function has references to or from
-code outside that function, it becomes almost impossible for Rust to figure out
-the lifetimes of the parameters or return values on its own. The lifetimes
-might be different each time the function is called. This is why we need to
-annotate the lifetimes manually.
+signature, not in the function body. The lifetime annotations become part of
+the contract of the function, much like the types in the signature are. Having
+function signatures contain the lifetime contract means the analysis the Rust
+compiler does can be simpler. If there’s a problem with the way a function is
+annotated or the way it is called, the compiler errors can point to the part of
+our code and the constraints more precisely. If, instead, the Rust compiler
+made more inferences about what we intended the relationships of the lifetimes
+to be, the compiler might only be able to point to a use of our code many steps
+away from the cause of the problem.
 -->
 
 Lorsqu'on précise les durées de vie dans les fonctions, les annotations se
-placent dans la signature de la fonction, pas dans le corps de la fonction. Rust
-peut analyser le code à l'intérieur du corps sans aucune aide. Cependant,
-lorsqu'une fonction a des références vers du code externe ou que ce code
-réutilise une référence retournée par cette fonction, il devient presque
-impossible pour Rust de déduire tout seul les durées de vie des paramètres ou
-des valeurs de retour. Les durées de vies peuvent être différentes à chaque fois
-que la fonction est appelée. C'est pourquoi nous avons besoin d'indiquer les
-durées de vie manuellement.
+placent dans la signature de la fonction, pas dans le corps de la fonction. Les
+annotations de durée de vie sont devenues partie intégrante de la fonction,
+exactement comme les types dans la signature. Avoir des signatures de fonction
+qui intègrent la durée de vie signifie que l'analyse que va faire le
+compilateur Rust sera plus simple. S'il y a un problème avec la façon dont la
+fonction est annotée ou appelée, les erreurs de compilation peuvent pointer
+plus précisément sur la partie de notre code qui impose ces contraintes. Mais
+si au contraire, le compilateur Rust aurait dû faire plus de suppositions sur
+ce que nous voulions créer comme lien de durée de vie, le compilateur n'aurait
+pu qu'évoquer une utilisation de notre code bien plus éloignée de la véritable
+raison du problème.
 
 <!--
 When we pass concrete references to `longest`, the concrete lifetime that is
@@ -1492,18 +1503,17 @@ This is the `longest` function from Listing 10-22 that returns the longer of
 two string slices. But now it has an extra parameter named `ann` of the generic
 type `T`, which can be filled in by any type that implements the `Display`
 trait as specified by the `where` clause. This extra parameter will be printed
-before the function compares the lengths of the string slices, which is why the
-`Display` trait bound is necessary. Because lifetimes are a type of generic,
-the declarations of the lifetime parameter `'a` and the generic type parameter
-`T` go in the same list inside the angle brackets after the function name.
+using `{}`, which is why the `Display` trait bound is necessary. Because
+lifetimes are a type of generic, the declarations of the lifetime parameter
+`'a` and the generic type parameter `T` go in the same list inside the angle
+brackets after the function name.
 -->
 
 C'est la fonction `la_plus_longue` de l'encart 10-22 qui retourne la plus grande
 de deux slices de chaînes de caractères. Mais maintenant elle a un paramètre
 supplémentaire `ann` de type générique `T`, qui peut être remplacé par n'importe
 quel type qui implémente le trait `Display` comme le précise la clause `where`.
-Ce paramètre supplémentaire sera affiché avant que la fonction compare les
-longueurs des slices de chaînes de caractères, c'est pourquoi le trait lié
+Ce paramètre supplémentaire sera affiché avec `{}`, c'est pourquoi le trait lié
 `Display` est nécessaire. Comme les durées de vie sont un type de génériques,
 les déclarations du paramètre de durée de vie `'a` et le paramètre de type
 générique `T` vont dans la même liste à l'intérieur des chevrons après le nom de

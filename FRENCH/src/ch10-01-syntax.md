@@ -127,7 +127,7 @@ fn largest<T>(list: &[T]) -> T {
 -->
 
 ```rust,ignore
-fn le_plus_grand<T>(liste: &[T]) -> &T {
+fn le_plus_grand<T>(liste: &[T]) -> T {
 ```
 
 <!--
@@ -326,9 +326,9 @@ same type as `x`, we’ll get a type mismatch error like this:
 
 Dans cet exemple, lorsque nous assignons l'entier 5 à `x`, nous laissons
 entendre au compilateur que le type générique `T` sera un entier pour cette
-instance de `Point<T>`. Ensuite, lorsque nous assignons 4.0 à `y`, que nous avons
-défini comme ayant le même type que `x`, nous obtenons une erreur d'incompatibilité de
-type comme celle-ci :
+instance de `Point<T>`. Ensuite, lorsque nous assignons 4.0 à `y`, que nous
+avons défini comme ayant le même type que `x`, nous obtenons une erreur
+d'incompatibilité de type comme celle-ci :
 
 <!--
 ```console
@@ -348,10 +348,10 @@ Listing 10-8, we can change the definition of `Point` to be generic over types
 -->
 
 Pour définir une structure `Point` où `x` et `y` sont tous les deux génériques
-mais peuvent avoir des types différents, nous pouvons utiliser plusieurs 
-paramètres de types génériques différents. Par exemple, dans l'encart 10-8, 
-nous pouvons changer la définition de `Point` pour être générique en 
-fonction des types `T` et `U` où `x` est de type `T` et `y` est de type `U`.
+mais peuvent avoir des types différents, nous pouvons utiliser plusieurs
+paramètres de types génériques différents. Par exemple, dans l'encart 10-8,
+nous pouvons changer la définition de `Point` pour être générique en fonction
+des types `T` et `U` où `x` est de type `T` et `y` est de type `U`.
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -433,13 +433,13 @@ optional value, and because `Option<T>` is generic, we can use this abstraction
 no matter what the type of the optional value is.
 -->
 
-Cette définition devrait désormais avoir plus de sens pour vous. Comme vous pouvez le
-constater, `Option<T>` est une énumération qui est générique en fonction du type
-`T` et a deux variantes : `Some`, qui contient une valeur de type `T`, et une
-variante `None` qui ne contient aucune valeur. En utilisant l'énumération
-`Option<T>`, nous pouvons exprimer le concept abstrait d'avoir une valeur
-optionnelle, et comme `Option<T>` est générique, nous pouvons utiliser cette
-abstraction peu importe le type de la valeur optionnelle.
+Cette définition devrait désormais avoir plus de sens pour vous. Comme vous
+pouvez le constater, `Option<T>` est une énumération qui est générique en
+fonction du type `T` et a deux variantes : `Some`, qui contient une valeur de
+type `T`, et une variante `None` qui ne contient aucune valeur. En utilisant
+l'énumération `Option<T>`, nous pouvons exprimer le concept abstrait d'avoir
+une valeur optionnelle, et comme `Option<T>` est générique, nous pouvons
+utiliser cette abstraction peu importe le type de la valeur optionnelle.
 
 <!--
 Enums can use multiple generic types as well. The definition of the `Result`
@@ -552,27 +552,41 @@ une référence à la donnée présente dans le champ `x`.
 
 <!--
 Note that we have to declare `T` just after `impl` so we can use it to specify
-that we’re implementing methods on the type `Point<T>`.  By declaring `T` as a
+that we’re implementing methods on the type `Point<T>`. By declaring `T` as a
 generic type after `impl`, Rust can identify that the type in the angle
-brackets in `Point` is a generic type rather than a concrete type.
+brackets in `Point` is a generic type rather than a concrete type. Because this
+is declaring the generic again, we could have chosen a different name for the
+generic parameter than the generic parameter declared in the struct definition,
+but using the same name is conventional. Methods written within an `impl` that
+declares the generic type will be defined on any instance of the type, no
+matter what concrete type ends up substituting for the generic type.
 -->
 
 Notez que nous devons déclarer `T` juste après `impl` afin de pouvoir l'utiliser
 pour préciser que nous implémentons des méthodes sur le type `Point<T>`. En
 déclarant `T` comme un type générique après `impl`, Rust peut comprendre que le
 type entre les chevrons dans `Point` est un type générique plutôt qu'un type
-concret.
+concret. Comme cela revient à déclarer à nouveau le générique, nous aurions pu
+choisir un nom différent pour le paramètre générique plutôt que de réutiliser
+le même nom que dans la définition de la structure, mais c'est devenu une
+convention d'utiliser le même nom. Les méthodes écrites dans un `impl` qui
+déclarent un type générique peuvent être définies sur n'importe quelle instance
+du type, peu importe quel type concret sera substitué dans le type générique.
 
 <!--
-We could, for example, implement methods only on `Point<f32>` instances rather
-than on `Point<T>` instances with any generic type. In Listing 10-10 we use the
-concrete type `f32`, meaning we don’t declare any types after `impl`.
+The other option we have is defining methods on the type with some constraint
+on the generic type. We could, for example, implement methods only on
+`Point<f32>` instances rather than on `Point<T>` instances with any generic
+type. In Listing 10-10 we use the concrete type `f32`, meaning we don’t declare
+any types after `impl`.
 -->
 
-Nous pouvons par exemple implémenter des méthodes uniquement sur des instances
-de `Point<f32>` plutôt que sur des instances de n'importe quel type `Point<T>`.
-Dans l'encart 10-10, nous utilisons le type concret `f32`, ce qui veut dire que
-nous n'avons pas besoin de déclarer un type après `impl`.
+L'autre possibilité que nous avons est de définir les méthodes sur le type avec
+des contraintes sur le type générique. Nous pouvons par exemple implémenter des
+méthodes uniquement sur des instances de `Point<f32>` plutôt que sur des
+instances de n'importe quel type `Point<T>`. Dans l'encart 10-10, nous
+utilisons le type concret `f32`, ce qui veut dire que nous n'avons pas besoin
+de déclarer un type après `impl`.
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -610,29 +624,28 @@ operations that are available only for floating point types.
 
 Ce code signifie que le type `Point<f32>` va avoir une méthode qui s'appelle
 `distance_depuis_lorigine` et les autres instances de `Point<T>` où `T` n'est
-pas du type `f32` ne pourront pas appeler cette méthode. Cette méthode 
-calcule la distance entre notre point et la coordonnée (0.0, 0.0) et utilise des
+pas du type `f32` ne pourront pas appeler cette méthode. Cette méthode calcule
+la distance entre notre point et la coordonnée (0.0, 0.0) et utilise des
 opérations mathématiques qui ne sont disponibles que pour les types de
 flottants.
 
 <!--
 Generic type parameters in a struct definition aren’t always the same as those
-you use in that struct’s method signatures. For example, Listing 10-11 defines
-the method `mixup` on the `Point<T, U>` struct from Listing 10-8. The method
-takes another `Point` as a parameter, which might have different types from the
-`self` `Point` we’re calling `mixup` on. The method creates a new `Point`
-instance with the `x` value from the `self` `Point` (of type `T`) and the `y`
-value from the passed-in `Point` (of type `W`).
+you use in that struct’s method signatures. Listing 10-11 uses the generic
+types `X1` and `Y1` for the `Point` struct and `X2` `Y2` for the `mixup` method
+signature to make the example clearer. The method creates a new `Point`
+instance with the `x` value from the `self` `Point` (of type `X1`) and the `y`
+value from the passed-in `Point` (of type `Y2`).
 -->
 
 Les paramètres de type génériques dans la définition d'une structure ne sont
 pas toujours les mêmes que ceux qui sont utilisés dans la signature des
-méthodes de cette structure. Par exemple, l'encart 10-11 définit la méthode
-`melange` sur la structure `Point<T, U>` de l'encart 10-8. La méthode prend un
-autre `Point` en paramètre, qui peut avoir des types différents du `Point`
-`self` sur lequel nous appelons `melange`. La méthode crée une nouvelle
-instance de `Point` avec la valeur de `x` provenant du `Point` `self` (de type
-`T`) et la valeur de `y` provenant du `Point` en paramètre (de type `W`).
+méthodes de cette structure. Par exemple, l'encart 10-11 utilise les types
+génériques `X1` et `Y1` pour la structure `Point`, ainsi que `X2` et `Y2` pour
+la signature de la méthode `melange` pour rendre l'exemple plus clair. La
+méthode crée une nouvelle instance de `Point` avec la valeur de `x` provenant
+du `Point` `self` (de type `X1`) et la valeur de `y` provenant du `Point` en
+paramètre (de type `Y2`).
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -680,16 +693,17 @@ valeur `"Hello"`) et un caractère `char` pour `y` (avec la valeur `c`). L'appel
 <!--
 The purpose of this example is to demonstrate a situation in which some generic
 parameters are declared with `impl` and some are declared with the method
-definition. Here, the generic parameters `T` and `U` are declared after `impl`,
-because they go with the struct definition. The generic parameters `V` and `W`
-are declared after `fn mixup`, because they’re only relevant to the method.
+definition. Here, the generic parameters `X1` and `Y1` are declared after
+`impl` because they go with the struct definition. The generic parameters `X2`
+and `Y2` are declared after `fn mixup`, because they’re only relevant to the
+method.
 -->
 
 Le but de cet exemple est de montrer une situation dans laquelle des paramètres
 génériques sont déclarés avec `impl` et d'autres sont déclarés dans la
-définition de la méthode. Ici, les paramètres génériques `T` et `U` sont
+définition de la méthode. Ici, les paramètres génériques `X1` et `Y1` sont
 déclarés après `impl`, car ils sont liés à la définition de la structure. Les
-paramètres génériques `V` et `W` sont déclarés après `fn melange`, car ils ne
+paramètres génériques `X2` et `Y2` sont déclarés après `fn melange`, car ils ne
 sont liés qu'à cette méthode.
 
 <!--

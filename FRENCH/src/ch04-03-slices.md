@@ -5,14 +5,14 @@
 ## Le type slice
 
 <!--
-Another data type that does not have ownership is the *slice*. Slices let you
-reference a contiguous sequence of elements in a collection rather than the
-whole collection.
+*Slices* let you reference a contiguous sequence of elements in a collection
+rather than the whole collection. A slice is a kind of reference, so it does
+not have ownership.
 -->
 
-Un autre type de donnée qui ne prend pas possession est la *slice*. Une slice
-vous permet d'obtenir une référence vers une séquence continue d'éléments d'une
-collection plutôt que toute la collection.
+Une *slice* vous permet d'obtenir une référence vers une séquence continue
+d'éléments d'une collection plutôt que toute la collection. Une slice est un
+genre de référence, donc elle ne prend pas possession.
 
 <!--
 Here’s a small programming problem: write a function that takes a string and
@@ -27,10 +27,12 @@ chaîne. Si la fonction ne trouve pas d'espace dans la chaîne, cela veut dire
 que la chaîne est en un seul mot, donc la chaîne en entier doit être retournée.
 
 <!--
-Let’s think about the signature of this function:
+Let’s work through how we’d write the signature of this function without using
+slices, to understand the problem that slices will solve:
 -->
 
-Imaginons la signature de cette fonction :
+Voyons comment écrire la signature de cette fonction sans utiliser les slices,
+afin de comprendre le problème que règlent les slices :
 
 <!--
 ```rust,ignore
@@ -43,17 +45,18 @@ fn premier_mot(s: &String) -> ?
 ```
 
 <!--
-This function, `first_word`, has a `&String` as a parameter. We don’t want
+The `first_word` function has a `&String` as a parameter. We don’t want
 ownership, so this is fine. But what should we return? We don’t really have a
 way to talk about *part* of a string. However, we could return the index of the
-end of the word. Let’s try that, as shown in Listing 4-7.
+end of the word, indicated by a space. Let’s try that, as shown in Listing 4-7.
 -->
 
-Cette fonction, `premier_mot`, prend un `&String` comme paramètre. Nous ne
+La fonction `premier_mot` prend un `&String` comme paramètre. Nous ne
 voulons pas en prendre possession, donc c'est ce qu'il nous faut. Mais que
 devons-nous retourner ? Nous n'avons aucun moyen de désigner une *partie*
 d'une chaîne de caractères. Cependant, nous pouvons retourner l'indice de la
-fin du mot. Essayons cela, dans l'encart 4-7 :
+fin du mot, qui se produit lorsqu'il y a un espace. Essayons cela, dans
+l'encart 4-7 :
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -117,35 +120,37 @@ méthode `iter` :
 ```
 
 <!--
-We’ll discuss iterators in more detail in Chapter 13. For now, know that `iter`
-is a method that returns each element in a collection and that `enumerate`
-wraps the result of `iter` and returns each element as part of a tuple instead.
-The first element of the tuple returned from `enumerate` is the index, and the
-second element is a reference to the element. This is a bit more convenient
-than calculating the index ourselves.
+We’ll discuss iterators in more detail in [Chapter 13][ch13]<!-- ignore -- >.
+For now, know that `iter` is a method that returns each element in a collection
+and that `enumerate` wraps the result of `iter` and returns each element as
+part of a tuple instead. The first element of the tuple returned from
+`enumerate` is the index, and the second element is a reference to the element.
+This is a bit more convenient than calculating the index ourselves.
 -->
 
-Nous aborderons plus en détail les itérateurs dans le chapitre 13. Pour le
-moment, sachez que `iter` est une méthode qui retourne chaque élément d'une
-collection, et que `enumerate` transforme le résultat de `iter` pour retourner
-plutôt chaque élément comme un tuple. Le premier élément du tuple retourné par
-`enumerate` est l'indice, et le second élément est une référence vers l'élément.
-C'est un peu plus pratique que de calculer les indices par nous-mêmes.
+Nous aborderons plus en détail les itérateurs dans le [chapitre
+13][ch13]<!-- ignore -->. Pour le moment, sachez que `iter` est une méthode qui
+retourne chaque élément d'une collection, et que `enumerate` transforme le
+résultat de `iter` pour retourner plutôt chaque élément comme un tuple. Le
+premier élément du tuple retourné par `enumerate` est l'indice, et le second
+élément est une référence vers l'élément. C'est un peu plus pratique que de
+calculer les indices par nous-mêmes.
 
 <!--
 Because the `enumerate` method returns a tuple, we can use patterns to
-destructure that tuple. We’ll be discussing patterns more in Chapter 6. So in
-the `for` loop, we specify a pattern that has `i` for the index in the tuple
-and `&item` for the single byte in the tuple. Because we get a reference to the
-element from `.iter().enumerate()`, we use `&` in the pattern.
+destructure that tuple. We’ll be discussing patterns more in [Chapter
+6][ch6]<!-- ignore -- >. In the `for` loop, we specify a pattern that has `i`
+for the index in the tuple and `&item` for the single byte in the tuple.
+Because we get a reference to the element from `.iter().enumerate()`, we use
+`&` in the pattern.
 -->
 
 Comme la méthode `enumerate` retourne un tuple, nous pouvons utiliser des
-motifs pour déstructurer ce tuple. Nous verrons les motifs au chapitre 6. Donc
-dans la boucle `for`, nous précisons un motif qui indique que nous définissons
-`i` pour l'indice au sein du tuple et `&element` pour l'octet dans le tuple.
-Comme nous obtenons une référence vers l'élément avec `.iter().enumerate()`,
-nous utilisons `&` dans le motif.
+motifs pour déstructurer ce tuple. Nous verrons les motifs au [chapitre
+6][ch6]<!-- ignore -->. Dans la boucle `for`, nous précisons un motif qui
+indique que nous définissons `i` pour l'indice au sein du tuple et `&element`
+pour l'octet dans le tuple. Comme nous obtenons une référence vers l'élément
+avec `.iter().enumerate()`, nous utilisons `&` dans le motif.
 
 <!--
 Inside the `for` loop, we search for the byte that represents the space by
@@ -247,14 +252,14 @@ fn second_mot(s: &String) -> (usize, usize) {
 <!--
 Now we’re tracking a starting *and* an ending index, and we have even more
 values that were calculated from data in a particular state but aren’t tied to
-that state at all. We now have three unrelated variables floating around that
+that state at all. We have three unrelated variables floating around that
 need to be kept in sync.
 -->
 
 Maintenant, nous avons un indice de début *et* un indice de fin, donc nous avons
 encore plus de valeurs qui sont calculées à partir d'une donnée dans un état
 donné, mais qui ne sont pas liées du tout à l'état de cette donnée. Nous avons
-maintenant trois variables isolées qui ont besoin d'être maintenues à jour.
+trois variables isolées qui ont besoin d'être maintenues à jour.
 
 <!--
 Luckily, Rust has a solution to this problem: string slices.
@@ -287,34 +292,27 @@ une partie d'une `String`, et ressemble à ceci :
 ```
 
 <!--
-This is similar to taking a reference to the whole `String` but with the extra
-`[0..5]` bit. Rather than a reference to the entire `String`, it’s a reference
-to a portion of the `String`.
+Rather than a reference to the entire `String`, `hello` is a reference to a
+portion of the `String`, specified in the extra `[0..5]` bit. We create slices
+using a range within brackets by specifying `[starting_index..ending_index]`,
+where `starting_index` is the first position in the slice and `ending_index` is
+one more than the last position in the slice. Internally, the slice data
+structure stores the starting position and the length of the slice, which
+corresponds to `ending_index` minus `starting_index`. So in the case of `let
+world = &s[6..11];`, `world` would be a slice that contains a pointer to the
+byte at index 6 of `s` with a length value of 5.
 -->
 
-Cela ressemble à une référence pour toute la `String`, mais avec la partie
-`[0..5]` en plus. Plutôt que d'être une référence vers toute la `String`, c'est
-une référence vers une partie de la `String`.
-
-<!--
-We can create slices using a range within brackets by specifying
-`[starting_index..ending_index]`, where `starting_index` is the first position
-in the slice and `ending_index` is one more than the last position in the
-slice. Internally, the slice data structure stores the starting position and
-the length of the slice, which corresponds to `ending_index` minus
-`starting_index`. So in the case of `let world = &s[6..11];`, `world` would be
-a slice that contains a pointer to the byte at index 6 of `s` with a length
-value of 5.
--->
-
-Nous pouvons créer des slices en utilisant un intervalle entre crochets en
-spécifiant `[indice_debut..indice_fin]`, où `indice_debut` est la position du
-premier octet de la slice et `indice_fin` est la position juste après le dernier
-octet de la slice. En interne, la structure de données de la slice stocke la
-position de départ et la longueur de la slice, ce qui correspond à `indice_fin`
-moins `indice_debut`. Donc dans le cas de `let world = &s[6..11];`, `world` est
-une slice qui contient un pointeur vers le sixième octet de `s` et une longueur
-de 5.
+Plutôt que d'être une référence vers toute la `String`, `hello` est une
+référence vers une partie de la `String`, comme indiqué dans la partie
+supplémentaire `[0..5]`. Nous créons des slices en utilisant un intervalle
+entre crochets en spécifiant `[indice_debut..indice_fin]`, où `indice_debut`
+est la position du premier octet de la slice et `indice_fin` est la position
+juste après le dernier octet de la slice. En interne, la structure de données
+de la slice stocke la position de départ et la longueur de la slice, ce qui
+correspond à `indice_fin` moins `indice_debut`. Donc dans le cas de
+`let world = &s[6..11];`, `world` est une slice qui contient un pointeur vers
+le sixième octet de `s` et une longueur de 5.
 
 <!--
 Figure 4-6 shows this in a diagram.
@@ -801,9 +799,13 @@ Passons maintenant au chapitre 5 et découvrons comment regrouper des données
 ensemble dans une `struct`.
 
 <!--
+[ch13]: ch13-02-iterators.html
+[ch6]: ch06-02-match.html#patterns-that-bind-to-values
 [strings]: ch08-02-strings.html#storing-utf-8-encoded-text-with-strings
 [deref-coercions]: ch15-02-deref.html#implicit-deref-coercions-with-functions-and-methods
 -->
 
+[ch13]: ch13-02-iterators.html
+[ch6]: ch06-02-match.html#des-motifs-reliés-à-des-valeurs
 [strings]: ch08-02-strings.html
 [deref-coercions]: ch15-02-deref.html

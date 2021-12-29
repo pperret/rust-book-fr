@@ -17,19 +17,18 @@ Internet pour le téléchargement.
 
 <!--
 > Note: If you prefer not to use `rustup` for some reason, please see the
-> [Other Rust Installation Methods page][install] for more options.
+> [Other Rust Installation Methods page][otherinstall] for more options.
 -->
 
 > Note : si vous préférez ne pas utiliser `rustup` pour une raison ou une autre,
-> vous pouvez vous référer à
-> [la page des autres moyens d'installation de Rust][rust-installation-page]
-> pour d'autres méthodes d'installation.
+> vous pouvez vous référer à [la page des autres moyens d'installation de
+> Rust][otherinstall] pour d'autres méthodes d'installation.
 
 <!--
-[install]: https://forge.rust-lang.org/infra/other-installation-methods.html
+[otherinstall]: https://forge.rust-lang.org/infra/other-installation-methods.html
 -->
 
-[install]: https://forge.rust-lang.org/infra/other-installation-methods.html
+[otherinstall]: https://forge.rust-lang.org/infra/other-installation-methods.html
 
 <!--
 The following steps install the latest stable version of the Rust compiler.
