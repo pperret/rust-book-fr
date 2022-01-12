@@ -1,4 +1,4 @@
-name: CI
+name: gh_pages_update
 
 on:
   pull_request:

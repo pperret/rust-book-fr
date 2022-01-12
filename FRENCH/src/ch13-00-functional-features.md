@@ -16,7 +16,7 @@ La conception de Rust s'est inspirée de nombreux langages et technologies
 existantes, et une de ses influences la plus marquante est la *programmation
 fonctionnelle*. La programmation fonctionnelle consiste souvent à utiliser une
 fonction comme une valeur en la passant en argument d'une autre fonction, la
-retourner en résultat d'une autre fonction, l'assigner à une variable pour
+retourner en résultat d'une autre fonction ou l'assigner à une variable pour
 l'exécuter plus tard, par exemple.
 
 <!--
@@ -60,7 +60,7 @@ code, so we’ll devote this entire chapter to them.
 -->
 
 Les autres fonctionnalités de Rust, comme le filtrage par motif et les
-énumérations que nous avons vu dans les chapitres précédents, sont influencés
+énumérations, que nous avons vues dans les chapitres précédents sont influencés
 par la programmation fonctionnelle. La maîtrise des fermetures et des itérateurs
 est une étape importante pour écrire du code Rust performant, c'est pourquoi
 nous allons leur dédier ce chapitre entier.
