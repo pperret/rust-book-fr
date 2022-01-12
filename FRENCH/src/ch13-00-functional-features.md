@@ -27,8 +27,8 @@ features in many languages often referred to as functional.
 
 Dans ce chapitre, nous n'allons pas débattre sur ce qu'est ou non la
 programmation fonctionnelle, mais nous allons plutôt voir quelques
-fonctionnalités de Rust qui sont similaires à celles des autres langages souvent
-considérés comme fonctionnels.
+fonctionnalités de Rust qui sont similaires à celles des autres langages
+souvent considérés comme fonctionnels.
 
 <!--
 More specifically, we’ll cover:

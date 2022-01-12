@@ -10,7 +10,7 @@ test tests::ce_test_reussit ... ok
 failures:
 
 ---- tests::ce_test_echoue stdout ----
-I got the value 8
+J'ai obtenu la valeur 8
 thread 'main' panicked at 'assertion failed: `(left == right)`
   left: `5`,
  right: `10`', src/lib.rs:19:9

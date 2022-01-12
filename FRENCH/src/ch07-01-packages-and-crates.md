@@ -89,7 +89,7 @@ binaire.
 <!--
 Here, we have a package that only contains *src/main.rs*, meaning it only
 contains a binary crate named `my-project`. If a package contains *src/main.rs*
-and *src/lib.rs*, it has two crates: a library and a binary, both with the same
+and *src/lib.rs*, it has two crates: a binary and a library, both with the same
 name as the package. A package can have multiple binary crates by placing files
 in the *src/bin* directory: each file will be a separate binary crate.
 -->
@@ -97,7 +97,7 @@ in the *src/bin* directory: each file will be a separate binary crate.
 Dans notre cas, nous avons un paquet qui contient uniquement *src/main.rs*, ce
 qui veut dire qu'il contient uniquement une crate binaire qui s'appelle
 `mon-projet`. Si un paquet contient *src/main.rs* et *src/lib.rs*, il a deux
-crates : une bibliothèque et une binaire, chacune avec le même nom que le
+crates : une binaire et une bibliothèque, chacune avec le même nom que le
 paquet. Un paquet peut avoir plusieurs crates binaires en ajoutant des fichiers
 dans le répertoire *src/bin* : chaque fichier sera une crate séparée.
 

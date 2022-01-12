@@ -6,14 +6,14 @@
 
 <!--
 To understand when we might want to use structs, let’s write a program that
-calculates the area of a rectangle. We’ll start with single variables, and then
-refactor the program until we’re using structs instead.
+calculates the area of a rectangle. We’ll start by using single variables, and
+then refactor the program until we’re using structs instead.
 -->
 
 Pour comprendre dans quels cas nous voudrions utiliser des structures, écrivons
-un programme qui calcule l'aire d'un rectangle. Nous commencerons avec de
-simples variables, puis on remaniera le code jusqu'à utiliser des structures à
-la place.
+un programme qui calcule l'aire d'un rectangle. Nous commencerons en utilisant
+de simples variables, puis on remaniera le code jusqu'à utiliser des structures
+à la place.
 
 <!--
 Let’s make a new binary project with Cargo called *rectangles* that will take
@@ -48,7 +48,7 @@ certaine manière dans le *src/main.rs* de notre projet.
 specified by separate width and height variables</span>
 -->
 
-<span class="caption">Encart 5-8 : Calcul de l'aire d'un rectangle défini par
+<span class="caption">Encart 5-8 : calcul de l'aire d'un rectangle défini par
 les variables distinctes `largeur` et `hauteur`</span>
 
 <!--
@@ -68,15 +68,14 @@ Maintenant, lancez ce programme avec `cargo run` :
 ```
 
 <!--
-Even though Listing 5-8 works and figures out the area of the rectangle by
-calling the `area` function with each dimension, we can do better. The width
-and the height are related to each other because together they describe one
-rectangle.
+This code succeeds in figuring out the area of the rectangle by calling the
+`area` function with each dimension, but we can do more to make this code clear
+and readable.
 -->
 
-Bien que l'encart 5-8 fonctionne et détermine l'aire du rectangle en appelant
-la fonction `aire` avec chaque dimension, on peut faire mieux. La largeur et la
-hauteur sont couplées entre elles car elles décrivent toutes les deux un rectangle.
+Ce code arrive à déterminer l'aire du rectangle en appelant la fonction `aire`
+avec chaque dimension, mais on peut faire mieux pour clarifier ce code et le
+rendre plus lisible.
 
 <!--
 The issue with this code is evident in the signature of `area`:
@@ -96,19 +95,19 @@ Le problème de ce code se voit dans la signature de `aire` :
 
 <!--
 The `area` function is supposed to calculate the area of one rectangle, but the
-function we wrote has two parameters. The parameters are related, but that’s
-not expressed anywhere in our program. It would be more readable and more
+function we wrote has two parameters, and it’s not clear anywhere in our
+program that the parameters are related. It would be more readable and more
 manageable to group width and height together. We’ve already discussed one way
 we might do that in [“The Tuple Type”][the-tuple-type]<!-- ignore -- > section
 of Chapter 3: by using tuples.
 -->
 
 La fonction `aire` est censée calculer l'aire d'un rectangle, mais la fonction
-que nous avons écrite a deux paramètres. Les paramètres sont liés, mais ce n'est
-exprimé nulle part dans notre programme. Il serait plus lisible et plus gérable
-de regrouper ensemble la largeur et la hauteur. Nous avons déjà vu dans la
-section [“Le type *tuple*”][the-tuple-type]<!-- ignore --> du chapitre 3 une
-façon qui nous permettrait de le faire : en utilisant des tuples.
+que nous avons écrite a deux paramètres, et il n'est pas précisé nulle part
+dans notre programme à quoi sont liés les paramètres. Il serait plus lisible et
+plus gérable de regrouper ensemble la largeur et la hauteur. Nous avons déjà vu
+dans la section [“Le type *tuple*”][the-tuple-type]<!-- ignore --> du chapitre 3
+une façon qui nous permettrait de le faire : en utilisant des tuples.
 
 <!--
 ### Refactoring with Tuples
@@ -150,34 +149,32 @@ rectangle dans un tuple</span>
 <!--
 In one way, this program is better. Tuples let us add a bit of structure, and
 we’re now passing just one argument. But in another way, this version is less
-clear: tuples don’t name their elements, so our calculation has become more
-confusing because we have to index into the parts of the tuple.
+clear: tuples don’t name their elements, so we have to index into the parts of
+the tuple, making our calculation less obvious.
 -->
 
 D'une certaine façon, ce programme est meilleur. Les tuples nous permettent de
 structurer un peu plus et nous ne passons plus qu'un argument. Mais d'une autre
 façon, cette version est moins claire : les tuples ne donnent pas de noms à
-leurs éléments, donc notre calcul est devenu plus déroutant puisqu'il faut
-accéder aux éléments du tuple via leur indice.
+leurs éléments, donc il faut accéder aux éléments du tuple via leur indice, ce
+qui rends plus compliqué notre calcul.
 
 <!--
-It doesn’t matter if we mix up width and height for the area calculation, but
-if we want to draw the rectangle on the screen, it would matter! We would have
-to keep in mind that `width` is the tuple index `0` and `height` is the tuple
-index `1`. If someone else worked on this code, they would have to figure this
-out and keep it in mind as well. It would be easy to forget or mix up these
-values and cause errors, because we haven’t conveyed the meaning of our data in
-our code.
+Mixing up the width and height wouldn’t matter for the area calculation, but if
+we want to draw the rectangle on the screen, it would matter! We would have to
+keep in mind that `width` is the tuple index `0` and `height` is the tuple
+index `1`. This would be even harder for someone else to figure out and keep in
+mind if they were to use our code. Because we haven’t conveyed the meaning of
+our data in our code, it’s now easier to introduce errors.
 -->
 
-Ce n'est pas grave de confondre la largeur et la hauteur pour calculer l'aire,
+Le mélange de la largeur et la hauteur n'est pas important pour calculer l'aire,
 mais si on voulait afficher le rectangle à l'écran, cela serait problématique !
-Il nous faut garder à l'esprit que la `largeur` est l'élément à l'indice 0 du
-tuple et que la `hauteur` est l'élément à l'indice 1. Si quelqu'un d'autre
-travaillait sur ce code, il devrait le déduire et s'en souvenir aussi. Il est
-facile d'oublier ou de confondre ces valeurs et par conséquent provoquer des
-erreurs, parce qu'on n'a pas exprimé la signification de nos données dans notre
-code.
+Il nous faut garder à l'esprit que la `largeur` est l'élément à l'indice `0` du
+tuple et que la `hauteur` est l'élément à l'indice `1`. Cela complexifie le
+travail de quelqu'un d'autre de le comprendre et s'en souvenir pour qu'il
+puisse l'utiliser. Comme on n'a pas exprimé la signification de nos données
+dans notre code, il est plus facile de faire des erreurs.
 
 <!--
 ### Refactoring with Structs: Adding More Meaning
@@ -187,13 +184,13 @@ code.
 
 <!--
 We use structs to add meaning by labeling the data. We can transform the tuple
-we’re using into a data type with a name for the whole as well as names for the
+we’re using into a struct with a name for the whole as well as names for the
 parts, as shown in Listing 5-10.
 -->
 
 On utilise des structures pour rendre les données plus expressives en leur
-donnant des noms. On peut transformer le tuple que nous avons utilisé en un type
-de donnée nommé dont ses éléments sont aussi nommés, comme le montre l'encart
+donnant des noms. On peut transformer le tuple que nous avons utilisé en une
+structure nommée dont ses éléments sont aussi nommés, comme le montre l'encart
 5-10.
 
 <!--
@@ -270,15 +267,15 @@ les indices `0` et `1`. On gagne en clarté.
 ### Ajouter des fonctionnalités utiles avec les traits dérivés
 
 <!--
-It’d be nice to be able to print an instance of `Rectangle` while we’re
+It’d be useful to be able to print an instance of `Rectangle` while we’re
 debugging our program and see the values for all its fields. Listing 5-11 tries
 using the [`println!` macro][println]<!-- ignore -- > as we have used in
 previous chapters. This won’t work, however.
 -->
 
-Cela serait bien de pouvoir afficher une instance de `Rectangle` pendant qu'on
-débogue notre programme et de voir la valeur de chacun de ses champs. L'encart
-5-11 essaye de le faire en utilisant [la macro
+Cela serait pratique de pouvoir afficher une instance de `Rectangle` pendant
+qu'on débogue notre programme et de voir la valeur de chacun de ses champs.
+L'encart 5-11 essaye de le faire en utilisant [la macro
 `println!`][println]<!-- ignore --> comme on l'a fait dans les chapitres
 précédents. Cependant, cela ne fonctionne pas.
 
@@ -333,7 +330,7 @@ a `1` or any other primitive type to a user. But with structs, the way
 display possibilities: Do you want commas or not? Do you want to print the
 curly brackets? Should all the fields be shown? Due to this ambiguity, Rust
 doesn’t try to guess what we want, and structs don’t have a provided
-implementation of `Display`.
+implementation of `Display` to use with `println!` and the `{}` placeholder.
 -->
 
 La macro `println!` peut faire toutes sortes de formatages textuels, et par
@@ -346,7 +343,8 @@ devrait formater son résultat est moins claire car il y a plus de possibilités
 d'affichage : Voulez-vous des virgules ? Voulez-vous afficher les accolades ?
 Est-ce que tous les champs devraient être affichés ? À cause de ces ambiguïtés,
 Rust n'essaye pas de deviner ce qu'on veut, et les structures n'implémentent pas
-`Display` par défaut.
+`Display` par défaut pour l'utiliser avec `println!` et les espaces réservés
+`{}`.
 
 <!--
 If we continue reading the errors, we’ll find this helpful note:
@@ -478,15 +476,15 @@ Nice! It’s not the prettiest output, but it shows the values of all the fields
 for this instance, which would definitely help during debugging. When we have
 larger structs, it’s useful to have output that’s a bit easier to read; in
 those cases, we can use `{:#?}` instead of `{:?}` in the `println!` string.
-When we use the `{:#?}` style in the example, the output will look like this:
+In this example, using the `{:#?}` style will output:
 -->
 
 Super ! Ce n'est pas le plus beau des affichages, mais cela montre les
 valeurs de tous les champs de cette instance, ce qui serait assurément utile
 lors du débogage. Quand on a des structures plus grandes, il serait bien d'avoir
 un affichage un peu plus lisible ; dans ces cas-là, on pourra utiliser `{:#?}`
-au lieu de `{:?}` dans la chaîne de formatage. Quand on utilise `{:#?}` dans cet
-exemple, l'affichage donnera plutôt ceci :
+au lieu de `{:?}` dans la chaîne de formatage. Dans cette exemple,
+l'utilisation du style `{:#?}` va afficher ceci :
 
 <!--
 ```console
@@ -499,30 +497,38 @@ exemple, l'affichage donnera plutôt ceci :
 ```
 
 <!--
-Another way to print out a value using the `Debug` format is by using the
-[`dbg!` macro][dbg] <!-- ignore -- >. The `dbg!` macro takes ownership of an
-expression, prints the file and line number of where that `dbg!` macro call
-occurs in your code along with the resulting value of that expression, and
-returns ownership of the value. Calling the `dbg!` macro prints to the standard
-error console stream (`stderr`), as opposed to `println!` which prints to the
-standard output console stream (`stdout`). We’ll talk more about `stderr` and
-`stdout` in the [“Writing Error Messages to Standard Error Instead of Standard
-Output” section in Chapter 12][err]<!-- ignore -- >. Here’s an example where
-we’re interested in the value that gets assigned to the `width` field, as well
-as the value of the whole struct in `rect1`:
+Another way to print out a value using the `Debug` format is to use the [`dbg!`
+macro][dbg]<!-- ignore -- >, which takes ownership of an expression, prints the
+file and line number of where that `dbg!` macro call occurs in your code along
+with the resulting value of that expression, and returns ownership of the value.
 -->
 
 Une autre façon d'afficher une valeur en utilisant le format `Debug` est
-d'utiliser la [macro `dbg!`][dbg]<!-- ignore -->. La macro `dbg!` prend
-possession de l'expression, affiche le nom du fichier et la ligne de votre code
-où se trouve cet appel à la macro `dbg!` ainsi que le résultat de cette
-expression, puis rend la possession de cette valeur. L'appel de la macro `dbg!`
-écrit dans le flux d'erreur standard de la console (`stderr`), contrairement à
-`println!` qui écrit dans le flux de sortie standard de la console (`stdout`).
-Nous reparlerons de `stderr` et de `stdout` dans [une section du
-chapitre 12][err]<!-- ignore -->. Voici un exemple dans lequel nous nous
-intéressons à la valeur assignée au champ `largeur`, ainsi que la valeur de
-toute la structure `rect1` :
+d'utiliser la [macro `dbg!`][dbg]<!-- ignore -->, qui prend possession de
+l'expression, affiche le nom du fichier et la ligne de votre code où se trouve
+cet appel à la macro `dbg!` ainsi que le résultat de cette expression, puis
+rend la possession de cette valeur.
+
+<!--
+> Note: Calling the `dbg!` macro prints to the standard error console stream
+> (`stderr`), as opposed to `println!` which prints to the standard output
+> console stream (`stdout`). We’ll talk more about `stderr` and `stdout` in the
+> “[“Writing Error Messages to Standard Error Instead of Standard
+> Output” section in Chapter 12][err]<!-- ignore -- >.
+-->
+
+> Remarque : l'appel à la macro `dbg!` écrit dans le flux d'erreur standard
+> de la console (`stderr`), contrairement à `println!` qui écrit dans le flux
+> de sortie standard de la console (`stdout`). Nous reparlerons de `stderr` et
+> de `stdout` dans [une section du chapitre 12][err]<!-- ignore -->.
+
+<!--
+Here’s an example where we’re interested in the value that gets assigned to the
+`width` field, as well as the value of the whole struct in `rect1`:
+-->
+
+Voici un exemple dans lequel nous nous intéressons à la valeur assignée au
+champ `largeur`, ainsi que la valeur de toute la structure `rect1` :
 
 <!--
 ```rust
@@ -538,7 +544,7 @@ toute la structure `rect1` :
 We can put `dbg!` around the expression `30 * scale` and, because `dbg!`
 returns ownership of the expression’s value, the `width` field will get the
 same value as if we didn’t have the `dbg!` call there. We don’t want `dbg!` to
-take ownership of `rect1`, so we use a reference to `dbg!` in the next call.
+take ownership of `rect1`, so we use a reference to `rect1` in the next call.
 Here’s what the output of this example looks like:
 -->
 
@@ -546,7 +552,7 @@ Nous pouvons placer le `dbg!` autour de l'expression `30 * echelle` et, comme
 `dbg!` retourne la possession de la valeur issue de l'expression, le champ
 `largeur` va avoir la même valeur que si nous n'avions pas appelé `dbg!` ici.
 Nous ne voulons pas que `dbg!` prenne possession de `rect1`, donc nous donnons
-une référence à `dbg!` lors de son prochain appel. Voici à quoi ressemble la
+une référence à `rect1` lors de son prochain appel. Voici à quoi ressemble la
 sortie de cet exemple :
 
 <!--

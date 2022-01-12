@@ -50,7 +50,7 @@ Par exemple, imaginons que nous écrivons une fonction `ajouter_deux` qui ajoute
 2 à n'importe quel nombre qu'on lui envoie. La signature de cette fonction
 prend un entier en paramètre et retourne un entier comme résultat. Lorsque nous
 implémentons et compilons cette fonction, Rust fait toutes les vérifications de
-type et d'emprunt que vous avez appris précédemment afin de s'assurer que, par
+type et d'emprunt que vous avez apprises précédemment afin de s'assurer que, par
 exemple, nous ne passions pas une valeur de type `String` ou une référence
 invalide à cette fonction. Mais Rust *ne peut pas* vérifier que cette fonction
 va faire précisément ce que nous avions prévu qu'elle fasse, qui en l'occurence
@@ -68,7 +68,7 @@ changed.
 Nous pouvons écrire des tests qui vérifient, par exemple, que lorsque nous
 donnons `3` à la fonction `ajouter_deux`, elle retourne bien `5`. Nous pouvons
 lancer ces tests à chaque fois que nous modifions notre code pour s'assurer
-qu'aucun comportement existant et satisfaisant n'ai changé.
+qu'aucun comportement existant et satisfaisant n'a changé.
 
 <!--
 Testing is a complex skill: although we can’t cover every detail about how to

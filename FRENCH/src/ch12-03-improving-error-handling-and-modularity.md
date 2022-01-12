@@ -10,7 +10,7 @@ program’s structure and how it’s handling potential errors.
 -->
 
 Pour améliorer notre programme, nous allons résoudre quatre problèmes liés
-à la structure du programme et comment il gère de potentielles erreurs.
+à la structure du programme et à la façon dont il gère de potentielles erreurs.
 
 <!--
 First, our `main` function now performs two tasks: it parses arguments and
@@ -41,7 +41,7 @@ it will be to keep track of the purpose of each. It’s best to group the
 configuration variables into one structure to make their purpose clear.
 -->
 
-Cette problématique est aussi liée au second problème : bien que `recherche` et
+Cette problématique est aussi liée au deuxième problème : bien que `recherche` et
 `nom_fichier` soient des variables de configuration de notre programme, les
 variables telles que `contenu` sont utilisées pour appuyer la logique du
 programme. Plus `main` est grand, plus nous aurons des variables à importer
@@ -62,7 +62,7 @@ Le troisième problème est que nous avons utilisé `expect` pour afficher un
 message d'erreur lorsque la lecture du fichier échoue, mais le message affiche
 uniquement `Quelque chose s'est mal passé lors de la lecture du fichier`. Lire
 un fichier peut échouer pour de nombreuses raisons : par exemple, le fichier
-peut ne pas exister, ou nous n'avons pas le droit de l'ouvrir. Pour le moment,
+peut ne pas exister, ou parce que nous n'avons pas le droit de l'ouvrir. Pour le moment,
 quelle que soit la raison, nous affichons le message d'erreur `Quelque chose
 s'est mal passé lors de la lecture du fichier`, ce qui ne donne aucune
 information à l'utilisateur !
@@ -278,23 +278,14 @@ other and what their purpose is.
 -->
 
 Un autre signe qui indique qu'il y a encore de la place pour de l'amélioration
-est que la partie `config` de `interpreter_config`, ce qui sous-entend que les
+est la partie `config` de `interpreter_config` qui sous-entend que les
 deux valeurs que nous retournons sont liées et font partie d'une même valeur de
-configuration. Actuellement, nous ne donnons pas de signification à cela dans la
-structure des données autrement qu'en regroupant les deux valeurs dans un
+configuration. Or, à ce stade, nous ne tenons pas compte de cela dans la 
+structure des données que nous utilisons si ce n'est en regroupant les deux valeurs dans un
 tuple ; nous pourrions mettre les deux valeurs dans une seule structure et
 donner un nom significatif à chacun des champs de la structure. Faire ainsi
 permet de faciliter la compréhension du code par les futurs développeurs de ce
-code pour comprendre le lien entre les deux et quels sont leurs rôles.
-
-<!--
-> Note: Using primitive values when a complex type would be more appropriate is
-> an anti-pattern known as *primitive obsession*.
--->
-
-> Remarque : l'utilisation de valeurs primitives à la place d'un type
-> sophistiqué lorsque c'est nécessaire est un anti-patron connu sous le nom
-> *d'obsession primitive*.
+code pour mettre en évidence le lien entre les deux valeurs et leurs rôles respectifs.
 
 <!--
 Listing 12-6 shows the improvements to the `parse_config` function.
@@ -392,8 +383,9 @@ un compromis qui en vaut la peine.
 > le [chapitre 13][ch13]<!-- ignore -->, vous allez apprendre à utiliser des
 > méthodes plus efficaces dans ce genre de situation. Mais pour le moment, ce
 > n'est pas un problème de copier quelques chaînes de caractères pour continuer
-> à progresser car vous allez le faire une seule fois et votre `nom_fichier` et
-> `recherche` sont très courts. Il est plus important d'avoir un programme
+> à progresser car vous allez le faire une seule fois et les chaînes
+> de caractères `nom_fichier` et `recherche` sont très courtes. Il est plus important 
+> d'avoir un programme
 > fonctionnel qui n'est pas très optimisé plutôt que d'essayer d'optimiser à
 > outrance le code dès sa première écriture. Plus vous deviendrez expérimenté
 > en Rust, plus il sera facile de commencer par la solution la plus
@@ -599,7 +591,7 @@ will be true, and we call the `panic!` macro to end the program immediately.
 -->
 
 Ce code est similaire à [la fonction Supposition::new que nous avons écrit
-dans l'encart 9-10][ch9-custom-types]<!-- ignore -->, dans lequel nous
+dans l'encart 9-10][ch9-custom-types]<!-- ignore -->, dans laquelle nous
 appelions `panic!` lorsque l'argument `valeur` était hors de l'intervalle des
 valeurs valides. Plutôt que de vérifier un intervalle de valeurs dans le cas
 présent, nous vérifions que la taille de `args` est au moins de 3 et que le
@@ -639,11 +631,11 @@ can use the other technique you learned about in Chapter 9—[returning a
 Cette sortie est meilleure : nous avons maintenant un message d'erreur
 compréhensible. Cependant, nous avons aussi des informations superflues que
 nous ne souhaitons pas afficher à nos utilisateurs. Peut-être que la technique
-que nous avons utilisé dans l'encart 9-13 n'est pas la plus appropriée dans ce
+que nous avons utilisée dans l'encart 9-13 n'est pas la plus appropriée dans ce
 cas : un appel à `panic!` est plus approprié pour un problème de développement
 qu'un problème d'utilisation, [comme nous l'avons appris au chapitre
 9][ch9-error-guidelines]<!-- ignore -->. A la place, nous pourrions utiliser
-une autre technique que vous avez appris au chapitre 9 — [retourner un
+une autre technique que vous avez apprise au chapitre 9 — [retourner un
 `Result`][ch9-result]<!-- ignore --> qui indique si c'est un succès ou une
 erreur.
 
@@ -690,12 +682,12 @@ pas aussi le `main`, ce que nous allons faire dans le prochain encart.
 <span class="filename">Fichier : src/main.rs</span>
 
 <!--
-```rust,ignore
+```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-09/src/main.rs:here}}
 ```
 -->
 
-```rust,ignore
+```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-09/src/main.rs:here}}
 ```
 
@@ -709,12 +701,14 @@ pas aussi le `main`, ce que nous allons faire dans le prochain encart.
 
 <!--
 Our `new` function now returns a `Result` with a `Config` instance in the
-success case and a `&str` in the error case.
+success case and a `&'static str` in the error case. Our error values will
+always be string literals that have the `'static` lifetime.
 -->
 
 Notre fonction `new` retourne désormais un `Result` contenant une instance de
-`Config` dans le cas d'un succès et une `&str` dans le cas d'une
-erreur.
+`Config` dans le cas d'un succès et une `&'static str` dans le cas d'une
+erreur. Nos valeurs d'erreur seront toujours des litéraux de chaîne de
+caractères qui ont la durée de vie `'static`.
 
 <!--
 We’ve made two changes in the body of the `new` function: instead of calling
@@ -726,8 +720,8 @@ make the function conform to its new type signature.
 Nous avons fait deux changements dans le corps de notre fonction `new` :
 plutôt que d'avoir à appeler `panic!` lorsque l'utilisateur n'envoie pas assez
 d'arguments, nous retournons maintenant une valeur `Err`, et nous avons intégré
-la valeur de retour `Config` dans un `Ok`. Ces modifications font en sorte que
-la fonction soit désormais conformes à son nouveau type de signature.
+la valeur de retour `Config` dans un `Ok`. Ces modifications rendent 
+la fonction conforme à son nouveau type de signature.
 
 <!--
 Returning an `Err` value from `Config::new` allows the `main` function to
@@ -805,7 +799,7 @@ value when it runs.
 -->
 
 Dans cet encart, nous avons utilisé une méthode que nous n'avons pas encore
-détaillé pour l'instant : `unwrap_or_else`, qui est défini sur `Result<T, E>`
+détaillée pour l'instant : `unwrap_or_else`, qui est définie sur `Result<T, E>`
 par la bibliothèque standard. L'utilisation de `unwrap_or_else` nous permet de
 définir une gestion des erreurs personnalisée, exempt de `panic!`. Si le
 `Result` est une valeur `Ok`, le comportement de cette méthode est similaire à
@@ -815,7 +809,7 @@ qui est une fonction anonyme que nous définissons et passons en argument de
 `unwrap_or_else`. Nous verrons les fermetures plus en détail dans le [chapitre
 13][ch13]<!-- ignore -->. Pour l'instant, vous avez juste à savoir que le
 `unwrap_or_else` va passer la valeur interne du `Err` (qui dans ce cas est la
-chaîne de caractères statique `"pas assez d'arguments"` que nous avons ajouté
+chaîne de caractères statique `"pas assez d'arguments"` que nous avons ajoutée
 dans l'encart 12-9) à notre fermeture dans l'argument `err` qui est présent
 entre deux barres verticales. Le code dans la fermeture peut ensuite utiliser
 la valeur `err` lorsqu'il est exécuté.
@@ -836,7 +830,7 @@ dans le cas d'une erreur fait uniquement deux lignes : nous affichons la valeur
 de `err` et nous appelons ensuite `process::exit`. La fonction `process::exit`
 va stopper le programme immédiatement et retourner le nombre qui lui a été donné
 en paramètre comme code de statut de sortie. C'est semblable à la gestion basée
-sur `panic!` que nous avons utilisé à l'encart 12-8, mais nous n'avons plus tout
+sur `panic!` que nous avons utilisée à l'encart 12-8, mais nous n'avons plus tout
 le texte en plus. Essayons cela :
 
 <!--
@@ -872,7 +866,7 @@ inspection, and we’ll be able to write tests for all the other logic.
 -->
 
 Maintenant que nous avons fini le remaniement de l'interprétation de la
-configuration, occupons-nous de logique du programme. Comme nous l'avons dit
+configuration, occupons-nous de la logique du programme. Comme nous l'avons dit
 dans [“Séparation des tâches des projets de
 binaires”](#separation-of-concerns-for-binary-projects)<!-- ignore -->, nous
 allons extraire une fonction `run` qui va contenir toute la logique qui est
@@ -943,7 +937,7 @@ signature and body of `run`.
 
 Avec le restant de la logique du programme maintenant séparée dans la fonction
 `run`, nous pouvons améliorer la gestion des erreurs, comme nous l'avons fait
-avec `Config::new` dans l'encart 12-9. Plutôt que de permettre au programme à
+avec `Config::new` dans l'encart 12-9. Plutôt que de permettre au programme de
 paniquer en appelant `expect`, la fonction `run` va retourner un `Result<T, E>`
 lorsque quelque chose se passe mal. Cela va nous permettre de consolider
 davantage la logique de gestion des erreurs dans le `main` pour qu'elle soit
@@ -1030,10 +1024,10 @@ it doesn’t return a value we need.
 
 Troisièmement, la fonction `run` retourne maintenant une valeur `Ok` dans les
 cas de succès. Nous avons déclaré dans la signature que le type de succès de la
-fonction `run` était `()`, ce qui signifie que nous avons envelopper la valeur
+fonction `run` était `()`, ce qui signifie que nous avons enveloppé la valeur
 de type unité dans la valeur `Ok`. Cette syntaxe `Ok(())` peut sembler un peu
 étrange au départ, mais utiliser `()` de cette manière est la façon idéale
-d'indiquer que nous appelons `run` uniquement pour ses effets secondaires ; elle
+d'indiquer que nous appelons `run` uniquement pour ses effets de bord ; elle
 ne retourne pas de valeur dont nous pourrions avoir besoin.
 
 <!--
@@ -1078,7 +1072,7 @@ with `Config::new` in Listing 12-10, but with a slight difference:
 -->
 
 Nous allons vérifier les erreurs et les gérer en utilisant une technique
-similaire à celle que nous avons utilisé avec `Config::new` dans l'encart
+similaire à celle que nous avons utilisée avec `Config::new` dans l'encart
 12-10, mais avec une légère différence :
 
 <!--
@@ -1108,10 +1102,10 @@ return the unwrapped value because it would only be `()`.
 
 Nous utilisons `if let` plutôt que `unwrap_or_else` pour vérifier si `run`
 retourne un valeur `Err` et appeler `process::exit(1)` le cas échéant. La
-fonction `run` ne retourne pas de valeur que nous avons besoin de `unwrap`
-comme nous l'avions fait avec le `Config::new` qui retournait une instance de
+fonction `run` ne retourne pas de valeur sur laquelle nous aurions besoin
+d'utiliser `unwrap` comme avec le `Config::new` qui retournait une instance de
 `Config`. Comme `run` retourne `()` dans le cas d'un succès, nous nous
-préoccupons uniquement de détecter les erreurs, donc n'avons pas besoin de
+préoccupons uniquement de détecter les erreurs, donc nous n'avons pas besoin de
 `unwrap_or_else` pour retourner la valeur extraite car elle sera toujours
 `()`.
 
@@ -1178,12 +1172,12 @@ dans l'encart 12-14.
 <span class="filename">Fichier : src/lib.rs</span>
 
 <!--
-```rust,ignore
+```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings-sources/ch12-an-io-project/listing-12-13/src/lib.rs:here}}
 ```
 -->
 
-```rust,ignore
+```rust,ignore,does_not_compile
 {{#rustdoc_include ../listings/ch12-an-io-project/listing-12-13/src/lib.rs:here}}
 ```
 
@@ -1202,7 +1196,7 @@ public API that we can test!
 -->
 
 Nous avons fait un usage généreux du mot-clé `pub` : sur `Config`, sur ses
-champs et sur la méthode `new`, et sur la fonction `run`. Nous avons maintenant
+champs et sur la méthode `new` et enfin sur la fonction `run`. Nous avons maintenant
 une crate de bibliothèque qui a une API publique que nous pouvons tester !
 
 <!--
@@ -1259,7 +1253,7 @@ future. Now it’s much easier to handle errors, and we’ve made the code more
 modular. Almost all of our work will be done in *src/lib.rs* from here on out.
 -->
 
-Ouah ! C'était pas mal de travail, mais nous sommes organisés pour nous assurer
+Ouah ! C'était pas mal de travail, mais nous nous sommes organisés pour nous assurer
 le succès à venir. Maintenant il est bien plus facile de gérer les erreurs, et
 nous avons rendu le code plus modulaire. A partir de maintenant, l'essentiel de
 notre travail sera effectué dans *src/lib.rs*.

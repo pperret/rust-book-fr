@@ -15,8 +15,8 @@ Ce chapitre est un résumé de toutes les nombreuses compétences que vous avez
 apprises précédemment et une découverte de quelques fonctionnalités
 supplémentaires de la bibliothèque standard. Nous allons construire un outil en
 ligne de commande qui interagit avec des fichiers et les entrées/sorties de la
-ligne de commande pour mettre en pratique certains concepts Rust que vous avez
-maintenant en votre connaissance.
+ligne de commande pour mettre en pratique certains concepts Rust dont vous avez
+maintenant connaissance.
 
 <!--
 Rust’s speed, safety, single binary output, and cross-platform support make it
@@ -28,16 +28,16 @@ as its arguments a filename and a string. Then it reads the file, finds lines
 in that file that contain the string argument, and prints those lines.
 -->
 
-Les fonctionnalités de rapidité, sécurité, de sortie binaire unique, et du
-support multi-plateforme de Rust en font le langage idéal pour créer des outils
+Sa rapiditié, ses fonctionnalités de sécurité, sa sortie binaire unifiée et sa prise
+en charge de multiples plateformes font de Rust le langage idéal pour créer des outils
 en ligne de commande, donc pour notre projet, nous allons construire notre
 version de l'outil en ligne de commande `grep` (qui signifie **g**lobally
 search a **r**egular **e**xpression and **p**rint, soit *recherche globale et
 affichage d'une expression régulière*). Dans des cas d'usage très simple,
-`grep` recherche une chaîne de caractère précise dans un fichier précis. Pour
-faire ainsi, `grep` prend en argument un nom de fichier et une chaîne de
+`grep` recherche une chaîne de caractères précise dans un fichier précis. Pour
+ce faire, `grep` prend en argument un nom de fichier et une chaîne de
 caractères. Ensuite, il lit le fichier, trouve les lignes de ce fichier qui
-contient la chaîne de caractères envoyé en argument, et affiche ces lignes.
+contiennent la chaîne de caractères passée en argument, puis affiche ces lignes.
 
 <!--
 Along the way, we’ll show how to make our command line tool use features of the
@@ -48,12 +48,12 @@ instead of standard output (`stdout`), so, for example, the user can redirect
 successful output to a file while still seeing error messages onscreen.
 -->
 
-Sur la route, nous allons vous montrer comment utiliser dans votre outil en
+En chemin, nous allons vous montrer comment utiliser dans votre outil en
 ligne de commande les fonctionnalités des terminaux que de nombreux outils en
 ligne de commande utilisent. Nous allons lire la valeur d'une variable
 d'environnement pour permettre à l'utilisateur de configurer le comportement de
 notre outil. Nous allons aussi afficher des messages d'erreur vers le flux
-d'erreur standard de la console (`stderr`) plutôt que la sortie standard
+d'erreur standard de la console (`stderr`) plutôt que vers la sortie standard
 (`stdout`), pour, par exemple, que l'utilisateur puisse rediriger la sortie
 fructueuse vers un fichier, tout en affichant les messages d'erreur à l'écran.
 
@@ -66,7 +66,7 @@ the background knowledge you need to understand a real-world project such as
 -->
 
 Un membre de la communauté Rust, Andrew Gallant, a déjà créé une version
-complète et très performante de `grep`, qu'il a appelé `ripgrep`. En
+complète et très performante de `grep`, qu'il a appelée `ripgrep`. En
 comparaison, notre version de `grep` sera plutôt simple, mais ce chapitre va
 vous donner les connaissances de base dont vous avez besoin pour appréhender
 un projet réel comme `ripgrep`.
@@ -76,7 +76,7 @@ Our `grep` project will combine a number of concepts you’ve learned so far:
 -->
 
 Notre projet `grep` va combiner un certain nombre de concepts que vous avez
-acquis jusqu'à présent :
+déjà acquis à ce stade :
 
 <!--
 * Organizing code (using what you learned about modules in [Chapter 7][ch7]<!--
@@ -103,9 +103,9 @@ Chapters [13][ch13]<!-- ignore -- > and [17][ch17]<!-- ignore -- > will cover in
 detail.
 -->
 
-Nous vous présenterons aussi brièvement les fermetures, les itérateurs, et les
+Nous vous présenterons aussi brièvement les fermetures, les itérateurs et les
 objets de trait, que les chapitres [13][ch13]<!-- ignore --> et
-[17][ch17]<!-- ignore --> vont traiter en détails.
+[17][ch17]<!-- ignore --> traiteront en détails.
 
 <!--
 [ch7]: ch07-00-managing-growing-projects-with-packages-crates-and-modules.html

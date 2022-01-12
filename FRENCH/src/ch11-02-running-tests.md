@@ -20,8 +20,8 @@ tests qu'il produit. Vous pouvez rajouter des options en ligne de commande pour
 changer le comportement par défaut de `cargo test`. Par exemple, le
 comportement par défaut des binaires produits par `cargo test` est de lancer
 tous les tests en parallèle et de capturer la sortie pendant l'exécution des
-tests, ce qui évite à la sortie d'être affichée sur l'écran pendant ce temps et
-facilite la lecture de la sortie concernant le résultat de l'exécution des
+tests, ce qui lui évite d'être affichée sur l'écran pendant ce temps, facilitant 
+la lecture des messages relatifs aux résultats de l'exécution des
 tests.
 
 <!--
@@ -58,9 +58,9 @@ environment variables.
 
 Lorsque vous lancez de nombreux tests, par défaut ils s'exécutent en parallèle
 dans des tâches. Cela veut dire que tous les tests vont finir de s'exécuter plus
-rapidement afin que vous sachiez si votre code fonctionne ou non. Comme mes
-tests s'exécutent en même temps, il faut s'assurer que vos tests ne dépendent
-pas l'un de l'autre ou d'un état partagé, y compris un environnement partagé,
+rapidement afin que vous sachiez si votre code fonctionne ou non. Comme les
+tests s'exécutent en même temps, il faut s'assurer qu'ils ne dépendent
+pas les uns des autres ou d'un état partagé, y compris un environnement partagé,
 comme le dossier de travail actuel ou des variables d'environnement.
 
 <!--
@@ -76,7 +76,7 @@ solution is to run the tests one at a time.
 -->
 
 Par exemple, disons que chacun de vos tests exécute du code qui crée un fichier
-*test-sortie.txt* sur le disque-dur et qu'il écrit quelques données dans ce
+*test-sortie.txt* sur le disque dur et qu'il écrit quelques données dans ce
 fichier. Ensuite, chaque test lit les données de ce fichier et vérifie que le
 fichier contient une valeur précise, qui est différente dans chaque test. Comme
 les tests sont lancés en même temps, un test risque d'écraser le contenu du
@@ -94,9 +94,9 @@ the following example:
 -->
 
 Si vous ne souhaitez pas exécuter les tests en parallèle ou si vous voulez un
-contrôle plus précis du nombre de tâches utilisés, vous pouvez envoyer le
-drapeau `--test-threads` ainsi que le nombre de tâches que vous souhaitez
-utiliser sur le binaire de test. Regardez cet exemple :
+contrôle plus précis du nombre de tâches utilisées, vous pouvez utiliser l'option
+ `--test-threads` suivie du nombre de tâches que vous souhaitez
+que le binaire de test exécute en parallèle. Regardez cet exemple :
 
 <!--
 ```console
@@ -116,9 +116,9 @@ state.
 -->
 
 Nous avons réglé le nombre de tâches à `1`, ce qui indique au programme de ne
-pas utiliser le parallélisme. Exécuter ces tests en utilisant une seule tâche va
-prendre plus de temps que de les lancer en parallèle, mais les tests ne vont pas
-s'influencer mutuellement s'ils partagent le même état.
+pas utiliser le parallélisme. Exécuter ces tests en n'effectuant qu'une seule tâche
+à la fois va prendre plus de temps que de les lancer en parallèle, mais cela assure que
+les tests ne vont pas s'influencer mutuellement s'ils partagent le même état.
 
 <!--
 ### Showing Function Output
@@ -227,7 +227,7 @@ When we run the tests in Listing 11-10 again with the `--show-output` flag, we
 see the following output:
 -->
 
-Lorsque nous lançons à nouveau les tests de l'encart 11-10 avec le drapeau
+Lorsque nous lançons à nouveau les tests de l'encart 11-10 avec l'option
 `--show-output`, nous voyons la sortie suivante :
 
 <!--
@@ -256,7 +256,7 @@ or names of the test(s) you want to run as an argument.
 Parfois, lancer une suite de tests entière peut prendre beaucoup de temps. Si
 vous travaillez sur du code d'un périmètre bien défini, vous pourriez avoir
 besoin d'exécuter uniquement les tests relatifs à ce code. Vous pouvez choisir
-quels tests exécuter en envoyant le ou les noms des test(s) que vous souhaitez
+quels tests exécuter en envoyant le ou les noms du ou des tests que vous souhaitez
 exécuter en argument de `cargo test`.
 
 <!--
@@ -365,7 +365,7 @@ will be run. For example, because two of our tests’ names contain `add`, we ca
 run those two by running `cargo test add`:
 -->
 
-Nous pouvons renseigner qu'une partie d'un nom de test, et tous les tests dont
+Nous pouvons ne renseigner qu'une partie d'un nom de test, et tous les tests dont
 les noms correspondent à cette valeur vont être exécutés. Par exemple, comme
 deux de nos noms de tests contiennent `ajouter`, nous pouvons exécuter ces deux
 en lançant `cargo test ajouter` :
@@ -470,11 +470,13 @@ uniquement les tests ignorés, nous pouvons utiliser `cargo test -- --ignored` :
 By controlling which tests run, you can make sure your `cargo test` results
 will be fast. When you’re at a point where it makes sense to check the results
 of the `ignored` tests and you have time to wait for the results, you can run
-`cargo test -- --ignored` instead.
+`cargo test -- --ignored` instead. If you want to run all tests whether they’re
+ignored or not, you can run `cargo test -- --include-ignored`.
 -->
 
 En gérant quels tests sont exécutés, vous pouvez vous assurer que vos résultats
 de `cargo test` seront rapides. Lorsque vous arrivez à un stade où il est
 justifié de vérifier le résultat des tests `ignored` et que vous avez le temps
 d'attendre ces résultats, vous pouvez lancer à la place
-`cargo test -- --ignored`.
+`cargo test -- --ignored`. Si vous voulez exécuter tous les tests q'uils soient
+ignorés ou non, vous pouvez lancer `cargo test -- --include-ignored`.

@@ -1053,7 +1053,7 @@ l'encart 10-16 implémente toujours la fonction `new` pour retourner une
 nouvelle instance de `Paire<T>` (pour rappel dans la section
 [”Définir des méthodes”][methods]<!-- ignore --> du chapitre 5 que `Self` est
 un alias de type pour le type du bloc `impl`, qui est dans ce cas le
-`Paire<T>`). Mais dans le blochain bloc `impl`, `Paire<T>` implémente la
+`Paire<T>`). Mais dans le bloc `impl` suivant, `Paire<T>` implémente la
 méthode `afficher_comparaison` uniquement si son type interne `T` implémente le
 trait `PartialOrd` qui active la comparaison *et* le trait `Display` qui permet
 l'affichage.
@@ -1165,7 +1165,7 @@ comportement particulier. Le compilateur peut ensuite utiliser les informations
 liées aux traits pour vérifier que tous les types concrets utilisés dans notre
 code suivent le comportement souhaité. Dans les langages typés dynamiquement,
 nous aurions une erreur à l'exécution si nous appelions une méthode sur un type
-qui n'implémentait pas la méthode. Mais Rust décale l'apparition de ces erreurs
+qui n'implémenterait pas la méthode. Mais Rust décale l'apparition de ces erreurs
 au moment de la compilation afin de nous forcer à résoudre les problèmes avant
 même que notre code soit capable de s'exécuter. De plus, nous n'avons pas besoin
 d'écrire un code qui vérifie le comportement lors de l'exécution car nous

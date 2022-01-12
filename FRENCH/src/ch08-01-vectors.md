@@ -424,7 +424,7 @@ d'emprunt évitent aux programmes de se retrouver dans cette situation.
 > consultez [le “Rustonomicon”][nomicon].
 
 <!--
-### Iterating over the Values in a Vector
+### Iterating Over the Values in a Vector
 -->
 
 ### Itérer sur les valeurs d'un vecteur

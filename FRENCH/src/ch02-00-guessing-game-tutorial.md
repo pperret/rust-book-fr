@@ -665,7 +665,7 @@ potentielle.
 The right way to suppress the warning is to actually write error handling, but
 in our case we just want to crash this program when a problem occurs, so we can
 use `expect`. You’ll learn about recovering from errors in [Chapter
-9][recover]<!-- ignore -->.
+9][recover]<!-- ignore -- >.
 -->
 
 La meilleure façon de masquer cet avertissement est de réellement écrire le

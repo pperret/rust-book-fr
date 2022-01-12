@@ -493,8 +493,8 @@ sur [GitHub][book].
 La version française est aussi disponible sur [GitHub][book-fr].
 
 <!--
-[book]: https://github.com/rust-lang/book/tree/master/src
+[book]: https://github.com/rust-lang/book/tree/main/src
 -->
 
-[book]: https://github.com/rust-lang/book/tree/master/src
+[book]: https://github.com/rust-lang/book/tree/main/src
 [book-fr]: https://github.com/Jimskapt/rust-book-fr

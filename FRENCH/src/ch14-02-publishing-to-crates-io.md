@@ -944,7 +944,7 @@ ressembler à ceci :
 [package]
 name = "guessing_game"
 version = "0.1.0"
-edition = "2018"
+edition = "2021"
 description = "A fun game where you guess what number the computer has chosen."
 license = "MIT OR Apache-2.0"
 
@@ -956,7 +956,7 @@ license = "MIT OR Apache-2.0"
 [package]
 name = "jeu_du_plus_ou_du_moins"
 version = "0.1.0"
-edition = "2018"
+edition = "2021"
 description = "Un jeu où vous devez deviner quel nombre l'ordinateur a choisi."
 license = "MIT OR Apache-2.0"
 

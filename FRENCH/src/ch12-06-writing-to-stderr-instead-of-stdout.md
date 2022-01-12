@@ -6,15 +6,15 @@
 
 <!--
 At the moment, we’re writing all of our output to the terminal using the
-`println!` macro. Most terminals provide two kinds of output: *standard
-output* (`stdout`) for general information and *standard error* (`stderr`)
-for error messages. This distinction enables users to choose to direct the
+`println!` macro. In most terminals, there are two kinds of output: *standard
+output* (`stdout`) for general information and *standard error* (`stderr`) for
+error messages. This distinction enables users to choose to direct the
 successful output of a program to a file but still print error messages to the
 screen.
 -->
 
 Pour l'instant, nous avons écrit toutes nos sorties du terminal en utilisant
-la macro `println!`. La plupart des terminaux fournissent deux genres de
+la macro `println!`. Dans la plupart des terminaux, il y a deux genres de
 sorties : la *sortie standard* (`stdout`) pour les informations générales
 et *la sortie d'erreur standard* (`stderr`) pour les messages d'erreur. Cette
 distinction permet à l'utilisateur de choisir de rediriger la sortie des

@@ -142,7 +142,7 @@ much easier to refactor smaller amounts of code. We’ll do that next.
 
 Très bien ! Notre code lit et affiche ensuite le contenu du fichier. Mais le
 code a quelques défauts. La fonction `main` a plusieurs responsabilités :
-généralement, les rôles des fonctions sont plus claires et faciles à entretenir
+généralement, les rôles des fonctions sont plus clairs et faciles à entretenir
 si chaque fonction est en charge d'une seule tâche. L'autre problème est que
 nous ne gérons pas les erreurs correctement. Le programme est encore très
 modeste, donc ces imperfections ne sont pas un gros problème, mais dès que le

@@ -21,7 +21,7 @@ différentes. La communauté Rust a conçu les tests dans deux catégories
 principales : *les tests unitaires* et *les tests d'intégration*. Les tests
 unitaires sont petits et plus précis, testent un module isolé à la fois, et
 peuvent tester les interfaces privées. Les tests d'intégration sont uniquement
-externes à notre bibliothèque et consomme notre code exactement de la même
+externes à notre bibliothèque et consomment notre code exactement de la même
 manière que tout autre code externe le ferait, en utilisant uniquement
 l'interface publique et éventuellement en utilisant plusieurs modules dans un
 test.
@@ -53,7 +53,7 @@ in each file to contain the test functions and to annotate the module with
 Le but des tests unitaires est de tester chaque élément du code de manière
 séparée du reste du code pour identifier rapidement où le code fonctionne
 ou non comme prévu. Vous devriez insérer les tests unitaires dans le
-dossier *src* de chaque fichier, à côté du code qu'ils testent. La convention
+dossier *src* dans chaque fichier, à côté du code qu'ils testent. La convention
 est de créer un module `tests` dans chaque fichier qui contient les fonctions
 de test et de marquer le module avec `cfg(test)`.
 
@@ -74,7 +74,7 @@ as the code, you’ll use `#[cfg(test)]` to specify that they shouldn’t be
 included in the compiled result.
 -->
 
-L'annotation `#[cfg(test)]` sur les modules de tests indiquent à Rust de
+L'annotation `#[cfg(test)]` sur les modules de tests indique à Rust de
 compiler et d'exécuter le code de test seulement lorsque vous lancez
 `cargo test`, et non pas lorsque vous lancez `cargo build`. Cela diminue la
 durée de compilation lorsque vous souhaitez uniquement compiler la bibliothèque
@@ -121,9 +121,9 @@ annotated with `#[test]`.
 -->
 
 Ce code est le module de test généré automatiquement. L'attribut `cfg` est
-l'abréviation de *configuration* et indique à rust que l'élément suivant ne
-doit être intégré que dans une certaine option de configuration donnée. Dans
-ce cas, l'option de configuration est `test`, qui est fourni par Rust pour la
+l'abréviation de *configuration* et indique à Rust que l'élément suivant ne
+doit être intégré que lorsqu'une certaine option de configuration est donnée. Dans
+ce cas, l'option de configuration est `test`, qui est fournie par Rust pour la
 compilation et l'exécution des tests. En utilisant l'attribut `cfg`, Cargo
 compile notre code de tests uniquement si nous avons exécuté les tests avec
 `cargo test`. Cela inclut toutes les fonctions auxiliaires qui pourraient se
@@ -185,10 +185,11 @@ you to do so.
 
 Remarquez que la fonction `addition_interne` n'est pas marquée comme `pub`. Les
 tests sont uniquement du code Rust, et le module `test` est simplement un autre
-module. Comme nous l'avons vu dans [une section][paths]<:-- ignore -->, les
-éléments dans les modules enfant peuvent utiliser les éléments dans leurs
+module. Comme nous l'avons vu dans [la section "Désigner un élément dans
+l'arborescence de modules"][paths]<!-- ignore -->, les
+éléments dans les modules enfants peuvent utiliser les éléments dans leurs
 modules parents. Dans ce test, nous importons dans la portée tous les éléments
-du parent du module `test` grâce à `use super::*;`, puis ensuite le test peut
+du parent du module `test` grâce à `use super::*;`, permettant ensuite au test de 
 faire appel à `addition_interne`. Si vous pensez qu'une fonction privée ne doit
 pas être testée, il n'y a rien qui vous y force avec Rust.
 
@@ -210,13 +211,13 @@ tests, you first need a *tests* directory.
 
 En Rust, les tests d'intégration sont exclusivement externes à votre
 bibliothèque. Ils consomment votre bibliothèque de la même manière que n'importe
-quel autre code, ce qui signifie qu'ils ne peuvent appeler uniquement les
+quel autre code, ce qui signifie qu'ils ne peuvent appeler que les
 fonctions qui font partie de l'interface de programmation applicative (API)
 publique de votre bibliothèque. Leur but est de tester si les multiples parties
 de votre bibliothèque fonctionnent correctement ensemble. Les portions de code
 qui fonctionnent bien toutes seules pourraient rencontrer des problèmes une fois
-imbriquées avec d'autres, donc les tests qui couvrent l'intégration du code est
-aussi important. Pour créer des tests d'intégration, vous avez d'abord besoin
+imbriquées avec d'autres, donc les tests qui couvrent l'intégration du code sont
+tout aussi importants. Pour créer des tests d'intégration, vous avez d'abord besoin
 d'un dossier *tests*.
 
 <!--
@@ -232,11 +233,11 @@ can then make as many test files as we want to in this directory, and Cargo
 will compile each of the files as an individual crate.
 -->
 
-Nous créons un dossier *tests* au niveau le plus haut de notre dossier de
+Nous créons un dossier *tests* au niveau le plus haut de notre dossier 
 projet, juste à côté de *src*. Cargo sait qu'il doit rechercher les fichiers de
 test d'intégration dans ce dossier. Nous pouvons ensuite construire autant de
-fichiers de test que nous souhaitons dans ce dossier, et Cargo va compiler
-chacun des fichiers comme une crate individuelle.
+fichiers de test que nous le souhaitons dans ce dossier, et Cargo va compiler
+chacun de ces fichiers comme une crate individuelle.
 
 <!--
 Let’s create an integration test. With the code in Listing 11-12 still in the
@@ -245,8 +246,8 @@ Let’s create an integration test. With the code in Listing 11-12 still in the
 -->
 
 Commençons à créer un test d'intégration. Avec le code de l'encart 11-12
-toujours présent dans le fichier *src/lib.rs*, créons un dossier *tests*, puis
-un nouveau fichier *tests/test_integration.rs*, et insérez-y le code de l'encart
+toujours présent dans le fichier *src/lib.rs*, créez un dossier *tests*, puis
+un nouveau fichier *tests/test_integration.rs* et insérez-y le code de l'encart
 11-13.
 
 <!--
@@ -313,10 +314,10 @@ Listing 11-12) and then a summary line for the unit tests.
 -->
 
 Les trois sections de la sortie concernent les tests unitaires, les tests
-d'intégration, et les tests de documentation. La première section à propos des
-tests unitaires est la même que nous avons déjà vu : une ligne pour chaque test
+d'intégration et les tests de documentation. La première section relative aux
+tests unitaires est la même que celle que nous avons déjà vue : une ligne pour chaque test
 unitaire (celui qui s'appelle `interne` que nous avons inséré dans l'encart
-11-12) et ensuite une ligne de résumé des tests unitaires.
+11-12) suivie d'une ligne de résumé des tests unitaires.
 
 <!--
 The integration tests section starts with the line `Running
@@ -331,7 +332,7 @@ target/debug/deps/test_integration-1082c4b063a8fbe6` (le hachage à la fin de
 votre sortie pourrait être différent). Ensuite, il y a une ligne pour chaque
 fonction de test présente dans ce test d'intégration et une ligne de résumé pour
 les résultats des tests d'intégration, juste avant que la section
-`Doc-tests addition` commence.
+`Doc-tests addition` ne commence.
 
 <!--
 Similarly to how adding more unit test functions adds more result lines to the
@@ -341,11 +342,11 @@ integration test file has its own section, so if we add more files in the
 *tests* directory, there will be more integration test sections.
 -->
 
-De la même façon que plus vous ajoutez de fonctions de tests unitaires et plus
-vous avez des lignes de résultats dans la section des tests unitaires, plus
+De la même façon que plus vous ajoutiez de fonctions de tests unitaires et plus
+vous aviez de lignes de résultats dans la section des tests unitaires, plus
 vous ajoutez des fonctions de tests aux fichiers de tests d'intégration et plus
-vous aurez des lignes de résultat à cette section correspondante aux fichiers
-de test d'intégration. Chaque fichier de test d'intégration a sa propre section,
+vous obtenez de lignes de résultat dans la section correspondant aux fichiers
+des tests d'intégration. Chaque fichier de test d'intégration a sa propre section,
 donc si nous ajoutons plus de fichiers dans le dossier *tests*, il y aura plus
 de sections de tests d'intégration.
 
@@ -425,7 +426,7 @@ multiple test files:
 -->
 
 Ce comportement différent des fichiers dans le dossier *tests* est encore plus
-remarquable lorsque vous avez un jeu de fonctions d'aide qui s'avèrent utiles
+notable lorsque vous avez un jeu de fonctions d'aide qui s'avèrent utiles
 pour plusieurs fichiers de test d'intégration et que vous essayez de suivre les
 étapes de la section [“Séparer les modules dans différents
 fichiers”][separating-modules-into-files]<!-- ignore --> du chapitre 7 afin de
@@ -450,7 +451,6 @@ test :
 ```rust
 {{#rustdoc_include ../listings/ch11-writing-automated-tests/no-listing-12-shared-test-code-problem/tests/common.rs}}
 ```
-
 
 <!--
 When we run the tests again, we’ll see a new section in the test output for the
@@ -496,7 +496,7 @@ crates or have sections in the test output.
 
 Pour éviter que `commun` s'affiche sur la sortie de test, au lieu de créer le
 fichier *tests/commun.rs*, nous allons créer *tests/commun/mod.rs*. C'est
-une convention de nommage alternative que Rust comprends aussi. Nommer le
+une convention de nommage alternative que Rust comprend aussi. Nommer le
 fichier ainsi indique à Rust de ne pas traiter le module `commun` comme un
 fichier de test d'intégration. Lorsque nous déplaçons le code de la fonction
 `parametrage` dans *tests/commun/mod.rs* et que nous supprimons le fichier
@@ -539,7 +539,7 @@ we demonstrated in Listing 7-21. Then in the test function, we can call the
 -->
 
 Remarquez que la déclaration `mod commun;` est la même que la déclaration d'un
-module que nous avons démontré dans l'encart 7-21. Ensuite, dans la fonction
+module que nous avons montrée dans l'encart 7-21. Ensuite, dans la fonction
 de tests, nous pouvons appeler la fonction `commun::parametrage`.
 
 <!--
@@ -608,7 +608,7 @@ l'implémentation des éléments privés. Les tests d'intégration vérifient qu
 nombreuses parties de la bibliothèque fonctionnent correctement ensemble, et
 ils utilisent l'API publique de la bibliothèque pour tester le code, de la même
 manière  que le ferait du code externe qui l'utiliserait. Même si le système de
-type de Rust et les règles de possession aident à prévenir certains types de
+type de Rust et les règles de possession aident à empêcher certains types de
 bogues, les tests restent toujours importants pour réduire les bogues de
 logique concernant le comportement attendu de votre code.
 

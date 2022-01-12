@@ -101,12 +101,12 @@ $ cd hello_cargo
 ```
 
 <!--
-The first command creates a new directory called *hello_cargo*. We’ve named
+The first command created a new directory called *hello_cargo*. We’ve named
 our project *hello_cargo*, and Cargo creates its files in a directory of the
 same name.
 -->
 
-La première commande crée un nouveau dossier appelé *hello_cargo*. Nous avons
+La première commande a crée un nouveau dossier appelé *hello_cargo*. Nous avons
 appelé notre projet *hello_cargo*, et Cargo crée ses fichiers dans un dossier
 avec le même nom.
 
@@ -162,7 +162,7 @@ Ouvrez *Cargo.toml* dans votre éditeur de texte favori. Son contenu devrait
 [package]
 name = "hello_cargo"
 version = "0.1.0"
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 ```
@@ -172,7 +172,7 @@ edition = "2018"
 [package]
 name = "hello_cargo"
 version = "0.1.0"
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 ```
@@ -257,7 +257,7 @@ fn main() {
 <!--
 Cargo has generated a “Hello, world!” program for you, just like the one we
 wrote in Listing 1-1! So far, the differences between our previous project and
-the project Cargo generates are that Cargo placed the code in the *src*
+the project Cargo generated are that Cargo placed the code in the *src*
 directory, and we have a *Cargo.toml* configuration file in the top directory.
 -->
 

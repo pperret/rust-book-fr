@@ -442,12 +442,12 @@ référence immuable, le `println!`, est située avant l'introduction de la
 référence mutable :
 
 <!--
-```rust,edition2018
+```rust,edition2021
 {{#rustdoc_include ../listings-sources/ch04-understanding-ownership/no-listing-13-reference-scope-ends/src/main.rs:here}}
 ```
 -->
 
-```rust,edition2018
+```rust,edition2021
 {{#rustdoc_include ../listings/ch04-understanding-ownership/no-listing-13-reference-scope-ends/src/main.rs:here}}
 ```
 

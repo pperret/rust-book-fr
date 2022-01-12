@@ -5,23 +5,24 @@
 ## La syntaxe des méthodes
 
 <!--
-*Methods* are similar to functions: they’re declared with the `fn` keyword and
-their name, they can have parameters and a return value, and they contain some
-code that is run when they’re called from somewhere else. However, methods are
-different from functions in that they’re defined within the context of a struct
-(or an enum or a trait object, which we cover in Chapters 6 and 17,
-respectively), and their first parameter is always `self`, which represents the
-instance of the struct the method is being called on.
+*Methods* are similar to functions: we declare them with the `fn` keyword and a
+name, they can have parameters and a return value, and they contain some code
+that’s run when the method is called from somewhere else. Unlike functions,
+methods are defined within the context of a struct (or an enum or a trait
+object, which we cover in Chapters 6 and 17, respectively), and their first
+parameter is always `self`, which represents the instance of the struct the
+method is being called on.
 -->
 
-Les *méthodes* sont similaires aux fonctions : on les déclare avec le mot-clé
-`fn` et leur nom, elles peuvent avoir des paramètres et une valeur de retour, et
-elles contiennent du code qui est exécuté quand on les appelle depuis un autre
-endroit. Cependant, les méthodes diffèrent des fonctions parce qu'elles sont
-définies dans le contexte d'une structure (ou d'une énumération ou d'un objet de
-trait, que nous aborderons respectivement aux chapitres 6 et 17) et que leur
-premier paramètre est toujours `self`, un mot-clé qui représente l'instance de
-la structure sur laquelle on appelle la méthode.
+Les *méthodes* sont similaires aux fonctions : nous les déclarons avec le
+mot-clé `fn` et un nom, elles peuvent avoir des paramètres et une valeur de
+retour, et elles contiennent du code qui est exécuté quand on la méthode est
+appellée depuis un autre endroit. Contrairement aux fonctions, les méthodes
+diffèrent des fonctions parce qu'elles sont définies dans le contexte d'une
+structure (ou d'une énumération ou d'un objet de trait, que nous aborderons
+respectivement aux chapitres 6 et 17) et que leur premier paramètre est
+toujours `self`, un mot-clé qui représente l'instance de la structure sur
+laquelle on appelle la méthode.
 
 <!--
 ### Defining Methods
@@ -133,7 +134,7 @@ empêcher le code appelant d'utiliser l'instance d'origine après la
 transformation.
 
 <!--
-The main benefit of using methods instead of functions, in addition to using
+The main reason for using methods instead of functions, in addition to providing
 method syntax and not having to repeat the type of `self` in every method’s
 signature, is for organization. We’ve put all the things we can do with an
 instance of a type in one `impl` block rather than making future users of our
@@ -141,9 +142,9 @@ code search for capabilities of `Rectangle` in various places in the library we
 provide.
 -->
 
-Outre l'utilisation de la syntaxe des méthodes et le fait de ne pas être obligé
-de répéter le type de `self` dans la signature de chaque méthode, le principal
-avantage de l'utilisation de méthodes plutôt que de fonctions est pour
+En complément de l'application de la syntaxe des méthodes et ainsi de ne pas
+être obligé de répéter le type de `self` dans la signature de chaque méthode,
+la principale raison d'utiliser les méthodes plutôt que de fonctions est pour
 l'organisation. Nous avons mis tout ce qu'on pouvait faire avec une instance de
 notre type dans un bloc `impl` plutôt que d'imposer aux futurs utilisateurs de
 notre code à rechercher les fonctionnalités de `Rectangle` à divers endroits de
@@ -175,41 +176,41 @@ des champs de la structure. Par exemple, nous pourions définir une méthode sur
 ```
 
 <!--
-Here, we’re choosing to make the behavior of the `width` method be that it
-returns `true` if the value in the instance’s `width` field is greater than 0,
-and `false` if the value is 0: we can use a field within a method of the same
-name for any purpose. In `main`, when we follow `rect1.width` with parentheses,
-Rust knows we mean the method `width`. When we don’t use parentheses, Rust
-knows we mean the field `width`.
+Here, we’re choosing to make the `width` method return `true` if the value in
+the instance’s `width` field is greater than 0, and `false` if the value is 0:
+we can use a field within a method of the same name for any purpose. In `main`,
+when we follow `rect1.width` with parentheses, Rust knows we mean the method
+`width`. When we don’t use parentheses, Rust knows we mean the field `width`.
 -->
 
-Ici, nous avons choisi de définir le comportement de la méthode `largeur` pour
-qu'elle retourne `true` si la valeur dans le champ `largeur` est supérieur ou
-égal à 0, et `false` si la valeur est 0 : nous pouvons utiliser un champ à
-l'intérieur d'une méthode du même nom, pour n'importe quel usage. Dans le
-`main`, lorsque nous ajoutons des parenthèses après `rect1.largeur`, Rust
-comprend que nous parlons de la méthode `largeur`. Lorsque nous n'utilisons pas
-les parenthèses, Rust sait nous parlons du champ `largeur`.
+Ici, nous avons défini la méthode `largeur` pour qu'elle retourne `true` si la
+valeur dans le champ `largeur` est supérieur ou égal à 0, et `false` si la
+valeur est 0 : nous pouvons utiliser un champ à l'intérieur d'une méthode du
+même nom, pour n'importe quel usage. Dans le `main`, lorsque nous ajoutons des
+parenthèses après `rect1.largeur`, Rust comprend que nous parlons de la méthode
+`largeur`. Lorsque nous n'utilisons pas les parenthèses, Rust sait nous parlons
+du champ `largeur`.
 
 <!--
-Often, but not always, methods with the same name as a field will be defined to
-only return the value in the field and do nothing else. Methods like this are
-called *getters*, and Rust does not implement them automatically for struct
-fields as some other languages do. Getters are useful because you can make the
-field private but the method public and thus enable read-only access to that
-field as part of the type’s public API. We will be discussing what public and
-private are and how to designate a field or method as public or private in
-Chapter 7.
+Often, but not always, when we give methods with the same name as a field we
+want it to only return the value in the field and do nothing else. Methods like
+this are called *getters*, and Rust does not implement them automatically for
+struct fields as some other languages do. Getters are useful because you can
+make the field private but the method public and thus enable read-only access
+to that field as part of the type’s public API. We will be discussing what
+public and private are and how to designate a field or method as public or
+private in Chapter 7.
 -->
 
-Souvent, mais pas toujours, les méthodes avec le même nom qu'un champ sont
-définies pour retourner uniquement la valeur de ce champ et ne rien faire
-d'autre. Ces méthodes sont appelées des *accesseurs*, et Rust ne les implémente
-pas automatiquement pour les champs des structures comme le font certains
-langages. Les accesseurs sont utiles pour rendre le champ privé mais rendre
-la méthode publique et ainsi donner un accès en lecture seule à ce champ dans
-l'API publique de ce type. Nous développerons les notions de publique et privé
-et comment définir un champ ou une méthode publique ou privée au chapitre 7.
+Souvent, mais pas toujours, lorsque nous appellons une méthode avec le même nom
+qu'un champ, nous voulons qu'elle renvoie uniquement la valeur de ce champ et
+ne fasse rien d'autre. Ces méthodes sont appelées des *accesseurs*, et Rust ne
+les implémente pas automatiquement pour les champs des structures comme le font
+certains langages. Les accesseurs sont utiles pour rendre le champ privé mais
+rendre la méthode publique et ainsi donner un accès en lecture seule à ce champ
+dans l'API publique de ce type. Nous développerons les notions de publique et
+privé et comment définir un champ ou une méthode publique ou privée au
+chapitre 7.
 
 <!--
 > ### Where’s the `->` Operator?
@@ -317,18 +318,18 @@ et comment définir un champ ou une méthode publique ou privée au chapitre 7.
 Let’s practice using methods by implementing a second method on the `Rectangle`
 struct. This time, we want an instance of `Rectangle` to take another instance
 of `Rectangle` and return `true` if the second `Rectangle` can fit completely
-within `self`; otherwise it should return `false`. That is, we want to be able
-to write the program shown in Listing 5-14, once we’ve defined the `can_hold`
-method.
+within `self` (the first `Rectangle`); otherwise it should return `false`. That
+is, once we’ve defined the `can_hold` method, we want to be able to write the
+program shown in Listing 5-14.
 -->
 
 Entraînons-nous à utiliser des méthodes en implémentant une seconde méthode sur
 la structure `Rectangle`. Cette fois-ci, nous voulons qu'une instance de
 `Rectangle` prenne une autre instance de `Rectangle` et qu'on retourne `true` si
-le second `Rectangle` peut se dessiner intégralement à l'intérieur de `self` ;
-sinon, on renverra `false`. En d'autres termes, on veut pouvoir écrire le
-programme de l'encart 5-14 une fois qu'on aura défini la méthode
-`peut_contenir`.
+le second `Rectangle` peut se dessiner intégralement à l'intérieur de `self`
+(le premier `Rectangle`) ; sinon, on renverra `false`. En d'autres termes, une
+fois qu'on aura défini la méthode `peut_contenir`, on veut pouvoir écrire le
+programme de l'encart 5-14.
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -454,7 +455,7 @@ All functions defined within an `impl` block are called *associated functions*
 because they’re associated with the type named after the `impl`. We can define
 associated functions that don’t have `self` as their first parameter (and thus
 are not methods) because they don’t need an instance of the type to work with.
-We’ve already used one function like this, the `String::from` function, that’s
+We’ve already used one function like this: the `String::from` function that’s
 defined on the `String` type.
 -->
 
@@ -463,8 +464,8 @@ associées* car elles sont associées au type renseigné après le `impl`. Nous
 pouvons aussi y définir des fonctions associées qui n'ont pas de `self` en
 premier paramètre (et donc ce ne sont pas des méthodes) car elles n'ont pas
 besoin d'une instance du type sur lequel elles travaillent. Nous avons déjà
-utilisé une fonction comme celle-ci, la fonction `String::from`, qui est définie
-sur le type `String`.
+utilisé une fonction comme celle-ci : la fonction `String::from` qui est
+définie sur le type `String`.
 
 <!--
 Associated functions that aren’t methods are often used for constructors that

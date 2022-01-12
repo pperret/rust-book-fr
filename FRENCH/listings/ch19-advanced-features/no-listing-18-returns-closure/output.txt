@@ -9,13 +9,8 @@ error[E0746]: return type cannot have an unboxed trait object
   = note: for information on `impl Trait`, see <https://doc.rust-lang.org/book/ch10-02-traits.html#returning-types-that-implement-traits>
 help: use `impl Fn(i32) -> i32` as the return type, as all return paths are of type `[closure@src/lib.rs:2:5: 2:14]`, which implements `Fn(i32) -> i32`
   |
-1 | fn retourne_une_fermeture() -> dyn Fn(i32) -> i32 {
-  |                                ------------------ expected `(dyn std::ops::Fn(i32) -> i32 + 'static)` because of return type
-2 |     |x| x + 1
-  |     ^^^^^^^^^ expected trait `std::ops::Fn`, found closure
-  |
-  = note: expected trait object `(dyn std::ops::Fn(i32) -> i32 + 'static)`
-                  found closure `[closure@src/lib.rs:2:5: 2:14]`
+1 | fn retourne_une_fermeture() -> impl Fn(i32) -> i32 {
+  |                                ~~~~~~~~~~~~~~~~~~~
 
 For more information about this error, try `rustc --explain E0746`.
 error: could not compile `functions-example` due to previous error

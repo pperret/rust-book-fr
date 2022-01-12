@@ -5,8 +5,8 @@ struct Utilisateur {
     nombre_de_connexions: u64,
 }
 
+// ANCHOR: here
 fn main() {
-    // ANCHOR: here
     let mut utilisateur1 = Utilisateur {
         email: String::from("quelquun@example.com"),
         pseudo: String::from("pseudoquelconque123"),
@@ -15,5 +15,5 @@ fn main() {
     };
     
     utilisateur1.email = String::from("unautremail@example.com");
-    // ANCHOR_END: here
 }
+// ANCHOR_END: here

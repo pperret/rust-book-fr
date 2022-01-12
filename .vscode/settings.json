@@ -12,7 +12,7 @@
         "MD014": false,
         "MD026": false,
         "MD033": {
-            "allowed_elements": ["img", "span", "sup"]
+            "allowed_elements": ["img", "span", "sup", "a"]
         },
         "MD041": false
     }

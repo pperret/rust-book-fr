@@ -180,7 +180,7 @@ Lorsque nous exécutons le programme, nous obtenons :
 ```
 
 <!--
-We’re allowed to change the value that `x` binds to from `5` to `6` when `mut`
+We’re allowed to change the value bound to `x` from `5` to `6` when `mut`
 is used. There are multiple trade-offs to consider in addition to the
 prevention of bugs. For example, in cases where you’re using large data
 structures, mutating an instance in place may be faster than copying and
@@ -190,7 +190,7 @@ think through, so lower performance might be a worthwhile penalty for gaining
 that clarity.
 -->
 
-En utilisant `mut`, nous avons permis à la valeur de `x` de passer de `5` à
+En utilisant `mut`, nous avons permis à la valeur liée à `x` de passer de `5` à
 `6`. Il y a d'autres compromis à envisager, en plus de la prévention des
 bogues. Par exemple, dans le cas où vous utiliseriez des grosses structures de
 données, muter une instance déjà existante peut être plus rapide que copier et

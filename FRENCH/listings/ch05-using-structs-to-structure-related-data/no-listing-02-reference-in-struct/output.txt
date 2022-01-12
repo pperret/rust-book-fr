@@ -8,9 +8,9 @@ error[E0106]: missing lifetime specifier
   |
 help: consider introducing a named lifetime parameter
   |
-1 | struct Utilisateur<'a> {
+1 ~ struct Utilisateur<'a> {
 2 |     actif: bool,
-3 |     pseudo: &'a str,
+3 ~     pseudo: &'a str,
   |
 
 error[E0106]: missing lifetime specifier
@@ -21,10 +21,10 @@ error[E0106]: missing lifetime specifier
   |
 help: consider introducing a named lifetime parameter
   |
-1 | struct Utilisateur<'a> {
+1 ~ struct Utilisateur<'a> {
 2 |     actif: bool,
 3 |     pseudo: &str,
-4 |     email: &'a str,
+4 ~     email: &'a str,
   |
 
 For more information about this error, try `rustc --explain E0106`.

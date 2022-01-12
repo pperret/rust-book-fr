@@ -31,8 +31,8 @@ take these actions, which include the `test` attribute, a few macros, and the
 -->
 
 Découvrons les fonctionnalités spécifiques qu'offre Rust pour écrire des tests
-qui font ces actions, dans lesquelles on retrouve l'attribut `test`, quelques
-macros, et l'attribut `should_panic`.
+qui font ces actions, dont l'attribut `test`, quelques
+macros et l'attribut `should_panic`.
 
 <!--
 ### The Anatomy of a Test Function
@@ -72,7 +72,7 @@ qui contient une fonction de test est automatiquement créé pour nous. Ce modul
 vous aide à démarrer l'écriture de vos tests afin que vous n'ayez pas à chercher
 la structure et la syntaxe exacte d'une fonction de test à chaque fois que vous
 débutez un nouveau projet. Vous pouvez ajouter autant de fonctions de test et
-autant de modules de test que vous le souhaitez !
+autant de modules de tests que vous le souhaitez !
 
 <!--
 We’ll explore some aspects of how tests work by experimenting with the template
@@ -82,9 +82,9 @@ behavior is correct.
 -->
 
 Nous allons découvrir quelques aspects du fonctionnement des tests en
-expérimentant avec le modèle de test généré pour nous, mais qui ne teste aucun
+expérimentant avec le modèle de tests généré pour nous, mais qui ne teste aucun
 code pour le moment. Ensuite, nous écrirons quelques tests plus proches de la
-réalité, qui utilisera du code que nous avons écrit et qui validera son bon
+réalité, qui utiliseront du code que nous avons écrit et qui valideront son bon
 comportement.
 
 <!--
@@ -137,7 +137,7 @@ devrait ressembler à l'encart 11-1.
 automatically by `cargo new`</span>
 -->
 
-<span class="caption">Encart 11-1 : le module de test et la fonction générées
+<span class="caption">Encart 11-1 : le module de test et la fonction générés
 automatiquement par `cargo new`</span>
 
 <!--
@@ -154,8 +154,8 @@ fonction pour voir comment elle fonctionne. Remarquez l'annotation `#[test]`
 avant la ligne `fn` : cet attribut indique que c'est une fonction de test, donc
 l'exécuteur de tests sait qu'il doit considérer cette fonction comme étant un
 test. Nous pouvons aussi avoir des fonctions qui ne font pas de tests dans le
-module `tests` afin de régler des scénarios en commun ou pour procéder à des
-opérations en commun, c'est pourquoi nous devons indiquer quelles fonctions sont
+module `tests` afin de configurer des scénarios communs ou exécuter des
+opérations communes, c'est pourquoi nous devons indiquer quelles fonctions sont
 des tests en utilisant l'attribut `#[test]`.
 
 <!--
@@ -205,11 +205,11 @@ reads `1 passed; 0 failed` totals the number of tests that passed or failed.
 
 Cargo a compilé et lancé le test. Après les lignes `Compiling`, `Finished`, et
 `Running`, on trouve la ligne `running 1 test`. La ligne suivante montre le nom
-de la fonction de test `it_works`, qui a été généré précédemment, et le résultat de
-l'exécution de ce test, `ok`. Le résumé général de l'exécution des tests
-s'affiche ensuite. Le texte `test result: ok.` signifie que tous les tests ont
-réussi, et la partie `1 passed; 0 failed` compte le nombre total de tests qui
-ont réussi ou échoué.
+de la fonction de test `it_works`, qui a été générée précédemment, et le
+résultat de l'exécution de ce test, `ok`. Le résumé général de l'exécution des
+tests s'affiche ensuite. Le texte `test result: ok.` signifie que tous les tests
+ont réussi, et la partie `1 passed; 0 failed` compte le nombre total de tests
+qui ont réussi ou échoué.
 
 <!--
 Because we don’t have any tests we’ve marked as ignored, the summary shows `0
@@ -233,7 +233,7 @@ Benchmark tests are, as of this writing, only available in nightly Rust. See
 
 La statistique `0 measured` sert pour des tests de benchmark qui mesurent les
 performances. Les tests de benchmark ne sont disponibles pour le moment que dans
-la version expérimentale de Rust (nighly), au moment de cette écriture.
+la version expérimentale de Rust (nightly), au moment de la rédaction.
 Rendez-vous sur [la documentation sur les tests de benchmark][bench] pour en
 savoir plus.
 
@@ -253,11 +253,11 @@ Tests”][doc-comments]<!-- ignore -- > section of Chapter 14. For now, we’ll
 ignore the `Doc-tests` output.
 -->
 
-La partie suivante du résultat du test, qui commence par `Doc-tests addition`,
+La partie suivante du résultat des tests, qui commence par `Doc-tests addition`,
 concerne les résultats de tous les tests présents dans la documentation. Nous
 n'avons pas de tests dans la documentation pour le moment, mais Rust peut
 compiler tous les exemples de code qui sont présents dans la documentation de
-notre API. Cette fonctionnalité nous aide à garder synchronisé notre
+notre API. Cette fonctionnalité nous aide à garder synchronisés notre
 documentation et notre code ! Nous verrons comment écrire nos tests dans la
 documentation dans une section du chapitre 14. Pour le moment, nous allons
 ignorer la partie `Doc-tests` du résultat.
@@ -318,8 +318,8 @@ which is to call the `panic!` macro. Enter the new test, `another`, so your
 Ajoutons un autre test, mais cette fois nous allons construire un test qui
 échoue ! Les tests échouent lorsque quelque chose dans la fonction de test
 panique. Chaque test est lancé dans une nouvelle tâche, et lorsque la tâche
-principale voit qu'une tâche de test est mort, le test est considéré
-comme échoué. Nous avons vu la façon la plus simple de faire paniquer au
+principale voit qu'une tâche de test a été interrompue par panique, le test est considéré
+comme ayant échoué. Nous avons vu la façon la plus simple de faire paniquer au
 chapitre 9, qui consiste à appeler la macro `panic!`. Ecrivez ce nouveau test,
 `un_autre`, de sorte que votre fichier `src/lib.rs` ressemble à ceci :
 
@@ -354,7 +354,7 @@ Run the tests again using `cargo test`. The output should look like Listing
 
 Lancez à nouveau les tests en utilisant `cargo test`. Le résultat devrait
 ressembler à l'encart 11-4, qui va afficher que notre test `exploration` a
-réussi et que `un_autre` va échouer.
+réussi et que `un_autre` a échoué.
 
 <!--
 ```console
@@ -527,12 +527,12 @@ a glob here so anything we define in the outer module is available to this
 
 Remarquez que nous avons ajouté une nouvelle ligne à l'intérieur du module
 `test` : `use super::*;`. Le module `tests` est un module classique qui suit les
-règles de visibilité que nous avons vu au chapitre 7 dans la section [“Les
+règles de visibilité que nous avons vues au chapitre 7 dans la section [“Les
 chemins pour désigner un élément dans l'arborescence de
 module”][paths-for-referring-to-an-item-in-the-module-tree]<!-- ignore -->.
 Comme le module `tests` est un module interne, nous avons besoin de ramener le
-code à tester qui se trouve dans son module parent dans la portée du module à
-l'intérieur. Nous utilisons ici un opérateur global afin que tout ce que nous
+code à tester qui se trouve dans son module parent dans la portée interne du
+module. Nous utilisons ici un opérateur global afin que tout ce que nous
 avons défini dans le module parent soit disponible dans le module `tests`.
 
 <!--
@@ -889,7 +889,7 @@ Vous pouvez aussi ajouter un message personnalisé qui peut être affiché avec 
 message d'échec comme un argument optionnel aux macros `assert!`, `assert_eq!`,
 et `assert_ne!`. Tous les arguments renseignés après celui qui est obligatoire
 dans `assert!` ou les deux arguments obligatoires de `assert_eq!` et
-`assert_ne!` sont envoyés à la macro `format!` (que nous avons vu dans une
+`assert_ne!` sont envoyés à la macro `format!` (que nous avons vue dans une
 section du
 [chapitre
 8][concatenation-with-the--operator-or-the-format-macro]<!-- ignore -->), ainsi
@@ -1173,7 +1173,7 @@ different messages depending on whether the value is too small or too large.
 
 Les tests qui utilisent `should_panic` ne sont parfois pas assez explicites car
 ils indiquent seulement que le code a paniqué. Un test `should_panic` peut
-réussir, même si le test panique pour une raison différente à celle que nous
+réussir, même si le test panique pour une raison différente de celle que nous
 attendions. Pour rendre les tests `should_panic` plus précis, nous pouvons
 ajouter un paramètre optionnel `expected` à l'attribut `should_panic`. Le
 système de test va s'assurer que le message d'échec contient bien le texte
@@ -1294,7 +1294,7 @@ that use `Result<T, E>`! Here’s the test from Listing 11-1, rewritten to use
 
 Précédemment, nous avons écrit des tests qui paniquent lorsqu'ils échouent.
 Nous pouvons également écrire des tests qui utilisent `Result<T, E>` ! Voici
-le test de l'encart 11-1, réécris pour utiliser `Result<T, E>` et retourner
+le test de l'encart 11-1, réécrit pour utiliser `Result<T, E>` et retourner
 une `Err` au lieu de paniquer :
 
 <!--
@@ -1332,13 +1332,15 @@ si n'importe quelle opération en son sein retourne une variante de `Err`.
 
 <!--
 You can’t use the `#[should_panic]` annotation on tests that use `Result<T,
-E>`. Instead, you should return an `Err` value directly when the test should
-fail.
+E>`. To assert that an operation returns an `Err` variant, *don’t* use the
+question mark operator on the `Result<T, E>` value. Instead, use
+`assert!(value.is_err())`.
 -->
 
 Vous ne pouvez pas utiliser l'annotation `#[should_panic]` sur les tests qui
-utilisent `Result<T, E>`. Mais à la place, vous devez retourner directement
-une valeur `Err` lorsque le test échoue.
+utilisent `Result<T, E>`. Pour vérifier qu'une opération retourne une variante
+`Err`, *n'utilisez pas* l'opérateur "point d'interrogation" sur la valeur de
+type `Result<T, E>`. A la place, utilisez plutôt `assert!(valeur.is_err())`.
 
 <!--
 Now that you know several ways to write tests, let’s look at what is happening
