@@ -18,17 +18,17 @@ binary target, or both.
 -->
 
 La commande `cargo install` vous permet d'installer et utiliser des crates de
-binaires localement. Cela n'est pas conçu pour remplacer les systèmes de
-paquets ; c'est plutôt un moyen pratique pour les développeurs Rust d'installer
+binaires localement. Cela n'est pas conçu pour remplacer les paquets systèmes ; 
+c'est plutôt un moyen pratique pour les développeurs Rust d'installer
 des outils que les autres ont partagé sur
 [crates.io](https://crates.io/)<!-- ignore -->. Notez que vous ne pouvez
 installer que des paquets qui ont des destinations binaires. Une *destination
 binaire* est le programme exécutable qui est créé si la crate a un fichier
-*src/main.rs* ou un autre fichier renseigné comme un binaire, contrairement
-à une destination de bibliothèque qui n'est pas exécutable en tant que tel mais
-qu'il est possible d'intégrer à un autre programme. Habituellement, les crates
-ont l'information dans le fichier *README* pour savoir si elle est une
-bibliothèque, a une destination binaire, ou les deux.
+*src/main.rs* ou un autre fichier désigné comme binaire, par opposition
+à une destination de bibliothèque qui n'est pas exécutable en tant que telle mais
+qu'il est possible d'intégrer à d'autres programmes. Habituellement, l'information permettant
+de savoir si une crate est une bibliothèque, possède plutôt une destination binaire ou les deux
+à la fois figure dans le fichier *README*.
 
 <!--
 All binaries installed with `cargo install` are stored in the installation
@@ -42,7 +42,7 @@ Tous les binaires installés avec `cargo install` sont stockés dans le dossier
 *bin* de la racine. Si vous installez Rust avec *rustup.rs* et que vous n'avez
 pas personnalisé la configuration, ce dossier sera *$HOME/.cargo/bin*.
 Assurez-vous que ce dossier est dans votre `$PATH` pour pouvoir exécuter des
-programmes que vous avez installé avec `cargo install`.
+programmes que vous avez installés avec `cargo install`.
 
 <!--
 For example, in Chapter 12 we mentioned that there’s a Rust implementation of
@@ -50,7 +50,7 @@ the `grep` tool called `ripgrep` for searching files. If we want to install
 `ripgrep`, we can run the following:
 -->
 
-Par exemple, dans le chapitre 12 nous avions mentionné le fait qu'il existait
+Par exemple, dans le chapitre 12, nous avions mentionné le fait qu'il existait
 une implémentation de l'outil `grep` en Rust qui s'appelait `ripgrep` et qui
 permettait de rechercher dans des fichiers. Si nous voulons installer
 `ripgrep`, nous pouvons faire comme ceci :
@@ -100,4 +100,4 @@ L'avant-dernière ligne de la sortie nous montre l'emplacement et le nom du
 binaire installé, qui est `rg` dans le cas de `ripgrep`. Tel que mentionné
 précédemment, du moment que le dossier d'installation est dans votre `$PATH`,
 vous pouvez ensuite lancer `rg --help` et commencer à utiliser un outil en Rust
-qui est rapide pour rechercher dans les fichiers !
+plus rapide pour rechercher dans des fichiers !

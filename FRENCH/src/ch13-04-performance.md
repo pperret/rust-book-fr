@@ -71,8 +71,8 @@ s'agisse d'une abstraction de haut niveau, sont compilés à peu près comme si
 vous aviez écrit vous-même le code un niveau plus bas. Les itérateurs sont l'une
 des abstractions à *coût zéro* de Rust, c'est-à-dire que l'utilisation de
 l'abstraction n'impose aucun surcoût lors de l'exécution. C'est la même notion
-que Bjarne Stroustrup, le concepteur et développeur original de C++, définit le
-*coût zéro* dans “Foundations of C++” (2012) :
+que celle que Bjarne Stroustrup, le concepteur et développeur original de C++, définit 
+en tant que *coût zéro* dans “Foundations of C++” (2012) :
 
 <!--
 > In general, C++ implementations obey the zero-overhead principle: What you
@@ -81,8 +81,8 @@ que Bjarne Stroustrup, le concepteur et développeur original de C++, définit l
 -->
 
 > En général, les implémentations de C++ obéissent au principe du coût zéro :
-> ce que vous n'utilisez pas, vous ne payez pas. Et encore plus loin : ce que
-> vous utilisez, vous ne pouvez pas mieux le coder.
+> ce que vous n'utilisez pas, vous ne le payez pas. Et plus encore : ce que
+> vous utilisez, vous ne pourrez pas le coder mieux à la main.
 
 <!--
 As another example, the following code is taken from an audio decoder. The
@@ -101,7 +101,7 @@ de décodage utilise l'opération mathématique de prédiction linéaire pour
 estimer les valeurs futures à partir d'une fonction linéaire des échantillons
 précédents. Ce code utilise une chaîne d'itérateurs pour faire quelques calculs
 sur trois variables dans la portée : une slice de données `tampon`, un tableau
-de 12 `coefficients`, et une quantité de décalage des données dans `decalage`.
+de 12 `coefficients` et une valeur de décalage des données dans `decalage`.
 Nous avons déclaré les variables dans cet exemple, mais nous ne leur avons pas
 donné de valeurs ; bien que ce code n'ait pas beaucoup de signification en
 dehors de son contexte, c'est toutefois un exemple concis et concret de la façon
@@ -169,8 +169,8 @@ the loop.
 Les calculs dans des applications comme les décodeurs audio donnent souvent la
 priorité aux performances. Ici, nous créons un itérateur à l'aide de deux
 adaptateurs, puis nous en consommons la valeur. A quel code d'assemblage
-ressemblera ce code Rust ressemblera-t-il une fois compilé ? Et bien, à l'heure
-où nous écrivons ces lignes, il est équivalent même code assembleur que vous
+ce code Rust ressemblera-t-il une fois compilé ? Et bien, à l'heure
+où nous écrivons ces lignes, il donne le même code assembleur que vous
 écririez à la main. Il n'y a pas du tout de boucle correspondant à l'itération
 sur les valeurs dans `coefficients` : Rust sait qu'il y a 12 itérations, donc il
 “déroule” la boucle. Le *déroulage* est une optimisation qui supprime la
@@ -190,8 +190,8 @@ Tous les coefficients sont stockés dans des registres, ce qui signifie qu'il
 est très rapide d'accéder à ces valeurs. Il n'y a pas de vérification des bornes
 sur les accès au tableau à l'exécution. Toutes ces optimisations que Rust est
 capable d'appliquer rendent le code produit extrêmement efficace. Maintenant
-que vous savez cela, vous pouvez utiliser des itérateurs et des closures
-sans crainte ! Ils font en sorte que le code est de haut niveau, mais ils n'ont
+que vous savez cela, vous pouvez utiliser des itérateurs et des fermetures
+sans crainte ! Ils font en sorte que le code soit de haut niveau, mais n'entraînent
 pas de pénalité de performance à l'exécution.
 
 <!--
@@ -208,11 +208,11 @@ iterators are such that runtime performance is not affected. This is part of
 Rust’s goal to strive to provide zero-cost abstractions.
 -->
 
-Les closures et les itérateurs sont des fonctionnalités de Rust inspirées par
+Les fermetures et les itérateurs sont des fonctionnalités de Rust inspirées par
 des idées des langages de programmation fonctionnels. Ils contribuent à la
 capacité de Rust d'exprimer clairement des idées de haut niveau avec des
 performances dignes d'un langage de bas niveau. Les implémentations des
-closures et des itérateurs sont telles que les performances à l'exécution ne
+fermetures et des itérateurs sont telles que les performances à l'exécution n'en
 sont pas affectées. Cela fait partie de l'objectif de Rust de s'efforcer à
 fournir des abstractions à coût zéro.
 

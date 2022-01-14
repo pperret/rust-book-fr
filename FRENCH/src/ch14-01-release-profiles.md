@@ -27,7 +27,7 @@ Cargo a deux profils principaux : le profil `dev` que cargo utilise lorsque vou
 lancez `cargo build` et le profil `release` (NdT : publication) que cargo
 utilise lorsque vous lancez `cargo build --release`. Le profil `dev` est défini
 avec de bons réglages par défaut pour le développement, et le profil `release` a
-de bons réglages par défaut de compilations pour publication.
+de bons réglages par défaut de compilation pour la publication.
 
 <!--
 These profile names might be familiar from the output of your builds:
@@ -183,5 +183,5 @@ For the full list of configuration options and defaults for each profile, see
 -->
 
 Pour la liste complète des options de configuration et leurs valeurs par défaut
-pour chaque profil, rendez-vous à la
+pour chaque profil, référez-vous à la
 [documentation de cargo](https://doc.rust-lang.org/cargo/reference/profiles.html).

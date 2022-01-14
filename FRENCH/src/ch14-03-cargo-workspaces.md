@@ -508,9 +508,9 @@ and compile the `rand` crate. We will get one warning because we aren’t
 referring to the `rand` we brought into scope:
 -->
 
-Nous pouvons maintenant ajouter `use rand;` au fichier *ajouter-un/src/lib.rs*,
+Nous pouvons maintenant ajouter `use rand;` au fichier *ajouter-un/src/lib.rs*
 et compiler l'ensemble de l'espace de travail en lançant `cargo build` dans le
-dossier *ajout*, ce qui va importer et compiler la crate `rand`. Nous devriez
+dossier *ajout*, ce qui va importer et compiler la crate `rand`. Nous devrions
 avoir un avertissement car nous n'avons pas utilisé le `rand` que nous avons
 introduit dans la portée :
 
@@ -628,12 +628,12 @@ in the workspace will be compatible with each other.
 Pour corriger cela, modifiez le fichier *Cargo.toml* pour le paquet
 `additioneur` et indiquez que `rand` est une dépendance de cette crate aussi. La compilation du
 paquet `additioneur` va rajouter `rand` à la liste des dépendances pour
-`additioneur` dans *Cargo.lock*, mais aucune copie supplémentaire de `rand` sera
-téléchargé. Cargo s'est assuré que toutes les crates de chaque paquet de
-l'espace de travail qui utilise le paquet `rand` serait de la même version.
+`additioneur` dans *Cargo.lock*, mais aucune copie supplémentaire de `rand` ne sera
+téléchargée. Cargo s'est assuré que toutes les crates de chaque paquet de
+l'espace de travail qui utilise le paquet `rand` seraient de la même version.
 Utiliser la même version de `rand` dans les espaces de travail économise de
-l'espace car nous n'avons pas à multiplier les copies, ni s'assurer que les
-crates dans l'espace de travail seraient compatibles l'une envers l'autre.
+l'espace car nous n'avons pas à multiplier les copies, ni à nous assurer que les
+crates dans l'espace de travail sont compatibles les unes avec les autres.
 
 <!--
 #### Adding a Test to a Workspace
@@ -742,8 +742,8 @@ one will run the tests for all the crates in the workspace.
 
 La première section de la sortie indique que le test `cela_fonctionne` de la
 crate `ajouter-un` a réussi. La section suivante indique qu'aucun test n'a été
-trouvé dans la crate `additioneur`, et ensuite la dernière section indique elle
-aussi qu'aucun test de documentation a été trouvé dans la crate `ajouter-un`.
+trouvé dans la crate `additioneur`, puis la dernière section indique elle
+aussi qu'aucun test de documentation n'a été trouvé dans la crate `ajouter-un`.
 Lancer `cargo test` dans un espace de travail structuré comme celui-ci va
 exécuter les tests pour toutes les crates de cet espace de travail.
 

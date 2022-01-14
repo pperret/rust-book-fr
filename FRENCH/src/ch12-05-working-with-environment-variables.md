@@ -42,7 +42,7 @@ nous allons appeler lorsque la variable d'environnement est active. Nous allons
 continuer à suivre le processus de TDD, donc la première étape est d'écrire à
 nouveau un test qui échoue. Nous allons ajouter un nouveau test pour la nouvelle
 fonction `rechercher_insensible_casse` et renommer notre ancien test
-`one_result` en `sensible_casse` pour clarifier les différences entre les deux
+`un_resultat` en `sensible_casse` pour clarifier les différences entre les deux
 tests, comme dans l'encart 12-20.
 
 <!--
@@ -125,7 +125,7 @@ they’ll be the same case when we check whether the line contains the query.
 La fonction `rechercher_insensible_casse`, présente dans l'encart 12-21, sera
 presque la même que la fonction `rechercher`. La seule différence est que nous
 allons transformer en minuscule le contenu de `recherche` et de chaque `ligne`
-pour que quel que soit la casse des arguments d'entrée, nous aurons toujours la
+pour que quelle que soit la casse des arguments d'entrée, nous aurons toujours la
 même casse lorsque nous vérifierons si la ligne contient la recherche.
 
 <!--
@@ -169,10 +169,10 @@ l'enregistrons dans une variable masquée avec le même nom. L'appel à
 recherche de l'utilisateur, comme `"rust"`, `"RUST"`, `"Rust"`, ou `"rUsT"`,
 nous traitons la recherche comme si elle était `"rust"` et par conséquent elle
 est insensible à la casse. La méthode `to_lowercase` devrait gérer de l'Unicode
-de base, mais ne sera pas fiable à 100%. Si nous avions écris une application
-sérieuse, nous aurions dû faire plus de choses à ce propos, toutefois la section
-actuelle traite des variables d'environnement et non pas de la gestion de
-l'Unicode, donc nous allons conserver ce code simplifié.
+de base, mais ne sera pas fiable à 100%. Si nous avions écrit une application
+sérieuse, nous aurions dû faire plus de choses à ce sujet, toutefois vu que la section
+actuelle traite des variables d'environnement et pas de la gestion de
+l'Unicode, nous allons conserver ce code simplifié.
 
 <!--
 Note that `query` is now a `String` rather than a string slice, because calling
@@ -203,7 +203,7 @@ query is.
 
 Ensuite, nous ajoutons un appel à `to_lowercase` sur chaque `ligne` avant de
 vérifier si elle contient `recherche` afin d'obtenir tous ses caractères en
-minuscule. Maintenant que nous avons `ligne` et `recherche` en minuscule, nous
+minuscule. Maintenant que nous avons `ligne` et `recherche` en minuscules, nous
 allons rechercher les correspondances peu importe la casse de la recherche.
 
 <!--
@@ -233,7 +233,7 @@ this field anywhere yet:
 Très bien ! Elles ont réussi. Maintenant, utilisons la nouvelle fonction
 `rechercher_insensible_casse` dans la fonction `run`. Pour commencer, nous
 allons ajouter une option de configuration à la structure `Config` pour changer
-entre la recherche sensible et non-sensible à la casse. L'ajout de ce champ va
+entre la recherche sensible et non sensible à la casse. L'ajout de ce champ va
 causer des erreurs de compilation car nous n'avons jamais initialisé ce champ
 pour le moment :
 
@@ -359,15 +359,16 @@ unset, so we’re checking `is_err` rather than using `unwrap`, `expect`, or any
 of the other methods we’ve seen on `Result`.
 -->
 
-Nous utilisons la méthode `is_err` sur le `Result` pour vérifier si c'est une
-erreur et donc par conséquent non définie, ce qui veut dire que nous *devons*
-effectuer une recherche sensible à la casse. Si la variable d'environnement
+Nous utilisons la méthode `is_err` sur le `Result` pour vérifier si nous obtenons
+une erreur, signalant par conséquent que la variable d'environnement n'est pas
+définie et donc que nous *devons* effectuer une recherche sensible à la casse. 
+Si la variable d'environnement
 `MINIGREP_INSENSIBLE_CASSE` a une valeur qui lui a été assignée, `is_err` va
 retourner `false` et le programme va procéder à une recherche non sensible à
-la casse. Nous ne préoccupons pas de la *valeur* de la variable d'environnement,
+la casse. Nous ne nous préoccupons pas de la *valeur* de la variable d'environnement,
 mais uniquement de savoir si elle est définie ou non, donc nous utilisons
-`is_err` plutôt que `unwrap`, `expect`, ou toute autre méthode que nous avons
-vu pour `Result`.
+`is_err` plutôt que `unwrap`, `expect` ou toute autre méthode que nous avons
+vue avec `Result`.
 
 <!--
 We pass the value in the `case_sensitive` variable to the `Config` instance so
@@ -388,7 +389,7 @@ the word “to” in all lowercase:
 
 Faisons un essai ! D'abord, nous allons lancer notre programme avec la variable
 d'environnement non définie et avec la recherche `to`, qui devrait trouver
-toutes les lignes qui contiennent le mot “to” en minuscule :
+toutes les lignes qui contiennent le mot “to” en minuscules :
 
 <!--
 ```console
@@ -414,7 +415,7 @@ variable and run the program as separate commands:
 -->
 
 Si vous utilisez PowerShell, vous allez avoir besoin d'affecter la variable
-d'environnement puis exécuter le programme avec deux commande séparées :
+d'environnement puis exécuter le programme avec deux commandes distinctes :
 
 <!--
 ```console
@@ -449,8 +450,7 @@ PS> Remove-Item Env:MINIGREP_INSENSIBLE_CASSE
 We should get lines that contain “to” that might have uppercase letters:
 -->
 
-Nous devrions trouver les lignes qui contiennent “to” qui ont des lettres
-majuscules :
+Nous devrions trouver cette fois-ci également toutes les lignes qui contiennent “to” écrit avec certaines lettres en majuscule:
 
 <!--
 <!-- manual-regeneration
@@ -509,16 +509,15 @@ Certains programmes permettent d'utiliser les arguments *et* les variables
 d'environnement pour un même réglage. Dans ce cas, le programme décide si l'un
 ou l'autre a la priorité. Pour vous exercer à nouveau, essayez de contrôler la
 sensibilité à la casse via un argument de ligne de commande ou une variable
-d'environnement. Vous devrez choisir si l'argument de la ligne de commande ou
-la variable d'environnement devrait être prioritaire si le programme est exécuté
-avec l'option réglée dans un cas pour être sensible à la casse et être
-insensible à la casse dans l'autre cas simultanément.
+d'environnement. Vous devrez choisir qui de l'argument de la ligne de commande ou
+de la variable d'environnement doit être prioritaire lorsque les deux sont configurés
+simultanément mais de manière contradictoire quand le programme est exécuté.
 
 <!--
 The `std::env` module contains many more useful features for dealing with
 environment variables: check out its documentation to see what is available.
 -->
 
-Le module `std::env` contient plein d'autres fonctionnalitées utiles pour
+Le module `std::env` contient plein d'autres fonctionnalités utiles pour
 utiliser les variables d'environnement : regardez sa documentation pour voir ce
 qu'il est possible de faire.

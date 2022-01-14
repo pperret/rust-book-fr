@@ -99,8 +99,8 @@ items in the vector.
 
 Dans les langages qui n'ont pas d'itérateurs fournis par leur bibliothèque
 standard, nous écririons probablement cette même fonctionnalité en démarrant une
-variable à l'indice 0, utiliser cette variable comme indice sur le vecteur afin
-d'obtenir une valeur, et incrémenter la valeur de cette variable dans une boucle
+variable à l'indice 0, en utilisant cette variable comme indice sur le vecteur afin
+d'obtenir une valeur puis en incrémentant la valeur de cette variable dans une boucle
 jusqu'à ce qu'elle atteigne le nombre total d'éléments dans le vecteur.
 
 <!--
@@ -113,8 +113,8 @@ index into, like vectors. Let’s examine how iterators do that.
 Les itérateurs s'occupent de toute cette logique pour nous, réduisant le code
 redondant dans lequel nous pourrions potentiellement faire des erreurs. Les
 itérateurs nous donnent plus de flexibilité pour utiliser la même logique avec
-de nombreux types de séquences différentes, et non pas uniquement avec des
-structures de données avec lesquelles nous pouvons utiliser des indices, comme
+de nombreux types de séquences différentes, et pas seulement avec des
+structures de données avec lesquelles nous pouvons utiliser des indices, telles que
 les vecteurs. Voyons comment les itérateurs font cela.
 
 <!--
@@ -226,11 +226,11 @@ ownership of `v1_iter` and made it mutable behind the scenes.
 -->
 
 Remarquez que nous avons eu besoin de rendre mutable `v1_iter` : appeler la
-méthode `next` sur un iterator change son état interne qui garde en mémoire où
-il est dans la séquence. En d'autres termes, ce code *consomme*, ou utilise,
+méthode `next` sur un iterator change son état interne qui garde en mémoire l'endroit
+où il en est dans la séquence. En d'autres termes, ce code *consomme*, ou utilise,
 l'itérateur. Chaque appel à `next` consomme un élément de l'itérateur. Nous
 n'avions pas eu besoin de rendre mutable `v1_iter` lorsque nous avions utilisé
-une boucle `for` parce que la boucle avait pris possession de `v1_iter` et l'a
+une boucle `for` parce que la boucle avait pris possession de `v1_iter` et l'avait
 rendu mutable en coulisses.
 
 <!--
@@ -319,7 +319,7 @@ ownership of the iterator we call it on.
 -->
 
 Nous ne sommes pas autorisés à utiliser `v1_iter` après l'appel à `sum` car
-`sum` a pris possession de l'itérateur sur lequel nous l'appelons.
+`sum` a pris possession de l'itérateur avec lequel nous l'appelons.
 
 <!--
 ### Methods that Produce Other Iterators
@@ -402,8 +402,8 @@ never gets called. The warning reminds us why: iterator adaptors are lazy, and
 we need to consume the iterator here.
 -->
 
-Le code dans l'encart 13-17 ne fait rien ; la fermeture que nous avons renseigné
-n'est jamais exécuté. L'avertissement nous rappelle pourquoi : les adaptateurs
+Le code dans l'encart 13-17 ne fait rien ; la fermeture que nous avons renseignée
+n'est jamais exécutée. L'avertissement nous rappelle pourquoi : les adaptateurs
 d'itération sont des *évaluations paresseuses*, c'est pourquoi nous devons
 consommer l'itérateur ici.
 
@@ -566,7 +566,7 @@ that have the same size as the value we specified.
 
 Le test confirme que lorsque nous appelons `chaussures_a_la_pointure`, nous
 n'obtenons que des chaussures qui ont la même pointure que la valeur que nous
-avons demandé.
+avons demandée.
 
 <!--
 ### Creating Our Own Iterators with the `Iterator` Trait
@@ -586,7 +586,7 @@ trait!
 -->
 
 Nous avons vu que nous pouvons créer un itérateur en appelant `iter`,
-`into_iter`, ou `iter_mut` sur un vecteur. Nous pouvons créer des itérateurs à
+`into_iter` ou `iter_mut` sur un vecteur. Nous pouvons créer des itérateurs à
 partir d'autres types de collections de la bibliothèque standard, comme les
 tables de hachage. Nous pouvons aussi créer des itérateurs qui font tout ce que
 nous voulons en implémentant le trait `Iterator` sur nos propres types. Comme
@@ -652,7 +652,7 @@ always starting new instances with a value of 0 in the `count` field.
 La structure `Compteur` a un champ `compteur`. Ce champ contient une valeur
 `u32` qui gardera la trace de l'endroit où nous sommes dans le processus
 d'itération de 1 à 5. Le champ `compteur` est privé car nous voulons que ce soit
-l'implémentation de `Compteur` qui gère sa valeur. La fonction `new` impose le
+l'implémentation de `Compteur` qui gère sa valeur. La fonction `new` impose 
 de toujours démarrer de nouvelles instances avec une valeur de 0 pour le champ
 `compteur`.
 
@@ -711,7 +711,7 @@ will increment `count` and return the current value wrapped in `Some`. Once
 Nous voulons que notre itérateur ajoute 1 à l'état courant, donc nous avons
 initialisé `compteur` à 0 pour qu'il retourne 1 lors du premier appel à `next`.
 Si la valeur de `compteur` est strictement inférieure à 5, `next` va incrémenter
-`compteur` puis va retourner valeur courante intégrée dans un `Some`. Une fois
+`compteur` puis va retourner la valeur courante intégrée dans un `Some`. Une fois
 que `compteur` vaudra 5, notre itérateur va arrêter d'incrémenter `compteur` et
 retournera toujours `None`.
 
@@ -764,7 +764,7 @@ calls `next` repeatedly, verifying that we have implemented the behavior we
 want this iterator to have: returning the values from 1 to 5.
 -->
 
-Ce test créé une nouvelle instance de `Compteur` dans la variable `compteur` et
+Ce test crée une nouvelle instance de `Compteur` dans la variable `compteur` et
 appelle ensuite `next` à plusieurs reprises, en vérifiant que nous avons
 implémenté le comportement que nous voulions que cet itérateur suive : renvoyer
 les valeurs de 1 à 5.
@@ -823,8 +823,8 @@ methods on our `Counter` iterator</span>
 -->
 
 
-<span class="caption">Encart 13-23 : utilisation d'une gamme de méthodes de
-traits `Iterator` sur notre itérateur `Counter` </span>
+<span class="caption">Encart 13-23 : utilisation d'une gamme de méthodes du
+trait `Iterator` sur notre itérateur `Compteur` </span>
 
 <!--
 Note that `zip` produces only four pairs; the theoretical fifth pair `(5,

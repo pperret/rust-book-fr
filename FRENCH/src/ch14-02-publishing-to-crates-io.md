@@ -104,9 +104,9 @@ in the *target/doc* directory.
 -->
 
 Ici nous avons écrit une description de ce que fait la fonction `ajouter_un`,
-débuté une section avec le titre `Exemples`, et ensuite on a fourni du code qui
+débuté une section avec le titre `Exemples` puis fourni du code qui
 montre comment utiliser la fonction `ajouter_un`. Nous pouvons générer la
-documentation HTML de ces commentaires de documentation en lançant `cargo doc`.
+documentation HTML à partir de ces commentaires de documentation en lançant `cargo doc`.
 Cette commande lance l'outil `rustdoc` qui est distribué avec Rust et place la
 documentation HTML générée dans le dossier *target/doc*.
 
@@ -122,7 +122,7 @@ Pour plus de facilité, lancer `cargo doc --open` va générer le HTML pour la
 documentation de votre crate courante (ainsi que la documentation pour toutes
 les dépendances de la crate) et ouvrir le résultat dans un navigateur web.
 Rendez-vous à la fonction `ajouter_one` et vous découvrirez comment le texte
-dans les commentaires de la documentation a été interprété, qui devrait
+dans les commentaires de la documentation a été interprété, ce qui devrait
 ressembler à l'illustration 14-1 :
 
 <!-- markdownlint-disable -->
@@ -173,13 +173,13 @@ que les auteurs de crate utilisent fréquemment dans leur documentation :
   and covering the invariants that the function expects callers to uphold.
 -->
 
-* **Panics** : le scénario dans lequel la fonction est documentée peut paniquer.
+* **Panics** : les scénarios dans lesquels la fonction qui est documentée peut paniquer.
   Ceux qui utilisent la fonction et qui ne veulent pas que leur programme
   panique doivent s'assurer qu'ils n'appellent pas la fonction dans ce genre de
   situation.
 * **Errors** : si la fonction retourne un `Result`, documenter les types
   d'erreurs qui peuvent survenir ainsi que les conditions qui mènent à ces
-  erreurs sera très bénéfique pour ceux qui utilisent votre API afin qu'ils
+  erreurs sera très utile pour ceux qui utilisent votre API afin qu'ils
   puissent écrire du code pour gérer ces différents types d'erreurs de manière à
   ce que cela leur convienne.
 * **Safety** : si la fonction fait un appel à `unsafe` (que nous verrons au
@@ -214,7 +214,7 @@ function from Listing 14-1, we will see a section in the test results like this:
 -->
 
 L'ajout des blocs de code d'exemple dans vos commentaires de documentation
-peuvent vous aider à montrer comment utiliser votre bibliothèque, et faire ceci
+peut vous aider à montrer comment utiliser votre bibliothèque, et faire ceci
 apporte un bonus supplémentaire : l'exécution de `cargo test` va lancer les
 codes d'exemples présents dans votre documentation comme étant des tests ! Il
 n'y a rien de mieux que de la documentation avec des exemples. Mais il n'y a
@@ -257,8 +257,8 @@ example panics and run `cargo test` again, we’ll see that the doc tests catch
 that the example and the code are out of sync with each other!
 -->
 
-Maintenant, si nous changeons la fonction ou l'exemple de sorte que le
-`assert_eq!` fasse paniquer l'exemple et que nous lançons `cargo test` à
+Maintenant, si nous changeons la fonction ou l'exemple de telle sorte que le
+`assert_eq!` de l'exemple panique et que nous lançons `cargo test` à
 nouveau, nous verrons que les tests de documentation vont découvrir que
 l'exemple et le code sont désynchronisés l'un de l'autre !
 
@@ -505,7 +505,7 @@ see them.
 -->
 
 Notez que les types `CouleurPrimaire` et `CouleurSecondaire` ne sont pas listés
-sur la page d'accueil, ni la fonction `mixer`. Nous devons cliquer sur `types`
+sur la page d'accueil, pas plus que la fonction `mixer`. Nous devons cliquer sur `types`
 et `utilitaires` pour les voir.
 
 <!--
@@ -611,7 +611,7 @@ and link re-exports on the front page, as shown in Figure 14-4, making the
 `PrimaryColor` and `SecondaryColor` types and the `mix` function easier to find.
 -->
 
-La documentation de l'API que `cargo doc` a généré pour cette crate va
+La documentation de l'API que `cargo doc` a générée pour cette crate va
 maintenant lister et lier les ré-exportations sur la page d'accueil, comme dans
 l'illustration 14-4, ce qui rend les types `CouleurPrimaire` et
 `CouleurSecondaire` plus faciles à trouver.
@@ -694,7 +694,7 @@ pouvez itérer plusieurs fois pour trouver une API qui fonctionne mieux pour vos
 utilisateurs. Choisir `pub use` vous donne de la flexibilité pour l'organisation
 interne de votre crate et découple la structure interne de ce que vous présentez
 aux utilisateurs. N'hésitez pas à regarder le code source des crates que vous
-avez installé pour voir si leur structure interne est différente de leur API
+avez installées pour voir si leur structure interne est différente de leur API
 publique.
 
 <!--
@@ -720,7 +720,7 @@ pouvoir faire cela, visitez la page d'accueil de
 [crates.io](https://crates.io/)<!-- ignore --> et connectez-vous avec votre
 compte GitHub (le compte GitHub est actuellement une obligation, mais crates.io
 pourra permettre de créer un compte d'une autre manière un jour). Une fois
-identifié, visitez les réglages de votre compte à l'adresse
+identifié, consultez les réglages de votre compte à l'adresse
 [https://crates.io/me/](https://crates.io/me/)<!-- ignore --> et récupérez votre
 jeton d'API (NdT : *API key*). Ensuite, lancez la commande `cargo login` avec
 votre clé d'API, comme ceci :
@@ -746,7 +746,7 @@ revoke it and generate a new token on [crates.io](https://crates.io/)<!-- ignore
 Cette commande informera cargo de votre jeton d'API et l'enregistrera localement
 dans *~/.cargo/credentials*. Notez que ce jeton est un *secret* : ne le partagez
 avec personne d'autre. Si vous le donnez à quelqu'un pour une quelconque raison,
-vous devriez la révoquer et générer un nouveau jeton sur
+vous devriez le révoquer et générer un nouveau jeton sur
 [crates.io](https://crates.io/)<!-- ignore -->.
 
 <!--
@@ -868,7 +868,7 @@ s'afficher à proximité de votre crate dans les résultats de recherche. Pour l
 champ `license`, vous devez donner une *valeur d'identification de la licence*.
 La [Linux Foundation’s Software Package Data Exchange (SPDX)][spdx] liste les
 identifications que vous pouvez utiliser pour cette valeur. Par exemple, pour
-renseigner que votre crate est sous la licence MIT, ajoutez l'identifiant
+stipuler que votre crate est sous la licence MIT, ajoutez l'identifiant
 `MIT` :
 
 <!--
@@ -906,7 +906,7 @@ use `license-file` to specify the name of that file instead of using the
 
 Si vous voulez utiliser une licence qui n'apparaît pas dans le SPDX, vous devez
 placer le texte de cette licence dans un fichier, inclure ce fichier dans votre
-projet, et ensuite utiliser `licence-file` pour renseigner le nom de ce fichier
+projet puis utiliser `licence-file` pour renseigner le nom de ce fichier
 plutôt que d'utiliser la clé `licence`.
 
 <!--
@@ -929,8 +929,8 @@ With a unique name, the version, your description, and a license added, the
 *Cargo.toml* file for a project that is ready to publish might look like this:
 -->
 
-Avec le nom unique, la version, la description et la licence que vous avez
-ajouté, le fichier *Cargo.toml* de ce projet qui est prêt à être publié devrait
+Une fois le nom unique, la version, la description et la licence 
+ajoutés, le fichier *Cargo.toml* de ce projet qui est prêt à être publié devrait
 ressembler à ceci :
 
 <!--
@@ -969,9 +969,9 @@ metadata you can specify to ensure others can discover and use your crate more
 easily.
 -->
 
-La [documentation de cargo](https://doc.rust-lang.org/cargo/) décris d'autres
+La [documentation de cargo](https://doc.rust-lang.org/cargo/) décrit d'autres
 métadonnées que vous pouvez renseigner pour vous assurer que les autres
-développeurs puissent découvrir encore plus facilement votre crate.
+développeurs puissent découvrir et utiliser votre crate plus facilement.
 
 <!--
 ### Publishing to Crates.io
@@ -1058,7 +1058,7 @@ anyone can easily add your crate as a dependency of their project.
 
 Félicitations ! Vous venez de partager votre code avec la communauté Rust, et
 désormais tout le monde peut facilement ajouter votre crate comme une dépendance
-de leur projet.
+de son projet.
 
 <!--
 ### Publishing a New Version of an Existing Crate
@@ -1076,9 +1076,9 @@ Then run `cargo publish` to upload the new version.
 
 Lorsque vous avez fait des changements sur votre crate et que vous êtes prêt à
 publier une nouvelle version, vous devez changer la valeur de `version`
-renseignée dans votre fichier *Cargo.toml* et le publier à nouveau. Utilisez les
-[règles versionnage sémantique][semver] pour choisir quelle sera la prochaine
-version la plus appropriée en fonction des changements que vous avez fait.
+renseignée dans votre fichier *Cargo.toml* et la publier à nouveau. Utilisez les
+[règles de versionnage sémantique][semver] pour choisir quelle sera la prochaine
+version la plus appropriée en fonction des changements que vous avez faits.
 Lancez ensuite `cargo publish` pour téléverser la nouvelle version.
 
 <!--
@@ -1165,4 +1165,4 @@ reset those secrets immediately.
 
 Une dépréciation *ne supprime pas* du code. Par exemple, la fonctionnalité de
 dépréciation n'est pas conçue pour supprimer des *secrets* téléversés par
-mégarde. Si cela arrive, vous devriez régénérer immédiatement ces secrets.
+mégarde. Si cela arrive, vous devez régénérer immédiatement ces secrets.

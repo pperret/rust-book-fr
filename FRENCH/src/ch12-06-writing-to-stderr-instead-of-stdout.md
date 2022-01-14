@@ -2,7 +2,7 @@
 ## Writing Error Messages to Standard Error Instead of Standard Output
 -->
 
-## Ecrire les messages d'erreur sur la sortie d'erreurs standard au lieu de la sortie normale
+## Ecrire les messages d'erreur sur la sortie d'erreur standard au lieu de la sortie normale
 
 <!--
 At the moment, we’re writing all of our output to the terminal using the
@@ -18,7 +18,7 @@ la macro `println!`. Dans la plupart des terminaux, il y a deux genres de
 sorties : la *sortie standard* (`stdout`) pour les informations générales
 et *la sortie d'erreur standard* (`stderr`) pour les messages d'erreur. Cette
 distinction permet à l'utilisateur de choisir de rediriger la sortie des
-réussites d'un programme vers un fichier mais continuer à afficher les messages
+messages sans erreurs d'un programme vers un fichier mais continuer à afficher les messages
 d'erreur à l'écran.
 
 <!--
@@ -33,7 +33,7 @@ devons utiliser autre chose pour écrire sur la sortie d'erreur standard.
 ### Checking Where Errors Are Written
 -->
 
-### Vérifier où sont écris les erreurs
+### Vérifier où sont écrites les erreurs
 
 <!--
 First, let’s observe how the content printed by `minigrep` is currently being
@@ -44,12 +44,12 @@ standard error stream, so any content sent to standard error will continue to
 display on the screen.
 -->
 
-Commençons par observer comment le contenu écris par `minigrep` est actuellement
-écris sur la sortie standard, y compris les messages d'erreur que nous
+Commençons par observer comment le contenu écrit par `minigrep` est actuellement
+écrit sur la sortie standard, y compris les messages d'erreur que nous
 souhaitons plutôt écrire sur la sortie d'erreur standard. Nous allons faire cela
 en redirigeant le flux de sortie standard vers un fichier pendant que nous
 déclencherons intentionnellement une erreur. Nous ne redirigerons pas le flux
-de sortie d'erreur standard, donc n'importe quel contenu envoyé à la sortie
+de sortie d'erreur standard, si bien que n'importe quel contenu envoyé à la sortie
 d'erreur standard va continuer à s'afficher à l'écran.
 
 <!--
@@ -115,9 +115,9 @@ useful for error messages like this to be printed to standard error so only
 data from a successful run ends up in the file. We’ll change that.
 -->
 
-Effectivement, notre message d'erreur est écris sur la sortie standard. Il
-est bien plus utile que les messages d'erreur comme celui-ci soient écris
-dans la sortie d'erreur standard afin qu'uniquement les données d'une
+Effectivement, notre message d'erreur est écrit sur la sortie standard. Il
+serait bien plus utile que les messages d'erreur comme celui-ci soient écrits
+sur la sortie d'erreur standard afin que seules les données produites par
 exécution fructueuse finissent dans le fichier. Nous allons corriger cela.
 
 <!--
@@ -136,10 +136,10 @@ instead.
 -->
 
 Nous allons utiliser le code de l'encart 12-24 pour changer la manière dont les
-messages d'erreur sont écris. Grâce au remaniement que nous avons fait plus tôt
-dans ce chapitre, tout le code qui écris les messages d'erreurs se trouve dans
+messages d'erreur sont écrits. Grâce au remaniement que nous avons fait plus tôt
+dans ce chapitre, tout le code qui écrit les messages d'erreurs se trouve dans
 une seule fonction, `main`. La bibliothèque standard fournit la macro
-`eprintln!` qui écris dans le flux d'erreur standard, donc changeons les deux
+`eprintln!` qui écrit dans le flux d'erreur standard, donc changeons les deux
 endroits où nous appelons `println!` afin d'utiliser `eprintln!` à la place.
 
 <!--
@@ -171,7 +171,7 @@ After changing `println!` to `eprintln!`, let’s run the program again in the
 same way, without any arguments and redirecting standard output with `>`:
 -->
 
-Après avoir changé `println!` en `eprintln!`, exécutons le programme à nouveau
+Après avoir changé `println!` en `eprintln!`, exécutons à nouveau le programme 
 de la même manière, sans aucun argument et en redirigeant la sortie standard
 avec `>` :
 
@@ -193,7 +193,7 @@ behavior we expect of command line programs.
 -->
 
 Désormais nous pouvons voir l'erreur à l'écran et *sortie.txt* ne contient rien,
-ce qui est le comportement de que nous attendons d'un programme en ligne de
+ce qui est le comportement que nous attendons d'un programme en ligne de
 commande.
 
 <!--
@@ -201,8 +201,8 @@ Let’s run the program again with arguments that don’t cause an error but sti
 redirect standard output to a file, like so:
 -->
 
-Exécutons le programme à nouveau avec des arguments qui ne causent pas d'erreurs
-mais nous continuons à rediriger la sortie standard, comme ceci :
+Exécutons le programme à nouveau avec des arguments qui ne causent pas d'erreur
+tout en continuant à rediriger la sortie standard vers un fichier, comme ceci :
 
 <!--
 ```console
@@ -245,9 +245,9 @@ This demonstrates that we’re now using standard output for successful output
 and standard error for error output as appropriate.
 -->
 
-Ceci prouve que nous utilisons maintenant la sortie standard pour la sortie
-réussie et l'erreur standard pour la sortie d'erreur, en fonction des
-circonstances.
+Ceci prouve qu'en fonction des circonstances, nous utilisons maintenant la
+sortie standard pour la sortie sans les erreurs et l'erreur standard pour la
+sortie d'erreur.
 
 <!--
 ## Summary
@@ -268,11 +268,11 @@ well tested.
 Ce chapitre a résumé certains des concepts majeurs que vous avez appris
 précédemment et expliqué comment procéder à des opérations courantes sur les
 entrées/sorties en Rust. En utilisant les arguments en ligne de commande, les
-fichiers, les variables d'environnement, et la macro `eprintln!` pour écrire les
+fichiers, les variables d'environnement et la macro `eprintln!` pour écrire les
 erreurs, vous pouvez désormais écrire des applications en ligne de commande. En
 suivant les concepts vus dans les chapitres précédents, votre code restera bien
 organisé, stockera les données dans les bonnes structures de données, gérera
-correctement les erreurs, et sera correctement testé.
+correctement les erreurs et sera correctement testé.
 
 <!--
 Next, we’ll explore some Rust features that were influenced by functional
@@ -280,4 +280,4 @@ languages: closures and iterators.
 -->
 
 Maintenant, nous allons découvrir quelques fonctionnalités de Rust qui ont été
-influencées par les langages fonctionnels : les closures et les itérateurs.
+influencées par les langages fonctionnels : les fermetures et les itérateurs.

@@ -11,7 +11,7 @@ other, more advanced features to show you how to do the following:
 -->
 
 Précédemment, nous avons utilisé les fonctionnalités les plus basiques de cargo
-pour compiler, exécuter, et tester notre code, mais il peut faire bien plus.
+pour compiler, exécuter et tester notre code, mais il peut faire bien plus.
 Dans ce chapitre, nous allons voir d'autres fonctionnalités avancées pour vous
 apprendre à faire ceci :
 

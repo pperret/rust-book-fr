@@ -38,9 +38,9 @@ sharing code that’s useful to you on [crates.io](https://crates.io/)<!-- ignor
 -->
 
 Le partage de code avec cargo et [crates.io](https://crates.io/)<!-- ignore -->
-est la partie qui rend l'écosystème de Rust très utile pour de nombreuses
+fait partie de ce qui rend l'écosystème de Rust très utile pour de nombreuses
 tâches. La bibliothèque standard de Rust est compacte et stable, et les crates
-sont faciles à partager, utiliser, et à améliorer dans un cycle de vie différent
-du langage. N'hésitez pas à partager du code qui vous est utile sur
+sont faciles à partager, à utiliser et à améliorer à un rythme différent
+de celui du langage. N'hésitez pas à partager du code qui vous est utile sur
 [crates.io](https://crates.io/)<!-- ignore --> ; il est fort probable qu'il
 sera aussi utile à quelqu'un d'autre !

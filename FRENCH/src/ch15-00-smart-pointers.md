@@ -18,7 +18,7 @@ Un *pointeur* est un concept général pour une variable qui contient une adress
 vers la mémoire. Cette adresse pointe vers d'autres données. Le type de pointeur
 le plus courant en Rust est la référence, que vous avez appris au chapitre 4.
 Les références sont marquées par le symbole `&` et empruntent la valeur sur
-laquelle ils pointent. Elles n'ont pas d'autres fonctionnalités que celle de
+laquelle elles pointent. Elles n'ont pas d'autres fonctionnalités que celle de
 pointer sur une donnée. De plus, elles n'ont aucun coût sur les performances et
 c'est le type de pointeur que nous utilisons le plus souvent.
 
@@ -34,17 +34,17 @@ keeping track of the number of owners and, when no owners remain, cleaning up
 the data.
 -->
 
-Les *pointeurs intelligents*, d'une autre côté, sont des structures de données
+Les *pointeurs intelligents*, d'un autre côté, sont des structures de données
 qui, non seulement se comportent comme un pointeur, mais ont aussi des
 fonctionnalités et métadonnées supplémentaires. Le concept de pointeur
 intelligent n'est pas propre à Rust : les pointeurs intelligents sont
 originaires du C++ et existent aussi dans d'autres langages. En Rust, les
-différents pointeurs intelligents définis dans bibliothèque standard
+différents pointeurs intelligents définis dans la bibliothèque standard
 fournissent des fonctionnalités supplémentaires à celles des références.
 Un exemple que nous allons explorer dans ce chapitre est le type de pointeur
 intelligent *compteur de références*. Ce pointeur vous permet d'avoir
 plusieurs propriétaires d'une donnée tout en gardant une trace de leur nombre et,
-lorsqu'il n'y en a plus, nettoyer cette donnée.
+lorsqu'il n'y en a plus, de nettoyer cette donnée.
 
 <!--
 In Rust, which uses the concept of ownership and borrowing, an additional
@@ -53,11 +53,11 @@ pointers that only borrow data; in contrast, in many cases, smart pointers
 *own* the data they point to.
 -->
 
-En Rust, qui utilise le concept de propriétaire et d'emprunt, une différence
+En Rust, qui utilise le concept de propriété et d'emprunt, une différence
 supplémentaire entre les références et les pointeurs intelligents est que les
 références sont des pointeurs qui empruntent seulement la donnée ; alors qu'au
 contraire, dans de nombreux cas, les pointeurs intelligents sont
-*propriétaires* des données sur lesquels ils pointent.
+*propriétaires* des données sur lesquelles ils pointent.
 
 <!--
 We’ve already encountered a few smart pointers in this book, such as `String`
@@ -72,9 +72,9 @@ Nous avons déjà rencontré quelques pointeurs intelligents au cours de ce
 livre, comme `String` et `Vec<T>` au chapitre 8, même si nous ne les avons pas
 désignés comme étant des pointeurs intelligents à ce moment-là. Ces deux types
 sont considérés comme des pointeurs intelligents car ils sont propriétaires de
-ces données et vous permettent de les manipuler. Ils ont aussi des métadonnées
+ données et vous permettent de les manipuler. Ils ont aussi des métadonnées
 (comme leur capacité) et certaines fonctionnalités ou garanties (comme `String`
-qui s'assure que ses données soient toujours en UTF-8).
+qui s'assure que ses données soient toujours en UTF-8 valide).
 
 <!--
 Smart pointers are usually implemented using structs. The characteristic that
@@ -121,9 +121,8 @@ pointeurs intelligents les plus courants de la bibliothèque standard :
 * `Box<T>` pour l'allocation de valeurs sur le tas
 * `Rc<T>`, un type comptant les références, qui permet d'avoir plusieurs
   propriétaires
-* `Ref<T>` et `RefMut<T>`, par lesquels on y accède via `RefCell<T>`, un type
-  qui permet d'appliquer les règles d'emprunt au moment de l'exécution au lieu
-  du moment de la compilation
+* `Ref<T>` et `RefMut<T>`, auxquels on accède via `RefCell<T>`, un type
+  qui permet d'appliquer les règles d'emprunt au moment de l'exécution plutôt qu'au moment de la compilation
 
 <!--
 In addition, we’ll cover the *interior mutability* pattern where an immutable
@@ -132,7 +131,7 @@ type exposes an API for mutating an interior value. We’ll also discuss
 -->
 
 En outre, nous allons voir le motif de *mutabilité interne* dans lequel un
-type immuable propose une API pour muter une valeur interne. Nous allons aussi
+type immuable propose une API pour modifier une valeur interne. Nous allons aussi
 parler des *boucles de références* : comment elles peuvent provoquer des fuites
 de mémoire et comment les éviter.
 
