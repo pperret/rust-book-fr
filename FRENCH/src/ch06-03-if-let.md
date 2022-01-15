@@ -36,18 +36,18 @@ code when the value is `Some`</span>
 valeur est `Some`</span>
 
 <!--
-If the value is `Some`, we want to print out the value in the `Some` variant,
-which we do by binding the value to the variable `max` in the pattern.
-We don’t want to do anything with the `None` value. To satisfy the `match`
-expression, we have to add `_ => ()` after processing just one variant, which
-is annoying boilerplate code to add.
+If the value is `Some`, we print out the value in the `Some` variant by binding
+the value to the variable `max` in the pattern. We don’t want to do anything
+with the `None` value. To satisfy the `match` expression, we have to add `_ =>
+()` after processing just one variant, which is annoying boilerplate code to
+add.
 -->
 
-Si la valeur est un `Some`, nous voulons afficher la valeur dans la variante
-`Some`, en associant la valeur à la variable `max` dans le motif.
-Nous ne voulons rien faire avec la valeur `None`. Pour satisfaire l'expression
-`match`, nous devons ajouter `_ => ()` après avoir géré une seule variante, ce
-qui est du code inutile.
+Si la valeur est un `Some`, nous affichons la valeur dans la variante `Some` en
+associant la valeur à la variable `max` dans le motif. Nous ne voulons rien
+faire avec la valeur `None`. Pour satisfaire l'expression `match`, nous devons
+ajouter `_ => ()` après avoir géré une seule variante, ce qui est du code
+inutile.
 
 <!--
 Instead, we could write this in a shorter way using `if let`. The following

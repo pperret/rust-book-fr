@@ -1,11 +1,13 @@
 <!--
-## The `match` Control Flow Operator
+<a id="the-match-control-flow-operator"></a>
+## The `match` Control Flow Construct
 -->
 
-## La structure de contrôle `match`
+<a id="la-structure-de-contrôle-match"></a>
+## La structure de contrôle de flux `match`
 
 <!--
-Rust has an extremely powerful control flow operator called `match` that allows
+Rust has an extremely powerful control flow construct called `match` that allows
 you to compare a value against a series of patterns and then execute code based
 on which pattern matches. Patterns can be made up of literal values, variable
 names, wildcards, and many other things; Chapter 18 covers all the different
@@ -14,9 +16,9 @@ expressiveness of the patterns and the fact that the compiler confirms that all
 possible cases are handled.
 -->
 
-Rust a un opérateur de contrôle très puissant appelé `match` qui vous permet de
-comparer une valeur avec une série de motifs et d'exécuter du code en fonction
-du motif qui correspond. Les motifs peuvent être constitués de valeurs
+Rust a une structure de contrôle de flux très puissant appelé `match` qui vous
+permet de comparer une valeur avec une série de motifs et d'exécuter du code en
+fonction du motif qui correspond. Les motifs peuvent être constitués de valeurs
 littérales, de noms de variables, de jokers, parmi tant d'autres ; le
 chapitre 18 va couvrir tous les différents types de motifs et ce qu'ils font. Ce
 qui fait la puissance de `match` est l'expressivité des motifs et le fait que le
@@ -28,6 +30,10 @@ down a track with variously sized holes along it, and each coin falls through
 the first hole it encounters that it fits into. In the same way, values go
 through each pattern in a `match`, and at the first pattern the value “fits,”
 the value falls into the associated code block to be used during execution.
+Speaking of coins, let’s use them as an example using `match`! We can write a
+function that takes an unknown United States coin and, in a similar way as the
+counting machine, determines which coin it is and return its value in cents, as
+shown here in Listing 6-3.
 -->
 
 Considérez l'expression `match` comme une machine à trier les pièces de
@@ -36,18 +42,9 @@ différentes, et chaque pièce tombe dans le premier trou à sa taille qu'elle
 rencontre. De manière similaire, les valeurs parcourent tous les motifs dans un
 `match`, et au premier motif auquel la valeur “correspond”, la valeur va
 descendre dans le bloc de code correspondant afin d'être utilisée pendant son
-exécution.
-
-<!--
-Because we just mentioned coins, let’s use them as an example using `match`! We
-can write a function that can take an unknown United States coin and, in a
-similar way as the counting machine, determine which coin it is and return its
-value in cents, as shown here in Listing 6-3.
--->
-
-Comme nous venons de mentionner des pièces, utilisons-les avec un exemple qui
-utilise `match` ! Nous pouvons écrire une fonction qui prend en paramètre une
-pièce inconnue des États-Unis d'Amérique et qui peut, de la même manière qu'une
+exécution. En parlant des pièces, utilisons-les avec un exemple qui utilise
+`match` ! Nous pouvons écrire une fonction qui prend en paramètre une pièce
+inconnue des États-Unis d'Amérique et qui peut, de la même manière qu'une
 machine à trier, déterminer quelle pièce c'est et retourner sa valeur en
 centimes, comme ci-dessous dans l'encart 6-3.
 
@@ -74,17 +71,17 @@ Let’s break down the `match` in the `value_in_cents` function. First, we list
 the `match` keyword followed by an expression, which in this case is the value
 `coin`. This seems very similar to an expression used with `if`, but there’s a
 big difference: with `if`, the expression needs to return a Boolean value, but
-here, it can be any type. The type of `coin` in this example is the `Coin` enum
-that we defined on line 1.
+here, it can return any type. The type of `coin` in this example is the `Coin`
+enum that we defined on the first line.
 -->
 
 Décomposons le `match` dans la fonction `valeur_en_centimes`. En premier lieu,
 nous utilisons le mot-clé `match` suivi par une expression, qui dans notre cas
 est la valeur de `piece`. Cela ressemble beaucoup à une expression utilisée avec
 `if`, mais il y a une grosse différence : avec `if`, l'expression doit retourner
-une valeur booléenne, mais ici, elle peut être de n'importe quel type. Dans cet
+une valeur booléenne, mais ici, elle retourne n'importe quel type. Dans cet
 exemple, `piece` est de type `PieceUs`, qui est l'énumération que nous avons
-définie à la ligne 1.
+définie à la première ligne.
 
 <!--
 Next are the `match` arms. An arm has two parts: a pattern and some code. The
@@ -125,20 +122,21 @@ résulte de l'expression dans la branche correspondante est la valeur qui sera
 retournée par l'expression `match`.
 
 <!--
-Curly brackets typically aren’t used if the match arm code is short, as it is
+We don't typically use curly brackets if the match arm code is short, as it is
 in Listing 6-3 where each arm just returns a value. If you want to run multiple
-lines of code in a match arm, you can use curly brackets. For example, the
-following code would print “Lucky penny!” every time the method was called with
-a `Coin::Penny` but would still return the last value of the block, `1`:
+lines of code in a match arm, you must use curly brackets. For example, the
+following code prints “Lucky penny!” every time the method is called with a
+`Coin::Penny`, but still returns the last value of the block, `1`:
 -->
 
-Les accolades ne sont généralement pas utilisées si le code de la branche
-correspondante est court, comme c'est le cas dans l'encart 6-3 où chaque branche
-retourne simplement une valeur. Si vous voulez exécuter plusieurs lignes de
-code dans une branche d'un `match`, vous devez utiliser les accolades. Par
-exemple, le code suivant va afficher “Un centime porte-bonheur !” à chaque fois
-que la méthode est appelée avec une valeur `PieceUs::Penny` mais va continuer à
-retourner la dernière valeur du bloc, `1` :
+Habituellement, nous n'utilisons pas les accolades si le code de la branche
+correspondante est court, comme c'est le cas dans l'encart 6-3 où chaque
+branche retourne simplement une valeur. Si vous voulez exécuter plusieurs
+lignes de code dans une branche d'un `match`, vous devez utiliser les
+accolades. Par exemple, le code suivant va afficher “Un centime
+porte-bonheur !” à chaque fois que la méthode est appelée avec une valeur
+`PieceUs::Penny`, mais va continuer à retourner la dernière valeur du
+bloc, `1` :
 
 <!--
 ```rust
@@ -203,10 +201,10 @@ also holds a `UsState` value</span>
 variante `Quarter` stocke en plus une valeur de type `EtatUs`</span>
 
 <!--
-Let’s imagine that a friend of ours is trying to collect all 50 state quarters.
-While we sort our loose change by coin type, we’ll also call out the name of
-the state associated with each quarter so if it’s one our friend doesn’t have,
-they can add it to their collection.
+Let’s imagine that a friend is trying to collect all 50 state quarters. While
+we sort our loose change by coin type, we’ll also call out the name of the
+state associated with each quarter so if it’s one our friend doesn’t have, they
+can add it to their collection.
 -->
 
 Imaginons qu'un de vos amis essaye de collectionner tous les *quarters* des 50
@@ -475,27 +473,28 @@ l'erreur à un milliard de dollars que nous avons vue précédemment.
 ### Les motifs génériques et le motif `_`
 
 <!--
-Let’s look at an example where we want to take special actions for a few
-particular values, but for all other values take one default action. Imagine
-we’re implementing a game where if you get a value of 3 on a dice roll, your
-player doesn’t move, but instead gets a new fancy hat. If you roll a 7, your
-player loses a fancy hat. For all other values, your player moves that number
-of spaces on the game board. Here’s a `match` that implements that logic, with
-the result of the dice roll hardcoded rather than a random value, and all other
-logic represented by functions without bodies because actually implementing
-them is out of scope for this example:
+Using enums, we can also take special actions for a few particular values, but
+for all other values take one default action. Imagine we’re implementing a game
+where, if you roll a 3 on a dice roll, your player doesn’t move, but instead
+gets a new fancy hat. If you roll a 7, your player loses a fancy hat. For all
+other values, your player moves that number of spaces on the game board. Here’s
+a `match` that implements that logic, with the result of the dice roll
+hardcoded rather than a random value, and all other logic represented by
+functions without bodies because actually implementing them is out of scope for
+this example:
 -->
 
-Voyons voir un exemple dans lequel nous voulons appliquer des actions spéciales
-pour certaines valeurs précises, mais une action par défaut pour toutes les
-autres valeurs. Imaginons que nous implémentons un jeu dans lequel si vous
-obtenez une valeur de 3 sur un lancé de dé, votre joueur ne se déplace pas, mais
-à la place il obtient un nouveau chapeau fataisie. Si vous obtenez un 7, votre
-joueur perd son chapeau fantaisie. Pour toutes les autres valeurs, votre joueur
-se déplace de ce nombre de cases sur le plateau du jeu. Voici un `match` qui
-implémente cette logique, avec le résultat du lancé de dé codé en dur plutôt
-qu'issu d'une génération aléatoire, et toute la logique des autres fonctions
-sont des corps vides car leur implémentation n'est pas le sujet de cet exemple :
+En utilisant les énumérations, nous pouvons aussi appliquer des actions
+spéciales pour certaines valeurs précises, mais une action par défaut pour
+toutes les autres valeurs. Imaginons que nous implémentons un jeu dans lequel,
+si vous obtenez une valeur de 3 sur un lancé de dé, votre joueur ne se déplace
+pas, mais à la place il obtient un nouveau chapeau fataisie. Si vous obtenez
+un 7, votre joueur perd son chapeau fantaisie. Pour toutes les autres valeurs,
+votre joueur se déplace de ce nombre de cases sur le plateau du jeu. Voici un
+`match` qui implémente cette logique, avec le résultat du lancé de dé codé en
+dur plutôt qu'issu d'une génération aléatoire, et toute la logique des autres
+fonctions sont des corps vides car leur implémentation n'est pas le sujet de
+cet exemple :
 
 <!--
 ```rust

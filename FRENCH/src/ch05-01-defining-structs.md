@@ -336,7 +336,7 @@ mais nous pouvons renseigner les valeurs des champs dans n'importe quel ordre,
 peu importe leur position dans la définition de la structure.
 
 <!--
-Note that the struct update syntax uses `=` like an assignement; this is
+Note that the struct update syntax uses `=` like an assignment; this is
 because it moves the data, just as we saw in the [“Ways Variables and Data
 Interact: Move”][move]<!-- ignore -- > section. In this example, we can no
 longer use `user1` after creating `user2` because the `String` in the
