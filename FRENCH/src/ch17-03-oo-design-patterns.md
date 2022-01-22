@@ -15,12 +15,12 @@ another state. The value that holds a state object knows nothing about the
 different behavior of the states or when to transition between states.
 -->
 
-Le *patron état* est un patron de conception issu de l'orienté objet. Le point
-essentiel du modèle est qu'une valeur a un état interne, qui est représenté par
-un ensemble *d'états*, et le comportement de la valeur change en fonction de son
-état interne. Les objets état partagent des fonctionnalités : en Rust, bien sûr,
-nous utilisons des structures et des traits plutôt que des objets et de
-l'héritage. Chaque objet état est responsable de son propre comportement et
+Le *patron état* est un patron de conception orienté objet. Le point essentiel
+de ce patron est qu'une valeur possède un état interne qui est représenté par
+un ensemble *d'objets état*, et le comportement de la valeur change en fonction
+de son état interne. Les objets état partagent des fonctionnalités : en Rust,
+bien sûr, nous utilisons des structures et des traits plutôt que des objets et
+de l'héritage. Chaque objet état est responsable de son propre comportement et
 décide lorsqu'il doit changer pour un autre état. La valeur contenue dans un
 objet état ne sait rien sur les différents comportements des états et ne sait
 pas quand il va changer d'état.
@@ -33,7 +33,7 @@ state objects to change its rules or perhaps add more state objects. Let’s loo
 at an example of the state design pattern and how to use it in Rust.
 -->
 
-L'utilisation du patron état signifie que lorsque les pré-requis du métier du
+L'utilisation du patron état signifie que lorsque les exigences métier du
 programme ont changé, nous n'avons pas besoin de changer le code à l'intérieur
 de l'objet état ou le code qui utilise l'objet. Nous avons juste besoin de
 modifier le code dans un des objets état pour changer son fonctionnement ou pour
@@ -59,8 +59,8 @@ manière incrémentale. Les fonctionnalités finales du blog seront les suivante
 1. Un billet de blog commence par un brouillon vide.
 2. Lorsque le brouillon est terminé, une relecture du billet est demandée.
 3. Lorsqu'un billet est approuvé, il est publié.
-4. Seuls les billets de blog publiés retournent du contenu à afficher, donc les
-   billets non approuvés ne peuvent pas être publiés accidentellement.
+4. Seuls les billets de blog publiés retournent du contenu à afficher si bien
+   que les billets non approuvés ne peuvent pas être publiés accidentellement.
 
 <!--
 Any other changes attempted on a post should have no effect. For example, if we
@@ -121,7 +121,7 @@ this would be to assert that a draft blog post returns an empty string from the
 Nous voulons permettre à l'utilisateur de créer un nouveau brouillon de billet
 de blog avec `Billet::new`. Ensuite nous voulons qu'il puisse ajouter du texte
 au billet de blog tant qu'il est à l'état de brouillon. Si nous essayons
-d'obtenir immédiatement le contenu du billet, avant qu'il soit relu, rien ne va
+d'obtenir immédiatement le contenu du billet, avant qu'il ne soit relu, rien ne va
 se passer car le billet est toujours un brouillon. Nous avons ajouté des
 `assert_eq!` dans le code pour les besoins de la démonstration. Un excellent
 test unitaire pour cela serait de vérifier qu'un brouillon de billet de blog
@@ -154,13 +154,13 @@ make a mistake with the states, like publishing a post before it’s reviewed.
 
 Remarquez que le seul type avec lequel nous interagissons avec la crate est le
 type `Billet`. Ce type va utiliser le patron état et va héberger une valeur qui
-sera un des trois objets état représentant les différents états dans lesquels
-passent un billet : brouillon, en attente de relecture, ou publié. Le changement
+sera un des trois objets état représentant les différents états par lesquels
+passe un billet : brouillon, en attente de relecture ou publié. Le changement
 d'un état à un autre sera géré en interne du type `Billet`. Les états vont
-changer suite aux méthodes appelées par les utilisateurs de notre bibliothèque
-sur l'instance de `Billet`, mais ils n'ont pas à gérer directement les
-changements d'état. De plus, les utilisateurs ne peuvent pas faire d'erreur avec
-les états, comme par exemple publier un billet avant qu'il soit relu.
+changer en réponse à l'appel des méthodes de l'instance de `Billet` par les
+utilisateurs de notre bibliothèque qui n'auront donc pas à les gérer
+directement. Ainsi les utilisateurs ne peuvent pas faire d'erreur avec les
+états, comme celle de publier un billet avant qu'il ne soit relu par exemple.
 
 <!--
 ### Defining `Post` and Creating a New Instance in the Draft State
@@ -180,11 +180,11 @@ inside an `Option<T>` in a private field named `state`. You’ll see why the
 
 Commençons l'implémentation de la bibliothèque ! Nous savons que nous aurons
 besoin d'une structure publique `Billet` qui héberge du contenu, donc nous
-allons commencer par définir cette structure et une fonction publique `new` qui
-lui est associée pour créer une instance de `Billet`, comme dans l'encart 17-12.
-Nous allons aussi créer un trait privé `Etat`. Ensuite `Billet` devra avoir un
-champ privé `etat` pour y loger une `Option<T>` contenant un objet trait de
-`Box<dyn Etat>`. Nous verrons plus tard l'intérêt du `Option<T>`.
+allons commencer par définir cette structure ainsi qu'une fonction publique
+`new` qui lui est associée pour créer une instance de `Billet`, comme dans
+l'encart 17-12. Nous allons aussi créer un trait privé `Etat`. Ensuite `Billet`
+devra avoir un champ privé `etat` pour y loger une `Option<T>` contenant un
+objet trait de `Box<dyn Etat>`. Nous verrons plus tard l'intérêt du `Option<T>`.
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -210,7 +210,7 @@ struct</span>
 
 <span class="caption">Encart 17-12 : définition d'une structure `Billet` et
 d'une fonction `new` qui crée une nouvelle instance de `Billet`, un trait
-`Etat`, et une structure `Brouillon`</span>
+`Etat` et une structure `Brouillon`</span>
 
 <!--
 The `State` trait defines the behavior shared by different post states, and the
@@ -220,10 +220,10 @@ just the `Draft` state because that is the state we want a post to start in.
 -->
 
 Le trait `Etat` définit le comportement partagé par plusieurs états de billet,
-et les états `Brouillon`, `EnRelecture`, et `Publier` vont tous implémenter le
+et les états `Brouillon`, `EnRelecture` et `Publier` vont tous implémenter ce
 trait `Etat`. Pour l'instant, le trait n'a pas de méthode, et nous allons
 commencer par définir uniquement l'état `Brouillon` car c'est l'état dans lequel
-nous voulons créer un nouveau billet.
+nous voulons que soit un nouveau billet lorsqu'il est créé.
 
 <!--
 When we create a new `Post`, we set its `state` field to a `Some` value that
@@ -261,7 +261,7 @@ Post` block:
 L'encart 17-11 a montré que nous souhaitons appeler une méthode `ajouter_texte`
 et lui passer un `&str` qui est ensuite ajouté au contenu textuel du billet de
 blog. Nous implémentons ceci avec une méthode plutôt que d'exposer publiquement
-le champ `contenu` avec `pub`. Cela signifie que nous pouvons implémenter une
+le champ `contenu` avec `pub`. Cela signifie que nous pourrons implémenter une
 méthode plus tard qui va contrôler comment le champ `contenu` sera lu. La
 méthode `ajouter_texte` est assez simple, donc ajoutons son implémentation dans
 le bloc `Billet` de l'encart 17-13 :
@@ -329,7 +329,7 @@ Même si nous avons appelé `ajouter_texte` et ajouté du contenu dans notre
 billet, nous voulons que la méthode `contenu` retourne toujours une slice de
 chaîne de caractères vide car le billet est toujours à l'état de brouillon,
 comme le montre la ligne 7 de l'encart 17-11. Implémentons maintenant la méthode
-`contenu` de la manière la plus simple qui répond à cette consigne : toujours
+`contenu` de la manière la plus simple qui réponde à cette consigne : toujours
 retourner un slice de chaîne de caractères vide. Nous la changerons plus tard
 lorsque nous implémenterons la capacité de changer l'état d'un billet afin qu'il
 puisse être publié. Pour l'instant, les billets ne peuvent qu'être à l'état de
@@ -418,7 +418,7 @@ current state and returns a new state.
 Nous installons la méthode publique `demander_relecture` sur `Billet` qui va
 prendre en argument une référence mutable à `self`. Ensuite nous appelons la
 méthode interne `demander_relecture` sur l'état interne de `Billet`, et cette
-seconde méthode `demander_relecture` consomme l'état en cours et applique un
+deuxième méthode `demander_relecture` consomme l'état en cours et applique un
 nouvel état.
 
 <!--
@@ -467,9 +467,9 @@ we’ve transformed it into a new state.
 -->
 
 Nous devons assigner temporairement `None` à `etat` plutôt que de lui donner
-directement avec code comme `self.etat = self.etat.demander_relecture();` car
+directement avec du code tel que `self.etat = self.etat.demander_relecture();` car
 nous voulons prendre possession de la valeur `etat`. Cela garantit que `Billet`
-ne peut pas utiliser l'ancienne valeur de `etat` après qu'on ai changé cet état.
+ne peut pas utiliser l'ancienne valeur de `etat` après qu'on ait changé cet état.
 
 <!--
 The `request_review` method on `Draft` needs to return a new, boxed instance of
@@ -484,7 +484,7 @@ La méthode `demander_relecture` sur `Brouillon` doit retourner une nouvelle
 instance d'une structure `EnRelecture` dans une `Box`, qui représente l'état
 lorsqu'un billet est en attente de relecture. La structure `EnRelecture`
 implémente elle aussi la méthode `demander_relecture` mais ne fait aucune
-modification. A la place, il se retourne lui-même, car lorsque nous demandons
+modification. A la place, elle se retourne elle-même, car lorsque nous demandons
 une relecture sur un billet déjà à l'état `EnRelecture`, il doit rester à l'état
 `EnRelecture`.
 
@@ -505,8 +505,8 @@ slice. We can now have a `Post` in the `PendingReview` state as well as in the
 Listing 17-11 now works up to line 10!
 -->
 
-Nous allons conserver la méthode `contenu` sur `Billet` comme elle l'est, elle
-va continuer à retourner une slice de chaîne de caractères vide. Nous pouvons
+Nous allons conserver la méthode `contenu` sur `Billet` comme elle est, elle
+va donc continuer à retourner une slice de chaîne de caractères vide. Nous pouvons
 maintenant avoir un `Billet` à l'état `Brouillon` ou `EnRelecture`, mais nous
 voulons qu'il suive le même comportement lorsqu'il est dans l'état
 `EnRelecture`. L'encart 17-11 fonctionne maintenant jusqu'à la ligne 10 !
@@ -524,8 +524,8 @@ state is approved, as shown in Listing 17-16:
 -->
 
 La méthode `approuver` ressemble à la méthode `demander_relecture` : elle va
-changer `etat` pour la valeur que l'état actuel retournera lorsque cet état est
-approuvé, comme le montre l'encart 17-16 :
+changer `etat` pour lui donner la valeur que l'état courant retournera lorsqu'il
+sera approuvé, comme le montre l'encart 17-16 :
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -609,7 +609,7 @@ delegate to a `content` method on `State`</span>
 -->
 
 <span class="caption">Encart 17-17 : correction de la méthode `contenu` de
-`Billet` pour déléguer à la méthode `contenu` de `Etat`</span>
+`Billet` afin qu'elle délègue à la méthode `contenu` de `Etat`</span>
 
 <!--
 Because the goal is to keep all these rules inside the structs that implement
@@ -639,7 +639,7 @@ référence vers la valeur dans `Option` plutôt que d'en prendre possession. Co
 `etat` est un `Option<Box<dyn Etat>>`, lorsque nous faisons appel à `as_ref`,
 une `Option<&Box<dyn Etat>>` est retournée. Si nous n'avions pas fait appel à
 `as_ref`, nous aurions obtenu une erreur car nous ne pouvons pas déplacer
-`etat` du `&self`, qui est emprunté, qui provient des paramètres de la fonction.
+`etat` de `&self`, lui-même est emprunté et provenant des paramètres de la fonction.
 
 <!--
 We then call the `unwrap` method, which we know will never panic, because we
@@ -652,9 +652,9 @@ to understand that.
 -->
 
 Nous faisons ensuite appel à la méthode `unwrap`, mais nous savons qu'elle ne
-va jamais paniquer, car nous savons que les méthodes sur `Billet` vont toujours
-garantir que `etat` contiendra toujours une valeur `Some` lorsqu'elles seront
-utilisées. C'est un des cas dont nous avons parlé dans
+va jamais paniquer, car nous savons que les méthodes sur `Billet` vont garantir
+que `etat` contiendra toujours une valeur `Some` lorsqu'elles seront utilisées.
+C'est un des cas dont nous avons parlé dans
 [une section][more-info-than-rustc]<!-- ignore --> du chapitre 9 lorsque nous
 savions qu'une valeur `None` ne serait jamais possible, même si le compilateur
 n'est pas capable de le comprendre.
@@ -675,7 +675,7 @@ l'extrapolation de déréférencement va s'appliquer sur le `&` et le `Box` pour
 que la méthode `contenu` puisse finalement être appelée sur le type qui
 implémente le trait `Etat`. Cela signifie que nous devons ajouter `contenu` à la
 définition du trait `Etat`, et que c'est ici que nous allons placer la logique
-pour le contenu à retourner en fonction de quel état nous avons, comme le montre
+pour le contenu à retourner en fonction de l'état nous avons, comme le montre
 l'encart 17-18 :
 
 <!--
@@ -734,17 +734,17 @@ pattern with the rules of the blog post workflow. The logic related to the
 rules lives in the state objects rather than being scattered throughout `Post`.
 -->
 
-Et nous avons maintenant terminé, tout le code de l'encart 17-11 fonctionne,
+Et nous avons maintenant terminé, tout le code de l'encart 17-11 fonctionne
 désormais ! Nous avons implémenté le patron état avec les règles de notre
-processus de publication définies pour notre blog. La logique des règles sont
-intégrées dans les objets état plutôt que d'être dispersée un peu partout dans
+processus de publication définies pour notre blog. La logique des règles est
+intégrée dans les objets état plutôt que d'être dispersée un peu partout dans
 `Billet`.
 
 <!--
 ### Trade-offs of the State Pattern
 -->
 
-### Les désavantages du patron état
+### Les inconvénients du patron état
 
 <!--
 We’ve shown that Rust is capable of implementing the object-oriented state
@@ -773,13 +773,13 @@ would only increase the more states we added: each of those `match` expressions
 would need another arm.
 -->
 
-Si nous aurions utilité une autre façon d'implémenter ces règles sans utiliser
+Si nous avions utilisé une autre façon d'implémenter ces règles sans utiliser
 le patron état, nous aurions dû utiliser des expressions `match` dans les
-méthodes de `Billet` ou même dans le code du `main` qui vérifie que l'état du
+méthodes de `Billet` ou même dans le code du `main` qui vérifie l'état du
 billet et les comportements associés aux changements d'états. Cela aurait eu
 pour conséquence d'avoir à regarder à différents endroits pour comprendre toutes
-les conséquences de la publication d'un billet ! Et ce code grossira au fur et
-à mesure que nous ajouterons des états : chaque expression `match` devra avoir
+les conséquences de la publication d'un billet ! Et ce code grossirait au fur et
+à mesure que nous ajouterions des états : chaque expression `match` devrait avoir
 des nouvelles branches pour ces nouveaux états.
 
 <!--
@@ -815,13 +815,13 @@ utilise le patron état, essayez d'accomplir certaines de ces suggestions :
 -->
 
 * Ajouter une méthode `rejeter` qui fait retourner l'état d'un billet de
-  `EnRelecture` en `Brouillon`.
+  `EnRelecture` à `Brouillon`.
 * Attendre deux appels à `approuver` avant que l'état puisse être changé en
   `Publier`.
-* Permettre aux utilisateurs pour ajouter du contenu textuel uniquement
-  lorsqu'un billet est à l'état `Brouillon`. Astuce : l'objet état est
-  responsable de ce qui peut changer dans le contenu mais pas responsable de la
-  modification de `Billet`.
+* Permettre aux utilisateurs d'ajouter du contenu textuel uniquement lorsqu'un
+  billet est à l'état `Brouillon`. Indice : rendre l'objet état responsable de
+  ce qui peut changer dans le contenu mais pas responsable de la modification
+  de `Billet`.
 
 </div>
 
@@ -835,13 +835,13 @@ change with the addition of a new state, but that would mean switching to
 another design pattern.
 -->
 
-Un désavantage du patron état est que comme les états implémentent les
-transitions en les états, certains des états sont reliés entre eux. Si nous
-ajoutons un nouvel état entre `EnRelecture` et `Publier`, comme `Planifier`,
-nous devrions alors changer le code dans `EnRelecture` pour qu'il passe ensuite
-à l'état `Planifier` à la place de `Publier`. Cela représentera moins de travail
-si `EnRelecture` n'a pas besoin de changer lorsqu'on ajoute un nouvel état, mais
-cela signifiera alors qu'il faut changer de patron.
+Un inconvénient du patron état est que comme les états implémentent les
+transitions entre les états, certains des états sont couplés entre eux. Si nous
+ajoutons un nouvel état entre `EnRelecture` et `Publier`, `Planifier` par exemple,
+nous devrons alors changer le code dans `EnRelecture` pour qu'il passe ensuite
+à l'état `Planifier` au lieu de `Publier`. Cela représenterait moins de travail
+si `EnRelecture` n'avait pas besoin de changer lorsqu'on ajoute un nouvel état, mais
+cela signifierait alors qu'il faudrait changer de patron.
 
 <!--
 Another downside is that we’ve duplicated some logic. To eliminate some of the
@@ -852,11 +852,11 @@ the concrete `self` will be exactly. We want to be able to use `State` as a
 trait object, so we need its methods to be object safe.
 -->
 
-Un autre désavantage et que nous avons de la logique en double. Pour éviter ces
+Un autre inconvénient est que nous avons de la logique en double. Pour éviter ces
 doublons, nous devrions essayer de faire en sorte que les méthodes
 `demander_relecture` et `approuver` qui retournent `self` deviennent les
-implémentations par défaut sur le trait `Etat` ; cependant, cela violera la
-sécurité des objets, car le trait ne sait pas ce qu'est exactement `self`. Nous
+implémentations par défaut sur le trait `Etat` ; cependant, cela violerait la
+sûreté des objets, car le trait ne sait pas ce qu'est exactement `self`. Nous
 voulons pouvoir utiliser `Etat` en tant qu'objet trait, donc nous avons besoin
 que ses méthodes soient sûres pour les objets.
 
@@ -869,12 +869,12 @@ that followed this pattern, we might consider defining a macro to eliminate the
 repetition (see the [“Macros”][macros]<!-- ignore -- > section in Chapter 19).
 -->
 
-Nous avons aussi des doublons dans le code des méthodes `demander_relecture`
-et `approuver` sur `Billet`. Ces deux méthodes délèguent leur travail aux mêmes
-méthodes respectives sur la valeur du champ `etat` de type `Option` et assignent
-la valeur au même champ `etat` à la fin. Si nous avions beaucoup de méthodes sur
-`Billet` qui suivent cette logique, nous devrions considérer la création et
-l'utilisation d'une macro pour éviter cette répétition (voir la
+Nous avons aussi des doublons dans le code des méthodes `demander_relecture` et
+`approuver` sur `Billet`. Ces deux méthodes délèguent leur travail à la même
+méthode de la valeur du champ `etat` de type `Option` et assignent la nouvelle
+valeur du même champ `etat` à la fin. Si nous avions beaucoup de méthodes sur
+`Billet` qui suivaient cette logique, nous devrions envisager de définir une
+macro pour éviter cette répétition (voir la
 [section dédiée][macros]<!-- ignore --> dans le chapitre 19).
 
 <!--
@@ -884,10 +884,10 @@ Let’s look at some changes we can make to the `blog` crate that can make
 invalid states and transitions into compile time errors.
 -->
 
-En implémentant le patron état exactement comme il l'est défini pour les
+En implémentant le patron état exactement comme il est défini pour les
 langages orientés-objet, nous ne profitons pas pleinement des avantages de
 Rust. Voyons voir si nous pouvons faire quelques changements pour que la crate
-`blog` puisse lever des erreurs à la compilation lorsqu'elle aura détecté des
+`blog` puisse lever des erreurs dès la compilation lorsqu'elle aura détecté des
 états ou des transitions invalides.
 
 <!--
@@ -905,12 +905,12 @@ draft posts where only published posts are allowed by issuing a compiler error.
 -->
 
 Nous allons vous montrer comment repenser le patron état pour qu'il offre des
-compromis différents. Plutôt que d'intégrer les états et les transitions
-complètement de manière à ce que le code externe ne puissent pas les connaître,
-nous allons transformer les états dans différents types. En conséquence, le
-système de vérification de type de Rust va éviter d'utiliser des brouillons de
-billets en provoquant une erreur du compilateur dans les endroits où ils seront
-utilisés alors que seuls les billets publiés seront autorisés.
+compromis différents. Plutôt que d'encapsuler complètement les états et les
+transitions, faisant que le code externe ne puissent pas les connaître, nous
+allons coder ces états sous forme de différents types. En conséquence, le
+système de vérification de type de Rust va empêcher toute tentative
+d'utilisation des brouillons de billets là où seuls des billets publiés sont
+autorisés, en provoquant une erreur de compilation.
 
 <!--
 Let’s consider the first part of `main` in Listing 17-11:
@@ -989,11 +989,11 @@ struct will represent a published post, and it has a `content` method that
 returns the `content`.
 -->
 
-Les deux structures `Billet` et `BrouillonDeBillet` ont un champ privé `contenu`
-qui stocke le texte du billet de blog. Les structures n'ont plus le champ `etat`
-car nous avons déplacé la signification de l'état directement dans le nom de ces
-types de structures. La structure `Billet` représente un billet publié, et a une
-méthode `contenu` qui retourne le `contenu`.
+Les deux structures `Billet` et `BrouillonDeBillet` ont un champ privé
+`contenu` qui stocke le texte du billet de blog. Les structures n'ont plus le
+champ `etat` car nous avons déplacé la signification de l'état directement dans
+le nom de ces types de structures. La structure `Billet` représente un billet
+publié et possède une méthode `contenu` qui retourne le `contenu`.
 
 <!--
 We still have a `Post::new` function, but instead of returning an instance of
@@ -1018,10 +1018,10 @@ these constraints will result in a compiler error.
 La structure `BrouillonDeBillet` a une méthode `ajouter_texte`, donc nous
 pouvons ajouter du texte à `contenu` comme nous le faisions avant, mais
 remarquez toutefois que `BrouillonDeBillet` n'a pas de méthode `contenu` de
-défini ! Donc pour l'instant le programme s'assure que tous les billets
-démarrent à l'état de brouillon, et que les brouillons ne proposent pas de
-contenu à publier. Toute tentative d'outre-passer ces contraintes vont
-déclencher des erreurs de compilation.
+définie ! Donc pour l'instant le programme s'assure que tous les billets
+démarrent à l'état de brouillon et que les brouillons ne proposent pas de
+contenu à publier. Toute tentative d'outre-passer ces contraintes va
+déclencher une erreur de compilation.
 
 <!--
 #### Implementing Transitions as Transformations into Different Types
@@ -1044,7 +1044,7 @@ brouillon de billet doit être relu et approuvé avant de pouvoir être publié.
 billet à l'état de relecture doit continuer à ne pas montrer son contenu.
 Implémentons ces contraintes en introduisant une nouvelle structure,
 `BilletEnRelecture`, en définissant la méthode `demander_relecture` sur
-`BrouillonDeBillet` pour retourner un `BilletEnRelecture`, et en définissant une
+`BrouillonDeBillet` retournant un `BilletEnRelecture`, et en définissant une
 méthode `approuver` sur `BilletEnRelecture` pour qu'elle retourne un `Billet`,
 comme le propose l'encart 17-20 :
 
@@ -1117,10 +1117,11 @@ méthodes `demander_relecture` et `approuver` retournent des nouvelles instances
 au lieu de modifier la structure sur laquelle elles ont été appelées, donc nous
 devons ajouter des assignations de masquage `let billet =` pour stocker les
 nouvelles instances retournées. Nous ne pouvons pas non plus vérifier que le
-contenu des brouillons de billets et ceux en cours de relecture soient bien
-vides, donc nous n'en avons plus besoin : nous ne pouvons plus compiler du code
-qui essaye d'utiliser le contenu d'un billet dans cet état. Le code du `main`
-mis à jour est présenté dans l'encart 17-21 :
+contenu des brouillons de billets et de ceux en cours de relecture sont bien
+vides, donc nous n'avons plus besoin des vérifications associées : en effet,
+nous ne pouvons plus compiler du code qui essaye d'utiliser le contenu d'un
+billet dans ces états. Le code du `main` mis à jour est présenté dans
+l'encart 17-21 :
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -1156,14 +1157,14 @@ compile time! This ensures that certain bugs, such as display of the content of
 an unpublished post, will be discovered before they make it to production.
 -->
 
-Les modifications dont nous avons besoin de faire au `main` pour réassigner
+Les modifications que nous avons eu besoin de faire à `main` pour réassigner
 `billet` impliquent que cette implémentation ne suit plus exactement le patron
 état orienté-objet : les changements d'états ne sont plus totalement intégrés
-dans l'implémentation de `Billet`. Cependant, nous faisons en sorte que les
-états invalides soient impossibles grâce au système de types et que la
-vérification de type s'effectue à la compilation ! Cela garantit que certains
-bogues, comme l'affichage du contenu d'un billet non publié, sera détecté avant
-avant d'arriver en production.
+dans l'implémentation de `Billet`. Cependant, nous avons obtenu que les
+états invalides sont désormais impossibles grâce au système de types et à la
+vérification de type qui s'effectue à la compilation ! Cela garantit que certains
+bogues, comme l'affichage du contenu d'un billet non publié, seront détectés avant
+d'arriver en production.
 
 <!--
 Try the tasks suggested for additional requirements that we mentioned at the
@@ -1172,12 +1173,12 @@ what you think about the design of this version of the code. Note that some of
 the tasks might be completed already in this design.
 -->
 
-Essayez d'accomplir [les suggestions proposées pour les conditions
-supplémentaires que nous avons listés au début de cette
-section](#suggestions-implementations), sur la crate `blog` telle qu'elle est
-après l'encart 17-20, pour vous faire une idée sur cette conception du code.
-Notez aussi que certaines suggestions sont déjà accomplies implicitement grâce à
-cette conception.
+Essayez d'implémenter [les exigences fonctionnelles supplémentaires suggérées
+dans la liste présente au début de cette section](#suggestions-implementations),
+sur la crate `blog` dans l'état où elle était après l'encart 17-20, afin de
+vous faire une idée sur cette façon de concevoir le code. Notez aussi que
+certaines de ces exigences pourraient déjà être implémentées implicitement du
+fait de cette conception.
 
 <!--
 We’ve seen that even though Rust is capable of implementing object-oriented
@@ -1191,11 +1192,11 @@ object-oriented languages don’t have.
 -->
 
 Nous avons vu que même si Rust est capable d'implémenter des patrons de
-conception orientés-objet, les autres patrons, comme intégrer l'état dans le
-système de type, est aussi possible en Rust. Ces patrons ont différents
-avantages et désavantages. Bien que vous soyez familier avec les patrons
+conception orientés-objet, d'autres patrons, tel qu'intégrer l'état dans le
+système de type, sont également possibles en Rust. Ces patrons présentent différents
+avantages et inconvénients. Bien que vous puissiez être très familier avec les patrons
 orientés-objet, vous gagnerez à repenser les choses pour tirer avantage des
-fonctionnalités de Rust, comme la détection de certains bogues à la compilation.
+fonctionnalités de Rust, telles que la détection de certains bogues à la compilation.
 Les patrons orientés-objet ne sont pas toujours la meilleure solution en Rust à
 cause de certaines de ses fonctionnalités, comme la possession, que les langages
 orientés-objet n'ont pas.
@@ -1223,7 +1224,7 @@ chapitre, vous savez maintenant que vous pouvez utiliser les objets trait pour
 pouvoir obtenir certaines fonctionnalités orienté-objet en Rust. La répartition
 dynamique peut offrir de la flexibilité à votre code en échange d'une perte de
 performances à l'exécution. Vous pouvez utiliser cette flexibilité pour
-implémenter des patrons orientés-objet qui puissent aider la maintenance de
+implémenter des patrons orientés-objet qui facilitent la maintenance de
 votre code. Rust offre d'autres fonctionnalités, comme la possession, que les
 langages orientés-objet n'ont pas. L'utilisation d'un patron orienté-objet n'est
 pas toujours la meilleure manière de tirer parti des avantages de Rust, mais
@@ -1235,10 +1236,10 @@ lots of flexibility. We’ve looked at them briefly throughout the book but
 haven’t seen their full capability yet. Let’s go!
 -->
 
-Dans le chapitre suivant, nous allons étudier les motifs, qui est une autre des
-fonctionnalités de Rust qui offre beaucoup de flexibilité. Nous les avons
-rencontrés brièvement dans le livre, mais nous n'avons pas encore vu tout leur
-potentiel. C'est parti !
+Dans le chapitre suivant, nous allons étudier les motifs, qui constituent une
+autre des fonctionnalités de Rust et apportent beaucoup de flexibilité. Nous
+les avons abordés brièvement dans le livre, mais nous n'avons pas encore vu
+tout leur potentiel. C'est parti !
 
 <!-- markdownlint-disable -->
 <!--

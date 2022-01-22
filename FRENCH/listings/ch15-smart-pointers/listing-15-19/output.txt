@@ -5,4 +5,4 @@ $ cargo run
 compteur après la création de a = 1
 compteur après la création de b = 2
 compteur après la création de c = 3
-compteur après que c soit sortie de la portée = 2
+compteur après que c est sorti de la portée = 2

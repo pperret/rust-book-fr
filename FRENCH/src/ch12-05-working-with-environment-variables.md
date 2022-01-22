@@ -361,14 +361,13 @@ of the other methods we’ve seen on `Result`.
 
 Nous utilisons la méthode `is_err` sur le `Result` pour vérifier si nous obtenons
 une erreur, signalant par conséquent que la variable d'environnement n'est pas
-définie et donc que nous *devons* effectuer une recherche sensible à la casse. 
-Si la variable d'environnement
-`MINIGREP_INSENSIBLE_CASSE` a une valeur qui lui a été assignée, `is_err` va
-retourner `false` et le programme va procéder à une recherche non sensible à
-la casse. Nous ne nous préoccupons pas de la *valeur* de la variable d'environnement,
-mais uniquement de savoir si elle est définie ou non, donc nous utilisons
-`is_err` plutôt que `unwrap`, `expect` ou toute autre méthode que nous avons
-vue avec `Result`.
+définie et donc que nous *devons* effectuer une recherche sensible à la casse.
+Si la variable d'environnement `MINIGREP_INSENSIBLE_CASSE` a une valeur qui lui
+a été assignée, `is_err` va retourner `false` et le programme va procéder à une
+recherche non sensible à la casse. Nous ne nous préoccupons pas de la *valeur*
+de la variable d'environnement, mais uniquement de savoir si elle est définie
+ou non, donc nous utilisons `is_err` plutôt que `unwrap`, `expect` ou toute
+autre méthode que nous avons vue avec `Result`.
 
 <!--
 We pass the value in the `case_sensitive` variable to the `Config` instance so
@@ -450,7 +449,8 @@ PS> Remove-Item Env:MINIGREP_INSENSIBLE_CASSE
 We should get lines that contain “to” that might have uppercase letters:
 -->
 
-Nous devrions trouver cette fois-ci également toutes les lignes qui contiennent “to” écrit avec certaines lettres en majuscule:
+Nous devrions trouver cette fois-ci également toutes les lignes qui contiennent
+“to” écrit avec certaines lettres en majuscule:
 
 <!--
 <!-- manual-regeneration

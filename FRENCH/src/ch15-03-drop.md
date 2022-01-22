@@ -2,7 +2,7 @@
 ## Running Code on Cleanup with the `Drop` Trait
 -->
 
-## Exécuter du code au nettoyage avec le trait `Drop`
+## Exécuter du code lors du nettoyage avec le trait `Drop`
 
 <!--
 The second trait important to the smart pointer pattern is `Drop`, which lets
@@ -21,7 +21,7 @@ d'une portée. Vous pouvez fournir une implémentation du trait `Drop` sur
 n'importe quel type, et le code que vous renseignez peut être utilisé pour
 libérer des ressources comme des fichiers ou des connections réseau. Nous
 présentons `Drop` dans le contexte des pointeurs intelligents car la
-fonctionnalité du trait `Drop` est quasiment systématiquement utilisé
+fonctionnalité du trait `Drop` est quasiment systématiquement utilisée
 lorsque nous implémentons un pointeur intelligent. Par exemple, lorsqu'une
 `Box<T>` est libérée, elle va désallouer l'espace occupé sur le tas sur lequel
 la boite pointe.
@@ -56,7 +56,7 @@ let’s implement `drop` with `println!` statements for now.
 Vous renseignez le code à exécuter lorsqu'une valeur sort de la portée en
 implémentant le trait `Drop`. Le trait `Drop` nécessite que vous implémentiez
 une méthode `drop` qui prend en paramètre une référence mutable à `self`. Pour
-visualiser lorsque Rust appelle `drop`, implémentons `drop` avec une instruction
+voir quand Rust appelle `drop`, implémentons `drop` avec une instruction
 `println!` à l'intérieur, pour le moment.
 
 <!--
@@ -68,7 +68,7 @@ function.
 
 L'encart 15-14 montre une structure `PointeurPerso` dont la seule fonctionnalité
 personnalisée est qu'elle va écrire `Nettoyage d'un PointeurPerso !` lorsque
-l'instance sort de la portée. Cet exemple montre lorsque Rust exécute la
+l'instance sort de la portée. Cet exemple signale quand Rust exécute la
 fonction `drop`.
 
 <!--
@@ -110,7 +110,7 @@ besoin de l'importer dans la portée. Nous implémentons le trait `Drop` sur
 `PointeurPerso` et nous fournissons une implémentation de la méthode `drop` qui
 appelle `println!`. Le corps de la fonction `drop` est l'endroit où vous placez
 la logique que vous souhaitez exécuter lorsqu'une instance du type concerné sort
-de la portée. Ici nous affichons un petit texte pour visionner lorsque Rust
+de la portée. Ici nous affichons un petit texte pour voir quand Rust
 appelle `drop`.
 
 <!--
@@ -122,9 +122,10 @@ call the `drop` method explicitly.
 -->
 
 Dans le `main`, nous créons deux instances de `PointeurPerso` et ensuite on
-affiche `PointeurPerso créés`. A la fin du `main`, nos instances de
+affiche `PointeurPersos créés`. A la fin du `main`, nos instances de
 `PointeurPerso` vont sortir de la portée, et Rust va appeler le code que nous
-avons placé explicitement dans a méthode `drop`.
+avons placé dans la méthode `drop` et qui va afficher notre message final.
+Notez que nous n'avons pas besoin d'appeler explicitement la méthode `drop`.
 
 <!--
 When we run this program, we’ll see the following output:
@@ -151,11 +152,11 @@ code that your type needs to run rather than a print message.
 -->
 
 Rust a appelé automatiquement `drop` pour nous lorsque nos instances sont
-sorties de la portée, et appelé le code que nous avons renseigné. Les variables
-sont libérées dans l'ordre inverse à leur création, donc `d` a été libéré avant
-`c`. Cet exemple vous fournit une illustration de comment la méthode `drop`
-fonctionne ; normalement vous devriez renseigner le code de nettoyage que votre
-type a besoin d'exécuter plutôt que d'afficher un message.
+sorties de la portée, appelant ainsi le code que nous y avions mis. Les variables
+sont libérées dans l'ordre inverse de leur création, donc `d` a été libéré avant
+`c`. Cet exemple vous fournit une illustration de la façon dont la méthode `drop`
+fonctionne ; normalement vous devriez y mettre le code de nettoyage dont votre
+type a besoin d'exécuter plutôt que d'afficher simplement un message.
 
 <!--
 ### Dropping a Value Early with `std::mem::drop`
@@ -218,7 +219,7 @@ aurons une erreur de compilation :
 the `Drop` trait manually to clean up early</span>
 -->
 
-<span class="caption">Encart 15-15 : tentative d'appel manuel à la méthode
+<span class="caption">Encart 15-15 : tentative d'appel manuel de la méthode
 `drop` du trait `Drop` afin de nettoyer prématurément</span>
 
 <!--
@@ -261,7 +262,7 @@ twice.
 
 Rust ne nous laisse pas appeler explicitement `drop` car Rust appellera toujours
 automatiquement `drop` sur la valeur à la fin du `main`. Cela serait une erreur
-de *double libération* car Rust va essayer de nettoyer la même valeur deux fois.
+de *double libération* car Rust essayerait de nettoyer la même valeur deux fois.
 
 <!--
 We can’t disable the automatic insertion of `drop` when a value goes out of
@@ -334,7 +335,7 @@ before the end of main.` text, showing that the `drop` method code is called to
 drop `c` at that point.
 -->
 
-Le texte ```Nettoyage d'un CustomSmartPointer avec la donnée `des trucs` !```
+Le texte ```Nettoyage d'un PointeurPerso avec la donnée `des trucs` !```
 est affiché entre `PointeurPerso créé` et
 `PointeurPerso libéré avant la fin du main`, ce qui démontre que la méthode
 `drop` a été appelée pour libérer `c` à cet endroit.
@@ -359,7 +360,7 @@ references are always valid also ensures that `drop` gets called only once when
 the value is no longer being used.
 -->
 
-Vous n'avez pas non plus à vous soucier des problèmes résultants du nettoyage
+Vous n'avez pas non plus à vous soucier des problèmes résultant du nettoyage
 accidentel de valeurs toujours utilisées : le système de possession assurant que
 les références sont toujours en vigueur assure également que `drop` n'est appelé
 qu'une seule fois lorsque la valeur n'est plus utilisée.

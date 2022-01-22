@@ -652,8 +652,8 @@ always starting new instances with a value of 0 in the `count` field.
 La structure `Compteur` a un champ `compteur`. Ce champ contient une valeur
 `u32` qui gardera la trace de l'endroit où nous sommes dans le processus
 d'itération de 1 à 5. Le champ `compteur` est privé car nous voulons que ce soit
-l'implémentation de `Compteur` qui gère sa valeur. La fonction `new` impose 
-de toujours démarrer de nouvelles instances avec une valeur de 0 pour le champ
+l'implémentation de `Compteur` qui gère sa valeur. La fonction `new` impose de
+toujours démarrer de nouvelles instances avec une valeur de 0 pour le champ
 `compteur`.
 
 <!--
@@ -821,7 +821,6 @@ pourrions le faire, comme le montre le test dans l'encart 13-23 :
 <span class="caption">Listing 13-23: Using a variety of `Iterator` trait
 methods on our `Counter` iterator</span>
 -->
-
 
 <span class="caption">Encart 13-23 : utilisation d'une gamme de méthodes du
 trait `Iterator` sur notre itérateur `Compteur` </span>

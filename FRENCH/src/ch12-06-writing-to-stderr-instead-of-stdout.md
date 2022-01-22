@@ -18,8 +18,8 @@ la macro `println!`. Dans la plupart des terminaux, il y a deux genres de
 sorties : la *sortie standard* (`stdout`) pour les informations générales
 et *la sortie d'erreur standard* (`stderr`) pour les messages d'erreur. Cette
 distinction permet à l'utilisateur de choisir de rediriger la sortie des
-messages sans erreurs d'un programme vers un fichier mais continuer à afficher les messages
-d'erreur à l'écran.
+messages sans erreurs d'un programme vers un fichier mais continuer à afficher
+les messages d'erreur à l'écran.
 
 <!--
 The `println!` macro is only capable of printing to standard output, so we
@@ -171,7 +171,7 @@ After changing `println!` to `eprintln!`, let’s run the program again in the
 same way, without any arguments and redirecting standard output with `>`:
 -->
 
-Après avoir changé `println!` en `eprintln!`, exécutons à nouveau le programme 
+Après avoir changé `println!` en `eprintln!`, exécutons à nouveau le programme
 de la même manière, sans aucun argument et en redirigeant la sortie standard
 avec `>` :
 

@@ -1,5 +1,5 @@
 [package]
-name = "ajouter-un"
+name = "ajouter_un"
 version = "0.1.0"
 edition = "2021"
 

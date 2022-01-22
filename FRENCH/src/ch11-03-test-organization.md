@@ -189,9 +189,9 @@ module. Comme nous l'avons vu dans [la section "Désigner un élément dans
 l'arborescence de modules"][paths]<!-- ignore -->, les
 éléments dans les modules enfants peuvent utiliser les éléments dans leurs
 modules parents. Dans ce test, nous importons dans la portée tous les éléments
-du parent du module `test` grâce à `use super::*;`, permettant ensuite au test de 
-faire appel à `addition_interne`. Si vous pensez qu'une fonction privée ne doit
-pas être testée, il n'y a rien qui vous y force avec Rust.
+du parent du module `test` grâce à `use super::*;`, permettant ensuite au test
+de faire appel à `addition_interne`. Si vous pensez qu'une fonction privée ne
+doit pas être testée, il n'y a rien qui vous y force avec Rust.
 
 <!--
 ### Integration Tests
@@ -233,9 +233,9 @@ can then make as many test files as we want to in this directory, and Cargo
 will compile each of the files as an individual crate.
 -->
 
-Nous créons un dossier *tests* au niveau le plus haut de notre dossier 
-projet, juste à côté de *src*. Cargo sait qu'il doit rechercher les fichiers de
-test d'intégration dans ce dossier. Nous pouvons ensuite construire autant de
+Nous créons un dossier *tests* au niveau le plus haut de notre dossier projet,
+juste à côté de *src*. Cargo sait qu'il doit rechercher les fichiers de test
+d'intégration dans ce dossier. Nous pouvons ensuite construire autant de
 fichiers de test que nous le souhaitons dans ce dossier, et Cargo va compiler
 chacun de ces fichiers comme une crate individuelle.
 
@@ -315,9 +315,9 @@ Listing 11-12) and then a summary line for the unit tests.
 
 Les trois sections de la sortie concernent les tests unitaires, les tests
 d'intégration et les tests de documentation. La première section relative aux
-tests unitaires est la même que celle que nous avons déjà vue : une ligne pour chaque test
-unitaire (celui qui s'appelle `interne` que nous avons inséré dans l'encart
-11-12) suivie d'une ligne de résumé des tests unitaires.
+tests unitaires est la même que celle que nous avons déjà vue : une ligne pour
+chaque test unitaire (celui qui s'appelle `interne` que nous avons inséré dans
+l'encart 11-12) suivie d'une ligne de résumé des tests unitaires.
 
 <!--
 The integration tests section starts with the line `Running

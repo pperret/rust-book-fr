@@ -29,8 +29,8 @@ Le découpage des calculs de votre programme dans plusieurs tâches peut
 améliorer sa performance car le programme fait plusieurs choses à la fois, mais
 cela rajoute aussi de la complexité. Comme les tâches peuvent s'exécuter de
 manière simultanée, il n'y a pas de garantie absolue sur l'ordre d'exécution
-de vos différentes parties de votre code. Cela peut poser des problèmes,
-comme :
+des différentes parties de votre code. Cela peut poser des problèmes,
+tels que :
 
 <!--
 * Race conditions, where threads are accessing data or resources in an
@@ -41,8 +41,8 @@ comme :
   reliably
 -->
 
-* Les situations de concurrence, durant lesquelles les tâches accèdent à une
-  donnée ou ressource dans un ordre incohérent
+* Les situations de concurrence, durant lesquelles les tâches accèdent à des
+  données ou des ressources dans un ordre incohérent
 * Des interblocages, durant lesquels deux tâches attendent mutuellement que
   l'autre finisse d'utiliser une ressource que l'autre tâche utilise, bloquant
   la progression des deux tâches
@@ -58,7 +58,7 @@ thread.
 
 Rust cherche à atténuer les effets indésirables de l'utilisation des tâches,
 mais le développement dans un contexte multitâches exige toujours une attention
-particulière et nécessite une structure de code différente de celle pour des
+particulière et nécessite une structure de code différente de celle des
 programmes qui s'exécutent dans une seule tâche.
 
 <!--
@@ -69,8 +69,8 @@ meaning one operating system thread per one language thread.
 -->
 
 Les langages de programmation implémentent les tâches de différentes manières.
-De nombreux systèmes d'exploitation offrent des API pour créer des nouvelles
-tâches. L'appel à cet API du système d'exploitation pour créer des tâches par
+De nombreux systèmes d'exploitation offrent des API pour créer de nouvelles
+tâches. L'appel à cette API du système d'exploitation pour créer des tâches par
 un langage est parfois qualifié de *1:1*, ce qui signifie une tâche du système
 d'exploitation par tâche dans le langage de programmation.
 
@@ -86,7 +86,7 @@ number.
 
 De nombreux langages de programmation fournissent leur propre implémentation
 spéciale des tâches. Les tâches fournies par un langage de programmation
-s'appelle une tâche *virtuelle*, et les langages qui utilisent ces tâches
+s'appelle des tâches *virtuelles*, et les langages qui utilisent ces tâches
 virtuelles vont les exécuter dans différentes tâches du système d'exploitation.
 C'est pourquoi le modèle des tâches virtuelles est appelé modèle *M:N* : il y a
 `M` tâches virtuelles pour `N` tâches du système d'exploitation, dans lequel
@@ -117,19 +117,19 @@ maintain performance.
 -->
 
 Dans ce contexte, lorsque nous parlons *d'environnement exécution*, nous
-entendons le code qui est intégré par le langage dans chaque binaire. Ce code
-peut être plus ou moins vaste en fonction du langage, mais chaque langage non
-assembleur aura une certaine quantité de code d'environnement exécution. Pour
-cette raison, lorsque les gens disent couramment d'un langage n'a pas
-“d'environnement d'exécution”, ils entendent très souvent “faible environnement
-d'exécution”. Les faibles environnements d'exécution ont moins de
-fonctionnalités mais ont l'avantage d'avoir des bibliothèques plus petites, ce
-qui facilite la combinaison du langage avec un autre et dans plus de contextes.
-Contrairement à de nombreux langages de programmation qui acceptent d'augmenter
-la taille de l'environnement d'exécution pour plus de fonctionnalités, Rust a
-besoin d'avoir un environnement d'exécution presque inexistant et ne doit pas
-faire de compromis sur ses capacités à faire appel au C, afin de conserver ses
-performances.
+voulons dire le code qui est intégré par le langage dans chaque binaire. Ce
+code peut être plus ou moins vaste en fonction du langage, mais chaque langage
+non assembleur possèdera quand même une certaine quantité de code
+d'environnement exécution. Pour cette raison, lorsque les gens disent un peu
+abusivement d'un langage qu'il n'a pas “d'environnement d'exécution”, ils
+veulent très souvent dire qu'il a un “faible environnement d'exécution”. Les
+faibles environnements d'exécution ont moins de fonctionnalités mais ont
+l'avantage d'avoir des bibliothèques plus petites, ce qui facilite la
+combinaison du langage avec un autre et dans plus de contextes. Contrairement à
+de nombreux langages de programmation qui acceptent d'augmenter la taille de
+l'environnement d'exécution pour avoir plus de fonctionnalités, Rust n'a
+quasiment pas besoin d'avoir un environnement d'exécution et ne doit pas faire
+de compromis en faisant appel au C afin de conserver ses performances.
 
 <!--
 The green-threading M:N model requires a larger language runtime to manage
@@ -144,9 +144,8 @@ Le modèle de tâches virtuelles M:N nécessite un plus grand environnement
 d'exécution pour gérer les tâches. C'est pourquoi la bibliothèque standard de
 Rust fournit seulement une implémentation 1:1. Comme Rust est un langage
 bas-niveau, il existe des crates qui implémentent des tâches M:N si vous
-préférez compenser des pertes de performances pour plus de maîtrise dans
-l'exécution des tâches et moins de conséquences pour les changements de
-contextes.
+préférez accepter des pertes de performances en échange de plus de maîtrise dans
+l'exécution des tâches ou de changements de contextes à moindre coût.
 
 <!--
 Now that we’ve defined threads in Rust, let’s explore how to use the
@@ -208,8 +207,8 @@ following:
 -->
 
 Remarquez qu'avec cette fonction, la nouvelle tâche s'arrêtera lorsque la tâche
-principale s'arrêtera, qu'elle ai fini ou non de s'exécuter. La sortie de ce
-programme peut être différente à chaque fois, mais il devrait ressembler à
+principale s'arrêtera, qu'elle ait fini ou non de s'exécuter. La sortie de ce
+programme peut être différente à chaque fois, mais elle devrait ressembler à
 ceci :
 
 <!--
@@ -258,10 +257,10 @@ L'appel à `thread::sleep` force une tâche à mettre en pause son exécution
 pendant une petite durée, permettant à une autre tâche de s'exécuter. Les
 tâches se relaieront probablement, mais ce n'est pas garanti : cela dépend de
 comment votre système d'exploitation agence les tâches. Lors de cette
-exécution, la tâche principale a d'abord écris, même si l'instruction
-d'écriture de la nouvelle tâche apparaît en premier dans le code. Et même si
+exécution, la tâche principale a écrit en premier, même si l'instruction
+d'écriture de la nouvelle tâche apparaissait d'abord dans le code. Et même si
 nous avons demandé à la nouvelle tâche d'écrire jusqu'à ce que `i` vaille `9`,
-elle l'a fait seulement jusqu'à `5`, avant que la tâche principale s'arrête.
+elle ne l'a fait que jusqu'à `5`, moment où la tâche principale s'est arrêtée.
 
 <!--
 If you run this code and only see output from the main thread, or don’t see any
@@ -288,10 +287,10 @@ on the order in which threads run!
 -->
 
 Le code dans l'encart 16-1 non seulement stoppe la nouvelle tâche prématurément
-la plupart du temps à cause de la fin de la tâche principale, mais elle ne
-garantit pas non plus que la nouvelle tâche va s'exécuter une seule fois. La
-raison à cela est qu'il n'y a pas de garantie sur l'ordre dans lequel les
-tâches vont s'exécuter !
+la plupart du temps à cause de la fin de la tâche principale, mais il ne
+garantit pas non plus que la nouvelle tâche va s'exécuter ne serait-ce qu'une
+seule fois. La raison à cela est qu'il n'y a pas de garantie sur l'ordre dans
+lequel les tâches vont s'exécuter !
 
 <!--
 We can fix the problem of the spawned thread not getting to run, or not getting
@@ -308,9 +307,9 @@ pas complètement, en sauvegardant la valeur de retour de `thread::spawn` dans
 une variable. Le type de retour de `thread::spawn` est `JoinHandle`. Un
 `JoinHandle` est une valeur possédée qui, lorsque nous appelons la méthode
 `join` sur elle, va attendre que ses tâches finissent. L'encart 16-2 montre
-comment utiliser le `JoinHandle` de la tâche que nous avons créé dans l'encart
+comment utiliser le `JoinHandle` de la tâche que nous avons créée dans l'encart
 16-1 en appelant la méthode `join` pour s'assurer que la nouvelle tâche finit
-bien avant que `main` se termine :
+bien avant que `main` ne se termine :
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -346,7 +345,7 @@ produce output similar to this:
 
 L'appel à `join` sur le manipulateur bloque la tâche qui s'exécute actuellement
 jusqu'à ce que la tâche représentée par le manipulateur se termine. *Bloquer*
-une tâche signifie que cette tâche est privée d'accomplir un quelconque travail
+une tâche signifie que cette tâche est empêchée d'accomplir un quelconque travail
 ou de se terminer. Comme nous avons inséré l'appel à `join` après la boucle
 `for` de la tâche principale, l'exécution de l'encart 16-2 devrait produire un
 résultat similaire à celui-ci :
@@ -396,9 +395,9 @@ The two threads continue alternating, but the main thread waits because of the
 call to `handle.join()` and does not end until the spawned thread is finished.
 -->
 
-Les deux tâches continuent à alterner, mais la tâche principale attends à cause
+Les deux tâches continuent à alterner, mais la tâche principale attend à cause
 de l'appel à `manipulateur.join()` et ne se termine pas avant que la nouvelle
-tâche soit finie.
+tâche ne soit finie.
 
 <!--
 But let’s see what happens when we instead move `handle.join()` before the
@@ -502,7 +501,7 @@ in the environment. This technique is especially useful when creating new
 threads in order to transfer ownership of values from one thread to another.
 -->
 
-Au chapitre 13, nous avons évoqué que nous pouvions utiliser le mot-clé `move`
+Au chapitre 13, nous avons mentionné que nous pouvions utiliser le mot-clé `move`
 avant la liste des paramètres d'une fermeture pour forcer la fermeture à
 prendre possession des valeurs de son environnement qu'elle utilise. Cette
 technique est particulièrement utile lorsque nous créons des nouvelles tâches
@@ -518,13 +517,13 @@ thread. However, this won’t yet work, as you’ll see in a moment.
 -->
 
 Remarquez dans l'encart 16-1 que la fermeture que nous donnons à `thread::spawn`
-ne prends pas d'arguments : nous n'utilisons aucune donnée de la tâche
+ne prend pas d'arguments : nous n'utilisons aucune donnée de la tâche
 principale dans le code de la nouvelle tâche. Pour utiliser des données de la
 tâche principale dans la nouvelle tâche, la fermeture de la nouvelle tâche doit
 capturer les valeurs dont elle a besoin. L'encart 16-3 montre une tentative de
-création d'un vecteur dans la tâche principale et l'utilisation dans la
+création d'un vecteur dans la tâche principale et son utilisation dans la
 nouvelle tâche. Cependant, cela ne fonctionne pas encore, comme vous allez le
-constater bientôt.
+constater dans un moment.
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -589,8 +588,8 @@ Listing 16-4 provides a scenario that’s more likely to have a reference to `v`
 that won’t be valid:
 -->
 
-L'encart 16-4 propose un scénario qui est plus enclin à avoir une référence à
-`v` qui ne sera plus valide :
+L'encart 16-4 propose un scénario qui est a plus de chance d'avoir une
+référence à `v` qui ne sera plus valide :
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -627,10 +626,10 @@ is also invalid. Oh no!
 -->
 
 Si nous étions autorisés à exécuter ce code, il y aurait une possibilité que
-la nouvelle tâche serait immédiatement placée en arrière-plan sans être
+la nouvelle tâche soit immédiatement placée en arrière-plan sans être
 exécutée du tout. La nouvelle tâche a une référence à `v` en son sein, mais la
 tâche principale libère immédiatement `v`, en utilisant la fonction `drop` que
-nous avons vu au chapitre 15. Ensuite, lorsque la nouvelle tâche commence à
+nous avons vue au chapitre 15. Ensuite, lorsque la nouvelle tâche commence à
 s'exécuter, `v` n'est plus en vigueur, donc une référence à cette dernière est
 elle aussi invalide !
 
@@ -672,9 +671,9 @@ should borrow the values. The modification to Listing 16-3 shown in Listing
 -->
 
 En ajoutant le mot-clé `move` avant la fermeture, nous forçons la fermeture à
-prendre possession des valeurs qu'elle utilise au lieu de laisser Rust en
-déduire qu'il doit emprunter les valeurs. Les modifications à l'encart 16-3
-proposées dans l'encart 16-5 devraient se compiler et s'exécuter comme prévu :
+prendre possession des valeurs qu'elle utilise au lieu de laisser Rust déduire
+qu'il doit emprunter les valeurs. Les modifications à l'encart 16-3 proposées
+dans l'encart 16-5 devraient se compiler et s'exécuter comme prévu :
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -711,12 +710,12 @@ would move `v` into the closure’s environment, and we could no longer call
 
 Qu'est-ce qui arriverait au code de l'encart 16-4 dans lequel la tâche
 principale fait appel à `drop` si nous utilisions la fermeture avec `move` ?
-Est-ce que le `move` va résoudre ce problème ? Malheureusement, non ; nous
+Est-ce que le `move` résoudrait le problème ? Malheureusement, non ; nous
 obtiendrions une erreur différente parce que ce que l'encart 16-4 essaye de
-faire n'est pas autorisé pour différentes raisons. Si nous ajoutions `move` à la
-fermeture, nous déplacerions `v` dans l'environnement de la fermeture, et nous
-ne pourrions plus appeler `drop` sur `v` dans la tâche principale. Nous
-obtiendrons à la place cette erreur de compilation :
+faire n'est pas autorisé pour une raison différente de la précédente. Si nous
+ajoutions `move` à la fermeture, nous déplacerions `v` dans l'environnement de
+la fermeture, et nous ne pourrions plus appeler `drop` sur `v` dans la tâche
+principale. Nous obtiendrons à la place cette erreur de compilation :
 
 <!--
 ```console
@@ -754,21 +753,21 @@ Rust’s conservative default of borrowing; it doesn’t let us violate the
 ownership rules.
 -->
 
-Les règles de possession de Rust nous ont encore sauvé la mise ! Nous obtenons
-une erreur du code l'encart 16-3 car Rust a été conservateur et a juste emprunté
-`v` à la tâche, ce qui signifie que la tâche principale peut théoriquement
-neutraliser la référence de la tâche crée. En demandant à Rust de déplacer la
+Les règles de possession de Rust nous ont encore sauvé la mise ! Nous obtenions
+une erreur avec le code de l'encart 16-3 car Rust a été conservateur et a juste emprunté
+`v` pour la tâche, ce qui signifie que la tâche principale pouvait théoriquement
+neutraliser la référence de la tâche créée. En demandant à Rust de déplacer la
 possession de `v` à la nouvelle tâche, nous avons garanti à Rust que la tâche
 principale n'utiliserait plus `v`. Si nous changeons l'encart 16-4 de la même
 manière, nous violons les règles de possession lorsque nous essayons d'utiliser
 `v` dans la tâche principale. Le mot-clé `move` remplace le comportement
-d'emprunt conservateur par défaut ; il ne nous laisse pas enfreindre les règles
-d'emprunt.
+d'emprunt conservateur par défaut de Rust; il ne nous laisse pas enfreindre les règles
+de possession.
 
 <!--
 With a basic understanding of threads and the thread API, let’s look at what we
 can *do* with threads.
 -->
 
-Avec cette connaissance de base des tâches et de leur API, découvrons ce que
+Armé de cette connaissance de base des tâches et de leur API, découvrons ce que
 nous pouvons *faire* avec les tâches.

@@ -47,12 +47,12 @@ dropped.
 
 Un canal de programmation est divisé en deux parties : un transmetteur et un
 receveur. La partie du transmetteur est le lieu en amont où vous déposez les
-canards en plastique sur la rivière et la partie du receveur est où les
-canards en plastique finissent leur voyage. Une partie de votre code fait appel
-à des méthodes sur le transmetteur avec les données que vous souhaitez envoyer,
-et une autre partie attends les messages à l'arrivée. Un canal est dit *fermé*
-lorsque la partie correspondante au transmetteur ou la partie du récepteur est
-libérée.
+canards en plastique sur la rivière et la partie du receveur est celle où les
+canards en plastique finissent leur voyage. Une partie de votre code appelle
+des méthodes du transmetteur en lui passant les données que vous souhaitez
+envoyer, tandis qu'une autre partie attend que des messages arrivent. Un canal
+est déclaré *fermé* lorsque l'une des parties, le transmetteur ou le récepteur,
+est libérée.
 
 <!--
 Here, we’ll work up to a program that has one thread to generate values and
@@ -71,7 +71,7 @@ tâches en utilisant un canal pour illustrer cette fonctionnalité. Une fois que
 vous serez familier avec cette technique, vous pourrez utiliser les canaux
 pour créer un système de dialogue en ligne ou un système où de nombreuses
 tâches font chacune une partie d'un gros calcul et envoient leur résultat à une
-tâche chargée d'agréger ces résultats.
+tâche chargée de les agréger.
 
 <!--
 First, in Listing 16-6, we’ll create a channel but not do anything with it.
@@ -145,12 +145,11 @@ La fonction `mpsc::channel` retourne un tuple, le premier élément est celui qu
 permet d'envoyer et le second est celui qui reçoit. Les abréviations `tx` et
 `rx` sont utilisés traditionnellement dans de nombreux domaines pour signifier
 respectivement *transmetteur* et *récepteur*, nous avons donc nommé nos
-variables comme ceci pour marquer chaque élément.  Nous utilisons une
-instruction `let` avec un motif qui déstructure les tuples ; nous allons voir
-l'utilisation des motifs dans les instructions `let` et la déstructuration au
-chapitre 18. L'utilisation d'une instruction `let` de cette manière est une
-approche facile pour extraire les éléments du tuple retourné par
-`mpsc::channel`.
+variables ainsi pour indiquer clairement le rôle de chaque élément.  Nous
+utilisons une instruction `let` avec un motif qui déstructure les tuples ; nous
+verrons l'utilisation des motifs dans les instructions `let` et la
+déstructuration au chapitre 18. L'utilisation d'une instruction `let` est une
+façon d'extraire facilement les éléments du tuple retourné par `mpsc::channel`.
 
 <!--
 Let’s move the transmitting end into a spawned thread and have it send one
@@ -217,7 +216,7 @@ donc si la partie réceptrice a déjà été libérée et qu'il n'y a nulle part
 envoyer la valeur, l'opération d'envoi va retourner une erreur. Dans cet
 exemple, nous faisons appel à `unwrap` pour paniquer en cas d'erreur. Mais dans
 un vrai programme, nous devrions gérer ce cas correctement : retournez au
-chapitre 9 pour revoir les stratégies pour gérer correctement les erreurs.
+chapitre 9 pour revoir les stratégies permettant de gérer correctement les erreurs.
 
 <!--
 In Listing 16-8, we’ll get the value from the receiving end of the channel in
@@ -286,7 +285,7 @@ disponible, et une valeur `Err` s'il n'y a pas de message cette fois-ci.
 L'utilisation de `try_recv` est pratique si cette tâche à d'autres choses à
 faire pendant qu'elle attend les messages : nous pouvons ainsi écrire une
 boucle qui appelle régulièrement `try_recv`, gère le message s'il y en a un, et
-sinon fait d'autres choses jusqu'à ce qu'elle vérifiera à nouveau.
+sinon fait d'autres choses avant de vérifier à nouveau.
 
 <!--
 We’ve used `recv` in this example for simplicity; we don’t have any other work
@@ -350,7 +349,7 @@ avec vos programmes Rust vous offre l'avantage d'éviter des erreurs de
 développement avec la concurrence. Faisons une expérience pour montrer comment
 la possession et les canaux fonctionnent ensemble pour éviter les problèmes :
 nous allons essayer d'utiliser la `valeur` dans la nouvelle tâche *après* que
-nous l'ayons envoyé dans le canal. Essayez de compiler le code de l'encart 16-9
+nous l'avons envoyée dans le canal. Essayez de compiler le code de l'encart 16-9
 pour découvrir pourquoi ce code n'est pas autorisé :
 
 <!--
@@ -375,7 +374,7 @@ down the channel</span>
 -->
 
 <span class="caption">Encart 16-9 : tentative d'utiliser `valeur` après que
-nous l'ayons envoyé dans le canal</span>
+nous l'avons envoyée dans le canal</span>
 
 <!--
 Here, we try to print `val` after we’ve sent it down the channel via `tx.send`.
@@ -386,11 +385,11 @@ unexpected results due to inconsistent or nonexistent data. However, Rust gives
 us an error if we try to compile the code in Listing 16-9:
 -->
 
-Ici, nous essayons d'afficher `valeur` après que nous l'ayons envoyé dans le
+Ici, nous essayons d'afficher `valeur` après que nous l'avons envoyée dans le
 canal avec `tx.send`. Ce serait une mauvaise idée de permettre cela : une fois
 que la valeur a été envoyée à une autre tâche, cette tâche peut la modifier ou
-la libérer avant que nous essayons de l'utiliser à nouveau. Il est possible que
-des modifications de l'autre tâche puissent causer des erreurs ou des résultats
+la libérer avant que nous essayions de l'utiliser à nouveau. Il est possible que
+des modifications faites par l'autre tâche puissent causer des erreurs ou des résultats
 inattendus à cause de données incohérentes ou manquantes. Toutefois, Rust nous
 affiche une erreur si nous essayons de compiler le code de l'encart 16-9 :
 
@@ -470,8 +469,8 @@ between each by calling the `thread::sleep` function with a `Duration` value of
 -->
 
 Cette fois-ci, la nouvelle tâche a un vecteur de chaînes de caractères que nous
-souhaitons envoyer à la tâche principale. Nous itérons sur celui-ci, on les
-envoie individuellement, et on fait une pause entre chaque envoi en appelant la
+souhaitons envoyer à la tâche principale. Nous itérons sur celui-ci, on envoie
+les chaînes une par une en faisant une pause entre chaque envoi en appelant la
 fonction `thread::sleep` avec une valeur `Duration` de 1 seconde.
 
 <!--
@@ -577,7 +576,8 @@ messages to the receiving end of the channel.
 
 Cette fois-ci, avant de créer la première nouvelle tâche, nous appelons `clone`
 sur la partie émettrice du canal. Cela va nous donner un nouveau transmetteur
-que nous pourrons passer à la seconde nouvelle tâche. Cela va nous donner deux
+que nous pourrons passer à la première nouvelle tâche. Nous passons ensuite le
+transmetteur original à une seconde nouvelle tâche. Cela va nous donner deux
 tâches, chacune envoyant des messages différents à la partie réceptrice du
 canal.
 
@@ -628,7 +628,7 @@ Vous pourrez peut-être constater que les valeurs sont dans un autre ordre chez
 vous ; cela dépend de votre système. C'est ce qui rend la concurrence aussi
 intéressante que difficile. Si vous jouez avec la valeur de `thread::sleep` en
 lui donnant différentes valeurs dans différentes tâches, chaque exécution sera
-encore moins déterminée et créera une sortie différente à chaque fois.
+encore moins déterministe et créera une sortie différente à chaque fois.
 
 <!--
 Now that we’ve looked at how channels work, let’s look at a different method of

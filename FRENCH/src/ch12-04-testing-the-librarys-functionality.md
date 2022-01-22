@@ -192,8 +192,9 @@ et la valeur de retour. Rappelez-vous que dans le
 [chapitre 10][ch10-lifetimes]<!-- ignore --> nous avions vu que le paramètre
 de durée de vie indique quelle durée de vie d'argument est connectée
 à la durée de vie de la valeur de retour. Dans notre cas, nous indiquons que le
-vecteur retourné devrait contenir des slices de chaînes de caractères qui proviennent 
-des slices de l'argument `contenu` (et pas de l'argument `recherche`).
+vecteur retourné devrait contenir des slices de chaînes de caractères qui
+proviennent des slices de l'argument `contenu` (et pas de l'argument
+`recherche`).
 
 <!--
 In other words, we tell Rust that the data returned by the `search` function
@@ -207,9 +208,10 @@ incorrectly.
 Autrement dit, nous disons à Rust que les données retournées par la fonction
 `rechercher` vont vivre aussi longtemps que la donnée dans l'argument `contenu`
 de la fonction `rechercher`. C'est très important ! Les données sur lesquelles
-pointent les slices doivent toujours être en vigueur pour que la référence reste valide ;
-si le compilateur croit que nous créons des slices de `recherche` plutôt que de
-`contenu`, ses vérifications de sécurité seront incorrectes.
+pointent les slices doivent toujours être en vigueur pour que la référence
+reste valide ; si le compilateur croit que nous créons des slices de
+`recherche` plutôt que de `contenu`, ses vérifications de sécurité seront
+incorrectes.
 
 <!--
 If we forget the lifetime annotations and try to compile this function, we’ll
@@ -601,9 +603,9 @@ and output, lifetimes, testing, and command line parsing.
 -->
 
 Très bien ! Nous avons construit notre propre mini-version d'un outil classique
-et nous avons beaucoup appris sur la façon de structurer nos applications. Nous en avons aussi
-appris un peu sur les entrées et sorties des fichiers, les durées de vie, les
-tests et l'interprétation de la ligne de commande.
+et nous avons beaucoup appris sur la façon de structurer nos applications. Nous
+en avons aussi appris un peu sur les entrées et sorties des fichiers, les
+durées de vie, les tests et l'interprétation de la ligne de commande.
 
 <!--
 To round out this project, we’ll briefly demonstrate how to work with

@@ -25,7 +25,7 @@ pas encore parlé du code unsafe ; nous le ferons au chapitre 19. Nous pouvons
 utiliser des types qui utilisent le motif de mutabilité interne lorsque nous
 pouvons être sûr que les règles d'emprunt seront suivies au moment de
 l'exécution, même si le compilateur ne peut pas en être sûr. Le code `unsafe`
-concerné est ensuite incorporé dans une API stable, et le type externe reste
+concerné est ensuite incorporé dans une API sûre, et le type externe reste
 immuable.
 
 <!--
@@ -48,10 +48,10 @@ it holds. So, what makes `RefCell<T>` different from a type like `Box<T>`?
 Recall the borrowing rules you learned in Chapter 4:
 -->
 
-Contrairement à `Rc<T>`, le type `RefCell<T>` représente un seul propriétaire
-de la donnée qu'il contient. Donc, qu'est-ce qui rend `RefCell<T>` différent
+Contrairement à `Rc<T>`, le type `RefCell<T>` représente une propriété unique
+de la donnée qu'il contient. Qu'est-ce qui rend donc `RefCell<T>` différent
 d'un type comme `Box<T>` ? Souvenez-vous des règles d'emprunt que vous avez
-appris au chapitre 4 :
+apprises au chapitre 4 :
 
 <!--
 * At any given time, you can have *either* (but not both of) one mutable
@@ -60,7 +60,7 @@ appris au chapitre 4 :
 -->
 
 * A un instant donné, vous pouvez avoir *soit* (mais pas les deux) une
-  référence mutable, soit n'importe quelle quantité de références immuables
+  référence mutable, soit n'importe quel nombre de références immuables
 * Les références doivent toujours être en vigueur.
 
 <!--
@@ -86,8 +86,8 @@ majority of cases, which is why this is Rust’s default.
 -->
 
 Les avantages de vérifier les règles d'emprunt au moment de la compilation est
-que les erreurs vont se produire plus tôt dans le processus de développement,
-et il n'y a pas d'impact sur la performance à l'exécution car toute l'analyse
+que les erreurs vont se produire plus tôt dans le processus de développement
+et qu'il n'y a pas d'impact sur les performances à l'exécution car toute l'analyse
 a déjà été faite au préalable. Pour ces raisons, la vérification des règles
 d'emprunt au moment de compilation est le meilleur choix à faire dans la
 majorité des cas, ce qui explique pourquoi c'est le choix par défaut de Rust.
@@ -102,7 +102,7 @@ of this book but is an interesting topic to research.
 -->
 
 L'avantage de vérifier les règles d'emprunt plutôt à l'exécution est que cela
-permet certains scénarios qui restent sûrs pour la mémoire, bien qu'interdites
+permet certains scénarios qui restent sûrs pour la mémoire, bien qu'interdits
 à cause des vérifications à la compilation. L'analyse statique, comme le
 compilateur Rust, est de nature prudente. Certaines propriétés du code sont
 impossibles à détecter en analysant le code : l'exemple le plus connu est le
@@ -123,7 +123,7 @@ guarantee that.
 Comme certaines analyses sont impossibles, si le compilateur Rust ne peut pas
 s'assurer que le code respecte les règles d'emprunt, il risque de rejeter un
 programme valide ; dans ce sens, il est prudent. Si Rust accepte un programme
-incorrecte, les utilisateurs ne pourront pas avoir confiance dans les
+incorrect, les utilisateurs ne pourront pas avoir confiance dans les
 garanties qu'apporte Rust. Cependant, si Rust rejette un programme valide, le
 développeur sera importuné, mais rien de catastrophique ne va se passer. Le
 type `RefCell<T>` est utile lorsque vous êtes sûr que votre code suit bien
@@ -140,14 +140,14 @@ multithreaded program in Chapter 16.
 De la même manière que `Rc<T>`, `RefCell<T>` sert uniquement pour des
 scénarios à une seule tâche et va vous donner une erreur à la compilation si
 vous essayez de l'utiliser dans un contexte multitâches. Nous verrons
-comment bénéficier les des fonctionnalités de `RefCell<T>` dans un programme
+comment bénéficier des fonctionnalités de `RefCell<T>` dans un programme
 multi-processus au chapitre 16.
 
 <!--
 Here is a recap of the reasons to choose `Box<T>`, `Rc<T>`, or `RefCell<T>`:
 -->
 
-Voici un résumé des raisons pour choisir `Box<T>`, `Rc<T>`, ou `RefCell<T>` :
+Voici un résumé des raisons de choisir `Box<T>`, `Rc<T>` ou `RefCell<T>` :
 
 <!--
 * `Rc<T>` enables multiple owners of the same data; `Box<T>` and `RefCell<T>`
@@ -264,8 +264,8 @@ that record what happens during a test so you can assert that the correct
 actions took place.
 -->
 
-Un *double de test* est un concept de programmation général pour un type
-utilisé à la place d'un autre type pendant des tests. Un *mock object* est un
+Un *double de test* est un concept général de programmation consistant à utiliser
+un type à la place d'un autre pendant des tests. Un *mock object* est un
 type particulier de double de test qui enregistre ce qui se passe lors d'un
 test afin que vous puissiez vérifier que les actions se sont passées
 correctement.
@@ -277,11 +277,10 @@ as some other languages do. However, you can definitely create a struct that
 will serve the same purposes as a mock object.
 -->
 
-Rust n'a pas d'objets dans le sens qu'entendent les autres langages qui ont
-des objets, et Rust n'a pas de fonctionnalité de mock object construit dans
-la bibliothèque standard comme l'entendent d'autres langages. Cependant, vous
-pouvez très bien créer une structure qui va répondre aux mêmes besoins qu'un
-mock object.
+Rust n'a pas d'objets au sens où l'entendent les autres langages qui en ont, et
+Rust n'offre pas non plus de fonctionnalité de mock object dans la bibliothèque
+standard comme le font d'autres langages. Cependant, vous pouvez très bien
+créer une structure qui va répondre aux mêmes besoins qu'un mock object.
 
 <!--
 Here’s the scenario we’ll test: we’ll create a library that tracks a value
@@ -291,10 +290,10 @@ user’s quota for the number of API calls they’re allowed to make, for exampl
 -->
 
 Voici le scénario que nous allons tester : nous allons créer une bibliothèque
-qui traque une valeur par rapport à une valeur maximale et envoie des messages
-en fonction de la proximité de la valeur courante. Cette bibliothèque peut
-être utilisée pour suivre un quota d'un utilisateur pour le nombre d'appels
-aux API qu'il est autorisé à faire, par exemple.
+qui surveille la proximité d'une valeur par rapport à une valeur maximale et
+envoie des messages en fonction de cette proximité. Cette bibliothèque peut
+être utilisée pour suivre un quota d'un utilisateur pour le nombre d'appels aux
+API qu'il est autorisé à faire, par exemple.
 
 <!--
 Our library will only provide the functionality of tracking how close to the
@@ -307,13 +306,13 @@ called `Messenger`. Listing 15-20 shows the library code:
 -->
 
 Notre bibliothèque va seulement fournir la fonctionnalité de suivi en fonction
-de la valeur maximale et quels seront les messages à chaque moment. Les
+de la valeur maximale et spécifier quels seront les messages à chaque moment. Les
 applications qui utiliseront notre bibliothèque devront fournir un mécanisme
 pour envoyer les messages : l'application peut afficher le message dans
-l'application, l'envoyer par email, l'envoyer par SMS, ou autre chose. La
+l'application, l'envoyer par email, l'envoyer par SMS ou autre chose. La
 bibliothèque n'a pas à se charger de ce détail. Tout ce que ce mécanisme doit
 faire est d'implémenter un trait `Messager` que nous allons fournir. L'encart
-15-20 propose du code pour cette bibliothèque :
+15-20 propose le code pour cette bibliothèque :
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -360,11 +359,11 @@ doit implémenter afin que le mock puisse être utilisé de la même manière qu
 l'objet réel. L'autre partie importante est lorsque nous souhaitons tester le
 comportement de la méthode `set_valeur` sur le `TraqueurDeLimite`. Nous pouvons
 changer ce que nous envoyons dans le paramètre `valeur`, mais `set_valeur` ne
-nous retourne rien qui nous permet de le vérifier. Nous voulons pouvoir dire que
-si nous créons un `TraqueurDeLimite` avec quelque chose qui implémente le trait
-`Messager` et une valeur précise pour `max`, lorsque nous passons différents
-nombres pour `valeur`, que le messager puisse confirmer l'envoi des messages
-correspondants.
+nous retourne rien qui nous permettrait de le vérifier. Nous voulons pouvoir
+dire que si nous créons un `TraqueurDeLimite` avec quelque chose qui implémente
+le trait `Messager` et une valeur précise pour `max`, lorsque nous passons
+différents nombres pour `valeur`, le messager reçoit bien l'instruction
+d'envoyer les messages correspondants.
 
 <!--
 We need a mock object that, instead of sending an email or text message when we
@@ -379,7 +378,7 @@ Nous avons besoin d'un mock object qui, au lieu d'envoyer un email ou un SMS
 lorsque nous faisons appel à `envoyer`, va seulement enregistrer les messages
 qu'on lui demande d'envoyer. Nous pouvons créer une nouvelle instance du mock
 object, créer un `TraqueurDeLimite` qui utilise le mock object, faire appel à la
-méthode `set_value` sur le `TraqueurDeLimite`, et ensuite vérifier que le mock
+méthode `set_value` sur le `TraqueurDeLimite` et ensuite vérifier que le mock
 object a bien les messages que nous attendions. L'encart 15-21 montre une
 tentative d'implémentation d'un mock object qui fait ceci, mais le vérificateur
 d'emprunt ne nous autorise pas à le faire :
@@ -406,7 +405,7 @@ that isn’t allowed by the borrow checker</span>
 -->
 
 <span class="caption">Encart 15-21 : une tentative d'implémentation d'un
-`MessagerMock` qui n'est pas autorisé par le vérificateur d'emprunt</span>
+`MessagerMock` qui n'est pas autorisée par le vérificateur d'emprunt</span>
 
 <!--
 This test code defines a `MockMessenger` struct that has a `sent_messages`
@@ -446,15 +445,16 @@ D'abord, nous créons un nouveau `MessagerMock`, qui va démarrer avec une liste
 vide de messages. Ensuite, nous créons un nouveau `TraqueurDeLimite` et nous
 lui donnons une référence vers ce `MessagerMock` et une valeur `max` de 100.
 Nous appelons la méthode `set_valeur` sur le `TraqueurDeLimite` avec une
-valeur de 80, qui est plus grande que 75 pourcent de 100. Enfin, nous
-vérifions que la liste de messages qu'a enregistré le `MessagerMock` a bien
-un message à l'intérieur.
+valeur de 80, qui est plus grande que 75 pourcents de 100. Enfin, nous
+vérifions que la liste de messages qu'a enregistrée le `MessagerMock` contient
+bien désormais un message.
 
 <!--
 However, there’s one problem with this test, as shown here:
 -->
 
-Cependant, il reste un problème avec ce test, qui est montré ci-dessous :
+Cependant, il reste un problème avec ce test, problème qui est montré
+ci-dessous :
 
 <!--
 ```console
@@ -491,7 +491,7 @@ shows what that looks like:
 C'est une situation dans laquelle la mutabilité interne peut nous aider !
 Nous allons stocker `messages_envoyes` dans une `RefCell<T>`, et ensuite la
 méthode `envoyer` pourra modifier `messages_envoyes` pour stocker les
-messages que nous avons avons vu. L'encart 15-22 montre à quoi cela peut
+messages que nous avons avons vus. L'encart 15-22 montre à quoi cela peut
 ressembler :
 
 <!--
@@ -552,7 +552,7 @@ in the inner vector, we call `borrow` on the `RefCell<Vec<String>>` to get an
 immutable reference to the vector.
 -->
 
-Le dernier changement que nous devons appliquer est dans la vérification :
+Le dernier changement que nous devons appliquer se trouve dans la vérification :
 pour savoir combien d'éléments sont présents dans le vecteur, nous faisons
 appel à `borrow` de `RefCell<Vec<String>>` pour obtenir une référence
 immuable vers le vecteur.
@@ -583,7 +583,7 @@ Lorsque nous créons des références immuables et mutables, nous utilisons
 respectivement les syntaxes `&` et `&mut`. Avec `RefCell<T>`, nous utilisons
 les méthodes `borrow` et `borrow_mut`, qui font partie de l'API stable de
 `RefCell<T>`. La méthode `borrow` retourne un pointeur intelligent du type
-`Ref<T>` et `borrow_mut` retourne le pointeur intelligent du type `RefMut<T>`.
+`Ref<T>` et `borrow_mut` retourne un pointeur intelligent du type `RefMut<T>`.
 Les deux implémentent `Deref`, donc nous pouvons les considérer comme des
 références classiques.
 
@@ -600,9 +600,9 @@ Le `RefCell<T>` suit combien de pointeurs intelligents `Ref<T>` et `RefMut<T>`
 sont actuellement actifs. A chaque fois que nous faisons appel à `borrow`, le
 `RefCell<T>` augmente son compteur du nombre d'emprunts immuables qui existent.
 Lorsqu'une valeur `Ref<T>` sort de la portée, le compteur d'emprunts immuables
-est décrémenté de un. `RefCell<T>` nous permet d'avoir autant d'emprunts
-immuables ou alors un seul emprunt mutable au même moment, exactement comme les
-règles d'emprunt à la compilation.
+est décrémenté de un. A tout moment `RefCell<T>` nous permet d'avoir plusieurs emprunts
+immuables ou bien un seul emprunt mutable, tout comme le font les
+règles d'emprunt au moment de la compilation.
 
 <!--
 If we try to violate these rules, rather than getting a compiler error as we
@@ -614,8 +614,8 @@ at runtime.
 -->
 
 Si nous ne respectons pas ces règles, l'implémentation de `RefCell<T>` va
-paniquer à l'exécution plutôt que d'avoir une erreur de compilation comme nous
-l'aurions avec des références classiques. L'encart 15-23 nous montre une
+paniquer à l'exécution plutôt que de provoquer une erreur de compilation comme nous
+l'aurions eu en utilisant des références classiques. L'encart 15-23 nous montre une
 modification apportée à l'implémentation de `envoyer` de l'encart 15-22. Nous
 essayons délibérément de créer deux emprunts mutables actifs dans la même
 portée pour montrer que `RefCell<T>` nous empêche de faire ceci à l'exécution.
@@ -692,8 +692,8 @@ functionality than regular references provide.
 -->
 
 La détection des erreurs d'emprunt à l'exécution plutôt qu'à la compilation
-signifie que vous allez trouver une erreur dans votre code plus tard dans le
-processus de développement et peut-être même pas avant que votre code soit
+signifie que vous pourriez découvrir une erreur dans votre code plus tard dans le
+processus de développement et peut-être même pas avant que votre code ne soit
 déployé en production. De plus, votre code va subir une petite perte de
 performances à l'exécution en raison du contrôle des emprunts à l'exécution
 plutôt qu'à la compilation. Cependant, l'utilisation de `RefCell<T>` rend
@@ -718,7 +718,7 @@ get a value that can have multiple owners *and* that you can mutate!
 
 Il est courant d'utiliser `RefCell<T>` en tandem avec `Rc<T>`. Rappelez-vous
 que `Rc<T>` vous permet d'avoir plusieurs propriétaires d'une même donnée, mais
-qu'il vous donne seulement un accès immuable à cette donnée. Si vous avez un
+qu'il ne vous donne qu'un seul accès immuable à cette donnée. Si vous avez un
 `Rc<T>` qui contient un `RefCell<T>`, vous pouvez obtenir une valeur qui peut
 avoir plusieurs propriétaires *et* que vous pouvez modifier !
 
@@ -733,10 +733,10 @@ the lists:
 -->
 
 Souvenez-vous de l'exemple de la liste de construction de l'encart 15-18 où nous
-avions utilisé `Rc<T>` pour permettre d'avoir plusieurs listes de se partager la
+avions utilisé `Rc<T>` pour permettre à plusieurs listes de se partager la
 possession d'une autre liste. Comme `Rc<T>` stocke seulement des valeurs
 immuables, nous ne pouvons changer aucune valeur dans la liste une fois que
-nous l'avons créé. Ajoutons un `RefCell<T>` pour pouvoir changer les valeurs
+nous l'avons créée. Ajoutons un `RefCell<T>` pour pouvoir changer les valeurs
 dans les listes. L'encart 15-24 nous montre ceci en ajoutant un `RefCell<T>`
 dans la définition de `Cons`, nous pouvons ainsi modifier les valeurs stockées
 dans n'importe quelle liste :
@@ -787,7 +787,7 @@ We wrap the list `a` in an `Rc<T>` so when we create lists `b` and `c`, they
 can both refer to `a`, which is what we did in Listing 15-18.
 -->
 
-Nous insérons la liste `a` dans un `Rc<T>` pour que lorsque nous créons `b` et
+Nous insérons la liste `a` dans un `Rc<T>` pour que, lorsque nous créons `b` et
 `c`, elles puissent toutes les deux utiliser `a`, ce que nous avions déjà fait
 dans l'encart 15-18.
 
@@ -803,7 +803,7 @@ on it and change the inner value.
 
 Après avoir créé les listes dans `a`, `b`, et `c`, nous ajoutons 10 à la valeur
 dans `valeur`. Nous faisons cela en appelant `borrow_mut` sur `valeur`, ce qui
-utilise la fonctionnalité de déréférencement automatique que nous avons vu au
+utilise la fonctionnalité de déréférencement automatique que nous avons vue au
 chapitre 5 (voir la section
 [“Où est l'opérateur -> ?”][wheres-the---operator]<!-- ignore -->) pour
 déréférencer le `Rc<T>` dans la valeur interne `RefCell<T>`. La méthode
@@ -844,7 +844,6 @@ que nous puissions modifier notre donnée lorsque nous en avons besoin. Les
 vérifications des règles d'emprunt à l'exécution nous protègent des accès
 concurrents, et il est parfois intéressant de sacrifier un peu de vitesse pour
 cette flexibilité dans nos structures de données.
-
 
 <!--
 The standard library has other types that provide interior mutability, such as

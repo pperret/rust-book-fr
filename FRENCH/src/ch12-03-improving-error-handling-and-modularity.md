@@ -62,10 +62,10 @@ Le troisième problème est que nous avons utilisé `expect` pour afficher un
 message d'erreur lorsque la lecture du fichier échoue, mais le message affiche
 uniquement `Quelque chose s'est mal passé lors de la lecture du fichier`. Lire
 un fichier peut échouer pour de nombreuses raisons : par exemple, le fichier
-peut ne pas exister, ou parce que nous n'avons pas le droit de l'ouvrir. Pour le moment,
-quelle que soit la raison, nous affichons le message d'erreur `Quelque chose
-s'est mal passé lors de la lecture du fichier`, ce qui ne donne aucune
-information à l'utilisateur !
+peut ne pas exister, ou parce que nous n'avons pas le droit de l'ouvrir. Pour
+le moment, quelle que soit la raison, nous affichons le message d'erreur
+`Quelque chose s'est mal passé lors de la lecture du fichier`, ce qui ne donne
+aucune information à l'utilisateur !
 
 <!--
 Fourth, we use `expect` repeatedly to handle different errors, and if the user
@@ -280,12 +280,13 @@ other and what their purpose is.
 Un autre signe qui indique qu'il y a encore de la place pour de l'amélioration
 est la partie `config` de `interpreter_config` qui sous-entend que les
 deux valeurs que nous retournons sont liées et font partie d'une même valeur de
-configuration. Or, à ce stade, nous ne tenons pas compte de cela dans la 
-structure des données que nous utilisons si ce n'est en regroupant les deux valeurs dans un
-tuple ; nous pourrions mettre les deux valeurs dans une seule structure et
-donner un nom significatif à chacun des champs de la structure. Faire ainsi
-permet de faciliter la compréhension du code par les futurs développeurs de ce
-code pour mettre en évidence le lien entre les deux valeurs et leurs rôles respectifs.
+configuration. Or, à ce stade, nous ne tenons pas compte de cela dans la
+structure des données que nous utilisons si ce n'est en regroupant les deux
+valeurs dans un tuple ; nous pourrions mettre les deux valeurs dans une seule
+structure et donner un nom significatif à chacun des champs de la structure.
+Faire ainsi permet de faciliter la compréhension du code par les futurs
+développeurs de ce code pour mettre en évidence le lien entre les deux valeurs
+et leurs rôles respectifs.
 
 <!--
 Listing 12-6 shows the improvements to the `parse_config` function.
@@ -383,14 +384,13 @@ un compromis qui en vaut la peine.
 > le [chapitre 13][ch13]<!-- ignore -->, vous allez apprendre à utiliser des
 > méthodes plus efficaces dans ce genre de situation. Mais pour le moment, ce
 > n'est pas un problème de copier quelques chaînes de caractères pour continuer
-> à progresser car vous allez le faire une seule fois et les chaînes
-> de caractères `nom_fichier` et `recherche` sont très courtes. Il est plus important 
-> d'avoir un programme
-> fonctionnel qui n'est pas très optimisé plutôt que d'essayer d'optimiser à
-> outrance le code dès sa première écriture. Plus vous deviendrez expérimenté
-> en Rust, plus il sera facile de commencer par la solution la plus
-> performante, mais pour le moment, il est parfaitement acceptable de faire
-> appel à `clone`.
+> à progresser car vous allez le faire une seule fois et les chaînes de
+> caractères `nom_fichier` et `recherche` sont très courtes. Il est plus
+> important d'avoir un programme fonctionnel qui n'est pas très optimisé plutôt
+> que d'essayer d'optimiser à outrance le code dès sa première écriture. Plus
+> vous deviendrez expérimenté en Rust, plus il sera facile de commencer par la
+> solution la plus performante, mais pour le moment, il est parfaitement
+> acceptable de faire appel à `clone`.
 
 <!--
 We’ve updated `main` so it places the instance of `Config` returned by
@@ -720,8 +720,8 @@ make the function conform to its new type signature.
 Nous avons fait deux changements dans le corps de notre fonction `new` :
 plutôt que d'avoir à appeler `panic!` lorsque l'utilisateur n'envoie pas assez
 d'arguments, nous retournons maintenant une valeur `Err`, et nous avons intégré
-la valeur de retour `Config` dans un `Ok`. Ces modifications rendent 
-la fonction conforme à son nouveau type de signature.
+la valeur de retour `Config` dans un `Ok`. Ces modifications rendent la
+fonction conforme à son nouveau type de signature.
 
 <!--
 Returning an `Err` value from `Config::new` allows the `main` function to

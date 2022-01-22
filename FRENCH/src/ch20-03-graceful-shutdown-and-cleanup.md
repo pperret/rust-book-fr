@@ -205,7 +205,6 @@ corriger cette erreur :
 {{#rustdoc_include ../listings/ch20-web-server/no-listing-05-fix-worker-new/src/lib.rs:here}}
 ```
 
-
 <!--
 The first error is in our `Drop` implementation. We mentioned earlier that we
 intended to call `take` on the `Option` value to move `thread` out of `worker`.

@@ -1080,15 +1080,16 @@ those checks manually and indicate as such with `unsafe`.
 
 Par exemple, souvenez-vous des traits `Sync` et `Send` que nous avions découvert
 dans une section du
-[chapitre 16][extensible-concurrency-with-the-sync-and-send-traits]<!-- ignore --> :
-le compilateur implémente automatiquement ces traits si nos types sont
-entièrement composés des types `Send` et `Sync`. Si nous implémentions un type
-qui contenait un type qui n'était pas `Send` ou `Sync`, comme des pointeurs
-bruts, et nous souhaitions marquer ce type comme étant `Send` ou `Sync`, nous
-aurions dû utiliser `unsafe`. Rust ne peut pas vérifier que notre type respecte
-les garanties pour que ce type puisse être envoyé en toute sécurité entre des
-tâches ou qu'il puisse être utilisé par plusieurs tâches ; toutefois, nous avons
-besoin de faire ces vérifications manuellement et les signaler avec `unsafe`.
+[chapitre 16][extensible-concurrency-with-the-sync-and-send-traits]<!--
+ignore --> : le compilateur implémente automatiquement ces traits si nos types
+sont entièrement composés des types `Send` et `Sync`. Si nous implémentions un
+type qui contenait un type qui n'était pas `Send` ou `Sync`, comme des
+pointeurs bruts, et nous souhaitions marquer ce type comme étant `Send` ou
+`Sync`, nous aurions dû utiliser `unsafe`. Rust ne peut pas vérifier que notre
+type respecte les garanties pour que ce type puisse être envoyé en toute
+sécurité entre des tâches ou qu'il puisse être utilisé par plusieurs tâches ;
+toutefois, nous avons besoin de faire ces vérifications manuellement et les
+signaler avec `unsafe`.
 
 <!--
 ### Accessing Fields of a Union

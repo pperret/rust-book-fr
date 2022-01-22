@@ -3,5 +3,5 @@ $ cargo run
     Finished dev [unoptimized + debuginfo] target(s) in 0.73s
      Running `target/debug/drop-example`
 PointeurPerso créé.
-Nettoyage d'un PointeurPerso avec la donnée `some data` !
+Nettoyage d'un PointeurPerso avec la donnée `des trucs` !
 PointeurPerso libéré avant la fin du main.

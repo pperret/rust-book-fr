@@ -6,7 +6,7 @@
 
 <!--
 The last of our common collections is the *hash map*. The type `HashMap<K, V>`
-stores a mapping of keys of type `K` to values of type `V`. It does this via a
+stores a mapping of keys of type `K` to values of type `V` using a
 *hashing function*, which determines how it places these keys and values into
 memory. Many programming languages support this kind of data structure, but
 they often use a different name, such as hash, map, object, hash table,
@@ -15,11 +15,12 @@ dictionary, or associative array, just to name a few.
 
 La dernière des collections les plus courantes est la *table de hachage (hash
 map)*. Le type `HashMap<K, V>` stocke une association de clés de type `K` à des
-valeurs de type `V`. Elle fait cela via une *fonction de hachage*, qui détermine
-comment elle va ranger ces clés et valeurs dans la mémoire. De nombreux langages
-de programmation prennent en charge ce genre de structure de données, mais elles
-ont souvent un nom différent, tel que hash, map, objet, table d'association,
-dictionnaire ou tableau associatif, pour n'en nommer que quelques-uns.
+valeurs de type `V` en utilisant une *fonction de hachage*, qui détermine
+comment elle va ranger ces clés et valeurs dans la mémoire. De nombreux
+langages de programmation prennent en charge ce genre de structure de données,
+mais elles ont souvent un nom différent, tel que hash, map, objet, table
+d'association, dictionnaire ou tableau associatif, pour n'en nommer que
+quelques-uns.
 
 <!--
 Hash maps are useful when you want to look up data not by using an index, as
@@ -54,16 +55,16 @@ consultez la documentation de la bibliothèque standard pour plus d'informations
 ### Créer une nouvelle table de hachage
 
 <!--
-You can create an empty hash map with `new` and add elements with `insert`. In
-Listing 8-20, we’re keeping track of the scores of two teams whose names are
-Blue and Yellow. The Blue team starts with 10 points, and the Yellow team
-starts with 50.
+One way to create an empty hash map is using `new` and adding elements with
+`insert`. In Listing 8-20, we’re keeping track of the scores of two teams whose
+names are *Blue* and *Yellow*. The Blue team starts with 10 points, and the
+Yellow team starts with 50.
 -->
 
-Vous pouvez créer une table de hachage vide avec `new` et y ajouter des éléments
-avec `insert`. Dans l'encart 8-20, nous consignons les scores de deux équipes
-qui s'appellent Bleu et Jaune. L'équipe Bleu commence avec 10 points, et
-l'équipe Jaune commence avec 50.
+Une façon de créer une table de hachage vide est d'utiliser `new` et d'ajouter
+des éléments avec `insert`. Dans l'encart 8-20, nous consignons les scores de
+deux équipes qui s'appellent *Bleu* et *Jaune*. L'équipe Bleu commence avec 10
+points, et l'équipe Jaune commence avec 50.
 
 <!--
 ```rust
@@ -159,8 +160,8 @@ The type annotation `HashMap<_, _>` is needed here because it’s possible to
 want unless you specify. For the parameters for the key and value types,
 however, we use underscores, and Rust can infer the types that the hash map
 contains based on the types of the data in the vectors. In Listing 8-21, the
-key type will be `String` and the value type will be `i32`, just as the types
-were in Listing 8-20.
+key type will be `String` and the value type will be `i32`, just as in Listing
+8-20.
 -->
 
 L'annotation de type `HashMap<_, _>` est nécessaire ici car `collect` peut
@@ -169,8 +170,7 @@ vous souhaitez si vous ne le précisez pas. Mais pour les paramètres qui
 correspondent aux types de clé et de valeur, nous utilisons des tirets bas, et
 Rust peut déduire les types que la table de hachage contient en fonction des
 types des données présentes dans les vecteurs. Dans l'encart 8-21, le type des
-clés sera `String` et le type des valeurs sera `i32`, tout comme l'étaient les
-types dans l'encart 8-20.
+clés sera `String` et le type des valeurs sera `i32`, comme dans l'encart 8-20.
 
 <!--
 ### Hash Maps and Ownership
@@ -320,17 +320,17 @@ Bleu : 10
 ### Modifier une table de hachage
 
 <!--
-Although the number of keys and values is growable, each key can only have one
-value associated with it at a time. When you want to change the data in a hash
-map, you have to decide how to handle the case when a key already has a value
-assigned. You could replace the old value with the new value, completely
+Although the number of key and value pairs is growable, each key can only have
+one value associated with it at a time. When you want to change the data in a
+hash map, you have to decide how to handle the case when a key already has a
+value assigned. You could replace the old value with the new value, completely
 disregarding the old value. You could keep the old value and ignore the new
 value, only adding the new value if the key *doesn’t* already have a value. Or
 you could combine the old value and the new value. Let’s look at how to do each
 of these!
 -->
 
-Bien que le nombre de clés et de valeurs puisse augmenter, chaque clé ne peut
+Bien que le nombre de paires de clé-valeur puisse augmenter, chaque clé ne peut
 être associée qu'à une seule valeur à la fois. Lorsque vous souhaitez modifier
 les données d'une table de hachage, vous devez choisir comment gérer le cas où
 une clé a déjà une valeur qui lui est associée. Vous pouvez remplacer l'ancienne
@@ -527,13 +527,13 @@ tous ces changements sont sûrs et autorisés par les règles d'emprunt.
 ### Fonctions de hachage
 
 <!--
-By default, `HashMap` uses a hashing function called SipHash that can provide
+By default, `HashMap` uses a hashing function called *SipHash* that can provide
 resistance to Denial of Service (DoS) attacks involving hash
 tables[^siphash]<!-- ignore -- >. This is not the fastest hashing algorithm
 available, but the trade-off for better security that comes with the drop in
 performance is worth it. If you profile your code and find that the default
 hash function is too slow for your purposes, you can switch to another function
-by specifying a different *hasher*. A hasher is a type that implements the
+by specifying a different hasher. A *hasher* is a type that implements the
 `BuildHasher` trait. We’ll talk about traits and how to implement them in
 Chapter 10. You don’t necessarily have to implement your own hasher from
 scratch; [crates.io](https://crates.io/)<!-- ignore -- > has libraries shared by
@@ -547,8 +547,8 @@ Ce n'est pas l'algorithme de hachage le plus rapide qui existe, mais le
 compromis entre une meilleure sécurité et la baisse de performances en vaut la
 peine. Si vous analysez la performance de votre code et que vous vous rendez
 compte que la fonction de hachage par défaut est trop lente pour vos besoins,
-vous pouvez la remplacer par une autre fonction en spécifiant un *hacheur*
-différent. Un hacheur est un type qui implémente le trait `BuildHasher`. Nous
+vous pouvez la remplacer par une autre fonction en spécifiant un hacheur
+différent. Un *hacheur* est un type qui implémente le trait `BuildHasher`. Nous
 verrons les traits et comment les implémenter au chapitre 10. Vous n'avez pas
 forcément besoin d'implémenter votre propre hacheur à partir de zéro ;
 [crates.io](https://crates.io/) héberge des bibliothèques partagées par d'autres

@@ -13,14 +13,14 @@ demonstrate how these closure features allow for code reuse and behavior
 customization.
 -->
 
-Les fermetures en Rust sont des fonctions anonymes qui peuvent être sauvegardés
-dans une variable ou qui peuvent être passées en argument à d'autres fonctions.
-Il est possible de créer une fermeture à un endroit du code et ensuite de
-l'appeler dans un contexte différent pour l'exécuter. Contrairement aux
-fonctions, les fermetures ont la possibilité de capturer les valeurs présentes
-dans le contexte où elles sont appelées. Nous allons montrer comment les
-fonctionnalités des fermetures permettent de réutiliser du code et suivre des
-comportements personnalisés.
+Les fermetures en Rust sont des fonctions anonymes qui peuvent être
+sauvegardées dans une variable ou qui peuvent être passées en argument à
+d'autres fonctions. Il est possible de créer une fermeture à un endroit du code
+et ensuite de l'appeler dans un contexte différent pour l'exécuter.
+Contrairement aux fonctions, les fermetures ont la possibilité de capturer les
+valeurs présentes dans le contexte où elles sont appelées. Nous allons montrer
+comment les fonctionnalités des fermetures permettent de réutiliser du code et
+suivre des comportements personnalisés.
 
 <!--
 ### Creating an Abstraction of Behavior with Closures
@@ -35,8 +35,8 @@ type inference, and traits.
 -->
 
 Travaillons sur un exemple d'une situation où il est utile de stocker une
-fermeture qui s'exécutera ultérieurement. Nous allons parler de la syntaxe des
-fermetures, de l'inférence de type, et des traits au cours de ce chapitre.
+fermeture qui s'exécutera ultérieurement. Au cours de ce chapitre, nous allons
+parler de la syntaxe des fermetures, de l'inférence de type et des traits.
 
 <!--
 Consider this hypothetical situation: we work at a startup that’s making an app
@@ -49,16 +49,16 @@ few seconds. We want to call this algorithm only when we need to and only call
 it once so we don’t make the user wait more than necessary.
 -->
 
-Imaginons la situation suivante : nous travaillons dans une *startup* qui créé
-une application pour générer des plans d'entraînements physiques personnalisés.
-L'application dorsale est écrite en Rust et l'algorithme qui génère les
-exercices en fonction de beaucoup de facteurs comme l'âge de l'utilisateur, son
-indice de masse corporelle, ses préférences et une intensité paramétrée par
-l'utilisateur. L'algorithme réellement utilisé n'est pas important pour cet
-exemple : ce qui est important c'est que le calcul prenne plusieurs secondes.
-Nous voulons appeler l'algorithme uniquement lorsque nous avons besoin, et
-seulement une fois, afin que l'utilisateur n'ai pas à attendre plus longtemps
-que nécessaire.
+Imaginons la situation suivante : nous travaillons dans une *startup* qui crée
+une application destinée à générer des programmes d'entraînements physiques
+personnalisés. L'application dorsale est écrite en Rust et repose sur un
+algorithme qui génère les exercices en fonction de beaucoup de facteurs tels
+que l'âge de l'utilisateur, son indice de masse corporelle, ses préférences et
+une intensité qu'il aura paramétré. L'algorithme réellement utilisé n'est pas
+important pour cet exemple : ce qui est important c'est que le calcul prenne
+plusieurs secondes. Nous voulons appeler l'algorithme uniquement lorsque nous
+en avons besoin, et seulement une fois, afin que l'utilisateur n'ait pas à
+attendre plus longtemps que nécessaire.
 
 <!--
 We’ll simulate calling this hypothetical algorithm with the function
@@ -69,7 +69,7 @@ we passed in.
 
 Pour simuler l'appel à cet algorithme hypothétique, nous allons utiliser la
 fonction `simuler_gros_calcul` présent dans l'encart 13-1, qui affichera
-`calcul très lent ...`, attendra deux secondes, et ensuite retournera le nombre
+`calcul très lent ...` et attendra deux secondes avant de retourner le nombre
 qui lui a été donné :
 
 <!--
@@ -94,7 +94,7 @@ calculation that takes about 2 seconds to run</span>
 -->
 
 <span class="caption">Encart 13-1 : une fonction pour remplacer un calcul
-hypothétique qui prend environ deux secondes à exécuter</span>
+hypothétique qui prend environ deux secondes à s'exécuter</span>
 
 <!--
 Next is the `main` function, which contains the parts of the workout app
@@ -104,12 +104,14 @@ app’s frontend isn’t relevant to the use of closures, we’ll hardcode value
 representing inputs to our program and print the outputs.
 -->
 
-Ensuite, nous avons la fonction `main` qui contient les parties importantes de
-cet exemple d'application d'entraînement. Cette fonction représente le code que
-l'application appellera lorsqu'un utilisateur demande un plan d'entraînement.
-Comme l'interaction avec l'application dorsale n'est pas adapté à l'utilisation
-des fermetures, nous allons coder en dur les valeurs représentant les entrées de
-notre programme, puis afficher les résultats.
+Ensuite, nous avons la fonction `main` qui contient les parties de
+l'application d'entraînement qui sont importantes pour cet exemple. Cette
+fonction représente le code que l'application appellera lorsqu'un utilisateur
+demande un programme d'entraînement. Comme l'interaction avec l'interface
+frontale de l'application n'apporte rien dans l'étude de l'utilisation des
+fermetures qui nous occupe ici, nous allons nous contenter de coder en dur les
+valeurs représentant les entrées de notre programme puis afficher les résultats
+obtenus.
 
 <!--
 The required inputs are these:
@@ -125,16 +127,16 @@ Les paramètres d'entrées nécessaires sont :
 -->
 
 * `intensite` qui est un nombre saisi par utilisateur lorsqu'il demande un
-  entraînement, afin qu'ils puissent indiquer s'ils veulent un entraînement de
+  entraînement afin d'indiquer s'il veut un entraînement de
   faible ou de haute intensité.
-* Un nombre aléatoire qui variera les plans d'entraînement
+* Un nombre aléatoire faisant varier les programmes d'entraînement
 
 <!--
 The output will be the recommended workout plan. Listing 13-2 shows the `main`
 function we’ll use.
 -->
 
-Le résultat sera le plan d'entraînement recommandé. L'encart 13-2 montre la
+Le résultat sera le programme d'entraînement recommandé. L'encart 13-2 montre la
 fonction `main` que nous allons utiliser.
 
 <!--
@@ -159,8 +161,8 @@ simulate user input and random number generation</span>
 -->
 
 <span class="caption">Encart 13-2 : une fonction `main` avec des valeurs codées
-en dur pour simuler l'entrée d'un utilisateur et la génération de nombres
-aléatoires</span>
+en dur pour simuler la saisie d'une valeur d'intensité par l'utilisateur et la
+génération d'un nombre aléatoire</span>
 
 <!--
 We’ve hardcoded the variable `simulated_user_specified_value` as 10 and the
@@ -173,10 +175,10 @@ with the simulated input values.
 
 Nous avons codé en dur la variable `valeur_utilisateur_simule` à 10 et la
 variable `nombre_aleatoire_simule` à 7 pour des raisons de simplicité ; dans un
-vrai programme nous obtiendrions le nombre d'intensité à partir de l'application
+vrai programme nous obtiendrions la valeur d'intensité à partir de l'interface
 frontale et nous utiliserions la crate `rand` pour générer un nombre aléatoire,
 comme nous l'avons fait dans l'exemple du jeu du plus ou du moins dans le
-chapitre 2. La fonction `main` appelle une fonction `generer_exercices` avec les
+chapitre 2. La fonction `main` appelle une fonction `generer_exercices` avec ces
 valeurs d'entrée simulées.
 
 <!--
@@ -189,7 +191,7 @@ changes in this example will be made to this function.
 Maintenant que nous avons le contexte, passons à l'algorithme. La fonction
 `generer_exercices` dans l'encart 13-3 contient la logique métier de
 l'application qui nous préoccupe le plus dans cet exemple. Le reste des
-changements de code dans cet exemple sera appliqué à cette fonction :
+changements de code dans cet exemple seront appliqués à cette fonction :
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -213,7 +215,7 @@ plans based on the inputs and calls to the `simulated_expensive_calculation`
 function</span>
 -->
 
-<span class="caption">Encart 13-3 : la logique métier qui affiche les plans
+<span class="caption">Encart 13-3 : la logique métier qui affiche les programmes
 d'entraînement en fonction des entrées et des appels à la fonction
 `simuler_gros_calcul`.</span>
 
@@ -258,7 +260,7 @@ minutes of running based on the complex algorithm.
 Si l'utilisateur souhaite un entraînement de haute intensité, il y a une logique
 en plus : si la valeur du nombre aléatoire généré par l'application est 3,
 l'application recommandera une pause et une hydratation à la place. Sinon,
-l'utilisateur recevra un nombre de minutes de course qui provient de
+l'utilisateur recevra un nombre de minutes de course à pied calculé par
 l'algorithme complexe.
 
 <!--
@@ -275,13 +277,12 @@ to call it if the result isn’t needed, and we still want to call it only once.
 Ce code fonctionne comme la logique métier le souhaite, mais imaginons que
 l'équipe de science des données nous informe qu'il va y avoir des changements
 dans la façon dont nous devrons appeler l'algorithme à l'avenir. Pour simplifier
-la mise à jour lorsque ces changements se produisent, nous voulons remanier ce
-code pour qu'il n'appelle la fonction `simuler_gros_calcul` qu'une seule fois.
+la mise à jour lorsque ces changements se produiront, nous voulons remanier ce
+code de sorte qu'il n'appelle la fonction `simuler_gros_calcul` qu'une seule fois.
 Nous voulons également nous débarrasser de l'endroit où nous appelons la
 fonction deux fois inutilement, sans ajouter d'autres appels à cette fonction au
 cours de ce processus. Autrement dit, nous ne voulons pas l'appeler si le
-résultat n'en a pas besoin, et nous voulons faire l'appeler qu'une seule fois au
-maximum.
+résultat n'en a pas besoin, et nous voulons ne l'appeler qu'une seule fois.
 
 <!--
 #### Refactoring Using Functions
@@ -345,9 +346,9 @@ We want to refer to `simulated_expensive_calculation` only once in
 we actually need the result. This is a use case for closures!
 -->
 
-Nous voulons référer à `simuler_gros_calcul` une seule fois dans
+Nous voulons nous référer à `simuler_gros_calcul` qu'une seule fois dans
 `generer_exercices`, mais retarder le gros calcul jusqu'au moment où nous avons
-avons besoin du résultat. C'est un cas d'utilisation des fermetures !
+avons réellement besoin du résultat. C'est un cas d'utilisation des fermetures !
 
 <!--
 #### Refactoring with Closures to Store Code
@@ -408,7 +409,7 @@ barres verticales (`|`), à l'intérieur desquelles on renseigne les paramètres
 la fermeture ; cette syntaxe a été choisie en raison de sa similitude avec les
 définitions des fermetures en Smalltalk et en Ruby. Cette fermeture a un
 paramètre `nombre` : si nous avions plus d'un paramètre, nous les séparerions
-par des virgules, comme `|param1, param2|`.
+par des virgules, comme ceci : `|param1, param2|`.
 
 <!--
 After the parameters, we place curly brackets that hold the body of the
@@ -438,7 +439,7 @@ the code we want to call is now stored in `expensive_closure`.
 Notez que cette instruction `let` signifie que la variable `fermeture_lente`
 contient la *définition* d'une fonction anonyme, pas la *valeur résultante* à
 l'appel de cette fonction anonyme. Rappelons que nous utilisons une fermeture
-pour définir le code à appeler dans un seul endroit, stocker ce code, et
+pour définir le code à appeler dans un seul endroit, stocker ce code et
 l'appeler plus tard ; le code que nous voulons appeler est maintenant stocké
 dans `fermeture_lente`.
 
@@ -479,15 +480,15 @@ defined</span>
 -->
 
 <span class="caption">Encart 13-6 : appel de la fermeture `fermeture_lente`
-que nous avons défini</span>
+que nous avons définie</span>
 
 <!--
 Now how to perform the expensive calculation is defined in only one
 place, and we’re only executing that code where we need the results.
 -->
 
-Désormais, le calcul lent n'est défini qu'à un seul endroit, et nous
-n'exécutons ce code uniquement où nous avons besoin des résultats.
+Désormais, le calcul lent n'est défini qu'à un seul endroit et nous
+n'exécutons ce code qu'aux endroits où nous avons besoin des résultats.
 
 <!--
 However, we’ve reintroduced one of the problems from Listing 13-3: we’re still
@@ -507,7 +508,7 @@ plus longtemps que nécessaire. Nous pourrions résoudre ce problème en créant
 variable locale à ce bloc `if` pour conserver le résultat de l'appel à la
 fermeture, mais les fermetures nous ouvrent d'autres solutions. Commençons
 d'abord par expliquer pourquoi il n'y a pas d'annotation de type dans la
-définition des fermetures et les traits liés aux fermetures.
+définition des fermetures et des traits liés aux fermetures.
 
 <!--
 ### Closure Type Inference and Annotation
@@ -527,12 +528,13 @@ naming them and exposing them to users of our library.
 
 Les fermetures ne nécessitent pas d'annoter le type des paramètres ou de la
 valeur de retour comme le font les fonctions `fn`. Les annotations de type sont
-nécessaires pour les fonctions, car elles font partie d'une interface explicite
+nécessaires pour les fonctions car elles font partie d'une interface explicite
 exposée à leurs utilisateurs. Définir cette interface de manière rigide est
 nécessaire pour s'assurer que tout le monde s'accorde sur les types de valeurs
 qu'une fonction utilise et retourne. Mais les fermetures ne sont pas utilisées
-dans une interface exposée ainsi : elles sont stockées dans des variables et
-utilisées sans les nommer ni les exposer aux utilisateurs de notre bibliothèque.
+dans une interface exposée de cette façon : elles sont stockées dans des
+variables et utilisées sans les nommer ni les exposer aux utilisateurs de notre
+bibliothèque.
 
 <!--
 Closures are usually short and relevant only within a narrow context rather
@@ -544,7 +546,7 @@ to how it’s able to infer the types of most variables.
 En outre, les fermetures sont généralement brèves et ne sont pertinentes que
 dans un contexte précis plutôt que pour des cas génériques. Dans ce contexte
 précis, le compilateur est capable de déduire le type des paramètres et le type
-de retour, comme il est capable d'inférer le type de la plupart des variables.
+de retour, tout comme il est capable d'inférer le type de la plupart des variables.
 
 <!--
 Making programmers annotate the types in these small, anonymous functions would
@@ -553,7 +555,7 @@ available.
 -->
 
 Demander aux développeurs d'annoter le type dans ces petites fonctions anonymes
-serait ennuyant et largement redondant avec l'information dont dispose déjà le
+serait pénible et largement redondant avec l'information dont dispose déjà le
 compilateur.
 
 <!--
@@ -566,7 +568,7 @@ would look like the definition shown in Listing 13-7.
 Comme pour les variables, nous pouvons ajouter des annotations de type si nous
 voulons rendre explicite et clarifier le code au risque d'être plus verbeux que
 ce qui est strictement nécessaire. Annoter les types de la fermeture que nous
-avons défini dans l'encart 13-5 ressemblerait à l'encart 13-7.
+avons définie dans l'encart 13-5 ressemblerait à l'encart 13-7.
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -641,7 +643,7 @@ annotations de type de la définition de la fermeture, et la quatrième ligne
 supprime les accolades qui sont facultatives, parce que le corps d'une fermeture
 n'a qu'une seule expression. Ce sont toutes des définitions valides qui
 suivront le même comportement lorsqu'on les appellera. L'appel aux fermetures
-est nécessaire pour que `ajouter_un_v3` et `ajouter_un_v4` puisse être compilés
+est nécessaire pour que `ajouter_un_v3` et `ajouter_un_v4` puissent être compilés
 car les types seront déduits en fonction de leur utilisation.
 
 <!--
@@ -658,7 +660,7 @@ Les définitions des fermetures auront un type concret déduit pour chacun de
 leurs paramètres et pour leur valeur de retour. Par exemple, l'encart 13-8
 montre la définition d'une petite fermeture qui renvoie simplement la valeur
 qu'elle reçoit comme paramètre. Cette fermeture n'est pas très utile sauf pour
-les besoins de cet exemple. Notez que nous n'avons pas ajouté d'annotations de
+les besoins de cet exemple. Notez que nous n'avons pas ajouté d'annotation de
 type à la définition : si nous essayons alors d'appeler la fermeture deux fois,
 en utilisant une `String` comme argument la première fois et un `u32` la
 deuxième fois, nous obtiendrons une erreur :
@@ -749,9 +751,9 @@ responsible for saving and reusing the result. You may know this pattern as
 
 Heureusement, une autre solution s'offre à nous. Nous pouvons créer une
 structure qui stockera la fermeture et la valeur qui en résulte. La structure
-n'exécutera la fermeture uniquement si nous avons besoin de la valeur
+n'exécutera la fermeture que si nous avons besoin de la valeur
 résultante, et elle mettra en cache la valeur résultante pour que le reste de
-notre code ne soit pas en charge de sauvegarder et de la réutiliser le résultat.
+notre code n'ait pas la responsabilité de sauvegarder et de réutiliser le résultat.
 Vous connaissez peut-être cette technique sous le nom de *mémoïsation* ou
 *d'évaluation paresseuse*.
 
@@ -769,7 +771,7 @@ le type de fermeture, car une définition de structure a besoin de connaître le
 types de chacun de ses champs. Chaque instance de fermeture a son propre type
 anonyme unique : cela signifie que même si deux fermetures ont la même
 signature, leurs types sont toujours considérés comme différents. Pour définir
-des structures, des enumérations ou des paramètres de fonction qui utilisent des
+des structures, des énumérations ou des paramètres de fonction qui utilisent des
 fermetures, nous utilisons des génériques et des traits liés, comme nous
 l'avons vu au chapitre 10.
 
@@ -782,7 +784,7 @@ this example, we can use the `Fn` trait.
 -->
 
 Les traits `Fn` sont fournis par la bibliothèque standard. Toutes les fermetures
-implémentent au moins un des traits suivants : `Fn`, `FnMut`, ou `FnOnce`. Nous
+implémentent au moins un des traits suivants : `Fn`, `FnMut` ou `FnOnce`. Nous
 verrons la différence entre ces traits dans la section
 [“Capturer l'environnement avec les
 fermetures”](#capturer-lenvironnement-avec-les-fermetures)<!-- ignore --> ; dans
@@ -831,7 +833,7 @@ closure in `calculation` and an optional result in `value`</span>
 -->
 
 <span class="caption">Encart 13-9 : définition d'une structure `Cache` qui
-possède une fermeture dans `calcul` et un résultat facultatif dans `valeur`.
+possède une fermeture dans `calcul` et un résultat optionnel dans `valeur`.
 </span>
 
 <!--
@@ -855,10 +857,10 @@ est précisé après le `->`).
 > `Fn` trait.
 -->
 
-> Remarque : les fonctions implémentent aussi tous les trois traits `Fn`. Si ce
-> que nous voulons faire n'a pas besoin de capturer une valeur de
-> l'environnement, nous pouvons utiliser une fonction plutôt qu'une fermeture où
-> nous avons besoin de quelque chose qui implémente un trait `Fn`.
+> Remarque : les fonctions peuvent aussi implémenter chacun de ces trois traits
+> `Fn`. Si ce que nous voulons faire ne nécessite pas de capturer une valeur de
+> l'environnement, nous pouvons utiliser une fonction plutôt qu'une fermeture
+> lorsque nous avons besoin de quelque chose qui implémente un trait `Fn`.
 
 <!--
 The `value` field is of type `Option<u32>`. Before we execute the closure,
@@ -1000,7 +1002,7 @@ Au lieu de sauvegarder la fermeture dans une variable directement, nous
 sauvegardons une nouvelle instance de `Cache` qui contient la fermeture.
 Ensuite, à chaque fois que nous voulons le résultat, nous appelons la méthode
 `valeur` sur cette instance de `Cache`. Nous pouvons appeler la méthode `valeur`
-autant de fois que nous souhaitons, ou ne pas l'appeler du tout, et le calcul
+autant de fois que nous le souhaitons, ou ne pas l'appeler du tout, et le calcul
 lent sera exécuté une fois au maximum.
 
 <!--
@@ -1066,11 +1068,11 @@ passed into it. We call the `value` method on this `Cacher` instance with an
 `value` with the `arg` value of 2 to return 2.
 -->
 
-Ce test créé une nouvelle instance de `Cache` avec une fermeture qui retourne
+Ce test crée une nouvelle instance de `Cache` avec une fermeture qui retourne
 la valeur qui lui est passée. Nous appelons la méthode `valeur` sur cette
 instance de `Cache` avec une valeur `arg` de 1 et ensuite une valeur `arg`
 de 2, et nous nous attendons à ce que l'appel à `valeur` avec la valeur `arg`
-de 2 devrait retourner 2.
+de 2 retourne 2.
 
 <!--
 Run this test with the `Cacher` implementation in Listing 13-9 and Listing
@@ -1117,7 +1119,7 @@ la fermeture avec cette clé. Plutôt que de regarder directement si `self.valeu
 a une valeur `Some` ou une valeur `None`, la fonction `valeur` recherchera `arg`
 dans la table de hachage et retournera la valeur si elle est présente. S'il
 n'est pas présent, le `Cache` appellera la fermeture et sauvegardera la valeur
-résultante dans la table de hachage associée à sa clée `arg`.
+résultante dans la table de hachage associée à sa clé `arg`.
 
 <!--
 The second problem with the current `Cacher` implementation is that it only
@@ -1149,7 +1151,7 @@ which they’re defined.
 -->
 
 Dans l'exemple du générateur d'entraînement, nous n'avons utilisé les fermetures
-uniquement comme des fonctions anonymes internes. Cependant, les fermetures ont
+que comme des fonctions anonymes internes. Cependant, les fermetures ont
 une capacité supplémentaire que les fonctions n'ont pas : elles peuvent capturer
 leur environnement et accéder aux variables de la portée dans laquelle elles
 sont définies.
@@ -1184,7 +1186,7 @@ fermeture :
 variable in its enclosing scope</span>
 -->
 
-<span class="caption">Encart 13-12 : exemple d'une fermeture qui réfère à une
+<span class="caption">Encart 13-12 : exemple d'une fermeture qui se réfère à une
 variable présente dans la portée qui la contient.</span>
 
 <!--
@@ -1195,7 +1197,7 @@ same scope that `equal_to_x` is defined in.
 
 Ici, même si `x` n'est pas un des paramètres de `egal_a_x`, la fermeture
 `egal_a_x` est autorisée à utiliser la variable `x` définie dans la même
-portée où est définie `egal_a_x`.
+portée que celle où est définie `egal_a_x`.
 
 <!--
 We can’t do the same with functions; if we try with the following example, our
@@ -1255,7 +1257,7 @@ their environment, defining and using functions will never incur this overhead.
 Lorsqu'une fermeture capture une valeur de son environnement, elle utilise la
 mémoire pour stocker les valeurs à utiliser dans son corps. Cette utilisation de
 la mémoire a un coût supplémentaire que nous ne voulons pas payer dans les cas
-les plus courants où nous voulons exécuter du code qui ne capture pas leur
+les plus courants où nous voulons exécuter du code qui ne capture pas son
 environnement. Comme les fonctions ne sont jamais autorisées à capturer leur
 environnement, la définition et l'utilisation des fonctions n'occasionneront
 jamais cette surcharge.
@@ -1284,7 +1286,7 @@ traits `Fn` comme ceci :
 * `Fn` borrows values from the environment immutably.
 -->
 
-* `FnOnce` consomme les variables qu'il capture à partir de sa portée, connu
+* `FnOnce` consomme les variables qu'il capture à partir de sa portée, désignée
   sous le nom de *l'environnement* de la fermeture. Pour consommer les variables
   capturées, la fermeture doit prendre possession de ces variables et les
   déplacer dans la fermeture lorsqu'elle est définie. La partie `Once` du nom
@@ -1337,8 +1339,8 @@ appartiennent à la nouvelle tâche.
 > Remarque : les fermetures `move` peuvent toujours implémenter `Fn` ou
 > `FnMut`, même si elles capturent les variables en les déplaçant. C'est
 > possible car les traits implémentés par un type de fermeture sont déterminés
-> par ce que font ces fermetures avec les valeurs déplacées, et non pas comment
-> elles les capturent. Le mot-clé `move` ne définit que cette dernière.
+> par ce que font ces fermetures avec les valeurs déplacées et pas d'après la façon
+> dont elles les capturent. Le mot-clé `move` ne définit que ce dernier aspect.
 
 <!--
 We’ll have more examples of `move` closures in Chapter 16 when we talk about
@@ -1348,7 +1350,7 @@ because integers can be copied rather than moved; note that this code will not
 yet compile.
 -->
 
-Nous aurons d'autres exemples de fermetures utilisant `move` au chapitre 16
+Nous verrons d'autres exemples de fermetures utilisant `move` au chapitre 16
 lorsque nous parlerons de la concurrence. Pour l'instant, voici le code de
 l'encart 13-12 avec le mot-clé `move` ajouté à la définition de la fermeture et
 utilisant des vecteurs au lieu d'entiers, car les entiers peuvent être copiés

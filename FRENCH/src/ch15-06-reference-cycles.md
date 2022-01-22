@@ -7,17 +7,17 @@
 <!--
 Rust’s memory safety guarantees make it difficult, but not impossible, to
 accidentally create memory that is never cleaned up (known as a *memory leak*).
-Preventing memory leaks entirely is not one of Rust’s guarantees in the same
-way that disallowing data races at compile time is, meaning memory leaks are
-memory safe in Rust. We can see that Rust allows memory leaks by using `Rc<T>`
-and `RefCell<T>`: it’s possible to create references where items refer to each
-other in a cycle. This creates memory leaks because the reference count of each
-item in the cycle will never reach 0, and the values will never be dropped.
+Preventing memory leaks entirely is not one of Rust’s guarantees, meaning
+memory leaks are memory safe in Rust. We can see that Rust allows memory leaks
+by using `Rc<T>` and `RefCell<T>`: it’s possible to create references where
+items refer to each other in a cycle. This creates memory leaks because the
+reference count of each item in the cycle will never reach 0, and the values
+will never be dropped.
 -->
 
 Les garanties de sécurité de la mémoire de Rust rendent difficile, mais pas
 impossible, la création accidentelle de mémoire qui n'est jamais nettoyée
-(aussi appelée *fuite de mémoire*). Eviter absolument les fuites de mémoire
+(aussi appelée *fuite de mémoire*). Eviter totalement les fuites de mémoire
 n'est pas une des garanties de Rust, en tout cas pas comme pour l'accès
 concurrent au moment de la compilation, ce qui signifie que les fuites de
 mémoire sont sans risque pour la mémoire avec Rust. Nous pouvons constater
@@ -147,9 +147,9 @@ from an `Rc<List>` that holds a `Nil` value to the `Rc<List>` in `b`.
 Nous modifions `a` afin qu'elle pointe sur `b` au lieu de `Nil`, ce qui crée
 une boucle. Nous faisons ceci en utilisant la méthode `parcourir` pour obtenir
 une référence au `RefCell<Rc<List>>` présent dans `a`, que nous plaçons dans la
-variable `link`. Ensuite nous utilisons la méthode `borrow_mut` sur le
-`RefCell<Rc<List>>` pour changer la valeur présente en son sein par une
-`Rc<List>` qui stocke une valeur `Nil` vers le `Rc<List>` présent dans `b`.
+variable `lien`. Ensuite nous utilisons la méthode `borrow_mut` sur le
+`RefCell<Rc<List>>` pour remplacer la valeur actuellement présente en son sein,
+la `Rc<List>` contenant `Nil`, par la `Rc<List>` présente dans `b`.
 
 <!--
 When we run this code, keeping the last `println!` commented out for the
@@ -229,12 +229,12 @@ program would use more memory than it needed and might overwhelm the system,
 causing it to run out of available memory.
 -->
 
-Dans ce cas, juste après que nous ayons créé la boucle de références, le
+Dans ce cas, juste après que nous avons créé la boucle de références, le
 programme se termine. Les conséquences de cette boucle ne sont pas
 désastreuses. Cependant, si un programme plus complexe alloue beaucoup de
 mémoire dans une boucle de références et la garde pendant longtemps, le
-programme va utiliser bien plus de mémoire qu'il a besoin et pourrait
-surcharger le système, qui devrait épuiser la mémoire disponible.
+programme va utiliser bien plus de mémoire qu'il n'en a besoin et pourrait
+surcharger le système en consommant ainsi toute la mémoire disponible.
 
 <!--
 Creating reference cycles is not easily done, but it’s not impossible either.
@@ -248,7 +248,7 @@ minimize.
 
 La création de boucles de références n'est pas facile à réaliser, mais n'est pas
 non plus impossible. Si vous avez des valeurs `RefCell<T>` qui contiennent des
-valeurs `Rc<T>` ou combinaisons similaires de types emboîtées avec de la
+valeurs `Rc<T>` ou des combinaisons similaires de types emboîtés avec de la
 mutabilité interne et du comptage de références, vous devez vous assurer que
 vous ne créez pas de boucles ; vous ne pouvez pas compter sur Rust pour les
 détecter. La création de boucle de références devrait être un bogue de logique
@@ -275,9 +275,9 @@ possession, et seules celles qui prennent possession décident si oui ou non une
 valeur peut être libérée. Dans l'encart 15-25, nous voulons toujours que les
 variantes `Cons` possèdent leur propre liste, donc il est impossible de
 réorganiser la structure des données. Voyons maintenant un exemple qui utilise
-des branches constituées de nœuds parents et enfants pour voir lorsque les
-liens qui ne prennent pas possession sont appropriés pour éviter les boucles de
-références.
+des graphes constitués de nœuds parents et de nœuds enfants pour voir quand
+des relations sans possessions constituent un moyen approprié d'éviter les
+boucles de références.
 
 <!--
 ### Preventing Reference Cycles: Turning an `Rc<T>` into a `Weak<T>`
@@ -300,7 +300,7 @@ doesn’t need to be 0 for the `Rc<T>` instance to be cleaned up.
 
 Précédemment, nous avons démontré que l'appel à `Rc::clone` augmente le
 `strong_count` d'une instance de `Rc<T>`, et une instance `Rc<T>` est nettoyée
-seulement si son `strong_count` est à 0. Vous pouvez aussi créer un *pointeur
+seulement si son `strong_count` est à 0. Vous pouvez aussi créer une *référence
 faible* (NdT : d'où le `weak`) vers la valeur présente dans une instance `Rc<T>`
 en appelant `Rc::downgrade` et en lui passant une référence vers le `Rc<T>`.
 Lorsque vous faites appel à `Rc::downgrade`, vous obtenez un pointeur
@@ -308,7 +308,7 @@ intelligent du type `Weak<T>`. Plutôt que d'augmenter le `strong_count` de
 l'instance de 1, l'appel à `Rc::downgrade` augmente le `weak_count` de 1. Le
 type `Rc<T>` utilise le `weak_count` pour compter combien de références
 `Weak<T>` existent, de la même manière que `strong_count`. La différence réside
-dans le fait que `weak_count` n'a pas besoin d'être 0 pour que l'instance
+dans le fait que `weak_count` n'a pas besoin d'être à 0 pour que l'instance
 `Rc<T>` soit nettoyée.
 
 <!--
@@ -319,10 +319,10 @@ once the strong reference count of values involved is 0.
 -->
 
 Les références fortes désignent la manière de partager la propriété d'une
-instance `Rc<T>`. Les pointeurs faibles ne désignent pas le lien qui prend
-possession. Ils ne vont provoquer de boucle de références car n'importe quelle
-boucle qui implique des pointeurs faibles se terminera lorsque le compteur de
-références fortes lié vaudra 0.
+instance `Rc<T>`. Les références faibles n'expriment pas de relation de
+possession. Ils ne provoqueront pas de boucle de références car n'importe quelle
+boucle impliquant des références faibles sera détruite une fois que le compteur de
+références fortes des valeurs impliquées vaudra 0.
 
 <!--
 Because the value that `Weak<T>` references might have been dropped, to do
@@ -397,9 +397,10 @@ modify which nodes are children of another node, so we have a `RefCell<T>` in
 Nous souhaitons qu'un `Noeud` prenne possession de ses enfants, et nous
 souhaitons partager la possession avec des variables afin d'accéder directement
 à chaque `Noeud` de l'arbre. Pour pouvoir faire ceci, nous définissons les
-éléments du `Vec<T>` pour être des valeurs du type `Rc<Noeud>`. Nous souhaitons
-également modifier tel nœud est enfant de tel autre nœud, donc nous plaçons
-un `RefCell<T>` dans `enfants` qui contient ce `Vec<Rc<Noeud>>`.
+éléments du `Vec<T>` comme étant des valeurs du type `Rc<Noeud>`. Nous
+souhaitons également pouvoir modifier le fait que tel nœud soit enfant de tel
+autre, donc, dans `enfants`, nous englobons le `Vec<Rc<Noeud>>` dans un
+`RefCell<T>`.
 
 <!--
 Next, we’ll use our struct definition and create one `Node` instance named
@@ -473,7 +474,7 @@ Pour que le nœud enfant connaisse son parent, nous devons ajouter un champ
 choisir quel sera le type de `parent`. Nous savons qu'il ne peut pas contenir
 de `Rc<T>`, car cela créera une boucle de référence avec `feuille.parent` qui
 pointe sur `branche` et `branche.enfant` qui pointe sur `feuille`, ce qui va
-faire que leurs valeurs `strong_count` ne sera jamais à 0.
+faire que leurs valeurs `strong_count` ne seront jamais à 0.
 
 <!--
 Thinking about the relationships another way, a parent node should own its
@@ -486,7 +487,7 @@ En concevant le lien d'une autre manière, un nœud parent devrait prendre
 possession de ses enfants : si un nœud parent est libéré, ses nœuds enfants
 devraient aussi être libérés. Cependant, un enfant ne devrait pas prendre
 possession de son parent : si nous libérons un nœud enfant, le parent doit
-toujours exister. C'est donc un cas d'emploi pour les pointeurs faibles !
+toujours exister. C'est donc un cas d'emploi pour les références faibles !
 
 <!--
 So instead of `Rc<T>`, we’ll make the type of `parent` use `Weak<T>`,
@@ -546,7 +547,7 @@ moyen de pointer vers son parent, `branche` :
 parent node `branch`</span>
 -->
 
-<span class="caption">Encart 15-28 : un nœud `feuille` avec un pointeur faible
+<span class="caption">Encart 15-28 : un nœud `feuille` avec une référence faible
 vers son nœud parent, `branche`</span>
 
 <!--
@@ -763,7 +764,7 @@ rules at runtime instead of at compile time.
 -->
 
 Ce chapitre a expliqué l'utilisation des pointeurs intelligents pour appliquer
-différentes garanties et compromis que celles qu'applique Rust par défaut avec
+des garanties et des compromis différents de ceux qu'applique Rust par défaut avec
 les références classiques. Le type `Box<T>` a une taille connue et pointe sur
 une donnée allouée sur le tas. Le type `Rc<T>` compte le nombre de références
 vers une donnée présente sur le tas afin que cette donnée puisse avoir

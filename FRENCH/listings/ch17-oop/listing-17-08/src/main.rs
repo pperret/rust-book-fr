@@ -9,7 +9,7 @@ struct ListeDeroulante {
 
 impl Affichable for ListeDeroulante {
     fn afficher(&self) {
-        // code servant vraiment à afficher une liste déroulante
+        // code servant à afficher vraiment une liste déroulante
     }
 }
 // ANCHOR_END: here

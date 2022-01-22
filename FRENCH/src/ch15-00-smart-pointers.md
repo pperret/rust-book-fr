@@ -122,7 +122,8 @@ pointeurs intelligents les plus courants de la bibliothèque standard :
 * `Rc<T>`, un type comptant les références, qui permet d'avoir plusieurs
   propriétaires
 * `Ref<T>` et `RefMut<T>`, auxquels on accède via `RefCell<T>`, un type
-  qui permet d'appliquer les règles d'emprunt au moment de l'exécution plutôt qu'au moment de la compilation
+  qui permet d'appliquer les règles d'emprunt au moment de l'exécution plutôt
+  qu'au moment de la compilation
 
 <!--
 In addition, we’ll cover the *interior mutability* pattern where an immutable

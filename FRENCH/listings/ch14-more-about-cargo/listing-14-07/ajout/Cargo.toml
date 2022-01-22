@@ -2,5 +2,5 @@
 
 members = [
     "additioneur",
-    "ajouter-un",
+    "ajouter_un",
 ]

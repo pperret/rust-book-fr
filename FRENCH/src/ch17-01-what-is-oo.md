@@ -37,8 +37,8 @@ catalog of object-oriented design patterns. It defines OOP this way:
 -->
 
 Le livre *Design Patterns: Elements of Reusable Object-Oriented Software*
-d'Erich Gamma, Richard Helm, Ralph Johnson, et John Vlissides (Addison-Wesley
-Professional, 1994), que l'on surnomme le livre du *Gang of Four*, est un
+d'Erich Gamma, Richard Helm, Ralph Johnson et John Vlissides (Addison-Wesley
+Professional, 1994) que l'on surnomme le livre du *Gang of Four* est un
 catalogue de patrons de conception orientés objet. Il définit la POO ainsi :
 
 <!--
@@ -58,11 +58,11 @@ enums with methods aren’t *called* objects, they provide the same
 functionality, according to the Gang of Four’s definition of objects.
 -->
 
-Si l'on se tient à cette définition, Rust est orienté objet : les structures et
-les énumérations ont des données, et les blocs `impl` leur fournissent des
-méthodes. Bien que les structures et les énumérations avec des méthodes ne
-soient pas qualifiées d'objets, elles en ont les fonctionnalités, d'après la
-définition des objets par le *Gang of Four*.
+Si l'on s'en tient à cette définition, Rust est orienté objet : les structures et
+les énumérations ont des données et les blocs `impl` leur fournissent des
+méthodes. Bien que les structures et les énumérations dotées de méthodes ne
+soient pas qualifiées d'objets, elles en ont les fonctionnalités selon la
+définition des objets faite par le *Gang of Four*.
 
 <!--
 ### Encapsulation that Hides Implementation Details
@@ -144,12 +144,12 @@ also updated. We do this by implementing `add`, `remove`, and `average` methods
 on the struct, as shown in Listing 17-2:
 -->
 
-La structure est marquée `pub` de sorte que d'autres codes puissent l'utiliser,
-mais les champs au sein de la structure restent privés. C'est important dans ce
-cas puisque nous voulons nous assurer que lorsqu'une valeur est ajoutée ou
-retirée dans la liste, la moyenne soit aussi mise à jour. Nous le faisons en
-implémentant les méthodes `ajouter`, `retirer` et `moyenne` sur la structure,
-comme le montre l'encart 17-2 :
+La structure est marquée `pub` de façon à ce qu'elle puisse être utilisée par
+du code externe, mais les champs au sein de la structure restent privés. C'est
+important dans ce cas puisque nous voulons nous assurer que lorsqu'une valeur
+est ajoutée ou retirée dans la liste, la moyenne soit aussi mise à jour. Nous
+le faisons en implémentant les méthodes `ajouter`, `retirer` et `moyenne` sur
+la structure, comme le montre l'encart 17-2 :
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -218,8 +218,8 @@ likely have to change if it were modifying `list` directly.
 -->
 
 Puisque nous avons encapsulé les détails d'implémentation de la structure
-`CollectionMoyennee`, nous pourrons aisément en changer quelques aspects, tels
-que la structure de données, à l'avenir. Par exemple, nous pourrions utiliser
+`CollectionMoyennee`, nous pourrons aisément en changer plus tard quelques
+aspects, tels que la structure de données. Par exemple, nous pourrions utiliser
 un `HashSet<i32>` plutôt qu'un `Vec<i32>` pour le champ `liste`. Du moment que
 les signatures des méthodes publiques `ajouter`, `retirer` et `moyenne` restent
 les mêmes, du code qui utilise `CollectionMoyennee` n'aurait pas besoin de
@@ -268,8 +268,8 @@ Si un langage doit avoir de l'héritage pour être un langage orienté objet, al
 Rust n'en est pas un. Il est impossible de définir une structure qui hérite des
 champs et de l'implémentation des méthodes de la structure mère. Cependant, si
 vous avez l'habitude d'utiliser l'héritage dans vos programmes, vous pouvez
-utiliser d'autres solutions en Rust, selon la raison pour laquelle vous vous
-êtes tourné vers l'héritage en premier lieu.
+utiliser d'autres solutions en Rust, en fonction de la raison qui vous a conduit
+en premier lieu à vous tourner vers l'héritage.
 
 <!--
 You choose inheritance for two main reasons. One is for reuse of code: you can

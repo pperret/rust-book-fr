@@ -480,7 +480,7 @@ string’s content.
 Ensuite, la ligne `.read_line(&mut supposition)` appelle la méthode
 [`read_line`][read_line]<!-- ignore --> sur l'entrée standard afin d'obtenir
 la saisie utilisateur.
-On passons aussi `&mut supposition` en argument de `read_line` pour lui
+Nous passons aussi `&mut supposition` en argument de `read_line` pour lui
 indiquer dans quelle chaîne de caractère il faut stocker la saisie utilisateur.
 Le but final de `read_line` est de récupérer tout ce que l'utilisateur écrit
 dans l'entrée standard et de l'ajouter à la fin d'une chaîne de caractères
@@ -601,13 +601,13 @@ Le chapitre 6 explorera les énumérations plus en détail. La raison d'être du
 type `Result` est de coder des informations pour la gestion des erreurs.
 
 <!--
-`Result`’s variants are `Ok` or `Err`. The `Ok` variant indicates the operation
+`Result`’s variants are `Ok` and `Err`. The `Ok` variant indicates the operation
 was successful, and inside `Ok` is the successfully generated value. The `Err`
 variant means the operation failed, and `Err` contains information about how or
 why the operation failed.
 -->
 
-Les variantes de `Result` sont `Ok` ou `Err`. La variante `Ok` signifie que
+Les variantes de `Result` sont `Ok` et `Err`. La variante `Ok` signifie que
 l'opération a fonctionné, et à l'intérieur de `Ok` se trouve la valeur générée
 avec succès. La variante `Err` signifie que l'opération a échoué, et `Err`
 contient les informations décrivant comment ou pourquoi l'opération a échoué.
@@ -2004,7 +2004,7 @@ et demander un nouveau nombre plutôt que de faire planter le programme</span>
 <!--
 We switch from an `expect` call to a `match` expression to move from crashing
 on an error to handling the error. Remember that `parse` returns a `Result`
-type and `Result` is an enum that has the variants `Ok` or `Err`. We’re using a
+type and `Result` is an enum that has the variants `Ok` and `Err`. We’re using a
 `match` expression here, as we did with the `Ordering` result of the `cmp`
 method.
 -->
@@ -2012,7 +2012,7 @@ method.
 Nous remplaçons un appel à `expect` par une expression `match` pour passer
 d'une erreur qui fait planter le programme à une erreur proprement gérée.
 N'oubliez pas que `parse` retourne un type `Result` et que `Result` est une
-énumération qui a pour variantes `Ok` ou `Err`. Nous utilisons ici une
+énumération qui a pour variantes `Ok` et `Err`. Nous utilisons ici une
 expression `match` comme nous l'avons déjà fait avec le résultat de type
 `Ordering` de la méthode `cmp`.
 

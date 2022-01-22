@@ -23,7 +23,7 @@ pub struct Bouton {
 
 impl Affichable for Bouton {
     fn afficher(&self) {
-        // code servant vraiment à afficher un bouton
+        // code servant à afficher vraiment un bouton
     }
 }
 // ANCHOR_END: here

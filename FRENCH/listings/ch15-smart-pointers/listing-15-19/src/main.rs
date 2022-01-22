@@ -16,6 +16,6 @@ fn main() {
         let c = Cons(4, Rc::clone(&a));
         println!("compteur après la création de c = {}", Rc::strong_count(&a));
     }
-    println!("compteur après que c soit sortie de la portée = {}", Rc::strong_count(&a));
+    println!("compteur après que c est sorti de la portée = {}", Rc::strong_count(&a));
 }
 // ANCHOR_END: here

@@ -20,8 +20,8 @@ tests qu'il produit. Vous pouvez rajouter des options en ligne de commande pour
 changer le comportement par défaut de `cargo test`. Par exemple, le
 comportement par défaut des binaires produits par `cargo test` est de lancer
 tous les tests en parallèle et de capturer la sortie pendant l'exécution des
-tests, ce qui lui évite d'être affichée sur l'écran pendant ce temps, facilitant 
-la lecture des messages relatifs aux résultats de l'exécution des
+tests, ce qui lui évite d'être affichée sur l'écran pendant ce temps,
+facilitant la lecture des messages relatifs aux résultats de l'exécution des
 tests.
 
 <!--
@@ -116,9 +116,10 @@ state.
 -->
 
 Nous avons réglé le nombre de tâches à `1`, ce qui indique au programme de ne
-pas utiliser le parallélisme. Exécuter ces tests en n'effectuant qu'une seule tâche
-à la fois va prendre plus de temps que de les lancer en parallèle, mais cela assure que
-les tests ne vont pas s'influencer mutuellement s'ils partagent le même état.
+pas utiliser le parallélisme. Exécuter ces tests en n'effectuant qu'une seule
+tâche à la fois va prendre plus de temps que de les lancer en parallèle, mais
+cela assure que les tests ne vont pas s'influencer mutuellement s'ils partagent
+le même état.
 
 <!--
 ### Showing Function Output

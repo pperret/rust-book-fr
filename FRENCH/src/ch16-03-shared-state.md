@@ -19,8 +19,8 @@ What would communicating by sharing memory look like? In addition, why would
 message-passing enthusiasts not use it and do the opposite instead?
 -->
 
-A quoi ressemble le partage de mémoire pour communiquer ? De plus, pourquoi les
-partisans de l'envoi de messages ne devraient pas l'utiliser et faire plutôt
+A quoi ressemble la communication par partage de mémoire ? De plus, pourquoi les
+partisans de l'envoi de messages ne devraient-ils pas l'utiliser et faire plutôt
 le contraire ?
 
 <!--
@@ -35,17 +35,16 @@ example, let’s look at mutexes, one of the more common concurrency primitives
 for shared memory.
 -->
 
-De manière générale, les canaux dans les langages de programmation ressemble à
-la possession unique, car une fois que vous avez transféré une valeur dans un
+De manière générale, les canaux dans les langages de programmation ressemblent à
+la possession exclusive, car une fois que vous avez transféré une valeur dans un
 canal, vous ne pouvez plus utiliser cette valeur. Le partage de mémoire en
 concurrence est comme de la possession multiple : plusieurs tâches peuvent
 accéder au même endroit de la mémoire en même temps. Comme vous l'avez vu au
-chapitre 15, dans lequel les pointeurs intelligents rendent possible la
-possession multiple, la possession multiple peut rajouter de la complexité car
-ces différents propriétaires ont besoin d'être gérés. Le système de type de Rust
-et les règles de possession aident beaucoup à les gérer correctement. Par
-exemple, découvrons les mutex, une des primitives les plus courantes pour
-partager la mémoire.
+chapitre 15, dans lequel les pointeurs intelligents la rendent possible, la
+possession multiple peut ajouter de la complexité car ses différents
+propriétaires ont besoin d'être gérés. Le système de type de Rust et les règles
+de possession aident beaucoup à les gérer correctement. Par exemple, découvrons
+les mutex, une des primitives les plus courantes pour partager la mémoire.
 
 <!--
 ### Using Mutexes to Allow Access to Data from One Thread at a Time
@@ -63,10 +62,10 @@ mutex is described as *guarding* the data it holds via the locking system.
 -->
 
 *Mutex* est une abréviation pour *mutual exclusion*, ce qui veut dire qu'un
-mutex ne permet qu'à une seule tâche d'accéder à une donnée en même temps. Pour
+mutex ne permet qu'à une seule tâche d'accéder à une donnée à un instant donné. Pour
 accéder à la donnée dans un mutex, une tâche doit d'abord signaler qu'elle
 souhaite y accéder en demandant l'obtention du *verrou* du mutex. Le verrou est
-une structure de donnée qui fait partie du mutex qui assure le suivi de qui a
+une structure de donnée qui fait partie du mutex et qui assure le suivi de qui a
 actuellement accès à la donnée. Par conséquent, le mutex est qualifié de
 *gardien* de la donnée qu'il renferme via le système de verrou.
 
@@ -100,7 +99,7 @@ as planned!
 -->
 
 Pour faire une métaphore de la vie courante d'un mutex, imaginez une table ronde
-lors d'une conférence avec un seul microphone. Avant qu'un participant puisse
+lors d'une conférence avec un seul microphone. Avant qu'un participant ne puisse
 parler, il doit demander ou signaler qu'il veut utiliser le micro. Lorsqu'il
 obtient le micro, il peut parler aussi longtemps qu'il le souhaite et ensuite
 passer le micro au prochain participant qui a demandé à pouvoir parler. Si un
@@ -114,10 +113,10 @@ many people are enthusiastic about channels. However, thanks to Rust’s type
 system and ownership rules, you can’t get locking and unlocking wrong.
 -->
 
-La gestion des mutex peut devenir incroyablement compliquée, c'est pourquoi tant de
-personnes sont partisanes des canaux. Cependant, grâce au système de type de
-Rust et aux règles de possession, vous ne pouvez pas vous tromper dans le
-verrouillage et déverrouillage.
+La gestion des mutex peut devenir incroyablement compliquée, c'est pourquoi
+tant de personnes sont partisanes des canaux. Cependant, grâce au système de
+type de Rust et aux règles de possession, vous ne pouvez pas vous tromper dans
+le verrouillage et déverrouillage.
 
 <!--
 #### The API of `Mutex<T>`
@@ -167,7 +166,7 @@ it’s our turn to have the lock.
 Comme avec beaucoup de types, nous créons un `Mutex<T>` en utilisant la
 fonction associée `new`. Pour accéder à la donnée dans le mutex, nous utilisons
 la méthode `lock` pour obtenir le verrou. Cela va bloquer la tâche courante,
-donc elle ne s'exécutera plus tant que ce n'est à notre tour d'avoir le verrou.
+donc elle ne s'exécutera plus tant que ce ne sera pas à notre tour d'avoir le verrou.
 
 <!--
 The call to `lock` would fail if another thread holding the lock panicked. In
@@ -175,10 +174,10 @@ that case, no one would ever be able to get the lock, so we’ve chosen to
 `unwrap` and have this thread panic if we’re in that situation.
 -->
 
-L'appel à `lock` va échouer dans le cas où une autre tâche qui avait le verrou
-paniquerait. Dans ce cas, personne ne pourra obtenir le verrou, donc nous avons
-choisi d'utiliser `unwrap` pour faire en sorte que cette tâche panique si elle
-est dans cette situation.
+L'appel à `lock` échouera si une autre tâche qui avait le verrou a paniqué.
+Dans ce cas, personne ne pourra obtenir le verrou, donc nous avons choisi
+d'utiliser `unwrap` pour que notre tâche panique si nous nous retrouvons dans
+une telle situation.
 
 <!--
 After we’ve acquired the lock, we can treat the return value, named `num` in
@@ -216,7 +215,7 @@ sur la donnée interne ; ce pointeur intelligent implémente aussi `Drop` qui
 libère le verrou automatiquement lorsqu'un `MutexGuard` sort de la portée, ce
 qui arrive à la fin de la portée interne dans l'encart 16-12. Au final, nous ne
 risquons pas d'oublier de rendre le verrou et ainsi bloquer l'utilisation du mutex
-par les autres tâches car la libération du verrou se produit automatiquement.
+pour les autres tâches car la libération du verrou se produit automatiquement.
 
 <!--
 After dropping the lock, we can print the mutex value and see that we were able
@@ -245,7 +244,7 @@ Essayons maintenant de partager une valeur entre plusieurs tâches en utilisant
 chacune augmente la valeur du compteur de 1, donc le compteur va passer de 0
 à 10. Le prochain exemple dans l'encart 16-13 débouchera sur une erreur de
 compilation, et nous allons utiliser cette erreur pour en apprendre plus sur
-l'utilisation de `Mutex<T>` et sur comment Rust nous aide à l'utiliser
+l'utilisation de `Mutex<T>` et sur la façon dont Rust nous aide à l'utiliser
 correctement.
 
 <!--
@@ -287,7 +286,7 @@ Nous avons créé une variable `compteur` pour stocker un `i32` dans un
 10 tâches en itérant sur un intervalle de nombres. Nous utilisons
 `thread::spawn` et nous donnons à toutes les tâches la même fermeture, qui
 déplace le compteur dans la tâche, obtient le verrou sur le `Mutex<T>` en
-faisant appel à la méthode `lock`, et on ajoute ensuite 1 à la valeur présente
+faisant appel à la méthode `lock` et ajoute ensuite 1 à la valeur présente
 dans le mutex. Lorsqu'une tâche finit d'exécuter sa fermeture, `nombre` va
 sortir de la portée et va libérer le verrou afin qu'une autre tâche puisse
 l'obtenir.
@@ -309,7 +308,7 @@ de ce programme.
 We hinted that this example wouldn’t compile. Now let’s find out why!
 -->
 
-Nous avions mentionné que cet exemple ne se compilerait pas. Découvrons
+Nous avions annoncé que cet exemple ne se compilerait pas. Découvrons
 maintenant pourquoi !
 
 <!--
@@ -332,8 +331,8 @@ multiple-ownership method we discussed in Chapter 15.
 Le message d'erreur signale que la valeur `compteur` a été déplacée dans
 l'itération précédente de la boucle. Donc Rust nous explique qu'il ne peut
 pas déplacer la possession du verrou de `compteur` dans plusieurs tâches.
-Corrigeons cette erreur de compilation avec une méthode pour avoir plusieurs
-propriétaires que nous avons vu au chapitre 15.
+Corrigeons cette erreur de compilation avec une méthode permettant d'avoir plusieurs
+propriétaires et que nous avons vue au chapitre 15.
 
 <!--
 #### Multiple Ownership with Multiple Threads
@@ -405,7 +404,7 @@ the traits that ensures the types we use with threads are meant for use in
 concurrent situations.
 -->
 
-Ouah, ce message d'erreur est très bavard ! Voici la partie la plus importante
+Ouah, ce message d'erreur est très verbeux ! Voici la partie la plus importante
 sur laquelle se concentrer :
 `` `Rc<Mutex<i32>>` cannot be sent between threads safely ``. Le compilateur
 nous indique aussi pour quelle raison :
@@ -425,17 +424,17 @@ with it. What we need is a type exactly like `Rc<T>` but one that makes changes
 to the reference count in a thread-safe way.
 -->
 
-Malheureusement, `Rc<T>` n'est pas sûr pour l'utilisation entre des tâches.
-Lorsque `Rc<T>` gère le compteur de références, il incrémente le compteur autant
-de fois que nous avons fait appel à `clone` et décrémente le compteur à chaque
-fois qu'un clone est libéré. Mais il n'utilise pas de primitives de concurrence
-pour s'assurer que les changements faits au compteur ne peuvent pas être
-interrompus par une autre tâche. Cela pourrait provoquer subtilement des bogues
-à cause d'une mauvaise gestion du compteur, qui pourraient provoquer des fuites
-de mémoire ou faire en sorte qu'une valeur soit libérée avant que nous ayons
-fini de l'utiliser. Nous avons besoin d'un type exactement comme `Rc<T>` mais
-qui procède aux changements du compteur de références de manière sûr dans des
-situations concurrentes.
+Malheureusement l'utilisation de `Rc<T>` n'est pas sure lorsqu'il est partagé
+entre plusieurs tâches. Lorsque `Rc<T>` gère le compteur de références, il
+incrémente le compteur autant de fois que nous avons fait appel à `clone` et
+décrémente le compteur à chaque fois qu'un clone est libéré. Mais il n'utilise
+pas de primitives de concurrence pour s'assurer que les changements faits au
+compteur ne peuvent pas être interrompus par une autre tâche. Cela pourrait
+provoquer des bogues subtils induisant une mauvaise gestion du compteur, ce qui
+pourrait provoquer des fuites de mémoire ou faire qu'une valeur soit libérée
+avant que nous ayions fini de l'utiliser. Nous avons besoin d'un type
+exactement comme `Rc<T>` mais qui procède aux changements du compteur de
+références de manière sure en situation de concurrence.
 
 <!--
 #### Atomic Reference Counting with `Arc<T>`
@@ -453,14 +452,14 @@ need to know that atomics work like primitive types but are safe to share
 across threads.
 -->
 
-Heureusement, `Arc<T>` *est* un type comme `Rc<T>` qui est sûr lors de
-situations concurrentes. Le *A* signifie *atomique*, ce qui signifie que c'est
-le type *compteur de références atomique*. L'atome est une sorte de primitive
+Heureusement, `Arc<T>` *est* un type comme `Rc<T>` qui est sûr en
+situation de concurrence. Le *A* signifie *atomique*, ce qui signifie que c'est
+un type *compteur de références atomique*. L'atome est une sorte de primitive
 concurrente que nous n'allons pas aborder en détails ici : rendez-vous dans la
 documentation de la bibliothèque standard sur [`std::sync::atomic`] pour en
 savoir plus. Pour le moment, vous avez juste besoin de retenir que les atomes
-fonctionnent comme les types primitifs mais qui son sûrs pour l'échange entre
-les tâches.
+fonctionnent comme les types primitifs mais qui sont sûrs à partager entre
+plusieurs tâches.
 
 <!--
 [`std::sync::atomic`]: ../std/sync/atomic/index.html
@@ -492,7 +491,7 @@ our program by changing the `use` line, the call to `new`, and the call to
 -->
 
 Retournons à notre exemple : `Arc<T>` et `Rc<T>` ont la même API, donc
-corrigeons notre programme en changeant la ligne `use`, l'appel à `new`, et
+corrigeons notre programme en changeant la ligne `use`, l'appel à `new` et
 l'appel à `clone`. Le code dans l'encart 16-15 va finalement se compiler et
 s'exécuter :
 
@@ -552,8 +551,8 @@ thread update the final result with its part.
 -->
 
 Nous y sommes arrivés ! Nous avons compté de 0 à 10, ce qui ne semble pas très
-impressionnant, mais cela nous a appris beaucoup sur `Mutex<T>` et la sécurité
-entre les tâches. Vous pouvez aussi utiliser cette structure de programme pour
+impressionnant, mais cela nous a appris beaucoup sur `Mutex<T>` et la sûreté
+des tâches. Vous pouvez aussi utiliser cette structure de programme pour
 procéder à des opérations plus complexes que simplement incrémenter un
 compteur. En utilisant cette stratégie, vous pouvez diviser un calcul en
 différentes parties, répartir ces parties sur des tâches, et ensuite utiliser
@@ -605,7 +604,7 @@ lorsqu'une opération nécessite de verrouiller deux ressources et que deux tâc
 ont chacune un des deux verrous, ce qui fait qu'elles s'attendent mutuellement
 pour toujours. Si vous êtes intéressés par les interblocages, essayez de créer
 un programme Rust qui a un interblocage ; recherchez ensuite des stratégies pour
-pallier aux interblocages dans n'importe quel langage et implémentez-les en
+remédier aux interblocages dans n'importe quel langage et implémentez-les en
 Rust. La documentation de l'API de la bibliothèque standard pour `Mutex<T>` et
 `MutexGuard` offre des informations précieuses à ce sujet.
 

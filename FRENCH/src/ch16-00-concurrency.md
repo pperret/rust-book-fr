@@ -16,7 +16,7 @@ change that.
 
 Le développement sécurisé et efficace dans des contextes de concurrence est un
 autre objectif majeur de Rust. La *programmation concurrente*, dans laquelle
-différentes parties d'un programme s'exécutent de manière indépendente, et le
+différentes parties d'un programme s'exécutent de manière indépendante, et le
 *parallélisme*, dans lequel différentes parties d'un programme s'exécutent en
 même temps, sont devenus des pratiques de plus en plus importantes au fur et à
 mesure que les ordinateurs tirent parti de leurs processeurs multiples.
@@ -41,7 +41,7 @@ subtle bugs and is easy to refactor without introducing new bugs.
 
 Au début, l'équipe de Rust pensait que garantir la sécurité de la mémoire et
 éviter les problèmes de concurrence étaient deux challenges distincts qui
-devaient être résolus de manière différentes. Avec le temps, l'équipe a
+devaient être résolus de manières différentes. Avec le temps, l'équipe a
 découvert que les systèmes de possession et de type sont des jeux d'outils
 puissants qui aident à sécuriser la mémoire *et* à régler des problèmes de
 concurrence ! En exploitant la possession et la vérification de type, de
@@ -49,12 +49,12 @@ nombreuses erreurs de concurrence deviennent des erreurs à la compilation en
 Rust plutôt que des erreurs à l'exécution. Ainsi, plutôt que d'avoir à passer
 beaucoup de votre temps à tenter de reproduire les circonstances exactes dans
 lesquelles un bogue de concurrence s'est produit à l'exécution, le code
-incorrecte va refuser de se compiler et va vous afficher une erreur expliquant
+incorrect va refuser de se compiler et va vous afficher une erreur expliquant
 le problème. Au final, vous pouvez corriger votre code pendant que vous
-travaillez dessus plutôt que d'avoir à le faire à posteriori après qu'il ai
+travaillez dessus plutôt que d'avoir à le faire a posteriori après qu'il ait
 potentiellement été livré en production. Nous avons surnommé cet aspect de Rust
 la *concurrence sans craintes*. La concurrence sans craintes vous permet
-d'écrire du code dépourvu de bogues subtils et il sera facile de le remanier
+d'écrire du code dépourvu de bogues subtils et qu'il sera facile de remanier
 sans risquer d'introduire de nouveaux bogues.
 
 <!--
@@ -92,11 +92,12 @@ gérer les problèmes de concurrence. Par exemple, Erlang a une fonctionnalité
 de partager un état entre les tâches. Ne proposer qu'un sous-ensemble de
 solutions possibles est une stratégie acceptable pour les langages de haut
 niveau, car un langage de haut niveau offre des avantages en sacrifiant
-certains contrôles pour être plus accessibles. Cependant, les langages de bas
+certains contrôles afin d'être plus accessible. Cependant, les langages de bas
 niveau sont censés fournir la solution la plus performante dans n'importe
-quelle situation donnée et proposer moins de facilités sur le matériel.
-Cependant, Rust offre une gamme d'outils pour répondre aux problèmes de toutes les
-manières possibles pour vos besoins du moment.
+quelle situation donnée et proposer moins d'abstraction vis-à-vis du matériel.
+C'est pourquoi Rust offre toute une gamme d'outils pour répondre aux problèmes
+de modélisation quelle que soit la manière qui est adaptée à la situation et
+aux exigences.
 
 <!--
 Here are the topics we’ll cover in this chapter:
@@ -117,5 +118,5 @@ Voici les sujets que nous allons aborder dans ce chapitre :
 * Le *passage de message* en concurrence, qui permet à plusieurs tâches
   d'accéder à la même donnée
 * Les traits `Sync` et `Send`, qui étendent les garanties de Rust sur la
-  concurrence autant à des types définis par les utilisateurs que par ceux qui
-  sont fournis par la bibliothèque standard
+  concurrence tant aux types définis par les utilisateurs qu'à ceux
+  fournis par la bibliothèque standard

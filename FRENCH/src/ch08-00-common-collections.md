@@ -54,15 +54,15 @@ Pour en savoir plus sur les autres types de collections fournies par la
 bibliothèque standard, allez voir [la documentation][collections].
 
 <!--
-[collections]: ../std/collections/index.html
--->
-
-[collections]: https://doc.rust-lang.org/std/collections/index.html
-
-<!--
 We’ll discuss how to create and update vectors, strings, and hash maps, as well
 as what makes each special.
 -->
 
 Nous allons voir comment créer et modifier les vecteurs, les Strings et les
 tables de hachage, et étudier leurs différences.
+
+<!--
+[collections]: ../std/collections/index.html
+-->
+
+[collections]: https://doc.rust-lang.org/std/collections/index.html

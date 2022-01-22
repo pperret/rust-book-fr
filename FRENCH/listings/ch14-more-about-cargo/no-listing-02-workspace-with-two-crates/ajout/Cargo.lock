@@ -4,10 +4,10 @@
 name = "additioneur"
 version = "0.1.0"
 dependencies = [
- "ajouter-un 0.1.0",
+ "ajouter_un 0.1.0",
 ]
 
 [[package]]
-name = "ajouter-un"
+name = "ajouter_un"
 version = "0.1.0"
 

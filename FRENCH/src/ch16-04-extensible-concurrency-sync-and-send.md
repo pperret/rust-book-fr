@@ -13,7 +13,7 @@ write your own concurrency features or use those written by others.
 -->
 
 Curieusement, le langage Rust a *très* peu de fonctionnalités de concurrence.
-La plupart des fonctionnalités de concurrence que nous avons vu précédemment
+La plupart des fonctionnalités de concurrence que nous avons vues précédemment
 dans ce chapitre font partie de la bibliothèque standard, pas du langage. Vos
 options pour gérer la concurrence ne sont pas limitées à celles du langage ou
 de la bibliothèque standard ; vous pouvez aussi écrire vos propres
@@ -50,9 +50,9 @@ Rust implémentent `Send`, mais il subsiste quelques exceptions, comme `Rc<T>` 
 il ne peut pas implémenter `Send` car si vous clonez une valeur `Rc<T>` et que
 vous essayez de transférer la possession de ce clone à une autre tâche, les
 deux tâches peuvent modifier le compteur de référence en même temps. Pour cette
-raison, `Rc<T>` est prévu pour une utilisation dans des situations qui
-nécessitent qu'une seule tâche dans lesquelles vous n'avez pas besoin de subir
-le coût sur la performance imposé par la sécurité entre les tâches.
+raison, `Rc<T>` n'est prévu que pour une utilisation dans des situations qui
+ne nécessitent qu'une seule tâche et pour lesquelles vous n'avez pas besoin de payer
+le surcoût sur la performance induit par la sureté de fonctionnement multi tâches.
 
 <!--
 Therefore, Rust’s type system and trait bounds ensure that you can never
@@ -76,7 +76,7 @@ we’ll discuss in Chapter 19.
 -->
 
 Tous les types composés entièrement d'autres types qui implémentent `Send` sont
-automatiquement marqués comme `Send` eux-aussi. Presque la plupart des types
+automatiquement marqués comme `Send` eux-aussi. Presque tous les types
 primitifs sont `Send`, à part les pointeurs bruts, ce que nous verrons au
 chapitre 19.
 
@@ -115,8 +115,8 @@ Threads”][sharing-a-mutext-between-multiple-threads]<!-- ignore -- > section.
 Le pointeur intelligent `Rc<T>` n'implémente pas non plus `Sync` pour les mêmes
 raisons qu'il n'implémente pas `Send`. Le type `RefCell<T>` (que nous avons vu
 au chapitre 15) et la famille liée aux types `Cell<T>` n'implémentent pas `Sync`.
-L'implémentation du vérificateur d'emprunt que fait `RefCell<T>` à l'exécution
-n'est pas sûre entre plusieurs tâches. Le pointeur intelligent `Mutex<T>`
+L'implémentation du vérificateur d'emprunt que `RefCell<T>` met en oeuvre à l'exécution
+n'est pas sûre pour le multi tâches. Le pointeur intelligent `Mutex<T>`
 implémente `Sync` et peut être utilisé pour partager l'accès entre plusieurs
 tâches, comme vous l'avez vu dans la section précédente.
 
@@ -154,7 +154,7 @@ l'instant l'information à retenir est que construire de nouveaux types
 pour la concurrence constitués d'éléments qui n'implémentent pas `Send` et
 `Sync` nécessite une réflexion approfondie pour respecter les garanties de
 sécurité. [“The Rustonomicon”][nomicon] contient plus d'informations à propos de
-ces garanties et comment les faire appliquer.
+ces garanties et de la façon de les faire appliquer.
 
 [The Rustonomicon]: https://doc.rust-lang.org/stable/nomicon/
 
@@ -201,15 +201,16 @@ go forth and make your programs concurrent, fearlessly!
 -->
 
 La bibliothèque standard de Rust fournit les canaux pour l'envoi de messages et
-les types de pointeurs intelligents, comme `Mutex<T>` et `Arc<T>`, qui sont sûr
-à utiliser en concurrence. Le système de type et le vérificateur d'emprunt sont
-là pour s'assurer que le code utilisé dans ces solutions ne vont pas conduire à
-des situations de concurrence ou utiliser des références qui ne sont plus en
-vigueur. Une fois que votre code se compile, vous pouvez être assuré qu'il
-fonctionnera bien sur plusieurs tâches sans avoir les genres de bogues
-*difficiles à traquer* qui sont monnaie courante dans les autres langages. Le
-développement en concurrence n'est un domaine qui ne devrait plus faire peur :
-lancez-vous et appliquez la concurrence à vos programmes sans en avoir crainte !
+les types de pointeurs intelligents, comme `Mutex<T>` et `Arc<T>`, qui sont
+sûrs à utiliser en situation de concurrence. Le système de type et le
+vérificateur d'emprunt sont là pour s'assurer que le code utilisé dans ces
+solutions ne vont pas conduire à des situations de concurrence ou utiliser des
+références qui ne sont plus en vigueur. Une fois que votre code se compile,
+vous pouvez être assuré qu'il fonctionnera bien sur plusieurs tâches sans avoir
+les genres de bogues *difficiles à traquer* qui sont monnaie courante dans les
+autres langages. Le développement en concurrence est un domaine qui ne devrait
+plus faire peur : lancez-vous et utilisez la concurrence dans vos programmes
+sans crainte !
 
 <!--
 Next, we’ll talk about idiomatic ways to model problems and structure solutions

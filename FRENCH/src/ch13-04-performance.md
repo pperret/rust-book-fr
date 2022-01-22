@@ -71,8 +71,8 @@ s'agisse d'une abstraction de haut niveau, sont compilés à peu près comme si
 vous aviez écrit vous-même le code un niveau plus bas. Les itérateurs sont l'une
 des abstractions à *coût zéro* de Rust, c'est-à-dire que l'utilisation de
 l'abstraction n'impose aucun surcoût lors de l'exécution. C'est la même notion
-que celle que Bjarne Stroustrup, le concepteur et développeur original de C++, définit 
-en tant que *coût zéro* dans “Foundations of C++” (2012) :
+que celle que Bjarne Stroustrup, le concepteur et développeur original de C++,
+définit en tant que *coût zéro* dans “Foundations of C++” (2012) :
 
 <!--
 > In general, C++ implementations obey the zero-overhead principle: What you

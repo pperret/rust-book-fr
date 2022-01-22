@@ -65,9 +65,9 @@ moment d'écrire la bibliothèque, nous ne pouvons pas savoir ni définir tous l
 types que les autres développeurs auraient envie de créer. Mais nous savons que
 `gui` doit gérer plusieurs valeurs de types différents et qu'elle
 doit appeler la méthode `afficher` sur chacune de ces valeurs de types
-différents. Il n'a pas besoin de savoir exactement ce qui arrivera quand on
-appellera la méthode `afficher`, mais seulement de savoir que la valeur aura
-cette méthode que nous pourrons appeler.
+différents. Elle n'a pas besoin de savoir exactement ce qui arrivera quand on
+appellera la méthode `afficher`, mais seulement de savoir que la valeur
+disposera de cette méthode que nous pourrons appeler.
 
 <!--
 To do this in a language with inheritance, we might define a class named
@@ -82,13 +82,13 @@ allow users to extend it with new types.
 
 Pour faire ceci dans un langage avec de l'héritage, nous pourrions définir une
 classe `Composant` qui a une méthode `afficher`. Les autres
-classes, telles que `Bouton`, `Image` et `ListeDeroulante`, hériteraient de
+classes, telles que `Bouton`, `Image` et `ListeDeroulante` hériteraient de
 `Composant` et hériteraient ainsi de la méthode `afficher`. Elles pourraient
 toutes redéfinir la méthode `afficher` avec leur comportement personnalisé,
 mais l'environnement de développement pourrait considérer tous les types comme
 des instances de `Composant` et appeler `afficher` sur chacun d'entre eux. Mais
 puisque Rust n'a pas d'héritage, il nous faut un autre moyen de structurer la
-bibliothèque `gui` pour permettre aux utilisateurs de la prolonger avec de
+bibliothèque `gui` pour permettre aux utilisateurs de l'enrichir avec de
 nouveaux types.
 
 <!--
@@ -515,9 +515,9 @@ our code if the values don’t implement the traits that the trait objects need.
 -->
 
 L'avantage d'utiliser les objets traits et le système de types de Rust pour
-écrire du code plutôt que d'utiliser le *duck typing* est que nous n'avons
+écrire du code semblable à celui utilisant le *duck typing* est que nous n'avons
 jamais besoin de vérifier si une valeur implémente une méthode en particulier à
-l'exécution, ni de s'inquiéter d'avoir des erreurs si une valeur n'implémente
+l'exécution, ni de nous inquiéter d'avoir des erreurs si une valeur n'implémente
 pas une méthode mais qu'on l'appelle quand même. Rust ne compilera pas notre
 code si les valeurs n'implémentent pas les traits requis par les objets traits.
 
@@ -577,7 +577,7 @@ didn’t mean to pass and we should pass a different type or we should implement
 -->
 
 L'erreur nous fait savoir que soit nous passons quelque chose à `Ecran` que nous
-ne voulions pas lui passer et nous devrions lui passer un type différent, soit
+ne voulions pas lui passer et que nous devrions lui passer un type différent, soit
 nous devrions implémenter `Affichable` sur `String` de sorte que `Ecran` puisse
 appeler `afficher` dessus.
 
@@ -602,18 +602,18 @@ runtime will figure out which method to call.
 -->
 
 Rappelez-vous de notre discussion dans [une
-section][performance-of-code-using-generics]<!-- ignore --> du
-chapitre 10 à propos du processus de monomorphisation effectué par le
-compilateur quand nous utilisons des traits liés sur des génériques : le
-compilateur génère des implémentations non génériques de fonctions et de
-méthodes pour chaque type concret que nous utilisons à la place d'un paramètre
-de type générique. Le code résultant de la monomorphisation effectue du
-*dispatch statique*, c'est-à-dire quand le compilateur sait quelle méthode
-vous appelez à la compilation. Cela s'oppose au *dispatch dynamique*,
-c'est-à-dire quand le compilateur ne peut pas déterminer à la compilation
-quelle méthode vous appelez. Dans les cas de répartition dynamique, le
-compilateur émet du code qui devra déterminer à l'exécution quelle méthode
-appeler.
+section][performance-of-code-using-generics]<!-- ignore --> du chapitre 10 à
+propos du processus de monomorphisation effectué par le compilateur quand nous
+utilisons des traits liés sur des génériques : le compilateur génère des
+implémentations non génériques de fonctions et de méthodes pour chaque type
+concret que nous utilisons à la place d'un paramètre de type générique. Le code
+résultant de la monomorphisation effectue du *dispatch statique* (*répartition
+statique*), qui peut être mis en place quand le compilateur sait, au moment de
+la compilation, quelle méthode vous appelez. Cela s'oppose au *dispatch
+dynamique* (*répartition dynamique*), qui est mis en place quand le compilateur
+ne peut pas déterminer à la compilation quelle méthode vous appelez. Dans le
+cas de la répartition dynamique, le compilateur produit du code qui devra
+déterminer à l'exécution quelle méthode appeler.
 
 <!--
 When we use trait objects, Rust must use dynamic dispatch. The compiler doesn’t
@@ -638,7 +638,7 @@ recherche de cette méthode qui n'a pas lieu avec la répartition statique. La
 répartition dynamique empêche en outre le compilateur de choisir de remplacer
 un appel de méthode par le code de cette méthode, ce qui empêche par ricochet
 certaines optimisations. Cependant, cela a permis de rendre plus flexible le
-code que nous avons écrit dans l'encart 17-5 et que nous avons pu supporter
+code que nous avons écrit dans l'encart 17-5 et que nous avons pu gérer
 dans l'encart 17-9, donc c'est un compromis à envisager.
 
 <!--
@@ -728,7 +728,7 @@ stand in for `Self`, because that’s the return type.
 Le type `String` implémente le trait `Clone`, et quand on appelle la méthode
 `clone` sur une instance de `String`, on récupère une instance de `String`. De
 même, si on appelle `clone` sur une instance de `Vec<T>`, on récupère une
-instance de `Vec<T>`. La signature de `clone` doit savoir à quel type correspond
+instance de `Vec<T>`. La signature de `clone` doit donc savoir à quel type correspond
 `Self`, puisqu'il s'agit du type de retour.
 
 <!--
@@ -740,7 +740,7 @@ implement the `Clone` trait instead of the `Draw` trait, like this:
 
 Le compilateur vous préviendra lorsque vous essayez de faire quelque chose qui
 enfreint les règles de sûreté au sens de l'objet lors de l'utilisation des
-objets traits. Par exemple, supposons que nous avons essayé d'implémenter la
+objets traits. Par exemple, supposons que nous ayons essayé d'implémenter la
 structure `Ecran` de l'encart 17-4 en la faisant contenir des types qui
 implémentent le trait `Clone` plutôt que le trait `Affichable`, comme ceci :
 
@@ -779,7 +779,7 @@ object safety section in the [Rust Reference][object-safety-reference].
 Cette erreur signifie que l'on ne peut pas utiliser ce trait comme d'un objet
 trait de cette façon. Si vous souhaitez connaître plus de détails sur la sûreté
 au sens de l'objet, référez-vous à la [RFC 255 de Rust][Rust RFC 255] (en
-anglais) ou la section de la sécurité des objets dans la
+anglais) ou à la section relative à la sûreté des objets dans la
 [référence Rust][object-safety-reference].
 
 <!--

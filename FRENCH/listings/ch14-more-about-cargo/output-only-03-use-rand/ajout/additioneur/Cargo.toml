@@ -5,4 +5,4 @@ edition = "2021"
 
 [dependencies]
 
-add-one = { path = "../ajouter-un" }
+ajouter_un = { path = "../ajouter_un" }

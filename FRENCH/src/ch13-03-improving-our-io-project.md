@@ -34,8 +34,8 @@ Listing 12-23:
 Dans l'encart 12-6, nous avions ajouté du code qui prenait une *slice* de
 `String` et qui créait une instance de la structure `Config` en utilisant les
 indices de la *slice* et en clonant les valeurs, permettant ainsi à la
-structure `Config` de posséder ces valeurs. Dans l'encart 13-24, nous avions
-reproduit l'implémentation de la fonction `Config::new` comme était dans
+structure `Config` de posséder ces valeurs. Dans l'encart 13-24, nous avons
+reproduit l'implémentation de la fonction `Config::new` telle qu'elle était dans
 l'encart 12-23 à la fin du chapitre 12 :
 
 <!--
@@ -80,9 +80,9 @@ and `filename` fields of `Config` so the `Config` instance can own its values.
 
 Nous avions besoin de `clone` ici parce que nous avons une slice d'éléments
 `String` dans le paramètre `args`, mais la fonction `new` ne possède pas `args`.
-Pour rendre la propriété d'une instance de `Config`, nous avons dû cloner les
-valeurs des champs `recherche` et `nom_fichier` de `Config` pour qu'elle puisse
-prendre possession de ses valeurs.
+Pour renvoyer la propriété d'une instance de `Config`, nous avons dû cloner les
+valeurs des champs `recherche` et `nom_fichier` de `Config` afin que cette instance
+de `Config` puisse prendre possession de ces valeurs.
 
 <!--
 With our new knowledge about iterators, we can change the `new` function to
@@ -97,7 +97,7 @@ fonction `new` pour prendre possession d'un itérateur passé en argument au lie
 d'emprunter une *slice*. Nous utiliserons les fonctionnalités des itérateurs à
 la place du code qui vérifie la taille de la slice et qui utilise les indices
 des éléments précis. Cela clarifiera ce que la fonction `Config::new` fait car
-l'itérateur accédera aux valeurs.
+c'est l'itérateur qui accédera aux valeurs.
 
 <!--
 Once `Config::new` takes ownership of the iterator and stops using indexing
@@ -251,7 +251,7 @@ we can call the `next` method on it! Listing 13-27 updates the code from
 Listing 12-23 to use the `next` method:
 -->
 
-Ensuite corrigeons le corps de `Config::new`. La documentation de la bibliothèque
+Corrigeons ensuite le corps de `Config::new`. La documentation de la bibliothèque
 standard explique aussi que `std::env::Args` implémente le trait `Iterator`, donc
 nous savons que nous pouvons appeler la méthode `next` dessus ! L'encart 13-27
 met à jour le code de l'encart 12-23 afin d'utiliser la méthode `next` :
@@ -296,8 +296,9 @@ donc d'abord nous appelons une fois `next` et nous ne faisons rien avec sa
 valeur de retour. Ensuite, nous appelons `next` pour obtenir la valeur que nous
 voulons mettre dans le champ `recherche` de `Config`. Si `next` renvoie un
 `Some`, nous utilisons un `match` pour extraire sa valeur. S'il retourne `None`,
-cela signifie qu'il n'y a pas assez d'arguments donnés et nous revenons plus tôt
-avec une valeur `Err`. De même pour la valeur `nom_fichier`.
+cela signifie que pas assez d'arguments ont été fournis, si bien que nous quittons
+aussitôt la fonction en retournant une valeur `Err`. Nous procédons de même
+pour la valeur `nom_fichier`.
 
 <!--
 ### Making Code Clearer with Iterator Adaptors
@@ -310,9 +311,9 @@ We can also take advantage of iterators in the `search` function in our I/O
 project, which is reproduced here in Listing 13-28 as it was in Listing 12-19:
 -->
 
-Nous pouvons également tirer parti des itérateurs dans la fonction
-`rechercher` de notre projet d'entrée/sortie, qui est reproduite ici dans
-l'encart 13-28, comme elle l'était dans l'encart 12-19 à la fin du chapitre 12 :
+Nous pouvons également tirer parti des itérateurs dans la fonction `rechercher`
+de notre projet d'entrée/sortie, qui est reproduite ici dans l'encart 13-28,
+telles qu'elle était dans l'encart 12-19 à la fin du chapitre 12 :
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -416,7 +417,7 @@ propre code et pourquoi : l'implémentation originale de l'encart 13-28 ou la
 version utilisant l'itérateur dans l'encart 13-29. La plupart des développeurs
 Rust préfèrent utiliser le style avec l'itérateur. C'est un peu plus difficile
 à comprendre au début, mais une fois que vous avez compris les différents
-adaptateurs d'itération et de ce qu'ils font, les itérateurs peuvent devenir
+adaptateurs d'itération et ce qu'ils font, les itérateurs peuvent devenir
 plus faciles à comprendre. Au lieu de jongler avec différentes boucles et de
 construire de nouveaux vecteurs, ce code se concentre sur l'objectif de haut
 niveau de la boucle. Cette abstraction permet d'éliminer une partie du code
@@ -431,4 +432,4 @@ performance.
 
 Mais ces deux implémentations sont-elles réellement équivalentes ? L'hypothèse
 intuitive pourrait être que la boucle de plus bas niveau sera plus rapide.
-Intéressons nous maintenant à leurs performances.
+Intéressons nous donc maintenant à leurs performances.

@@ -31,7 +31,7 @@ or smart pointers.
 
 Regardons d'abord comment l'opérateur de déréférencement fonctionne avec des
 références classiques. Ensuite nous essayerons de définir un type personnalisé
-qui se comporte comme `Box<T>`, et voir pourquoi l'opérateur de déréférencement
+qui se comporte comme `Box<T>` et voir pourquoi l'opérateur de déréférencement
 ne fonctionne pas comme une référence sur notre type fraîchement défini. Nous
 allons découvrir comment implémenter le trait `Deref` de manière à ce qu'il soit
 possible que les pointeurs intelligents fonctionnent comme les références.
@@ -462,7 +462,7 @@ Listing 15-9.
 Notez que l'opérateur `*` est remplacé par un appel à la méthode `deref` suivi
 par un appel à l'opérateur `*` une seule fois, à chaque fois que nous utilisons
 un `*` dans notre code. Comme la substitution de l'opérateur `*` ne s'effectue
-pas de manière récursive et infinie, nous récupérerons une donnée de type `i32`,
+pas de manière récursive et infinie, nous récupèrerons une donnée de type `i32`,
 qui correspond au `5` du `assert_eq!` de l'encart 15-9.
 
 <!--
@@ -474,27 +474,27 @@ qui correspond au `5` du `assert_eq!` de l'encart 15-9.
 <!--
 *Deref coercion* is a convenience that Rust performs on arguments to functions
 and methods. Deref coercion works only on types that implement the `Deref`
-trait. Deref coercion converts such a type into a reference to another type.
-For example, deref coercion can convert `&String` to `&str` because `String`
-implements the `Deref` trait such that it returns `&str`. Deref coercion happens
-automatically when we pass a reference to a particular type’s value as an
-argument to a function or method that doesn’t match the parameter type in the
-function or method definition. A sequence of calls to the `deref` method
-converts the type we provided into the type the parameter needs.
+trait. Deref coercion converts a reference to such a type into a reference to
+another type. For example, deref coercion can convert `&String` to `&str`
+because `String` implements the `Deref` trait such that it returns `&str`.
+Deref coercion happens automatically when we pass a reference to a particular
+type’s value as an argument to a function or method that doesn’t match the
+parameter type in the function or method definition. A sequence of calls to the
+`deref` method converts the type we provided into the type the parameter needs.
 -->
 
 L'*extrapolation de déréférencement* est une commodité que Rust applique sur les
 arguments des fonctions et des méthodes. L'extrapolation de déréférencement
 fonctionne uniquement avec un type qui implémente le trait `Deref`.
-L'extrapolation de déréférencement convertit ce type en une référence vers un
-autre type. Par exemple, l'extrapolation de déréférencement peut convertir
-`&String` en `&str` car `String` implémente le trait `Deref` de sorte qu'il
-puisse retourner `&str`. L'extrapolation de déréférencement s'applique
-automatiquement lorsque nous passons une référence vers une valeur d'un type
-particulier en argument d'une fonction ou d'une méthode qui ne correspond pas à
-ce type de paramètre dans la définition de la fonction ou de la méthode. Une
-série d'appels à la méthode `deref` convertit le type que nous donnons dans le
-type que le paramètre nécessite.
+L'extrapolation de déréférencement convertit une référence vers ce type en une
+référence vers un autre type. Par exemple, l'extrapolation de déréférencement
+peut convertir `&String` en `&str` car `String` implémente le trait `Deref` de
+sorte qu'il puisse retourner `&str`. L'extrapolation de déréférencement
+s'applique automatiquement lorsque nous passons une référence vers une valeur
+d'un type particulier en argument d'une fonction ou d'une méthode qui ne
+correspond pas à ce type de paramètre dans la définition de la fonction ou de
+la méthode. Une série d'appels à la méthode `deref` convertit le type que nous
+donnons dans le type que le paramètre nécessite.
 
 <!--
 Deref coercion was added to Rust so that programmers writing function and
@@ -503,11 +503,11 @@ with `&` and `*`. The deref coercion feature also lets us write more code that
 can work for either references or smart pointers.
 -->
 
-L'extrapolation de déréférencement a été ajouté à Rust afin de permettre aux
+L'extrapolation de déréférencement a été ajoutée à Rust afin de permettre aux
 développeurs d'écrire des appels de fonctions et de méthodes qui n'ont pas
 besoin d'indiquer explicitement les références et les déréférencements avec `&`
 et `*`. La fonctionnalité d'extrapolation de déréférencement nous permet aussi
-d'écrire plus de code qui peut fonctionner à la fois pour les références ou pour
+d'écrire plus de code qui peut fonctionner à la fois pour les références et pour
 les pointeurs intelligents.
 
 <!--
@@ -519,7 +519,7 @@ parameter:
 
 Pour voir l'extrapolation de déréférencement en action, utilisons le type
 `MaBoite<T>` que nous avons défini dans l'encart 15-8 ainsi que l'implémentation
-de `Deref` que nous avons ajouté dans l'encart 15-10. L'encart 15-11 montre la
+de `Deref` que nous avons ajoutée dans l'encart 15-10. L'encart 15-11 montre la
 définition d'une fonction qui a un paramètre qui est une slice de chaîne de
 caractères :
 
@@ -711,7 +711,7 @@ happens for mutable references.
 
 Les deux premiers cas sont exactement les mêmes, sauf pour la mutabilité. Le
 premier cas signifie que si vous avez un `&T` et que `T` implémente `Deref` pour
-le type `U`, vous pouvez obtenir un `&U` de manière transparente. Le second cas
+le type `U`, vous pouvez obtenir un `&U` de manière transparente. Le deuxième cas
 signifie que la même extrapolation de déréférencement se déroule pour les
 références mutables.
 
@@ -730,14 +730,14 @@ possible.
 -->
 
 Le troisième cas est plus ardu : Rust va aussi procéder à une extrapolation de
-déréférencement d'une référence mutable vers une référence immuable. Mais 
-l'inverse n'est *pas* possible: une extrapolation de déréférencement d'une 
+déréférencement d'une référence mutable vers une référence immuable. Mais
+l'inverse n'est *pas* possible: une extrapolation de déréférencement d'une
 valeur immuable ne donnera jamais une référence mutable. A cause des règles
-d'emprunt, si vous avez une référence mutable, cette référence mutable doit être 
-la seule référence vers cette donnée (autrement, le programme ne peut pas être 
-compilé). Convertir une référence mutable vers une référence immuable ne va
-jamais casser les règles d'emprunt. Convertir une référence immuable vers une 
-référence mutable nécessite que la référence immuable initiale soit la seule 
-référence immuable vers cette donnée, mais les règles d'emprunt n'empêchent pas 
-cela. Ainsi, Rust ne peut pas déduire que la conversion d'une référence immuable 
-vers une référence mutable soit possible.
+d'emprunt, si vous avez une référence mutable, cette référence mutable doit
+être la seule référence vers cette donnée (autrement, le programme ne peut pas
+être compilé). Convertir une référence mutable vers une référence immuable ne
+va jamais casser les règles d'emprunt. Convertir une référence immuable vers
+une référence mutable nécessite que la référence immuable initiale soit la
+seule référence immuable vers cette donnée, mais les règles d'emprunt ne
+garantissent pas cela. Rust ne peut donc pas déduire que la conversion d'une
+référence immuable vers une référence mutable est possible.

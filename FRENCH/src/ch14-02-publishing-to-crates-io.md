@@ -61,14 +61,14 @@ manière *d'utiliser* votre crate et non pas à la manière dont elle est
 Documentation comments use three slashes, `///`, instead of two and support
 Markdown notation for formatting the text. Place documentation comments just
 before the item they’re documenting. Listing 14-1 shows documentation comments
-for an `add_one` function in a crate named `my_crate`:
+for an `add_one` function in a crate named `my_crate`.
 -->
 
 Les commentaires de documentation utilisent trois barres obliques `///` au lieu
 de deux et prend en charge la notation Markdown pour mettre en forme le texte.
 Placez les commentaires de documentation juste avant l'élément qu'ils
 documentent. L'encart 14-1 montre des commentaires de documentation pour une
-fonction `ajouter_un` dans une crate nommée `ma_crate` :
+fonction `ajouter_un` dans une crate nommée `ma_crate`.
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -106,9 +106,9 @@ in the *target/doc* directory.
 Ici nous avons écrit une description de ce que fait la fonction `ajouter_un`,
 débuté une section avec le titre `Exemples` puis fourni du code qui
 montre comment utiliser la fonction `ajouter_un`. Nous pouvons générer la
-documentation HTML à partir de ces commentaires de documentation en lançant `cargo doc`.
-Cette commande lance l'outil `rustdoc` qui est distribué avec Rust et place la
-documentation HTML générée dans le dossier *target/doc*.
+documentation HTML à partir de ces commentaires de documentation en lançant
+`cargo doc`. Cette commande lance l'outil `rustdoc` qui est distribué avec Rust
+et place la documentation HTML générée dans le dossier *target/doc*.
 
 <!--
 For convenience, running `cargo doc --open` will build the HTML for your
@@ -505,8 +505,8 @@ see them.
 -->
 
 Notez que les types `CouleurPrimaire` et `CouleurSecondaire` ne sont pas listés
-sur la page d'accueil, pas plus que la fonction `mixer`. Nous devons cliquer sur `types`
-et `utilitaires` pour les voir.
+sur la page d'accueil, pas plus que la fonction `mixer`. Nous devons cliquer
+sur `types` et `utilitaires` pour les voir.
 
 <!--
 Another crate that depends on this library would need `use` statements that
@@ -829,7 +829,10 @@ $ cargo publish
 warning: manifest has no description, license, license-file, documentation, homepage or repository.
 See https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info.
 --snip--
-error: api errors (status 200 OK): missing or empty metadata fields: description, license. Please see https://doc.rust-lang.org/cargo/reference/manifest.html for how to upload metadata
+error: failed to publish to registry at https://crates.io
+
+Caused by:
+  the remote server responded with an error: missing or empty metadata fields: description, license. Please see https://doc.rust-lang.org/cargo/reference/manifest.html for how to upload metadata
 ```
 -->
 
@@ -839,7 +842,10 @@ $ cargo publish
 warning: manifest has no description, license, license-file, documentation, homepage or repository.
 See https://doc.rust-lang.org/cargo/reference/manifest.html#package-metadata for more info.
 -- partie masquée ici --
-error: api errors (status 200 OK): missing or empty metadata fields: description, license. Please see https://doc.rust-lang.org/cargo/reference/manifest.html for how to upload metadata
+error: failed to publish to registry at https://crates.io
+
+Caused by:
+  the remote server responded with an error: missing or empty metadata fields: description, license. Please see https://doc.rust-lang.org/cargo/reference/manifest.html for how to upload metadata
 ```
 
 <!--
@@ -929,9 +935,9 @@ With a unique name, the version, your description, and a license added, the
 *Cargo.toml* file for a project that is ready to publish might look like this:
 -->
 
-Une fois le nom unique, la version, la description et la licence 
-ajoutés, le fichier *Cargo.toml* de ce projet qui est prêt à être publié devrait
-ressembler à ceci :
+Une fois le nom unique, la version, la description et la licence ajoutés, le
+fichier *Cargo.toml* de ce projet qui est prêt à être publié devrait ressembler
+à ceci :
 
 <!--
 <span class="filename">Filename: Cargo.toml</span>

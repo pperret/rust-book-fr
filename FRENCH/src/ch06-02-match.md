@@ -4,6 +4,7 @@
 -->
 
 <a id="la-structure-de-contrôle-match"></a>
+
 ## La structure de contrôle de flux `match`
 
 <!--
@@ -122,7 +123,7 @@ résulte de l'expression dans la branche correspondante est la valeur qui sera
 retournée par l'expression `match`.
 
 <!--
-We don't typically use curly brackets if the match arm code is short, as it is
+We don’t typically use curly brackets if the match arm code is short, as it is
 in Listing 6-3 where each arm just returns a value. If you want to run multiple
 lines of code in a match arm, you must use curly brackets. For example, the
 following code prints “Lucky penny!” every time the method is called with a
