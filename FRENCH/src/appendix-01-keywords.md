@@ -1,12 +1,3 @@
-> # 🚧 Attention, peinture fraîche !
->
-> Cette page a été traduite par une seule personne et n'a pas été relue et
-> vérifiée par quelqu'un d'autre ! Les informations peuvent par exemple être
-> erronées, être formulées maladroitement, ou contenir d'autres types de fautes.
->
-> Vous pouvez contribuer à l'amélioration de cette page sur sa
-> [Pull Request](https://github.com/Jimskapt/rust-book-fr/pull/222).
-
 <!--
 ## Appendix A: Keywords
 -->
@@ -94,13 +85,13 @@ Les mots-clés suivants apportent actuellement les fonctionnalités décrites.
 * `while` - loop conditionally based on the result of an expression
 -->
 
-* `as` - effectue une transformation primitive, précise le trait que contient un
+* `as` - effectue une transformation primitive, précise le trait qui contient un
   élément, ou renomme des éléments dans les instructions `use` et `extern crate`
-* `async` - retourne un `Future` plutôt que de bloquer la tâche de cours
-* `await` - mets en pause l'exécution jusqu'à ce que le résultat d'un `Future`
+* `async` - retourne un `Future` plutôt que de bloquer la tâche en cours
+* `await` - met en pause l'exécution jusqu'à ce que le résultat d'un `Future`
   soit prêt
 * `break` - sort immédiatement d'une boucle
-* `const` - définit des éléments fixes ou des pointeurs bruts fixes
+* `const` - définit des éléments constants ou des pointeurs bruts constants
 * `continue` - va directement à la prochaine itération de la boucle en cours
 * `crate` - crée un lien vers une crate externe ou une variable de macro qui
   représente la crate dans laquelle la macro est définie
@@ -109,13 +100,12 @@ Les mots-clés suivants apportent actuellement les fonctionnalités décrites.
   et `if let`
 * `enum` - définit une énumération
 * `extern` - crée un lien vers une crate, une fonction, ou une variable externe
-* `false` - le litéral qui vaut "faux" pour un booléen
+* `false` - le littéral qui vaut “faux” pour un booléen
 * `fn` - définit une fonction ou le type de pointeur de fonction
 * `for` - crée une boucle sur des éléments d'un itérateur, implémente un trait,
-  ou renseigne une durée de vie nécessaire pour un niveau supérieur
+  ou renseigne une durée de vie de niveau supérieur
 * `if` - une branche liée au résultat d'une expression conditionnelle
-* `impl` - implémente des fonctionnalités propres à l'élément ou à celles d'un
-  trait
+* `impl` - implémente des fonctionnalités propres à un élément ou à un trait
 * `in` - fait partie de la syntaxe de la boucle `for`
 * `let` - lie une valeur à une variable
 * `loop` - fait une boucle sans condition (théoriquement infinie)
@@ -128,18 +118,18 @@ Les mots-clés suivants apportent actuellement les fonctionnalités décrites.
 * `pub` - autorise la visibilité publique sur des champs de structures, des
   blocs `impl`, ou des modules
 * `ref` - lie une valeur avec une référence
-* `return` - retourne quelque chose, dans une fonction
-* `Self` - un alias de type pour le type que nous définissons ou implementons
-* `self` - désigne le sujet d'une méthode, ou du module courant
+* `return` - retourne une valeur depuis une fonction
+* `Self` - un alias de type pour le type que nous définissons ou implémentons
+* `self` - désigne le sujet d'une méthode ou du module courant
 * `static` - une variable globale ou une durée de vie qui dure tout le long de
   l'exécution du programme
 * `struct` - définit une structure
 * `super` - le module parent du module courant
 * `trait` - définit un trait
-* `true` - le litéral qui vaut "vrai" pour un booléen
+* `true` - le littéral qui vaut “vrai” pour un booléen
 * `type` - définit un alias de type ou un type associé
-* `union` - définit un [union] et n'est qu'un mot-clé lorsqu'il est utilisé dans
-  la décalation d'un union
+* `union` - définit une [union] et n'est un mot-clé que lorsqu'il est utilisé
+  dans la déclaration d'une union
 * `unsafe` - autorise du code, des fonctions, des traits ou des implémentations
   non sécurisées
 * `use` - importe des éléments dans la portée
@@ -150,7 +140,7 @@ Les mots-clés suivants apportent actuellement les fonctionnalités décrites.
 [union]: ../reference/items/unions.html
 -->
 
-[union]: ../reference/items/unions.html
+[union]: https://doc.rust-lang.org/reference/items/unions.html
 
 <!--
 ### Keywords Reserved for Future Use
@@ -163,7 +153,7 @@ The following keywords do not have any functionality but are reserved by Rust
 for potential future use.
 -->
 
-Les mots-clés suivants n'offrent actuellement aucune fonctionnalitée mais sont
+Les mots-clés suivants n'offrent actuellement aucune fonctionnalité mais sont
 réservés par Rust pour une potentielle utilisation future.
 
 <!--
@@ -243,7 +233,7 @@ fn match(aiguille: &str, botte_de_foin: &str) -> bool {
 you’ll get this error:
 -->
 
-... vous allez obtenir l'erreur suivante :
+… vous allez obtenir l'erreur suivante :
 
 <!--
 ```text
@@ -271,7 +261,7 @@ identifier syntax, like this:
 
 L'erreur montre que vous ne pouvez pas utiliser le mot-clé `match` comme
 identificateur de la fonction. Pour utiliser `match` comme nom de fonction, vous
-allez avoir besoin d'utiliser la syntaxe d'identificateur brut, comme ceci :
+devez utiliser la syntaxe d'identificateur brut, comme ceci :
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -306,9 +296,9 @@ This code will compile without any errors. Note the `r#` prefix on the function
 name in its definition as well as where the function is called in `main`.
 -->
 
-Ce code va se compiler sans erreur. Remarquez aussi le préfixe `r#` sur le nom
-de la fonction dans sa définition mais aussi lorsque cette fonction est appelée
-dans `main`.
+Ce code va se compiler sans erreur. Remarquez le préfixe `r#` sur le nom de la
+fonction dans sa définition mais aussi lorsque cette fonction est appelée dans
+`main`.
 
 <!--
 Raw identifiers allow you to use any word you choose as an identifier, even if
@@ -324,13 +314,13 @@ E][appendix-e]<!-- ignore -- > for more information on editions.
 Les identificateurs bruts vous permettent d'utiliser n'importe quel mot que vous
 souhaitez comme identificateur, même si ce mot est un mot-clé réservé. De plus,
 les identificateurs bruts vous permettent d'utiliser des bibliothèques écrites
-dans des éditions de Rust différentes que celle qu'utilise votre crate. Par
-exemple, `try` n'est pas un mot-clé dans l'édition 2015 mais l'est dans
+dans des éditions de Rust différentes de celle qu'utilise votre crate. Par
+exemple, `try` n'est pas un mot-clé dans l'édition 2015, mais il l'est dans
 l'édition 2018. Si vous dépendez d'une bibliothèque qui était écrite avec
 l'édition 2015 et qui avait une fonction `try`, vous allez avoir besoin
 d'utiliser la syntaxe d'identificateur brut, `r#try` dans ce cas, pour faire
 appel à cette fonction à partir de code écrit avec l'édition 2018. Voir
-[l'annexe E][appendix-e]<!-- ignore --> pour en savoir plus les éditions.
+[l'annexe E][appendix-e]<!-- ignore --> pour en savoir plus sur les éditions.
 
 <!--
 [appendix-e]: appendix-05-editions.html

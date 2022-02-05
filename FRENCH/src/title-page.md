@@ -12,13 +12,13 @@
 Rust*
 
 <!--
-This version of the text assumes you’re using Rust 1.57 (released 2021-12-02)
+This version of the text assumes you’re using Rust 1.58 (released 2022-01-13)
 or later. See the [“Installation” section of Chapter 1][install]<!-- ignore -- >
 to install or update Rust.
 -->
 
-Cette version du document suppose que vous utilisez Rust 1.57 (publié le
-02/12/2021) ou ultérieur. Voir la [section “Installation” du
+Cette version du document suppose que vous utilisez Rust 1.58 (publié le
+13/01/2022) ou ultérieur. Voir la [section “Installation” du
 chapitre 1][install]<!-- ignore --> pour installer ou mettre à jour Rust.
 
 <!--

@@ -10,7 +10,7 @@ section, we gather all the syntax valid in patterns and discuss why you might
 want to use each one.
 -->
 
-A travers le livre, vous avez rencontré de nombreux types de motifs. Dans cette
+Tout au long de ce livre, vous avez rencontré de nombreux types de motifs. Dans cette
 section, nous allons rassembler toutes les syntaxes valides des motifs et
 examiner les raisons pour lesquelles vous devriez utiliser chacune d'entre
 elles.
@@ -27,7 +27,7 @@ following code gives some examples:
 -->
 
 Comme vous l'avez vu chapitre 6, vous pouvez faire directement correspondre des
-motifs sur des littéraux. Le code suivant vous donne quelques exemples :
+motifs avec des littéraux. Le code suivant vous donne quelques exemples :
 
 <!--
 ```rust
@@ -69,11 +69,11 @@ running this code or reading further.
 -->
 
 Les variables nommées sont des motifs irréfutables qui correspondent à
-n'importe quelle valeur, et nous les avons utilisés de nombreuses foix dans le
+n'importe quelle valeur, et nous les avons utilisées de nombreuses fois dans le
 livre. Cependant, il subsiste un problème lorsque vous utilisez les variables
 nommées dans les expressions `match`. Comme `match` débute une nouvelle portée,
-les variables utilisées comme étant une partie du motif de la construction
-`match` vont masquer celles avec le même nom provenant de l'extérieur de la
+les variables utilisées comme faisant partie du motif de la construction
+`match` vont masquer celles ayant le même nom et provenant de l'extérieur de la
 construction `match`, comme c'est le cas avec toutes les variables. Dans
 l'encart 18-11, nous déclarons une variable `x` avec la valeur `Some(5)` et une
 variable `y` avec la valeur `10`. Nous créons alors une expression `match` sur
@@ -113,7 +113,7 @@ continues.
 
 Voyons ce qui se passe lorsque l'expression `match` est utilisée. Le motif
 présent dans la première branche du `match` ne correspond pas à la valeur
-actuelle de `x`, donc le code continue.
+actuelle de `x`, donc le code passe à la branche suivante.
 
 <!--
 The pattern in the second match arm introduces a new variable named `y` that
@@ -125,10 +125,10 @@ the inner value of the `Some` in `x`. That value is `5`, so the expression for
 that arm executes and prints `Matched, y = 5`.
 -->
 
-Le motif dans la seconde branche du `match` ajoute une nouvelle variable `y`
+Le motif dans la deuxième branche du `match` ajoute une nouvelle variable `y`
 qui va correspondre à n'importe quelle valeur logée dans une valeur `Some`.
 Comme nous sommes dans une nouvelle portée à l'intérieur de l'expression
-`match`, c'est une nouvelle variable `y`, et non pas le `y` que nous avons
+`match`, c'est une nouvelle variable `y`, et pas le `y` que nous avons
 déclaré au début avec la valeur 10. Cette nouvelle correspondance `y` va
 correspondre à n'importe quelle valeur à l'intérieur d'un `Some`, ce qui est
 la situation présente actuellement dans `x`. Ainsi, ce nouveau `y` correspondra
@@ -144,12 +144,12 @@ been shadowed. In this hypothetical case, the `match` would print `Default
 case, x = None`.
 -->
 
-Si `x` aurait été une valeur `None` plutôt que `Some(5)`, les motifs présents
-dans les deux premières branches n'auraient pas correspondu, donc la valeur qui
-aurait correspondu serait celui avec le tiret du bas. Nous n'avons pas
-introduit de nouvelle variable `x` qui est présente dans la branche du motif,
-donc le `x` dans l'expression désigne toujours la variable `x` en dehors, qui
-n'a pas été masquée. Dans ce cas, le `match` devrait afficher
+En supposant maintenant que `x` ait la valeur `None` plutôt que `Some(5)`, les motifs présents
+dans les deux premières branches ne correspondront pas, donc la valeur qui
+correspondra sera celle avec le tiret du bas. Comme nous n'avons pas
+introduit de nouvelle variable `x` dans la branche du motif,
+le `x` de l'expression associée désigne toujours la variable `x` en dehors et qui
+n'a pas été masquée. Le `match` va donc afficher
 `Cas par défaut, x = None`.
 
 <!--
@@ -157,8 +157,9 @@ When the `match` expression is done, its scope ends, and so does the scope of
 the inner `y`. The last `println!` produces `at the end: x = Some(5), y = 10`.
 -->
 
-Lorsque l'expression `match` est terminée, sa portée se termine, et avec elle
-la portée de la variable interne `y`. Le dernier `println!` affiche
+Lorsque l'expression `match` 
+est terminée, sa portée se termine également, et avec elle
+la portée de la variable interne `y`. Le dernier `println!` affiche donc
 `A la fin : x = Some(5), y = 10`.
 
 <!--
@@ -169,10 +170,10 @@ Conditionals with Match Guards”](#extra-conditionals-with-match-guards)<!--
 ignore -- > section.
 -->
 
-Pour créer une expression `match` qui compare les valeurs d'une variable
-externe `x` et `y`, plutôt que d'utiliser une variable masquée, nous aurons
+Pour créer une expression `match` qui compare les valeurs de la variable
+externe `x` avec `y`, plutôt que d'utiliser une variable masquée, nous aurions
 besoin d'utiliser à la place un contrôle de correspondance. Nous verrons les
-contrôles de correspondance plus loin dans une des sections.
+contrôles de correspondance dans une des sections suivantes.
 
 <!--
 ### Multiple Patterns
@@ -188,11 +189,11 @@ value of `x` matches either of the values in that arm, that arm’s code will
 run:
 -->
 
-Dans les expressions `match`, vous pouvez faire correspondre plusieurs motifs
-en utilisant la syntaxe `|`, qui signifie *ou*. Par exemple, le code suivant
-applique un `match` sur la valeur de `x`, la première des branches a une option
-*ou*, ce qui signifie que si la valeur de `x` correspond à un de ces motifs de
-cette branche, le code de cette branche sera exécuté :
+Dans les expressions `match`, vous pouvez faire correspondre une même branche à plusieurs motifs
+en utilisant la syntaxe `|`, qui signifie *ou*. Par exemple, dans le code suivant
+appliquant un `match` sur la valeur de `x`, la première des branches possède une option
+*ou*, ce qui signifie que si la valeur de `x` correspond à l'un ou l'autre des motifs de
+cette branche, le code associé sera exécuté :
 
 <!--
 ```rust
@@ -246,10 +247,10 @@ number between 1 and 1,000!
 
 Si `x` vaut 1, 2, 3, 4 ou 5, la première branche va correspondre. Cette syntaxe
 est plus pratique à utiliser que d'avoir à utiliser l'opérateur `|` pour
-exprimer la même idée ; à la place de `1..=5` nous aurions dû préciser
-`1 | 2 | 3 | 4 | 5` si nous avions dû utiliser `|`. Renseigner un intervalle
-est bien plus court, en particulier si nous souhaitons correspondre aux valeurs
-entre 1 et 1000 par exemple !
+exprimer la même idée ; à la place de `1..=5` nous aurions dû écrire
+`1 | 2 | 3 | 4 | 5` si nous avions utilisé `|`. Renseigner un intervalle
+est bien plus court, en particulier si nous souhaitons avoir une correspondance 
+avec les valeurs comprises entre 1 et 1000 par exemple !
 
 <!--
 Ranges are only allowed with numeric values or `char` values, because the
@@ -259,8 +260,8 @@ which Rust can tell if a range is empty or not are `char` and numeric values.
 
 Les intervalles peuvent être des nombres ou des `char` (caractères), car le
 compilateur vérifie que l'intervalle n'est pas vide au moment de la
-compilation. Les seuls types pour lesquels Rust peut dire si un intervalle est
-vide ou non sont pour les nombres et les `char`.
+compilation et les seuls types pour lesquels Rust peut dire si un intervalle est
+vide ou non sont ceux constitués de nombres ou de `char`.
 
 <!--
 Here is an example using ranges of `char` values:
@@ -331,21 +332,6 @@ nous pouvons séparer en utilisant un motif avec une instruction `let`.
 {{#rustdoc_include ../listings/ch18-patterns-and-matching/listing-18-12/src/main.rs}}
 ```
 
-```rust
-struct Point {
-    x: i32,
-    y: i32,
-}
-
-fn main() {
-    let p = Point { x: 0, y: 7 };
-
-    let Point { x: a, y: b } = p;
-    assert_eq!(0, a);
-    assert_eq!(7, b);
-}
-```
-
 <!--
 <span class="caption">Listing 18-12: Destructuring a struct’s fields into
 separate variables</span>
@@ -362,10 +348,10 @@ it’s common to want the variable names to match the field names to make it
 easier to remember which variables came from which fields.
 -->
 
-Ce code créé les variables `a` et `b` qui correspondent aux valeurs des champs
+Ce code crée les variables `a` et `b` qui correspondent aux valeurs des champs
 `x` et `y` de la structure `p`. Cet exemple montre que les noms des variables
 du motif n'ont pas à correspondre aux noms des champs de la structure. Mais il
-est courant de vouloir que les noms des variables correspondent aux noms des
+est courant de vouloir faire correspondre le nom des variables avec le nom des
 champs pour se rappeler plus facilement quelle variable provient de quel champ.
 
 <!--
@@ -378,13 +364,13 @@ in Listing 18-12, but the variables created in the `let` pattern are `x` and
 `y` instead of `a` and `b`.
 -->
 
-Comme avoir des noms de variables qui correspondent aux champs est courant et
-comme écrire `let Point { x: x, y: y } = p;` est assez répétitif, il existe un
-raccourci pour les motifs qui correspondent aux champs des structures : vous
-avez simplement besoin de lister le nom des champs de la structure, et les
-variables créées à partir du motif auront les mêmes noms. L'encart 18-12 montre
+Comme faire correspondre les noms des variables avec ceux des champs est une pratique
+courante et qu'écrire `let Point { x: x, y: y } = p;` est inutilement redondant, il existe un
+raccourci pour les motifs qui correspondent aux champs des structures : il vous
+suffit de lister simplement le nom des champs de la structure pour que les
+variables créées à partir du motif aient les mêmes noms. L'encart 18-12 montre
 du code qui se comporte de la même manière que le code de l'encart 18-12, mais
-les variables créées dans le motif du `let` sont `x` et `y` au lieu de `a` et
+dans lequel les variables créées dans le motif du `let` sont `x` et `y` au lieu de `a` et
 `b`.
 
 <!--
@@ -417,9 +403,9 @@ of the `p` variable. The outcome is that the variables `x` and `y` contain the
 values from the `p` struct.
 -->
 
-Ce code créé les variables `x` et `y` qui correspondent aux champs `x` et `y`
+Ce code crée les variables `x` et `y` qui correspondent aux champs `x` et `y`
 de la variable `p`. Il en résulte que les variables `x` et `y` contiennent les
-valeurs correspondantes à la structure `p`.
+valeurs correspondantes de la structure `p`.
 
 <!--
 We can also destructure with literal values as part of the struct pattern
@@ -428,10 +414,10 @@ some of the fields for particular values while creating variables to
 destructure the other fields.
 -->
 
-Nous pouvons aussi destructurer avec des valeurs littérales comme faisant partie
+Nous pouvons aussi destructurer en utilisant des valeurs littérales faisant partie
 du motif de la structure plutôt que d'avoir à créer les variables pour tous les
-champs. Ceci nous permet de tester certains champs pour des valeurs
-particulières tout en créant les variables pour destructurer les autres champs.
+champs. Ceci nous permet de tester que certains champs possèdent des valeurs
+particulières tout en créant des variables pour destructurer les autres champs.
 
 <!--
 Listing 18-14 shows a `match` expression that separates `Point` values into
@@ -440,8 +426,8 @@ three cases: points that lie directly on the `x` axis (which is true when `y =
 -->
 
 L'encart 18-14 montre une expression `match` qui sépare les valeurs `Point`
-en trois catégories : les points qui sont directement sur l'axe `x` (ce qui est
-vrai lorsque `y = 0`), ceux directement sur l'axe `y` (`x = 0`), ou sur aucun
+en trois catégories : les points qui sont sur l'axe `x` (ce qui est
+vrai lorsque `y = 0`), ceux sur l'axe `y` (`x = 0`) et ceux qui ne sont sur aucun
 de ces deux axes.
 
 <!--
@@ -474,9 +460,9 @@ the `y` field matches if its value matches the literal `0`. The pattern still
 creates an `x` variable that we can use in the code for this arm.
 -->
 
-La première branche va correspondre avec n'importe quel point qui se trouve sur
+La première branche va correspondre avec tous les points qui se trouvent sur
 l'axe `x` en précisant que le champ `y` correspond au littéral `0`. Le motif va
-toujours créer une variable `x` que nous pouvons utiliser dans le code de cette
+systématiquement créer une variable `x` que nous pourrons utiliser dans le code de cette
 branche.
 
 <!--
@@ -486,7 +472,7 @@ value of the `y` field. The third arm doesn’t specify any literals, so it
 matches any other `Point` and creates variables for both the `x` and `y` fields.
 -->
 
-De la même manière, la seconde branche correspondra avec tous les points sur
+De la même manière, la deuxième branche correspondra avec tous les points sur
 l'axe `y` en précisant que le champ `x` correspondra uniquement si sa valeur
 est `0` et créera une variable `y` pour la valeur du champ `y`. La troisième
 branche n'a pas besoin d'un littéral en particulier, donc elle correspondra à
@@ -498,7 +484,7 @@ In this example, the value `p` matches the second arm by virtue of `x`
 containing a 0, so this code will print `On the y axis at 7`.
 -->
 
-Dans cet exemple, la valeur `p` correspond avec la seconde branche car son `x`
+Dans cet exemple, la valeur `p` correspond avec la deuxième branche car son `x`
 vaut `0`, donc ce code va afficher `Sur l'axe y à la position 7`.
 
 <!--
@@ -516,12 +502,12 @@ example, in Listing 18-15 we use the `Message` enum from Listing 6-2 and write
 a `match` with patterns that will destructure each inner value.
 -->
 
-Nous avons destructuré les énumérations précédemment dans ce livre, par exemple
+Nous avons déjà destructuré des énumérations précédemment dans ce livre, par exemple
 lorsque nous avions destructuré `Option<i32>` dans l'encart 6-5 du chapitre 6.
-Un détail que nous n'avons pas précisé explicitement était que le motif pour
-destructurer une énumération devait correspondre à la façon dont est défini les
+Un détail que nous n'avions pas précisé explicitement était que le motif pour
+destructurer une énumération doit correspondre à la façon dont sont définies les
 données dans l'énumération. Par exemple, dans l'encart 18-15 nous utilisons
-l'énumération `Message` de l'encart 6-2 et nous rajoutons un `match` avec des
+l'énumération `Message` de l'encart 6-2 et nous ajoutons un `match` avec des
 motifs qui devraient destructurer chaque valeur interne.
 
 <!--
@@ -554,7 +540,7 @@ changing the value of `msg` to see the code from the other arms run.
 -->
 
 Ce code va afficher
-`Changement des taux de rouge à 0, de vert à 160, et de bleu à 255`. Essayez de
+`Changement des taux de rouge à 0, de vert à 160 et de bleu à 255`. Essayez de
 changer la valeur de `message` pour voir le code qu'exécute les autres
 branches.
 
@@ -564,9 +550,9 @@ the value any further. We can only match on the literal `Message::Quit` value,
 and no variables are in that pattern.
 -->
 
-Pour les variantes d'énumération sans aucune donnée, comme `Message::Quitter`,
+Pour les variantes d'énumération sans aucune donnée, telle que `Message::Quitter`,
 nous ne pouvons pas destructurer de valeurs. Nous pouvons uniquement
-correspondre à la valeur littérale `Message::Quitter`, et il n'y a pas de
+correspondre à la valeur littérale `Message::Quitter` et il n'y a pas de
 variable dans ce motif.
 
 <!--
@@ -580,7 +566,7 @@ we did in Listing 18-13.
 Pour les variantes d'énumération qui ressemblent aux structures, comme
 `Message::Deplacer`, nous pouvons utiliser un motif similaire aux motifs que
 nous utilisons pour correspondre aux structures. Après le nom de la variante,
-nous utilisons des accolades et ensuite nous listons les champs avec des
+nous utilisons des accolades puis nous listons les champs avec des
 variables afin de diviser les éléments à utiliser dans le code de cette
 branche. Ici nous utilisons la forme raccourcie comme nous l'avons fait à
 l'encart 18-13.
@@ -593,26 +579,26 @@ variables in the pattern must match the number of elements in the variant we’r
 matching.
 -->
 
-Pour les variantes d'énumérations qui ressemblent à des tuples, comme
-`Message::Ecrire` qui stocke un tuple avec un élément, et
+Pour les variantes d'énumérations qui ressemblent à des tuples, telles que
+`Message::Ecrire` qui stocke un tuple avec un seul élément, ou
 `Message::ChangerCouleur` qui stocke un tuple avec trois éléments, le motif
-ressemble au motif que nous renseignons pour correspondre aux tuples. Le nombre
-de variables dans le motif doit correspondre aux nombre d'éléments dans la
+est semblable à celui que nous renseignons pour correspondre aux tuples. Le nombre
+de variables dans le motif doit correspondre au nombre d'éléments dans la
 variante qui correspond.
 
 <!--
 #### Destructuring Nested Structs and Enums
 -->
 
-#### Destructurer des structures imbriquées et des énumérations
+#### Destructurer des structures et des énumérations imbriquées
 
 <!--
 Until now, all our examples have been matching structs or enums that were one
 level deep. Matching can work on nested items too!
 -->
 
-Jusqu'à présent, tous nos exemples avaient des correspondances avec structures
-ou des énumérations qui avaient un seul niveau de profondeur. Les
+Jusqu'à présent, tous nos exemples avaient des correspondances avec des structures
+ou des énumérations qui n'avaient qu'un seul niveau de profondeur. Les
 correspondances fonctionnent aussi sur les éléments imbriqués !
 
 <!--
@@ -653,11 +639,11 @@ conditions in one `match` expression, even though two enums are involved.
 Le motif de la première branche dans l'expression `match` correspond à la
 variante d'énumération `Message::ChangerCouleur` qui contient une variante
 `Couleur::Rvb` ; ensuite le motif fait correspondre des variables aux trois
-valeurs `i32` à l'intérieur. Le motif de la seconde branche correspond aussi
+valeurs `i32` que cette dernière contient. Le motif de la seconde branche correspond aussi
 à une variante de l'énumération de `Message::ChangerCouleur`, mais la valeur
 interne correspond plutôt à la variante `Couleur::Tsv`. Nous pouvons renseigner
-ces conditions complexes dans une seule expression `match`, même si nous la
-faisons sur deux énumérations.
+ces conditions complexes dans une seule expression `match`, bien que deux
+énumérations différentes soient impliquées.
 
 <!--
 #### Destructuring Structs and Tuples
@@ -723,17 +709,17 @@ parts of a value. Let’s explore how and why to use each of these patterns.
 Vous avez pu constater qu'il est parfois utile d'ignorer des valeurs dans un
 motif, comme celle dans la dernière branche d'un `match`, pour obtenir un joker
 qui ne fait rien mis à part qu'il représente toutes les autres valeurs
-possibles. Il existe plusieurs façons d'ignorer des valeurs entières ou des
-parties de valeurs dans un motif : l'utilisation du motif `_` (que vous avez
-déjà vu), l'utilisation du motif `_` à l'intérieur d'un autre motif, utiliser
-un nom qui commence avec un tiret bas, ou utiliser `..` pour ignorer les
-parties restantes d'une valeur. Voyons comment et pourquoi utiliser ces motifs.
+possibles. Il existe plusieurs façons d'ignorer totalement ou en partie des valeurs 
+dans un motif : en utilisant le motif `_` (que vous avez
+déjà vu), le motif `_` à l'intérieur d'un autre motif,
+un nom qui commence avec un tiret bas, ou enfin `..` pour ignorer les
+parties restantes d'une valeur. Voyons comment et pourquoi utiliser ces différents motifs.
 
 <!--
 #### Ignoring an Entire Value with `_`
 -->
 
-#### Ignorer une valeur entière avec `_`
+#### Ignorer complètement une valeur avec `_`
 
 <!--
 We’ve used the underscore (`_`) as a wildcard pattern that will match any value
@@ -742,11 +728,11 @@ useful as the last arm in a `match` expression, we can use it in any pattern,
 including function parameters, as shown in Listing 18-17.
 -->
 
-Nous avons utilisé le tiret bas (`_`) comme un motif de joker qui devait
-correspondre avec n'importe quelle valeur mais ne pouvait pas être assigné à
-une valeur. Bien que le motif du tiret bas `_` est particulièrement utile dans
-la dernière branche d'une expression `match`, nous pouvons l'utiliser dans
-n'importe quel motif, y compris les paramètres de fonctions, comme montré dans
+Nous avons utilisé le tiret bas (`_`) comme un motif joker qui 
+correspondra avec n'importe quelle valeur mais ne l'assignera pas.
+Bien que le motif du tiret bas `_` soit particulièrement utile dans
+la dernière branche d'une expression `match`, nous pouvons aussi l'utiliser dans
+n'importe quel motif, y compris dans les paramètres de fonctions, comme montré dans
 l'encart 18-17.
 
 <!--
@@ -791,7 +777,7 @@ name instead.
 -->
 
 Dans la plupart des cas lorsque vous n'avez pas besoin d'un paramètre d'une
-fonction, vous pouvez changer la signature pour qu'elle n'inclue pas le
+fonction, vous pouvez changer la signature pour qu'elle n'inclut pas le
 paramètre non utilisé. Ignorer un paramètre de fonction peut être
 particulièrement utile dans certains cas, comme par exemple, lors de
 l'implémentation d'un trait lorsque vous avez besoin d'un certain type de
@@ -816,12 +802,12 @@ setting but can unset the setting and give it a value if it is currently unset.
 -->
 
 Nous pouvons aussi utiliser `_` au sein d'un autre motif pour ignorer
-uniquement une partie d'une valeur, par exemple, si nous souhaitons tester
+uniquement une partie d'une valeur, par exemple, si nous ne souhaitons tester
 qu'une seule partie d'une valeur mais que nous n'utilisons pas les autres
 parties dans le code que nous souhaitons exécuter. L'encart 18-18 montre du
-code qui s'occupe de gérer une valeur d'un réglage. Les règles métier sont que
-l'utilisateur ne doit pas pouvoir réécrire un réglage personnalisé mais peut
-annuler le réglage et lui donner une valeur s'il est bien inexistant.
+code qui s'occupe de gérer la valeur d'un réglage. Les règles métier sont que
+l'utilisateur ne doit pas pouvoir modifier un réglage existant mais peut
+annuler le réglage ou lui donner une valeur s'il n'en a pas encore.
 
 <!--
 ```rust
@@ -855,10 +841,10 @@ changed.
 Ce code va afficher `Vous ne pouvez pas écraser une valeur déjà existante` et
 ensuite `Le réglage vaut Some(5)`. Dans la première branche, nous n'avons pas
 besoin de récupérer ou d'utiliser les valeurs à l'intérieur de chacune des
-variantes `Some`, mais nous avons besoin de tester les cas lorsque
-`valeur_du_reglage` et `nouvelle_valeur_du_reglage` vaudront la variante
+variantes `Some`, mais nous avons besoin de tester les situations
+où `valeur_du_reglage` et `nouvelle_valeur_du_reglage` sont toutes deux des variantes
 `Some`. Dans ce cas, nous écrivons que nous n'allons pas changer
-`valeur_du_reglage`, et il ne changera pas.
+`valeur_du_reglage` et elle ne changera pas.
 
 <!--
 In all other cases (if either `setting_value` or `new_setting_value` are
@@ -879,7 +865,7 @@ fourth values in a tuple of five items.
 
 Nous pouvons aussi utiliser les tirets bas à plusieurs endroits dans un même
 motif pour ignorer des valeurs précises. L'encart 18-19 montre un exemple qui
-ignore la seconde et quatrième valeur dans un tuple de cinq éléments.
+ignore la deuxième et la quatrième valeur dans un tuple de cinq éléments.
 
 <!--
 ```rust
@@ -903,14 +889,14 @@ This code will print `Some numbers: 2, 8, 32`, and the values 4 and 16 will be
 ignored.
 -->
 
-Ce code va afficher `Voici quelques nombres : 2, 8, 32`, et les valeurs 4 et 16
-seront ignorées.
+Ce code va afficher `Voici quelques nombres : 2, 8, 32` tandis que les valeurs 4 et 16
+sont ignorées.
 
 <!--
 #### Ignoring an Unused Variable by Starting Its Name with `_`
 -->
 
-#### Ignorer une variable non utilisée en démarrant son nom avec un `_`
+#### Ignorer une variable non utilisée en préfixant son nom avec un `_`
 
 <!--
 If you create a variable but don’t use it anywhere, Rust will usually issue a
@@ -923,13 +909,13 @@ only get a warning about one of them.
 -->
 
 Si vous créez une variable mais que vous ne l'utilisez nulle part, Rust va
-lancer un avertissement car cela est peut-être un bogue. Mais parfois il est
+lancer un avertissement car cela pourrait être un bogue. Mais parfois il est
 utile de créer une variable que vous n'utilisez pas encore, ce qui peut arriver
-lorsque vous créez un prototype ou créez un projet. Dans ce genre de situation,
-vous pouvez demander à Rust de ne pas vous avertir de la variable non utilisée
-en débutant le nom de la variable avec un tiret bas. Dans l'encart 18-20, nous
+lorsque vous créez un prototype ou un projet. Dans ce genre de situation,
+vous pouvez demander à Rust de ne pas vous avertir que la variable n'est pas utilisée
+en préfixant son nom avec un tiret bas. Dans l'encart 18-20, nous
 créons deux variables non utilisées, mais lorsque nous compilerons ce code,
-nous n'aurons qu'un seul avertissement sur une seule d'entre elles.
+nous n'aurons d'avertissement que pour une seule d'entre elles.
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -952,9 +938,9 @@ nous n'aurons qu'un seul avertissement sur une seule d'entre elles.
 underscore to avoid getting unused variable warnings</span>
 -->
 
-<span class="caption">Encart 18-20 : démarrer le nom d'une variable avec un
-tiret bas pour éviter d'avoir des avertissements à propos de variables non
-utilisées</span>
+<span class="caption">Encart 18-20 : préfixer le nom d'une variable avec un
+tiret bas pour éviter d'avoir des avertissements signalant une variable non
+utilisée</span>
 
 <!--
 Here we get a warning about not using the variable `y`, but we don’t get a
@@ -962,8 +948,8 @@ warning about not using the variable preceded by the underscore.
 -->
 
 Ici nous avons un avertissement qui nous prévient que nous n'utilisons pas la
-variable `y`, mais nous n'avons pas d'avertissement à propos de la variable qui
-a le nom qui commence par un tiret bas.
+variable `y`, mais nous n'avons pas d'avertissement concernant la variable dont 
+le nom est préfixé par un tiret bas.
 
 <!--
 Note that there is a subtle difference between using only `_` and using a name
@@ -972,8 +958,8 @@ variable, whereas `_` doesn’t bind at all. To show a case where this
 distinction matters, Listing 18-21 will provide us with an error.
 -->
 
-Remarquez comme la différence est subtile entre l'utilisation d'uniquement `_`
-et un nom qui commence par un tiret bas. La syntaxe `_x` continue à associer la
+Notez qu'il existe une différence subtile entre utiliser uniquement `_`
+et préfixer un nom avec un tiret bas. La syntaxe `_x` continue à associer la
 valeur à une variable, alors que `_` ne le fait pas du tout. Pour montrer un
 cas où cette différence est importante, l'encart 18-21 va nous donner une
 erreur.
@@ -993,8 +979,8 @@ erreur.
 underscore still binds the value, which might take ownership of the value</span>
 -->
 
-<span class="caption">Encart 18-21 : une variable non utilisée qui commence par
-un tiret bas continue à assigner la valeur, qui pourrait prendre possession de
+<span class="caption">Encart 18-21 : une variable non utilisée préfixée par
+un tiret bas continue à assigner la valeur, ce qui pourrait entraîner une prise de possession de
 la valeur</span>
 
 <!--
@@ -1005,8 +991,8 @@ because `s` doesn’t get moved into `_`.
 -->
 
 Nous allons obtenir une erreur car la valeur `s` est toujours déplacée dans
-`_s`, ce qui nous empêche d'utiliser `s` ensuite. Cependant, l'utilisation du
-tiret bas tout seul n'assigne jamais la valeur à quelque chose. L'encart 18-22
+`_s`, ce qui nous empêche d'utiliser `s` ensuite. A l'inverse, l'utilisation du
+tiret bas tout seul n'assigne jamais la valeur à quelque chose. Par conséquent, l'encart 18-22
 va se compiler sans aucune erreur car `s` n'est pas déplacé dans `_`.
 
 <!--
@@ -1051,7 +1037,7 @@ the values in the `y` and `z` fields.
 -->
 
 Avec les valeurs qui ont de nombreux éléments, nous pouvons utiliser la syntaxe
-`..` pour utiliser uniquement quelques éléments et ignorer les autres, ce qui
+`..` pour n'utiliser que quelques éléments et ignorer les autres, ce qui
 évite d'avoir à faire une liste de tirets bas pour chacune des valeurs
 ignorées. Le motif `..` ignore tous les éléments d'une valeur qui ne
 correspondent pas explicitement au reste du motif. Dans l'encart 18-23, nous
@@ -1074,8 +1060,8 @@ la coordonnée `x` et ignorer les valeurs des champs `y` et `z`.
 for `x` by using `..`</span>
 -->
 
-<span class="caption">Encart 18-23 : on ignore tous les champs d'un `Point`, à
-l'exception de `x`, en utilisant `..`</span>
+<span class="caption">Encart 18-23 : on ignore tous les champs d'un `Point` à
+l'exception de `x` en utilisant `..`</span>
 
 <!--
 We list the `x` value and then just include the `..` pattern. This is quicker
@@ -1084,8 +1070,8 @@ structs that have lots of fields in situations where only one or two fields are
 relevant.
 -->
 
-Nous ajoutons la valeur `x` et juste ensuite nous insérons le motif `..`. C'est
-plus rapide que d'avoir à rajouter `y: _` et `z: _`, en particulier lorsque
+Nous ajoutons la valeur `x` puis nous insérons simplement le motif `..`. C'est
+plus rapide que d'avoir à ajouter `y: _` et `z: _`, en particulier lorsque
 nous travaillons avec des structures qui ont beaucoup de champs alors qu'un
 seul champ ou deux nous intéressent.
 
@@ -1119,7 +1105,7 @@ a tuple and ignoring all other values</span>
 -->
 
 <span class="caption">Encart 18-24 : on correspond uniquement avec la première
-et la dernière valeur d'un tuple et nous ignorons toutes les autres valeurs
+et la dernière valeur d'un tuple en ignorant toutes les autres valeurs
 </span>
 
 <!--
@@ -1138,10 +1124,10 @@ Listing 18-25 shows an example of using `..` ambiguously, so it will not
 compile.
 -->
 
-Cependant, l'utilisation de `..` peut être ambigu. S'il n'est pas clair de
-savoir quelles sont les valeurs qui doivent correspondre et celles qui doivent
-être ignorées, Rust va nous donner une erreur. L'encart 18-25 nous montre un
-exemple d'utilisation ambigu de `..`, donc il ne se compilera pas.
+Cependant, l'utilisation de `..` peut être ambigu. S'il n'est pas possible 
+de déterminer clairement quelles valeurs doivent correspondre et quelles valeurs
+doivent être ignorées, Rust va nous retourner une erreur. L'encart 18-25 nous montre un
+exemple d'utilisation ambigu de `..` qui, par conséquent, ne se compilera pas.
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -1165,13 +1151,13 @@ way</span>
 -->
 
 <span class="caption">Encart 18-25 : une tentative d'utilisation de `..` de
-manière ambigu</span>
+manière ambigüe</span>
 
 <!--
 When we compile this example, we get this error:
 -->
 
-Lorsque nous compilons cet  exemple, nous obtenons l'erreur suivante :
+Lorsque nous compilons cet exemple, nous obtenons l'erreur suivante :
 
 <!--
 ```console
@@ -1193,15 +1179,15 @@ The variable name `second` doesn’t mean anything special to Rust, so we get a
 compiler error because using `..` in two places like this is ambiguous.
 -->
 
-Il n'est pas possible pour Rust de déterminer combien de valeurs sont à ignorer
+Il est impossible pour Rust de déterminer combien de valeurs doivent être ignorées
 dans le tuple avant de faire correspondre une valeur avec `second` et ensuite
-combien d'autres à ignorer après cela. Ce code pourrait signifier que nous
-voulons ignorer `2`, faire correspondre `second` avec `4`, en ensuite ignorer
-`8`, `16`, et `32` ; ou que nous souhaitons ignorer `2` et `4`, et faire
-correspondre `second` à `8`, et ignorer ensuite `16` et `32` ; et ainsi de
+combien d'autres doivent être ignorées après. Ce code pourrait signifier que nous
+voulons ignorer `2`, faire correspondre `second` avec `4`, puis ignorer ensuite
+`8`, `16` et `32` ; ou que nous souhaitons ignorer `2` et `4`, faire
+correspondre `second` à `8`, puis ignorer ensuite `16` et `32` ; et ainsi de
 suite. Le nom de la variable `second` ne signifie pas grand-chose pour Rust,
 donc nous obtenons une erreur de compilation à cause de l'utilisation de `..`
-à deux endroits qui rendent la situation ambigu.
+à deux endroits qui rendent la situation ambigüe.
 
 <!--
 ### Extra Conditionals with Match Guards
@@ -1217,10 +1203,10 @@ than a pattern alone allows.
 -->
 
 Un *contrôle de correspondance* est une condition `if` supplémentaire renseignée
-après le motif d'une branche d'un `match` qui doit elle aussi correspondre, de
-même que le filtrage par motif, pour que cette branche soit choisie. Les
+après le motif d'une branche d'un `match` qui doit elle aussi correspondre en même temps 
+que le filtrage par motif, pour que cette branche soit choisie. Les
 contrôles de correspondance sont utiles pour exprimer des idées plus complexes
-que celles permises par les motifs tout seuls.
+que celles permises uniquement par les motifs.
 
 <!--
 The condition can use variables created in the pattern. Listing 18-26 shows a
@@ -1268,19 +1254,18 @@ arm, which would match because the second arm doesn’t have a match guard and
 therefore matches any `Some` variant.
 -->
 
-Si `nombre` aurait été plutôt `Some(10)`, le contrôle de correspondance de la
+Si `nombre` avait été plutôt `Some(10)`, le contrôle de correspondance de la
 première branche aurait été faux car 10 n'est pas inférieur à 5. Rust serait
-donc allé à la seconde branche, qui devrait correspondre car la seconde branche
-n'a pas de contrôle de correspondance et correspond parfois à la variante
-`Some`.
+donc allé à la deuxième branche, qui devrait être choisie car cette deuxième branche
+correspond à n'importe quelle variante `Some` et n'a pas de contrôle de correspondance.
 
 <!--
 There is no way to express the `if x < 5` condition within a pattern, so the
 match guard gives us the ability to express this logic.
 -->
 
-Il n'y a pas d'autre moyen d'exprimer la condition `if x < 5` dans un motif,
-donc le contrôle de correspondance nous donne la possibilité d'exprimer cette
+Comme il n'existe pas d'autre moyen d'exprimer la condition `if x < 5` dans un motif,
+le contrôle de correspondance nous donne la possibilité d'exprimer une telle 
 logique.
 
 <!--
@@ -1335,7 +1320,7 @@ there is no `n` variable outside the `match`.
 -->
 
 Ce code va maintenant afficher `Cas par défaut, x = Some(5)`. Le motif de la
-seconde branche du `match` ne crée pas de nouvelle variable `y` qui masquerait
+deuxième branche du `match` ne crée pas de nouvelle variable `y` qui masquerait
 le `y` externe, ce qui signifie que nous pouvons utiliser le `y` externe dans
 le contrôle de correspondance. Au lieu de renseigner le motif comme étant
 `Some(y)`, ce qui aurait masqué le `y` externe, nous renseignons `Some(n)`.
@@ -1368,7 +1353,7 @@ correspondance pour y renseigner plusieurs motifs ; la condition du contrôle d
 correspondance s'effectuera alors sur tous les motifs. L'encart 18-28 montre la
 priorité de combinaison d'un contrôle de correspondance sur un motif qui
 utilise `|`. La partie importante de cet exemple est que le contrôle de
-correspondance `if y` s'applique sur `4`, `5`, *et* `6`, même si `if y` semble
+correspondance `if y` s'applique sur `4`, `5` *et* `6`, même si `if y` semble
 s'appliquer uniquement à `6`.
 
 <!--
@@ -1401,10 +1386,10 @@ behaves like this:
 -->
 
 La condition de correspondance signifie que la branche correspond uniquement si
-la valeur de `x` vaut `4`, `5`, ou `6` *et* que `y` vaut `true`. Lorsque ce
+la valeur de `x` vaut `4`, `5` ou `6` *et* que `y` vaut `true`. Lorsque ce
 code s'exécute, le motif de la première branche correspond car `x` vaut 4, mais
 le contrôle de correspondance `if y` est faux, donc ce programme affiche `no`.
-La raison est que la condition `if` s'applique à tout le motif `4 | 5 | 6`, et
+La raison est que la condition `if` s'applique à tout le motif `4 | 5 | 6` et
 pas seulement à la dernière valeur `6`. Autrement dit, la priorité d'un
 contrôle de correspondance avec un motif se comporte comme ceci :
 
@@ -1422,7 +1407,7 @@ contrôle de correspondance avec un motif se comporte comme ceci :
 rather than this:
 -->
 
-plutôt que comme ceci :
+et pas comme ceci :
 
 <!--
 ```text
@@ -1509,11 +1494,11 @@ isn’t able to use the value from the `id` field, because we haven’t saved th
 `id` value in a variable.
 -->
 
-Dans la seconde branche, où nous avons uniquement un intervalle renseigné dans
+Dans la deuxième branche, où nous avons uniquement un intervalle renseigné dans
 le motif, le code associé à la branche n'a pas besoin d'une variable qui
-contient la valeur actuelle du champ `id`. La valeur du champ `id` aurait pu
-être 10, 11, ou 12, mais le code associé à ce motif ne saura pas quelle est sa
-valeur. Le code du motif n'est pas capable d'utiliser la valeur du champ `id`,
+contienne la valeur actuelle du champ `id`. La valeur du champ `id` aurait pu
+être 10, 11 ou 12, mais le code associé à ce motif ne la connaîtra pas. 
+Le code du motif n'est pas capable d'utiliser la valeur du champ `id`,
 car nous n'avons pas enregistré `id` dans une variable.
 
 <!--
@@ -1525,10 +1510,10 @@ first two arms: any value would match this pattern.
 -->
 
 Dans la dernière branche, nous avons renseigné une variable sans intervalle,
-nous avons la valeur qui peut être utilisée dans le code de la branche, dans la
-variable `id`. La raison à cela est que nous avons utilisé la syntaxe
-raccourcie pour les champs des structures. Mais nous n'avons pas appliqué de
-tests à la valeur sur le champ `id` de cette branche, comme nous l'avions fait
+nous avons donc dans la variable `id` la valeur qui peut être utilisée dans 
+le code de la branche. La raison à cela est que nous avons utilisé la syntaxe
+raccourcie pour les champs des structures. Mais, dans cette branche, nous 
+n'avons pas appliqué de tests à la valeur sur le champ `id`, comme nous l'avions fait
 avec les deux premières branches : n'importe quelle valeur correspondra à ce
 motif.
 
@@ -1556,9 +1541,9 @@ variables. We can create simple or complex patterns to suit our needs.
 
 Les motifs de Rust sont très utiles lorsque nous devons distinguer différents
 types de données. Lorsque nous les avions utilisés dans les expressions
-`match`, Rust s'est assuré que vos motifs couvent l'intégralité de toutes
-valeurs possibles, ou alors votre programme ne se compilait pas. Les motifs
-dans les instructions `let` et les paramètres de fonction rendre ces
+`match`, Rust s'est assuré que vos motifs couvraient l'intégralité de toutes
+valeurs possibles, et, dans le cas contraire, votre programme ne se compilait pas. Les motifs
+dans les instructions `let` et les paramètres de fonction rendent ces
 constructions encore plus utiles, permettant de déstructurer les valeurs en
 parties plus petites tout en les assignant à des variables. Nous pouvons créer
 des motifs très simples ou alors plus complexes pour répondre à nos besoins.

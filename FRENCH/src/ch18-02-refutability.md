@@ -17,8 +17,9 @@ a_value` because if the value in the `a_value` variable is `None` rather than
 Les motifs se divisent en deux catégories : réfutables et irréfutables. Les
 motifs qui vont correspondre à n'importe quelle valeur qu'on lui passe sont
 *irréfutables*. Un exemple serait le `x` dans l'instruction `let x = 5;` car
-`x` correspond à tout ce qui est possible et ainsi ne peut pas échouer à la
-correspondance. Les motifs qui peuvent échouer à correspondre à quelques valeurs
+`x` correspond à tout ce qui est possible de sorte que la
+correspondance ne puisse pas échouer. Les motifs pour lesquels la correspondance
+peut échouer pour certains valeurs
 sont *réfutables*. Un exemple serait `Some(x)` dans l'expression
 `if let Some(x) = une_valeur` car si la valeur dans la variable `une_valeur` est
 `None` au lieu de `Some`, le motif `Some(x)` ne correspondra pas.
@@ -33,12 +34,12 @@ failure: the functionality of a conditional is in its ability to perform
 differently depending on success or failure.
 -->
 
-Les paramètres de fonctions, les instructions `let`, et les boucles `for`
-peuvent seulement accepter des motifs irréfutables, car le programme ne peut
+Les paramètres de fonctions, les instructions `let` et les boucles `for`
+ne peuvent accepter que des motifs irréfutables, car le programme ne peut
 rien faire d'autre lorsque les valeurs ne correspondent pas. Les expressions
-`if let` et `while let` acceptent les motifs réfutables et irréfutables, mais le
-compilateur met en garde contre l'utilisation des motifs irréfutables dans ce
-cas car par définition ces expressions sont prévues pour gérer un problème
+`if let` et `while let` acceptent les motifs réfutables et irréfutables, mais 
+dans le second cas, le compilateur affichera une mise en garde 
+car, par définition, ces expressions sont destinées à gérer un problème
 éventuel : le but des conditions est de se comporter différemment en fonction de
 la réussite ou de l'échec.
 
@@ -53,9 +54,9 @@ using the pattern with, depending on the intended behavior of the code.
 De manière générale, vous ne devriez pas avoir à vous soucier des différences
 entre les motifs réfutables et irréfutables ; en revanche, vous devez vous
 familiariser avec le concept de réfutabilité afin que vous puissiez comprendre
-lorsque vous le verrez dans un message d'erreur. Dans ce cas, vous allez avoir
-besoin de changer soit le motif, soit la construction avec laquelle vous
-utilisez, en fonction du comportement prévu du code.
+ce qui se passe lorsque vous le verrez apparaître dans un message d'erreur. 
+Dans ce cas, vous allez avoir besoin de changer soit le motif, soit la construction 
+avec laquelle vous l'utilisez, selon le comportement attendu du code.
 
 <!--
 Let’s look at an example of what happens when we try to use a refutable pattern
@@ -66,8 +67,8 @@ pattern. As you might expect, this code will not compile.
 
 Examinons un exemple de ce qu'il se passe lorsque nous essayons d'utiliser un
 motif réfutable lorsque Rust prévoit d'utiliser un motif irréfutable, et
-vice-versa. L'encart 18-8 montre une instruction `let`, mais pour le motif nous
-avons renseigné `Some(x)`, un motif réfutable. Comme vous pouvez vous en douter,
+vice-versa. L'encart 18-8 montre une instruction `let`, mais comme le motif nous
+avons indiqué `Some(x)`, un motif réfutable. Comme vous pouvez vous en douter,
 ce code ne va pas se compiler.
 
 <!--
@@ -96,10 +97,10 @@ do with a `None` value. At compile time, Rust will complain that we’ve tried t
 use a refutable pattern where an irrefutable pattern is required:
 -->
 
-Si `une_option_quelconque` était une valeur `None`, cela ferait échouer le motif
-`Some(x)`, ce qui signifie que le motif est réfutable. Cependant, l'instruction
-`let` ne peut accepter qu'un motif irréfutable car il n'y a pas d'instructions à
-suivre dans le cas d'une valeur `None`. A la compilation, Rust s'y opposera en
+Si `une_option_quelconque` était une valeur `None`, elle ne correspondrait pas 
+au motif `Some(x)`, ce qui signifie que le motif est réfutable. Cependant, l'instruction
+`let` ne peut accepter qu'un motif irréfutable car il n'existe pas d'instructions valides à
+exécuter avec une valeur `None`. A la compilation, Rust s'y opposera en
 expliquant que nous avons essayé d'utiliser un motif réfutable là où un motif
 irréfutable est nécessaire :
 
@@ -130,11 +131,11 @@ will just skip the code in the curly brackets, giving it a way to continue
 validly. Listing 18-9 shows how to fix the code in Listing 18-8.
 -->
 
-Pour corriger le problème lorsque nous avons un motif réfutable où un motif
-irréfutable est nécessaire, nous pouvons changer le code qui utilise ce motif :
-au lieu d'utiliser `let`, nous pouvons utiliser `if let`. Ensuite, si le motif
-ne correspond pas, le code va simplement sauter le code entre les accolades,
-nous offrant la possibilité de continuer correctement. L'encart 18-9 montre
+Pour corriger le problème lorsque nous avons un motif réfutable là où un motif
+irréfutable est nécessaire, nous pouvons modifier le code qui utilise ce motif :
+au lieu d'utiliser `let`, nous pouvons utiliser `if let`. Dans ce cas, si le motif
+ne correspond pas, le programme va simplement sauter le code entre les accolades,
+ce qui lui permet de poursuivre son exécution sans rencontrer d'erreur. L'encart 18-9 montre
 comment corriger le code de l'encart 18-8.
 
 <!--
@@ -162,10 +163,10 @@ let` a pattern that will always match, such as `x`, as shown in Listing 18-10,
 the compiler will give a warning.
 -->
 
-Ce code est parfaitement valide, bien que cela signifie que nous ne pouvons pas
-utiliser un motif irréfutable sans avoir d'erreur. Si nous donnons au `if let`
-un motif qui correspond toujours, comme pour `x` montré dans l'encart 18-10, le
-compilateur va lever un avertissement.
+Nous avons donné au code une porte de sortie. Ce code est parfaitement valide, cependant
+il implique que nous ne pouvons pas utiliser un motif irréfutable sans provoquer une erreur. 
+Si nous donnons au `if let` un motif qui correspond toujours, tel que `x`, comme montré dans l'encart 18-10, 
+le compilateur va lever un avertissement.
 
 <!--
 ```rust
@@ -213,8 +214,8 @@ this syntax isn’t particularly useful and could be replaced with a simpler
 
 C'est pourquoi les branches de `match` doivent utiliser des motifs réfutables,
 sauf pour la dernière branche, qui devrait correspondre à n'importe quelle
-valeur grâce à son motif irréfutable. Rust nous permet d'utiliser un motif
-irréfutable dans un `match` avec une seule branche, mais cette syntaxe n'est
+valeur grâce à un motif irréfutable. Rust nous permet d'utiliser un motif
+irréfutable dans un `match` ne possédant qu'une seule branche, mais cette syntaxe n'est
 pas particulièrement utile et devrait être remplacée par une instruction `let`
 plus simple.
 
@@ -224,6 +225,6 @@ and irrefutable patterns, let’s cover all the syntax we can use to create
 patterns.
 -->
 
-Maintenant que vous savez où utiliser les motifs et les différences entre les
-motifs réfutables et irréfutables, voyons les syntaxes que nous pouvons
-utiliser pour créer des motifs.
+Maintenant que vous savez où utiliser les motifs et que vous connaissez 
+la différence entre les motifs réfutables et irréfutables, voyons toutes 
+les syntaxes que nous pouvons utiliser pour créer des motifs.

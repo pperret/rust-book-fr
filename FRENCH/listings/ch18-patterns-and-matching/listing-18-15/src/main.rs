@@ -20,7 +20,7 @@ fn main() {
         }
         Message::Ecrire(text) => println!("Message textuel : {}", text),
         Message::ChangerCouleur(r, g, b) => println!(
-            "Changement des taux de rouge à {}, de vert à {}, et de bleu à {}",
+            "Changement des taux de rouge à {}, de vert à {} et de bleu à {}",
             r, g, b
         ),
     }

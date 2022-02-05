@@ -17,7 +17,7 @@ impl Pilote for Humain {
 
 impl Magicien for Humain {
     fn voler(&self) {
-        println!("Décolage !");
+        println!("Décollage !");
     }
 }
 

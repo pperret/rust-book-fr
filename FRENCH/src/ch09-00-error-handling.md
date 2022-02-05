@@ -5,16 +5,14 @@
 # La gestion des erreurs
 
 <!--
-Rust’s commitment to reliability extends to error handling. Errors are a fact
-of life in software, so Rust has a number of features for handling situations
-in which something goes wrong. In many cases, Rust requires you to acknowledge
-the possibility of an error and take some action before your code will compile.
-This requirement makes your program more robust by ensuring that you’ll
-discover errors and handle them appropriately before you’ve deployed your code
-to production!
+Errors are a fact of life in software, so Rust has a number of features for
+handling situations in which something goes wrong. In many cases, Rust requires
+you to acknowledge the possibility of an error and take some action before your
+code will compile. This requirement makes your program more robust by ensuring
+that you’ll discover errors and handle them appropriately before you’ve
+deployed your code to production!
 -->
 
-L'engagement de Rust pour la fiabilité concerne aussi la gestion des erreurs.
 Les erreurs font partie de la vie des programmes informatiques, c'est pourquoi
 Rust a des fonctionnalités pour gérer les situations dans lesquelles quelque
 chose dérape. Dans de nombreux cas, Rust exige que vous anticipiez les erreurs
@@ -25,18 +23,20 @@ votre code en production !
 
 <!--
 Rust groups errors into two major categories: *recoverable* and *unrecoverable*
-errors. For a recoverable error, such as a file not found error, it’s
-reasonable to report the problem to the user and retry the operation.
+errors. For a recoverable error, such as a *file not found* error, we most
+likely just want to report the problem to the user and retry the operation.
 Unrecoverable errors are always symptoms of bugs, like trying to access a
-location beyond the end of an array.
+location beyond the end of an array, and so we want to immediately stop the
+program.
 -->
 
 Rust classe les erreurs dans deux catégories principales : les erreurs
 *récupérables* et *irrécupérables*. Pour les erreurs récupérables, comme
-lorsqu'un fichier n'est pas trouvable, il est préférable de signaler le problème
-à l'utilisateur et de relancer l'opération. Les erreurs irrécupérables sont
-toujours des symptômes de bogues, comme essayer d'accéder à un élément en dehors
-de l'intervalle de données d'un tableau.
+l'erreur *le fichier n'a pas été trouvé*, nous préférons probablement signaler
+le problème à l'utilisateur et relancer l'opération. Les erreurs irrécupérables
+sont toujours des symptômes de bogues, comme par exemple essayer d'accéder à un
+élément en dehors de l'intervalle de données d'un tableau, et alors dans ce cas
+nous voulons arrêter immédiatement l'exécution du programme.
 
 <!--
 Most languages don’t distinguish between these two kinds of errors and handle

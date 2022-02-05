@@ -528,7 +528,7 @@ patterns are evaluated in order. Rust will warn us if we add arms after a
 catch-all because those later arms would never match!
 -->
 
-Ce code se compile, même si nous n'avons pas lité toutes les valeurs possibles
+Ce code se compile, même si nous n'avons pas listé toutes les valeurs possibles
 qu'un `u8` puisse avoir, car le dernier motif va correspondre à toutes les
 valeurs qui ne sont pas spécifiquement listés. Ce motif générique répond à la
 condition qu'un `match` doive être exhaustif. Notez que nous devons placer la

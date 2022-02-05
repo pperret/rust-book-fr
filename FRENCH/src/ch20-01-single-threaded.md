@@ -11,7 +11,7 @@ servers. The details of these protocols are beyond the scope of this book, but
 a brief overview will give you the information you need.
 -->
 
-Nous allons commencer par faire fonctionner un serveur web avec une seule tâche.
+Nous allons commencer par faire fonctionner un serveur web monotâche.
 Avant de commencer, faisons un survol rapide des protocoles utilisés dans les
 serveurs web. Les détails de ces protocoles ne sont pas le sujet de ce livre,
 mais un rapide aperçu vous donnera les informations dont vous avez besoin.
@@ -27,9 +27,9 @@ protocols.
 
 Les deux principaux protocoles utilisés dans les serveurs web sont le
 *Hypertext Transfer Protocol* *(HTTP)* et le *Transmission Control Protocol*
-*(TCP)*. Ces deux protocoles sont des protocoles de type *demande-réponse*, ce
-qui signifie qu'un *client* démarre les requêtes, et le *serveur* écoute les
-requêtes et fournit une réponse au client. Le contenu de ces requêtes et
+*(TCP)*. Ces deux protocoles sont des protocoles de type *requête-réponse*, ce
+qui signifie qu'un *client* initie des requêtes tandis que le *serveur* écoute les
+requêtes et fournit une réponse au client. Le contenu de ces requêtes et de ces
 réponses est défini par les protocoles.
 
 <!--
@@ -127,9 +127,9 @@ chosen this port for two reasons: HTTP isn’t normally accepted on this port, a
 En utilisant `TcpListener`, nous pouvons écouter les connexions TCP à l'adresse
 `127.0.0.1:7878`. Dans cette adresse, la partie avant les double-points est une
 adresse IP qui représente votre ordinateur (c'est la même sur chaque ordinateur
-et ne représente pas précisément l'ordinateur de l'auteur), et `7878` est le
+et ne représente pas spécifiquement l'ordinateur de l'auteur), et `7878` est le
 port. Nous avons choisi ce port pour deux raisons : HTTP n'est pas
-habituellement accepté sur ce port, et 7878 correspond aux touches utilisées
+habituellement accepté sur ce port et 7878 correspond aux touches utilisées
 sur un clavier de téléphone pour écrire *Rust*.
 
 <!--
@@ -142,7 +142,7 @@ will return a new `TcpListener` instance. The reason the function is called
 La fonction `bind` dans ce scénario fonctionne comme la fonction `new` dans le
 sens où elle retourne une nouvelle instance de `TcpListener`. La raison pour
 laquelle cette fonction s'appelle `bind` *(NdT : signifie "lier")* est que dans
-les réseaux, connecter un port à écouter se dit aussi “lier à un port”.
+le domaine des réseaux, se connecter à un port se dit se “lier à un port”.
 
 <!--
 The `bind` function returns a `Result<T, E>`, which indicates that binding
@@ -160,12 +160,12 @@ La fonction `bind` retourne un `Result<T, E>`, ce qui signifie que la création
 de lien peut échouer. Par exemple, la connexion au port 80 nécessite d'être
 administrateur (les utilisateurs non-administrateur ne peuvent écouter que sur
 les ports supérieurs à 1023), donc si nous essayons de connecter un port 80
-sans être administrateur, le lien ne va pas fonctionner. Un autre exemple, le
+sans être administrateur, le lien ne va pas fonctionner. Pour donner un autre exemple, le
 lien ne va pas fonctionner si nous exécutons deux instances de notre programme
 et que nous avons deux programmes qui écoutent sur le même port. Comme nous
 écrivons un serveur basique uniquement à but pédagogique, nous n'avons pas à
 nous soucier de la gestion de ce genre d'erreur ; c'est pourquoi nous utilisons
-`unwrap` pour arrêter l'exécution du programme si des erreurs arrivent.
+`unwrap` pour arrêter l'exécution du programme si des erreurs surviennent.
 
 <!--
 The `incoming` method on `TcpListener` returns an iterator that gives us a
@@ -182,13 +182,13 @@ streams for us to handle.
 La méthode `incoming` d'un `TcpListener` retourne l'itérateur qui nous donne une
 séquence de flux (plus précisément, des flux de type `TcpStream`). Un seul
 *flux* représente une connexion entre le client et le serveur. Une *connexion*
-est le nom qui désigne tout le processus désignant la requête ainsi que la
-réponse, durant lequel le client se connecte au serveur, le serveur génère une
-réponse, et le serveur ferme la connexion. Ainsi, `TcpStream` va se lire
+est le nom qui désigne le processus complet de requête et de réponse, 
+durant lequel le client se connecte au serveur, le serveur génère une
+réponse puis le serveur ferme la connexion. Ainsi, `TcpStream` va se lire
 lui-même pour voir ce que le client a envoyé et nous permettre ensuite d'écrire
 notre réponse dans le flux. De manière générale, cette boucle `for` traitera
-chaque connexion dans l'ordre et produire nous une série de flux pour que nous
-puissions les gérer.
+l'une après l'autre chaque connexion dans l'ordre et produira une série de flux que
+nous devrons gérer.
 
 <!--
 For now, our handling of the stream consists of calling `unwrap` to terminate
@@ -206,8 +206,8 @@ connections are closed.
 
 Pour l'instant, notre gestion des flux consiste à appeler `unwrap` pour arrêter
 notre programme si le flux rencontre une erreur ; s'il n'y a pas d'erreurs, le
-programme affiche un message. Nous allons ajouter plus de fonctionnalités dans
-le cas de succès dans le prochain encart. La raison pour laquelle nous pourrions
+programme affiche un message. Nous ajouterons davantage de fonctionnalités en
+cas de succès dans le prochain encart. La raison pour laquelle nous pourrions
 recevoir des erreurs de la méthode `incoming` lorsqu'un client se connecte au
 serveur est qu'en réalité nous n'itérons pas sur les connexions. En effet, nous
 itérons sur des *tentatives de connexion*. La connexion peut échouer pour de
@@ -215,7 +215,7 @@ nombreuses raisons, beaucoup d'entre elles sont spécifiques au système
 d'exploitation. Par exemple, de nombreux systèmes d'exploitation ont une limite
 sur le nombre de connexions ouvertes simultanément qu'ils peuvent supporter ;
 les tentatives de nouvelles connexions une fois ce nombre dépassé produiront une
-erreur jusqu'à ce que certaines connexions soient fermées.
+erreur jusqu'à ce que certaines des connexions soient fermées.
 
 <!--
 Let’s try running this code! Invoke `cargo run` in the terminal and then load
@@ -227,8 +227,8 @@ were printed when the browser connected to the server!
 
 Essayons d'exécuter ce code ! Saisissez `cargo run` dans le terminal et ensuite
 ouvrez *127.0.0.1:7878* dans un navigateur web. Le navigateur devrait afficher
-un message d'erreur comme “La connexion a été réinitialisée”, car le serveur ne
-renvois pas de données pour le moment. Mais si vous regardez le terminal, vous
+un message d'erreur tel que “La connexion a été réinitialisée”, car le serveur ne
+renvoie pas de données pour le moment. Mais si vous regardez le terminal, vous
 devriez voir quelques messages qui se sont affichés lorsque le navigateur s'est
 connecté au serveur !
 
@@ -256,7 +256,7 @@ browser tab.
 -->
 
 Des fois, vous pourriez voir plusieurs messages s'afficher pour une seule
-requête de navigateur ; la raison à cela est peut-être que le navigateur fait
+requête du navigateur ; la raison à cela est peut-être que le navigateur fait
 une requête pour la page ainsi que des requêtes pour d'autres ressources, comme
 l'icone *favicon.ico* qui s'affiche dans l'onglet du navigateur.
 
@@ -269,8 +269,8 @@ connections by retrying, because the problem might be temporary. The important
 factor is that we’ve successfully gotten a handle to a TCP connection!
 -->
 
-Peut-être que le navigateur essaye aussi de se connecter plusieurs fois au
-serveur car le serveur ne répond aucune donnée. Lorsque `flux` sort de la portée
+Peut-être que le navigateur essaie aussi de se connecter plusieurs fois au
+serveur car le serveur ne renvoie aucune donnée dans sa réponse. Lorsque `flux` sort de la portée
 et est nettoyé à la fin de la boucle, la connexion est fermée car cela est
 implémenté dans le `drop`. Les navigateurs réagissent à ces connexions fermées
 en ré-essayant, car le problème peut être temporaire. La partie importante est
@@ -283,10 +283,10 @@ run` after you’ve made each set of code changes to make sure you’re running 
 newest code.
 -->
 
-Souvenez-vous que vous pouvez arrêter le programme en appuyant sur
+Pensez à arrêter le programme en appuyant sur
 <span class="keystroke">ctrl-c</span> lorsque vous avez fini d'exécuter une
-version du code. Relancez ensuite `cargo run` après avoir appliqué un jeu de
-modifications pour vous assurer d'exécuter le nouveau code.
+version donnée du code. Relancez ensuite `cargo run` après avoir appliqué une série de
+modifications afin d'être sûr que vous exécutez bien la toute dernière version du code.
 
 <!--
 ### Reading the Request
@@ -303,8 +303,8 @@ print it so we can see the data being sent from the browser. Change the code to
 look like Listing 20-2.
 -->
 
-Commençons à implémenter la fonctionnalité pour lire la requête du navigateur !
-Pour séparer les parties où nous obtenons une connexion et celle où nous
+Commençons à implémenter la fonctionnalité permettant de lire la requête du navigateur !
+Pour séparer les parties où nous obtenons une connexion de celle où nous
 agissons avec la connexion, nous allons créer une nouvelle fonction pour traiter
 les connexions. Dans cette nouvelle fonction `gestion_connexion`, nous allons
 lire des données provenant du flux TCP et les afficher afin que nous puissions
@@ -359,9 +359,9 @@ mutation, but in this case we need the `mut` keyword.
 
 Dans la fonction `gestion_connexion`, nous avons fait en sorte que le paramètre
 `flux` soit mutable. La raison à cela est que l'instance de `TcpStream` garde en
-mémoire interne quelles données il nous a retourné. Il peut avoir plus de
-données que celles que nous avons demandé, et il peut alors conserver ces
-données jusqu'à la prochaine fois où nous demanderons des données. Il doit donc
+mémoire interne le suivi des données qu'il nous a retournées. Il peut lire plus de données
+que nous en avons demandées et les conserver pour la prochaine fois que nous en 
+redemanderons. Il doit donc
 être `mut` car son état interne doit pouvoir changer ; d'habitude, nous n'avons
 pas besoin que la “lecture” nécessite d'être mutable, mais dans ce cas nous
 avons besoin du mot-clé `mut`.
@@ -380,11 +380,11 @@ the buffer.
 Ensuite, nous devons lire les données du flux. Nous faisons cela en deux
 temps : d'abord, nous déclarons un `tampon` sur la pile pour y stocker les
 données qui seront lues. Nous avons fait en sorte que le tampon fasse 1024
-octets, ce qui est suffisamment grand pour stocker les données d'un requête
+octets, ce qui est suffisamment grand pour stocker les données d'une requête
 basique, ce qui est suffisant pour nos besoins dans ce chapitre. Si nous
-aurions voulu gérer des requêtes de tailles quelconques, la gestion du tampon
-aurait été plus complexe ; nous allons la garder simplifiée pour l'instant.
-Nous envoyons le tampon dans `flux.read`, qui va lire les octets provenant du
+avions voulu gérer des requêtes de taille arbitraire, cette gestion du tampon
+aurait été plus complexe ; nous allons la garder simpliste pour l'instant.
+Nous envoyons le tampon dans `flux.read` qui va lire les octets provenant du
 `TcpStream` et les ajouter dans le tampon.
 
 <!--
@@ -398,12 +398,12 @@ characters for characters in the buffer that aren’t filled by request data.
 
 Ensuite, nous convertissons les octets présents dans le tampon en chaînes de
 caractères et nous affichons cette chaîne de caractères. La fonction
-`String::from_utf8_lossy` prends en paramètres un `&[u8]` le transforme en une
+`String::from_utf8_lossy` prend en paramètre un `&[u8]` et le transforme en une
 `String`. La partie “lossy” du nom indique le comportement de cette fonction
 lorsqu'elle rencontre une séquence UTF-8 invalide : elle va remplacer la
 séquence invalide par `�`, le caractère `U+FFFD REPLACEMENT CHARACTER`. Vous
-devriez voir ces caractères de remplacement pour les caractères dans le
-tampon qui ne correspondent pas aux données de la demande.
+devriez voir ces caractères de remplacement à la place des caractères du
+tampon qui n'ont pas été renseignés par des données de requête.
 
 <!--
 Let’s try this code! Start the program and make a request in a web browser
@@ -523,12 +523,12 @@ and URLs isn’t important for our purposes in this chapter, but the HTTP spec
 uses the term URI, so we can just mentally substitute URL for URI here.
 -->
 
-La prochaine partie de la ligne de requête est */*, qui indique *l'URI*
+La partie suivante de la ligne de requête est */*, qui indique *l'URI*
 *(Uniform Resource Identifier)* que demande le client : une URI est presque,
 mais pas complètement, la même chose qu'une *URL* *(Uniform Resource Locator)*.
-La différence entre les URI et les URL n'est pas très importante pour nos
-besoins dans ce chapitre, mais la spécification de HTTP utilise le terme URI,
-donc nous pouvons simplement remplacer URL par URI dans ce cas-ci.
+La différence entre les URI et les URL n'est pas très importante pour nous
+dans ce chapitre, mais la spécification de HTTP utilise le terme URI,
+donc, ici, nous pouvons simplement lire URL là où URI est écrit.
 
 <!--
 The last part is the HTTP version the client uses, and then the request line
@@ -539,11 +539,11 @@ CRLF sequence separates the request line from the rest of the request data.
 Note that when the CRLF is printed, we see a new line start rather than `\r\n`.
 -->
 
-La dernière partie est la version HTTP que le client utilise, et ensuite la
+La dernière partie est la version HTTP que le client utilise, puis la
 ligne de requête termine avec une *séquence CRLF* (CRLF signifie
 *Carriage Return, retour chariot*, et *Line Feed, saut de ligne* qui sont des
 termes qui remontent à l'époque des machines à écrire !). La séquence CRLF peut
-aussi être écrite `\r\n`, dans laquelle `\r` est un retour chariot, et `\n` est
+aussi être écrite `\r\n`, dans laquelle `\r` est un retour chariot et `\n` est
 un saut de ligne. La séquence CRLF sépare la ligne de requête du reste des
 données de la requête. Notez toutefois que lorsqu'un CRLF est affiché, nous
 voyons une nouvelle ligne plutôt qu'un `\r\n`.
@@ -554,16 +554,16 @@ we see that `GET` is the method, */* is the request URI, and `HTTP/1.1` is the
 version.
 -->
 
-D'après la ligne de requête que nous avons reçu après avoir exécuté notre
+D'après la ligne de requête que nous avons reçue après avoir exécuté notre
 programme précédemment, nous constatons que la méthode est `GET`, */* est l'URI
-demandée, et `HTTP/1.1` est la version.
+demandée et `HTTP/1.1` est la version.
 
 <!--
 After the request line, the remaining lines starting from `Host:` onward are
 headers. `GET` requests have no body.
 -->
 
-Après la ligne de requête, les lignes après celle où nous avons `Host:` sont
+Après la ligne de requête, les lignes suivant celle où nous avons `Host:` sont
 des entêtes. Les requêtes `GET` n'ont pas de corps.
 
 <!--
@@ -572,7 +572,7 @@ address, such as *127.0.0.1:7878/test*, to see how the request data changes.
 -->
 
 Essayez de faire une requête dans un navigateur différent ou de demander une
-adresse différente, comme *127.0.0.1:7878/test*, pour observer comment les
+adresse différente, telle que *127.0.0.1:7878/test*, afin d'observer comment les
 données de requête changent.
 
 <!--
@@ -593,7 +593,7 @@ Now we’ll implement sending data in response to a client request. Responses
 have the following format:
 -->
 
-Maintenant, nous allons implémenter l'envoi d'une réponse à requête client. Les
+Maintenant, nous allons implémenter l'envoi d'une réponse à une requête client. Les
 réponses suivent le format suivant :
 
 <!--
@@ -620,16 +620,16 @@ response.
 
 La première ligne est une *ligne de statut* qui contient la version HTTP
 utilisée dans la réponse, un code numérique de statut qui résume le résultat
-de la requête, et une phrase de raison qui fournit une description textuelle du
+de la requête et une phrase de raison qui fournit une description textuelle du
 code de statut. Après la séquence CRLF viennent tous les entêtes, une autre
-séquence CRLF, et enfin le corps de la réponse.
+séquence CRLF et enfin le corps de la réponse.
 
 <!--
 Here is an example response that uses HTTP version 1.1, has a status code of
 200, an OK reason phrase, no headers, and no body:
 -->
 
-Voici un exemple de réponse qui utilise HTTP version 1.1, qui a un code de
+Voici un exemple de réponse qui utilise HTTP version 1.1, a un code de
 statut de 200, une phrase de raison à OK, pas d'entêtes, et pas de corps :
 
 <!--
@@ -653,7 +653,7 @@ Listing 20-3.
 Le code de statut 200 est la réponse standard de succès. Le texte est une toute
 petite réponse HTTP de succès. Ecrivons ceci dans le flux de notre réponse à
 une requête avec succès ! Dans la fonction `gestion_connexion`, enlevez le
-`println!` qui affiche les données de requête et remplacez-la par le code de
+`println!` qui affiche les données de requête et remplacez-le par le code de
 l'encart 20-3.
 
 <!--
@@ -702,7 +702,7 @@ buffer to minimize calls to the underlying operating system.
 -->
 
 Comme l'opération `write` peut échouer, nous utilisons `unwrap` sur toutes les
-erreurs, comme précédemment. Encore une fois ; dans un véritable application,
+erreurs, comme précédemment. Encore une fois, dans un véritable application,
 vous devriez gérer les cas d'erreur ici. Enfin, `flush` va attendre et empêcher
 le programme de continuer à s'exécuter jusqu'à ce que tous les octets soient
 écrits dans la connexion ; `TcpStream` contient un tampon interne pour réduire
@@ -736,9 +736,9 @@ a new file, *hello.html*, in the root of your project directory, not in the
 possibility.
 -->
 
-Implémentons la fonctionnalité pour retourner plus qu'une page blanche. Créez
+Implémentons la fonctionnalité permettant de retourner plus qu'une simple page blanche. Créez
 un nouveau fichier, *hello.html*, à la racine de votre dossier de projet, et
-non pas dans le dossier *src*. Vous pouvez ajouter le HTML que vous souhaitez ;
+pas dans le dossier *src*. Vous pouvez ajouter le HTML que vous souhaitez ;
 l'encart 20-4 vous montre une possibilité.
 
 <!--
@@ -849,7 +849,7 @@ signifie que si vous essayez de demander *127.0.0.1:7878/autre-chose* dans
 votre navigateur web, vous obtiendrez la même réponse HTML. Notre serveur est
 très limité, et ne correspond pas à ce que font la plupart des serveurs web.
 Nous souhaitons désormais personnaliser nos réponses en fonction de la requête
-et renvoyer seulement le fichier HTML pour la bonne requête faite à */*.
+et ne renvoyer le fichier HTML que pour une requête bien formatée faite à */*.
 
 <!--
 ### Validating the Request and Selectively Responding
@@ -867,13 +867,13 @@ received against what we know a request for */* looks like and adds `if` and
 `else` blocks to treat requests differently.
 -->
 
-Jusqu'à présent, notre serveur web devrait retourner le HTML du fichier peu
+Jusqu'à présent, notre serveur web retourne le HTML du fichier peu
 importe ce que demande le client. Ajoutons une fonctionnalité pour vérifier que
 le navigateur demande bien */* avant de retourner le fichier HTML et retournons
 une erreur si le navigateur demande autre chose. Pour cela, nous devons
-modifier `gestion_connexion` comme l'encart 20-6. Ce nouveau code compare le
-contenu de la requête que nous recevons à une requête que nous voudrions pour
-*/* en ajoutant des blocs `if` et `else` pour traiter différemment les requêtes.
+modifier `gestion_connexion` comme dans l'encart 20-6. Ce nouveau code compare le
+contenu de la requête que nous recevons à la requête que nous attendrions pour
+*/* et ajoute des blocs `if` et `else` pour traiter les requêtes de manière différenciée.
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -896,8 +896,8 @@ contenu de la requête que nous recevons à une requête que nous voudrions pour
 to */* differently from other requests</span>
 -->
 
-<span class="caption">Encart 20-6 : détection et gestion des requêtes vers */*,
-qui est différente en fonction des autres requêtes</span>
+<span class="caption">Encart 20-6 : détection et gestion des requêtes vers */* 
+de manière différenciée des autres requêtes</span>
 
 <!--
 First, we hardcode the data corresponding to the */* request into the `get`
@@ -912,10 +912,10 @@ HTML file.
 D'abord, nous codons en dur les données correspondant à la requête */* dans la
 variable `get`. Comme nous lisons des octets bruts provenant du tampon, nous
 transformons `get` en une chaîne d'octets en ajoutant la syntaxe de chaîne
-d'octets `b""` au début du contenu des données. Ensuite, nous attendons le
-moment où le `tampon` commence par les mêmes octets que ceux dans `get`.
-Lorsque c'est le cas, cela signifie que nous avons reçu une requête
-correctement bien formulée vers */*, qui est le cas de réussite que nous allons
+d'octets `b""` au début des données du contenu. Ensuite, nous vérifions que 
+le `tampon` commence par les mêmes octets que ceux présents dans `get`.
+Si c'est le cas, cela signifie que nous avons reçu une requête
+vers */* correctement formatée, qui est le cas de succès que nous allons
 gérer dans le bloc `if` qui retourne le contenu de notre fichier HTML.
 
 <!--
@@ -926,7 +926,7 @@ to all other requests.
 
 Si `tampon` ne *commence pas* avec les octets présents dans `get`, cela
 signifie que nous avons reçu une autre requête. Nous allons bientôt ajouter du
-code au bloc `else` pour répondre à toutes les autres requêtes.
+code au bloc `else` pour répondre à toutes ces autres requêtes.
 
 <!--
 Run this code now and request *127.0.0.1:7878*; you should get the HTML in
@@ -938,7 +938,7 @@ saw when running the code in Listing 20-1 and Listing 20-2.
 Exécutez ce code maintenant et demandez *127.0.0.1:7878* ; vous devriez obtenir
 le HTML de *hello.html*. Si vous faites n'importe quelle autre requête,
 comme *127.0.0.1:7878/autre-chose*, vous allez obtenir une erreur de connexion
-comme celle que vous avez vu lorsque vous exécutiez le code l'encart 20-1 et de
+comme celle que vous avez vue lorsque vous exécutiez le code l'encart 20-1 et de
 l'encart 20-2.
 
 <!--
@@ -950,7 +950,7 @@ indicating the response to the end user.
 
 Maintenant ajoutons le code de l'encart 20-7 au bloc `else` pour retourner une
 réponse avec le code de statut 404, qui signale que le contenu demandé par
-cette requête n'est pas trouvé. Nous allons aussi retourner du HTML pour qu'une
+cette requête n'a pas été trouvé. Nous allons aussi retourner du HTML pour qu'une
 page s'affiche dans le navigateur, indiquant la réponse à l'utilisateur final.
 
 <!--
@@ -975,7 +975,7 @@ error page if anything other than */* was requested</span>
 -->
 
 <span class="caption">Encart 20-7 : répondre un code de statut 404 et une page
-d'erreur s'il y autre chose que */* qui est demandé</span>
+d'erreur lorsqu'autre chose que */* a été demandé</span>
 
 <!--
 Here, our response has a status line with status code 404 and the reason
@@ -985,11 +985,11 @@ the error page; again feel free to use any HTML you want or use the example
 HTML in Listing 20-8.
 -->
 
-Ici, notre réponse a une ligne de statut avec le code de statut 404 et la
+Ici notre réponse possède une ligne de statut avec le code de statut 404 et la
 phrase de raison `NOT FOUND`. Le corps de la réponse sera le HTML présent dans
-le fichier *404.html*. Nous aurons besoin de créer un fichier `404.html` à côté
-de *hello.html* pour la page d'erreur ; n'hésitez pas à nouveau à utiliser le
-HTML que vous souhaitez ou à défaut utiliser le HTML d'exemple présent dans
+le fichier *404.html*. Nous aurons besoin de créer un fichier `404.html` au même
+endroit que *hello.html* pour la page d'erreur; de nouveau, n'hésitez pas à utiliser le
+HTML que vous souhaitez ou, à défaut, utilisez le HTML d'exemple présent dans
 l'encart 20-8.
 
 <!--
@@ -1024,7 +1024,7 @@ should return the contents of *hello.html*, and any other request, like
 
 Une fois ces modifications appliquées, exécutez à nouveau votre serveur. Les
 requêtes vers *127.0.0.1:7878* devraient retourner le contenu de
-*hello.html*, et toutes les autres requêtes, comme
+*hello.html* et toutes les autres requêtes, telle que
 *127.0.0.1:7878/autre-chose*, devraient retourner le HTML d'erreur présent dans
 *404.html*.
 
@@ -1051,8 +1051,8 @@ dans le flux. La seule différence entre eux sont la ligne de statut et le nom
 du fichier. Rendons le code plus concis en isolant ces différences dans des
 lignes `if` et `else` qui vont assigner les valeurs de la ligne de statut et du
 nom de fichier à des variables ; nous pourrons ensuite utiliser ces variables
-sans avoir à se préoccuper du contexte dans du code qui va lire le fichier et
-écrire la réponse. L'encart 20-9 montre le code qui découle du remplacement des
+sans avoir à nous préoccuper du contexte dans le code qui va lire le fichier et
+écrire la réponse. L'encart 20-9 montre le code résultant après remplacement des
 gros blocs `if` et `else`.
 
 <!--
@@ -1087,7 +1087,7 @@ statement, as discussed in Chapter 18.
 -->
 
 Maintenant que les blocs `if` et `else` retournent uniquement les valeurs
-correctes pour la ligne de statut et le nom du fichier dans un tuple ; nous
+correctes pour la ligne de statut et le nom du fichier dans un tuple, nous
 pouvons utiliser la déstructuration pour assigner ces deux valeurs à
 `ligne_statut` et `nom_fichier` en utilisant un motif dans l'instruction `let`,
 comme nous l'avons vu dans le chapitre 18.
@@ -1116,7 +1116,7 @@ requests with a 404 response.
 -->
 
 Super ! Nous avons maintenant un serveur web simple qui tient dans environ 40
-lignes de code, qui répond à une requête précise par sa page de contenu et
+lignes de code, qui répond à une requête précise par une page de contenu et
 répond à toutes les autres avec une réponse 404.
 
 <!--

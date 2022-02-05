@@ -15,11 +15,11 @@ fn main() {
 
     match msg {
         Message::ChangerCouleur(Couleur::Rvb(r, v, b)) => println!(
-            "Changement des taux de rouge à {}, de vert à {}, et de bleu à {}",
+            "Changement des taux de rouge à {}, de vert à {} et de bleu à {}",
             r, v, b
         ),
         Message::ChangerCouleur(Couleur::Tsv(t, s, v)) => println!(
-            "Changement des taux de teinte à {}, de saturation à {}, et de valeur à {}",
+            "Changement des taux de teinte à {}, de saturation à {} et de valeur à {}",
             t, s, v
         ),
         _ => (),

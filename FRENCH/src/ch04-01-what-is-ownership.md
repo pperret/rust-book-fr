@@ -122,7 +122,7 @@ chaînes de caractères.
 >
 > De nombreux langages ne nécessitent pas de se préoccuper de la
 > pile (*stack*) et du tas (*heap*). Mais dans un langage de programmation
-> système comme Rust, si une donnée soit sur la pile ou sur le tas a une influance
+> système comme Rust, si une donnée soit sur la pile ou sur le tas a une influence
 > sur le comportement du langage et explique pourquoi nous devons faire certains
 > choix. Nous décrirons plus loin dans ce chapitre comment la possession
 > fonctionne vis-à-vis de la pile et du tas, voici donc une brève explication au

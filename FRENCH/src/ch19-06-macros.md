@@ -12,7 +12,7 @@ of *procedural* macros:
 -->
 
 Nous avons déjà utilisé des macros tout au long de ce livre, comme `println!`,
-mais nous n'avons pas exploré en profondeur ce qu'est une macro et comment
+mais nous n'avons pas examiné en profondeur ce qu'est une macro et comment
 elles fonctionnent. Le terme *macro* renvoie à une famille de fonctionnalités de
 Rust : les macros *déclaratives* avec `macro_rules!` et trois types de macros
 *procédurales* :
@@ -83,10 +83,10 @@ called at runtime and a trait needs to be implemented at compile time.
 -->
 
 La signature d'une fonction doit déclarer le nombre et le type de paramètres
-qu'à cette fonction. Les macros, d'un autre côté, peuvent prendre un nombre
-variable de paramètres : nous pouvons faire appel à `println!("salut")` avec un
-seul argument, ou `println!("salut {}", nom)` avec deux arguments. Aussi, les
-macros se déploient avant que le compilateur interprète la signification du
+qu'a cette fonction. Les macros, à l'inverse, peuvent prendre un nombre
+variable de paramètres : nous pouvons appeler `println!("salut")` avec un
+seul paramètre, ou `println!("salut {}", nom)` avec deux paramètres. De plus, les
+macros sont déployées avant que le compilateur n'interprète la signification du
 code, donc une macro peut, par exemple, implémenter un trait sur un type donné.
 Une fonction ne peut pas le faire, car elle est exécutée à l'exécution et un
 trait doit être implémenté à la compilation.
@@ -103,7 +103,7 @@ Le désavantage d'implémenter une macro par rapport à une fonction est que les
 définitions de macros sont plus complexes que les définitions de fonction car
 vous écrivez du code Rust qui écrit lui-même du code Rust. A cause de cette
 approche, les définitions de macro sont généralement plus difficiles à lire,
-comprendre et maintenir que les définitions de fonctions.
+à comprendre et à maintenir que les définitions de fonctions.
 
 <!--
 Another important difference between macros and functions is that you must
@@ -139,12 +139,12 @@ compilation.
 
 La forme la plus utilisée de macro en Rust est la *macro déclarative*. Elles
 sont parfois appelées “macros définies par un exemple”,
-“macros `macro_rules!`”, ou simplement “macros”. Au fond, les macros
+“macros `macro_rules!`” ou simplement “macros”. Fondamentalement, les macros
 déclaratives vous permettent d'écrire quelque chose de similaire à une
 expression `match` de Rust. Comme nous l'avons vu au chapitre 6, les
 expressions `match` sont des structures de contrôle qui prennent en argument
-une expression, compare la valeur qui en résulte avec les motifs, et ensuite
-exécute le code associé au motif qui correspond. Les macros comparent elles
+une expression, comparent la valeur qui en résulte avec les motifs et ensuite
+exécutent le code associé au motif qui correspond. Les macros comparent elles
 aussi une valeur avec des motifs qui sont associés à code particulier : dans
 cette situation, la valeur est littéralement le code source Rust envoyé à la
 macro ; les motifs sont comparés avec la structure de ce code source ; et le
@@ -184,7 +184,7 @@ because we wouldn’t know the number or type of values up front.
 Nous aurions pu aussi utiliser la macro `vec!` pour créer un vecteur de deux
 entiers ou un vecteur de cinq slices de chaînes de caractères. Nous n'aurions
 pas pu utiliser une fonction pour faire la même chose car nous n'aurions pas pu
-connaître le nombre ou le type de valeurs au départ.
+connaître le nombre ou le type des valeurs au départ.
 
 <!--
 Listing 19-28 shows a slightly simplified definition of the `vec!` macro.
@@ -260,7 +260,7 @@ one arm.
 -->
 
 La structure dans le corps de `vec!` ressemble à la structure d'une expression
-`match`. Ici nous avons une branche avec le motif `( $( $x:expr ), * )`, suivi
+`match`. Ici nous avons une branche avec le motif `( $( $x:expr ), * )`, suivie
 par `=>` et le code du bloc associé à ce motif. Si le motif correspond, le bloc
 de code associé sera déployé. Etant donné que c'est le seul motif dans cette
 macro, il n'y a qu'une seule bonne façon d'y correspondre ; tout autre motif va
@@ -275,10 +275,10 @@ Listing 19-28 mean; for the full macro pattern syntax, see [the reference].
 -->
 
 La syntaxe correcte pour un motif dans les définitions de macros est différente
-de la syntaxe de motif que nous avons vu au chapitre 18 car les motifs de
+de la syntaxe de motif que nous avons vue au chapitre 18 car les motifs de
 macros sont comparés à des structures de code Rust plutôt qu'à des valeurs.
 Examinons la signification des éléments du motif de l'encart 19-28 ; pour voir
-l'intégralité de la syntaxe du motif de la macro, rendez-vous
+l'intégralité de la syntaxe du motif de la macro, référez-vous
 [à la documentation][the reference].
 
 <!--
@@ -380,13 +380,13 @@ the online documentation or other resources, such as [“The Little Book of Rust
 Macros”][tlborm] started by Daniel Keep and continued by Lukas Wirth.
 -->
 
-Il subsiste quelques cas marginaux étranges avec `macro_rules!`. Bientôt, Rust
+Il subsiste quelques cas limites étranges avec `macro_rules!`. Bientôt, Rust
 rajoutera un second type de macro déclarative qui fonctionnera de la même
-manière mais qui corrigera ces cas marginaux. Après cette mise à jour,
+manière mais qui corrigera ces cas limites. Après cette mise à jour,
 `macro_rules!` sera dépréciée. En sachant cela, ainsi que le fait que la
-plupart des développeurs Rust vont plus *utiliser* les macros *qu'écrire* des
-macros, nous ne verrons plus à nouveau `macro_rules!` à l'avenir. Pour en
-savoir plus sur l'écriture des macros, consultez la documentation en ligne, ou
+plupart des développeurs Rust vont davantage *utiliser* les macros qu'en *écrire*, 
+nous arrêtons là la discussion sur `macro_rules!`. Pour en
+apprendre plus sur l'écriture des macros, consultez la documentation en ligne ou
 d'autres ressources comme [“The Little Book of Rust Macros”][tlborm], débuté
 par Daniel Keep et continué par Lukas Wirth.
 
@@ -410,9 +410,9 @@ against patterns and replacing the code with other code as declarative macros
 do.
 -->
 
-La seconde forme de macro est la *macro procédurale*, qui se comporte plus
-comme des fonctions (et sont un type de procédure). Les macros procédurales
-prennent du code en entrée, travaille sur ce code, et produit du code en sortie
+La seconde forme de macro est la *macro procédurale*, qui se comporte davantage
+comme une fonction (et est un type de procédure). Les macros procédurales
+prennent du code en entrée, travaillent sur ce code et produisent du code en sortie
 plutôt que de faire des correspondances sur des motifs et remplacer du code
 avec un autre code, comme le font les macros déclaratives.
 
@@ -487,9 +487,9 @@ La fonction qui définit une macro procédurale prend un `TokenStream` en entré
 et produit un `TokenStream` en sortie. Le type `TokenStream` est défini par la
 crate `proc_macro` qui est fournie par Rust et représente une séquence de
 jetons. C'est le cœur de la macro : le code source sur lequel la macro opère
-compose l'entrée `TokenStream`, et le code que la macro produit est une sortie
-`TokenStream`. La fonction a aussi un attribut qui lui est rattaché qui
-renseigne quel genre de macro procédurale nous créons. Nous pouvons avoir
+compose l'entrée `TokenStream`, et le code que la macro produit est la sortie
+`TokenStream`. La fonction a aussi un attribut qui lui est rattaché et qui
+indique quel genre de macro procédurale nous créons. Nous pouvons avoir
 différents types de macros procédurales dans la même crate.
 
 <!--
@@ -561,7 +561,7 @@ first step is to make a new library crate, like this:
 -->
 
 Ce code va afficher `Hello, Macro ! Mon nom est Pancakes !` lorsque vous en
-aurez fini. La première étape est de créer une nouvelle crate de bibliothèque,
+aurez fini. La première étape consiste à créer une nouvelle crate de bibliothèque,
 comme ceci :
 
 <!--
@@ -622,8 +622,8 @@ work.
 -->
 
 Cependant, l'utilisateur doit écrire le bloc d'implémentation pour chacun des
-types qu'il souhaite utiliser avec `hello_macro` ; nous souhaitons leur
-épargner de faire ce travail.
+types qu'il souhaite utiliser avec `hello_macro` ; nous souhaitons lui
+épargner ce travail.
 
 <!--
 Additionally, we can’t yet provide the `hello_macro` function with default
@@ -647,9 +647,9 @@ called `foo_derive`. Let’s start a new crate called `hello_macro_derive` insid
 our `hello_macro` project:
 -->
 
-La prochaine étape est de définir la macro procédurale. A l'heure de l'écriture
-de ces lignes, les macros procédurales au besoin d'être placées dans leur
-propre crate. Cette restriction pourra éventuellement être levée. La convention
+La prochaine étape consiste à définir la macro procédurale. Au moment de l'écriture
+de ces lignes, les macros procédurales ont besoin d'être placées dans leur
+propre crate. Cette restriction sera levée plus tard. La convention
 pour structurer les crates et les crates de macros est la suivante : pour
 une crate `foo`, une crate de macro procédurale personnalisée de dérivée doit
 s'appeler `foo_derive`. Créons une nouvelle crate `hello_macro_derive` au sein
@@ -684,7 +684,7 @@ changeons la définition du trait dans `hello_macro`, nous aurons aussi à
 changer l'implémentation de la macro procédurale dans `hello_macro_derive`. Les
 deux crates vont devoir être publiées séparément, et les développeurs qui vont
 utiliser ces crates vont avoir besoin d'ajouter les deux dépendances et les
-importer dans la portée. Nous pouvons plutôt faire en sorte que la crate
+importer dans la portée. Nous pourrions plutôt faire en sorte que la crate
 `hello_macro` utilise `hello_macro_derive` comme dépendance et ré-exporter le
 code de la macro procédurale. Cependant, la façon dont nous avons structuré le
 projet donne la possibilité aux développeurs d'utiliser `hello_macro` même s'ils
@@ -699,7 +699,7 @@ in a moment, so we need to add them as dependencies. Add the following to the
 
 Nous devons déclarer la crate `hello_macro_derive` comme étant une crate de
 macro procédurale. Nous allons aussi avoir besoin des fonctionnalités des
-crates `syn` et `quote`, comme vous allez de constater bientôt, donc nous
+crates `syn` et `quote`, comme vous allez le constater bientôt, donc nous
 allons les ajouter comme dépendances. Ajoutez ceci dans le fichier *Cargo.toml*
 de `hello_macro_derive` :
 
@@ -751,7 +751,7 @@ fonction `impl_hello_macro`.
 will require in order to process Rust code</span>
 -->
 
-<span class="caption">Encart 19-31 : du code que la plupart des macros
+<span class="caption">Encart 19-31 : du code dont la plupart des macros
 procédurales auront besoin pour travailler avec du code Rust</span>
 
 <!--
@@ -765,8 +765,8 @@ the inner function (`impl_hello_macro` in this case) will be different
 depending on your procedural macro’s purpose.
 -->
 
-Remarquez que nous avons divisé le code dans la fonction `hello_macro_derive`,
-qui est responsable de parcourir le `TokenStream`, et la fonction
+Remarquez que nous avons séparé le code de la fonction `hello_macro_derive`,
+qui est responsable de parcourir le `TokenStream`, de celui de la fonction
 `impl_hello_macro`, qui est responsable de transformer l'arborescence
 syntaxique : cela facilite l'écriture de la macro procédurale. Le code dans la
 fonction englobante (qui est `hello_macro_derive` dans notre cas) sera le même
@@ -782,7 +782,7 @@ dependencies in *Cargo.toml*. The `proc_macro` crate is the compiler’s API tha
 allows us to read and manipulate Rust code from our code.
 -->
 
-Nous avons ajouté trois nouvelles crates : `proc_macro`, [`syn`], et [`quote`].
+Nous avons ajouté trois nouvelles crates : `proc_macro`, [`syn`] et [`quote`].
 La crate `proc_macro` est fournie par Rust, donc nous n'avons pas besoin de
 l'ajouter aux dépendances dans *Cargo.toml*. La crate `proc_macro` fournit une
 API du compilateur qui nous permet de lire et manipuler le code Rust à partir de
@@ -822,9 +822,9 @@ convention most procedural macros follow.
 La fonction `hello_macro_derive` va être appelée lorsqu'un utilisateur de notre
 bibliothèque utilisera `#[derive(HelloMacro)]` sur un type. Cela sera possible
 car nous avons annoté notre fonction `hello_macro_derive` avec
-`proc_macro_derive` et nous avons renseigné le nom, `HelloMacro`, qui
+`proc_macro_derive` et nous avons indiqué le nom, `HelloMacro`, qui
 correspond au nom de notre trait ; c'est la convention que la plupart des
-macros procédurales doivent suivre.
+macros procédurales suivent.
 
 <!--
 The `hello_macro_derive` function first converts the `input` from a
@@ -837,7 +837,7 @@ struct we get from parsing the `struct Pancakes;` string:
 
 La fonction `hello_macro_derive` commence par convertir le `input` qui est un
 `TokenStream` en une structure de données que nous pouvons ensuite interpréter
-et y faire des opérations dessus. C'est là que `syn` rentre en jeu. La fonction
+et sur laquelle faire des opérations. C'est là que `syn` entre en jeu. La fonction
 `parse` de `syn` prend un `TokenStream` et retourne une structure `DeriveInput`
 qui représente le code Rust. L'encart 19-32 montre les parties intéressantes de
 la structure `DeriveInput` que nous obtenons en convertissant la chaîne de
@@ -891,7 +891,7 @@ parsing the code that has the macro’s attribute in Listing 19-30</span>
 -->
 
 <span class="caption">Encart 19-32 : l'instance de `DeriveInput` que nous
-obtenons lorsque nous convertissons le code qui l'attribut de la macro dans
+obtenons lorsque nous analysons le code qui est décoré par l'attribut de la macro dans
 l'encart 19-30</span>
 
 <!--
@@ -924,7 +924,7 @@ they’ll get the extra functionality that we provide in the modified
 
 Bientôt, nous définirons la fonction `impl_hello_macro`, qui nous permettra de
 construire le nouveau code Rust que nous souhaitons injecter. Mais avant de faire
-cela, remarquez que la sortie de notre macro derive est aussi un `TokenStream`.
+cela, remarquez que la sortie de notre macro `derive` est aussi un `TokenStream`.
 Le `TokenStream` retourné est ajouté au code que les utilisateurs de notre
 crate ont écrit, donc lorsqu'ils compilent leur crate, ils récupéreront la
 fonctionnalité additionnelle que nous injectons dans le `TokenStream` modifié.
@@ -957,7 +957,7 @@ into a `DeriveInput` instance, let’s generate the code that implements the
 
 Maintenant que nous avons le code pour transformer le code Rust annoté d'un
 `TokenStream` en une instance de `DeriveInput`, créons le code qui implémente le
-trait `HelloMacro` sur le type annoté, comme l'encart 19-33.
+trait `HelloMacro` sur le type annoté, comme montré dans l'encart 19-33.
 
 <!--
 <span class="filename">Filename: hello_macro_derive/src/lib.rs</span>
@@ -995,7 +995,7 @@ Listing 19-30.
 
 Nous obtenons une instance de structure `Ident` qui contient le nom
 (`identifier`) du type annoté en utilisant `ast.ident`. La structure de l'encart
-19-32 montre ceci lorsque nous exécutons la fonction `impl_hello_macro` sur le
+19-32 montre que lorsque nous exécutons la fonction `impl_hello_macro` sur le
 code de l'encart 19-30, le `ident` que nous obtenons aura le champ `ident` avec
 la valeur `"Pancakes"`. Ainsi, la variable `nom` de l'encart 19-33 contiendra
 une instance de la structure `Ident` qui, une fois affichée, sera la chaîne de
@@ -1010,11 +1010,11 @@ returns a value of the required `TokenStream` type.
 -->
 
 La macro `quote!` nous permet de définir le code Rust que nous souhaitons
-retourner. Le compilateur attend quelque chose de différent en résultat que
-ce qui correspond à l'exécution de `quote!`, donc nous devons le convertir en
-`TokenStream`. Nous faisons ceci en faisant appel à la méthode `into`, qui se
-base sur cette représentation intermédiaire et retourne une valeur attendue,
-comme ici du type `TokenStream`.
+retourner. Le compilateur attend quelque chose de différent que le résultat direct
+produit par l'exécution de `quote!`, donc nous devons convertir ce dernier en
+`TokenStream`. Nous faisons ceci en faisant appel à la méthode `into`, qui utilise 
+cette représentation intermédiaire et retourne une valeur du type attendu,
+le type `TokenStream` ici.
 
 <!--
 The `quote!` macro also provides some very cool templating mechanics: we can
@@ -1024,9 +1024,9 @@ Check out [the `quote` crate’s docs][quote-docs] for a thorough introduction.
 -->
 
 La macro `quote!` fournit aussi quelques mécaniques de gabarit intéressantes :
-nous pouvons entrer `#nom`, et `quote!` va le remplacer avec la valeur dans la
-variable `nom`. Vous pouvez même procéder à quelques répétions de façon
-similaire au fonctionnement des macros classiques. Regardez dans
+nous pouvons entrer `#nom`, et `quote!` va le remplacer avec la valeur présente dans la
+variable `nom`. Vous pouvez même exécuter des répétitions d'une façon
+similaire à celle des macros classiques. Regardez dans
 [la documentation de `quote`][quote-docs] pour une présentation plus détaillée.
 
 <!--
@@ -1087,8 +1087,8 @@ dans votre dossier *projects* en utilisant `cargo new pancakes`. Nous avons
 besoin d'ajouter `hello_macro` et `hello_macro_derive` comme dépendances dans le
 *Cargo.toml* de la crate `pancakes`. Si vous publiez vos versions de
 `hello_macro` et de `hello_macro_derive` sur [crates.io](https://crates.io),
-elles sont des dépendances classiques ; sinon, vous pouvez les renseigner comme
-dépendance locale avec `path` comme ceci :
+ce seront des dépendances classiques ; sinon, vous pouvez les indiquer en tant que
+dépendances locales avec `path` comme ci-après :
 
 <!--
 ```toml
@@ -1110,9 +1110,9 @@ trait implementation.
 
 Renseignez le code l'encart 19-30 dans *src/main.rs*, puis lancez `cargo run` :
 cela devrait afficher `Hello, Macro ! Mon nom est Pancakes !`. L'implémentation
-du trait `HelloMacro` à l'aide de la macro procédurale est injectée sans que la
-crate `pancakes` n'ai besoin de le faire manuellement ; le
-`#[derive(HelloMacro)]` a rajouté automatiquement l'implémentation du trait.
+du trait `HelloMacro` à l'aide de la macro procédurale a été incluse sans que la
+crate `pancakes` n'ait eu besoin de l'implémenter ; le
+`#[derive(HelloMacro)]` a ajouté automatiquement l'implémentation du trait.
 
 <!--
 Next, let’s explore how the other kinds of procedural macros differ from custom
@@ -1120,7 +1120,7 @@ derive macros.
 -->
 
 Maintenant, découvrons comment les autres types de macros procédurales se
-distinguent des macros derive personnalisées.
+distinguent des macros `derive` personnalisées.
 
 <!--
 ### Attribute-like macros
@@ -1137,7 +1137,7 @@ Here’s an example of using an attribute-like macro: say you have an attribute
 named `route` that annotates functions when using a web application framework:
 -->
 
-Les macros qui ressemblent à des attributs ressemblent aux macros derive
+Les macros qui ressemblent à des attributs ressemblent aux macros `derive`
 personnalisées, mais au lieu de générer du code pour l'attribut `derive`, elles
 vous permettent de créer des nouveaux attributs. Elles sont aussi plus
 flexibles : `derive` fonctionne uniquement pour les structures et les
@@ -1199,8 +1199,8 @@ function that generates the code you want!
 -->
 
 Mis à part cela, les macros qui ressemblent à des attributs fonctionnent de la
-même manière que les macros derive personnalisées : vous générez une crate avec
-le type de la crate `proc-macro` et implémentez une fonction qui génèrera le
+même manière que les macros `derive` personnalisées : vous générez une crate avec
+le type de la crate `proc-macro` et vous implémentez une fonction qui génèrera le
 code que vous souhaitez !
 
 <!--
@@ -1226,7 +1226,7 @@ ressemblent à des appels de fonction. De la même manière que les macros
 `macro_rules!`, elles sont plus flexibles que les fonctions ; par exemple, elles
 peuvent prendre une quantité non finie d'arguments. Cependant, les macros
 `macro_rules!` peuvent être définies uniquement en utilisant la syntaxe qui
-ressemble à `match` que nous avons vu dans [une section précédente][decl]. Les
+ressemble à `match` et que nous avons vue dans [une section précédente][decl]. Les
 macros qui ressemblent à des fonctions prennent en paramètre un `TokenStream` et
 leurs définitions manipulent ce `TokenStream` en utilisant du code Rust comme le
 font les deux autres types de macros procédurales. Voici un exemple d'une macro
@@ -1278,7 +1278,7 @@ the tokens that are inside the parentheses and return the code we wanted to
 generate.
 -->
 
-Cette définition ressemble à la signature de la macro derive personnalisée :
+Cette définition ressemble à la signature de la macro `derive` personnalisée :
 nous récupérons les éléments entre parenthèses et retournons le code que nous
 souhaitons générer.
 
@@ -1298,11 +1298,11 @@ solutions.
 -->
 
 Ouah ! Maintenant vous avez quelques fonctionnalités de Rust supplémentaires
-dans votre boite à outils que vous utiliserez probablement rarement, mais vous
-savez maintenant qu'elles vous aideront dans des situations très particulières.
-Nous avons abordé plusieurs sujets complexes afin que vous puissiez les
-reconnaître ainsi que leur syntaxe lorsque vous les rencontrerez dans des
-messages de suggestions dans des erreurs ou dans du code de quelqu'un d'autre.
+dans votre boite à outils que vous n'utiliserez probablement que rarement, mais vous
+savez maintenant qu'elles pourront vous aider dans certaines situations très particulières.
+Nous avons introduits plusieurs sujets complexes afin que vous puissiez les
+reconnaître, ainsi que la syntaxe associée, lorsque vous les rencontrerez dans des
+messages de suggestions dans des erreurs ou dans le code de quelqu'un d'autre.
 Utilisez ce chapitre comme référence pour vous guider vers ces solutions.
 
 <!--

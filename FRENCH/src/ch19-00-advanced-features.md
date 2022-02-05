@@ -17,12 +17,12 @@ make sure you have a grasp of all the features Rust has to offer.
 Jusqu'ici, vous avez appris les fonctionnalités les plus utilisées du langage
 de programmation Rust. Avant de commencer le nouveau projet du chapitre 20, nous
 allons regarder quelques aspects du langage que vous pourriez rencontrer de
-temps à autre. Vous pouvez utiliser ce chapitre comme étant une référence
-lorsque vous rencontrerez des éléments inconnus lorsque vous utiliserez Rust.
+temps à autre. Vous pouvez utiliser ce chapitre comme référence à consulter
+lorsque vous rencontrerez des éléments de Rust qui vous sont inconnus.
 Les fonctionnalités que vous allez découvrir dans ce chapitre sont utiles dans
-de nombreuses situations spécifiques. Même si vous n'allez pas les rencontrer
+des situations très spécifiques. Même si vous n'allez pas les rencontrer
 très souvent, nous voulons nous assurer que vous comprenez bien toutes les
-fonctionnalités qu'offrent Rust.
+fonctionnalités que Rust peut offrir.
 
 <!--
 In this chapter, we’ll cover:
@@ -42,20 +42,20 @@ Dans ce chapitre, nous allons voir :
 -->
 
 * Le *unsafe* de Rust : comment désactiver certaines garanties de Rust et
-  prendre la responsabilité de veiller manuellement à ces garanties
+  prendre la responsabilité de veiller vous-même manuellement à les assurer
 * Les traits avancés : les types associés, les types de paramètres par défaut,
-  la syntaxe entièrement détaillée, les supertraits, et le motif newtype en lien
+  la syntaxe entièrement détaillée, les supertraits et le motif newtype en lien
   avec les traits
 * Les types avancés : en savoir plus sur le motif newtype, les alias de type, le
-  type never, et les types à taille dynamique
-* Les fonctions et fermetures avancées : les pointeurs de fonctions et retourner
+  type never et les types à taille dynamique
+* Les fonctions et fermetures avancées : les pointeurs de fonctions et la façon de retourner
   des fermetures
-* Les macros : une manière de définir du code qui écrit encore plus de code au
+* Les macros : une manière de définir du code qui produit encore plus de code au
   moment de la compilation
 
 <!--
 It’s a panoply of Rust features with something for everyone! Let’s dive in!
 -->
 
-Voilà une pléthore de fonctionnalités de Rust dans lesquelles chacun y trouvera
+Voilà pléthore de fonctionnalités de Rust dans lesquelles chacun y trouvera
 son compte ! Commençons tout de suite !

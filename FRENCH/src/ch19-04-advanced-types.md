@@ -13,7 +13,7 @@ discuss the `!` type and dynamically sized types.
 -->
 
 Le système de type de Rust offre quelques fonctionnalités que nous avons
-mentionné dans ce livre mais que nous n'avons pas encore étudié. Nous allons
+mentionnées dans ce livre mais que nous n'avons pas encore étudiées. Nous allons
 commencer par voir les newtypes en général lorsque nous examinerons pourquoi
 les newtypes sont des types utiles. Ensuite nous nous pencherons sur les alias
 de type, une fonctionnalité qui ressemble aux newtypes mais avec quelques
@@ -45,15 +45,15 @@ values in a newtype. If we wrote a function with a parameter of type
 that function with a value of type `Meters` or a plain `u32`.
 -->
 
-Le motif newtype est utile pour des tâches qui se prolongent en dehors de ce
-que nous avons vu jusqu'à présent, notamment pour faire en sorte statiquement
-que les valeurs ne soient jamais confondues et pour indiquer les unités d'une
+Le motif newtype est utile pour faire des choses qui vont au-delà de ce 
+que nous avons vu jusqu'à présent, notamment pour s'assurer statiquement
+que des valeurs ne soient jamais confondues ou pour spécifier les unités d'une
 valeur. Vous avez vu un exemple d'utilisation des newtypes pour indiquer des
-unités dans l'encart 19-15 : souvenez-vous des structures `Milimetres` et
+unités dans l'encart 19-15 : souvenez-vous des structures `Millimetres` et
 `Metres` qui englobaient des valeurs `u32` dans ces newtypes. Si nous avions
-écrit une fonction avec un paramètre de type `Milimetres`, nous ne pourrions
-pas compiler un programme qui fait accidentellement appel à cette fonction avec
-une valeur du type `Metres` ou un `u32` pur.
+écrit une fonction avec un paramètre de type `Millimetres`, nous ne n'aurions pas 
+pu compiler un programme qui aurait accidentellement fait appel à cette fonction avec
+une valeur du type `Metres` ou `u32` pur.
 
 <!--
 Another use of the newtype pattern is in abstracting away some implementation
@@ -62,10 +62,10 @@ the API of the private inner type if we used the new type directly to restrict
 the available functionality, for example.
 -->
 
-Une autre utilisation du motif newtype est de rendre abstrait certains détails
+Une autre utilisation du motif newtype est de permettre d'abstraire certains détails
 d'implémentation d'un type : le newtype peut exposer une API publique qui est
-différente de l'API du type interne privé si nous avons utilisé directement le
-newtype pour restreindre les fonctionnalités disponibles, par exemple.
+différente de l'API du type interne privé si, par exemple, nous utilisons directement le
+newtype pour restreindre les fonctionnalités disponibles.
 
 <!--
 Newtypes can also hide internal implementation. For example, we could provide a
@@ -82,9 +82,9 @@ section of Chapter 17.
 
 Les newtypes peuvent aussi masquer des implémentations internes. Par exemple,
 nous pouvons fournir un type `Personnes` pour embarquer un
-`HashMap<i32, String>` qui stocke un identifiant d'une personne associé à son
+`HashMap<i32, String>` qui stocke l'identifiant de personnes associés à leur
 nom. Le code qui utilisera `Personnes` ne pourra utiliser que l'API publique
-que nous fournissons, comme une méthode pour ajouter une chaîne de caractères
+que nous fournissons, telle qu'une méthode pour ajouter une chaîne de caractères
 en tant que nom à la collection `Personnes` ; ce code n'aura pas
 besoin de savoir que nous assignons en interne un identifiant `i32` aux noms.
 Le motif newtype est une façon allégée de procéder à de l'encapsulation pour
@@ -95,7 +95,7 @@ chapitre 17][encapsulation-that-hides-implementation-details]<!-- ignore -->.
 ### Creating Type Synonyms with Type Aliases
 -->
 
-### Créer des synonymes de noms avec les alias de type
+### Créer des synonymes de types avec les alias de type
 
 <!--
 Along with the newtype pattern, Rust provides the ability to declare a *type
@@ -126,9 +126,9 @@ values of type `i32`:
 -->
 
 Désormais, l'alias `Kilometres` est un *synonyme* de `i32` ; contrairement aux
-types `Milimetres` et `Metres` que nous avons créé dans l'encart 19-15,
+types `Millimetres` et `Metres` que nous avons créés dans l'encart 19-15,
 `Kilometres` n'est pas un newtype séparé. Les valeurs qui ont le type
-`Kilometre` seront traités comme si elles étaient du type `i32` :
+`Kilometre` seront traitées comme si elles étaient du type `i32` :
 
 <!--
 ```rust
@@ -159,7 +159,7 @@ might have a lengthy type like this:
 -->
 
 L'utilisation principale pour les synonymes de types est de réduire la
-répétition. Par exemple, nous pourrions avoir un type un peu long comme
+répétition. Par exemple, nous pourrions avoir un type un peu long tel que
 celui-ci :
 
 <!--
@@ -178,9 +178,9 @@ over the code can be tiresome and error prone. Imagine having a project full of
 code like that in Listing 19-24.
 -->
 
-L'écriture de ce type un peu long dans des signatures de fonctions et comme
-annotations de types tout au long du code peut être fatigante et faciliter les
-erreurs. Imaginez avoir un projet avec plein de code comme celui dans l'encart
+Ecrire ce type un peu long dans des signatures de fonctions et comme
+annotations de types tout au long du code peut s'avérer pénible et faciliter les
+erreurs. Imaginez que vous ayez un projet avec plein de code ressemblant à celui de l'encart
 19-24.
 
 <!--
@@ -197,7 +197,7 @@ erreurs. Imaginez avoir un projet avec plein de code comme celui dans l'encart
 <span class="caption">Listing 19-24: Using a long type in many places</span>
 -->
 
-<span class="caption">Encart 19-24 : utilisation d'un long type dans de nombreux
+<span class="caption">Encart 19-24 : utilisation d'un type long à écrire dans de nombreux
 endroits</span>
 
 <!--
@@ -207,8 +207,8 @@ can replace all uses of the type with the shorter alias `Thunk`.
 -->
 
 Un alias de type simplifie ce code en réduisant la répétition. Dans l'encart
-19-25, nous avons ajouté un alias `Thunk` pour ce type verbeux et qui peut
-remplacer tous ses cas d'emploi du type avec l'alias `Thunk`, plus court.
+19-25, nous avons ajouté un alias `Thunk` pour ce type verbeux, alias plus court qui peut
+le remplacer partout où il est utilisé.
 
 <!--
 ```rust
@@ -237,7 +237,7 @@ gets stored).
 
 Ce code est plus facile à lire et écrire ! Choisir un nom plus explicite pour
 un alias peut aussi vous aider à communiquer ce que vous voulez faire (*thunk*
-est un terme désignant du code qui peut être évalué plus tard, donc c'est un nom
+est un terme désignant du code qui doit être évalué plus tard, donc c'est un nom
 approprié pour une fermeture qui est stockée).
 
 <!--
@@ -252,12 +252,12 @@ the `Write` trait:
 
 Les alias de type sont couramment utilisés avec le type `Result<T, E>` pour
 réduire la répétition. Regardez le module `std::io` de la bibliothèque standard.
-Les opérations d'entrée/sortie retournent parfois un `Result<T, E>` pour gérer
-les situations lorsque les opérations échouent. Cette bibliothèque a une
+Les opérations d'entrée/sortie retournent souvent un `Result<T, E>` pour gérer
+les situations où les opérations échouent. Cette bibliothèque a une
 structure `std::io::Error` qui représente toutes les erreurs possibles
 d'entrée/sortie. De nombreuses fonctions dans `std::io` vont retourner un
-`Result<T, E>` avec `E` qui est `std::io::Error`, ces fonctions sont dans le
-trait `Write` :
+`Result<T, E>` avec `E` qui est un alias pour `std::io::Error`, comme par exemple 
+ces fonctions sont dans le trait `Write` :
 
 <!--
 ```rust,noplayground
@@ -274,7 +274,7 @@ The `Result<..., Error>` is repeated a lot. As such, `std::io` has this type
 alias declaration:
 -->
 
-Le `Result<..., Error>` est répété plein de fois. Ainsi, `std::io` a cette
+Le `Result<..., Error>` est répété plein de fois. C'est pourquoi `std::io` possède cette
 déclaration d'alias de type :
 
 <!--
@@ -317,16 +317,16 @@ just another `Result<T, E>`, which means we can use any methods that work on
 -->
 
 L'alias de type nous aide sur deux domaines : il permet de faciliter l'écriture
-du code *et* il nous donne une interface uniforme pour tout `std::io`. Comme
+du code *et* il nous donne une interface cohérente pour tout `std::io`. Comme
 c'est un alias, c'est simplement un autre `Result<T, E>`, ce qui signifie que
 nous pouvons utiliser n'importe quelle méthode qui fonctionne avec
-`Result<T, E>`, ainsi que les syntaxes spéciales comme l'opérateur `?`.
+`Result<T, E>`, ainsi que les syntaxes spéciales telle que l'opérateur `?`.
 
 <!--
 ### The Never Type that Never Returns
 -->
 
-### Le type "jamais", qui ne retourna pas de valeur
+### Le type "jamais", qui ne retourne jamais de valeur
 
 <!--
 Rust has a special type named `!` that’s known in type theory lingo as the
@@ -359,7 +359,7 @@ so `bar` can never possibly return.
 Ce code peut être interprété comme “la fonction `bar` qui ne retourne pas de
 valeur”. Les fonctions qui ne retournent pas de valeur s'appellent des
 *fonctions divergentes*. Nous ne pouvons pas créer de valeurs de type `!` donc
-`bar` afin que `bar` ne puisse jamais retourner de valeur.
+`bar` ne pourra jamais retourner de valeur.
 
 <!--
 But what use is a type you can never create values for? Recall the code from
@@ -457,9 +457,9 @@ function that we call on `Option<T>` values to produce a value or panic? Here
 is its definition:
 -->
 
-Ce type "jamais" est aussi utile avec la macro `panic!`. Vous souvenez-vous que
-la fonction `unwrap` que nous appelons sur les valeurs `Option<T>` fournissent
-une valeur, ou paniquent ? Voici sa définition :
+Ce type "jamais" est tout aussi utile avec la macro `panic!`. Vous souvenez-vous que
+la fonction `unwrap` que nous appelons sur les valeurs `Option<T>` fournit
+une valeur ou panique ? Voici sa définition :
 
 <!--
 ```rust,ignore
@@ -529,8 +529,8 @@ Vu qu'il est nécessaire pour Rust de connaître certains détails, comme la
 quantité d'espace à allouer à une valeur d'un type donné, il y a un aspect de
 ce système de type qui peut être déroutant : le concept des *types à taille
 dynamique*. Parfois appelés *DST* (Dynamically Sized Types) ou *types sans
-taille*, ces types nous permettent d'écrire du code qui utilisent des valeurs
-qui ne peuvent être connues uniquement à l'exécution.
+taille*, ces types nous permettent d'écrire du code qui utilise des valeurs
+dont la taille ne peut être connue qu'à l'exécution.
 
 <!--
 Let’s dig into the details of a dynamically sized type called `str`, which
@@ -541,11 +541,11 @@ we can’t create a variable of type `str`, nor can we take an argument of type
 -->
 
 Voyons les détails d'un type à taille dynamique qui s'appelle `str`, que nous
-avons utilisé dans ce livre. Plus précisément `&str`, car `str` en lui-même est
-un DST. Nous ne pouvons connaître la longueur de la chaîne de caractère qu'à
+avons utilisé dans ce livre. Notez bien que ce n'est pas `&str`, mais bien `str` 
+qui est un DST. Nous ne pouvons connaître la longueur de la chaîne de caractère qu'à
 l'exécution, ce qui signifie que nous ne pouvons ni créer une variable de
 type `str`, ni prendre en argument un type `str`. Imaginons le code
-suivant, qui ne devrait pas fonctionner :
+suivant, qui ne fonctionnera pas :
 
 <!--
 ```rust,ignore,does_not_compile
@@ -568,7 +568,7 @@ holding a dynamically sized type.
 
 Rust a besoin de savoir combien de mémoire allouer pour chaque valeur d'un type
 donné, et toutes les valeurs de ce type doivent utiliser la même quantité de
-mémoire. Si Rust nous aurait autorisé à écrire ce code, ces deux valeurs `str`
+mémoire. Si Rust nous avait autorisé à écrire ce code, ces deux valeurs `str`
 devraient occuper la même quantité de mémoire. Mais elles ont deux longueurs
 différentes : `s1` prend 21 octets en mémoire alors que `s2` en a besoin de 15.
 C'est pourquoi il est impossible de créer une variable qui stocke un type à
@@ -600,16 +600,16 @@ dynamically sized types is that we must always put values of dynamically sized
 types behind a pointer of some kind.
 -->
 
-Aussi, bien qu'un `&T` soit une seule valeur qui stocke l'adresse mémoire d'où
-se trouve le `T`, un `&str` représente *deux* valeurs : l'adresse du `str` et sa
+Aussi, bien qu'un `&T` soit une valeur unique qui stocke l'adresse mémoire à laquelle
+se trouve le `T`, un `&str` est constitué de *deux* valeurs : l'adresse du `str` et sa
 longueur. Ainsi, nous pouvons connaître la taille d'une valeur `&str` à la
 compilation : elle vaut deux fois la taille d'un `usize`. Ce faisant, nous
 connaissons toujours la taille d'un `&str`, peu importe la longueur de la chaîne
-de caractères sur laquelle cela pointe. Généralement, c'est comme cela que les
+de caractères sur laquelle il pointe. Généralement, c'est comme cela que les
 types à taille dynamique sont utilisés en Rust : ils ont des métadonnées
 supplémentaires qui stockent la taille des informations dynamiques. La règle
 d'or des types à taille dynamique est que nous devons toujours placer les
-valeurs à types à taille dynamique dans une sorte de pointeur.
+valeurs à types à taille dynamique derrière un pointeur d'une certaine sorte.
 
 <!--
 We can combine `str` with all kinds of pointers: for example, `Box<str>` or
@@ -625,12 +625,12 @@ Trait>` would work too).
 
 Nous pouvons combiner `str` avec n'importe quel type de pointeur : par exemple,
 `Box<str>` ou `Rc<str>`. En fait, vous avez vu cela déjà auparavant mais avec un
-type à taille dynamique : les traits. Chaque trait est un type à taille
+autre type à taille dynamique : les traits. Chaque trait est un type à taille
 dynamique auquel nous pouvons nous référer en utilisant le nom du trait. Dans
 [une section][using-trait-objects-that-allow-for-values-of-different-types]<!--
 ignore --> du chapitre 17, nous avions mentionné que pour utiliser les traits
-comme des objets traits, nous devions les utiliser avec un pointeur, comme le
-`&dyn Trait` ou `Box<dyn Trait>` (`Rc<dyn Trait>` devrait aussi fonctionner).
+comme des objets traits, nous devions les utiliser via un pointeur, tel que 
+`&dyn Trait` ou `Box<dyn Trait>` (`Rc<dyn Trait>` fonctionnera également).
 
 <!--
 To work with DSTs, Rust has a particular trait called the `Sized` trait to
@@ -640,11 +640,11 @@ In addition, Rust implicitly adds a bound on `Sized` to every generic function.
 That is, a generic function definition like this:
 -->
 
-Pour pouvoir travailler avec les DST, Rust a un trait particulier `Sized` pour
+Pour pouvoir travailler avec les DST, Rust dispose d'un trait particulier `Sized` pour
 déterminer si oui ou non la taille d'un type est connue à la compilation. Ce
 trait est automatiquement implémenté sur tout ce qui a une taille connue à la
 compilation. De plus, Rust ajoute implicitement le trait lié `Sized` sur chaque
-fonction générique. Ainsi, la définition d'une fonction générique comme
+fonction générique. Ainsi, la définition d'une fonction générique telle que 
 celle-ci :
 
 <!--
@@ -661,7 +661,7 @@ celle-ci :
 is actually treated as though we had written this:
 -->
 
-... est en réalité traitée comme si nous avions écris ceci :
+... est en réalité traitée comme si nous avions écrit ceci :
 
 <!--
 ```rust,ignore
@@ -679,7 +679,7 @@ compile time. However, you can use the following special syntax to relax this
 restriction:
 -->
 
-Par défaut, les fonctions génériques vont fonctionner uniquement sur les types
+Par défaut, les fonctions génériques vont fonctionner uniquement sur des types
 qui ont une taille connue à la compilation. Cependant, vous pouvez utiliser la
 syntaxe spéciale suivante pour éviter cette restriction :
 
@@ -703,8 +703,8 @@ compile time. The `?Trait` syntax with this meaning is only available for
 Le trait lié `?Sized` signifie que “`T` peut être ou ne pas être `Sized`” et
 cette notation prévaut sur le comportement par défaut qui dit que les types
 génériques doivent avoir une taille connue au moment de la compilation. La
-syntaxe `?Trait` avec ce comportement n'est seulement disponible pour `Sized`,
-et non pas pour les autres traits.
+syntaxe `?Trait` avec ce comportement n'est disponible que pour `Sized`,
+et pour aucun autre trait.
 
 <!--
 Also note that we switched the type of the `t` parameter from `T` to `&T`.
@@ -713,8 +713,8 @@ pointer. In this case, we’ve chosen a reference.
 -->
 
 Remarquez aussi que nous avons changé le type du paramètre `t` de `T` en `&T`.
-Comme ce type pourrait ne pas être un `Sized`, nous devons l'utiliser avec
-quelque chose qui sert de pointeur. Dans ce cas, nous avons choisi une
+Comme ce type pourrait ne pas être un `Sized`, nous devons l'utiliser via
+un pointeur d'une sorte ou d'une autre. Dans ce cas, nous avons choisi une
 référence.
 
 <!--

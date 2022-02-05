@@ -126,8 +126,8 @@
     - [Transformer notre serveur monotâche en serveur multitâches](ch20-02-multithreaded.md)
     - [Arrêt propre et nettoyage](ch20-03-graceful-shutdown-and-cleanup.md)
 
-- [🚧 Annexes](appendix-00.md)
-    - [🚧 A - les mots-clés](appendix-01-keywords.md)
+- [Annexes](appendix-00.md)
+    - [A - les mots-clés](appendix-01-keywords.md)
     - [🚧 B - les opérateurs et les symboles](appendix-02-operators.md)
     - [🚧 C - les traits dérivables](appendix-03-derivable-traits.md)
     - [🚧 D - Des outils de développement utiles](appendix-04-useful-development-tools.md)

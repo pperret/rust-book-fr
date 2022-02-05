@@ -11,9 +11,9 @@ Behavior”][traits-defining-shared-behavior]<!-- ignore -- > section of Chapter
 that you know more about Rust, we can get into the nitty-gritty.
 -->
 
-Nous avons vu les traits dans une section du chapitre 10, mais comme les durées
-de vie, nous n'avons pas abordé certains détails. Maintenant que vous en savez
-plus sur Rust, nous pouvons entrer dans le vif du sujet.
+Nous avons vu les traits dans une section du chapitre 10, mais comme pour les durées
+de vie, nous n'avons pas abordé certains détails plus avancés. Maintenant que vous en savez
+plus sur Rust, nous pouvons attaquer les choses sérieuses.
 
 <!--
 ### Specifying Placeholder Types in Trait Definitions with Associated Types
@@ -45,11 +45,11 @@ than features explained in the rest of the book but more commonly than many of
 the other features discussed in this chapter.
 -->
 
-Nous avions dit que vous aurez rarement besoin de la plupart des
+Nous avions dit que vous auriez rarement besoin de la plupart des
 fonctionnalités avancées de ce chapitre. Les types associés sont un entre-deux :
 ils sont utilisés plus rarement que les fonctionnalités expliquées dans le reste
-de ce livre, mais on les rencontre plus fréquemment que de nombreuses
-fonctionnalités de ce chapitre.
+de ce livre, mais on les rencontre plus fréquemment que la plupart des autres
+fonctionnalités présentées dans ce chapitre.
 
 <!--
 One example of a trait with an associated type is the `Iterator` trait that the
@@ -63,8 +63,8 @@ shown in Listing 19-12.
 
 Un exemple de trait avec un type associé est le trait `Iterator` que fournit la
 bibliothèque standard. Le type associé `Item` permet de renseigner le type des
-valeurs que le type qui implémente le trait `Iterator` parcours. Dans une
-section du chapitre 13, nous avons mentionné que la définition du trait
+valeurs que le type qui implémente le trait `Iterator` parcourt. Dans une
+section du chapitre 13, nous avions mentionné que la définition du trait
 `Iterator` ressemblait à cet encart 19-12.
 
 <!--
@@ -139,7 +139,7 @@ This syntax seems comparable to that of generics. So why not just define the
 `Iterator` trait with generics, as shown in Listing 19-13?
 -->
 
-Cette syntaxe ressemble aux génériques. Donc pourquoi uniquement définir le
+Cette syntaxe ressemble aux génériques. Donc pourquoi ne pas simplement définir le
 trait `Iterator` avec les génériques, comme dans l'encart 19-13 ?
 
 <!--
@@ -171,9 +171,9 @@ the concrete types of the generic type parameters each time. When we use the
 indicate which implementation of `Iterator` we want to use.
 -->
 
-La différence est que lorsque vous utilisez les génériques, comme dans l'encart
-19-13, nous devons annoter les types dans chaque implémentation ; et comme nous
-pouvons aussi implémenter `Iterator<String> for Compteur` sur d'autres types,
+La différence est que lorsque on utilise les génériques, comme dans l'encart
+19-13, on doit annoter les types dans chaque implémentation ; et comme nous
+pouvons aussi implémenter `Iterator<String> for Compteur` ou tout autre type,
 nous pourrions alors avoir plusieurs implémentations de `Iterator` pour
 `Compteur`. Autrement dit, lorsqu'un trait a un paramètre générique, il peut
 être implémenté sur un type plusieurs fois, en changeant à chaque fois le type
@@ -191,11 +191,11 @@ that we call `next` on `Counter`.
 -->
 
 Avec les types associés, nous n'avons pas besoin d'annoter les types car nous
-n'implémentons pas un trait plusieurs fois sur un même type. Dans l'encart
-19-12 qui contient la définition qui utilise les types associés, nous pouvons
-uniquement choisir une seule fois quel sera le type de `Item`, car il ne peut
-y avoir qu'un seul `impl Iterator for Compteur`. Nous n'avons pas eu à préciser
-que nous souhaitions avoir un itérateur de valeurs `u32` à chaque fois que nous
+ne pouvons pas implémenter un trait plusieurs fois sur un même type. Dans l'encart
+19-12 qui contient la définition qui utilise les types associés, nous ne pouvons
+ choisir quel sera le type de `Item` qu'une seule fois, car il ne peut
+y avoir qu'un seul `impl Iterator for Compteur`. Nous n'avons pas à préciser
+que nous souhaitons avoir un itérateur de valeurs `u32` à chaque fois que nous
 faisons appel à `next` sur `Compteur`.
 
 <!--
@@ -379,14 +379,14 @@ sur `Millimetres` avec `Metres` comme étant le `Rhs`, comme dans l'encart
 -->
 
 <span class="caption">Encart 19-15 : implémentation du trait `Add` sur
-`Milimetres` pour pouvoir additionner `Milimetres` à `Metres`</span>
+`Millimetres` pour pouvoir additionner `Millimetres` à `Metres`</span>
 
 <!--
 To add `Millimeters` and `Meters`, we specify `impl Add<Meters>` to set the
 value of the `Rhs` type parameter instead of using the default of `Self`.
 -->
 
-Pour additionner `Milimetres` et `Metres`, nous renseignons
+Pour additionner `Millimetres` et `Metres`, nous renseignons
 `impl Add<Metres>` pour régler la valeur du paramètre de type `Rhs` au lieu
 d'utiliser la valeur par défaut `Self`.
 
@@ -447,7 +447,7 @@ on one type. It’s also possible to implement a method directly on the type wit
 the same name as methods from traits.
 -->
 
-Il n'y a rien en Rust qui empêche un trait d'avoir une méthode avec le même
+Il n'y a rien en Rust qui empêche un trait d'avoir une méthode portant le même
 nom qu'une autre méthode d'un autre trait, ni ne vous empêche d'implémenter
 ces deux traits sur un même type. Il est aussi possible
 d'implémenter directement une méthode avec le même nom que celle présente dans
@@ -462,11 +462,11 @@ on it. Each `fly` method does something different.
 -->
 
 Lorsque nous faisons appel à des méthodes qui ont un conflit de nom, vous devez
-préciser à Rust précisément celui que vous souhaitez utiliser. Imaginons le
+préciser à Rust précisément celle que vous souhaitez utiliser. Imaginons le
 code dans l'encart 19-16 dans lequel nous avons défini deux traits, `Pilote` et
-`Magicien`, qui ont tous les deux une méthode `voler`. Lorsque nous
-implémentons les deux traits sur un type `Humain` qui a déjà une méthode
-`voler` qui lui a été implémenté. Chaque méthode `voler` fait quelque chose de
+`Magicien`, qui ont tous les deux une méthode `voler`. Nous
+implémentons ensuite ces deux traits sur un type `Humain` qui a déjà lui-aussi une méthode
+`voler` qui lui a été implémentée. Chaque méthode `voler` fait quelque chose de
 différent.
 
 <!--
@@ -568,8 +568,7 @@ nous souhaitons utiliser. L'encart 19-18 montre cette syntaxe.
 want to call</span>
 -->
 
-<span class="caption">Encart 19-18 : préciser quelle méthode `voler` de quel
-trait nous souhaitons utiliser</span>
+<span class="caption">Encart 19-18 : préciser de quel trait nous souhaitons utiliser la méthode `voler`</span>
 
 <!--
 Specifying the trait name before the method name clarifies to Rust which
@@ -607,9 +606,9 @@ both implement one *trait*, Rust could figure out which implementation of a
 trait to use based on the type of `self`.
 -->
 
-Comme la méthode `voler` prends un paramètre `self`, si nous avions deux
+Comme la méthode `voler` prend un paramètre `self`, si nous avions deux
 *types* qui implémentaient chacun un des deux *traits*, Rust pourrait en
-déduire quelle implémentation de quel trait à utiliser en fonction du type
+déduire quelle implémentation de quel trait utiliser en fonction du type
 de `self`.
 
 <!--
@@ -625,8 +624,8 @@ Cependant, les fonctions associées qui font partie des traits n'ont pas de
 paramètre `self`. Lorsque deux types de la même portée implémentent ce trait,
 Rust ne peut pas en déduire quel type vous sous-entendez jusqu'à ce que vous
 utilisiez la *syntaxe totalement définie*. Par exemple, le trait `Animal` de
-l'encart 19-19 a une fonction associée `nom_bebe`, l'implémentation de
-`Animal` sur la structure `Chien`, et la fonction associée `nom_bebe` définie
+l'encart 19-19 a une fonction associée `nom_bebe` qui est implémentée à la fois
+par l'implémentation d'`Animal` sur la structure `Chien` et par la fonction associée `nom_bebe` définie
 directement sur `Chien`.
 
 <!--
@@ -664,7 +663,7 @@ is expressed in the implementation of the `Animal` trait on `Dog` in the
 `baby_name` function associated with the `Animal` trait.
 -->
 
-Ce code a été conçu pour un refuge à animaux qui souhaite que tous leurs chiots
+Ce code a été conçu pour un refuge pour animaux qui souhaite que tous leurs chiots
 soient nommés Spot, ce qui est implémenté dans la fonction associée `nom_bebe`
 de `Chien`. Le type `Chien` implémente lui aussi le trait `Animal`, qui décrit
 les caractéristiques que tous les animaux doivent avoir. Les bébés chiens
@@ -702,7 +701,7 @@ Listing 19-20, we’ll get a compilation error.
 Ce résultat n'est pas celui que nous souhaitons. Nous voulons appeler la
 fonction `nom_bebe` qui fait partie du trait `Animal` que nous avons implémenté
 sur `Chien` afin que le code affiche `Un bébé chien s'appelle un chiot`. La
-technique pour préciser le nom du trait que nous avons utilisé ne va pas nous
+technique pour préciser le nom du trait que nous avons utilisée précédemment ne va pas nous
 aider ici ; si nous changeons le `main` par le code de l'encart 19-20, nous
 allons avoir une erreur de compilation.
 
@@ -786,7 +785,7 @@ implemented on `Dog`</span>
 
 <span class="caption">Encart 19-21 : utilisation de la syntaxe totalement
 définie pour préciser que nous souhaitons appeler la fonction `nom_bebe` du
-trait `Animal` comme il est implémenté sur `Chien`</span>
+trait `Animal` tel qu'il est implémenté sur `Chien`</span>
 
 <!--
 We’re providing Rust with a type annotation within the angle brackets, which
@@ -797,7 +796,7 @@ implemented on `Dog` by saying that we want to treat the `Dog` type as an
 
 Nous avons donné à Rust une annotation de type entre des chevrons, ce qui
 indique que nous souhaitons appeler la méthode `nom_bebe` du trait `Animal`
-comme elle est implémentée sur `Chien` en indiquant que nous souhaitons traiter
+telle qu'elle est implémentée sur `Chien` en indiquant que nous souhaitons traiter
 le type `Chien` comme étant un `Animal` pour cet appel de fonction. Ce code va
 désormais afficher ce que nous souhaitons :
 
@@ -840,7 +839,7 @@ implementation you want to call.
 Pour les fonctions associées, il n'y a pas de `destinataire` : il n'y a qu'une
 liste d'arguments. Vous pouvez utiliser la syntaxe totalement définie à
 n'importe quel endroit où vous faites appel à des fonctions ou des méthodes.
-Cependant, vous pouvez éviter de renseigner n'importe quelle partie de cette
+Cependant, vous avez la possibilité de ne pas renseigner toute partie de cette
 syntaxe que Rust peut déduire à partir d'autres informations présentes dans le
 code. Vous avez seulement besoin d'utiliser cette syntaxe plus verbeuse dans
 les cas où il y a plusieurs implémentations qui utilisent le même nom et que
@@ -859,8 +858,8 @@ this case, you need to rely on the dependent trait also being implemented.
 The trait you rely on is a *supertrait* of the trait you’re implementing.
 -->
 
-Des fois, vous pourriez avoir besoin d'un trait pour utiliser une autre
-fonctionnalité d'un trait. Dans ce cas, vous devez pouvoir compter sur le fait
+Des fois, vous pourriez avoir besoin d'un trait pour utiliser la 
+fonctionnalité d'un autre trait. Dans ce cas, vous devez pouvoir compter sur le fait
 que le trait dépendant soit bien implémenté. Le trait sur lequel vous comptez
 est alors un *supertrait* du trait que vous implémentez.
 
@@ -873,8 +872,8 @@ call `outline_print` on a `Point` instance that has `1` for `x` and `3` for
 -->
 
 Par exemple, imaginons que nous souhaitons créer un trait `OutlinePrint` qui
-offre une méthode `outline_print` affiche une valeur entourée d'astérisques.
-Pour une structure `Point` qui implémente `Display` pour afficher `(x, y)`,
+offre une méthode `outline_print` affichant une valeur entourée d'astérisques.
+Ainsi, pour une structure `Point` qui implémente `Display` pour afficher `(x, y)`,
 lorsque nous faisons appel à `outline_print` sur une instance de `Point` qui a
 `1` pour valeur de `x` et `3` pour `y`, cela devrait afficher ceci :
 
@@ -906,8 +905,8 @@ the trait. Listing 19-22 shows an implementation of the `OutlinePrint` trait.
 -->
 
 Dans l'implémentation de `outline_print`, nous souhaitons utiliser la
-fonctionnalité du trait `Display`. Toutefois, nous devons renseigner que le
-trait `OutlinePrint` fonctionnera uniquement pour les types qui auront aussi
+fonctionnalité du trait `Display`. De ce fait, nous devons indiquer que le
+trait `OutlinePrint` fonctionnera uniquement pour les types qui auront également
 implémenté `Display` et qui fourniront la fonctionnalité dont a besoin
 `OutlinePrint`. Nous pouvons faire ceci dans la définition du trait en
 renseignant `OutlinePrint: Display`. Cette technique ressemble à l'ajout d'un
@@ -951,7 +950,7 @@ Comme nous avons précisé que `OutlinePrint` nécessite le trait `Display`, nou
 pouvons utiliser la fonction `to_string` qui est automatiquement implémentée
 pour n'importe quel type qui implémente `Display`. Si nous avions essayé
 d'utiliser `to_string` sans ajouter un double-point et en renseignant le trait
-`Display` après le nom du trait, nous obtiendrons alors une erreur qui nous
+`Display` après le nom du trait, nous aurions alors obtenu une erreur qui nous
 informerait qu'il n'y a pas de méthode `to_string` pour le type `&Self` dans la
 portée courante.
 
@@ -961,7 +960,7 @@ doesn’t implement `Display`, such as the `Point` struct:
 -->
 
 Voyons ce qui ce passe lorsque nous essayons d'implémenter `OutlinePrint` sur
-un type qui n'implémente pas `Display`, comme la structure `Point` :
+un type qui n'implémente pas `Display`, comme c'est le cas de la structure `Point` :
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -1026,7 +1025,7 @@ successfully, and we can call `outline_print` on a `Point` instance to display
 it within an outline of asterisks.
 -->
 
-Suite à cela, l'implémentation du trait `OutlinePrint` sur `Point` va se
+Ceci fait, l'implémentation du trait `OutlinePrint` sur `Point` va se
 compiler avec succès, et nous pourrons appeler `outline_print` sur une instance
 de `Point` pour l'afficher dans le cadre constitué d'astérisques.
 
@@ -1064,7 +1063,7 @@ pour le type sur lequel nous souhaitons implémenter le trait. Ensuite, le type
 enveloppant est local à notre crate, et nous pouvons lui implémenter un trait.
 *Newtype* est un terme qui provient du langage de programmation Haskell. Il n'y
 a pas de conséquence sur les performance à l'exécution pour l'utilisation de ce
-motif, et le type enveloppant est résolu à la compilation.
+motif, ce qui signifie que le type enveloppant est résolu à la compilation.
 
 <!--
 As an example, let’s say we want to implement `Display` on `Vec<T>`, which the
@@ -1075,7 +1074,7 @@ that holds an instance of `Vec<T>`; then we can implement `Display` on
 -->
 
 Comme exemple, disons que nous souhaitons implémenter `Display` sur `Vec<T>`, ce
-que la règle de l'orphelin nous empêche directement de faire car le trait
+que la règle de l'orphelin nous empêche de faire directement car le trait
 `Display` et le type `Vec<T>` sont définis en dehors de notre crate. Nous
 pouvons construire une structure `Enveloppe` qui possède une instance de
 `Vec<T>` ; et ensuite nous pouvons implémenter `Display` sur `Enveloppe` et
@@ -1133,15 +1132,15 @@ behavior—we would have to implement just the methods we do want manually.
 Le désavantage d'utiliser cette technique est que `Enveloppe` est un nouveau
 type, donc il n'implémente pas toutes les méthodes de la valeur qu'il possède.
 Il faudrait implémenter toutes les méthodes de `Vec<T>` directement sur
-`Enveloppe` afin que les méthodes délèguent à `self.0`, ce qui nous permettrait
-d'utiliser `Enveloppe` exactement comme un `Vec<T>`. Si nous voulions que le
-nouveau type ait toutes les méthodes du type qu'il possède, l'implémentation du
-trait `Deref` (que nous avons vu dans
+`Enveloppe` de façon à ce qu'elles délèguent aux méthodes correspondantes de `self.0`, 
+ce qui nous permettrait d'utiliser `Enveloppe` exactement comme un `Vec<T>`. Si 
+nous voulions que le nouveau type ait toutes les méthodes du type qu'il possède, 
+l'implémentation du trait `Deref` (que nous avons vu dans
 [une section du chapitre 15][smart-pointer-deref]<!-- ignore -->) sur
 `Enveloppe` pour retourner le type interne pourrait être une solution. Si nous
 ne souhaitons pas que le type `Enveloppe` ait toutes les méthodes du type qu'il
 possède (par exemple, pour limiter les fonctionnalités du type `Enveloppe`),
-nous devrions implémenter manuellement que les méthodes que nous souhaitons.
+nous n'avons qu'à implémenter manuellement que les méthodes que nous souhaitons.
 
 <!--
 Now you know how the newtype pattern is used in relation to traits; it’s also a

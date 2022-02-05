@@ -3,5 +3,5 @@ $ cargo run
     Finished dev [unoptimized + debuginfo] target(s) in 0.46s
      Running `target/debug/traits-example`
 Ici le capitaine qui vous parle.
-Décolage !
+Décollage !
 *agite frénétiquement ses bras*

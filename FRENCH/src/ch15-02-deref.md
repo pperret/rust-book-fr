@@ -179,7 +179,7 @@ montré dans l'encart 15-7 :
 déréférencement sur un `Box<i32>`</span>
 
 <!--
-The only difference between Listing 15-7 and Listing 15-6 is that here we set
+The main difference between Listing 15-7 and Listing 15-6 is that here we set
 `y` to be an instance of a box pointing to a copied value of `x` rather than a
 reference pointing to the value of `x`. In the last assertion, we can use the
 dereference operator to follow the box’s pointer in the same way that we did
@@ -187,14 +187,14 @@ when `y` was a reference. Next, we’ll explore what is special about `Box<T>`
 that enables us to use the dereference operator by defining our own box type.
 -->
 
-La seule différence entre l'encart 15-7 et l'encart 15-6 est qu'ici nous avons
-fait en sorte que `y` soit une instance de boite qui pointe sur une copie de la
-valeur de `x` plutôt qu'avoir une référence vers la valeur de `x`. Dans la
-dernière assertion, nous pouvons utiliser l'opérateur de déréférencement pour
-suivre le pointeur de la boite de la même manière que nous l'avons fait lorsque
-`y` était une référence. Maintenant, nous allons regarder ce qu'il y a de si
-spécial dans `Box<T>` qui nous permet d'utiliser l'opérateur de déréférencement
-en définissant notre propre type de boite.
+La principale différence entre l'encart 15-7 et l'encart 15-6 est qu'ici nous
+avons fait en sorte que `y` soit une instance de boite qui pointe sur une copie
+de la valeur de `x` plutôt qu'avoir une référence vers la valeur de `x`. Dans
+la dernière assertion, nous pouvons utiliser l'opérateur de déréférencement
+pour suivre le pointeur de la boite de la même manière que nous l'avons fait
+lorsque `y` était une référence. Maintenant, nous allons regarder ce qu'il y a
+de si spécial dans `Box<T>` qui nous permet d'utiliser l'opérateur de
+déréférencement en définissant notre propre type de boite.
 
 <!--
 ### Defining Our Own Smart Pointer
@@ -329,19 +329,21 @@ déréférencement avec l'opérateur `*`, nous devons implémenter le trait `Der
 ### Considérer un type comme une référence en implémentant le trait `Deref`
 
 <!--
-As discussed in Chapter 10, to implement a trait, we need to provide
+As discussed in the [“Implementing a Trait on a Type”][impl-trait]<!-- ignore
+-- > section of Chapter 10, to implement a trait, we need to provide
 implementations for the trait’s required methods. The `Deref` trait, provided
 by the standard library, requires us to implement one method named `deref` that
 borrows `self` and returns a reference to the inner data. Listing 15-10
 contains an implementation of `Deref` to add to the definition of `MyBox`:
 -->
 
-Comme nous l'avons vu dans le chapitre 10, pour implémenter un trait, nous
-devons fournir les implémentations des méthodes nécessaires pour ce trait. Le
-trait `Deref`, fourni par la bibliothèque standard, nécessite que nous
-implémentions une méthode `deref` qui prend possession de `self` et retourne une
-référence vers la donnée interne. L'encart 15-10 contient une implémentation de
-`Deref` à ajouter à la définition de `MaBoite` :
+Comme nous l'avons vu dans une section du [chapitre 10][impl-trait]<!-- ignore
+-->, pour implémenter un trait, nous devons fournir les implémentations des
+méthodes nécessaires pour ce trait. Le trait `Deref`, fourni par la
+bibliothèque standard, nécessite que nous implémentions une méthode `deref` qui
+prend possession de `self` et retourne une référence vers la donnée interne.
+L'encart 15-10 contient une implémentation de `Deref` à ajouter à la définition
+de `MaBoite` :
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -380,15 +382,20 @@ moment ; nous les verrons plus en détail au chapitre 19.
 
 <!--
 We fill in the body of the `deref` method with `&self.0` so `deref` returns a
-reference to the value we want to access with the `*` operator. The `main`
-function in Listing 15-9 that calls `*` on the `MyBox<T>` value now compiles,
-and the assertions pass!
+reference to the value we want to access with the `*` operator. Recall from the
+[“Using Tuple Structs without Named Fields to Create Different
+Types”][tuple-structs]<!-- ignore -- > section of Chapter 5 that `.0` accesses
+the first value in a tuple struct. The `main` function in Listing 15-9 that
+calls `*` on the `MyBox<T>` value now compiles, and the assertions pass!
 -->
 
 Nous renseignons le corps de la méthode `deref` avec `&self.0` afin que `deref`
 retourne une référence vers la valeur que nous souhaitons accéder avec
-l'opérateur `*`. La fonction `main` de l'encart 15-9 qui appelle `*` sur la
-valeur `MaBoite<T>` se compile désormais, et le `assert` réussit aussi !
+l'opérateur `*`. Rappellez-vous de la section du
+[chapitre 5][tuple-structs]<!-- ignore --> où nous avons appris que le `.0`
+accède à la première valeur d'une structure tuple. La fonction `main` de
+l'encart 15-9 qui appelle `*` sur la valeur `MaBoite<T>` se compile désormais,
+et le `assert` réussit aussi !
 
 <!--
 Without the `Deref` trait, the compiler can only dereference `&` references.
@@ -741,3 +748,11 @@ une référence mutable nécessite que la référence immuable initiale soit la
 seule référence immuable vers cette donnée, mais les règles d'emprunt ne
 garantissent pas cela. Rust ne peut donc pas déduire que la conversion d'une
 référence immuable vers une référence mutable est possible.
+
+<!--
+[impl-trait]: ch10-02-traits.html#implementing-a-trait-on-a-type
+[tuple-structs]: ch05-01-defining-structs.html#using-tuple-structs-without-named-fields-to-create-different-types
+-->
+
+[impl-trait]: ch10-02-traits.html
+[tuple-structs]: ch05-01-defining-structs.html

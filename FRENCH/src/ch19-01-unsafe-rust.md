@@ -12,9 +12,9 @@ and works just like regular Rust, but gives us extra superpowers.
 -->
 
 Tout le code Rust que nous avons abordé jusqu'à présent a bénéficié des
-garanties de sécurité de la mémoire, vérifiées à la compilation. Cependant, Rust
-a un second langage caché en son sein qui n'applique pas ces vérifications
-pour la sécurité de la mémoire : il s'appelle le *Rust non sécurisé* et
+garanties de sécurité de la mémoire, vérifiées à la compilation. Cependant Rust
+possède un second langage caché en son sein qui n'applique pas ces vérifications
+de sécurité de la mémoire : il s'appelle le *Rust non sécurisé* et
 fonctionne comme le Rust habituel, mais fournit quelques super-pouvoirs
 supplémentaires.
 
@@ -36,11 +36,11 @@ garanties, il vaut mieux rejeter quelques programmes valides plutôt que
 d'accepter quelques programmes invalides. Bien que le code *puisse* être
 correct, si le compilateur Rust n'a pas assez d'information pour être sûr, il
 va refuser ce code. Dans ce cas, vous pouvez utiliser du code non sécurisé pour
-dire au compilateur “fais-moi confiance, je sais ce que je fait”. La
-contrepartie pour cela est que vous l'utilisez à vos risques et périls : si
+dire au compilateur “fais-moi confiance, je sais ce que je fait”. Le prix à
+payer pour cela est que vous l'utilisez à vos risques et périls : si
 vous écrivez du code non sécurisé de manière incorrecte, des problèmes liés à
-la sécurité de la mémoire peuvent se produire, comme le déréférencement d'un
-pointeur vide par exemple.
+la sécurité de la mémoire peuvent se produire, tel qu'un déréférencement d'un
+pointeur vide.
 
 <!--
 Another reason Rust has an unsafe alter ego is that the underlying computer
@@ -54,8 +54,8 @@ Rust and how to do it.
 
 Une autre raison pour laquelle Rust embarque son alter-ego non sécurisé est que
 le matériel des ordinateurs sur lequel il repose n'est pas sécurisé par essence.
-Si Rust ne vous laisse pas procéder à des opérations non sécurisées, vous ne
-pourrez pas faire certaines choses. Rust doit pouvoir vous permettre de
+Si Rust ne vous laissait pas procéder à des opérations non sécurisées, vous ne
+pourriez pas faire certaines choses. Rust doit pouvoir vous permettre de
 développer du code bas-niveau, comme pouvoir interagir directement avec le
 système d'exploitation ou même écrire votre propre système d'exploitation.
 Pouvoir travailler avec des systèmes bas-niveau est un des objectifs du langage.
@@ -77,7 +77,7 @@ the ability to:
 Pour pouvoir utiliser le Rust non sécurisé, il faut utiliser le mot-clé `unsafe`
 et ensuite créer un nouveau bloc qui contient le code non sécurisé. Vous pouvez
 faire cinq actions en Rust non sécurisé, qui s'appellent *les super-pouvoirs du
-non sécurisé*, que vous ne pouvez pas faire en Rust sécurisé. Ces super-pouvoirs
+non sécurisé*, actions que vous ne pourriez pas faire en Rust sécurisé. Ces super-pouvoirs
 permettent de :
 
 <!--
@@ -106,8 +106,8 @@ Il est important de comprendre que `unsafe` ne désactive pas le vérificateur
 d'emprunt et ne désactive pas les autres vérifications de sécurité de Rust : si
 vous utilisez une référence dans du code non sécurisé, elle sera toujours
 vérifiée. Le mot-clé `unsafe` vous donne seulement accès à ces cinq
-fonctionnalités qui ne sont alors pas vérifiées par le compilateur pour veiller
-à la sécurité de la mémoire. Vous conservez un certain niveau de sécurité à
+fonctionnalités qui ne sont alors pas vérifiées par le compilateur en vue de veiller
+à la sécurité de la mémoire. Vous conservez donc un certain niveau de sécurité à
 l'intérieur d'un bloc `unsafe`.
 
 <!--
@@ -118,8 +118,8 @@ access memory in a valid way.
 -->
 
 De plus, `unsafe` ne signifie pas que le code à l'intérieur du bloc est
-obligatoirement dangereux ou qu'il va forcément avoir des problèmes de sécurité
-mémoire : le but étant qu'en tant que développeur, vous vous assurez que le code
+obligatoirement dangereux ou qu'il va forcément présenter des problèmes de sécurité
+mémoire : l'idée étant qu'en tant que développeur, vous vous assuriez que le code
 à l'intérieur d'un bloc `unsafe` va accéder correctement à la mémoire.
 
 <!--
@@ -130,11 +130,11 @@ any errors related to memory safety must be within an `unsafe` block. Keep
 bugs.
 -->
 
-Personne n'est parfait, les erreurs arrivent, et en nécessitant que ces cinq
-opérations non sécurisés se trouvent dans des blocs marqués d'un `unsafe`, vous
-saurez que des erreurs liées à la sécurité de la mémoire se trouveront dans un
-bloc `unsafe`. Essayez de minimiser la taille des blocs `unsafe` ; vous ne le
-regretterez pas lorsque vous diagnostiquerez des bogues de mémoire.
+Personne n'est parfait, les erreurs arrivent, et en imposant que ces cinq
+opérations non sécurisés se trouvent dans des blocs marqués d'un `unsafe`, Rust vous
+permet de savoir que ces éventuelles erreurs liées à la sécurité de la mémoire se trouveront dans un
+bloc `unsafe`. Vous devez donc essayer de minimiser la taille des blocs `unsafe` ; vous ne le
+regretterez pas lorsque vous rechercherez des bogues de mémoire.
 
 <!--
 To isolate unsafe code as much as possible, it’s best to enclose unsafe code
@@ -148,22 +148,22 @@ abstraction is safe.
 -->
 
 Pour isoler autant que possible le code non sécurisé, il vaut mieux intégrer du
-code non sécurisé dans une abstraction et fournir ainsi une API sécurisée, ce
-que nous verrons plus tard dans ce chapitre lorsque nous examinerons les
+code non sécurisé dans une abstraction et fournir ainsi une API sécurisée, comme
+nous le verrons plus tard dans ce chapitre lorsque nous examinerons les
 fonctions et méthodes non sécurisées. Certaines parties de la bibliothèque
-standard sont implémentés comme étant des abstractions sécurisées et basées sur
-du code non sécurisé qui a été audité. Envelopper du code non sécurisé dans une
-abstraction sécurisée évite l'utilisation de `unsafe` de se propager dans des
+standard sont implémentées comme étant des abstractions sécurisées et basées sur
+du code non sécurisé qui a été audité. Encapsuler du code non sécurisé dans une
+abstraction sécurisée évite que l'utilisation de `unsafe` ne se propage dans des
 endroits où vous ou vos utilisateurs souhaiteraient éviter d'utiliser les
-fonctionnalités du code `unsafe`, car utiliser une abstraction sécurisée doit
-être sûre.
+fonctionnalités du code `unsafe`, car au final utiliser une abstraction sécurisée doit
+rester sûr.
 
 <!--
 Let’s look at each of the five unsafe superpowers in turn. We’ll also look at
 some abstractions that provide a safe interface to unsafe code.
 -->
 
-Analysons chacun à leur tour les cinq super-pouvoirs. Nous allons aussi
+Analysons ces cinq super-pouvoirs à tour de rôle. Nous allons aussi
 découvrir quelques abstractions qui fournissent une interface sécurisée pour
 faire fonctionner du code non sécurisé.
 
@@ -187,8 +187,8 @@ after being dereferenced.
 Au chapitre 4, dans la section
 [“Les références pendouillantes”][dangling-references]<!-- ignore -->, nous
 avions mentionné que le compilateur s'assure que les références sont toujours
-valides. Le Rust non sécurisé a deux nouveaux types qui s'appellent les
-*pointeurs brut* qui ressemblent aux références. Comme les références, les
+valides. Le Rust non sécurisé offre deux nouveaux types qui s'appellent les
+*pointeurs brut* et qui ressemblent aux références. Comme les références, les
 pointeurs bruts peuvent être immuables ou mutables et s'écrivent respectivement
 `*const T` et `*mut T`. L'astérisque n'est pas l'opérateur de déréférencement ;
 il fait partie du nom du type. Dans un contexte de pointeur brut, *immuable*
@@ -199,7 +199,7 @@ déréférencé.
 Different from references and smart pointers, raw pointers:
 -->
 
-Par rapport aux références et les pointeurs intelligents, les pointeurs
+Par rapport aux références et aux pointeurs intelligents, les pointeurs
 bruts peuvent :
 
 <!--
@@ -213,8 +213,8 @@ bruts peuvent :
 * ignorer les règles d'emprunt en ayant plusieurs pointeurs tant immuables que
   mutables ou en ayant plusieurs pointeurs mutables qui pointent vers le même
   endroit.
-* ne pas être obligé de pointer sur un emplacement mémoire valide
-* être autorisé à avoir la valeur nulle
+* ne pas être obligés de pointer sur un emplacement mémoire valide
+* être autorisés à avoir la valeur nulle
 * ne pas implémenter de fonctionnalité de nettoyage automatique
 
 <!--
@@ -276,7 +276,7 @@ Nous avons créé des pointeurs bruts en utilisant `as` pour transformer les
 références immuables et mutables en leur type de pointeur brut correspondant.
 Comme nous les avons créés directement à partir de références qui sont garanties
 d'être valides, nous savons que ces pointeurs bruts seront valides, mais nous ne
-pouvons pas faire cette déduction sur tous les pointeurs bruts.
+pouvons pas faire cette supposition sur tous les pointeurs bruts.
 
 <!--
 Next, we’ll create a raw pointer whose validity we can’t be so certain of.
@@ -290,8 +290,9 @@ Usually, there is no good reason to write code like this, but it is possible.
 Ensuite, nous allons créer un pointeur brut dont la validité n'est pas
 certaine. L'encart 19-2 montre comment créer un pointeur brut vers un
 emplacement arbitraire de la mémoire. Essayer d'utiliser de la mémoire
-arbitraire est incertain : il peut y avoir des données à cette adresse, ou il
-peut ne pas y en avoir, le programme peut déboucher sur une erreur de
+arbitraire va engendrer un comportement incertain : il peut y avoir des données à cette adresse comme il
+peut ne pas y en avoir, le compilateur pourrait optimiser le code de tel sorte qu'aucun accès mémoire n'aura lieu
+ou bien le programme pourrait déclencher une erreur de
 segmentation. Habituellement, il n'y a pas de bonne raison d'écrire du code
 comme celui-ci, mais c'est possible.
 
@@ -349,7 +350,7 @@ it points at that we might end up dealing with an invalid value.
 -->
 
 La création de pointeur ne pose pas de problèmes ; c'est seulement lorsque nous
-essayons d'accéder aux valeurs sur lesquelles elles pointent qu'on risque
+essayons d'accéder aux valeurs sur lesquelles ils pointent qu'on risque
 d'obtenir une valeur invalide.
 
 <!--
@@ -384,11 +385,11 @@ abstraction that uses unsafe code.
 -->
 
 Avec tous ces dangers, pourquoi vous risquer à utiliser les pointeurs bruts ?
-Une des utilisations majeures est lorsque nous nous interfacons avec du code
+Une des utilisations principale consiste à s'interfacer avec du code
 C, comme vous allez le découvrir dans la section suivante. Une autre
-utilisation est lorsque nous créons une abstraction sécurisée que le
-vérificateur d'emprunt ne comprends pas. Nous allons découvrir les fonctions
-non sécurisées et ensuite voir un exemple d'une abstraction sécurisée qui
+utilisation est de nous permettre de créer une abstraction sécurisée que le
+vérificateur d'emprunt ne comprend pas. Nous allons découvrir les fonctions
+non sécurisées puis voir un exemple d'une abstraction sécurisée qui
 utilise du code non sécurisé.
 
 <!--
@@ -408,14 +409,14 @@ we’re saying that we’ve read this function’s documentation and take
 responsibility for upholding the function’s contracts.
 -->
 
-Le second type d'opération qui nécessite un bloc `unsafe` est l'appel à des
+Le deuxième type d'opération qui nécessite un bloc `unsafe` est l'appel à des
 fonctions non sécurisées. Les fonctions et méthodes non sécurisées ressemblent
 exactement aux méthodes et fonctions habituelles, mais ont un
 `unsafe` en plus devant le reste de leur définition. Le mot-clé `unsafe` dans
-ce cas signifie que la fonction a des exigences à respecter pour pouvoir y
-faire appel, car Rust ne peut pas garantir que nous avons rempli ces exigences.
+ce cas signifie que la fonction a des exigences que nous devons respecter pour pouvoir y
+faire appel, car Rust ne pourra pas garantir de son côté que nous les ayons remplies.
 En faisant appel à une fonction non sécurisée dans un bloc `unsafe`, nous
-signalons que nous avons lu la documentation de cette fonction et pris la
+reconnaissons que nous avons lu la documentation de cette fonction et pris la
 responsabilité de respecter les conditions d'utilisation de la fonction.
 
 <!--
@@ -462,8 +463,8 @@ function.
 -->
 
 En ajoutant le bloc `unsafe` autour de notre appel à `dangereux`, nous
-signalons à Rust que nous avons lu la documentation de la fonction, que nous
-comprenons comment l'utiliser correctement, et que nous avons vérifié que nous
+déclarons à Rust que nous avons lu la documentation de la fonction, que nous
+comprenons comment l'utiliser correctement et que nous avons vérifié que nous
 répondons bien aux exigences de la fonction.
 
 <!--
@@ -472,7 +473,7 @@ unsafe operations within an unsafe function, we don’t need to add another
 `unsafe` block.
 -->
 
-Les corps des fonctions non sécurisées sont bien des blocs `unsafe`, donc pour
+Les corps des fonctions non sécurisées sont bel et bien des blocs `unsafe`, donc pour
 pouvoir procéder à d'autres opérations non sécurisées dans une fonction non
 sécurisée, nous n'avons pas besoin d'ajouter un autre bloc `unsafe`.
 
@@ -646,12 +647,12 @@ mutable slice to `i32` values, `as_mut_ptr` returns a raw pointer with the type
 -->
 
 Souvenez-vous de la section [“Le type slice”][the-slice-type]<!-- ignore --> du
-chapitre 4 dans laquelle nous avions dit qu'un slice est défini par un pointeur
+chapitre 4 dans laquelle nous avions dit qu'une slice est définie par un pointeur
 vers une donnée ainsi qu'une longueur de la slice. Nous avons utilisé la méthode
 `len` pour obtenir la longueur d'une slice ainsi que la méthode `as_mut_ptr`
 pour accéder au pointeur brut d'une slice. Dans ce cas, comme nous avons une
 slice mutable de valeurs `i32`, `as_mut_ptr` retourne un pointeur brut avec le
-type `*mut i32`, que nous avons stocké dans la variable `ptr`.
+type `*mut i32` que nous stockons dans la variable `ptr`.
 
 <!--
 We keep the assertion that the `mid` index is within the slice. Then we get to
@@ -667,10 +668,10 @@ Nous avons conservé la vérification que l'indice `mid` soit dans la slice.
 Ensuite, nous utilisons le code non sécurisé : la fonction
 `slice::from_raw_parts_mut` prend en paramètre un pointeur brut et une longueur,
 et elle créée une slice. Nous utilisons cette fonction pour créer une slice qui
-débute à `ptr` et qui est long de `mid` éléments. Ensuite nous faisons appel à
+débute à `ptr` et qui est longue de `mid` éléments. Ensuite nous faisons appel à
 la méthode `add` sur `ptr` avec `mid` en argument pour obtenir un pointeur
 brut qui démarre à `mid`, et nous créons une slice qui utilise ce pointeur et
-le nombre restant d'éléments après `mid` pour la longueur.
+le nombre restant d'éléments après `mid` comme longueur.
 
 <!--
 The function `slice::from_raw_parts_mut` is unsafe because it takes a raw
@@ -684,12 +685,12 @@ will be valid pointers to data within the slice. This is an acceptable and
 appropriate use of `unsafe`.
 -->
 
-La fonction `slice::from_raw_parts_mut` est non sécurisé car elle prend en
+La fonction `slice::from_raw_parts_mut` est non sécurisée car elle prend en
 argument un pointeur brut et doit avoir confiance en la validité de ce pointeur.
 La méthode `add` sur les pointeurs bruts est aussi non sécurisée, car elle
 doit croire que l'emplacement décalé est aussi un pointeur valide. Voilà
 pourquoi nous avons placé un bloc `unsafe` autour de nos appels à
-`slice::from_raw_parts_mut` et `add` afin que nous puissions les appeler. En
+`slice::from_raw_parts_mut` et `add` afin que nous puissions les effectuer. En
 analysant le code et en ayant ajouté la vérification que `mid` doit être
 inférieur ou égal à `len`, nous pouvons affirmer que tous les pointeurs bruts
 utilisés dans le bloc `unsafe` sont des pointeurs valides vers les données de la
@@ -708,7 +709,7 @@ Remarquez que nous n'avons pas eu besoin de marquer la fonction résultante
 fonction dans du code Rust sécurisé. Nous avons créé une abstraction sécurisée
 du code non sécurisé avec une implémentation de la fonction qui utilise de
 manière sécurisée du code non sécurisé, car elle créée uniquement des pointeurs
-valides à partir des données dont cette fonction a accès.
+valides à partir des données auxquelles cette fonction a accès.
 
 <!--
 In contrast, the use of `slice::from_raw_parts_mut` in Listing 19-7 would
@@ -745,9 +746,9 @@ that the slice this code creates contains valid `i32` values. Attempting to use
 -->
 
 Nous ne possédons pas la mémoire à cet emplacement arbitraire, et il n'y a
-aucune garantie que la slice créée par ce code contient des valeurs `i32`
-valides. La tentative d'utilisation de `slice` sera soumise à un comportement
-imprévisible même si c'est une slice valide.
+aucune garantie que la slice créée par ce code contiennent des valeurs `i32`
+valides. Toute tentative d'utilisation de `slice` aura un comportement
+imprévisible bien qu'il s'agisse d'une slice valide.
 
 <!--
 #### Using `extern` Functions to Call External Code
@@ -766,9 +767,8 @@ programming language to call those functions.
 Parfois, votre code Rust peut avoir besoin d'interagir avec du code écrit dans
 d'autres langages. Dans ce cas, Rust propose un mot-clé, `extern`, qui facilite
 la création et l'utilisation du *Foreign Function Interface (FFI)*. Le FFI est
-un outil permettant à un langage de programmation de définir des fonctions et
-permettre à différents langages de programmation de faire appel à ces
-fonctions.
+un outil permettant à un langage de programmation de définir des fonctions auxquelles
+d'autres langages de programmation pourront faire appel.
 
 <!--
 Listing 19-8 demonstrates how to set up an integration with the `abs` function
@@ -778,12 +778,12 @@ enforce Rust’s rules and guarantees, and Rust can’t check them, so
 responsibility falls on the programmer to ensure safety.
 -->
 
-L'encart 19-8 montre comment régler l'intégration avec la fonction `abs` de la
-bibliothèque standard du C. Les fonctions déclarées dans les blocs `extern`
-sont toujours non sécurisés lorsqu'on les utilise dans du code Rust. La raison
+L'encart 19-8 montre comment configurer l'intégration de la fonction `abs` de la
+bibliothèque standard du C. Les fonctions déclarées dans des blocs `extern`
+sont toujours non sécurisées lorsqu'on les utilise dans du code Rust. La raison
 à cela est que les autres langages n'appliquent pas les règles et garanties de
-Rust, et Rust ne peut pas les vérifier, donc la responsabilité de les utiliser
-en toute sécurité revient au développeur.
+Rust, Rust ne peut donc pas les vérifier, si bien que la responsabilité de s'assurer
+de la sécurité revient au développeur.
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -928,14 +928,14 @@ figure out the lifetime and we aren’t required to annotate it explicitly.
 Accessing an immutable static variable is safe.
 -->
 
-Les variables statiques ressemblent aux constantes, que nous avons vu dans la
+Les variables statiques ressemblent aux constantes, que nous avons vues dans la
 section
 [“Différences entre les variables et les constantes”][differences-between-variables-and-constants]<!-- ignore -->
 du chapitre 3. Les noms des variables statiques sont par convention en
 `SCREAMING_SNAKE_CASE`. Les variables statiques
-peuvent uniquement stocker des références avec la durée de vie `'static`, ce
-qui signifie que le compilateur Rust peut comprendre sa durée de vie et nous
-n'avons pas besoin de la renseigner explicitement. L'accès à une variable
+peuvent uniquement stocker des références ayant la durée de vie `'static`, de façon
+à ce que le compilateur Rust puisse la déterminer tout seul et que nous
+n'ayons pas besoin de la renseigner explicitement. L'accès à une variable
 statique immuable est sécurisé.
 
 <!--
@@ -946,7 +946,7 @@ are allowed to duplicate their data whenever they’re used.
 -->
 
 Les constantes et les variables statiques immuables se ressemblent, mais leur
-différence subtile est que les valeurs dans les variables statiques sont une
+différence subtile est que les valeurs dans les variables statiques ont une
 adresse fixe en mémoire. L'utilisation de sa valeur va toujours accéder à la
 même donnée. Les constantes en revanche, peuvent reproduire leurs données à
 chaque fois qu'elles sont utilisées.
@@ -999,7 +999,7 @@ Comme avec les variables classiques, nous renseignons la mutabilité en
 utilisant le mot-clé `mut`. Tout code qui lit ou modifie `COMPTEUR` doit se
 trouver dans un bloc `unsafe`. Ce code se compile et affiche `COMPTEUR : 3`
 comme nous l'espérions car nous n'avons qu'une seule tâche. Si nous avions
-plusieurs tâches qui accèdent à `COMPTEUR` nous pourrions avoir un accès
+plusieurs tâches qui accèdent à `COMPTEUR`, nous pourrions avoir un accès
 concurrent.
 
 <!--
@@ -1010,11 +1010,11 @@ thread-safe smart pointers we discussed in Chapter 16 so the compiler checks
 that data accessed from different threads is done safely.
 -->
 
-Avec les données mutables qui sont globalement accessibles, il devient
+Avec les données mutables qui sont accessibles globalement, il devient
 difficile de s'assurer qu'il n'y a pas d'accès concurrent, c'est pourquoi Rust
 considère les variables statiques mutables comme étant non sécurisées. Lorsque
 c'est possible, il vaut mieux utiliser les techniques de concurrence et les
-pointeurs intelligents adaptés au multitâche que nous avons vu au chapitre 16,
+pointeurs intelligents adaptés au multitâche que nous avons vus au chapitre 16,
 afin que le compilateur puisse vérifier que les données qu'utilisent les
 différentes tâches sont sécurisées.
 
@@ -1032,7 +1032,7 @@ keyword before `trait` and marking the implementation of the trait as `unsafe`
 too, as shown in Listing 19-11.
 -->
 
-Un autre cas d'emploi de `unsafe` est l'implémentation d'un trait non sécurisé.
+Un autre cas d'usage de `unsafe` est l'implémentation d'un trait non sécurisé.
 Un trait n'est pas sécurisé lorsque au moins une de ses méthodes contient une
 invariante que le compilateur ne peut pas vérifier. Nous pouvons déclarer un
 trait qui n'est pas sécurisé en ajoutant le mot-clé `unsafe` devant `trait` et
@@ -1078,17 +1078,17 @@ across threads or accessed from multiple threads; therefore, we need to do
 those checks manually and indicate as such with `unsafe`.
 -->
 
-Par exemple, souvenez-vous des traits `Sync` et `Send` que nous avions découvert
+Par exemple, souvenez-vous des traits `Sync` et `Send` que nous avions découverts
 dans une section du
 [chapitre 16][extensible-concurrency-with-the-sync-and-send-traits]<!--
 ignore --> : le compilateur implémente automatiquement ces traits si nos types
 sont entièrement composés des types `Send` et `Sync`. Si nous implémentions un
-type qui contenait un type qui n'était pas `Send` ou `Sync`, comme des
+type qui contenait un type qui n'était pas `Send` ou `Sync`, tel que les
 pointeurs bruts, et nous souhaitions marquer ce type comme étant `Send` ou
 `Sync`, nous aurions dû utiliser `unsafe`. Rust ne peut pas vérifier que notre
 type respecte les garanties pour que ce type puisse être envoyé en toute
 sécurité entre des tâches ou qu'il puisse être utilisé par plusieurs tâches ;
-toutefois, nous avons besoin de faire ces vérifications manuellement et les
+en conséquence, nous avons besoin de faire ces vérifications manuellement et le
 signaler avec `unsafe`.
 
 <!--
@@ -1111,7 +1111,7 @@ champs d'un *union*. Un `union` ressemble à une `struct`, mais un seul champ de
 ceux déclarés est utilisé dans une instance précise au même moment. Les unions
 sont principalement utilisés pour s'interfacer avec les unions du code C.
 L'accès aux champs des unions n'est pas sécurisé car Rust ne peut pas garantir
-le type de données qui est actuellement stockée dans l'instance de l'union.
+le type de la donnée qui est actuellement stockée dans l'instance de l'union.
 Vous pouvez en apprendre plus sur les unions dans [the reference][reference].
 
 <!--
@@ -1128,13 +1128,13 @@ reason to use `unsafe` code, you can do so, and having the explicit `unsafe`
 annotation makes it easier to track down the source of problems when they occur.
 -->
 
-L'utilisation de `unsafe` pour s'approprier une des cinq actions (ou
+L'utilisation de `unsafe` pour mettre en oeuvre une des cinq actions (ou
 super-pouvoirs) que nous venons d'aborder n'est pas une mauvaise chose et ne doit
 pas être mal vu. Mais il est plus difficile de sécuriser du code `unsafe` car le
 compilateur ne peut pas aider à garantir la sécurité de la mémoire. Lorsque vous
 avez une bonne raison d'utiliser du code non sécurisé, vous pouvez le faire, et
 vous aurez l'annotation explicite `unsafe` pour faciliter la recherche de la
-source de problèmes lorsqu'ils surviennent.
+source des problèmes lorsqu'ils surviennent.
 
 <!--
 [dangling-references]:

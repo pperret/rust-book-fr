@@ -10,7 +10,7 @@ closures, which include function pointers and returning closures.
 -->
 
 Maintenant, nous allons explorer quelques fonctionnalités avancées liées aux
-fonctions et aux fermetures, comme les pointeurs de fonctions et retourner des
+fonctions et aux fermetures, dont les pointeurs de fonctions et la capacité de retourner des
 fermetures.
 
 <!--
@@ -37,7 +37,7 @@ déjà définie plutôt que de définir une nouvelle fermeture. Vous pouvez fair
 ceci avec des pointeurs de fonctions, qui vous permettent d'utiliser des
 fonctions en argument d'autres fonctions. Les fonctions nécessitent le type `fn`
 (avec un f minuscule), à ne pas confondre avec le trait de fermeture `Fn`. Le
-type `fn` s'appelle un *pointeur de fonction*. La syntaxe pour renseigner qu'un
+type `fn` s'appelle un *pointeur de fonction*. La syntaxe pour indiquer qu'un
 paramètre est un pointeur de fonction ressemble à celle des fermetures, comme
 vous pouvez le voir dans l'encart 19-27.
 
@@ -76,7 +76,7 @@ Ce code affiche `La réponse est : 12`. Nous avons précisé que le paramètre 
 dans `le_faire_deux_fois` est une `fn` qui prend en argument un paramètre du
 type `i32` et retourne un `i32`. Nous pouvons ensuite appeler `f` dans le corps
 de `le_faire_deux_fois`. Dans `main`, nous pouvons envoyer le nom de la fonction
-`add_one` dans le premier argument de `le_faire_deux_fois`.
+`ajouter_un` dans le premier argument de `le_faire_deux_fois`.
 
 <!--
 Unlike closures, `fn` is a type rather than a trait, so we specify `fn` as the
@@ -85,8 +85,8 @@ of the `Fn` traits as a trait bound.
 -->
 
 Contrairement aux fermetures, `fn` est un type plutôt qu'un trait, donc nous
-renseignons `fn` directement comme type de paramètre plutôt que de déclarer un
-paramètre de type générique avec un des traits `Fn` liés.
+indiquons `fn` directement comme type de paramètre plutôt que de déclarer un
+paramètre de type générique avec un des traits `Fn` comme trait lié.
 
 <!--
 Function pointers implement all three of the closure traits (`Fn`, `FnMut`, and
@@ -96,11 +96,11 @@ type and one of the closure traits so your functions can accept either
 functions or closures.
 -->
 
-Les pointeurs de fonctions implémentent tous les trois traits de fermeture
-(`Fn`, `FnMut`, et `FnOnce`), afin que vous puissiez toujours envoyer un
+Les pointeurs de fonctions implémentent simultanément les trois traits de fermeture
+(`Fn`, `FnMut` et `FnOnce`) afin que vous puissiez toujours envoyer un
 pointeur de fonction en argument d'une fonction qui attendait une fermeture. Il
 vaut mieux écrire des fonctions qui utilisent un type générique et un des traits
-de fermetures afin que vos fonctions puissent accepter soit des fonctions, soit
+de fermeture afin que vos fonctions puissent accepter soit des fonctions, soit
 des fermetures.
 
 <!--
@@ -109,7 +109,7 @@ interfacing with external code that doesn’t have closures: C functions can
 accept functions as arguments, but C doesn’t have closures.
 -->
 
-Un exemple dans lequel vous voudriez accepter uniquement des `fn`, et non pas
+Une situation dans laquelle vous ne voudrez accepter que des `fn` et pas
 des fermetures, est lorsque vous vous interfacez avec du code externe qui n'a
 pas de fermetures : les fonctions C peuvent accepter des fonctions en argument,
 mais le C n'a pas fermetures.
@@ -120,8 +120,8 @@ function, let’s look at a use of `map`. To use the `map` function to turn a
 vector of numbers into a vector of strings, we could use a closure, like this:
 -->
 
-Un autre exemple dans lequel vous pouvez utiliser soit une fermeture définie en
-une seule ligne ou le nom d'une fonction, est lorsque vous utilisez `map`. Pour
+Comme exemple d'une situation dans laquelle vous pouvez utiliser soit une fermeture définie 
+directement ou le nom d'une fonction, prenons l'utilisation de `map`. Pour
 utiliser la fonction `map` pour transformer un vecteur de nombres en vecteur de
 chaînes de caractères, nous pouvons utiliser une fermeture, comme ceci :
 
@@ -161,10 +161,10 @@ there are multiple functions available named `to_string`. Here, we’re using th
 library has implemented for any type that implements `Display`.
 -->
 
-Notez que nous devons utiliser la syntaxe complète que nous avons vu
+Notez que nous devons utiliser la syntaxe complète que nous avons vue
 précédemment dans [la section précédente][advanced-traits]<!-- ignore --> car il
-y a plusieurs fonctions de disponibles qui s'appellent `to_string`. Ici, nous
-utilisons la fonction `to_string` définie dans le trait `ToString`, que la
+existe plusieurs fonctions disponibles qui s'appellent `to_string`. Ici, nous
+utilisons la fonction `to_string` définie dans le trait `ToString` que la
 bibliothèque standard a implémenté sur chaque type qui implémente `Display`.
 
 <!--
@@ -179,13 +179,13 @@ functions as arguments for methods that take closures, like so:
 
 Nous avons un autre motif utile qui exploite un détail de l'implémentation des
 structures tuple et des variantes d'énumérations de structures de tuples. Ces
-types utilisent `()` comme syntaxe d'initialisation, qui ressemble à un appel de
-fonction. Les initialisateurs sont actuellement implémentés comme étant des
-fonctions qui retournent une instance qui est construite avec leurs propres
-arguments. Nous pouvons utiliser ces fonctions d'initialisation comme étant des
+types utilisent `()` comme syntaxe d'initialisation, ce qui ressemble à un appel de
+fonction. Les initialisateurs sont effectivement actuellement implémentés en tant que 
+fonctions qui retournent une instance qui est construite à partir des paramètres qu'on lui donne. 
+Nous pouvons utiliser ces fonctions d'initialisation en tant que 
 pointeurs de fonctions qui implémentent les traits de fermetures, ce qui
-signifie que nous pouvons renseigner les fonctions d'initialisation en argument
-de méthodes qui prennent en argument des fermetures, comme ceci :
+signifie que nous pouvons utiliser les fonctions d'initialisation comme paramètre 
+des méthodes qui acceptent des fermetures, comme ceci :
 
 <!--
 ```rust
@@ -207,9 +207,9 @@ compile to the same code, so use whichever style is clearer to you.
 Nous avons ici créé des instances de `Statut::Valeur` en utilisant chacune des
 valeurs `u32` présentes dans l'intervalle sur laquelle nous appelons `map` en
 utilisant la fonction d'initialisation de `Statut::Valeur`. Certaines personnes
-préfèrent ce style, et d'autres préfèrent utiliser des fermetures. Ces deux cas
-se compilent pour faire la même chose, donc vous pouvez utiliser le style qui
-vous conviens le plus.
+préfèrent ce style, et d'autres préfèrent utiliser des fermetures. Ces deux approches
+se compilent et produisent le même code, vous pouvez donc utiliser le style qui
+est le plus clair pour vous.
 
 <!--
 ### Returning Closures
@@ -227,8 +227,8 @@ pointer `fn` as a return type, for example.
 -->
 
 Les fermetures sont représentées par des traits, ce qui signifie que vous ne
-pouvez pas retourner directement des fermetures. Dans la plupart des cas où vous
-voudrez retourner un trait, vous pouvez utiliser à la place le type concret qui
+pouvez pas retourner directement des fermetures. Dans la plupart des situations 
+où vous auriez voulu retourner un trait, vous pouvez utiliser à la place le type concret qui
 implémente le trait comme valeur de retour de la fonction. Mais vous ne pouvez
 pas faire ceci avec les fermetures car elles n'ont pas de type concret qu'elles
 peuvent retourner ; vous n'êtes pas autorisé à utiliser le pointeur de fonction
@@ -273,7 +273,7 @@ it will need to store the closure. We saw a solution to this problem earlier.
 We can use a trait object:
 -->
 
-Encore l'erreur du trait `Sized` ! Rust ne sait pas combien de mémoire sera
+Une nouvelle fois l'erreur du trait `Sized` ! Rust ne sait pas combien de mémoire sera
 nécessaire pour stocker la fermeture. Nous avons vu une solution à ce problème
 précédemment. Nous pouvons utiliser un objet trait :
 
