@@ -286,7 +286,7 @@ However, we want to take different actions for different failure reasons: if
 and return the handle to the new file. If `File::open` failed for any other
 reason—for example, because we didn’t have permission to open the file—we still
 want the code to `panic!` in the same way as it did in Listing 9-4. For this we
-add an inner `match` expression, shown in Listing 8-5.
+add an inner `match` expression, shown in Listing 9-5.
 -->
 
 Le code dans l'encart 9-4 va faire un `panic!` peu importe la raison de l'échec

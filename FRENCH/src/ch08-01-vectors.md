@@ -284,20 +284,6 @@ se passe lorsque nous avons un vecteur de cinq éléments et qu'ensuite nous
 essayons d'accéder à un élément à l'indice 100 avec chaque technique.
 
 <!--
-Rust has two ways to reference an element so you can choose how the program
-behaves when you try to use an index value that the vector doesn’t have an
-element for. As an example, let’s see what a program will do if it has a vector
-that holds five elements and then tries to access an element at index 100, as
-shown in Listing 8-6.
--->
-
-Rust a deux manières de récupérer un élément afin que vous puissiez choisir
-comment le programme doit se comporter lorsque vous essayez d'utiliser un
-indice pour lequel le vecteur n'a pas d'élément correspondant. Par exemple,
-regardons ce qu'un programme fait s'il a un vecteur qui contient cinq éléments
-et qu'il essaye d'accéder à l'élément à l'indice 100, comme dans l'encart 8-6.
-
-<!--
 ```rust,should_panic,panics
 {{#rustdoc_include ../listings-sources/ch08-common-collections/listing-08-06/src/main.rs:here}}
 ```

@@ -582,7 +582,7 @@ d'arguments</span>
 
 <!--
 This code is similar to [the `Guess::new` function we wrote in Listing
-9-10][ch9-custom-types]<!-- ignore -- >, where we called `panic!` when the
+9-13][ch9-custom-types]<!-- ignore -- >, where we called `panic!` when the
 `value` argument was out of the range of valid values. Instead of checking for
 a range of values here, we’re checking that the length of `args` is at least 3
 and the rest of the function can operate under the assumption that this
@@ -591,7 +591,7 @@ will be true, and we call the `panic!` macro to end the program immediately.
 -->
 
 Ce code est similaire à [la fonction Supposition::new que nous avons écrit
-dans l'encart 9-10][ch9-custom-types]<!-- ignore -->, dans laquelle nous
+dans l'encart 9-13][ch9-custom-types]<!-- ignore -->, dans laquelle nous
 appelions `panic!` lorsque l'argument `valeur` était hors de l'intervalle des
 valeurs valides. Plutôt que de vérifier un intervalle de valeurs dans le cas
 présent, nous vérifions que la taille de `args` est au moins de 3 et que le

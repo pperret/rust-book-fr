@@ -1501,12 +1501,12 @@ tâche courante va attendre jusqu'à ce qu'une mission soit disponible. Le
 à la fois.
 
 <!--
-With the implementation of this trick, our thread pool is in a working state!
-Give it a `cargo run` and make some requests:
+Our thread pool is now in a working state! Give it a `cargo run` and make some
+requests:
 -->
 
-Avec l'implémentation de cette astuce, notre groupe de tâches est en état de
-fonctionner ! Faites un `cargo run` et faites quelques requêtes :
+Notre groupe de tâches est désormais en état de fonctionner ! Faites un
+`cargo run` et faites quelques requêtes :
 
 <!--
 <!-- manual-regeneration

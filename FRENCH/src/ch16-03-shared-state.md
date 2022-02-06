@@ -447,25 +447,19 @@ Fortunately, `Arc<T>` *is* a type like `Rc<T>` that is safe to use in
 concurrent situations. The *a* stands for *atomic*, meaning it’s an *atomically
 reference counted* type. Atomics are an additional kind of concurrency
 primitive that we won’t cover in detail here: see the standard library
-documentation for [`std::sync::atomic`] for more details. At this point, you just
-need to know that atomics work like primitive types but are safe to share
-across threads.
+documentation for [`std::sync::atomic`][atomic]<!-- ignore -- > for more
+details. At this point, you just need to know that atomics work like primitive
+types but are safe to share across threads.
 -->
 
 Heureusement, `Arc<T>` *est* un type comme `Rc<T>` qui est sûr en
 situation de concurrence. Le *A* signifie *atomique*, ce qui signifie que c'est
 un type *compteur de références atomique*. L'atome est une sorte de primitive
 concurrente que nous n'allons pas aborder en détails ici : rendez-vous dans la
-documentation de la bibliothèque standard sur [`std::sync::atomic`] pour en
-savoir plus. Pour le moment, vous avez juste besoin de retenir que les atomes
-fonctionnent comme les types primitifs mais qui sont sûrs à partager entre
-plusieurs tâches.
-
-<!--
-[`std::sync::atomic`]: ../std/sync/atomic/index.html
--->
-
-[`std::sync::atomic`]: https://doc.rust-lang.org/std/sync/atomic/index.html
+documentation de la bibliothèque standard sur [`std::sync::atomic`][atomic]<!--
+ignore --> pour en savoir plus. Pour le moment, vous avez juste besoin de
+retenir que les atomes fonctionnent comme les types primitifs mais qui sont
+sûrs à partager entre plusieurs tâches.
 
 <!--
 You might then wonder why all primitive types aren’t atomic and why standard
@@ -615,3 +609,9 @@ how we can use them with custom types.
 
 Nous allons terminer ce chapitre en parlant des traits `Send` et `Sync` et
 voir comment nous pouvons les utiliser sur des types personnalisés.
+
+<!--
+[atomic]: ../std/sync/atomic/index.html
+-->
+
+[atomic]: https://doc.rust-lang.org/std/sync/atomic/index.html

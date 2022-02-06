@@ -109,24 +109,24 @@ behavior we want our `blog` crate to have</span>
 de notre crate `blog`</span>
 
 <!--
-We want to allow the user to create a new draft blog post with `Post::new`.
-Then we want to allow text to be added to the blog post while it’s in the draft
-state. If we try to get the post’s content immediately, before approval,
-nothing should happen because the post is still a draft. We’ve added
-`assert_eq!` in the code for demonstration purposes. An excellent unit test for
-this would be to assert that a draft blog post returns an empty string from the
-`content` method, but we’re not going to write tests for this example.
+We want to allow the user to create a new draft blog post with `Post::new`. We
+want to allow text to be added to the blog post. If we try to get the post’s
+content immediately, before approval, we shouldn't get any text because the
+post is still a draft. We’ve added `assert_eq!` in the code for demonstration
+purposes. An excellent unit test for this would be to assert that a draft blog
+post returns an empty string from the `content` method, but we’re not going to
+write tests for this example.
 -->
 
 Nous voulons permettre à l'utilisateur de créer un nouveau brouillon de billet
-de blog avec `Billet::new`. Ensuite nous voulons qu'il puisse ajouter du texte
-au billet de blog tant qu'il est à l'état de brouillon. Si nous essayons
-d'obtenir immédiatement le contenu du billet, avant qu'il ne soit relu, rien ne va
-se passer car le billet est toujours un brouillon. Nous avons ajouté des
-`assert_eq!` dans le code pour les besoins de la démonstration. Un excellent
-test unitaire pour cela serait de vérifier qu'un brouillon de billet de blog
-retourne bien une chaîne de caractères vide à partir de la méthode `contenu`,
-mais nous n'allons pas écrire de tests pour cet exemple.
+de blog avec `Billet::new`. Nous voulons qu'il puisse ajouter du texte au
+billet de blog. Si nous essayons d'obtenir immédiatement le contenu du billet,
+avant qu'il ne soit relu, nous n'obtiendrons aucun texte car le billet est
+toujours un brouillon. Nous avons ajouté des `assert_eq!` dans le code pour les
+besoins de la démonstration. Un excellent test unitaire pour cela serait de
+vérifier qu'un brouillon de billet de blog retourne bien une chaîne de
+caractères vide à partir de la méthode `contenu`, mais nous n'allons pas écrire
+de tests pour cet exemple.
 
 <!--
 Next, we want to enable a request for a review of the post, and we want
@@ -560,32 +560,35 @@ Nous avons ajouté la méthode `approuver` au trait `Etat` et ajouté une nouvel
 structure `Publier`, qui implémente `Etat`.
 
 <!--
-Similar to `request_review`, if we call the `approve` method on a `Draft`, it
-will have no effect because it will return `self`. When we call `approve` on
-`PendingReview`, it returns a new, boxed instance of the `Published` struct.
-The `Published` struct implements the `State` trait, and for both the
-`request_review` method and the `approve` method, it returns itself, because
-the post should stay in the `Published` state in those cases.
+Similar to the way `request_review` on `PendingReview` works, if we call the
+`approve` method on a `Draft`, it will have no effect because `approve` will
+return `self`. When we call `approve` on `PendingReview`, it returns a new,
+boxed instance of the `Published` struct. The `Published` struct implements the
+`State` trait, and for both the `request_review` method and the `approve`
+method, it returns itself, because the post should stay in the `Published`
+state in those cases.
 -->
 
-Comme pour `demander_relecture`, si nous faisons appel à la méthode `approuver`
-sur un `Brouillon`, cela n'aura pas d'effet car elle va retourner `self`.
-Lorsque nous appellerons `approuver` sur `EnRelecture`, elle va retourner une
-nouvelle instance de la structure `Publier` dans une instance de `Box`. La
-structure `Publier` implémente le trait `Etat`, et pour chacune des méthodes
-`demander_relecture` et `approuver`, elle va retourner elle-même, car le billet
-doit rester à l'état `Publier` dans ce cas-là.
+Comme pour la façon de fonctionner de `demander_relecture` sur `EnRelecture`,
+si nous faisons appel à la méthode `approuver` sur un `Brouillon`, cela n'aura
+pas d'effet car `approuver` va retourner `self`. Lorsque nous appellerons
+`approuver` sur `EnRelecture`, elle va retourner une nouvelle instance de la
+structure `Publier` dans une instance de `Box`. La structure `Publier`
+implémente le trait `Etat`, et pour chacune des méthodes `demander_relecture`
+et `approuver`, elle va retourner elle-même, car le billet doit rester à l'état
+`Publier` dans ce cas-là.
 
 <!--
-Now we need to update the `content` method on `Post`: if the state is
-`Published`, we want to return the value in the post’s `content` field;
-otherwise, we want to return an empty string slice, as shown in Listing 17-17:
+Now we need to update the `content` method on `Post`. We want the value
+returned from `content` to depend on the current state of the `Post`, so we're
+going to have the `Post` delegate to a `content` method defined on its `state`,
+as shown in Listing 17-17:
 -->
 
-Nous devons maintenant modifier la méthode `contenu` sur `Billet` : si l'état
-est `Publier`, nous voulons retourner la valeur du champ `contenu` du billet ;
-sinon nous retournons une slice de chaîne de caractères vide, comme dans
-l'encart 17-17 :
+Nous devons maintenant modifier la méthode `contenu` sur `Billet`. Nous
+souhaitons que la valeur retournée par `contenu` dépende de l'état actuel du
+`Billet`, donc nous allons faire en sorte que le `Billet` délègue sa logique à
+une méthode `contenu` défini sur son `etat`, comme dans l'encart 17-17 :
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -628,9 +631,9 @@ valeur de `etat`.
 <!--
 We call the `as_ref` method on the `Option` because we want a reference to the
 value inside the `Option` rather than ownership of the value. Because `state`
-is an `Option<Box<dyn State>>`, when we call `as_ref`, an `Option<&Box<dyn State>>` is
-returned. If we didn’t call `as_ref`, we would get an error because we can’t
-move `state` out of the borrowed `&self` of the function parameter.
+is an `Option<Box<dyn State>>`, when we call `as_ref`, an `Option<&Box<dyn
+State>>` is returned. If we didn’t call `as_ref`, we would get an error because
+we can’t move `state` out of the borrowed `&self` of the function parameter.
 -->
 <!-- markdownlint-enable -->
 

@@ -34,6 +34,13 @@ et en hors-ligne avec l'installation de Rust qui a été effectuée avec `rustup
 vous pouvez lancer `rustup docs --book` pour l'ouvrir.
 
 <!--
+Several community [translations] are also available.
+-->
+
+Vous avez aussi à votre disposition quelques [traductions][translations]<!--
+ignore --> entretenues par la communauté.
+
+<!--
 This text is available in [paperback and ebook format from No Starch
 Press][nsprust].
 -->
@@ -45,8 +52,10 @@ La version anglaise de ce livre est disponible
 [install]: ch01-01-installation.html
 [editions]: appendix-05-editions.html
 [nsprust]: https://nostarch.com/rust
+[translations]: appendix-06-translation.html
 -->
 
 [install]: ch01-01-installation.html
 [editions]: appendix-05-editions.html
 [nsprust]: https://nostarch.com/rust
+[translations]: appendix-06-translation.html

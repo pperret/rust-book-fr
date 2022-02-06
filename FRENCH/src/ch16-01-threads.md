@@ -65,96 +65,18 @@ programmes qui s'exécutent dans une seule tâche.
 Programming languages implement threads in a few different ways. Many operating
 systems provide an API for creating new threads. This model where a language
 calls the operating system APIs to create threads is sometimes called *1:1*,
-meaning one operating system thread per one language thread.
+meaning one operating system thread per one language thread. The Rust standard
+library only provides an implementation of 1:1 threading; there are crates that
+implement other models of threading that make different tradeoffs.
 -->
 
 Les langages de programmation implémentent les tâches de différentes manières.
 De nombreux systèmes d'exploitation offrent des API pour créer de nouvelles
 tâches. L'appel à cette API du système d'exploitation pour créer des tâches par
 un langage est parfois qualifié de *1:1*, ce qui signifie une tâche du système
-d'exploitation par tâche dans le langage de programmation.
-
-<!--
-Many programming languages provide their own special implementation of threads.
-Programming language-provided threads are known as *green* threads, and
-languages that use these green threads will execute them in the context of a
-different number of operating system threads. For this reason, the
-green-threaded model is called the *M:N* model: there are `M` green threads per
-`N` operating system threads, where `M` and `N` are not necessarily the same
-number.
--->
-
-De nombreux langages de programmation fournissent leur propre implémentation
-spéciale des tâches. Les tâches fournies par un langage de programmation
-s'appelle des tâches *virtuelles*, et les langages qui utilisent ces tâches
-virtuelles vont les exécuter dans différentes tâches du système d'exploitation.
-C'est pourquoi le modèle des tâches virtuelles est appelé modèle *M:N* : il y a
-`M` tâches virtuelles pour `N` tâches du système d'exploitation, dans lequel
-`M` et `N` ne sont pas nécessairement le même nombre.
-
-<!--
-Each model has its own advantages and trade-offs, and the trade-off most
-important to Rust is runtime support. *Runtime* is a confusing term and can
-have different meanings in different contexts.
--->
-
-Chaque modèle a ses propres avantages et compromis, et le compromis le plus
-important pour Rust est la prise en charge de l'environnement d'exécution.
-*Environnement d'exécution* est un terme qui peut prêter à confusion et avoir
-différentes significations dans différents contextes.
-
-<!--
-In this context, by *runtime* we mean code that is included by the language in
-every binary. This code can be large or small depending on the language, but
-every non-assembly language will have some amount of runtime code. For that
-reason, colloquially when people say a language has “no runtime,” they often
-mean “small runtime.” Smaller runtimes have fewer features but have the
-advantage of resulting in smaller binaries, which make it easier to combine the
-language with other languages in more contexts. Although many languages are
-okay with increasing the runtime size in exchange for more features, Rust needs
-to have nearly no runtime and cannot compromise on being able to call into C to
-maintain performance.
--->
-
-Dans ce contexte, lorsque nous parlons *d'environnement exécution*, nous
-voulons dire le code qui est intégré par le langage dans chaque binaire. Ce
-code peut être plus ou moins vaste en fonction du langage, mais chaque langage
-non assembleur possèdera quand même une certaine quantité de code
-d'environnement exécution. Pour cette raison, lorsque les gens disent un peu
-abusivement d'un langage qu'il n'a pas “d'environnement d'exécution”, ils
-veulent très souvent dire qu'il a un “faible environnement d'exécution”. Les
-faibles environnements d'exécution ont moins de fonctionnalités mais ont
-l'avantage d'avoir des bibliothèques plus petites, ce qui facilite la
-combinaison du langage avec un autre et dans plus de contextes. Contrairement à
-de nombreux langages de programmation qui acceptent d'augmenter la taille de
-l'environnement d'exécution pour avoir plus de fonctionnalités, Rust n'a
-quasiment pas besoin d'avoir un environnement d'exécution et ne doit pas faire
-de compromis en faisant appel au C afin de conserver ses performances.
-
-<!--
-The green-threading M:N model requires a larger language runtime to manage
-threads. As such, the Rust standard library only provides an implementation of
-1:1 threading. Because Rust is such a low-level language, there are crates that
-implement M:N threading if you would rather trade overhead for aspects such as
-more control over which threads run when and lower costs of context switching,
-for example.
--->
-
-Le modèle de tâches virtuelles M:N nécessite un plus grand environnement
-d'exécution pour gérer les tâches. C'est pourquoi la bibliothèque standard de
-Rust fournit seulement une implémentation 1:1. Comme Rust est un langage
-bas-niveau, il existe des crates qui implémentent des tâches M:N si vous
-préférez accepter des pertes de performances en échange de plus de maîtrise dans
-l'exécution des tâches ou de changements de contextes à moindre coût.
-
-<!--
-Now that we’ve defined threads in Rust, let’s explore how to use the
-thread-related API provided by the standard library.
--->
-
-Maintenant que nous avons défini ce qu'étaient les tâches en Rust, découvrons
-comment utiliser les API liées aux tâches fournies par la bibliothèque
-standard.
+d'exploitation par tâche dans le langage de programmation. La bibliothèque
+standard de Rust fournit une seule implémentation 1:1 ; il existe des crates
+qui implémentent d'autres modèles qui font des choix différents.
 
 <!--
 ### Creating a New Thread with `spawn`
@@ -487,25 +409,20 @@ vos tâches peuvent être exécutées ou non en même temps.
 ### Utiliser les fermetures `move` avec les tâches
 
 <!--
-The `move` closure is often used alongside `thread::spawn` because it allows
-you to use data from one thread in another thread.
+The `move` keyword is often used with closures passed to `thread::spawn`
+because the closure will then take ownership of the values it uses from the
+environment, thus transferring ownership of those values from one thread to
+another. In the [“Capturing the Environment with Closures”][capture]<!-- ignore
+-- > section of Chapter 13, we discussed `move` in the context of closures. Now,
+we’ll concentrate more on the interaction between `move` and `thread::spawn`
 -->
 
-La fermeture `move` est souvent utilisé avec `thread::spawn` car elle vous
-permet d'utiliser une donnée d'une tâche dans une autre tâche.
-
-<!--
-In Chapter 13, we mentioned we can use the `move` keyword before the parameter
-list of a closure to force the closure to take ownership of the values it uses
-in the environment. This technique is especially useful when creating new
-threads in order to transfer ownership of values from one thread to another.
--->
-
-Au chapitre 13, nous avons mentionné que nous pouvions utiliser le mot-clé `move`
-avant la liste des paramètres d'une fermeture pour forcer la fermeture à
-prendre possession des valeurs de son environnement qu'elle utilise. Cette
-technique est particulièrement utile lorsque nous créons des nouvelles tâches
-pour pouvoir transférer la possession des valeurs d'une tâche à une autre.
+Le mot-clé `move` est souvent utilisé avec des fermetures passées à
+`thread::spawn` car la fermeture va alors prendre possession des valeurs de son
+environnement qu'elle utilise, ce qui transfère la possession des valeurs d'une
+tâche à une autre. Dans [une section du chapitre 13][capture]<!-- ignore -->,
+nous avons présenté `move` dans le contexte des fermetures. A présent, nous
+allons plus nous concentrer sur l'interaction entre `move` et `thread::spawn`.
 
 <!--
 Notice in Listing 16-1 that the closure we pass to `thread::spawn` takes no
@@ -652,7 +569,7 @@ after automatic regeneration, look at listings/ch16-fearless-concurrency/listing
 help: to force the closure to take ownership of `v` (and any other referenced variables), use the `move` keyword
   |
 6 |     let handle = thread::spawn(move || {
-  |                                ^^^^^^^
+  |                                ++++
 ```
 -->
 
@@ -660,7 +577,7 @@ help: to force the closure to take ownership of `v` (and any other referenced va
 help: to force the closure to take ownership of `v` (and any other referenced variables), use the `move` keyword
   |
 6 |     let manipulateur = thread::spawn(move || {
-  |                                      ^^^^^^^
+  |                                      ++++
 ```
 
 <!--
@@ -771,3 +688,9 @@ can *do* with threads.
 
 Armé de cette connaissance de base des tâches et de leur API, découvrons ce que
 nous pouvons *faire* avec les tâches.
+
+<!--
+[capture]: ch13-01-closures.html#capturing-the-environment-with-closures
+-->
+
+[capture]: ch13-01-closures.html
