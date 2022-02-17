@@ -27,13 +27,13 @@ exploits, crashes, or corruption.
 -->
 
 Prenez par exemple la gestion des éléments au “niveau système” qui traite de
-détails bas niveau de gestion de mémoire, de modèles de données, et de
+détails bas niveau de gestion de mémoire, de modèles de données et de
 concurrence. Traditionnellement, ce domaine de la programmation est jugé
 ésotérique, compréhensible uniquement par une poignée de personnes qui ont
 consacré des années d'apprentissage à en déjouer les pièges infâmes.
 Et même ceux qui travaillent dans ce domaine le font avec beaucoup de prudence,
-de crainte que leur code soit soumis à des failles ou des plantages,
-ou qu'il soit corrompu.
+de crainte que leur code ne puisse conduire à des problèmes de sécurité, des plantages
+ou des corruptions de mémoire.
 
 <!--
 Rust breaks down these barriers by eliminating the old pitfalls and providing a
@@ -81,7 +81,7 @@ same skills to target your Raspberry Pi.
 Mais Rust n'est pas cantonné à la programmation de bas niveau. C'est un langage
 suffisamment expressif et ergonomique pour rendre les applications en ligne
 de commande, les serveurs web et bien d'autres types de code agréables à écrire
-— vous trouverez plus tard des exemples simples de chacun dans ce livre.
+— vous trouverez plus tard des exemples simples de ces types de programmes dans ce livre.
 Travailler avec Rust vous permet d'acquérir des compétences qui sont
 transposables d'un domaine à un autre ; vous pouvez apprendre Rust en écrivant
 une application web, puis appliquer les mêmes notions pour les utiliser avec
@@ -95,10 +95,10 @@ general. So dive in, get ready to learn—and welcome to the Rust community!
 -->
 
 Ce livre exploite pleinement le potentiel de Rust pour permettre à ses
-utilisateurs de se développer. C'est une documentation conviviale et accessible
+utilisateurs de se perfectionner. C'est une documentation conviviale et accessible
 destinée à améliorer vos connaissances en Rust, mais aussi à améliorer vos
 capacités et votre assurance en tant que développeur en général. Alors foncez,
-et préparez-vous à apprendre — et bienvenue dans la communauté Rust !
+préparez-vous à apprendre, et bienvenue dans la communauté Rust !
 
 <!--
 — Nicholas Matsakis and Aaron Turon
