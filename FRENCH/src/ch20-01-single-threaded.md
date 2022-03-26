@@ -160,12 +160,13 @@ La fonction `bind` retourne un `Result<T, E>`, ce qui signifie que la création
 de lien peut échouer. Par exemple, la connexion au port 80 nécessite d'être
 administrateur (les utilisateurs non-administrateur ne peuvent écouter que sur
 les ports supérieurs à 1023), donc si nous essayons de connecter un port 80
-sans être administrateur, le lien ne va pas fonctionner. Pour donner un autre exemple, le
-lien ne va pas fonctionner si nous exécutons deux instances de notre programme
-et que nous avons deux programmes qui écoutent sur le même port. Comme nous
-écrivons un serveur basique uniquement à but pédagogique, nous n'avons pas à
-nous soucier de la gestion de ce genre d'erreur ; c'est pourquoi nous utilisons
-`unwrap` pour arrêter l'exécution du programme si des erreurs surviennent.
+sans être administrateur, le lien ne va pas fonctionner. Pour donner un autre
+exemple, le lien ne va pas fonctionner si nous exécutons deux instances de
+notre programme et que nous avons deux programmes qui écoutent sur le même
+port. Comme nous écrivons un serveur basique uniquement à but pédagogique, nous
+n'avons pas à nous soucier de la gestion de ce genre d'erreur ; c'est pourquoi
+nous utilisons `unwrap` pour arrêter l'exécution du programme si des erreurs
+surviennent.
 
 <!--
 The `incoming` method on `TcpListener` returns an iterator that gives us a
@@ -182,13 +183,13 @@ streams for us to handle.
 La méthode `incoming` d'un `TcpListener` retourne l'itérateur qui nous donne une
 séquence de flux (plus précisément, des flux de type `TcpStream`). Un seul
 *flux* représente une connexion entre le client et le serveur. Une *connexion*
-est le nom qui désigne le processus complet de requête et de réponse, 
-durant lequel le client se connecte au serveur, le serveur génère une
-réponse puis le serveur ferme la connexion. Ainsi, `TcpStream` va se lire
-lui-même pour voir ce que le client a envoyé et nous permettre ensuite d'écrire
-notre réponse dans le flux. De manière générale, cette boucle `for` traitera
-l'une après l'autre chaque connexion dans l'ordre et produira une série de flux que
-nous devrons gérer.
+est le nom qui désigne le processus complet de requête et de réponse, durant
+lequel le client se connecte au serveur, le serveur génère une réponse puis le
+serveur ferme la connexion. Ainsi, `TcpStream` va se lire lui-même pour voir ce
+que le client a envoyé et nous permettre ensuite d'écrire notre réponse dans le
+flux. De manière générale, cette boucle `for` traitera l'une après l'autre
+chaque connexion dans l'ordre et produira une série de flux que nous devrons
+gérer.
 
 <!--
 For now, our handling of the stream consists of calling `unwrap` to terminate
@@ -270,11 +271,12 @@ factor is that we’ve successfully gotten a handle to a TCP connection!
 -->
 
 Peut-être que le navigateur essaie aussi de se connecter plusieurs fois au
-serveur car le serveur ne renvoie aucune donnée dans sa réponse. Lorsque `flux` sort de la portée
-et est nettoyé à la fin de la boucle, la connexion est fermée car cela est
-implémenté dans le `drop`. Les navigateurs réagissent à ces connexions fermées
-en ré-essayant, car le problème peut être temporaire. La partie importante est
-que nous avons obtenu avec succès un manipulateur de connexion TCP !
+serveur car le serveur ne renvoie aucune donnée dans sa réponse. Lorsque `flux`
+sort de la portée et est nettoyé à la fin de la boucle, la connexion est fermée
+car cela est implémenté dans le `drop`. Les navigateurs réagissent à ces
+connexions fermées en ré-essayant, car le problème peut être temporaire. La
+partie importante est que nous avons obtenu avec succès un manipulateur de
+connexion TCP !
 
 <!--
 Remember to stop the program by pressing <span class="keystroke">ctrl-c</span>
@@ -285,8 +287,9 @@ newest code.
 
 Pensez à arrêter le programme en appuyant sur
 <span class="keystroke">ctrl-c</span> lorsque vous avez fini d'exécuter une
-version donnée du code. Relancez ensuite `cargo run` après avoir appliqué une série de
-modifications afin d'être sûr que vous exécutez bien la toute dernière version du code.
+version donnée du code. Relancez ensuite `cargo run` après avoir appliqué une
+série de modifications afin d'être sûr que vous exécutez bien la toute dernière
+version du code.
 
 <!--
 ### Reading the Request
@@ -303,13 +306,13 @@ print it so we can see the data being sent from the browser. Change the code to
 look like Listing 20-2.
 -->
 
-Commençons à implémenter la fonctionnalité permettant de lire la requête du navigateur !
-Pour séparer les parties où nous obtenons une connexion de celle où nous
-agissons avec la connexion, nous allons créer une nouvelle fonction pour traiter
-les connexions. Dans cette nouvelle fonction `gestion_connexion`, nous allons
-lire des données provenant du flux TCP et les afficher afin que nous puissions
-voir les données envoyées par le navigateur. Changez le code pour qu'il
-ressemble à l'encart 20-2.
+Commençons à implémenter la fonctionnalité permettant de lire la requête du
+navigateur ! Pour séparer les parties où nous obtenons une connexion de celle
+où nous agissons avec la connexion, nous allons créer une nouvelle fonction
+pour traiter les connexions. Dans cette nouvelle fonction `gestion_connexion`,
+nous allons lire des données provenant du flux TCP et les afficher afin que
+nous puissions voir les données envoyées par le navigateur. Changez le code
+pour qu'il ressemble à l'encart 20-2.
 
 <!--
 <span class="filename">Filename: src/main.rs</span>
@@ -358,13 +361,12 @@ mutation, but in this case we need the `mut` keyword.
 -->
 
 Dans la fonction `gestion_connexion`, nous avons fait en sorte que le paramètre
-`flux` soit mutable. La raison à cela est que l'instance de `TcpStream` garde en
-mémoire interne le suivi des données qu'il nous a retournées. Il peut lire plus de données
-que nous en avons demandées et les conserver pour la prochaine fois que nous en 
-redemanderons. Il doit donc
-être `mut` car son état interne doit pouvoir changer ; d'habitude, nous n'avons
-pas besoin que la “lecture” nécessite d'être mutable, mais dans ce cas nous
-avons besoin du mot-clé `mut`.
+`flux` soit mutable. La raison à cela est que l'instance de `TcpStream` garde
+en mémoire interne le suivi des données qu'il nous a retournées. Il peut lire
+plus de données que nous en avons demandées et les conserver pour la prochaine
+fois que nous en redemanderons. Il doit donc être `mut` car son état interne
+doit pouvoir changer ; d'habitude, nous n'avons pas besoin que la “lecture”
+nécessite d'être mutable, mais dans ce cas nous avons besoin du mot-clé `mut`.
 
 <!--
 Next, we need to actually read from the stream. We do this in two steps:
@@ -736,10 +738,10 @@ a new file, *hello.html*, in the root of your project directory, not in the
 possibility.
 -->
 
-Implémentons la fonctionnalité permettant de retourner plus qu'une simple page blanche. Créez
-un nouveau fichier, *hello.html*, à la racine de votre dossier de projet, et
-pas dans le dossier *src*. Vous pouvez ajouter le HTML que vous souhaitez ;
-l'encart 20-4 vous montre une possibilité.
+Implémentons la fonctionnalité permettant de retourner plus qu'une simple page
+blanche. Créez un nouveau fichier, *hello.html*, à la racine de votre dossier
+de projet, et pas dans le dossier *src*. Vous pouvez ajouter le HTML que vous
+souhaitez ; l'encart 20-4 vous montre une possibilité.
 
 <!--
 <span class="filename">Filename: hello.html</span>
@@ -896,7 +898,7 @@ contenu de la requête que nous recevons à la requête que nous attendrions pou
 to */* differently from other requests</span>
 -->
 
-<span class="caption">Encart 20-6 : détection et gestion des requêtes vers */* 
+<span class="caption">Encart 20-6 : détection et gestion des requêtes vers */*
 de manière différenciée des autres requêtes</span>
 
 <!--
@@ -912,11 +914,11 @@ HTML file.
 D'abord, nous codons en dur les données correspondant à la requête */* dans la
 variable `get`. Comme nous lisons des octets bruts provenant du tampon, nous
 transformons `get` en une chaîne d'octets en ajoutant la syntaxe de chaîne
-d'octets `b""` au début des données du contenu. Ensuite, nous vérifions que 
-le `tampon` commence par les mêmes octets que ceux présents dans `get`.
-Si c'est le cas, cela signifie que nous avons reçu une requête
-vers */* correctement formatée, qui est le cas de succès que nous allons
-gérer dans le bloc `if` qui retourne le contenu de notre fichier HTML.
+d'octets `b""` au début des données du contenu. Ensuite, nous vérifions que le
+`tampon` commence par les mêmes octets que ceux présents dans `get`. Si c'est
+le cas, cela signifie que nous avons reçu une requête vers */* correctement
+formatée, qui est le cas de succès que nous allons gérer dans le bloc `if` qui
+retourne le contenu de notre fichier HTML.
 
 <!--
 If `buffer` does *not* start with the bytes in `get`, it means we’ve received
@@ -987,10 +989,10 @@ HTML in Listing 20-8.
 
 Ici notre réponse possède une ligne de statut avec le code de statut 404 et la
 phrase de raison `NOT FOUND`. Le corps de la réponse sera le HTML présent dans
-le fichier *404.html*. Nous aurons besoin de créer un fichier `404.html` au même
-endroit que *hello.html* pour la page d'erreur; de nouveau, n'hésitez pas à utiliser le
-HTML que vous souhaitez ou, à défaut, utilisez le HTML d'exemple présent dans
-l'encart 20-8.
+le fichier *404.html*. Nous aurons besoin de créer un fichier `404.html` au
+même endroit que *hello.html* pour la page d'erreur; de nouveau, n'hésitez pas
+à utiliser le HTML que vous souhaitez ou, à défaut, utilisez le HTML d'exemple
+présent dans l'encart 20-8.
 
 <!--
 <span class="filename">Filename: 404.html</span>

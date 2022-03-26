@@ -30,8 +30,8 @@ expression to run if the value matches that arm’s pattern, like this:
 Comme nous l'avons vu au chapitre 6, nous utilisons les motifs dans les
 branches des expressions `match`. Techniquement, les expressions `match` sont
 définies avec le mot-clé `match`, une valeur sur laquelle procéder et une ou
-plusieurs branches qui constituent un motif, chacune associée à une expression à exécuter
-si la valeur correspond au motif de la branche, comme ceci :
+plusieurs branches qui constituent un motif, chacune associée à une expression
+à exécuter si la valeur correspond au motif de la branche, comme ceci :
 
 <!--
 ```text
@@ -59,13 +59,13 @@ a catchall pattern for the last arm: for example, a variable name matching any
 value can never fail and thus covers every remaining case.
 -->
 
-L'une des conditions à respecter pour les expressions `match` est qu'elles doivent
-être *exhaustives* dans le sens où toutes les valeurs possibles de la valeur présente dans
-l'expression `match` doivent être prises en compte. Une façon de s'assurer que
-vous avez couvert toutes les possibilités est d'avoir un motif passe-partout
-pour la dernière branche : par exemple, une valeur quelconque ne pourra jamais
-échouer car la dernière branche permet de couvrir tous les autres cas
-possibles.
+L'une des conditions à respecter pour les expressions `match` est qu'elles
+doivent être *exhaustives* dans le sens où toutes les valeurs possibles de la
+valeur présente dans l'expression `match` doivent être prises en compte. Une
+façon de s'assurer que vous avez couvert toutes les possibilités est d'avoir un
+motif passe-partout pour la dernière branche : par exemple, une valeur
+quelconque ne pourra jamais échouer car la dernière branche permet de couvrir
+tous les autres cas possibles.
 
 <!--
 A particular pattern `_` will match anything, but it never binds to a variable,
@@ -78,9 +78,9 @@ chapter.
 
 Le motif spécifique `_` va correspondre à tout, mais il ne fournira jamais de
 variable, donc il est souvent utilisé dans la dernière branche. Le motif `_`
-peut par exemple être utile lorsque vous souhaitez ignorer toutes les autres valeurs qui
-n'ont pas été listées. Nous allons voir plus en détail le motif
-`_` dans une section
+peut par exemple être utile lorsque vous souhaitez ignorer toutes les autres
+valeurs qui n'ont pas été listées. Nous allons voir plus en détail le motif `_`
+dans une section
 [plus tard dans ce chapitre][ignoring-values-in-a-pattern]<!-- ignore -->.
 
 <!--
@@ -165,8 +165,9 @@ Si l'utilisateur renseigne une couleur favorite, c'est cette couleur qui
 devient la couleur de fond. Sinon, si nous sommes mardi, la couleur de fond
 sera le vert. Sinon, si l'utilisateur a renseigné son âge dans une chaîne de
 caractères et que nous pouvons l'interpréter comme un nombre avec succès, la
-couleur de fond sera soit le violet, soit l'orange en fonction de la valeur de ce
-nombre. Enfin, si aucune de ces conditions ne s'applique, la couleur de fond sera le bleu.
+couleur de fond sera soit le violet, soit l'orange en fonction de la valeur de
+ce nombre. Enfin, si aucune de ces conditions ne s'applique, la couleur de fond
+sera le bleu.
 
 <!--
 This conditional structure lets us support complex requirements. With the
@@ -349,8 +350,8 @@ variable assignment with `let`:
 -->
 
 Avant d'arriver à ce chapitre, nous n'avions abordé explicitement l'utilisation
-des motifs qu'avec `match` et `if let`, mais en réalité, nous avions
-utilisé les motifs dans d'autres endroits, y compris dans les instructions `let`. Par
+des motifs qu'avec `match` et `if let`, mais en réalité, nous avions utilisé
+les motifs dans d'autres endroits, y compris dans les instructions `let`. Par
 exemple, considérons l'assignation de la variable suivante avec `let` :
 
 <!--
@@ -394,12 +395,12 @@ effectively means “bind everything to the variable `x`, whatever the value is.
 -->
 
 Dans des instructions telles que `let x = 5;` avec un nom de variable dans
-l'emplacement `MOTIF`, le nom de la variable n'est juste qu'une forme particulièrement simple de
-motif. Rust compare l'expression avec le motif et assigne tous les noms qu'il
-trouve. Dans l'exemple `let x = 5;`, `x` est un motif qui signifie
-“relie ce qui correspond ici à la variable `x`”.  Puisque le nom `x` constitue un motif complet,
-il signifie exactement “relie tout ce qui suit à la variable
-`x`, quelle qu'en soit la valeur”.
+l'emplacement `MOTIF`, le nom de la variable n'est juste qu'une forme
+particulièrement simple de motif. Rust compare l'expression avec le motif et
+assigne tous les noms qu'il trouve. Dans l'exemple `let x = 5;`, `x` est un
+motif qui signifie “relie ce qui correspond ici à la variable `x`”.  Puisque le
+nom `x` constitue un motif complet, il signifie exactement “relie tout ce qui
+suit à la variable `x`, quelle qu'en soit la valeur”.
 
 <!--
 To see the pattern matching aspect of `let` more clearly, consider Listing
@@ -499,8 +500,9 @@ of elements in the tuple.
 Si nous souhaitons ignorer une ou plusieurs valeurs dans un tuple, nous pouvons
 utiliser `_` ou `..`, comme vous allez le voir à la dernière section de ce
 chapitre. Si le problème est que nous avons trop de variables dans le motif, la
-solution pour faire correspondre les types consiste à enlever des variables de 
-façon à ce que le nombre de variables corresponde au nombre d'éléments présents dans le tuple.
+solution pour faire correspondre les types consiste à enlever des variables de
+façon à ce que le nombre de variables corresponde au nombre d'éléments présents
+dans le tuple.
 
 <!--
 ### Function Parameters
@@ -586,8 +588,9 @@ discussed in Chapter 13.
 -->
 
 Nous pouvons aussi utiliser les motifs dans la liste des paramètres d'une
-fermeture de la même manière que dans la liste des paramètres d'une fonction, car les
-fermetures sont similaires aux fonctions, comme nous l'avons dit au chapitre 13.
+fermeture de la même manière que dans la liste des paramètres d'une fonction,
+car les fermetures sont similaires aux fonctions, comme nous l'avons dit au
+chapitre 13.
 
 <!--
 At this point, you’ve seen several ways of using patterns, but patterns don’t

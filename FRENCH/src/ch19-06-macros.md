@@ -384,11 +384,11 @@ Il subsiste quelques cas limites étranges avec `macro_rules!`. Bientôt, Rust
 rajoutera un second type de macro déclarative qui fonctionnera de la même
 manière mais qui corrigera ces cas limites. Après cette mise à jour,
 `macro_rules!` sera dépréciée. En sachant cela, ainsi que le fait que la
-plupart des développeurs Rust vont davantage *utiliser* les macros qu'en *écrire*, 
-nous arrêtons là la discussion sur `macro_rules!`. Pour en
-apprendre plus sur l'écriture des macros, consultez la documentation en ligne ou
-d'autres ressources comme [“The Little Book of Rust Macros”][tlborm], débuté
-par Daniel Keep et continué par Lukas Wirth.
+plupart des développeurs Rust vont davantage *utiliser* les macros qu'en
+*écrire*, nous arrêtons là la discussion sur `macro_rules!`. Pour en apprendre
+plus sur l'écriture des macros, consultez la documentation en ligne ou d'autres
+ressources comme [“The Little Book of Rust Macros”][tlborm], débuté par Daniel
+Keep et continué par Lukas Wirth.
 
 <!--
 [tlborm]: https://veykril.github.io/tlborm/
@@ -428,14 +428,14 @@ fonctionnent toutes de la même manière.
 <!--
 When creating procedural macros, the definitions must reside in their own crate
 with a special crate type. This is for complex technical reasons that we hope
-to eliminate in the future. Using procedural macros looks like the code in
+to eliminate in the future. Defining procedural macros looks like the code in
 Listing 19-29, where `some_attribute` is a placeholder for using a specific
-macro.
+macro variety.
 -->
 
 Lorsque vous créez une macro procédurale, les définitions doivent être rangées
 dans leur propre crate avec un type spécial de crate. Ceci pour des raisons
-techniques complexes que nous espérons supprimer dans l'avenir. L'utilisation
+techniques complexes que nous espérons supprimer dans l'avenir. La déclaration
 des macros procédurales ressemble au code de l'encart 19-29, dans lequel
 `un_attribut_quelconque` est un emplacement pour l'utilisation d'une macro
 spécifique.
@@ -465,11 +465,11 @@ pub fn un_nom_quelconque(entree: TokenStream) -> TokenStream {
 ```
 
 <!--
-<span class="caption">Listing 19-29: An example of using a procedural
+<span class="caption">Listing 19-29: An example of defining a procedural
 macro</span>
 -->
 
-<span class="caption">Encart 19-29 : un exemple d'utilisation d'une macro
+<span class="caption">Encart 19-29 : un exemple de déclaration d'une macro
 procédurale</span>
 
 <!--
@@ -891,8 +891,8 @@ parsing the code that has the macro’s attribute in Listing 19-30</span>
 -->
 
 <span class="caption">Encart 19-32 : l'instance de `DeriveInput` que nous
-obtenons lorsque nous analysons le code qui est décoré par l'attribut de la macro dans
-l'encart 19-30</span>
+obtenons lorsque nous analysons le code qui est décoré par l'attribut de la
+macro dans l'encart 19-30</span>
 
 <!--
 The fields of this struct show that the Rust code we’ve parsed is a unit struct
@@ -1010,11 +1010,11 @@ returns a value of the required `TokenStream` type.
 -->
 
 La macro `quote!` nous permet de définir le code Rust que nous souhaitons
-retourner. Le compilateur attend quelque chose de différent que le résultat direct
-produit par l'exécution de `quote!`, donc nous devons convertir ce dernier en
-`TokenStream`. Nous faisons ceci en faisant appel à la méthode `into`, qui utilise 
-cette représentation intermédiaire et retourne une valeur du type attendu,
-le type `TokenStream` ici.
+retourner. Le compilateur attend quelque chose de différent que le résultat
+direct produit par l'exécution de `quote!`, donc nous devons convertir ce
+dernier en `TokenStream`. Nous faisons ceci en faisant appel à la méthode
+`into`, qui utilise cette représentation intermédiaire et retourne une valeur
+du type attendu, le type `TokenStream` ici.
 
 <!--
 The `quote!` macro also provides some very cool templating mechanics: we can
@@ -1024,8 +1024,8 @@ Check out [the `quote` crate’s docs][quote-docs] for a thorough introduction.
 -->
 
 La macro `quote!` fournit aussi quelques mécaniques de gabarit intéressantes :
-nous pouvons entrer `#nom`, et `quote!` va le remplacer avec la valeur présente dans la
-variable `nom`. Vous pouvez même exécuter des répétitions d'une façon
+nous pouvons entrer `#nom`, et `quote!` va le remplacer avec la valeur présente
+dans la variable `nom`. Vous pouvez même exécuter des répétitions d'une façon
 similaire à celle des macros classiques. Regardez dans
 [la documentation de `quote`][quote-docs] pour une présentation plus détaillée.
 
@@ -1214,11 +1214,11 @@ Function-like macros define macros that look like function calls. Similarly to
 `macro_rules!` macros, they’re more flexible than functions; for example, they
 can take an unknown number of arguments. However, `macro_rules!` macros can be
 defined only using the match-like syntax we discussed in the section
-[“Declarative Macros with `macro_rules!` for General Metaprogramming”][decl]
-earlier. Function-like macros take a `TokenStream` parameter and their
-definition manipulates that `TokenStream` using Rust code as the other two
-types of procedural macros do. An example of a function-like macro is an `sql!`
-macro that might be called like so:
+[“Declarative Macros with `macro_rules!` for General
+Metaprogramming”][decl]<!-- ignore -- > earlier. Function-like macros take a
+`TokenStream` parameter and their definition manipulates that `TokenStream`
+using Rust code as the other two types of procedural macros do. An example of a
+function-like macro is an `sql!` macro that might be called like so:
 -->
 
 Les macros qui ressemblent à des fonctions définissent des macros qui
@@ -1226,12 +1226,12 @@ ressemblent à des appels de fonction. De la même manière que les macros
 `macro_rules!`, elles sont plus flexibles que les fonctions ; par exemple, elles
 peuvent prendre une quantité non finie d'arguments. Cependant, les macros
 `macro_rules!` peuvent être définies uniquement en utilisant la syntaxe qui
-ressemble à `match` et que nous avons vue dans [une section précédente][decl]. Les
-macros qui ressemblent à des fonctions prennent en paramètre un `TokenStream` et
-leurs définitions manipulent ce `TokenStream` en utilisant du code Rust comme le
-font les deux autres types de macros procédurales. Voici un exemple d'une macro
-qui ressemble à une fonction qui est une macro `sql!` qui devrait être utilisée
-comme ceci :
+ressemble à `match` et que nous avons vue dans [une section
+précédente][decl]<!-- ignore -->. Les macros qui ressemblent à des fonctions
+prennent en paramètre un `TokenStream` et leurs définitions manipulent ce
+`TokenStream` en utilisant du code Rust comme le font les deux autres types de
+macros procédurales. Voici un exemple d'une macro qui ressemble à une fonction
+qui est une macro `sql!` qui devrait être utilisée comme ceci :
 
 <!--
 [decl]: #declarative-macros-with-macro_rules-for-general-metaprogramming

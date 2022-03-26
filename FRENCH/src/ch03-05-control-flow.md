@@ -61,7 +61,7 @@ découvrir les expressions `if`. Dans le fichier *src/main.rs*, écrivez ceci :
 <!--
 All `if` expressions start with the keyword `if`, followed by a condition. In
 this case, the condition checks whether or not the variable `number` has a
-value less than 5. We place block of code to execute if the condition is true
+value less than 5. We place the block of code to execute if the condition is true
 immediately after the condition inside curly brackets. Blocks of code
 associated with the conditions in `if` expressions are sometimes called *arms*,
 just like the arms in `match` expressions that we discussed in the [“Comparing
@@ -71,7 +71,7 @@ ignore -- > section of Chapter 2.
 
 Une expression `if` commence par le mot-clé `if`, suivi d'une condition.
 Dans notre cas, la condition vérifie si oui ou non la variable `nombre` a une
-valeur inférieure à 5. Nous ajoutons un bloc de code à exécuter si la condition
+valeur inférieure à 5. Nous ajoutons le bloc de code à exécuter si la condition
 est vérifiée immédiatement après la condition entre des accolades. Les blocs de
 code associés à une condition dans une expression `if` sont parfois appelés des
 *branches*, exactement comme les branches dans les expressions `match` que nous

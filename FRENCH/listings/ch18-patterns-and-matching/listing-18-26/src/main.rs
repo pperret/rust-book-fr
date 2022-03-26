@@ -3,8 +3,8 @@ fn main() {
     let nombre = Some(4);
 
     match nombre {
-        Some(x) if x < 5 => println!("moins que cinq : {}", x),
-        Some(x) => println!("{}", x),
+        Some(x) if x % 2 == 0 => println!("Le nombre {} est pair", x),
+        Some(x) => println!("Le nombre {} est impair", x),
         None => (),
     }
     // ANCHOR_END: here

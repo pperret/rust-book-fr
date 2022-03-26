@@ -14,8 +14,8 @@ control flow. A pattern consists of some combination of the following:
 Les motifs sont une syntaxe spéciale de Rust permettant de filtrer selon la
 structure des types, qu'elle soit simple ou complexe. L'utilisation de motifs
 conjointement avec des expressions `match` et d'autres constructions vous donne
-davantage de maîtrise sur le flux de contrôle de votre programme. 
-Un motif est constitué d'une combinaison de :
+davantage de maîtrise sur le flux de contrôle de votre programme. Un motif est
+constitué d'une combinaison de :
 
 <!--
 * Literals
@@ -38,8 +38,9 @@ to continue running a particular piece of code.
 -->
 
 Ces composants décrivent la forme de la donnée avec laquelle nous travaillons,
-que nous comparons alors à différents motifs de valeurs pour déterminer si notre programme
-dispose de la donnée appropriée pour exécuter une partie spécifique de code.
+que nous comparons alors à différents motifs de valeurs pour déterminer si
+notre programme dispose de la donnée appropriée pour exécuter une partie
+spécifique de code.
 
 <!--
 To use a pattern, we compare it to some value. If the pattern matches the

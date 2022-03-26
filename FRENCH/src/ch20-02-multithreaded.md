@@ -63,8 +63,9 @@ secondes avant de pouvoir répondre à nouveau.
 */sleep* and sleeping for 5 seconds</span>
 -->
 
-<span class="caption">Encart 20-10 : simulation d'une requête provoquant un long traitement
-en détectant */pause* et en faisant une pause de 5 secondes</span>
+<span class="caption">Encart 20-10 : simulation d'une requête provoquant un
+long traitement en détectant */pause* et en faisant une pause de 5
+secondes</span>
 
 <!--
 This code is a bit messy, but it’s good enough for simulation purposes. We
@@ -152,11 +153,11 @@ the processing of requests to a halt.
 -->
 
 Nous allons limiter le nombre de tâches dans le groupe à un petit nombre pour
-nous protéger d'attaques par déni de service (Denial of Service, DoS) ; si notre
-programme créait une nouvelle tâche à chaque requête qu'il reçoit, quelqu'un qui
-ferait 10 millions de requêtes à notre serveur pourrait faire des ravages en
-utilisant toutes les ressources de notre serveur et bloquer ainsi le traitement 
-de toute nouvelle requête.
+nous protéger d'attaques par déni de service (Denial of Service, DoS) ; si
+notre programme créait une nouvelle tâche à chaque requête qu'il reçoit,
+quelqu'un qui ferait 10 millions de requêtes à notre serveur pourrait faire des
+ravages en utilisant toutes les ressources de notre serveur et bloquer ainsi le
+traitement de toute nouvelle requête.
 
 <!--
 Rather than spawning unlimited threads, we’ll have a fixed number of threads
@@ -429,14 +430,13 @@ to bring the library crate in and bring `ThreadPool` into scope by adding the
 following code to the top of *src/bin/main.rs*:
 -->
 
-Créez ensuite un nouveau dossier, *src/bin*, et déplacez-y la crate binaire *src/main.rs* 
-qui sera donc désormais *src/bin/main.rs*. Ceci va faire que
-la crate de bibliothèque sera la crate principale dans le dossier
-*salutations* ; nous pouvons quand même continuer à exécuter le binaire dans
-*src/bin/main.rs* en utilisant `cargo run`. Après avoir déplacé le fichier
-*main.rs*, modifiez-le pour importer la crate de bibliothèque et importer
-`GroupeTaches` dans la portée en ajoutant le code suivant en haut de
-*src/bin/main.rs* :
+Créez ensuite un nouveau dossier, *src/bin*, et déplacez-y la crate binaire
+*src/main.rs*  qui sera donc désormais *src/bin/main.rs*. Ceci va faire que la
+crate de bibliothèque sera la crate principale dans le dossier *salutations* ;
+nous pouvons quand même continuer à exécuter le binaire dans *src/bin/main.rs*
+en utilisant `cargo run`. Après avoir déplacé le fichier *main.rs*, modifiez-le
+pour importer la crate de bibliothèque et importer `GroupeTaches` dans la
+portée en ajoutant le code suivant en haut de *src/bin/main.rs* :
 
 <!--
 <span class="filename">Filename: src/bin/main.rs</span>
@@ -567,11 +567,12 @@ Nous allons définir la méthode `executer` sur `GroupeTaches` pour prendre en
 paramètre une fermeture. Souvenez-vous que nous avions vu dans [une section du
 chapitre 13][storing-closures-using-generic-parameters-and-the-fn-traits]<!--
 ignore --> que nous pouvions prendre en paramètre les fermetures avec trois
-types de traits différents : `Fn`, `FnMut`, et `FnOnce`. Nous devons décider quel genre
-de fermeture nous allons utiliser ici. Nous savons que nous allons faire quelque
-chose de sensiblement identique à l'implémentation du `thread::spawn` de la
-bibliothèque standard, donc nous pouvons nous inspirer de ce qui lie 
-la signature de `thread::spawn` à son paramètre. La documentation nous donne ceci :
+types de traits différents : `Fn`, `FnMut`, et `FnOnce`. Nous devons décider
+quel genre de fermeture nous allons utiliser ici. Nous savons que nous allons
+faire quelque chose de sensiblement identique à l'implémentation du
+`thread::spawn` de la bibliothèque standard, donc nous pouvons nous inspirer de
+ce qui lie la signature de `thread::spawn` à son paramètre. La documentation
+nous donne ceci :
 
 <!--
 ```rust,ignore
@@ -651,8 +652,8 @@ have no parameters, we still need the parentheses.
 Nous utilisons toujours le `()` après `FnOne` car ce `FnOnce` représente une
 fermeture qui ne prend pas de paramètres et retourne le type unité `()`.
 Exactement comme les définitions de fonctions, le type de retour peut être omis
-de la signature, mais même si elle ne contient pas de paramètre, nous avons tout de
-même besoin des parenthèses.
+de la signature, mais même si elle ne contient pas de paramètre, nous avons
+tout de même besoin des parenthèses.
 
 <!--
 Again, this is the simplest implementation of the `execute` method: it does
@@ -660,8 +661,8 @@ nothing, but we’re trying only to make our code compile. Let’s check it agai
 -->
 
 A nouveau, c'est l'implémentation la plus simpliste de la méthode `executer` :
-elle ne fait rien, mais nous essayons seulement de faire en sorte que notre code
-se compile. Vérifions-le à nouveau :
+elle ne fait rien, mais nous essayons seulement de faire en sorte que notre
+code se compile. Vérifions-le à nouveau :
 
 <!--
 ```console
@@ -719,15 +720,16 @@ we return a `ThreadPool` instance and have the program panic if it receives a
 zero by using the `assert!` macro, as shown in Listing 20-13.
 -->
 
-Nous ne faisons rien avec les paramètres passés à `new` et `executer`. Implémentons le
-corps de ces fonctions avec le comportement que nous souhaitons. Pour commencer,
-réfléchissons à `new`. Précédemment, nous avions choisi un type sans signe pour
-le paramètre `taille`, car un groupe avec un nombre négatif de tâches n'a pas de
-sens. Cependant, un groupe avec aucune tâche n'a pas non plus de sens, alors que
-zéro est une valeur parfaitement valide pour `usize`. Nous allons ajouter du
-code pour vérifier que `taille` est plus grand que zéro avant de retourner une
-instance de `GroupeTaches` et faire en sorte que le programme panique s'il
-reçoit un zéro, en utilisant la macro `assert!` comme dans l'encart 20-13.
+Nous ne faisons rien avec les paramètres passés à `new` et `executer`.
+Implémentons le corps de ces fonctions avec le comportement que nous
+souhaitons. Pour commencer, réfléchissons à `new`. Précédemment, nous avions
+choisi un type sans signe pour le paramètre `taille`, car un groupe avec un
+nombre négatif de tâches n'a pas de sens. Cependant, un groupe avec aucune
+tâche n'a pas non plus de sens, alors que zéro est une valeur parfaitement
+valide pour `usize`. Nous allons ajouter du code pour vérifier que `taille` est
+plus grand que zéro avant de retourner une instance de `GroupeTaches` et faire
+en sorte que le programme panique s'il reçoit un zéro, en utilisant la macro
+`assert!` comme dans l'encart 20-13.
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -777,13 +779,13 @@ ambitious, try to write a version of `new` with the following signature to
 compare both versions:
 -->
 
-Au lieu d'ajouter la macro `assert!` comme nous venons de le faire, nous aurions pu
-faire en sorte que `new` retourne un `Result` comme nous l'avions fait avec
-`Config::new` dans le projet d'entrée/sortie dans l'encart 12-9. Mais nous avons
-décidé que dans le cas présent, la création d'un groupe de tâches sans aucune tâche 
-devait être une erreur irrécupérable. Si vous en sentez l'envie, essayez
-d'écrire une version de `new` avec la signature suivante, pour comparer les deux
-versions :
+Au lieu d'ajouter la macro `assert!` comme nous venons de le faire, nous
+aurions pu faire en sorte que `new` retourne un `Result` comme nous l'avions
+fait avec `Config::new` dans le projet d'entrée/sortie dans l'encart 12-9. Mais
+nous avons décidé que dans le cas présent, la création d'un groupe de tâches
+sans aucune tâche devait être une erreur irrécupérable. Si vous en sentez
+l'envie, essayez d'écrire une version de `new` avec la signature suivante, pour
+comparer les deux versions :
 
 <!--
 ```rust,ignore
@@ -939,12 +941,12 @@ implement it manually.
 -->
 
 Nous avions laissé un commentaire dans la boucle `for` dans l'encart 20-14 qui
-concernait la création des tâches. Maintenant, nous allons voir comment créer ces
-tâches. La bibliothèque standard fournit un moyen de créer des tâches avec
-`thread::spawn` à qui il faut passer le code que la tâche doit
-exécuter dès qu'elle est créée. Cependant, dans notre cas, nous souhaitons
-créer des tâches et faire en sorte qu'elles *attendent* du code que nous leur enverrons plus
-tard. L'implémentation des tâches de la bibliothèque standard n'offre aucun 
+concernait la création des tâches. Maintenant, nous allons voir comment créer
+ces tâches. La bibliothèque standard fournit un moyen de créer des tâches avec
+`thread::spawn` à qui il faut passer le code que la tâche doit exécuter dès
+qu'elle est créée. Cependant, dans notre cas, nous souhaitons créer des tâches
+et faire en sorte qu'elles *attendent* du code que nous leur enverrons plus
+tard. L'implémentation des tâches de la bibliothèque standard n'offre aucun
 moyen de faire ceci ; nous devons donc implémenter cela nous-même.
 
 <!--
@@ -958,11 +960,11 @@ for taking those orders and filling them.
 
 Nous allons implémenter ce comportement en introduisant une nouvelle structure
 de données entre le `GroupeTaches` et les tâches qui va gérer ce nouveau
-comportement. Nous allons appeler cette structure `Operateur`, nom qui lui est 
-traditionnellement donné avec `Worker` dans les implémentations de groupe de tâches. 
-Imaginez des personnes qui travaillent dans la cuisine d'un restaurant : les opérateurs 
-attendent les commandes des clients puis sont chargés de prendre en charge ces commandes et
-d'y répondre.
+comportement. Nous allons appeler cette structure `Operateur`, nom qui lui est
+traditionnellement donné avec `Worker` dans les implémentations de groupe de
+tâches. Imaginez des personnes qui travaillent dans la cuisine d'un restaurant :
+les opérateurs attendent les commandes des clients puis sont chargés de prendre
+en charge ces commandes et d'y répondre.
 
 <!--
 Instead of storing a vector of `JoinHandle<()>` instances in the thread pool,
@@ -1146,12 +1148,13 @@ plan :
    and execute the closures of any jobs it receives.
 -->
 
-1. Le `GroupeTaches` va créer un canal et se connecter à la partie émettrice de ce canal.
+1. Le `GroupeTaches` va créer un canal et se connecter à la partie émettrice de
+   ce canal.
 2. Chaque `Operateur` va se connecter à la partie réceptrice du canal.
 3. Nous allons créer une nouvelle structure `Mission` qui va stocker les
    fermetures que nous souhaitons envoyer dans le canal.
-4. La méthode `executer` va envoyer la mission qu'elle souhaite executer à 
-   la partie émettrice du canal.
+4. La méthode `executer` va envoyer la mission qu'elle souhaite executer à la
+   partie émettrice du canal.
 5. Dans sa propre tâche, l' `Operateur` va vérifier en permanence la partie
    réceptrice du canal et exécuter les fermetures des missions qu'il va
    recevoir.
@@ -1287,10 +1290,10 @@ Additionally, taking a job off the channel queue involves mutating the
 otherwise, we might get race conditions (as covered in Chapter 16).
 -->
 
-De plus, obtenir une mission de la file d'attente du canal implique de modifier la
-`reception`, donc les tâches ont besoin d'une méthode sécurisée pour partager
-et modifier `reception` ; autrement, nous risquons de nous trouver dans des situations de
-concurrence (comme nous l'avons vu dans le chapitre 16).
+De plus, obtenir une mission de la file d'attente du canal implique de modifier
+la `reception`, donc les tâches ont besoin d'une méthode sécurisée pour
+partager et modifier `reception` ; autrement, nous risquons de nous trouver
+dans des situations de concurrence (comme nous l'avons vu dans le chapitre 16).
 
 <!--
 Recall the thread-safe smart pointers discussed in Chapter 16: to share
@@ -1365,12 +1368,12 @@ at Listing 20-19.
 -->
 
 Finissons en implémentant la méthode `executer` de `GroupeTaches`. Nous allons
-également modifier la structure `Mission` pour la transformer en un alias de type pour un
-objet trait qui contiendra le type de fermeture que `executer` recevra.
-Comme nous l'avons vu dans [une section du
-chapitre 19][creating-type-synonyms-with-type-aliases]<!-- ignore -->, les
-alias de type nous permettent de raccourcir les types un peu trop longs.
-Voyez cela dans l'encart 20-19.
+également modifier la structure `Mission` pour la transformer en un alias de
+type pour un objet trait qui contiendra le type de fermeture que `executer`
+recevra. Comme nous l'avons vu dans
+[une section du chapitre 19][creating-type-synonyms-with-type-aliases]<!--
+ignore -->, les alias de type nous permettent de raccourcir les types un peu
+trop longs. Voyez cela dans l'encart 20-19.
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -1427,11 +1430,12 @@ channel for a job and running the job when it gets one. Let’s make the change
 shown in Listing 20-20 to `Worker::new`.
 -->
 
-Mais nous n'avons pas encore tout à fait fini ! Dans l'opérateur, notre fermeture envoyée
-à `thread::spawn` ne fait que *référencer* la partie réception du canal. Au lieu de ça, nous avons
-besoin que la fermeture boucle à l'infini, demandant une mission à la partie réceptrice 
-du canal et l'exécutant quand elle en obtient une. Appliquons les changements montrés 
-dans l'encart 20-20 à `Operateur::new`.
+Mais nous n'avons pas encore tout à fait fini ! Dans l'opérateur, notre
+fermeture envoyée à `thread::spawn` ne fait que *référencer* la partie
+réception du canal. Au lieu de ça, nous avons besoin que la fermeture boucle à
+l'infini, demandant une mission à la partie réceptrice du canal et l'exécutant
+quand elle en obtient une. Appliquons les changements montrés dans l'encart
+20-20 à `Operateur::new`.
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -1671,18 +1675,17 @@ than intended if we don’t think carefully about the lifetime of the
 `MutexGuard<T>`.
 -->
 
-Ce code se compile et s'exécute mais ne se produit pas le comportement des 
-tâches que nous souhaitons : une requête lente à traiter va
-continuer à mettre en attente de traitement les autres requêtes. 
-La raison à cela est subtile : la structure `Mutex` n'a pas de
-méthode publique `unlock` car la propriété du verrou se base sur la durée de
-vie du `MutexGuard<T>` au sein du `LockResult<MutexGuard<T>>` que retourne la
-méthode `lock`. A la compilation, le vérificateur d'emprunt peut ensuite
-vérifier la règle qui dit qu'une ressource gardée par un `Mutex` ne peut
-être accessible que si nous avons ce verrou. Mais cette implémentation peut
-aussi conduire à ce que nous gardions le verrou plus longtemps que prévu si
-nous ne réfléchissons pas avec attention à la durée de vie du
-`MutexGuard<T>`.
+Ce code se compile et s'exécute mais ne se produit pas le comportement des
+tâches que nous souhaitons : une requête lente à traiter va continuer à mettre
+en attente de traitement les autres requêtes. La raison à cela est subtile : la
+structure `Mutex` n'a pas de méthode publique `unlock` car la propriété du
+verrou se base sur la durée de vie du `MutexGuard<T>` au sein du
+`LockResult<MutexGuard<T>>` que retourne la méthode `lock`. A la compilation,
+le vérificateur d'emprunt peut ensuite vérifier la règle qui dit qu'une
+ressource gardée par un `Mutex` ne peut être accessible que si nous avons ce
+verrou. Mais cette implémentation peut aussi conduire à ce que nous gardions le
+verrou plus longtemps que prévu si nous ne réfléchissons pas avec attention à
+la durée de vie du `MutexGuard<T>`.
 
 <!--
 The code in Listing 20-20 that uses `let job =

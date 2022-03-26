@@ -34,14 +34,14 @@ failure: the functionality of a conditional is in its ability to perform
 differently depending on success or failure.
 -->
 
-Les paramètres de fonctions, les instructions `let` et les boucles `for`
-ne peuvent accepter que des motifs irréfutables, car le programme ne peut
-rien faire d'autre lorsque les valeurs ne correspondent pas. Les expressions
-`if let` et `while let` acceptent les motifs réfutables et irréfutables, mais 
-dans le second cas, le compilateur affichera une mise en garde 
-car, par définition, ces expressions sont destinées à gérer un problème
-éventuel : le but des conditions est de se comporter différemment en fonction de
-la réussite ou de l'échec.
+Les paramètres de fonctions, les instructions `let` et les boucles `for` ne
+peuvent accepter que des motifs irréfutables, car le programme ne peut rien
+faire d'autre lorsque les valeurs ne correspondent pas. Les expressions
+`if let` et `while let` acceptent les motifs réfutables et irréfutables, mais
+dans le second cas, le compilateur affichera une mise en garde car, par
+définition, ces expressions sont destinées à gérer un problème éventuel : le
+but des conditions est de se comporter différemment en fonction de la réussite
+ou de l'échec.
 
 <!--
 In general, you shouldn’t have to worry about the distinction between refutable
@@ -54,9 +54,10 @@ using the pattern with, depending on the intended behavior of the code.
 De manière générale, vous ne devriez pas avoir à vous soucier des différences
 entre les motifs réfutables et irréfutables ; en revanche, vous devez vous
 familiariser avec le concept de réfutabilité afin que vous puissiez comprendre
-ce qui se passe lorsque vous le verrez apparaître dans un message d'erreur. 
-Dans ce cas, vous allez avoir besoin de changer soit le motif, soit la construction 
-avec laquelle vous l'utilisez, selon le comportement attendu du code.
+ce qui se passe lorsque vous le verrez apparaître dans un message d'erreur.
+Dans ce cas, vous allez avoir besoin de changer soit le motif, soit la
+construction avec laquelle vous l'utilisez, selon le comportement attendu du
+code.
 
 <!--
 Let’s look at an example of what happens when we try to use a refutable pattern
@@ -97,12 +98,12 @@ do with a `None` value. At compile time, Rust will complain that we’ve tried t
 use a refutable pattern where an irrefutable pattern is required:
 -->
 
-Si `une_option_quelconque` était une valeur `None`, elle ne correspondrait pas 
-au motif `Some(x)`, ce qui signifie que le motif est réfutable. Cependant, l'instruction
-`let` ne peut accepter qu'un motif irréfutable car il n'existe pas d'instructions valides à
-exécuter avec une valeur `None`. A la compilation, Rust s'y opposera en
-expliquant que nous avons essayé d'utiliser un motif réfutable là où un motif
-irréfutable est nécessaire :
+Si `une_option_quelconque` était une valeur `None`, elle ne correspondrait pas
+au motif `Some(x)`, ce qui signifie que le motif est réfutable. Cependant,
+l'instruction `let` ne peut accepter qu'un motif irréfutable car il n'existe
+pas d'instructions valides à exécuter avec une valeur `None`. A la compilation,
+Rust s'y opposera en expliquant que nous avons essayé d'utiliser un motif
+réfutable là où un motif irréfutable est nécessaire :
 
 <!--
 ```console
@@ -133,10 +134,10 @@ validly. Listing 18-9 shows how to fix the code in Listing 18-8.
 
 Pour corriger le problème lorsque nous avons un motif réfutable là où un motif
 irréfutable est nécessaire, nous pouvons modifier le code qui utilise ce motif :
-au lieu d'utiliser `let`, nous pouvons utiliser `if let`. Dans ce cas, si le motif
-ne correspond pas, le programme va simplement sauter le code entre les accolades,
-ce qui lui permet de poursuivre son exécution sans rencontrer d'erreur. L'encart 18-9 montre
-comment corriger le code de l'encart 18-8.
+au lieu d'utiliser `let`, nous pouvons utiliser `if let`. Dans ce cas, si le
+motif ne correspond pas, le programme va simplement sauter le code entre les
+accolades, ce qui lui permet de poursuivre son exécution sans rencontrer
+d'erreur. L'encart 18-9 montre comment corriger le code de l'encart 18-8.
 
 <!--
 ```rust
@@ -163,10 +164,11 @@ let` a pattern that will always match, such as `x`, as shown in Listing 18-10,
 the compiler will give a warning.
 -->
 
-Nous avons donné au code une porte de sortie. Ce code est parfaitement valide, cependant
-il implique que nous ne pouvons pas utiliser un motif irréfutable sans provoquer une erreur. 
-Si nous donnons au `if let` un motif qui correspond toujours, tel que `x`, comme montré dans l'encart 18-10, 
-le compilateur va lever un avertissement.
+Nous avons donné au code une porte de sortie. Ce code est parfaitement valide,
+cependant il implique que nous ne pouvons pas utiliser un motif irréfutable
+sans provoquer une erreur. Si nous donnons au `if let` un motif qui correspond
+toujours, tel que `x`, comme montré dans l'encart 18-10, le compilateur va
+lever un avertissement.
 
 <!--
 ```rust
@@ -215,9 +217,9 @@ this syntax isn’t particularly useful and could be replaced with a simpler
 C'est pourquoi les branches de `match` doivent utiliser des motifs réfutables,
 sauf pour la dernière branche, qui devrait correspondre à n'importe quelle
 valeur grâce à un motif irréfutable. Rust nous permet d'utiliser un motif
-irréfutable dans un `match` ne possédant qu'une seule branche, mais cette syntaxe n'est
-pas particulièrement utile et devrait être remplacée par une instruction `let`
-plus simple.
+irréfutable dans un `match` ne possédant qu'une seule branche, mais cette
+syntaxe n'est pas particulièrement utile et devrait être remplacée par une
+instruction `let` plus simple.
 
 <!--
 Now that you know where to use patterns and the difference between refutable
@@ -225,6 +227,6 @@ and irrefutable patterns, let’s cover all the syntax we can use to create
 patterns.
 -->
 
-Maintenant que vous savez où utiliser les motifs et que vous connaissez 
-la différence entre les motifs réfutables et irréfutables, voyons toutes 
-les syntaxes que nous pouvons utiliser pour créer des motifs.
+Maintenant que vous savez où utiliser les motifs et que vous connaissez la
+différence entre les motifs réfutables et irréfutables, voyons toutes les
+syntaxes que nous pouvons utiliser pour créer des motifs.

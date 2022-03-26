@@ -82,9 +82,9 @@ the crates you might use in the future.
 
 Toutefois, notre intention dans ce chapitre est de vous aider à apprendre, et
 ne pas de se laisser aller à la facilité. Comme Rust est un langage de
-programmation système, nous pouvons choisir le niveau d'abstraction avec 
-lequel nous souhaitons travailler et nous pouvons descendre à un niveau plus bas
-que ce qui est possible ou pratique dans d'autres langages. Nous allons écrire
+programmation système, nous pouvons choisir le niveau d'abstraction avec lequel
+nous souhaitons travailler et nous pouvons descendre à un niveau plus bas que
+ce qui est possible ou pratique dans d'autres langages. Nous allons écrire
 manuellement le serveur HTTP basique et le groupe de tâches afin que vous
-puissiez apprendre les idées et techniques générales qui se cachent derrière les crates que
-vous serez peut-être amenés à utiliser à l'avenir.
+puissiez apprendre les idées et techniques générales qui se cachent derrière
+les crates que vous serez peut-être amenés à utiliser à l'avenir.

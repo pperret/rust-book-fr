@@ -467,6 +467,7 @@ Let’s recap what we’ve learned so far about Cargo:
 Récapitulons ce que nous avons appris sur Cargo :
 
 <!--
+* We can create a project using `cargo new`.
 * We can build a project using `cargo build`.
 * We can build and run a project in one step using `cargo run`.
 * We can build a project without producing a binary to check for errors using
@@ -475,6 +476,7 @@ Récapitulons ce que nous avons appris sur Cargo :
   Cargo stores it in the *target/debug* directory.
 -->
 
+* Nous pouvons créer un projet en utilisant `cargo new`.
 * Nous pouvons compiler un projet en utilisant `cargo build`.
 * Nous pouvons compiler puis exécuter un projet en une seule fois en utilisant
   `cargo run`.

@@ -18,9 +18,9 @@ Le code de l'encart 20-20 répond aux requêtes de manière asynchrone grâce à
 l'utilisation du groupe de tâches, comme nous l'espérions. Nous avons quelques
 avertissements sur les champs `operateurs`, `id` et `tâche` que nous
 n'utilisons pas directement et qui nous rappellent que nous ne nettoyons rien.
-Lorsque nous arrêtons brutalement la tâche principale en appuyant sur <span class="keystroke">ctrl-c</span>, 
-toutes les autres tâches sont également immédiatement stoppées,
-même si elles sont en train de servir une requête.
+Lorsque nous arrêtons brutalement la tâche principale en appuyant sur
+<span class="keystroke">ctrl-c</span>, toutes les autres tâches sont également
+immédiatement stoppées, même si elles sont en train de servir une requête.
 
 <!--
 Now we’ll implement the `Drop` trait to call `join` on each of the threads in
@@ -89,13 +89,13 @@ thread. If the call to `join` fails, we use `unwrap` to make Rust panic and go
 into an ungraceful shutdown.
 -->
 
-D'abord, nous faisons une boucle sur tous les `operateurs` du groupe de tâches. 
+D'abord, nous faisons une boucle sur tous les `operateurs` du groupe de tâches.
 Pour ce faire, nous utilisons `&mut` car `self` n'est qu'une référence mutable
-du groupe de tâches mais nous aurons également besoin de pouvoir muter chaque `operateur`. 
-Pour chaque opérateur, nous affichons un message qui
-indique qu'il s'arrête puis nous faisons appel à `join` sur
-la tâche de cet opérateur. Si l'appel à `join` échoue, nous utilisons `unwrap`
-pour faire paniquer Rust et ainsi procéder à un arrêt brutal.
+du groupe de tâches mais nous aurons également besoin de pouvoir muter chaque
+`operateur`. Pour chaque opérateur, nous affichons un message qui indique qu'il
+s'arrête puis nous faisons appel à `join` sur la tâche de cet opérateur. Si
+l'appel à `join` échoue, nous utilisons `unwrap` pour faire paniquer Rust et
+ainsi procéder à un arrêt brutal.
 
 <!--
 Here is the error we get when we compile this code:
@@ -127,16 +127,16 @@ thread to run.
 -->
 
 L'erreur nous informe que nous ne pouvons pas faire appel à `join` car nous
-avons seulement fait un emprunt mutable pour chacun des `operateur` alors que `join`
-prend possession de son argument. Pour résoudre ce problème, nous devons
-sortir la `tache` de l'instance de `Operateur` qui la possède afin que
-`join` puisse la consommer. Nous faisons ceci dans l'encart 17-15 : comme
-`Operateur` contient désormais un `Option<thread::JoinHandle<()>>`, nous pouvons utiliser
+avons seulement fait un emprunt mutable pour chacun des `operateur` alors que
+`join` prend possession de son argument. Pour résoudre ce problème, nous devons
+sortir la `tache` de l'instance de `Operateur` qui la possède afin que `join`
+puisse la consommer. Nous faisons ceci dans l'encart 17-15 : comme `Operateur`
+contient désormais un `Option<thread::JoinHandle<()>>`, nous pouvons utiliser
 la méthode `take` sur `Option` pour sortir la valeur de la variante `Some` et
-y mettre à la place une variante `None`. Autrement dit, un `Operateur`
-qui est en cours d'exécution aura une variante `Some` dans `tache`, et lorsque
-nous souhaiterons nettoyer `Operateur`, nous remplacerons `Some` par `None` afin
-que `Operateur` n'ait pas de tâche à exécuter.
+y mettre à la place une variante `None`. Autrement dit, un `Operateur` qui est
+en cours d'exécution aura une variante `Some` dans `tache`, et lorsque nous
+souhaiterons nettoyer `Operateur`, nous remplacerons `Some` par `None` afin que
+`Operateur` n'ait pas de tâche à exécuter.
 
 <!--
 So we know we want to update the definition of `Worker` like this:
@@ -244,8 +244,8 @@ cleaned up, so nothing happens in that case.
 Comme nous l'avons vu au chapitre 17, la méthode `take` sur `Option` sort la
 variante `Some` et laisse un `None` à la place. Nous utilisons `if let` pour
 destructurer le `Some` et obtenir la tâche ; ensuite nous faisons appel à `join`
-sur cette tâche. Si la tâche d'un opérateur est déjà un `None`, nous savons qu'il 
-a déjà nettoyé sa tâche et que dans ce cas nous n'avons rien à faire.
+sur cette tâche. Si la tâche d'un opérateur est déjà un `None`, nous savons
+qu'il a déjà nettoyé sa tâche et que dans ce cas nous n'avons rien à faire.
 
 <!--
 ### Signaling to the Threads to Stop Listening for Jobs
@@ -263,15 +263,15 @@ current implementation of `drop`, the main thread will block forever waiting
 for the first thread to finish.
 -->
 
-Avec tous ces changements, notre code se compile désormais sans aucun avertissement. Mais
-la mauvaise nouvelle est que pour l'instant ce code ne fonctionne comme nous le
-souhaitons. La cause se situe dans la logique des fermetures
-qui sont exécutées par les tâches des instances de `Operateur` : pour le
-moment, nous faisons appel à `join`, mais cela ne va pas arrêter les
+Avec tous ces changements, notre code se compile désormais sans aucun
+avertissement. Mais la mauvaise nouvelle est que pour l'instant ce code ne
+fonctionne comme nous le souhaitons. La cause se situe dans la logique des
+fermetures qui sont exécutées par les tâches des instances de `Operateur` :
+pour le moment, nous faisons appel à `join`, mais cela ne va pas arrêter les
 tâches car elles font une boucle infinie avec `loop` pour attendre des
 missions. Si nous essayons de nettoyer notre `GroupeTaches` avec
-l'implémentation actuelle de `drop`, la tâche principale va se bloquer 
-pour toujours en attendant en vain que la première tâche se termine.
+l'implémentation actuelle de `drop`, la tâche principale va se bloquer pour
+toujours en attendant en vain que la première tâche se termine.
 
 <!--
 To fix this problem, we’ll modify the threads so they listen for either a `Job`
@@ -283,8 +283,8 @@ variants.
 Pour corriger ce problème, nous allons modifier les tâches pour qu'elles
 attendent soit une `Mission` à exécuter, soit le signal qui leur dit qu'elles
 doivent arrêter d'attendre des missions et sortir de la boucle infinie. Notre
-canal va envoyer une de ces deux variantes d'énumération au lieu 
-d'instances de `Mission`.
+canal va envoyer une de ces deux variantes d'énumération au lieu d'instances de
+`Mission`.
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>
@@ -356,12 +356,13 @@ is received.
 -->
 
 Pour intégrer l'énumération `Message`, nous devons changer `Mission` par
-`Message` à deux endroits : dans la définition de `GroupeTaches` et dans la signature de
-`Operateur::new`. La méthode `executer` de `GroupeTaches` doit envoyer des
-missions encapsulées dans des variantes de `Message::NouvelleTache`. Ensuite,
-dans `Operateur::new` où nous recevons des `Message` du canal, la mission sera
-traitée si la variante `NouvelleTache` est reçue, ou bien la tâche arrêtera la
-boucle si la variante `Extinction` est reçue.
+`Message` à deux endroits : dans la définition de `GroupeTaches` et dans la
+signature de `Operateur::new`. La méthode `executer` de `GroupeTaches` doit
+envoyer des missions encapsulées dans des variantes de
+`Message::NouvelleTache`. Ensuite, dans `Operateur::new` où nous recevons des
+`Message` du canal, la mission sera traitée si la variante `NouvelleTache` est
+reçue, ou bien la tâche arrêtera la boucle si la variante `Extinction` est
+reçue.
 
 <!--
 With these changes, the code will compile and continue to function in the same
@@ -410,11 +411,11 @@ message from the channel.
 -->
 
 Nous itérons deux fois sur les opérateurs : une fois pour envoyer un message
-`Extinction` pour chaque opérateur, et une seconde fois pour utiliser `join` sur leur
-tâche. Si nous avions essayé d'envoyer le message et
-d'utiliser immédiatement `join` dans la même boucle, nous n'aurions pas pu
-garantir que l'opérateur de l'itération en cours serait celui qui obtiendrait le
-message envoyé dans le canal.
+`Extinction` pour chaque opérateur, et une seconde fois pour utiliser `join`
+sur leur tâche. Si nous avions essayé d'envoyer le message et d'utiliser
+immédiatement `join` dans la même boucle, nous n'aurions pas pu garantir que
+l'opérateur de l'itération en cours serait celui qui obtiendrait le message
+envoyé dans le canal.
 
 <!--
 To better understand why we need two separate loops, imagine a scenario with
@@ -430,13 +431,13 @@ message. Deadlock!
 Pour mieux comprendre pourquoi nous avons besoin de deux boucles distinctes,
 imaginez un scénario avec deux opérateurs. Si nous avions utilisé une seule
 boucle pour itérer sur chacun des opérateurs, dans la première itération un
-message d'extinction aurait été envoyé dans le canal et `join` aurait été utilisé sur la
-tâche du premier opérateur. Si ce premier opérateur était occupé à traiter une
-requête à ce moment-là, le second opérateur aurait alors récupéré le message
-d'extinction dans le canal et se serait arrêté. Nous serions alors restés à attendre que le
-premier opérateur s'arrête, mais cela ne se serait jamais produit car c'est la
-seconde tâche qui aurait obtenu le message d'extinction. Nous serions alors dans
-une situation d'interblocage !
+message d'extinction aurait été envoyé dans le canal et `join` aurait été
+utilisé sur la tâche du premier opérateur. Si ce premier opérateur était occupé
+à traiter une requête à ce moment-là, le second opérateur aurait alors récupéré
+le message d'extinction dans le canal et se serait arrêté. Nous serions alors
+restés à attendre que le premier opérateur s'arrête, mais cela ne se serait
+jamais produit car c'est la seconde tâche qui aurait obtenu le message
+d'extinction. Nous serions alors dans une situation d'interblocage !
 
 <!--
 To prevent this scenario, we first put all of our `Terminate` messages on the
@@ -515,8 +516,8 @@ should error, and in your terminal you should see output similar to this:
 -->
 
 Démarrez le serveur avec `cargo run` et faites trois requêtes. La troisième
-requête devrait renvoyer une erreur tandis que dans votre terminal vous devriez avoir une
-sortie similaire à ceci :
+requête devrait renvoyer une erreur tandis que dans votre terminal vous devriez
+avoir une sortie similaire à ceci :
 
 <!--
 <!-- manual-regeneration
@@ -584,8 +585,8 @@ the thread pool calls `join` to shut down each worker thread.
 -->
 
 Vous pourriez avoir un ordre différent entre les opérateurs et les messages
-affichés. Nous pouvons constater la façon dont ce code fonctionne grâce aux messages :
-les opérateurs 0 et 3 obtiennent les deux premières requêtes puis, à
+affichés. Nous pouvons constater la façon dont ce code fonctionne grâce aux
+messages : les opérateurs 0 et 3 obtiennent les deux premières requêtes puis, à
 la troisième requête, le serveur arrête d'accepter des connexions. Lorsque
 le `GroupeTaches` sort de la portée à la fin du `main`, son implémentation de
 `Drop` entre en action et le groupe demande à tous les opérateurs de
@@ -622,8 +623,8 @@ shutdown of the server, which cleans up all the threads in the pool.
 
 Félicitations ! Nous avons maintenant terminé notre projet ; nous avons un
 serveur web basique qui utilise un groupe de tâches pour répondre de manière
-asynchrone. Nous pouvons demander un arrêt propre du serveur qui va 
-nettoyer toutes les tâches du groupe.
+asynchrone. Nous pouvons demander un arrêt propre du serveur qui va nettoyer
+toutes les tâches du groupe.
 
 <!--
 Here’s the full code for reference:
