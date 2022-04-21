@@ -10,8 +10,8 @@ other symbols that appear by themselves or in the context of paths, generics,
 trait bounds, macros, attributes, comments, tuples, and brackets.
 -->
 
-Cette annexe contient un glossaire de syntaxes Rust, comprenant les opérateurs
-et les autres symboles qui s'utilisent tout seuls ou alors dans le cadre de
+Cette annexe contient un glossaire d'éléments de syntaxe de Rust, notamment les
+opérateurs et les autres symboles qui s'utilisent tout seuls ou dans le cadre de
 chemins, de génériques, de traits liés, de macros, d'attributs, de commentaires,
 de tuples, de crochets ou d'accolades.
 
@@ -28,10 +28,10 @@ overloadable. If an operator is overloadable, the relevant trait to use to
 overload that operator is listed.
 -->
 
-Le tableau B-1 contient une liste d'opérateurs en Rust, un exemple de comment
-l'opérateur devrait être utilisé dans ce contexte, une petite explication, et si
-cet opérateur est surchargeable. Si un opérateur est surchargeable, le trait
-concerné à utiliser pour la surcharge est indiqué.
+Le tableau B-1 liste les opérateurs de Rust en indiquant pour chacun un exemple
+d'utilisation en situation, une petite explication, et si cet opérateur est
+surchargeable. Si un opérateur est surchargeable, le trait qu'il faut utiliser
+pour la surcharge est indiqué.
 
 <!--
 <span class="caption">Table B-1: Operators</span>
@@ -103,8 +103,8 @@ concerné à utiliser pour la surcharge est indiqué.
 | `!` | `ident!(...)`, `ident!{...}`, `ident![...]` | Identificateur de macro | |
 | `!` | `!expr` | Négation binaire ou logique | `Not` |
 | `!=` | `var != expr` | Comparaison de non-égalité | `PartialEq` |
-| `%` | `expr % expr` | Reste arithmétique | `Rem` |
-| `%=` | `var %= expr` | Reste arithmétique et assignation | `RemAssign` |
+| `%` | `expr % expr` | Modulo arithmétique | `Rem` |
+| `%=` | `var %= expr` | Modulo arithmétique et assignation | `RemAssign` |
 | `&` | `&expr`, `&mut expr` | Emprunt | |
 | `&` | `&type`, `&mut type`, `&'a type`, `&'a mut type` | Type de pointeur emprunté | |
 | `&` | `expr & expr` | ET binaire | `BitAnd` |
@@ -132,24 +132,24 @@ concerné à utiliser pour la surcharge est indiqué.
 | `/=` | `var /= expr` | Division arithmétique et assignation | `DivAssign` |
 | `:` | `pat: type`, `ident: type` | Contrainte | |
 | `:` | `ident: expr` | Initialisateur de champ de structure | |
-| `:` | `'a: loop {...}` | Une identification de boucle | |
+| `:` | `'a: loop {...}` | Étiquette de boucle | |
 | `;` | `expr;` | Fin d'élément et d'instruction | |
-| `;` | `[...; len]` | Syntaxe désignant une partie d'un tableau à taille finie | |
+| `;` | `[...; len]` | Partie de la syntaxe d'un tableau de taille fixe | |
 | `<<` | `expr << expr` | Décalage à gauche | `Shl` |
 | `<<=` | `var <<= expr` | Décalage à gauche et assignation | `ShlAssign` |
 | `<` | `expr < expr` | Comparaison "inférieur à" | `PartialOrd` |
 | `<=` | `expr <= expr` | Comparaison "inférieur ou égal à" | `PartialOrd` |
 | `=` | `var = expr`, `ident = type` | Assignation ou équivalence | |
 | `==` | `expr == expr` | Comparaison d'égalité | `PartialEq` |
-| `=>` | `pat => expr` | Syntaxe d'une partie d'une branche correspondante | |
+| `=>` | `pat => expr` | Partie de la syntaxe d'une branche de `match` | |
 | `>` | `expr > expr` | Comparaison "supérieur à" | `PartialOrd` |
 | `>=` | `expr >= expr` | Comparaison "supérieur ou égal à" | `PartialOrd` |
 | `>>` | `expr >> expr` | Décalage à droite | `Shr` |
 | `>>=` | `var >>= expr` | Décalage à droite et assignation | `ShrAssign` |
-| `@` | `ident @ pat` | Création d'un identificateur à partir du motif | |
+| `@` | `ident @ pat` | Création d'un identificateur à partir d'un motif | |
 | `^` | `expr ^ expr` | OU exclusif binaire | `BitXor` |
 | `^=` | `var ^= expr` | OU exclusif binaire et assignation | `BitXorAssign` |
-| <code>&vert;</code> | <code>pat &vert; pat</code> | Alternatives à un motif | |
+| <code>&vert;</code> | <code>pat &vert; pat</code> | Alternatives dans un motif | |
 | <code>&vert;</code> | <code>expr &vert; expr</code> | OU binaire | `BitOr` |
 | <code>&vert;=</code> | <code>var &vert;= expr</code> | OU binaire et assignation | `BitOrAssign` |
 | <code>&vert;&vert;</code> | <code>expr &vert;&vert; expr</code> | OU logique | |
@@ -166,9 +166,9 @@ The following list contains all non-letters that don’t function as operators;
 that is, they don’t behave like a function or method call.
 -->
 
-La liste suivante contient tout ce qui n'est pas une lettre et qui ne fonctionne
-pas comme un opérateur ; autrement dit tout ce qui ne se comporte pas comme un
-appel de fonction ou de méthode.
+La liste suivante contient tout ce qui ne s'écrit pas en lettres et qui ne
+fonctionne pas comme un opérateur ; autrement dit, tout ce qui ne se comporte
+pas comme un appel de fonction ou de méthode.
 
 <!--
 Table B-2 shows symbols that appear on their own and are valid in a variety of
@@ -182,7 +182,7 @@ valables dans plusieurs situations.
 <span class="caption">Table B-2: Stand-Alone Syntax</span>
 -->
 
-<span class="caption">Tableau B-2 : syntaxes autonomes</span>
+<span class="caption">Tableau B-2 : éléments de syntaxe autonomes</span>
 
 <!--
 | Symbol | Explanation |
@@ -202,17 +202,17 @@ valables dans plusieurs situations.
 
 | Symbole | Explication |
 |---------|-------------|
-| `'ident` | Nom d'une durée de vie ou nom boucle |
-| `...u8`, `...i32`, `...f64`, `...usize`, etc. | Nombre littéral d'un type spécifique |
-| `"..."` | Chaîne de caractère littérale |
-| `r"..."`, `r#"..."#`, `r##"..."##`, etc. | Chaîne de caractères brute littérale, les caractères d'échappement ne sont pas traités |
-| `b"..."` | Chaîne d'octet littéral ; construit un `[u8]` au lieu d'une chaîne de caractères |
-| `br"..."`, `br#"..."#`, `br##"..."##`, etc. | Chaîne d'octets brute littérale, combinaison de la chaîne d'octets brute et de la chaîne d'octets littérale |
-| `'...'` | Caractère littéral |
-| `b'...'` | Octet ASCII littéral |
+| `'ident` | Nom d'une durée de vie ou étiquette de boucle |
+| `...u8`, `...i32`, `...f64`, `...usize`, etc. | Littéral de nombre d'un type spécifique |
+| `"..."` | Littéral de chaîne de caractères |
+| `r"..."`, `r#"..."#`, `r##"..."##`, etc. | Littéral brut de chaîne de caractères, les caractères d'échappement ne sont pas traités |
+| `b"..."` | Littéral de chaîne d'octets ; construit un `[u8]` au lieu d'une chaîne de caractères |
+| `br"..."`, `br#"..."#`, `br##"..."##`, etc. | Littéral brut de chaîne d'octets, combinaison du littéral brut de chaîne et de la chaîne d'octets |
+| `'...'` | Littéral de caractère |
+| `b'...'` | Littéral d'octet ASCII |
 | <code>&vert;...&vert; expr</code> | Une fermeture |
-| `!` | Le type “jamais", toujours vide pour les fonctions divergentes |
-| `_` | Le motif “ignoré" ; aussi utilisé pour rendre lisibles les nombres entiers littéraux |
+| `!` | Le type “jamais”, toujours vide pour les fonctions divergentes |
+| `_` | Le motif “ignoré” ; aussi utilisé pour rendre lisibles les littéraux de nombres |
 
 <!--
 Table B-3 shows symbols that appear in the context of a path through the module
@@ -226,7 +226,8 @@ dans une structure de modules pour obtenir un élément.
 <span class="caption">Table B-3: Path-Related Syntax</span>
 -->
 
-<span class="caption">Tableau B-3 : syntaxes utilisés pour les chemins</span>
+<span class="caption">Tableau B-3 : éléments de syntaxe utilisés pour les
+chemins</span>
 
 <!--
 | Symbol | Explanation |
@@ -245,13 +246,13 @@ dans une structure de modules pour obtenir un élément.
 | Symbole | Explication |
 |---------|-------------|
 | `ident::ident` | Chemin d'un espace de nom |
-| `::path` | Chemin relatif à la crate racine (c'est à dire un chemin explicitement absolu) |
-| `self::path` | Chemin relatif au module courant (c'est à dire un chemin explicitement relatif) |
+| `::path` | Chemin relatif à la crate racine (c'est-à-dire un chemin explicitement absolu) |
+| `self::path` | Chemin relatif au module courant (c'est-à-dire un chemin explicitement relatif) |
 | `super::path` | Chemin relatif au parent du module courant |
-| `type::ident`, `<type as trait>::ident` | Des constantes, fonctions et types associées |
-| `<type>::...` | Un élément associé pour un type qui ne peut pas être directement nommé (par exemple, `<&T>::...`, `<[T]>::...`, etc) |
+| `type::ident`, `<type as trait>::ident` | Des constantes, fonctions et types associés |
+| `<type>::...` | Un élément associé pour un type qui ne peut pas être directement nommé (par exemple, `<&T>::...`, `<[T]>::...`, etc.) |
 | `trait::method(...)` | Clarifier l'appel d'une méthode en nommant le trait qui le définit |
-| `type::method(...)` | Clarifier l'appel d'une fonction en nommant le type pour laquelle elle est définie |
+| `type::method(...)` | Clarifier l'appel d'une méthode en nommant le type pour lequel elle est définie |
 | `<type as trait>::method(...)` | Clarifier l'appel d'une méthode en nommant le trait et le type |
 
 <!--
@@ -321,7 +322,7 @@ paramètres de type génériques avec des traits liés.
 |---------|-------------|
 | `T: U` | Paramètre générique `T` contraint aux types qui implémentent `U` |
 | `T: 'a` | Type générique `T` doit vivre aussi longtemps que la durée de vie `'a` (ce qui signifie que le type ne peut pas contenir temporairement de références avec une durée de vie plus petite que `'a`) |
-| `T : 'static` | Type générique `T` qui ne contient pas d'autres références empruntées autres que des `'static` |
+| `T : 'static` | Type générique `T` qui ne contient aucune référence empruntée qui ne soit pas `'static` |
 | `'b: 'a` | La durée de vie générique `'b` doit vivre aussi longtemps que `'a` |
 | `T: ?Sized` | Permet aux paramètres de type génériques d'être de type à taille dynamique |
 | `'a + trait`, `trait + trait` | Contrainte de type composé |
@@ -385,11 +386,11 @@ Le tableau B-7 montre des symboles pour créer des commentaires.
 
 | Symbole | Explication |
 |---------|-------------|
-| `//` | Ligne commentée |
-| `//!` | Commentaire de documentation sur l'élément contenant actuel |
+| `//` | Ligne de commentaire |
+| `//!` | Commentaire de documentation sur l'élément contenant ce commentaire |
 | `///` | Commentaire de documentation sur l'élément suivant ce commentaire |
 | `/*...*/` | Bloc de commentaire |
-| `/*!...*/` | Bloc de commentaire de documentation sur l'élément contenant actuel |
+| `/*!...*/` | Bloc de commentaire de documentation sur l'élément contenant ce commentaire |
 | `/**...*/` | Bloc de commentaire de documentation sur l'élément suivant ce commentaire |
 
 <!--
@@ -419,12 +420,12 @@ Le tableau B-8 montre des symboles utilisés avec les tuples.
 
 | Symbole | Explication |
 |---------|-------------|
-| `()` | Un tuple vide (aussi appelé unitaire), à la fois un type et un litéral |
+| `()` | Un tuple vide (aussi appelé unité), à la fois un type et un littéral |
 | `(expr)` | Une expression entre parenthèses |
-| `(expr,)` | Un tuple d'un seul élement qui est une expression |
-| `(type,)` | Un tuple d'un seul élement qui est un type |
-| `(expr, ...)` | Une expression dans un tuple |
-| `(type, ...)` | Un type dans un tuple |
+| `(expr,)` | Une expression tuple contenant un seul élément |
+| `(type,)` | Un type tuple contenant un seul élément |
+| `(expr, ...)` | Une expression tuple |
+| `(type, ...)` | Un type tuple |
 | `expr(expr, ...)` | Une expression d'appel à une fonction ; aussi utilisé pour initialiser une structure tuple ou une variante d'énumération tuple |
 | `expr.0`, `expr.1`, etc. | Utilisation d'indices sur un tuple |
 
@@ -449,7 +450,7 @@ Le tableau B-9 montre les contextes d'utilisation des accolades.
 
 | Symbole | Explication |
 |---------|-------------|
-| `{...}` | Bloc d'expression |
+| `{...}` | Un bloc d'expression |
 | `Type {...}` | Un littéral de `struct` |
 
 <!--
@@ -479,5 +480,5 @@ Le tableau B-10 montre les contextes d'utilisation des crochets.
 | `[...]` | Un littéral de tableau |
 | `[expr; len]` | Un littéral de tableau qui contient `len` copies de `expr` |
 | `[type; len]` | Un type de tableau qui contient `len` instances de `type` |
-| `expr[expr]` | Une collection indexée. C'est surchargeable (via `Index` et `IndexMut`) |
+| `expr[expr]` | Une collection indexée (surchargeable via `Index` et `IndexMut`) |
 | `expr[..]`, `expr[a..]`, `expr[..b]`, `expr[a..b]` | Une collection indexée qui se comporte comme une slice de collection, grâce à l'utilisation de `Range`, `RangeFrom`, `RangeTo`, ou de `RangeFull` comme “indice” |
