@@ -140,7 +140,7 @@ same type `T`.
 Cette définition se lit comme ceci : la fonction `le_plus_grand` est générique
 en fonction du type `T`. Cette fonction a un paramètre qui s'appelle `liste`,
 qui est une slice de valeurs de type `T`. Cette fonction `le_plus_grand` va
-retourner une référence vers la valeur du même type `T`.
+retourner une valeur du même type `T`.
 
 <!--
 Listing 10-5 shows the combined `largest` function definition using the generic

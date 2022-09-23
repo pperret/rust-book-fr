@@ -199,8 +199,8 @@ have the same value as if you had specified `1000`.
 -->
 
 Vous pouvez écrire des littéraux d'entiers dans chacune des formes décrites dans
-le tableau 3-2. Notez qu'un littéral numérique peut être de différent type
-numérique autorisent l'utilisation un suffixe de type, comme `57u8`, afin de
+le tableau 3-2. Notez que les littéraux numériques qui peuvent être de plusieurs types
+numériques autorisent l'utilisation d'un suffixe de type, tel que `57u8`, afin de
 préciser leur type. Les nombres littéraux peuvent aussi utiliser `_` comme
 séparateur visuel afin de les rendre plus lisible, comme par exemple `1_000`,
 qui a la même valeur que si vous aviez renseigné `1000`.
@@ -292,7 +292,7 @@ d'entier par défaut est le `i32`. La principale utilisation d'un `isize` ou d'u
 > qui peuvent faire paniquer le programme. En revanche, en cas de dépassement,
 > Rust va effectuer un *rebouclage du complément à deux*. Pour faire simple, les
 > valeurs supérieures à la valeur maximale du type seront “rebouclées” depuis la
-> valeur minimale que le type peut stocker. Dans cas d'un `u8`, la valeur 256
+> valeur minimale que le type peut stocker. Dans le cas d'un `u8`, la valeur 256
 > devient 0, la valeur 257 devient 1, et ainsi de suite. Le programme ne va
 > paniquer, mais la variable va avoir une valeur qui n'est probablement pas ce
 > que vous attendez à avoir. Se fier au comportement du rebouclage lors du

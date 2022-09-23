@@ -541,9 +541,9 @@ insérer un `Box<T>` à l'intérieur d'une variante `Cons` au lieu d'y mettre
 directement une autre valeur `List`. Le `Box<T>` va pointer sur la prochaine
 valeur `List` qui sera sur le tas plutôt que d'être dans la variante `Cons`.
 Théoriquement, nous avons toujours une liste, créée avec des listes qui
-“contiennent” d'autres listes, mais cette implémentation est ressemble plus
-maintenant à des éléments placés les uns à côté des autres, plutôt que les
-uns dans les autres.
+“contiennent” d'autres listes, mais cette implémentation ressemble plus à
+présent à des éléments placés les uns à côté des autres plutôt que les uns dans
+les autres.
 
 <!--
 We can change the definition of the `List` enum in Listing 15-2 and the usage
@@ -644,10 +644,10 @@ rest of this chapter.
 Le type `Box<T>` est un pointeur intelligent car il implémente le trait
 `Deref`, qui permet aux valeurs `Box<T>` d'être traitées comme des
 références. Lorsque une valeur `Box<T>` sort de la portée, les données sur le
-tas que la boite pointait est aussi nettoyé grâce au trait `Drop`. Explorons
-plus en détail ces deux traits. Ces deux traits deviendrons encore plus
-importants pour les fonctionnalités offertes par les autres pointeurs
-intelligents que nous verrons dans le reste de ce chapitre.
+tas pointées par la boite seront également nettoyées grâce à l'implémentation
+du trait `Drop`. Explorons plus en détail ces deux traits. Ces deux traits
+deviendrons encore plus importants pour les fonctionnalités offertes par les
+autres pointeurs intelligents que nous verrons dans le reste de ce chapitre.
 
 <!-- markdownlint-disable -->
 <!--

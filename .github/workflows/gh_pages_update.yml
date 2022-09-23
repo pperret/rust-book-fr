@@ -1,7 +1,6 @@
 name: gh_pages_update
 
 on:
-  pull_request:
   push:
     branches:
       - french-unreleased

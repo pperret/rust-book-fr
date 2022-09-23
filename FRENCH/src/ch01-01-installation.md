@@ -150,7 +150,7 @@ distribution’s documentation. For example, if you use Ubuntu, you can install
 the `build-essential` package.
 -->
 
-Les utilisateurs de Linux doivent généralement install GCC ou Clang, en fonction
+Les utilisateurs de Linux doivent généralement installer GCC ou Clang, en fonction
 de la documentation de leur distribution. Par exemple, si vous utilisez Ubuntu,
 vous pouvez installer le paquet `build-essential`.
 

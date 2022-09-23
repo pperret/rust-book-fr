@@ -361,9 +361,9 @@ the value is no longer being used.
 -->
 
 Vous n'avez pas non plus à vous soucier des problèmes résultant du nettoyage
-accidentel de valeurs toujours utilisées : le système de possession assurant que
-les références sont toujours en vigueur assure également que `drop` n'est appelé
-qu'une seule fois lorsque la valeur n'est plus utilisée.
+accidentel de valeurs toujours utilisées : le système de possession garantit que
+les références restent toujours en vigueur, et garantit également que `drop`
+n'est appelée qu'une seule fois lorsque la valeur n'est plus utilisée.
 
 <!--
 Now that we’ve examined `Box<T>` and some of the characteristics of smart

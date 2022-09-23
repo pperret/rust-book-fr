@@ -17,7 +17,7 @@ expressiveness of the patterns and the fact that the compiler confirms that all
 possible cases are handled.
 -->
 
-Rust a une structure de contrôle de flux très puissant appelé `match` qui vous
+Rust a une structure de contrôle de flux très puissante appelée `match` qui vous
 permet de comparer une valeur avec une série de motifs et d'exécuter du code en
 fonction du motif qui correspond. Les motifs peuvent être constitués de valeurs
 littérales, de noms de variables, de jokers, parmi tant d'autres ; le

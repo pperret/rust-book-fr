@@ -122,7 +122,7 @@ chaînes de caractères.
 >
 > De nombreux langages ne nécessitent pas de se préoccuper de la
 > pile (*stack*) et du tas (*heap*). Mais dans un langage de programmation
-> système comme Rust, si une donnée soit sur la pile ou sur le tas a une influence
+> système comme Rust, le fait qu'une donnée soit sur la pile ou sur le tas a une influence
 > sur le comportement du langage et explique pourquoi nous devons faire certains
 > choix. Nous décrirons plus loin dans ce chapitre comment la possession
 > fonctionne vis-à-vis de la pile et du tas, voici donc une brève explication au
@@ -234,7 +234,7 @@ boilerplate code.
 Maintenant
 que nous avons vu la syntaxe Rust de base, nous n'allons plus ajouter tout le
 code du style `fn main() {` dans les exemples, donc si vous voulez reproduire
-les exemples, assurez-vous de placer manuellement dans une fonction `main`. Par
+les exemples, assurez-vous de les placer manuellement dans une fonction `main`. Par
 conséquent, nos exemples seront plus concis, nous permettant de nous concentrer
 sur les détails de la situation plutôt que sur du code normalisé.
 
@@ -336,7 +336,7 @@ donnée qui est plus complexe que ceux que nous avons rencontrés dans la sectio
 [“Types de données”][data-types]<!-- ignore --> du chapitre 3. Les types que
 nous avons vus précédemment ont tous une taille connue et peuvent être stockés
 sur la pile ainsi que retirés de la pile lorsque la portée n'en a plus besoin,
-et peuvent aussi être rapidement et facilement afin de constituer une nouvelle
+et peuvent aussi être rapidement et facilement copiés afin de constituer une nouvelle
 instance indépendante si une autre partie du code a besoin d'utiliser la même
 valeur dans une portée différente. Mais nous voulons expérimenter le stockage
 de données sur le tas et découvrir comment Rust sait quand il doit nettoyer ces

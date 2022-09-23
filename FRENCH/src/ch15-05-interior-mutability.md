@@ -161,7 +161,7 @@ Voici un résumé des raisons de choisir `Box<T>`, `Rc<T>` ou `RefCell<T>` :
 -->
 
 * `Rc<T>` permet d'avoir plusieurs propriétaires pour une même donnée ;
-  `Rc<T>` et `RefCell<T>` n'ont qu'un seul propriétaire.
+  `Box<T>` et `RefCell<T>` n'ont qu'un seul propriétaire.
 * `Box<T>` permet des emprunts immuables ou mutables à la compilation ;
   `Rc<T>` permet uniquement des emprunts immuables, vérifiés à la
   compilation ; `RefCell<T>` permet des emprunts immuables ou mutables,
@@ -178,7 +178,8 @@ examine how it’s possible.
 
 Modifer une valeur à l'intérieur d'une valeur immuable est ce qu'on appelle
 le motif de *mutabilité interne*. Découvrons une situation pour laquelle la
-mutabilité interne est utile est examinons comment c'est possible.
+mutabilité interne s'avère utile, puis examinons comment cela est rendu
+possible.
 
 <!--
 ### Interior Mutability: A Mutable Borrow to an Immutable Value
@@ -290,10 +291,10 @@ user’s quota for the number of API calls they’re allowed to make, for exampl
 -->
 
 Voici le scénario que nous allons tester : nous allons créer une bibliothèque
-qui surveille la proximité d'une valeur par rapport à une valeur maximale et
-envoie des messages en fonction de cette proximité. Cette bibliothèque peut
-être utilisée pour suivre un quota d'un utilisateur pour le nombre d'appels aux
-API qu'il est autorisé à faire, par exemple.
+qui surveillera la proximité d'une valeur par rapport à une valeur maximale et
+enverra des messages en fonction de cette limite. Par exemple, cette
+bibliothèque peut être utilisée pour suivre le quota d'un utilisateur afin de
+suivre le nombre d'appels aux API qu'il est autorisé à faire.
 
 <!--
 Our library will only provide the functionality of tracking how close to the
@@ -305,14 +306,14 @@ that detail. All it needs is something that implements a trait we’ll provide
 called `Messenger`. Listing 15-20 shows the library code:
 -->
 
-Notre bibliothèque va seulement fournir la fonctionnalité de suivi en fonction
-de la valeur maximale et spécifier quels seront les messages à chaque moment. Les
-applications qui utiliseront notre bibliothèque devront fournir un mécanisme
-pour envoyer les messages : l'application peut afficher le message dans
-l'application, l'envoyer par email, l'envoyer par SMS ou autre chose. La
-bibliothèque n'a pas à se charger de ce détail. Tout ce que ce mécanisme doit
-faire est d'implémenter un trait `Messager` que nous allons fournir. L'encart
-15-20 propose le code pour cette bibliothèque :
+Notre bibliothèque fournira uniquement la fonctionnalité de suivi en fonction de
+la proximité d'une valeur avec la maximale et définiera quels seront les
+messages associés. Les applications qui utiliseront notre bibliothèque devront
+fournir un mécanisme pour envoyer les messages : l'application peut afficher le
+message dans l'application, l'envoyer par email, l'envoyer par SMS ou autre
+chose. La bibliothèque n'a pas à se charger de ce détail. Tout ce que ce
+mécanisme doit faire est d'implémenter un trait `Messager` que nous allons
+fournir. L'encart 15-20 propose le code pour cette bibliothèque :
 
 <!--
 <span class="filename">Filename: src/lib.rs</span>

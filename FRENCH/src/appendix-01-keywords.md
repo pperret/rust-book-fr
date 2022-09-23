@@ -121,7 +121,7 @@ Les mots-clés suivants ont actuellement la fonction décrite.
 * `return` - retourne une valeur depuis une fonction
 * `Self` - un alias de type pour le type que nous définissons ou implémentons
 * `self` - désigne le sujet d'une méthode ou du module courant
-* `static` - une variable globale ou une durée de vie qui presiste tout au long de
+* `static` - une variable globale ou une durée de vie qui persiste tout au long de
   l'exécution du programme
 * `struct` - définit une structure
 * `super` - le module parent du module courant

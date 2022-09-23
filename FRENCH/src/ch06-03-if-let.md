@@ -14,7 +14,7 @@ variable but only wants to execute code if the value is the `Some` variant.
 La syntaxe `if let` vous permet de combiner `if` et `let` afin de gérer les
 valeurs qui correspondent à un motif donné, tout en ignorant les autres.
 Imaginons le programme dans l'encart 6-6 qui fait un `match` sur la valeur
-`Option<u8>` de la variable `config_max` mais n'a besoin d'exécuter du code que
+`Option<u8>` de la variable `une_valeur_u8` mais n'a besoin d'exécuter du code que
 si la valeur est la variante `Some`.
 
 <!--

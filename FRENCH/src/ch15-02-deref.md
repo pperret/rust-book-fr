@@ -341,7 +341,7 @@ Comme nous l'avons vu dans une section du [chapitre 10][impl-trait]<!-- ignore
 -->, pour implémenter un trait, nous devons fournir les implémentations des
 méthodes nécessaires pour ce trait. Le trait `Deref`, fourni par la
 bibliothèque standard, nécessite que nous implémentions une méthode `deref` qui
-prend possession de `self` et retourne une référence vers la donnée interne.
+emprunte `self` et retourne une référence vers la donnée interne.
 L'encart 15-10 contient une implémentation de `Deref` à ajouter à la définition
 de `MaBoite` :
 

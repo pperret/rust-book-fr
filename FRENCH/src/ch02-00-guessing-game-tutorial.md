@@ -994,8 +994,8 @@ from [Crates.io][cratesio]. Crates.io is where people in the Rust ecosystem
 post their open source Rust projects for others to use.
 -->
 
-Lorsque nous ajoutons une dépendance externe, Cargo récupère la dernière
-version de tout dont la dépendance nécessite depuis le *registre*, qui est une
+Lorsque nous ajoutons une dépendance externe, Cargo récupère les dernières
+versions de tout ce dont cette dépendance a besoin depuis le *registre*, qui est une
 copie des données de [Crates.io][cratesio]. Crates.io est là où les
 développeurs de l'écosystème Rust publient leurs projets open source afin de
 les rendre disponibles aux autres.

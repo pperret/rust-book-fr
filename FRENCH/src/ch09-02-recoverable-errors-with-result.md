@@ -1147,10 +1147,10 @@ cette première ligne, donc nous appelons `last` pour retourner le dernier
 élément dans l'itérateur. C'est une `Option` car il est possible que la
 première ligne soit une chaîne de caractères vide, par exemple si `texte`
 commence par une ligne vide mais a des caractères sur les autres lignes, comme
-par exemple `"\nhi"`. Cependant, si y a un caractère à la fin de la première
+par exemple `"\nhi"`. Cependant, si il y a un caractère à la fin de la première
 ligne, il sera retourné dans la variante `Some`. L'opérateur `?` au millieu
 nous donne un moyen concret d'exprimer cette logique, nous permettant
-d'implémenter la fonction en une ligne. Si nous n'aurions pas pu utiliser
+d'implémenter la fonction en une ligne. Si nous n'avions pas pu utiliser
 l'opérateur `?` sur `Option`, nous aurions dû implémenter cette logique en
 utilisant plus d'appels à des méthodes ou des expressions `match`.
 
