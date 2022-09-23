@@ -1,0 +1,861 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Stocker des clés associées à des valeurs dans des tables de hachage - Le langage de programmation Rust</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../ferris.css">
+        <link rel="stylesheet" href="../theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Le langage de programmation Rust</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Avant-propos</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="translation-terms.html">Traduction des termes</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Prise en main</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, world!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Programmer le jeu du plus ou du moins</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Les concepts courants de programmation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> Les variables et la mutabilité</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Les types de données</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Les fonctions</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Les commentaires</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Les structures de contrôle</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Comprendre la possession</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Qu'est-ce que la possession ?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Les références et l'emprunt</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Le type slice</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Utiliser les structures pour structurer des données apparentées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Définir et instancier des structures</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Un exemple de programme qui utilise des structures</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> La syntaxe des méthodes</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Les énumérations et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Définir une énumération</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> La structure de contrôle match</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> Une structure de contrôle concise : if let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Gérer des projets grandissants avec les paquets, crates et modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Les paquets et les crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Définir des modules pour gérer la portée et la visibilité</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Désigner un élément dans l'arborescence de modules</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Importer des chemins dans la portée via le mot-clé use</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Séparer les modules dans différents fichiers</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Les collections standard</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Stocker des listes de valeurs avec des vecteurs</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> Stocker du texte encodé en UTF-8 avec les Strings</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html" class="active"><strong aria-hidden="true">8.3.</strong> Stocker des clés associées à des valeurs dans des tables de hachage</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> La gestion des erreurs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Les erreurs irrécupérables avec panic!</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Des erreurs récupérables avec Result</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> Paniquer ou ne pas paniquer, telle est la question</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Les types génériques, les traits et les durées de vie</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Les types de données génériques</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Définir des comportements partagés avec les traits</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> La conformité des références avec les durées de vies</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Ecrire des tests automatisés</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Comment écrire des tests</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Gérer l'exécution des tests</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> L'organisation des tests</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> Un projet d'entrée/sortie : construire un programme en ligne de commande</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Récupérer les arguments de la ligne de commande</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Lire un fichier</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Remanier le code pour améliorer sa modularité et la gestion des erreurs</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Développer les fonctionnalités de la bibliothèque avec le TDD</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Travailler avec des variables d'environnement</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Ecrire les messages d'erreur sur la sortie d'erreurs standard au lieu de la sortie normale</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Les fonctionnalités des langages fonctionnels : les itérateurs et les fermetures</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Les fermetures : fonctions anonymes qui peuvent utiliser leur environnement</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Traiter une série d'éléments avec un itérateur</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> Amélioration de notre projet d'entrée/sortie</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Comparaison des performances : les boucles et les itérateurs</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> En savoir plus sur cargo et crates.io</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Personnaliser les compilations avec les profils de publication</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Publier une crate sur crates.io</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Les espaces de travail de cargo</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Installer des binaires à partir de crates.io avec cargo install</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Etendre les fonctionnalités de cargo avec des commandes personnalisées</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Les pointeurs intelligents</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Utiliser Box&lt;T&gt; pour pointer sur des données présentes sur le tas</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Considérer les pointeurs intelligents comme des références grâce au trait Deref</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Exécuter du code au nettoyage avec le trait Drop</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, le pointeur intelligent qui compte les références</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; et le motif de mutabilité interne</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Les boucles de références qui peuvent provoquer des fuites de mémoire</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> La concurrence sans craintes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Utiliser les tâches pour exécuter simultanément du code</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Utiliser l'envoi de messages pour transférer des données entre les tâches</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Le partage d'état en concurrence</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Etendre la concurrence avec les traits Sync et Send</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Les fonctionnalités orientées objet de Rust</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Les caractéristiques des langages orientés objet</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Utiliser les objets traits qui permettent des valeurs de types différents</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Implémenter un patron de conception orienté-objet</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Les motifs et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> Tous les endroits où les motifs peuvent être utilisés</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> La réfutabilité : lorsqu'un motif peut échouer à correspondre</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> La syntaxe des motifs</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Les fonctionnalités avancées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Le Rust non sécurisé (unsafe)</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Les traits avancés</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Les types avancés</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Les fonctions et fermetures avancées</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Les macros</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Projet final : construire un serveur web multitâches</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Développer un serveur web monotâche</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Transformer notre serveur monotâche en serveur multitâches</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Arrêt propre et nettoyage</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Annexes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - les mots-clés</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> 🚧 B - les opérateurs et les symboles</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> 🚧 C - les traits dérivables</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> 🚧 D - Des outils de développement utiles</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> 🚧 E - Les éditions</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> 🚧 F - Les traductions de ce livre</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> 🚧 G - Comment Rust est construit, et “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Le langage de programmation Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/Jimskapt/rust-book-fr" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+## Storing Keys with Associated Values in Hash Maps
+-->
+<h2 id="stocker-des-clés-associées-à-des-valeurs-dans-des-tables-de-hachage"><a class="header" href="#stocker-des-clés-associées-à-des-valeurs-dans-des-tables-de-hachage">Stocker des clés associées à des valeurs dans des tables de hachage</a></h2>
+<!--
+The last of our common collections is the *hash map*. The type `HashMap<K, V>`
+stores a mapping of keys of type `K` to values of type `V` using a
+*hashing function*, which determines how it places these keys and values into
+memory. Many programming languages support this kind of data structure, but
+they often use a different name, such as hash, map, object, hash table,
+dictionary, or associative array, just to name a few.
+-->
+<p>La dernière des collections les plus courantes est la <em>table de hachage (hash
+map)</em>. Le type <code>HashMap&lt;K, V&gt;</code> stocke une association de clés de type <code>K</code> à des
+valeurs de type <code>V</code> en utilisant une <em>fonction de hachage</em>, qui détermine
+comment elle va ranger ces clés et valeurs dans la mémoire. De nombreux
+langages de programmation prennent en charge ce genre de structure de données,
+mais elles ont souvent un nom différent, tel que hash, map, objet, table
+d'association, dictionnaire ou tableau associatif, pour n'en nommer que
+quelques-uns.</p>
+<!--
+Hash maps are useful when you want to look up data not by using an index, as
+you can with vectors, but by using a key that can be of any type. For example,
+in a game, you could keep track of each team’s score in a hash map in which
+each key is a team’s name and the values are each team’s score. Given a team
+name, you can retrieve its score.
+-->
+<p>Les tables de hachage sont utiles lorsque vous voulez rechercher des données non
+pas en utilisant des indices, comme vous pouvez le faire avec les vecteurs, mais
+en utilisant une clé qui peut être de n'importe quel type. Par exemple, dans un
+jeu, vous pouvez consigner le score de chaque équipe dans une table de hachage
+dans laquelle chaque clé est le nom d'une équipe et la valeur est le score de
+l'équipe. Si vous avez le nom d'une équipe, vous pouvez récupérer son score.</p>
+<!--
+We’ll go over the basic API of hash maps in this section, but many more goodies
+are hiding in the functions defined on `HashMap<K, V>` by the standard library.
+As always, check the standard library documentation for more information.
+-->
+<p>Nous allons passer en revue l'API de base des tables de hachage dans cette
+section, mais bien d'autres fonctionnalités se cachent dans les fonctions
+définies sur <code>HashMap&lt;K, V&gt;</code> par la bibliothèque standard. Comme d'habitude,
+consultez la documentation de la bibliothèque standard pour plus d'informations.</p>
+<!--
+### Creating a New Hash Map
+-->
+<h3 id="créer-une-nouvelle-table-de-hachage"><a class="header" href="#créer-une-nouvelle-table-de-hachage">Créer une nouvelle table de hachage</a></h3>
+<!--
+One way to create an empty hash map is using `new` and adding elements with
+`insert`. In Listing 8-20, we’re keeping track of the scores of two teams whose
+names are *Blue* and *Yellow*. The Blue team starts with 10 points, and the
+Yellow team starts with 50.
+-->
+<p>Une façon de créer une table de hachage vide est d'utiliser <code>new</code> et d'ajouter
+des éléments avec <code>insert</code>. Dans l'encart 8-20, nous consignons les scores de
+deux équipes qui s'appellent <em>Bleu</em> et <em>Jaune</em>. L'équipe Bleu commence avec 10
+points, et l'équipe Jaune commence avec 50.</p>
+<!--
+```rust
+# fn main() {
+    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Bleu"), 10);
+    scores.insert(String::from("Jaune"), 50);
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from(&quot;Bleu&quot;), 10);
+    scores.insert(String::from(&quot;Jaune&quot;), 50);
+<span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 8-20: Creating a new hash map and inserting some
+keys and values</span>
+-->
+<p><span class="caption">Encart 8-20 : création d'une nouvelle table de hachage et
+insertion de quelques clés et valeurs</span></p>
+<!--
+Note that we need to first `use` the `HashMap` from the collections portion of
+the standard library. Of our three common collections, this one is the least
+often used, so it’s not included in the features brought into scope
+automatically in the prelude. Hash maps also have less support from the
+standard library; there’s no built-in macro to construct them, for example.
+-->
+<p>Notez que nous devons d'abord importer <code>HashMap</code> via <code>use</code> depuis la partie des
+collections de la bibliothèque standard. De nos trois collections courantes,
+cette dernière est la moins utilisée, donc elle n'est pas présente dans les
+fonctionnalités importées automatiquement dans la portée par l'étape
+préliminaire. Les tables de hachage sont aussi moins gérées par la bibliothèque
+standard ; il n'y a pas de macro intégrée pour les construire, par exemple.</p>
+<!--
+Just like vectors, hash maps store their data on the heap. This `HashMap` has
+keys of type `String` and values of type `i32`. Like vectors, hash maps are
+homogeneous: all of the keys must have the same type, and all of the values
+must have the same type.
+-->
+<p>Exactement comme les vecteurs, les tables de hachage stockent leurs données sur
+le tas. Cette <code>HashMap</code> a des clés de type <code>String</code> et des valeurs de type
+<code>i32</code>. Et comme les vecteurs, les tables de hachage sont homogènes : toutes les
+clés doivent être du même type, et toutes les valeurs doivent aussi être du
+même type.</p>
+<!--
+Another way of constructing a hash map is by using iterators and the `collect`
+method on a vector of tuples, where each tuple consists of a key and its value.
+We’ll be going into more detail about iterators and their associated methods in
+the [”Processing a Series of Items with Iterators” section of Chapter
+13][iterators]<!-- ignore -- >. The `collect` method gathers data into a number
+of collection types, including `HashMap`. For example, if we had the team names
+and initial scores in two separate vectors, we could use the `zip` method to
+create an iterator of tuples where “Blue” is paired with 10, and so forth. Then
+we could use the `collect` method to turn that iterator of tuples into a hash
+map, as shown in Listing 8-21.
+-->
+<p>Une autre façon de construire une table de hachage est d'utiliser les itérateurs
+et la méthode <code>collect</code> sur un vecteur de tuples, où chaque tuple représente une
+clé et sa valeur. Nous aborderons en détail les itérateurs et leurs méthodes
+associées dans <a href="ch13-02-iterators.html">une section du chapitre 13</a><!-- ignore -->. La
+méthode <code>collect</code> regroupe les données dans quelques types de collections, dont
+<code>HashMap</code>. Par exemple, si nous avions les noms des équipes et les scores
+initiaux dans deux vecteurs séparés, nous pourrions utiliser la méthode <code>zip</code>
+pour créer un itérateur de tuples où “Bleu” est associé à 10, et ainsi de suite.
+Ensuite, nous pourrions utiliser la méthode <code>collect</code> pour transformer cet
+itérateur de tuples en table de hachage, comme dans l'encart 8-21.</p>
+<!--
+```rust
+# fn main() {
+    use std::collections::HashMap;
+
+    let equipes = vec![String::from("Bleu"), String::from("Jaune")];
+    let scores_initiaux = vec![10, 50];
+
+    let mut scores: HashMap<_, _> =
+        equipes.into_iter().zip(scores_initiaux.into_iter()).collect();
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    use std::collections::HashMap;
+
+    let equipes = vec![String::from(&quot;Bleu&quot;), String::from(&quot;Jaune&quot;)];
+    let scores_initiaux = vec![10, 50];
+
+    let mut scores: HashMap&lt;_, _&gt; =
+        equipes.into_iter().zip(scores_initiaux.into_iter()).collect();
+<span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 8-21: Creating a hash map from a list of teams
+and a list of scores</span>
+-->
+<p><span class="caption">Encart 8-21 : création d'une table de hachage à partir
+d'une liste d'équipes et d'une liste de scores</span></p>
+<!--
+The type annotation `HashMap<_, _>` is needed here because it’s possible to
+`collect` into many different data structures and Rust doesn’t know which you
+want unless you specify. For the parameters for the key and value types,
+however, we use underscores, and Rust can infer the types that the hash map
+contains based on the types of the data in the vectors. In Listing 8-21, the
+key type will be `String` and the value type will be `i32`, just as in Listing
+8-20.
+-->
+<p>L'annotation de type <code>HashMap&lt;_, _&gt;</code> est nécessaire ici car <code>collect</code> peut
+générer plusieurs types de structures de données et Rust ne sait pas laquelle
+vous souhaitez si vous ne le précisez pas. Mais pour les paramètres qui
+correspondent aux types de clé et de valeur, nous utilisons des tirets bas, et
+Rust peut déduire les types que la table de hachage contient en fonction des
+types des données présentes dans les vecteurs. Dans l'encart 8-21, le type des
+clés sera <code>String</code> et le type des valeurs sera <code>i32</code>, comme dans l'encart 8-20.</p>
+<!--
+### Hash Maps and Ownership
+-->
+<h3 id="les-tables-de-hachage-et-la-possession"><a class="header" href="#les-tables-de-hachage-et-la-possession">Les tables de hachage et la possession</a></h3>
+<!--
+For types that implement the `Copy` trait, like `i32`, the values are copied
+into the hash map. For owned values like `String`, the values will be moved and
+the hash map will be the owner of those values, as demonstrated in Listing 8-22.
+-->
+<p>Pour les types qui implémentent le trait <code>Copy</code>, comme <code>i32</code>, les valeurs sont
+copiées dans la table de hachage. Pour les valeurs qui sont possédées comme
+<code>String</code>, les valeurs seront déplacées et la table de hachage sera la
+propriétaire de ces valeurs, comme démontré dans l'encart 8-22.</p>
+<!--
+```rust
+# fn main() {
+    use std::collections::HashMap;
+
+    let nom_champ = String::from("Couleur favorite");
+    let valeur_champ = String::from("Bleu");
+
+    let mut table = HashMap::new();
+    table.insert(nom_champ, valeur_champ);
+    // nom_champ et valeur_champ ne sont plus en vigueur à partir d'ici,
+    // essayez de les utiliser et vous verrez l'erreur du compilateur que
+    // vous obtiendrez !
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    use std::collections::HashMap;
+
+    let nom_champ = String::from(&quot;Couleur favorite&quot;);
+    let valeur_champ = String::from(&quot;Bleu&quot;);
+
+    let mut table = HashMap::new();
+    table.insert(nom_champ, valeur_champ);
+    // nom_champ et valeur_champ ne sont plus en vigueur à partir d'ici,
+    // essayez de les utiliser et vous verrez l'erreur du compilateur que
+    // vous obtiendrez !
+<span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 8-22: Showing that keys and values are owned by
+the hash map once they’re inserted</span>
+-->
+<p><span class="caption">Encart 8-22 : démonstration que les clés et les valeurs
+sont possédées par la table de hachage une fois qu'elles sont insérées</span></p>
+<!--
+We aren’t able to use the variables `field_name` and `field_value` after
+they’ve been moved into the hash map with the call to `insert`.
+-->
+<p>Nous ne pouvons plus utiliser les variables <code>nom_champ</code> et <code>valeur_champ</code> après
+qu'elles ont été déplacées dans la table de hachage lors de l'appel à <code>insert</code>.</p>
+<!--
+If we insert references to values into the hash map, the values won’t be moved
+into the hash map. The values that the references point to must be valid for at
+least as long as the hash map is valid. We’ll talk more about these issues in
+the [“Validating References with
+Lifetimes”][validating-references-with-lifetimes]<!-- ignore -- > section in
+Chapter 10.
+-->
+<p>Si nous insérons dans la table de hachage des références vers des valeurs, ces
+valeurs ne seront pas déplacées dans la table de hachage. Les valeurs vers
+lesquelles les références pointent doivent rester en vigueur au moins aussi
+longtemps que la table de hachage. Nous verrons ces problématiques dans <a href="ch10-03-lifetime-syntax.html">une
+section du chapitre 10</a><!-- ignore -->.</p>
+<!--
+### Accessing Values in a Hash Map
+-->
+<h3 id="accéder-aux-valeurs-dans-une-table-de-hachage"><a class="header" href="#accéder-aux-valeurs-dans-une-table-de-hachage">Accéder aux valeurs dans une table de hachage</a></h3>
+<!--
+We can get a value out of the hash map by providing its key to the `get`
+method, as shown in Listing 8-23.
+-->
+<p>Nous pouvons obtenir une valeur d'une table de hachage en passant sa clé à la
+méthode <code>get</code>, comme dans l'encart 8-23.</p>
+<!--
+```rust
+# fn main() {
+    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Bleu"), 10);
+    scores.insert(String::from("Jaune"), 50);
+
+    let nom_equipe = String::from("Bleu");
+    let score = scores.get(&nom_equipe);
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from(&quot;Bleu&quot;), 10);
+    scores.insert(String::from(&quot;Jaune&quot;), 50);
+
+    let nom_equipe = String::from(&quot;Bleu&quot;);
+    let score = scores.get(&amp;nom_equipe);
+<span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 8-23: Accessing the score for the Blue team
+stored in the hash map</span>
+-->
+<p><span class="caption">Encart 8-23 : récupération du score de l'équipe <code>Bleu</code>,
+stocké dans la table de hachage</span></p>
+<!--
+Here, `score` will have the value that’s associated with the Blue team, and the
+result will be `Some(&10)`. The result is wrapped in `Some` because `get`
+returns an `Option<&V>`; if there’s no value for that key in the hash map,
+`get` will return `None`. The program will need to handle the `Option` in one
+of the ways that we covered in Chapter 6.
+-->
+<p>Dans notre cas, <code>score</code> aura la valeur qui est associée à l'équipe <code>Bleu</code>, et le
+résultat sera <code>Some(&amp;10)</code>. Le résultat est encapsulé dans un <code>Some</code> car <code>get</code>
+retourne une <code>Option&lt;&amp;V&gt;</code> : s'il n'y a pas de valeur pour cette clé dans la
+table de hachage, <code>get</code> va retourner <code>None</code>. Le programme doit gérer cette
+<code>Option</code> d'une des manières dont nous avons parlé au chapitre 6.</p>
+<!--
+We can iterate over each key/value pair in a hash map in a similar manner as we
+do with vectors, using a `for` loop:
+-->
+<p>Nous pouvons itérer sur chaque paire de clé/valeur dans une table de hachage de
+la même manière que nous le faisons avec les vecteurs, en utilisant une boucle
+<code>for</code> :</p>
+<!--
+```rust
+# fn main() {
+    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Bleu"), 10);
+    scores.insert(String::from("Jaune"), 50);
+
+    for (cle, valeur) in &scores {
+        println!("{} : {}", cle, valeur);
+    }
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from(&quot;Bleu&quot;), 10);
+    scores.insert(String::from(&quot;Jaune&quot;), 50);
+
+    for (cle, valeur) in &amp;scores {
+        println!(&quot;{} : {}&quot;, cle, valeur);
+    }
+<span class="boring">}
+</span></code></pre></pre>
+<!--
+This code will print each pair in an arbitrary order:
+-->
+<p>Ce code va afficher chaque paire dans un ordre arbitraire :</p>
+<!--
+```text
+Yellow: 50
+Blue: 10
+```
+-->
+<pre><code class="language-text">Jaune : 50
+Bleu : 10
+</code></pre>
+<!--
+### Updating a Hash Map
+-->
+<h3 id="modifier-une-table-de-hachage"><a class="header" href="#modifier-une-table-de-hachage">Modifier une table de hachage</a></h3>
+<!--
+Although the number of key and value pairs is growable, each key can only have
+one value associated with it at a time. When you want to change the data in a
+hash map, you have to decide how to handle the case when a key already has a
+value assigned. You could replace the old value with the new value, completely
+disregarding the old value. You could keep the old value and ignore the new
+value, only adding the new value if the key *doesn’t* already have a value. Or
+you could combine the old value and the new value. Let’s look at how to do each
+of these!
+-->
+<p>Bien que le nombre de paires de clé-valeur puisse augmenter, chaque clé ne peut
+être associée qu'à une seule valeur à la fois. Lorsque vous souhaitez modifier
+les données d'une table de hachage, vous devez choisir comment gérer le cas où
+une clé a déjà une valeur qui lui est associée. Vous pouvez remplacer l'ancienne
+valeur avec la nouvelle valeur, en ignorant complètement l'ancienne valeur. Vous
+pouvez garder l'ancienne valeur et ignorer la nouvelle valeur, en insérant la
+nouvelle valeur uniquement si la clé <em>n'a pas</em> déjà une valeur. Ou vous pouvez
+fusionner l'ancienne valeur et la nouvelle. Découvrons dès maintenant comment
+faire chacune de ces actions !</p>
+<!--
+#### Overwriting a Value
+-->
+<h4 id="réécrire-une-valeur"><a class="header" href="#réécrire-une-valeur">Réécrire une valeur</a></h4>
+<!--
+If we insert a key and a value into a hash map and then insert that same key
+with a different value, the value associated with that key will be replaced.
+Even though the code in Listing 8-24 calls `insert` twice, the hash map will
+only contain one key/value pair because we’re inserting the value for the Blue
+team’s key both times.
+-->
+<p>Si nous ajoutons une clé et une valeur dans une table de hachage et que nous
+ajoutons à nouveau la même clé avec une valeur différente, la valeur associée
+à cette clé sera remplacée. Même si le code dans l'encart 8-24 appelle deux
+fois <code>insert</code>, la table de hachage contiendra une seule paire de clé/valeur car
+nous ajoutons la valeur pour l'équipe <code>Bleu</code> à deux reprises.</p>
+<!--
+```rust
+# fn main() {
+    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Bleu"), 10);
+    scores.insert(String::from("Bleu"), 25);
+
+    println!("{:?}", scores);
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from(&quot;Bleu&quot;), 10);
+    scores.insert(String::from(&quot;Bleu&quot;), 25);
+
+    println!(&quot;{:?}&quot;, scores);
+<span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 8-24: Replacing a value stored with a particular
+key</span>
+-->
+<p><span class="caption">Encart 8-24 : remplacement d'une valeur stockée sous une
+clé spécifique</span></p>
+<!--
+This code will print `{"Blue": 25}`. The original value of `10` has been
+overwritten.
+-->
+<p>Ce code va afficher <code>{&quot;Bleu&quot;: 25}</code>. La valeur initiale <code>10</code> a été remplacée.</p>
+<!--
+#### Only Inserting a Value If the Key Has No Value
+-->
+<h4 id="ajouter-une-valeur-seulement-si-la-clé-na-pas-déjà-de-valeur"><a class="header" href="#ajouter-une-valeur-seulement-si-la-clé-na-pas-déjà-de-valeur">Ajouter une valeur seulement si la clé n'a pas déjà de valeur</a></h4>
+<!--
+It’s common to check whether a particular key has a value and, if it doesn’t,
+insert a value for it. Hash maps have a special API for this called `entry`
+that takes the key you want to check as a parameter. The return value of the
+`entry` method is an enum called `Entry` that represents a value that might or
+might not exist. Let’s say we want to check whether the key for the Yellow team
+has a value associated with it. If it doesn’t, we want to insert the value 50,
+and the same for the Blue team. Using the `entry` API, the code looks like
+Listing 8-25.
+-->
+<p>Il est courant de vérifier si une clé spécifique a déjà une valeur, et si ce
+n'est pas le cas, de lui associer une valeur. Les tables de hachage ont une API
+spécifique pour ce cas-là qui s'appelle <code>entry</code> et qui prend en paramètre la
+clé que vous voulez vérifier. La valeur de retour de la méthode <code>entry</code> est une
+énumération qui s'appelle <code>Entry</code> qui représente une valeur qui existe ou non.
+Imaginons que nous souhaitons vérifier si la clé pour l'équipe <code>Jaune</code> a une
+valeur qui lui est associée. Si ce n'est pas le cas, nous voulons lui associer
+la valeur 50, et faire de même pour l'équipe <code>Bleu</code>. En utilisant l'API <code>entry</code>,
+ce code va ressembler à l'encart 8-25.</p>
+<!--
+```rust
+# fn main() {
+    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Bleu"), 10);
+
+    scores.entry(String::from("Jaune")).or_insert(50);
+    scores.entry(String::from("Bleu")).or_insert(50);
+
+    println!("{:?}", scores);
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    use std::collections::HashMap;
+
+    let mut scores = HashMap::new();
+    scores.insert(String::from(&quot;Bleu&quot;), 10);
+
+    scores.entry(String::from(&quot;Jaune&quot;)).or_insert(50);
+    scores.entry(String::from(&quot;Bleu&quot;)).or_insert(50);
+
+    println!(&quot;{:?}&quot;, scores);
+<span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 8-25: Using the `entry` method to only insert if
+the key does not already have a value</span>
+-->
+<p><span class="caption">Encart 8-25 : utilisation de la méthode <code>entry</code> pour
+ajouter la clé uniquement si elle n'a pas déjà de valeur associée</span></p>
+<!--
+The `or_insert` method on `Entry` is defined to return a mutable reference to
+the value for the corresponding `Entry` key if that key exists, and if not,
+inserts the parameter as the new value for this key and returns a mutable
+reference to the new value. This technique is much cleaner than writing the
+logic ourselves and, in addition, plays more nicely with the borrow checker.
+-->
+<p>La méthode <code>or_insert</code> sur <code>Entry</code> est conçue pour retourner une référence
+mutable vers la valeur correspondant à la clé du <code>Entry</code> si cette clé existe,
+et sinon, d'ajouter son paramètre comme nouvelle valeur pour cette clé et
+retourner une référence mutable vers la nouvelle valeur. Cette technique est
+plus propre que d'écrire la logique nous-mêmes et, de plus, elle fonctionne
+mieux avec le vérificateur d'emprunt.</p>
+<!--
+Running the code in Listing 8-25 will print `{"Yellow": 50, "Blue": 10}`. The
+first call to `entry` will insert the key for the Yellow team with the value
+50 because the Yellow team doesn’t have a value already. The second call to
+`entry` will not change the hash map because the Blue team already has the
+value 10.
+-->
+<p>L'exécution du code de l'encart 8-25 va afficher <code>{&quot;Jaune&quot;: 50, &quot;Bleu&quot;: 10}</code>.
+Le premier appel à <code>entry</code> va ajouter la clé pour l'équipe <code>Jaune</code> avec la
+valeur <code>50</code> car l'équipe <code>Jaune</code> n'a pas encore de valeur. Le second appel à
+<code>entry</code> ne va pas changer la table de hachage car l'équipe <code>Bleu</code> a déjà la
+valeur <code>10</code>.</p>
+<!--
+#### Updating a Value Based on the Old Value
+-->
+<h4 id="modifier-une-valeur-en-fonction-de-lancienne-valeur"><a class="header" href="#modifier-une-valeur-en-fonction-de-lancienne-valeur">Modifier une valeur en fonction de l'ancienne valeur</a></h4>
+<!--
+Another common use case for hash maps is to look up a key’s value and then
+update it based on the old value. For instance, Listing 8-26 shows code that
+counts how many times each word appears in some text. We use a hash map with
+the words as keys and increment the value to keep track of how many times we’ve
+seen that word. If it’s the first time we’ve seen a word, we’ll first insert
+the value 0.
+-->
+<p>Une autre utilisation courante avec les tables de hachage est de regarder la
+valeur d'une clé et ensuite la modifier en fonction de l'ancienne valeur. Par
+exemple, l'encart 8-26 contient du code qui compte combien de fois chaque mot
+apparaît dans du texte. Nous utilisons une table de hachage avec les mots comme
+clés et nous incrémentons la valeur pour compter combien de fois nous avons vu
+ce mot. Si c'est la première fois que nous voyons un mot, nous allons d'abord
+insérer la valeur <code>0</code>.</p>
+<!--
+```rust
+# fn main() {
+    use std::collections::HashMap;
+
+    let texte = "bonjour le monde magnifique monde";
+
+    let mut table = HashMap::new();
+
+    for mot in texte.split_whitespace() {
+        let compteur = table.entry(mot).or_insert(0);
+        *compteur += 1;
+    }
+
+    println!("{:?}", table);
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    use std::collections::HashMap;
+
+    let texte = &quot;bonjour le monde magnifique monde&quot;;
+
+    let mut table = HashMap::new();
+
+    for mot in texte.split_whitespace() {
+        let compteur = table.entry(mot).or_insert(0);
+        *compteur += 1;
+    }
+
+    println!(&quot;{:?}&quot;, table);
+<span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 8-26: Counting occurrences of words using a hash
+map that stores words and counts</span>
+-->
+<p><span class="caption">Encart 8-26 : comptage des occurrences des mots en
+utilisant une table de hachage qui stocke les mots et leur quantité</span></p>
+<!--
+This code will print `{"world": 2, "hello": 1, "wonderful": 1}`. The
+`split_whitespace` method iterates over sub-slices, separated by whitespace, of
+the value in `text`. The `or_insert` method returns a mutable reference (`&mut
+V`) to the value for the specified key. Here we store that mutable reference in
+the `count` variable, so in order to assign to that value, we must first
+dereference `count` using the asterisk (`*`). The mutable reference goes out of
+scope at the end of the `for` loop, so all of these changes are safe and
+allowed by the borrowing rules.
+-->
+<p>Ce code va afficher <code>{&quot;monde&quot;: 2, &quot;bonjour&quot;: 1, &quot;magnifique&quot;: 1, &quot;le&quot;: 1}</code>. La
+méthode <code>split_whitespace</code> va itérer sur les sous-slices, séparées par des
+espaces vides, sur la valeur dans <code>texte</code>. La méthode <code>or_insert</code> retourne une
+référence mutable (<code>&amp;mut V</code>) vers la valeur de la clé spécifiée. Nous stockons
+ici la référence mutable dans la variable <code>compteur</code>, donc pour affecter une
+valeur, nous devons d'abord déréférencer <code>compteur</code> en utilisant l'astérisque
+(<code>*</code>). La référence mutable sort de la portée à la fin de la boucle <code>for</code>, donc
+tous ces changements sont sûrs et autorisés par les règles d'emprunt.</p>
+<!--
+### Hashing Functions
+-->
+<h3 id="fonctions-de-hachage"><a class="header" href="#fonctions-de-hachage">Fonctions de hachage</a></h3>
+<!--
+By default, `HashMap` uses a hashing function called *SipHash* that can provide
+resistance to Denial of Service (DoS) attacks involving hash
+tables[^siphash]<!-- ignore -- >. This is not the fastest hashing algorithm
+available, but the trade-off for better security that comes with the drop in
+performance is worth it. If you profile your code and find that the default
+hash function is too slow for your purposes, you can switch to another function
+by specifying a different hasher. A *hasher* is a type that implements the
+`BuildHasher` trait. We’ll talk about traits and how to implement them in
+Chapter 10. You don’t necessarily have to implement your own hasher from
+scratch; [crates.io](https://crates.io/)<!-- ignore -- > has libraries shared by
+other Rust users that provide hashers implementing many common hashing
+algorithms.
+-->
+<p>Par défaut, <code>HashMap</code> utilise une fonction de hachage nommée SipHash qui résiste
+aux attaques par déni de service (DoS) envers les tables de hachage<sup class="footnote-reference"><a href="#siphash">1</a></sup>.
+Ce n'est pas l'algorithme de hachage le plus rapide qui existe, mais le
+compromis entre une meilleure sécurité et la baisse de performances en vaut la
+peine. Si vous analysez la performance de votre code et que vous vous rendez
+compte que la fonction de hachage par défaut est trop lente pour vos besoins,
+vous pouvez la remplacer par une autre fonction en spécifiant un hacheur
+différent. Un <em>hacheur</em> est un type qui implémente le trait <code>BuildHasher</code>. Nous
+verrons les traits et comment les implémenter au chapitre 10. Vous n'avez pas
+forcément besoin d'implémenter votre propre hacheur à partir de zéro ;
+<a href="https://crates.io/">crates.io</a> héberge des bibliothèques partagées par d'autres
+utilisateurs de Rust qui fournissent de nombreux algorithmes de hachage
+répandus.</p>
+<!--
+[^siphash]: [https://en.wikipedia.org/wiki/SipHash](https://en.wikipedia.org/wiki/SipHash)
+-->
+<div class="footnote-definition" id="siphash"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://en.wikipedia.org/wiki/SipHash">https://en.wikipedia.org/wiki/SipHash</a></p>
+</div>
+<!--
+## Summary
+-->
+<h2 id="résumé"><a class="header" href="#résumé">Résumé</a></h2>
+<!--
+Vectors, strings, and hash maps will provide a large amount of functionality
+necessary in programs when you need to store, access, and modify data. Here are
+some exercises you should now be equipped to solve:
+-->
+<p>Les vecteurs, Strings, et tables de hachage vont vous apporter de nombreuses
+fonctionnalités nécessaires à vos programmes lorsque vous aurez besoin de
+stocker, accéder, et modifier des données. Voici quelques exercices que vous
+devriez maintenant être en mesure de résoudre :</p>
+<!--
+* Given a list of integers, use a vector and return the median (when sorted,
+  the value in the middle position) and mode (the value that occurs most often;
+  a hash map will be helpful here) of the list.
+* Convert strings to pig latin. The first consonant of each word is moved to
+  the end of the word and “ay” is added, so “first” becomes “irst-fay.” Words
+  that start with a vowel have “hay” added to the end instead (“apple” becomes
+  “apple-hay”). Keep in mind the details about UTF-8 encoding!
+* Using a hash map and vectors, create a text interface to allow a user to add
+  employee names to a department in a company. For example, “Add Sally to
+  Engineering” or “Add Amir to Sales.” Then let the user retrieve a list of all
+  people in a department or all people in the company by department, sorted
+  alphabetically.
+-->
+<ul>
+<li>À partir d'une liste d'entiers, utiliser un vecteur et retourner la médiane
+(la valeur au milieu lorsque la liste est triée) et le mode (la valeur qui
+apparaît le plus souvent ; une table de hachage sera utile dans ce cas) de la
+liste.</li>
+<li>Convertir des chaînes de caractères dans une variante du louchébem.
+La consonne initiale de chaque mot est remplacée par la lettre <code>l</code> et est
+rétablie à la fin du mot suivie du suffixe argotique “em” ; ainsi, “bonjour”
+devient “<em>l</em>onjour<em>bem</em>”. Si le mot commence par une voyelle, ajouter un <code>l</code>
+au début du mot et ajouter à la fin le suffixe “muche”. Et gardez en tête les
+détails à propos de l'encodage UTF-8 !</li>
+<li>En utilisant une table de hachage et des vecteurs, créez une interface
+textuelle pour permettre à un utilisateur d'ajouter des noms d'employés dans
+un département d'une entreprise. Par exemple, “Ajouter Sally au bureau
+d'études” ou “Ajouter Amir au service commercial”. Ensuite, donnez la
+possibilité à l'utilisateur de récupérer une liste de toutes les personnes
+dans un département, ou tout le monde dans l'entreprise trié par département,
+et classés dans l'ordre alphabétique dans tous les cas.</li>
+</ul>
+<!--
+The standard library API documentation describes methods that vectors, strings,
+and hash maps have that will be helpful for these exercises!
+-->
+<p>La documentation de l'API de la bibliothèque standard décrit les méthodes qu'ont
+les vecteurs, chaînes de caractères et tables de hachage, ce qui vous sera bien
+utile pour mener à bien ces exercices !</p>
+<!--
+We’re getting into more complex programs in which operations can fail, so, it’s
+a perfect time to discuss error handling. We’ll do that next!
+-->
+<p>Nous nous lançons dans des programmes de plus en plus complexes dans lesquels
+les opérations peuvent échouer, c'est donc le moment idéal pour voir comment
+bien gérer les erreurs. C'est ce que nous allons faire au prochain chapitre !</p>
+<!--
+[iterators]: ch13-02-iterators.html
+[validating-references-with-lifetimes]:
+ch10-03-lifetime-syntax.html#validating-references-with-lifetimes
+-->
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch08-02-strings.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch09-00-error-handling.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch08-02-strings.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch09-00-error-handling.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../ferris.js"></script>
+    </body>
+</html>

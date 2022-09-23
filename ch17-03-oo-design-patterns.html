@@ -1,0 +1,2130 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Implémenter un patron de conception orienté-objet - Le langage de programmation Rust</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../ferris.css">
+        <link rel="stylesheet" href="../theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Le langage de programmation Rust</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Avant-propos</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="translation-terms.html">Traduction des termes</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Prise en main</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, world!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Programmer le jeu du plus ou du moins</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Les concepts courants de programmation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> Les variables et la mutabilité</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Les types de données</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Les fonctions</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Les commentaires</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Les structures de contrôle</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Comprendre la possession</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Qu'est-ce que la possession ?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Les références et l'emprunt</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Le type slice</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Utiliser les structures pour structurer des données apparentées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Définir et instancier des structures</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Un exemple de programme qui utilise des structures</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> La syntaxe des méthodes</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Les énumérations et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Définir une énumération</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> La structure de contrôle match</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> Une structure de contrôle concise : if let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Gérer des projets grandissants avec les paquets, crates et modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Les paquets et les crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Définir des modules pour gérer la portée et la visibilité</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Désigner un élément dans l'arborescence de modules</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Importer des chemins dans la portée via le mot-clé use</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Séparer les modules dans différents fichiers</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Les collections standard</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Stocker des listes de valeurs avec des vecteurs</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> Stocker du texte encodé en UTF-8 avec les Strings</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Stocker des clés associées à des valeurs dans des tables de hachage</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> La gestion des erreurs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Les erreurs irrécupérables avec panic!</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Des erreurs récupérables avec Result</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> Paniquer ou ne pas paniquer, telle est la question</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Les types génériques, les traits et les durées de vie</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Les types de données génériques</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Définir des comportements partagés avec les traits</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> La conformité des références avec les durées de vies</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Ecrire des tests automatisés</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Comment écrire des tests</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Gérer l'exécution des tests</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> L'organisation des tests</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> Un projet d'entrée/sortie : construire un programme en ligne de commande</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Récupérer les arguments de la ligne de commande</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Lire un fichier</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Remanier le code pour améliorer sa modularité et la gestion des erreurs</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Développer les fonctionnalités de la bibliothèque avec le TDD</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Travailler avec des variables d'environnement</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Ecrire les messages d'erreur sur la sortie d'erreurs standard au lieu de la sortie normale</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Les fonctionnalités des langages fonctionnels : les itérateurs et les fermetures</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Les fermetures : fonctions anonymes qui peuvent utiliser leur environnement</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Traiter une série d'éléments avec un itérateur</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> Amélioration de notre projet d'entrée/sortie</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Comparaison des performances : les boucles et les itérateurs</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> En savoir plus sur cargo et crates.io</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Personnaliser les compilations avec les profils de publication</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Publier une crate sur crates.io</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Les espaces de travail de cargo</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Installer des binaires à partir de crates.io avec cargo install</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Etendre les fonctionnalités de cargo avec des commandes personnalisées</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Les pointeurs intelligents</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Utiliser Box&lt;T&gt; pour pointer sur des données présentes sur le tas</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Considérer les pointeurs intelligents comme des références grâce au trait Deref</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Exécuter du code au nettoyage avec le trait Drop</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, le pointeur intelligent qui compte les références</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; et le motif de mutabilité interne</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Les boucles de références qui peuvent provoquer des fuites de mémoire</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> La concurrence sans craintes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Utiliser les tâches pour exécuter simultanément du code</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Utiliser l'envoi de messages pour transférer des données entre les tâches</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Le partage d'état en concurrence</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Etendre la concurrence avec les traits Sync et Send</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Les fonctionnalités orientées objet de Rust</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Les caractéristiques des langages orientés objet</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Utiliser les objets traits qui permettent des valeurs de types différents</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html" class="active"><strong aria-hidden="true">17.3.</strong> Implémenter un patron de conception orienté-objet</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Les motifs et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> Tous les endroits où les motifs peuvent être utilisés</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> La réfutabilité : lorsqu'un motif peut échouer à correspondre</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> La syntaxe des motifs</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Les fonctionnalités avancées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Le Rust non sécurisé (unsafe)</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Les traits avancés</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Les types avancés</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Les fonctions et fermetures avancées</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Les macros</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Projet final : construire un serveur web multitâches</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Développer un serveur web monotâche</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Transformer notre serveur monotâche en serveur multitâches</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Arrêt propre et nettoyage</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Annexes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - les mots-clés</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> 🚧 B - les opérateurs et les symboles</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> 🚧 C - les traits dérivables</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> 🚧 D - Des outils de développement utiles</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> 🚧 E - Les éditions</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> 🚧 F - Les traductions de ce livre</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> 🚧 G - Comment Rust est construit, et “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Le langage de programmation Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/Jimskapt/rust-book-fr" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+## Implementing an Object-Oriented Design Pattern
+-->
+<h2 id="implémenter-un-patron-de-conception-orienté-objet"><a class="header" href="#implémenter-un-patron-de-conception-orienté-objet">Implémenter un patron de conception orienté-objet</a></h2>
+<!--
+The *state pattern* is an object-oriented design pattern. The crux of the
+pattern is that a value has some internal state, which is represented by a set
+of *state objects*, and the value’s behavior changes based on the internal
+state. The state objects share functionality: in Rust, of course, we use
+structs and traits rather than objects and inheritance. Each state object is
+responsible for its own behavior and for governing when it should change into
+another state. The value that holds a state object knows nothing about the
+different behavior of the states or when to transition between states.
+-->
+<p>Le <em>patron état</em> est un patron de conception orienté objet. Le point essentiel
+de ce patron est qu'une valeur possède un état interne qui est représenté par
+un ensemble <em>d'objets état</em>, et le comportement de la valeur change en fonction
+de son état interne. Les objets état partagent des fonctionnalités : en Rust,
+bien sûr, nous utilisons des structures et des traits plutôt que des objets et
+de l'héritage. Chaque objet état est responsable de son propre comportement et
+décide lorsqu'il doit changer pour un autre état. La valeur contenue dans un
+objet état ne sait rien sur les différents comportements des états et ne sait
+pas quand il va changer d'état.</p>
+<!--
+Using the state pattern means when the business requirements of the program
+change, we won’t need to change the code of the value holding the state or the
+code that uses the value. We’ll only need to update the code inside one of the
+state objects to change its rules or perhaps add more state objects. Let’s look
+at an example of the state design pattern and how to use it in Rust.
+-->
+<p>L'utilisation du patron état signifie que lorsque les exigences métier du
+programme ont changé, nous n'avons pas besoin de changer le code à l'intérieur
+de l'objet état ou le code qui utilise l'objet. Nous avons juste besoin de
+modifier le code dans un des objets état pour changer son fonctionnement ou pour
+ajouter d'autres objets état. Voyons un exemple du patron état et comment
+l'utiliser en Rust.</p>
+<!--
+We’ll implement a blog post workflow in an incremental way. The blog’s final
+functionality will look like this:
+-->
+<p>Nous allons implémenter un processus de publication de billets de blogs de
+manière incrémentale. Les fonctionnalités finales du blog seront les suivantes :</p>
+<!--
+1. A blog post starts as an empty draft.
+2. When the draft is done, a review of the post is requested.
+3. When the post is approved, it gets published.
+4. Only published blog posts return content to print, so unapproved posts can’t
+   accidentally be published.
+-->
+<ol>
+<li>Un billet de blog commence par un brouillon vide.</li>
+<li>Lorsque le brouillon est terminé, une relecture du billet est demandée.</li>
+<li>Lorsqu'un billet est approuvé, il est publié.</li>
+<li>Seuls les billets de blog publiés retournent du contenu à afficher si bien
+que les billets non approuvés ne peuvent pas être publiés accidentellement.</li>
+</ol>
+<!--
+Any other changes attempted on a post should have no effect. For example, if we
+try to approve a draft blog post before we’ve requested a review, the post
+should remain an unpublished draft.
+-->
+<p>Tous les autres changements effectués sur un billet n'auront pas d'effet. Par
+exemple, si nous essayons d'approuver un brouillon de billet de blog avant
+d'avoir demandé une relecture, le billet devrait rester à l'état de brouillon
+non publié.</p>
+<!--
+Listing 17-11 shows this workflow in code form: this is an example usage of the
+API we’ll implement in a library crate named `blog`. This won’t compile yet
+because we haven’t implemented the `blog` crate yet.
+-->
+<p>L'encart 17-11 présente ce processus de publication sous forme de code : c'est
+un exemple d'utilisation de l'API que nous allons implémenter dans une crate de
+bibliothèque <code>blog</code>. Elle ne va pas encore se compiler car nous n'avons pas
+encore implémenté la crate <code>blog</code>.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust,ignore,does_not_compile
+use blog::Post;
+
+fn main() {
+    let mut post = Post::new();
+
+    post.add_text("I ate a salad for lunch today");
+    assert_eq!("", post.content());
+
+    post.request_review();
+    assert_eq!("", post.content());
+
+    post.approve();
+    assert_eq!("I ate a salad for lunch today", post.content());
+}
+```
+-->
+<pre><code class="language-rust ignore does_not_compile">use blog::Billet;
+
+fn main() {
+    let mut billet = Billet::new();
+
+    billet.ajouter_texte(&quot;J'ai mangé une salade au déjeuner aujourd'hui&quot;);
+    assert_eq!(&quot;&quot;, billet.contenu());
+
+    billet.demander_relecture();
+    assert_eq!(&quot;&quot;, billet.contenu());
+
+    billet.approuver();
+    assert_eq!(&quot;J'ai mangé une salade au déjeuner aujourd'hui&quot;, billet.contenu());
+}
+</code></pre>
+<!--
+<span class="caption">Listing 17-11: Code that demonstrates the desired
+behavior we want our `blog` crate to have</span>
+-->
+<p><span class="caption">Encart 17-11 : du code qui montre le comportement attendu
+de notre crate <code>blog</code></span></p>
+<!--
+We want to allow the user to create a new draft blog post with `Post::new`. We
+want to allow text to be added to the blog post. If we try to get the post’s
+content immediately, before approval, we shouldn't get any text because the
+post is still a draft. We’ve added `assert_eq!` in the code for demonstration
+purposes. An excellent unit test for this would be to assert that a draft blog
+post returns an empty string from the `content` method, but we’re not going to
+write tests for this example.
+-->
+<p>Nous voulons permettre à l'utilisateur de créer un nouveau brouillon de billet
+de blog avec <code>Billet::new</code>. Nous voulons qu'il puisse ajouter du texte au
+billet de blog. Si nous essayons d'obtenir immédiatement le contenu du billet,
+avant qu'il ne soit relu, nous n'obtiendrons aucun texte car le billet est
+toujours un brouillon. Nous avons ajouté des <code>assert_eq!</code> dans le code pour les
+besoins de la démonstration. Un excellent test unitaire pour cela serait de
+vérifier qu'un brouillon de billet de blog retourne bien une chaîne de
+caractères vide à partir de la méthode <code>contenu</code>, mais nous n'allons pas écrire
+de tests pour cet exemple.</p>
+<!--
+Next, we want to enable a request for a review of the post, and we want
+`content` to return an empty string while waiting for the review. When the post
+receives approval, it should get published, meaning the text of the post will
+be returned when `content` is called.
+-->
+<p>Ensuite, nous voulons permettre de demander une relecture du billet, et nous
+souhaitons que <code>contenu</code> retourne toujours une chaîne de caractères vide pendant
+que nous attendons la relecture. Lorsque la relecture du billet est approuvée,
+il doit être publié, ce qui signifie que le texte du billet doit être retourné
+lors de l'appel à <code>contenu</code>.</p>
+<!--
+Notice that the only type we’re interacting with from the crate is the `Post`
+type. This type will use the state pattern and will hold a value that will be
+one of three state objects representing the various states a post can be
+in—draft, waiting for review, or published. Changing from one state to another
+will be managed internally within the `Post` type. The states change in
+response to the methods called by our library’s users on the `Post` instance,
+but they don’t have to manage the state changes directly. Also, users can’t
+make a mistake with the states, like publishing a post before it’s reviewed.
+-->
+<p>Remarquez que le seul type avec lequel nous interagissons avec la crate est le
+type <code>Billet</code>. Ce type va utiliser le patron état et va héberger une valeur qui
+sera un des trois objets état représentant les différents états par lesquels
+passe un billet : brouillon, en attente de relecture ou publié. Le changement
+d'un état à un autre sera géré en interne du type <code>Billet</code>. Les états vont
+changer en réponse à l'appel des méthodes de l'instance de <code>Billet</code> par les
+utilisateurs de notre bibliothèque qui n'auront donc pas à les gérer
+directement. Ainsi les utilisateurs ne peuvent pas faire d'erreur avec les
+états, comme celle de publier un billet avant qu'il ne soit relu par exemple.</p>
+<!--
+### Defining `Post` and Creating a New Instance in the Draft State
+-->
+<h3 id="définir-billet-et-créer-une-nouvelle-instance-à-létat-de-brouillon"><a class="header" href="#définir-billet-et-créer-une-nouvelle-instance-à-létat-de-brouillon">Définir <code>Billet</code> et créer une nouvelle instance à l'état de brouillon</a></h3>
+<!--
+Let’s get started on the implementation of the library! We know we need a
+public `Post` struct that holds some content, so we’ll start with the
+definition of the struct and an associated public `new` function to create an
+instance of `Post`, as shown in Listing 17-12. We’ll also make a private
+`State` trait. Then `Post` will hold a trait object of `Box<dyn State>`
+inside an `Option<T>` in a private field named `state`. You’ll see why the
+`Option<T>` is necessary in a bit.
+-->
+<p>Commençons l'implémentation de la bibliothèque ! Nous savons que nous aurons
+besoin d'une structure publique <code>Billet</code> qui héberge du contenu, donc nous
+allons commencer par définir cette structure ainsi qu'une fonction publique
+<code>new</code> qui lui est associée pour créer une instance de <code>Billet</code>, comme dans
+l'encart 17-12. Nous allons aussi créer un trait privé <code>Etat</code>. Ensuite <code>Billet</code>
+devra avoir un champ privé <code>etat</code> pour y loger une <code>Option&lt;T&gt;</code> contenant un
+objet trait de <code>Box&lt;dyn Etat&gt;</code>. Nous verrons plus tard l'intérêt du <code>Option&lt;T&gt;</code>.</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,noplayground
+pub struct Post {
+    state: Option<Box<dyn State>>,
+    content: String,
+}
+
+impl Post {
+    pub fn new() -> Post {
+        Post {
+            state: Some(Box::new(Draft {})),
+            content: String::new(),
+        }
+    }
+}
+
+trait State {}
+
+struct Draft {}
+
+impl State for Draft {}
+```
+-->
+<pre><code class="language-rust noplayground">pub struct Billet {
+    etat: Option&lt;Box&lt;dyn Etat&gt;&gt;,
+    contenu: String,
+}
+
+impl Billet {
+    pub fn new() -&gt; Billet {
+        Billet {
+            etat: Some(Box::new(Brouillon {})),
+            contenu: String::new(),
+        }
+    }
+}
+
+trait Etat {}
+
+struct Brouillon {}
+
+impl Etat for Brouillon {}
+</code></pre>
+<!--
+<span class="caption">Listing 17-12: Definition of a `Post` struct and a `new`
+function that creates a new `Post` instance, a `State` trait, and a `Draft`
+struct</span>
+-->
+<p><span class="caption">Encart 17-12 : définition d'une structure <code>Billet</code> et
+d'une fonction <code>new</code> qui crée une nouvelle instance de <code>Billet</code>, un trait
+<code>Etat</code> et une structure <code>Brouillon</code></span></p>
+<!--
+The `State` trait defines the behavior shared by different post states, and the
+`Draft`, `PendingReview`, and `Published` states will all implement the `State`
+trait. For now, the trait doesn’t have any methods, and we’ll start by defining
+just the `Draft` state because that is the state we want a post to start in.
+-->
+<p>Le trait <code>Etat</code> définit le comportement partagé par plusieurs états de billet,
+et les états <code>Brouillon</code>, <code>EnRelecture</code> et <code>Publier</code> vont tous implémenter ce
+trait <code>Etat</code>. Pour l'instant, le trait n'a pas de méthode, et nous allons
+commencer par définir uniquement l'état <code>Brouillon</code> car c'est l'état dans lequel
+nous voulons que soit un nouveau billet lorsqu'il est créé.</p>
+<!--
+When we create a new `Post`, we set its `state` field to a `Some` value that
+holds a `Box`. This `Box` points to a new instance of the `Draft` struct. This
+ensures whenever we create a new instance of `Post`, it will start out as a
+draft. Because the `state` field of `Post` is private, there is no way to
+create a `Post` in any other state! In the `Post::new` function, we set the
+`content` field to a new, empty `String`.
+-->
+<p>Lorsque nous créons un nouveau <code>Billet</code>, nous assignons à son champ <code>etat</code> une
+valeur <code>Some</code> qui contient une <code>Box</code>. Cette <code>Box</code> pointe sur une nouvelle
+instance de la structure <code>Brouillon</code>. Cela garantira qu'à chaque fois que nous
+créons une nouvelle instance de <code>Billet</code>, elle commencera à l'état de brouillon.
+Comme le champ <code>etat</code> de <code>Billet</code> est privé, il n'y a pas d'autre manière de
+créer un <code>Billet</code> dans un autre état ! Dans la fonction <code>Billet::new</code>, nous
+assignons une nouvelle <code>String</code> vide au champ <code>contenu</code>.</p>
+<!--
+### Storing the Text of the Post Content
+-->
+<h3 id="stocker-le-texte-du-contenu-du-billet"><a class="header" href="#stocker-le-texte-du-contenu-du-billet">Stocker le texte du contenu du billet</a></h3>
+<!--
+Listing 17-11 showed that we want to be able to call a method named
+`add_text` and pass it a `&str` that is then added to the text content of the
+blog post. We implement this as a method rather than exposing the `content`
+field as `pub`. This means we can implement a method later that will control
+how the `content` field’s data is read. The `add_text` method is pretty
+straightforward, so let’s add the implementation in Listing 17-13 to the `impl
+Post` block:
+-->
+<p>L'encart 17-11 a montré que nous souhaitons appeler une méthode <code>ajouter_texte</code>
+et lui passer un <code>&amp;str</code> qui est ensuite ajouté au contenu textuel du billet de
+blog. Nous implémentons ceci avec une méthode plutôt que d'exposer publiquement
+le champ <code>contenu</code> avec <code>pub</code>. Cela signifie que nous pourrons implémenter une
+méthode plus tard qui va contrôler comment le champ <code>contenu</code> sera lu. La
+méthode <code>ajouter_texte</code> est assez simple, donc ajoutons son implémentation dans
+le bloc <code>Billet</code> de l'encart 17-13 :</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,noplayground
+# pub struct Post {
+#     state: Option<Box<dyn State>>,
+#     content: String,
+# }
+# 
+impl Post {
+    // --snip--
+#     pub fn new() -> Post {
+#         Post {
+#             state: Some(Box::new(Draft {})),
+#             content: String::new(),
+#         }
+#     }
+# 
+    pub fn add_text(&mut self, text: &str) {
+        self.content.push_str(text);
+    }
+}
+# 
+# trait State {}
+# 
+# struct Draft {}
+# 
+# impl State for Draft {}
+```
+-->
+<pre><code class="language-rust noplayground"><span class="boring">pub struct Billet {
+</span><span class="boring">    etat: Option&lt;Box&lt;dyn Etat&gt;&gt;,
+</span><span class="boring">    contenu: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Billet {
+    // -- partie masquée ici --
+<span class="boring">    pub fn new() -&gt; Billet {
+</span><span class="boring">        Billet {
+</span><span class="boring">            etat: Some(Box::new(Brouillon {})),
+</span><span class="boring">            contenu: String::new(),
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    pub fn ajouter_texte(&amp;mut self, texte: &amp;str) {
+        self.contenu.push_str(texte);
+    }
+}
+<span class="boring">
+</span><span class="boring">trait Etat {}
+</span><span class="boring">
+</span><span class="boring">struct Brouillon {}
+</span><span class="boring">
+</span><span class="boring">impl Etat for Brouillon {}
+</span></code></pre>
+<!--
+<span class="caption">Listing 17-13: Implementing the `add_text` method to add
+text to a post’s `content`</span>
+-->
+<p><span class="caption">Encart 17-13 : implémentation de la méthode
+<code>ajouter_texte</code> pour ajouter du texte au <code>contenu</code> d'un billet</span></p>
+<!--
+The `add_text` method takes a mutable reference to `self`, because we’re
+changing the `Post` instance that we’re calling `add_text` on. We then call
+`push_str` on the `String` in `content` and pass the `text` argument to add to
+the saved `content`. This behavior doesn’t depend on the state the post is in,
+so it’s not part of the state pattern. The `add_text` method doesn’t interact
+with the `state` field at all, but it is part of the behavior we want to
+support.
+-->
+<p>La méthode <code>ajouter_texte</code> prend en argument une référence mutable vers <code>self</code>,
+car nous changeons l'instance <code>Billet</code> sur laquelle nous appelons
+<code>ajouter_texte</code>. Nous faisons ensuite appel à <code>push_str</code> sur le <code>String</code> dans
+<code>contenu</code> et nous y envoyons l'argument <code>texte</code> pour l'ajouter au <code>contenu</code> déjà
+stocké. Ce comportement ne dépend pas de l'état dans lequel est le billet, donc
+cela ne fait pas partie du patron état. La méthode <code>ajouter_texte</code> n'interagit
+pas du tout avec le champ <code>etat</code>, mais c'est volontaire.</p>
+<!--
+### Ensuring the Content of a Draft Post Is Empty
+-->
+<h3 id="sassurer-que-le-contenu-dun-brouillon-est-vide"><a class="header" href="#sassurer-que-le-contenu-dun-brouillon-est-vide">S'assurer que le contenu d'un brouillon est vide</a></h3>
+<!--
+Even after we’ve called `add_text` and added some content to our post, we still
+want the `content` method to return an empty string slice because the post is
+still in the draft state, as shown on line 7 of Listing 17-11. For now, let’s
+implement the `content` method with the simplest thing that will fulfill this
+requirement: always returning an empty string slice. We’ll change this later
+once we implement the ability to change a post’s state so it can be published.
+So far, posts can only be in the draft state, so the post content should always
+be empty. Listing 17-14 shows this placeholder implementation:
+-->
+<p>Même si nous avons appelé <code>ajouter_texte</code> et ajouté du contenu dans notre
+billet, nous voulons que la méthode <code>contenu</code> retourne toujours une slice de
+chaîne de caractères vide car le billet est toujours à l'état de brouillon,
+comme le montre la ligne 7 de l'encart 17-11. Implémentons maintenant la méthode
+<code>contenu</code> de la manière la plus simple qui réponde à cette consigne : toujours
+retourner un slice de chaîne de caractères vide. Nous la changerons plus tard
+lorsque nous implémenterons la capacité de changer l'état d'un billet afin qu'il
+puisse être publié. Pour l'instant, les billets ne peuvent qu'être à l'état de
+brouillon, donc le contenu du billet devrait toujours être vide. L'encart 17-14
+montre l'implémentation de ceci :</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,noplayground
+# pub struct Post {
+#     state: Option<Box<dyn State>>,
+#     content: String,
+# }
+# 
+impl Post {
+    // --snip--
+#     pub fn new() -> Post {
+#         Post {
+#             state: Some(Box::new(Draft {})),
+#             content: String::new(),
+#         }
+#     }
+# 
+#     pub fn add_text(&mut self, text: &str) {
+#         self.content.push_str(text);
+#     }
+# 
+    pub fn content(&self) -> &str {
+        ""
+    }
+}
+# 
+# trait State {}
+# 
+# struct Draft {}
+# 
+# impl State for Draft {}
+```
+-->
+<pre><code class="language-rust noplayground"><span class="boring">pub struct Billet {
+</span><span class="boring">    etat: Option&lt;Box&lt;dyn Etat&gt;&gt;,
+</span><span class="boring">    contenu: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Billet {
+    // -- partie masquée ici --
+<span class="boring">    pub fn new() -&gt; Billet {
+</span><span class="boring">        Billet {
+</span><span class="boring">            etat: Some(Box::new(Brouillon {})),
+</span><span class="boring">            contenu: String::new(),
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn ajouter_texte(&amp;mut self, texte: &amp;str) {
+</span><span class="boring">        self.contenu.push_str(texte);
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    pub fn contenu(&amp;self) -&gt; &amp;str {
+        &quot;&quot;
+    }
+}
+<span class="boring">
+</span><span class="boring">trait Etat {}
+</span><span class="boring">
+</span><span class="boring">struct Brouillon {}
+</span><span class="boring">
+</span><span class="boring">impl Etat for Brouillon {}
+</span></code></pre>
+<!--
+<span class="caption">Listing 17-14: Adding a placeholder implementation for
+the `content` method on `Post` that always returns an empty string slice</span>
+-->
+<p><span class="caption">Encart 17-14 : ajout d'une implémentation de la méthode
+<code>contenu</code> sur <code>Billet</code> qui va toujours retourner une slice de chaîne de
+caractères vide</span></p>
+<!--
+With this added `content` method, everything in Listing 17-11 up to line 7
+works as intended.
+-->
+<p>Avec cette méthode <code>contenu</code> ajoutée, tout ce qu'il y a dans l'encart 17-11
+fonctionne comme prévu jusqu'à la ligne 7.</p>
+<!--
+### Requesting a Review of the Post Changes Its State
+-->
+<h3 id="demander-une-relecture-du-billet-va-changer-son-état"><a class="header" href="#demander-une-relecture-du-billet-va-changer-son-état">Demander une relecture du billet va changer son état</a></h3>
+<!--
+Next, we need to add functionality to request a review of a post, which should
+change its state from `Draft` to `PendingReview`. Listing 17-15 shows this code:
+-->
+<p>Ensuite, nous avons besoin d'ajouter une fonctionnalité pour demander la
+relecture d'un billet, qui devrait changer son état de <code>Brouillon</code> à
+<code>EnRelecture</code>. L'encart 17-15 montre ce code :</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,noplayground
+# pub struct Post {
+#     state: Option<Box<dyn State>>,
+#     content: String,
+# }
+# 
+impl Post {
+    // --snip--
+#     pub fn new() -> Post {
+#         Post {
+#             state: Some(Box::new(Draft {})),
+#             content: String::new(),
+#         }
+#     }
+# 
+#     pub fn add_text(&mut self, text: &str) {
+#         self.content.push_str(text);
+#     }
+# 
+#     pub fn content(&self) -> &str {
+#         ""
+#     }
+# 
+    pub fn request_review(&mut self) {
+        if let Some(s) = self.state.take() {
+            self.state = Some(s.request_review())
+        }
+    }
+}
+
+trait State {
+    fn request_review(self: Box<Self>) -> Box<dyn State>;
+}
+
+struct Draft {}
+
+impl State for Draft {
+    fn request_review(self: Box<Self>) -> Box<dyn State> {
+        Box::new(PendingReview {})
+    }
+}
+
+struct PendingReview {}
+
+impl State for PendingReview {
+    fn request_review(self: Box<Self>) -> Box<dyn State> {
+        self
+    }
+}
+```
+-->
+<pre><code class="language-rust noplayground"><span class="boring">pub struct Billet {
+</span><span class="boring">    etat: Option&lt;Box&lt;dyn Etat&gt;&gt;,
+</span><span class="boring">    contenu: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Billet {
+    // -- partie masquée ici --
+<span class="boring">    pub fn new() -&gt; Billet {
+</span><span class="boring">        Billet {
+</span><span class="boring">            etat: Some(Box::new(Brouillon {})),
+</span><span class="boring">            contenu: String::new(),
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn ajouter_texte(&amp;mut self, texte: &amp;str) {
+</span><span class="boring">        self.contenu.push_str(texte);
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn contenu(&amp;self) -&gt; &amp;str {
+</span><span class="boring">        &quot;&quot;
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    pub fn demander_relecture(&amp;mut self) {
+        if let Some(s) = self.etat.take() {
+            self.etat = Some(s.demander_relecture())
+        }
+    }
+}
+
+trait Etat {
+    fn demander_relecture(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt;;
+}
+
+struct Brouillon {}
+
+impl Etat for Brouillon {
+    fn demander_relecture(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+        Box::new(EnRelecture {})
+    }
+}
+
+struct EnRelecture {}
+
+impl Etat for EnRelecture {
+    fn demander_relecture(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+        self
+    }
+}
+</code></pre>
+<!--
+<span class="caption">Listing 17-15: Implementing `request_review` methods on
+`Post` and the `State` trait</span>
+-->
+<p><span class="caption">Encart 17-15 : implémentation des méthodes
+<code>demander_relecture</code> sur <code>Billet</code> et le trait <code>Etat</code></span></p>
+<!--
+We give `Post` a public method named `request_review` that will take a mutable
+reference to `self`. Then we call an internal `request_review` method on the
+current state of `Post`, and this second `request_review` method consumes the
+current state and returns a new state.
+-->
+<p>Nous installons la méthode publique <code>demander_relecture</code> sur <code>Billet</code> qui va
+prendre en argument une référence mutable à <code>self</code>. Ensuite nous appelons la
+méthode interne <code>demander_relecture</code> sur l'état interne de <code>Billet</code>, et cette
+deuxième méthode <code>demander_relecture</code> consomme l'état en cours et applique un
+nouvel état.</p>
+<!--
+We’ve added the `request_review` method to the `State` trait; all types that
+implement the trait will now need to implement the `request_review` method.
+Note that rather than having `self`, `&self`, or `&mut self` as the first
+parameter of the method, we have `self: Box<Self>`. This syntax means the
+method is only valid when called on a `Box` holding the type. This syntax takes
+ownership of `Box<Self>`, invalidating the old state so the state value of the
+`Post` can transform into a new state.
+-->
+<p>Nous avons ajouté la méthode <code>demander_relecture</code> sur le trait <code>Etat</code> ; tous les
+types qui implémentent le trait vont maintenant devoir implémenter la méthode
+<code>demander_relecture</code>. Remarquez qu'au lieu d'avoir <code>self</code>, <code>&amp;self</code>, ou
+<code>&amp;mut self</code> en premier paramètre de la méthode, nous avons <code>self: Box&lt;Self&gt;</code>.
+Cette syntaxe signifie que la méthode est valide uniquement lorsqu'on l'appelle
+sur une <code>Box</code> qui contient ce type. Cette syntaxe prend possession de
+<code>Box&lt;Self&gt;</code>, ce qui annule l'ancien état du <code>Billet</code> qui peut changer pour un
+nouvel état.</p>
+<!--
+To consume the old state, the `request_review` method needs to take ownership
+of the state value. This is where the `Option` in the `state` field of `Post`
+comes in: we call the `take` method to take the `Some` value out of the `state`
+field and leave a `None` in its place, because Rust doesn’t let us have
+unpopulated fields in structs. This lets us move the `state` value out of
+`Post` rather than borrowing it. Then we’ll set the post’s `state` value to the
+result of this operation.
+-->
+<p>Pour consommer l'ancien état, la méthode <code>demander_relecture</code> a besoin de
+prendre possession de la valeur d'état. C'est ce à quoi sert le <code>Option</code> dans le
+champ <code>etat</code> de <code>Billet</code> : nous faisons appel à la méthode <code>take</code> pour obtenir
+la valeur dans le <code>Some</code> du champ <code>etat</code> et le remplacer par <code>None</code>, car Rust ne
+nous permet pas d'avoir des champs non renseignés dans des structures. Cela nous
+permet d'extraire la valeur de <code>etat</code> d'un <code>Billet</code>, plutôt que de l'emprunter.
+Ensuite, nous allons réaffecter le résultat de cette opération à <code>etat</code> du
+<code>Billet</code> concerné.</p>
+<!--
+We need to set `state` to `None` temporarily rather than setting it directly
+with code like `self.state = self.state.request_review();` to get ownership of
+the `state` value. This ensures `Post` can’t use the old `state` value after
+we’ve transformed it into a new state.
+-->
+<p>Nous devons assigner temporairement <code>None</code> à <code>etat</code> plutôt que de lui donner
+directement avec du code tel que <code>self.etat = self.etat.demander_relecture();</code> car
+nous voulons prendre possession de la valeur <code>etat</code>. Cela garantit que <code>Billet</code>
+ne peut pas utiliser l'ancienne valeur de <code>etat</code> après qu'on ait changé cet état.</p>
+<!--
+The `request_review` method on `Draft` needs to return a new, boxed instance of
+a new `PendingReview` struct, which represents the state when a post is waiting
+for a review. The `PendingReview` struct also implements the `request_review`
+method but doesn’t do any transformations. Rather, it returns itself, because
+when we request a review on a post already in the `PendingReview` state, it
+should stay in the `PendingReview` state.
+-->
+<p>La méthode <code>demander_relecture</code> sur <code>Brouillon</code> doit retourner une nouvelle
+instance d'une structure <code>EnRelecture</code> dans une <code>Box</code>, qui représente l'état
+lorsqu'un billet est en attente de relecture. La structure <code>EnRelecture</code>
+implémente elle aussi la méthode <code>demander_relecture</code> mais ne fait aucune
+modification. A la place, elle se retourne elle-même, car lorsque nous demandons
+une relecture sur un billet déjà à l'état <code>EnRelecture</code>, il doit rester à l'état
+<code>EnRelecture</code>.</p>
+<!--
+Now we can start seeing the advantages of the state pattern: the
+`request_review` method on `Post` is the same no matter its `state` value. Each
+state is responsible for its own rules.
+-->
+<p>Désormais nous commençons à voir les avantages du patron état : la méthode
+<code>demander_relecture</code> sur <code>Billet</code> est la même peu importe la valeur de son
+<code>etat</code>. Chaque état est maître de son fonctionnement.</p>
+<!--
+We’ll leave the `content` method on `Post` as is, returning an empty string
+slice. We can now have a `Post` in the `PendingReview` state as well as in the
+`Draft` state, but we want the same behavior in the `PendingReview` state.
+Listing 17-11 now works up to line 10!
+-->
+<p>Nous allons conserver la méthode <code>contenu</code> sur <code>Billet</code> comme elle est, elle
+va donc continuer à retourner une slice de chaîne de caractères vide. Nous pouvons
+maintenant avoir un <code>Billet</code> à l'état <code>Brouillon</code> ou <code>EnRelecture</code>, mais nous
+voulons qu'il suive le même comportement lorsqu'il est dans l'état
+<code>EnRelecture</code>. L'encart 17-11 fonctionne maintenant jusqu'à la ligne 10 !</p>
+<!--
+### Adding the `approve` Method that Changes the Behavior of `content`
+-->
+<h3 id="ajouter-une-méthode-approuver-qui-change-le-comportement-de-contenu"><a class="header" href="#ajouter-une-méthode-approuver-qui-change-le-comportement-de-contenu">Ajouter une méthode <code>approuver</code> qui change le comportement de <code>contenu</code></a></h3>
+<!--
+The `approve` method will be similar to the `request_review` method: it will
+set `state` to the value that the current state says it should have when that
+state is approved, as shown in Listing 17-16:
+-->
+<p>La méthode <code>approuver</code> ressemble à la méthode <code>demander_relecture</code> : elle va
+changer <code>etat</code> pour lui donner la valeur que l'état courant retournera lorsqu'il
+sera approuvé, comme le montre l'encart 17-16 :</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,noplayground
+# pub struct Post {
+#     state: Option<Box<dyn State>>,
+#     content: String,
+# }
+# 
+impl Post {
+    // --snip--
+#     pub fn new() -> Post {
+#         Post {
+#             state: Some(Box::new(Draft {})),
+#             content: String::new(),
+#         }
+#     }
+# 
+#     pub fn add_text(&mut self, text: &str) {
+#         self.content.push_str(text);
+#     }
+# 
+#     pub fn content(&self) -> &str {
+#         ""
+#     }
+# 
+#     pub fn request_review(&mut self) {
+#         if let Some(s) = self.state.take() {
+#             self.state = Some(s.request_review())
+#         }
+#     }
+# 
+    pub fn approve(&mut self) {
+        if let Some(s) = self.state.take() {
+            self.state = Some(s.approve())
+        }
+    }
+}
+
+trait State {
+    fn request_review(self: Box<Self>) -> Box<dyn State>;
+    fn approve(self: Box<Self>) -> Box<dyn State>;
+}
+
+struct Draft {}
+
+impl State for Draft {
+    // --snip--
+#     fn request_review(self: Box<Self>) -> Box<dyn State> {
+#         Box::new(PendingReview {})
+#     }
+# 
+    fn approve(self: Box<Self>) -> Box<dyn State> {
+        self
+    }
+}
+
+struct PendingReview {}
+
+impl State for PendingReview {
+    // --snip--
+#     fn request_review(self: Box<Self>) -> Box<dyn State> {
+#         self
+#     }
+# 
+    fn approve(self: Box<Self>) -> Box<dyn State> {
+        Box::new(Published {})
+    }
+}
+
+struct Published {}
+
+impl State for Published {
+    fn request_review(self: Box<Self>) -> Box<dyn State> {
+        self
+    }
+
+    fn approve(self: Box<Self>) -> Box<dyn State> {
+        self
+    }
+}
+```
+-->
+<pre><code class="language-rust noplayground"><span class="boring">pub struct Billet {
+</span><span class="boring">    etat: Option&lt;Box&lt;dyn Etat&gt;&gt;,
+</span><span class="boring">    contenu: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Billet {
+    // -- partie masquée ici --
+<span class="boring">    pub fn new() -&gt; Billet {
+</span><span class="boring">        Billet {
+</span><span class="boring">            etat: Some(Box::new(Brouillon {})),
+</span><span class="boring">            contenu: String::new(),
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn ajouter_texte(&amp;mut self, texte: &amp;str) {
+</span><span class="boring">        self.contenu.push_str(texte);
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn contenu(&amp;self) -&gt; &amp;str {
+</span><span class="boring">        &quot;&quot;
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn demander_relecture(&amp;mut self) {
+</span><span class="boring">        if let Some(s) = self.etat.take() {
+</span><span class="boring">            self.etat = Some(s.demander_relecture())
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    pub fn approuver(&amp;mut self) {
+        if let Some(s) = self.etat.take() {
+            self.etat = Some(s.approuver())
+        }
+    }
+}
+
+trait Etat {
+    fn demander_relecture(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt;;
+    fn approuver(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt;;
+}
+
+struct Brouillon {}
+
+impl Etat for Brouillon {
+    // -- partie masquée ici --
+<span class="boring">    fn demander_relecture(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+</span><span class="boring">        Box::new(EnRelecture {})
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    fn approuver(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+        self
+    }
+}
+
+struct EnRelecture {}
+
+impl Etat for EnRelecture {
+    // -- partie masquée ici --
+<span class="boring">    fn demander_relecture(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+</span><span class="boring">        self
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    fn approuver(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+        Box::new(Publier {})
+    }
+}
+
+struct Publier {}
+
+impl Etat for Publier {
+    fn demander_relecture(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+        self
+    }
+
+    fn approuver(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+        self
+    }
+}
+</code></pre>
+<!--
+<span class="caption">Listing 17-16: Implementing the `approve` method on
+`Post` and the `State` trait</span>
+-->
+<p><span class="caption">Encart 17-16 : implémentation de la méthode <code>approuver</code>
+sur <code>Billet</code> et sur le trait <code>Etat</code></span></p>
+<!--
+We add the `approve` method to the `State` trait and add a new struct that
+implements `State`, the `Published` state.
+-->
+<p>Nous avons ajouté la méthode <code>approuver</code> au trait <code>Etat</code> et ajouté une nouvelle
+structure <code>Publier</code>, qui implémente <code>Etat</code>.</p>
+<!--
+Similar to the way `request_review` on `PendingReview` works, if we call the
+`approve` method on a `Draft`, it will have no effect because `approve` will
+return `self`. When we call `approve` on `PendingReview`, it returns a new,
+boxed instance of the `Published` struct. The `Published` struct implements the
+`State` trait, and for both the `request_review` method and the `approve`
+method, it returns itself, because the post should stay in the `Published`
+state in those cases.
+-->
+<p>Comme pour la façon de fonctionner de <code>demander_relecture</code> sur <code>EnRelecture</code>,
+si nous faisons appel à la méthode <code>approuver</code> sur un <code>Brouillon</code>, cela n'aura
+pas d'effet car <code>approuver</code> va retourner <code>self</code>. Lorsque nous appellerons
+<code>approuver</code> sur <code>EnRelecture</code>, elle va retourner une nouvelle instance de la
+structure <code>Publier</code> dans une instance de <code>Box</code>. La structure <code>Publier</code>
+implémente le trait <code>Etat</code>, et pour chacune des méthodes <code>demander_relecture</code>
+et <code>approuver</code>, elle va retourner elle-même, car le billet doit rester à l'état
+<code>Publier</code> dans ce cas-là.</p>
+<!--
+Now we need to update the `content` method on `Post`. We want the value
+returned from `content` to depend on the current state of the `Post`, so we're
+going to have the `Post` delegate to a `content` method defined on its `state`,
+as shown in Listing 17-17:
+-->
+<p>Nous devons maintenant modifier la méthode <code>contenu</code> sur <code>Billet</code>. Nous
+souhaitons que la valeur retournée par <code>contenu</code> dépende de l'état actuel du
+<code>Billet</code>, donc nous allons faire en sorte que le <code>Billet</code> délègue sa logique à
+une méthode <code>contenu</code> défini sur son <code>etat</code>, comme dans l'encart 17-17 :</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,ignore,does_not_compile
+# pub struct Post {
+#     state: Option<Box<dyn State>>,
+#     content: String,
+# }
+# 
+impl Post {
+    // --snip--
+#     pub fn new() -> Post {
+#         Post {
+#             state: Some(Box::new(Draft {})),
+#             content: String::new(),
+#         }
+#     }
+# 
+#     pub fn add_text(&mut self, text: &str) {
+#         self.content.push_str(text);
+#     }
+# 
+    pub fn content(&self) -> &str {
+        self.state.as_ref().unwrap().content(self)
+    }
+    // --snip--
+# 
+#     pub fn request_review(&mut self) {
+#         if let Some(s) = self.state.take() {
+#             self.state = Some(s.request_review())
+#         }
+#     }
+# 
+#     pub fn approve(&mut self) {
+#         if let Some(s) = self.state.take() {
+#             self.state = Some(s.approve())
+#         }
+#     }
+}
+# 
+# trait State {
+#     fn request_review(self: Box<Self>) -> Box<dyn State>;
+#     fn approve(self: Box<Self>) -> Box<dyn State>;
+# }
+# 
+# struct Draft {}
+# 
+# impl State for Draft {
+#     fn request_review(self: Box<Self>) -> Box<dyn State> {
+#         Box::new(PendingReview {})
+#     }
+# 
+#     fn approve(self: Box<Self>) -> Box<dyn State> {
+#         self
+#     }
+# }
+# 
+# struct PendingReview {}
+# 
+# impl State for PendingReview {
+#     fn request_review(self: Box<Self>) -> Box<dyn State> {
+#         self
+#     }
+# 
+#     fn approve(self: Box<Self>) -> Box<dyn State> {
+#         Box::new(Published {})
+#     }
+# }
+# 
+# struct Published {}
+# 
+# impl State for Published {
+#     fn request_review(self: Box<Self>) -> Box<dyn State> {
+#         self
+#     }
+# 
+#     fn approve(self: Box<Self>) -> Box<dyn State> {
+#         self
+#     }
+# }
+```
+-->
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">pub struct Billet {
+</span><span class="boring">    etat: Option&lt;Box&lt;dyn Etat&gt;&gt;,
+</span><span class="boring">    contenu: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Billet {
+    // -- partie masquée ici --
+<span class="boring">    pub fn new() -&gt; Billet {
+</span><span class="boring">        Billet {
+</span><span class="boring">            etat: Some(Box::new(Brouillon {})),
+</span><span class="boring">            contenu: String::new(),
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn ajouter_texte(&amp;mut self, texte: &amp;str) {
+</span><span class="boring">        self.contenu.push_str(texte);
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    pub fn contenu(&amp;self) -&gt; &amp;str {
+        self.etat.as_ref().unwrap().contenu(self)
+    }
+    // -- partie masquée ici --
+<span class="boring">
+</span><span class="boring">    pub fn demander_relecture(&amp;mut self) {
+</span><span class="boring">        if let Some(s) = self.etat.take() {
+</span><span class="boring">            self.etat = Some(s.demander_relecture())
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn approuver(&amp;mut self) {
+</span><span class="boring">        if let Some(s) = self.etat.take() {
+</span><span class="boring">            self.etat = Some(s.approuver())
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span>}
+<span class="boring">
+</span><span class="boring">trait Etat {
+</span><span class="boring">    fn demander_relecture(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt;;
+</span><span class="boring">    fn approuver(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt;;
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct Brouillon {}
+</span><span class="boring">
+</span><span class="boring">impl Etat for Brouillon {
+</span><span class="boring">    fn demander_relecture(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+</span><span class="boring">        Box::new(EnRelecture {})
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn approuver(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+</span><span class="boring">        self
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct EnRelecture {}
+</span><span class="boring">
+</span><span class="boring">impl Etat for EnRelecture {
+</span><span class="boring">    fn demander_relecture(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+</span><span class="boring">        self
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn approuver(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+</span><span class="boring">        Box::new(Publier {})
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct Publier {}
+</span><span class="boring">
+</span><span class="boring">impl Etat for Publier {
+</span><span class="boring">    fn demander_relecture(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+</span><span class="boring">        self
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn approuver(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+</span><span class="boring">        self
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<!--
+<span class="caption">Listing 17-17: Updating the `content` method on `Post` to
+delegate to a `content` method on `State`</span>
+-->
+<p><span class="caption">Encart 17-17 : correction de la méthode <code>contenu</code> de
+<code>Billet</code> afin qu'elle délègue à la méthode <code>contenu</code> de <code>Etat</code></span></p>
+<!--
+Because the goal is to keep all these rules inside the structs that implement
+`State`, we call a `content` method on the value in `state` and pass the post
+instance (that is, `self`) as an argument. Then we return the value that is
+returned from using the `content` method on the `state` value.
+-->
+<p>Comme notre but est de conserver toutes ces règles dans les structures qui
+implémentent <code>Etat</code>, nous appelons une méthode <code>contenu</code> sur la valeur de
+<code>etat</code> et nous lui passons en argument l'instance du billet (avec le <code>self</code>).
+Nous retournons ensuite la valeur retournée par la méthode <code>contenu</code> sur la
+valeur de <code>etat</code>.</p>
+<!-- markdownlint-disable -->
+<!--
+We call the `as_ref` method on the `Option` because we want a reference to the
+value inside the `Option` rather than ownership of the value. Because `state`
+is an `Option<Box<dyn State>>`, when we call `as_ref`, an `Option<&Box<dyn
+State>>` is returned. If we didn’t call `as_ref`, we would get an error because
+we can’t move `state` out of the borrowed `&self` of the function parameter.
+-->
+<!-- markdownlint-enable -->
+<p>Nous faisons appel à la méthode <code>as_ref</code> sur <code>Option</code> car nous voulons une
+référence vers la valeur dans <code>Option</code> plutôt que d'en prendre possession. Comme
+<code>etat</code> est un <code>Option&lt;Box&lt;dyn Etat&gt;&gt;</code>, lorsque nous faisons appel à <code>as_ref</code>,
+une <code>Option&lt;&amp;Box&lt;dyn Etat&gt;&gt;</code> est retournée. Si nous n'avions pas fait appel à
+<code>as_ref</code>, nous aurions obtenu une erreur car nous ne pouvons pas déplacer
+<code>etat</code> de <code>&amp;self</code>, lui-même est emprunté et provenant des paramètres de la fonction.</p>
+<!--
+We then call the `unwrap` method, which we know will never panic, because we
+know the methods on `Post` ensure that `state` will always contain a `Some`
+value when those methods are done. This is one of the cases we talked about in
+the [“Cases In Which You Have More Information Than the
+Compiler”][more-info-than-rustc]<!-- ignore -- > section of Chapter 9 when we
+know that a `None` value is never possible, even though the compiler isn’t able
+to understand that.
+-->
+<p>Nous faisons ensuite appel à la méthode <code>unwrap</code>, mais nous savons qu'elle ne
+va jamais paniquer, car nous savons que les méthodes sur <code>Billet</code> vont garantir
+que <code>etat</code> contiendra toujours une valeur <code>Some</code> lorsqu'elles seront utilisées.
+C'est un des cas dont nous avons parlé dans
+<a href="ch09-03-to-panic-or-not-to-panic.html">une section</a><!-- ignore --> du chapitre 9 lorsque nous
+savions qu'une valeur <code>None</code> ne serait jamais possible, même si le compilateur
+n'est pas capable de le comprendre.</p>
+<!-- markdownlint-disable -->
+<!--
+At this point, when we call `content` on the `&Box<dyn State>`, deref coercion will
+take effect on the `&` and the `Box` so the `content` method will ultimately be
+called on the type that implements the `State` trait. That means we need to add
+`content` to the `State` trait definition, and that is where we’ll put the
+logic for what content to return depending on which state we have, as shown in
+Listing 17-18:
+-->
+<!-- markdownlint-enable -->
+<p>A partir de là, lorsque nous faisons appel à <code>contenu</code> sur <code>&amp;Box&lt;dyn Etat&gt;</code>,
+l'extrapolation de déréférencement va s'appliquer sur le <code>&amp;</code> et le <code>Box</code> pour
+que la méthode <code>contenu</code> puisse finalement être appelée sur le type qui
+implémente le trait <code>Etat</code>. Cela signifie que nous devons ajouter <code>contenu</code> à la
+définition du trait <code>Etat</code>, et que c'est ici que nous allons placer la logique
+pour le contenu à retourner en fonction de l'état nous avons, comme le montre
+l'encart 17-18 :</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,noplayground
+# pub struct Post {
+#     state: Option<Box<dyn State>>,
+#     content: String,
+# }
+# 
+# impl Post {
+#     pub fn new() -> Post {
+#         Post {
+#             state: Some(Box::new(Draft {})),
+#             content: String::new(),
+#         }
+#     }
+# 
+#     pub fn add_text(&mut self, text: &str) {
+#         self.content.push_str(text);
+#     }
+# 
+#     pub fn content(&self) -> &str {
+#         self.state.as_ref().unwrap().content(self)
+#     }
+# 
+#     pub fn request_review(&mut self) {
+#         if let Some(s) = self.state.take() {
+#             self.state = Some(s.request_review())
+#         }
+#     }
+# 
+#     pub fn approve(&mut self) {
+#         if let Some(s) = self.state.take() {
+#             self.state = Some(s.approve())
+#         }
+#     }
+# }
+# 
+trait State {
+    // --snip--
+#     fn request_review(self: Box<Self>) -> Box<dyn State>;
+#     fn approve(self: Box<Self>) -> Box<dyn State>;
+# 
+    fn content<'a>(&self, post: &'a Post) -> &'a str {
+        ""
+    }
+}
+
+// --snip--
+# 
+# struct Draft {}
+# 
+# impl State for Draft {
+#     fn request_review(self: Box<Self>) -> Box<dyn State> {
+#         Box::new(PendingReview {})
+#     }
+# 
+#     fn approve(self: Box<Self>) -> Box<dyn State> {
+#         self
+#     }
+# }
+# 
+# struct PendingReview {}
+# 
+# impl State for PendingReview {
+#     fn request_review(self: Box<Self>) -> Box<dyn State> {
+#         self
+#     }
+# 
+#     fn approve(self: Box<Self>) -> Box<dyn State> {
+#         Box::new(Published {})
+#     }
+# }
+# 
+struct Published {}
+
+impl State for Published {
+    // --snip--
+#     fn request_review(self: Box<Self>) -> Box<dyn State> {
+#         self
+#     }
+# 
+#     fn approve(self: Box<Self>) -> Box<dyn State> {
+#         self
+#     }
+# 
+    fn content<'a>(&self, post: &'a Post) -> &'a str {
+        &post.content
+    }
+}
+```
+-->
+<pre><code class="language-rust noplayground"><span class="boring">pub struct Billet {
+</span><span class="boring">    etat: Option&lt;Box&lt;dyn Etat&gt;&gt;,
+</span><span class="boring">    contenu: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Billet {
+</span><span class="boring">    pub fn new() -&gt; Billet {
+</span><span class="boring">        Billet {
+</span><span class="boring">            etat: Some(Box::new(Brouillon {})),
+</span><span class="boring">            contenu: String::new(),
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn ajouter_texte(&amp;mut self, texte: &amp;str) {
+</span><span class="boring">        self.contenu.push_str(texte);
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn contenu(&amp;self) -&gt; &amp;str {
+</span><span class="boring">        self.etat.as_ref().unwrap().contenu(self)
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn demander_relecture(&amp;mut self) {
+</span><span class="boring">        if let Some(s) = self.etat.take() {
+</span><span class="boring">            self.etat = Some(s.demander_relecture())
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn approuver(&amp;mut self) {
+</span><span class="boring">        if let Some(s) = self.etat.take() {
+</span><span class="boring">            self.etat = Some(s.approuver())
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>trait Etat {
+    // -- partie masquée ici --
+<span class="boring">    fn demander_relecture(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt;;
+</span><span class="boring">    fn approuver(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt;;
+</span><span class="boring">
+</span>    fn contenu&lt;'a&gt;(&amp;self, billet: &amp;'a Billet) -&gt; &amp;'a str {
+        &quot;&quot;
+    }
+}
+
+// -- partie masquée ici --
+<span class="boring">
+</span><span class="boring">struct Brouillon {}
+</span><span class="boring">
+</span><span class="boring">impl Etat for Brouillon {
+</span><span class="boring">    fn demander_relecture(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+</span><span class="boring">        Box::new(EnRelecture {})
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn approuver(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+</span><span class="boring">        self
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct EnRelecture {}
+</span><span class="boring">
+</span><span class="boring">impl Etat for EnRelecture {
+</span><span class="boring">    fn demander_relecture(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+</span><span class="boring">        self
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn approuver(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+</span><span class="boring">        Box::new(Publier {})
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>struct Publier {}
+
+impl Etat for Publier {
+    // -- partie masquée ici --
+<span class="boring">    fn demander_relecture(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+</span><span class="boring">        self
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn approuver(self: Box&lt;Self&gt;) -&gt; Box&lt;dyn Etat&gt; {
+</span><span class="boring">        self
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    fn contenu&lt;'a&gt;(&amp;self, billet: &amp;'a Billet) -&gt; &amp;'a str {
+        &amp;billet.contenu
+    }
+}
+</code></pre>
+<!--
+<span class="caption">Listing 17-18: Adding the `content` method to the `State`
+trait</span>
+-->
+<p><span class="caption">Encart 17-18 : ajout de la méthode <code>contenu</code> sur le trait
+<code>Etat</code></span></p>
+<!--
+We add a default implementation for the `content` method that returns an empty
+string slice. That means we don’t need to implement `content` on the `Draft`
+and `PendingReview` structs. The `Published` struct will override the `content`
+method and return the value in `post.content`.
+-->
+<p>Nous avons ajouté une implémentation par défaut pour la méthode <code>contenu</code> qui
+retourne une slice de chaîne de caractères vide. Cela nous permet de ne pas
+avoir à implémenter <code>contenu</code> sur les structures <code>Brouillon</code> et <code>EnRelecture</code>.
+La structure <code>Publier</code> va remplacer la méthode <code>contenu</code> et retourner la valeur
+présente dans <code>billet.contenu</code>.</p>
+<!--
+Note that we need lifetime annotations on this method, as we discussed in
+Chapter 10. We’re taking a reference to a `post` as an argument and returning a
+reference to part of that `post`, so the lifetime of the returned reference is
+related to the lifetime of the `post` argument.
+-->
+<p>Remarquez aussi que nous devons annoter des durées de vie sur cette méthode,
+comme nous l'avons vu au chapitre 10. Nous allons prendre en argument une
+référence au <code>billet</code> et retourner une référence à une partie de ce <code>billet</code>,
+donc la durée de vie retournée par la référence est liée à la durée de vie de
+l'argument <code>billet</code>.</p>
+<!--
+And we’re done—all of Listing 17-11 now works! We’ve implemented the state
+pattern with the rules of the blog post workflow. The logic related to the
+rules lives in the state objects rather than being scattered throughout `Post`.
+-->
+<p>Et nous avons maintenant terminé, tout le code de l'encart 17-11 fonctionne
+désormais ! Nous avons implémenté le patron état avec les règles de notre
+processus de publication définies pour notre blog. La logique des règles est
+intégrée dans les objets état plutôt que d'être dispersée un peu partout dans
+<code>Billet</code>.</p>
+<!--
+### Trade-offs of the State Pattern
+-->
+<h3 id="les-inconvénients-du-patron-état"><a class="header" href="#les-inconvénients-du-patron-état">Les inconvénients du patron état</a></h3>
+<!--
+We’ve shown that Rust is capable of implementing the object-oriented state
+pattern to encapsulate the different kinds of behavior a post should have in
+each state. The methods on `Post` know nothing about the various behaviors. The
+way we organized the code, we have to look in only one place to know the
+different ways a published post can behave: the implementation of the `State`
+trait on the `Published` struct.
+-->
+<p>Nous avons démontré que Rust est capable d'implémenter le patron état qui est
+orienté objet pour regrouper les différents types de comportement qu'un billet
+doit avoir à chaque état. Les méthodes sur <code>Billet</code> ne savent rien des
+différents comportements. De la manière dont nous avons organisé le code, nous
+n'avons qu'à regarder à un seul endroit pour connaître les différents
+comportements qu'un billet publié va suivre : l'implémentation du trait <code>Etat</code>
+sur la structure <code>Publier</code>.</p>
+<!--
+If we were to create an alternative implementation that didn’t use the state
+pattern, we might instead use `match` expressions in the methods on `Post` or
+even in the `main` code that checks the state of the post and changes behavior
+in those places. That would mean we would have to look in several places to
+understand all the implications of a post being in the published state! This
+would only increase the more states we added: each of those `match` expressions
+would need another arm.
+-->
+<p>Si nous avions utilisé une autre façon d'implémenter ces règles sans utiliser
+le patron état, nous aurions dû utiliser des expressions <code>match</code> dans les
+méthodes de <code>Billet</code> ou même dans le code du <code>main</code> qui vérifie l'état du
+billet et les comportements associés aux changements d'états. Cela aurait eu
+pour conséquence d'avoir à regarder à différents endroits pour comprendre toutes
+les conséquences de la publication d'un billet ! Et ce code grossirait au fur et
+à mesure que nous ajouterions des états : chaque expression <code>match</code> devrait avoir
+des nouvelles branches pour ces nouveaux états.</p>
+<!--
+With the state pattern, the `Post` methods and the places we use `Post` don’t
+need `match` expressions, and to add a new state, we would only need to add a
+new struct and implement the trait methods on that one struct.
+-->
+<p>Avec le patron état, les méthodes de <code>Billet</code> et les endroits où nous utilisons
+<code>Billet</code> n'ont pas besoin d'expressions <code>match</code>, et pour ajouter un nouvel état,
+nous avons seulement besoin d'ajouter une nouvelle structure et d'implémenter
+les méthodes du trait sur cette structure.</p>
+<div id="suggestions-implementations">
+<!--
+The implementation using the state pattern is easy to extend to add more
+functionality. To see the simplicity of maintaining code that uses the state
+pattern, try a few of these suggestions:
+-->
+<p>L'implémentation qui utilise le patron état est facile à améliorer pour ajouter
+plus de fonctionnalités. Pour découvrir la simplicité de maintenance du code qui
+utilise le patron état, essayez d'accomplir certaines de ces suggestions :</p>
+<!--
+* Add a `reject` method that changes the post’s state from `PendingReview` back
+  to `Draft`.
+* Require two calls to `approve` before the state can be changed to `Published`.
+* Allow users to add text content only when a post is in the `Draft` state.
+  Hint: have the state object responsible for what might change about the
+  content but not responsible for modifying the `Post`.
+-->
+<ul>
+<li>Ajouter une méthode <code>rejeter</code> qui fait retourner l'état d'un billet de
+<code>EnRelecture</code> à <code>Brouillon</code>.</li>
+<li>Attendre deux appels à <code>approuver</code> avant que l'état puisse être changé en
+<code>Publier</code>.</li>
+<li>Permettre aux utilisateurs d'ajouter du contenu textuel uniquement lorsqu'un
+billet est à l'état <code>Brouillon</code>. Indice : rendre l'objet état responsable de
+ce qui peut changer dans le contenu mais pas responsable de la modification
+de <code>Billet</code>.</li>
+</ul>
+</div>
+<!--
+One downside of the state pattern is that, because the states implement the
+transitions between states, some of the states are coupled to each other. If we
+add another state between `PendingReview` and `Published`, such as `Scheduled`,
+we would have to change the code in `PendingReview` to transition to
+`Scheduled` instead. It would be less work if `PendingReview` didn’t need to
+change with the addition of a new state, but that would mean switching to
+another design pattern.
+-->
+<p>Un inconvénient du patron état est que comme les états implémentent les
+transitions entre les états, certains des états sont couplés entre eux. Si nous
+ajoutons un nouvel état entre <code>EnRelecture</code> et <code>Publier</code>, <code>Planifier</code> par exemple,
+nous devrons alors changer le code dans <code>EnRelecture</code> pour qu'il passe ensuite
+à l'état <code>Planifier</code> au lieu de <code>Publier</code>. Cela représenterait moins de travail
+si <code>EnRelecture</code> n'avait pas besoin de changer lorsqu'on ajoute un nouvel état, mais
+cela signifierait alors qu'il faudrait changer de patron.</p>
+<!--
+Another downside is that we’ve duplicated some logic. To eliminate some of the
+duplication, we might try to make default implementations for the
+`request_review` and `approve` methods on the `State` trait that return `self`;
+however, this would violate object safety, because the trait doesn’t know what
+the concrete `self` will be exactly. We want to be able to use `State` as a
+trait object, so we need its methods to be object safe.
+-->
+<p>Un autre inconvénient est que nous avons de la logique en double. Pour éviter ces
+doublons, nous devrions essayer de faire en sorte que les méthodes
+<code>demander_relecture</code> et <code>approuver</code> qui retournent <code>self</code> deviennent les
+implémentations par défaut sur le trait <code>Etat</code> ; cependant, cela violerait la
+sûreté des objets, car le trait ne sait pas ce qu'est exactement <code>self</code>. Nous
+voulons pouvoir utiliser <code>Etat</code> en tant qu'objet trait, donc nous avons besoin
+que ses méthodes soient sûres pour les objets.</p>
+<!--
+Other duplication includes the similar implementations of the `request_review`
+and `approve` methods on `Post`. Both methods delegate to the implementation of
+the same method on the value in the `state` field of `Option` and set the new
+value of the `state` field to the result. If we had a lot of methods on `Post`
+that followed this pattern, we might consider defining a macro to eliminate the
+repetition (see the [“Macros”][macros]<!-- ignore -- > section in Chapter 19).
+-->
+<p>Nous avons aussi des doublons dans le code des méthodes <code>demander_relecture</code> et
+<code>approuver</code> sur <code>Billet</code>. Ces deux méthodes délèguent leur travail à la même
+méthode de la valeur du champ <code>etat</code> de type <code>Option</code> et assignent la nouvelle
+valeur du même champ <code>etat</code> à la fin. Si nous avions beaucoup de méthodes sur
+<code>Billet</code> qui suivaient cette logique, nous devrions envisager de définir une
+macro pour éviter cette répétition (voir la
+<a href="ch19-06-macros.html#macros">section dédiée</a><!-- ignore --> dans le chapitre 19).</p>
+<!--
+By implementing the state pattern exactly as it’s defined for object-oriented
+languages, we’re not taking as full advantage of Rust’s strengths as we could.
+Let’s look at some changes we can make to the `blog` crate that can make
+invalid states and transitions into compile time errors.
+-->
+<p>En implémentant le patron état exactement comme il est défini pour les
+langages orientés-objet, nous ne profitons pas pleinement des avantages de
+Rust. Voyons voir si nous pouvons faire quelques changements pour que la crate
+<code>blog</code> puisse lever des erreurs dès la compilation lorsqu'elle aura détecté des
+états ou des transitions invalides.</p>
+<!--
+#### Encoding States and Behavior as Types
+-->
+<h4 id="implémenter-les-états-et-les-comportements-avec-des-types"><a class="header" href="#implémenter-les-états-et-les-comportements-avec-des-types">Implémenter les états et les comportements avec des types</a></h4>
+<!--
+We’ll show you how to rethink the state pattern to get a different set of
+trade-offs. Rather than encapsulating the states and transitions completely so
+outside code has no knowledge of them, we’ll encode the states into different
+types. Consequently, Rust’s type checking system will prevent attempts to use
+draft posts where only published posts are allowed by issuing a compiler error.
+-->
+<p>Nous allons vous montrer comment repenser le patron état pour qu'il offre des
+compromis différents. Plutôt que d'encapsuler complètement les états et les
+transitions, faisant que le code externe ne puissent pas les connaître, nous
+allons coder ces états sous forme de différents types. En conséquence, le
+système de vérification de type de Rust va empêcher toute tentative
+d'utilisation des brouillons de billets là où seuls des billets publiés sont
+autorisés, en provoquant une erreur de compilation.</p>
+<!--
+Let’s consider the first part of `main` in Listing 17-11:
+-->
+<p>Considérons la première partie du <code>main</code> de l'encart 17-11 :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust,ignore
+# use blog::Post;
+# 
+fn main() {
+    let mut post = Post::new();
+
+    post.add_text("I ate a salad for lunch today");
+    assert_eq!("", post.content());
+# 
+#     post.request_review();
+#     assert_eq!("", post.content());
+# 
+#     post.approve();
+#     assert_eq!("I ate a salad for lunch today", post.content());
+}
+```
+-->
+<pre><code class="language-rust ignore"><span class="boring">use blog::Billet;
+</span><span class="boring">
+</span>fn main() {
+    let mut billet = Billet::new();
+
+    billet.ajouter_texte(&quot;J'ai mangé une salade au déjeuner aujourd'hui&quot;);
+    assert_eq!(&quot;&quot;, billet.contenu());
+<span class="boring">
+</span><span class="boring">    billet.demander_relecture();
+</span><span class="boring">    assert_eq!(&quot;&quot;, billet.contenu());
+</span><span class="boring">
+</span><span class="boring">    billet.approuver();
+</span><span class="boring">    assert_eq!(&quot;J'ai mangé une salade au déjeuner aujourd'hui&quot;, billet.contenu());
+</span>}
+</code></pre>
+<!--
+We still enable the creation of new posts in the draft state using `Post::new`
+and the ability to add text to the post’s content. But instead of having a
+`content` method on a draft post that returns an empty string, we’ll make it so
+draft posts don’t have the `content` method at all. That way, if we try to get
+a draft post’s content, we’ll get a compiler error telling us the method
+doesn’t exist. As a result, it will be impossible for us to accidentally
+display draft post content in production, because that code won’t even compile.
+Listing 17-19 shows the definition of a `Post` struct and a `DraftPost` struct,
+as well as methods on each:
+-->
+<p>Nous pouvons toujours créer de nouveaux billets à l'état de brouillon en
+utilisant <code>Billet::new</code> et ajouter du texte au contenu du billet. Mais au lieu
+d'avoir une méthode <code>contenu</code> sur un brouillon de billet qui retourne une chaîne
+de caractères vide, nous faisons en sorte que les brouillons de billets n'aient
+même pas de méthode <code>contenu</code>. Ainsi, si nous essayons de récupérer le contenu
+d'un brouillon de billet, nous obtenons une erreur de compilation qui nous
+informera que la méthode n'existe pas. Finalement, il nous sera impossible de
+publier le contenu d'un brouillon de billet en production, car ce code ne se
+compilera même pas. L'encart 17-19 nous propose les définitions d'une structure
+<code>Billet</code> et d'une structure <code>BrouillonDeBillet</code> ainsi que leurs méthodes :</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,noplayground
+pub struct Post {
+    content: String,
+}
+
+pub struct DraftPost {
+    content: String,
+}
+
+impl Post {
+    pub fn new() -> DraftPost {
+        DraftPost {
+            content: String::new(),
+        }
+    }
+
+    pub fn content(&self) -> &str {
+        &self.content
+    }
+}
+
+impl DraftPost {
+    pub fn add_text(&mut self, text: &str) {
+        self.content.push_str(text);
+    }
+}
+```
+-->
+<pre><code class="language-rust noplayground">pub struct Billet {
+    contenu: String,
+}
+
+pub struct BrouillonDeBillet {
+    contenu: String,
+}
+
+impl Billet {
+    pub fn new() -&gt; BrouillonDeBillet {
+        BrouillonDeBillet {
+            contenu: String::new(),
+        }
+    }
+
+    pub fn contenu(&amp;self) -&gt; &amp;str {
+        &amp;self.contenu
+    }
+}
+
+impl BrouillonDeBillet {
+    pub fn ajouter_texte(&amp;mut self, texte: &amp;str) {
+        self.contenu.push_str(texte);
+    }
+}
+</code></pre>
+<!--
+<span class="caption">Listing 17-19: A `Post` with a `content` method and a
+`DraftPost` without a `content` method</span>
+-->
+<p><span class="caption">Encart 17-19 : un <code>Billet</code> avec une méthode <code>contenu</code> et
+un <code>BrouillonDeBillet</code> sans méthode <code>contenu</code></span></p>
+<!--
+Both the `Post` and `DraftPost` structs have a private `content` field that
+stores the blog post text. The structs no longer have the `state` field because
+we’re moving the encoding of the state to the types of the structs. The `Post`
+struct will represent a published post, and it has a `content` method that
+returns the `content`.
+-->
+<p>Les deux structures <code>Billet</code> et <code>BrouillonDeBillet</code> ont un champ privé
+<code>contenu</code> qui stocke le texte du billet de blog. Les structures n'ont plus le
+champ <code>etat</code> car nous avons déplacé la signification de l'état directement dans
+le nom de ces types de structures. La structure <code>Billet</code> représente un billet
+publié et possède une méthode <code>contenu</code> qui retourne le <code>contenu</code>.</p>
+<!--
+We still have a `Post::new` function, but instead of returning an instance of
+`Post`, it returns an instance of `DraftPost`. Because `content` is private
+and there aren’t any functions that return `Post`, it’s not possible to create
+an instance of `Post` right now.
+-->
+<p>Nous avons toujours la fonction <code>Billet::new</code>, mais au lieu de retourner une
+instance de <code>Billet</code>, elle va retourner une instance de <code>BrouillonDeBillet</code>.
+Comme <code>contenu</code> est privé et qu'il n'y a pas de fonction qui retourne <code>Billet</code>,
+il ne sera pas possible pour le moment de créer une instance de <code>Billet</code>.</p>
+<!--
+The `DraftPost` struct has an `add_text` method, so we can add text to
+`content` as before, but note that `DraftPost` does not have a `content` method
+defined! So now the program ensures all posts start as draft posts, and draft
+posts don’t have their content available for display. Any attempt to get around
+these constraints will result in a compiler error.
+-->
+<p>La structure <code>BrouillonDeBillet</code> a une méthode <code>ajouter_texte</code>, donc nous
+pouvons ajouter du texte à <code>contenu</code> comme nous le faisions avant, mais
+remarquez toutefois que <code>BrouillonDeBillet</code> n'a pas de méthode <code>contenu</code> de
+définie ! Donc pour l'instant le programme s'assure que tous les billets
+démarrent à l'état de brouillon et que les brouillons ne proposent pas de
+contenu à publier. Toute tentative d'outre-passer ces contraintes va
+déclencher une erreur de compilation.</p>
+<!--
+#### Implementing Transitions as Transformations into Different Types
+-->
+<h4 id="implémenter-les-changements-détat-en-tant-que-changement-de-type"><a class="header" href="#implémenter-les-changements-détat-en-tant-que-changement-de-type">Implémenter les changements d'état en tant que changement de type</a></h4>
+<!--
+So how do we get a published post? We want to enforce the rule that a draft
+post has to be reviewed and approved before it can be published. A post in the
+pending review state should still not display any content. Let’s implement
+these constraints by adding another struct, `PendingReviewPost`, defining the
+`request_review` method on `DraftPost` to return a `PendingReviewPost`, and
+defining an `approve` method on `PendingReviewPost` to return a `Post`, as
+shown in Listing 17-20:
+-->
+<p>Donc, comment publier un billet ? Nous voulons renforcer la règle qui dit qu'un
+brouillon de billet doit être relu et approuvé avant de pouvoir être publié. Un
+billet à l'état de relecture doit continuer à ne pas montrer son contenu.
+Implémentons ces contraintes en introduisant une nouvelle structure,
+<code>BilletEnRelecture</code>, en définissant la méthode <code>demander_relecture</code> sur
+<code>BrouillonDeBillet</code> retournant un <code>BilletEnRelecture</code>, et en définissant une
+méthode <code>approuver</code> sur <code>BilletEnRelecture</code> pour qu'elle retourne un <code>Billet</code>,
+comme le propose l'encart 17-20 :</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,noplayground
+# pub struct Post {
+#     content: String,
+# }
+# 
+# pub struct DraftPost {
+#     content: String,
+# }
+# 
+# impl Post {
+#     pub fn new() -> DraftPost {
+#         DraftPost {
+#             content: String::new(),
+#         }
+#     }
+# 
+#     pub fn content(&self) -> &str {
+#         &self.content
+#     }
+# }
+# 
+impl DraftPost {
+    // --snip--
+#     pub fn add_text(&mut self, text: &str) {
+#         self.content.push_str(text);
+#     }
+# 
+    pub fn request_review(self) -> PendingReviewPost {
+        PendingReviewPost {
+            content: self.content,
+        }
+    }
+}
+
+pub struct PendingReviewPost {
+    content: String,
+}
+
+impl PendingReviewPost {
+    pub fn approve(self) -> Post {
+        Post {
+            content: self.content,
+        }
+    }
+}
+```
+-->
+<pre><code class="language-rust noplayground"><span class="boring">pub struct Billet {
+</span><span class="boring">    contenu: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">pub struct BrouillonDeBillet {
+</span><span class="boring">    contenu: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Billet {
+</span><span class="boring">    pub fn new() -&gt; BrouillonDeBillet {
+</span><span class="boring">        BrouillonDeBillet {
+</span><span class="boring">            contenu: String::new(),
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn contenu(&amp;self) -&gt; &amp;str {
+</span><span class="boring">        &amp;self.contenu
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl BrouillonDeBillet {
+    // -- partie masquée ici --
+<span class="boring">    pub fn ajouter_texte(&amp;mut self, texte: &amp;str) {
+</span><span class="boring">        self.contenu.push_str(texte);
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    pub fn demander_relecture(self) -&gt; BilletEnRelecture {
+        BilletEnRelecture {
+            contenu: self.contenu,
+        }
+    }
+}
+
+pub struct BilletEnRelecture {
+    contenu: String,
+}
+
+impl BilletEnRelecture {
+    pub fn approuver(self) -&gt; Billet {
+        Billet {
+            contenu: self.contenu,
+        }
+    }
+}
+</code></pre>
+<!--
+<span class="caption">Listing 17-20: A `PendingReviewPost` that gets created by
+calling `request_review` on `DraftPost` and an `approve` method that turns a
+`PendingReviewPost` into a published `Post`</span>
+-->
+<p><span class="caption">Encart 17-20 : ajout d'un <code>BilletEnRelecture</code> qui est créé
+par l'appel à <code>demander_relecture</code> sur <code>BrouillonDeBillet</code>, ainsi qu'une méthode
+<code>approuver</code> qui transforme un <code>BilletEnRelecture</code> en <code>Billet</code> publié</span></p>
+<!--
+The `request_review` and `approve` methods take ownership of `self`, thus
+consuming the `DraftPost` and `PendingReviewPost` instances and transforming
+them into a `PendingReviewPost` and a published `Post`, respectively. This way,
+we won’t have any lingering `DraftPost` instances after we’ve called
+`request_review` on them, and so forth. The `PendingReviewPost` struct doesn’t
+have a `content` method defined on it, so attempting to read its content
+results in a compiler error, as with `DraftPost`. Because the only way to get a
+published `Post` instance that does have a `content` method defined is to call
+the `approve` method on a `PendingReviewPost`, and the only way to get a
+`PendingReviewPost` is to call the `request_review` method on a `DraftPost`,
+we’ve now encoded the blog post workflow into the type system.
+-->
+<p>Les méthodes <code>demander_relecture</code> et <code>approuver</code> prennent possession de <code>self</code>,
+ce qui consomme les instances de <code>BrouillonDeBillet</code> et de <code>BilletEnRelecture</code>
+pour les transformer respectivement en <code>BilletEnRelecture</code> et en <code>Billet</code>.
+Ainsi, il ne restera plus d'instances de <code>BrouillonDeBillet</code> après avoir appelé
+<code>approuver</code> sur elles, et ainsi de suite. La structure <code>BilletEnRelecture</code> n'a
+pas de méthode <code>contenu</code> qui lui est définie, donc si on essaye de lire son
+contenu, on obtient une erreur de compilation, comme avec <code>BrouillonDeBillet</code>.
+Comme la seule manière d'obtenir une instance de <code>Billet</code> qui a une méthode
+<code>contenu</code> de définie est d'appeler la méthode<code>approuver</code> sur un
+<code>BilletEnRelecture</code>, et que la seule manière d'obtenir un <code>BilletEnRelecture</code>
+est d'appeler la méthode <code>demander_relecture</code> sur un <code>BrouillonDeBillet</code>, nous
+avons désormais intégré le processus de publication des billets de blog avec le
+système de type.</p>
+<!--
+But we also have to make some small changes to `main`. The `request_review` and
+`approve` methods return new instances rather than modifying the struct they’re
+called on, so we need to add more `let post =` shadowing assignments to save
+the returned instances. We also can’t have the assertions about the draft and
+pending review posts’ contents be empty strings, nor do we need them: we can’t
+compile code that tries to use the content of posts in those states any longer.
+The updated code in `main` is shown in Listing 17-21:
+-->
+<p>Mais nous devons aussi faire quelques petits changements dans le <code>main</code>. Les
+méthodes <code>demander_relecture</code> et <code>approuver</code> retournent des nouvelles instances
+au lieu de modifier la structure sur laquelle elles ont été appelées, donc nous
+devons ajouter des assignations de masquage <code>let billet =</code> pour stocker les
+nouvelles instances retournées. Nous ne pouvons pas non plus vérifier que le
+contenu des brouillons de billets et de ceux en cours de relecture sont bien
+vides, donc nous n'avons plus besoin des vérifications associées : en effet,
+nous ne pouvons plus compiler du code qui essaye d'utiliser le contenu d'un
+billet dans ces états. Le code du <code>main</code> mis à jour est présenté dans
+l'encart 17-21 :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust,ignore
+use blog::Post;
+
+fn main() {
+    let mut post = Post::new();
+
+    post.add_text("I ate a salad for lunch today");
+
+    let post = post.request_review();
+
+    let post = post.approve();
+
+    assert_eq!("I ate a salad for lunch today", post.content());
+}
+```
+-->
+<pre><code class="language-rust ignore">use blog::Billet;
+
+fn main() {
+    let mut billet = Billet::new();
+
+    billet.ajouter_texte(&quot;J'ai mangé une salade au déjeuner aujourd'hui&quot;);
+
+    let billet = billet.demander_relecture();
+
+    let billet = billet.approuver();
+
+    assert_eq!(&quot;J'ai mangé une salade au déjeuner aujourd'hui&quot;, billet.contenu());
+}
+</code></pre>
+<!--
+<span class="caption">Listing 17-21: Modifications to `main` to use the new
+implementation of the blog post workflow</span>
+-->
+<p><span class="caption">Encart 17-21 : modification de <code>main</code> pour utiliser la
+nouvelle implémentation du processus de publication de billet de blog</span></p>
+<!--
+The changes we needed to make to `main` to reassign `post` mean that this
+implementation doesn’t quite follow the object-oriented state pattern anymore:
+the transformations between the states are no longer encapsulated entirely
+within the `Post` implementation. However, our gain is that invalid states are
+now impossible because of the type system and the type checking that happens at
+compile time! This ensures that certain bugs, such as display of the content of
+an unpublished post, will be discovered before they make it to production.
+-->
+<p>Les modifications que nous avons eu besoin de faire à <code>main</code> pour réassigner
+<code>billet</code> impliquent que cette implémentation ne suit plus exactement le patron
+état orienté-objet : les changements d'états ne sont plus totalement intégrés
+dans l'implémentation de <code>Billet</code>. Cependant, nous avons obtenu que les
+états invalides sont désormais impossibles grâce au système de types et à la
+vérification de type qui s'effectue à la compilation ! Cela garantit que certains
+bogues, comme l'affichage du contenu d'un billet non publié, seront détectés avant
+d'arriver en production.</p>
+<!--
+Try the tasks suggested for additional requirements that we mentioned at the
+start of this section on the `blog` crate as it is after Listing 17-20 to see
+what you think about the design of this version of the code. Note that some of
+the tasks might be completed already in this design.
+-->
+<p>Essayez d'implémenter <a href="#suggestions-implementations">les exigences fonctionnelles supplémentaires suggérées
+dans la liste présente au début de cette section</a>,
+sur la crate <code>blog</code> dans l'état où elle était après l'encart 17-20, afin de
+vous faire une idée sur cette façon de concevoir le code. Notez aussi que
+certaines de ces exigences pourraient déjà être implémentées implicitement du
+fait de cette conception.</p>
+<!--
+We’ve seen that even though Rust is capable of implementing object-oriented
+design patterns, other patterns, such as encoding state into the type system,
+are also available in Rust. These patterns have different trade-offs. Although
+you might be very familiar with object-oriented patterns, rethinking the
+problem to take advantage of Rust’s features can provide benefits, such as
+preventing some bugs at compile time. Object-oriented patterns won’t always be
+the best solution in Rust due to certain features, like ownership, that
+object-oriented languages don’t have.
+-->
+<p>Nous avons vu que même si Rust est capable d'implémenter des patrons de
+conception orientés-objet, d'autres patrons, tel qu'intégrer l'état dans le
+système de type, sont également possibles en Rust. Ces patrons présentent différents
+avantages et inconvénients. Bien que vous puissiez être très familier avec les patrons
+orientés-objet, vous gagnerez à repenser les choses pour tirer avantage des
+fonctionnalités de Rust, telles que la détection de certains bogues à la compilation.
+Les patrons orientés-objet ne sont pas toujours la meilleure solution en Rust à
+cause de certaines de ses fonctionnalités, comme la possession, que les langages
+orientés-objet n'ont pas.</p>
+<!--
+## Summary
+-->
+<h2 id="résumé"><a class="header" href="#résumé">Résumé</a></h2>
+<!--
+No matter whether or not you think Rust is an object-oriented language after
+reading this chapter, you now know that you can use trait objects to get some
+object-oriented features in Rust. Dynamic dispatch can give your code some
+flexibility in exchange for a bit of runtime performance. You can use this
+flexibility to implement object-oriented patterns that can help your code’s
+maintainability. Rust also has other features, like ownership, that
+object-oriented languages don’t have. An object-oriented pattern won’t always
+be the best way to take advantage of Rust’s strengths, but is an available
+option.
+-->
+<p>Que vous pensiez ou non que Rust est un langage orienté-objet après avoir lu ce
+chapitre, vous savez maintenant que vous pouvez utiliser les objets trait pour
+pouvoir obtenir certaines fonctionnalités orienté-objet en Rust. La répartition
+dynamique peut offrir de la flexibilité à votre code en échange d'une perte de
+performances à l'exécution. Vous pouvez utiliser cette flexibilité pour
+implémenter des patrons orientés-objet qui facilitent la maintenance de
+votre code. Rust offre d'autres fonctionnalités, comme la possession, que les
+langages orientés-objet n'ont pas. L'utilisation d'un patron orienté-objet n'est
+pas toujours la meilleure manière de tirer parti des avantages de Rust, mais
+cela reste une option disponible.</p>
+<!--
+Next, we’ll look at patterns, which are another of Rust’s features that enable
+lots of flexibility. We’ve looked at them briefly throughout the book but
+haven’t seen their full capability yet. Let’s go!
+-->
+<p>Dans le chapitre suivant, nous allons étudier les motifs, qui constituent une
+autre des fonctionnalités de Rust et apportent beaucoup de flexibilité. Nous
+les avons abordés brièvement dans le livre, mais nous n'avons pas encore vu
+tout leur potentiel. C'est parti !</p>
+<!-- markdownlint-disable -->
+<!--
+[more-info-than-rustc]: ch09-03-to-panic-or-not-to-panic.html#cases-in-which-you-have-more-information-than-the-compiler
+[macros]: ch19-06-macros.html#macros
+-->
+<!-- markdownlint-enable -->
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch17-02-trait-objects.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch18-00-patterns.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch17-02-trait-objects.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch18-00-patterns.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../ferris.js"></script>
+    </body>
+</html>

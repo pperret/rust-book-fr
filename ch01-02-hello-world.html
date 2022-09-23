@@ -1,0 +1,592 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Hello, world! - Le langage de programmation Rust</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../ferris.css">
+        <link rel="stylesheet" href="../theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Le langage de programmation Rust</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Avant-propos</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="translation-terms.html">Traduction des termes</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Prise en main</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html" class="active"><strong aria-hidden="true">1.2.</strong> Hello, world!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Programmer le jeu du plus ou du moins</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Les concepts courants de programmation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> Les variables et la mutabilité</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Les types de données</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Les fonctions</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Les commentaires</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Les structures de contrôle</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Comprendre la possession</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Qu'est-ce que la possession ?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Les références et l'emprunt</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Le type slice</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Utiliser les structures pour structurer des données apparentées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Définir et instancier des structures</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Un exemple de programme qui utilise des structures</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> La syntaxe des méthodes</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Les énumérations et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Définir une énumération</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> La structure de contrôle match</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> Une structure de contrôle concise : if let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Gérer des projets grandissants avec les paquets, crates et modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Les paquets et les crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Définir des modules pour gérer la portée et la visibilité</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Désigner un élément dans l'arborescence de modules</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Importer des chemins dans la portée via le mot-clé use</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Séparer les modules dans différents fichiers</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Les collections standard</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Stocker des listes de valeurs avec des vecteurs</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> Stocker du texte encodé en UTF-8 avec les Strings</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Stocker des clés associées à des valeurs dans des tables de hachage</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> La gestion des erreurs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Les erreurs irrécupérables avec panic!</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Des erreurs récupérables avec Result</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> Paniquer ou ne pas paniquer, telle est la question</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Les types génériques, les traits et les durées de vie</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Les types de données génériques</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Définir des comportements partagés avec les traits</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> La conformité des références avec les durées de vies</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Ecrire des tests automatisés</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Comment écrire des tests</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Gérer l'exécution des tests</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> L'organisation des tests</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> Un projet d'entrée/sortie : construire un programme en ligne de commande</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Récupérer les arguments de la ligne de commande</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Lire un fichier</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Remanier le code pour améliorer sa modularité et la gestion des erreurs</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Développer les fonctionnalités de la bibliothèque avec le TDD</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Travailler avec des variables d'environnement</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Ecrire les messages d'erreur sur la sortie d'erreurs standard au lieu de la sortie normale</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Les fonctionnalités des langages fonctionnels : les itérateurs et les fermetures</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Les fermetures : fonctions anonymes qui peuvent utiliser leur environnement</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Traiter une série d'éléments avec un itérateur</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> Amélioration de notre projet d'entrée/sortie</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Comparaison des performances : les boucles et les itérateurs</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> En savoir plus sur cargo et crates.io</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Personnaliser les compilations avec les profils de publication</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Publier une crate sur crates.io</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Les espaces de travail de cargo</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Installer des binaires à partir de crates.io avec cargo install</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Etendre les fonctionnalités de cargo avec des commandes personnalisées</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Les pointeurs intelligents</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Utiliser Box&lt;T&gt; pour pointer sur des données présentes sur le tas</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Considérer les pointeurs intelligents comme des références grâce au trait Deref</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Exécuter du code au nettoyage avec le trait Drop</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, le pointeur intelligent qui compte les références</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; et le motif de mutabilité interne</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Les boucles de références qui peuvent provoquer des fuites de mémoire</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> La concurrence sans craintes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Utiliser les tâches pour exécuter simultanément du code</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Utiliser l'envoi de messages pour transférer des données entre les tâches</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Le partage d'état en concurrence</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Etendre la concurrence avec les traits Sync et Send</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Les fonctionnalités orientées objet de Rust</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Les caractéristiques des langages orientés objet</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Utiliser les objets traits qui permettent des valeurs de types différents</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Implémenter un patron de conception orienté-objet</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Les motifs et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> Tous les endroits où les motifs peuvent être utilisés</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> La réfutabilité : lorsqu'un motif peut échouer à correspondre</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> La syntaxe des motifs</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Les fonctionnalités avancées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Le Rust non sécurisé (unsafe)</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Les traits avancés</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Les types avancés</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Les fonctions et fermetures avancées</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Les macros</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Projet final : construire un serveur web multitâches</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Développer un serveur web monotâche</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Transformer notre serveur monotâche en serveur multitâches</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Arrêt propre et nettoyage</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Annexes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - les mots-clés</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> 🚧 B - les opérateurs et les symboles</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> 🚧 C - les traits dérivables</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> 🚧 D - Des outils de développement utiles</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> 🚧 E - Les éditions</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> 🚧 F - Les traductions de ce livre</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> 🚧 G - Comment Rust est construit, et “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Le langage de programmation Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/Jimskapt/rust-book-fr" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+## Hello, World!
+-->
+<h2 id="hello-world"><a class="header" href="#hello-world">Hello, World!</a></h2>
+<!--
+Now that you’ve installed Rust, let’s write your first Rust program. It’s
+traditional when learning a new language to write a little program that prints
+the text `Hello, world!` to the screen, so we’ll do the same here!
+-->
+<p>Maintenant que vous avez installé Rust, écrivons notre premier programme Rust.
+Lorsqu'on apprend un nouveau langage, il est de tradition d'écrire un petit
+programme qui écrit le texte &quot;Hello, world!&quot; à l'écran, donc c'est ce que nous
+allons faire !</p>
+<!--
+> Note: This book assumes basic familiarity with the command line. Rust makes
+> no specific demands about your editing or tooling or where your code lives, so
+> if you prefer to use an integrated development environment (IDE) instead of
+> the command line, feel free to use your favorite IDE. Many IDEs now have some
+> degree of Rust support; check the IDE’s documentation for details. Recently,
+> the Rust team has been focusing on enabling great IDE support, and progress
+> has been made rapidly on that front!
+-->
+<blockquote>
+<p>Note : ce livre part du principe que vous êtes familier avec la ligne de
+commande. Rust n'impose pas d'exigences sur votre éditeur, vos outils ou
+l'endroit où vous mettez votre code, donc si vous préférez utiliser un
+environnement de développement intégré (IDE) au lieu de la ligne de commande,
+vous êtes libre d'utiliser votre IDE favori. De nombreux IDE prennent en
+charge Rust à des degrés divers ; consultez la documentation de
+l'IDE pour plus d'informations. Récemment, l'équipe Rust s'est attelée à
+améliorer l'intégration dans les IDE et des progrès ont rapidement été faits
+dans ce domaine !</p>
+</blockquote>
+<!--
+### Creating a Project Directory
+-->
+<h3 id="créer-un-dossier-projet"><a class="header" href="#créer-un-dossier-projet">Créer un dossier projet</a></h3>
+<!--
+You’ll start by making a directory to store your Rust code. It doesn’t matter
+to Rust where your code lives, but for the exercises and projects in this book,
+we suggest making a *projects* directory in your home directory and keeping all
+your projects there.
+-->
+<p>Nous allons commencer par créer un dossier pour y ranger le code Rust. Là où
+vous mettez votre code n'est pas important pour Rust, mais pour les exercices et
+projets de ce livre, nous vous suggérons de créer un dossier <em>projects</em> dans
+votre dossier utilisateur et de ranger tous vos projets là-dedans.</p>
+<!--
+Open a terminal and enter the following commands to make a *projects* directory
+and a directory for the “Hello, world!” project within the *projects* directory.
+-->
+<p>Ouvrez un terminal et écrivez les commandes suivantes pour créer un
+dossier <em>projects</em> et un dossier pour le projet “Hello, world!” à l'intérieur
+de ce dossier <em>projects</em>.</p>
+<!--
+For Linux, macOS, and PowerShell on Windows, enter this:
+-->
+<p>Sous Linux, macOS et PowerShell sous Windows, écrivez ceci :</p>
+<!--
+```console
+$ mkdir ~/projects
+$ cd ~/projects
+$ mkdir hello_world
+$ cd hello_world
+```
+-->
+<pre><code class="language-console">$ mkdir ~/projects
+$ cd ~/projects
+$ mkdir hello_world
+$ cd hello_world
+</code></pre>
+<!--
+For Windows CMD, enter this:
+-->
+<p>Avec CMD sous Windows, écrivez ceci :</p>
+<!--
+```cmd
+> mkdir "%USERPROFILE%\projects"
+> cd /d "%USERPROFILE%\projects"
+> mkdir hello_world
+> cd hello_world
+```
+-->
+<pre><code class="language-cmd">&gt; mkdir &quot;%USERPROFILE%\projects&quot;
+&gt; cd /d &quot;%USERPROFILE%\projects&quot;
+&gt; mkdir hello_world
+&gt; cd hello_world
+</code></pre>
+<!--
+### Writing and Running a Rust Program
+-->
+<h3 id="Écrire-et-exécuter-un-programme-rust"><a class="header" href="#Écrire-et-exécuter-un-programme-rust">Écrire et exécuter un programme Rust</a></h3>
+<!--
+Next, make a new source file and call it *main.rs*. Rust files always end with
+the *.rs* extension. If you’re using more than one word in your filename, use
+an underscore to separate them. For example, use *hello_world.rs* rather than
+*helloworld.rs*.
+-->
+<p>Ensuite, créez un nouveau fichier source et appelez-le <em>main.rs</em>. Les fichiers
+Rust se terminent toujours par l'extension <em>.rs</em>. Si vous utilisez plusieurs
+mots dans votre nom de fichier, utilisez un tiret bas (<code>_</code>) pour
+les séparer. Par exemple, vous devriez utiliser <em>hello_world.rs</em> au lieu de
+<em>helloworld.rs</em>.</p>
+<!--
+Now open the *main.rs* file you just created and enter the code in Listing 1-1.
+-->
+<p>Maintenant, ouvrez le fichier <em>main.rs</em> que vous venez de créer et entrez le
+code de l'encart 1-1.</p>
+<!--
+<span class="filename">Filename: main.rs</span>
+-->
+<p><span class="filename">Fichier : main.rs</span></p>
+<!--
+```rust
+fn main() {
+    println!("Hello, world!");
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    println!(&quot;Hello, world!&quot;);
+}
+</code></pre></pre>
+<!--
+<span class="caption">Listing 1-1: A program that prints `Hello, world!`</span>
+-->
+<p><span class="caption">Encart 1-1 : Un programme qui affiche <code>Hello, world!</code>
+</span></p>
+<!--
+Save the file and go back to your terminal window. On Linux or macOS, enter
+the following commands to compile and run the file:
+-->
+<p>Enregistrez le fichier et retournez dans votre terminal. Sur Linux
+ou macOS, écrivez les commandes suivantes pour compiler et exécuter le fichier :</p>
+<!--
+```console
+$ rustc main.rs
+$ ./main
+Hello, world!
+```
+-->
+<pre><code class="language-console">$ rustc main.rs
+$ ./main
+Hello, world!
+</code></pre>
+<!--
+On Windows, enter the command `.\main.exe` instead of `./main`:
+-->
+<p>Sur Windows, écrivez la commande <code>.\main.exe</code> à la place de <code>.\main</code> :</p>
+<!--
+```powershell
+> rustc main.rs
+> .\main.exe
+Hello, world!
+```
+-->
+<pre><code class="language-powershell">&gt; rustc main.rs
+&gt; .\main.exe
+Hello, world!
+</code></pre>
+<!--
+Regardless of your operating system, the string `Hello, world!` should print to
+the terminal. If you don’t see this output, refer back to the
+[“Troubleshooting”][troubleshooting]<!-- ignore -- > part of the Installation
+section for ways to get help.
+-->
+<p>Peu importe votre système d'exploitation, la chaîne de caractères
+<code>Hello, world!</code> devrait s'écrire dans votre terminal. Si cela ne s'affiche pas,
+référez-vous à la partie <a href="ch01-01-installation.html#d%C3%A9pannage">&quot;Dépannage&quot;</a><!-- ignore --> du
+chapitre d'installation pour vous aider.</p>
+<!--
+If `Hello, world!` did print, congratulations! You’ve officially written a Rust
+program. That makes you a Rust programmer—welcome!
+-->
+<p>Si <code>Hello, world!</code> s'affiche, félicitations ! Vous avez officiellement écrit un
+programme Rust. Cela fait de vous un développeur Rust — bienvenue !</p>
+<!--
+### Anatomy of a Rust Program
+-->
+<h3 id="structure-dun-programme-rust"><a class="header" href="#structure-dun-programme-rust">Structure d'un programme Rust</a></h3>
+<!--
+Let’s review in detail what just happened in your “Hello, world!” program.
+Here’s the first piece of the puzzle:
+-->
+<p>Regardons en détail ce qui s'est passé dans votre programme “Hello, world!”.
+Voici le premier morceau du puzzle :</p>
+<!--
+```rust
+fn main() {
+
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">fn main() {
+
+}
+</code></pre></pre>
+<!--
+These lines define a function in Rust. The `main` function is special: it is
+always the first code that runs in every executable Rust program. The first
+line declares a function named `main` that has no parameters and returns
+nothing. If there were parameters, they would go inside the parentheses, `()`.
+-->
+<p>Ces lignes définissent une fonction dans Rust. La fonction <code>main</code> est spéciale :
+c'est toujours le premier code qui est exécuté dans tous les programmes
+en Rust. La première ligne déclare une fonction qui s'appelle <code>main</code>, qui n'a
+pas de paramètre et qui ne retourne aucune valeur. S'il y avait des paramètres,
+ils seraient placés entre les parenthèses <code>()</code>.</p>
+<!--
+Also, note that the function body is wrapped in curly brackets, `{}`. Rust
+requires these around all function bodies. It’s good style to place the opening
+curly bracket on the same line as the function declaration, adding one space in
+between.
+-->
+<p>À noter en outre que le corps de la fonction est placé entre des accolades
+<code>{}</code>. Rust en a besoin autour du corps de chaque fonction. C'est une
+bonne pratique d'insérer l'accolade ouvrante sur la même ligne que la
+déclaration de la fonction, en ajoutant une espace entre les deux.</p>
+<!--
+If you want to stick to a standard style across Rust projects, you can use an
+automatic formatter tool called `rustfmt` to format your code in a particular
+style. The Rust team has included this tool with the standard Rust distribution,
+like `rustc`, so it should already be installed on your computer! Check the
+online documentation for more details.
+-->
+<p>Si vous souhaitez formater le code de vos projets Rust de manière standardisé,
+vous pouvez utiliser un outil de formatage automatique tel que <code>rustfmt</code>.
+L'équipe de Rust a intégré cet outil dans la distribution standard de Rust,
+comme pour <code>rustc</code> par exemple, donc il est probablement déjà installé sur votre
+ordinateur ! Consultez la documentation en ligne pour en savoir plus.</p>
+<!--
+Inside the `main` function is the following code:
+-->
+<p>À l'intérieur de la fonction <code>main</code>, nous avons le code suivant :</p>
+<!--
+```rust
+    println!("Hello, world!");
+```
+-->
+<pre><pre class="playground"><code class="language-rust">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    println!(&quot;Hello, world!&quot;);
+<span class="boring">}
+</span></code></pre></pre>
+<!--
+This line does all the work in this little program: it prints text to the
+screen. There are four important details to notice here.
+-->
+<p>Cette ligne fait tout le travail dans ce petit programme : il écrit le texte à
+l'écran. Il y a quatre détails importants à noter ici.</p>
+<!--
+First, Rust style is to indent with four spaces, not a tab.
+-->
+<p>Premièrement, le style de Rust est d'indenter avec quatre espaces, et non pas
+avec une tabulation.</p>
+<!--
+Second, `println!` calls a Rust macro. If it called a function instead, it
+would be entered as `println` (without the `!`). We’ll discuss Rust macros in
+more detail in Chapter 19. For now, you just need to know that using a `!`
+means that you’re calling a macro instead of a normal function, and that macros
+don’t always follow the same rules as functions.
+-->
+<p>Deuxièmement, <code>println!</code> fait appel à une macro Rust. S'il appelait une
+fonction à la place, cela serait écrit <code>println</code> (sans le <code>!</code>). Nous aborderons
+les macros Rust plus en détail dans le chapitre 19. Pour l'instant, vous avez
+juste à savoir qu'utiliser un <code>!</code> signifie que vous utilisez une macro plutôt
+qu'une fonction classique. Les macros ne suivent pas toujours les mêmes règles
+que les fonctions.</p>
+<!--
+Third, you see the `"Hello, world!"` string. We pass this string as an argument
+to `println!`, and the string is printed to the screen.
+-->
+<p>Troisièmement, vous voyez la chaîne de caractères <code>&quot;Hello, world!&quot;</code>. Nous
+envoyons cette chaîne en argument à <code>println!</code> et cette chaîne est affichée
+à l'écran.</p>
+<!--
+Fourth, we end the line with a semicolon (`;`), which indicates that this
+expression is over and the next one is ready to begin. Most lines of Rust code
+end with a semicolon.
+-->
+<p>Quatrièmement, nous terminons la ligne avec un point-virgule (<code>;</code>), qui indique
+que cette expression est terminée et que la suivante est prête à commencer. La
+plupart des lignes de Rust se terminent avec un point-virgule.</p>
+<!--
+### Compiling and Running Are Separate Steps
+-->
+<h3 id="la-compilation-et-lexécution-sont-des-étapes-séparées"><a class="header" href="#la-compilation-et-lexécution-sont-des-étapes-séparées">La compilation et l'exécution sont des étapes séparées</a></h3>
+<!--
+You’ve just run a newly created program, so let’s examine each step in the
+process.
+-->
+<p>Vous venez de lancer un nouveau programme fraîchement créé, donc penchons-nous
+sur chaque étape du processus.</p>
+<!--
+Before running a Rust program, you must compile it using the Rust compiler by
+entering the `rustc` command and passing it the name of your source file, like
+this:
+-->
+<p>Avant de lancer un programme Rust, vous devez le compiler en utilisant le
+compilateur Rust en entrant la commande <code>rustc</code> et en lui passant le nom de
+votre fichier source, comme ceci :</p>
+<!--
+```console
+$ rustc main.rs
+```
+-->
+<pre><code class="language-console">$ rustc main.rs
+</code></pre>
+<!--
+If you have a C or C++ background, you’ll notice that this is similar to `gcc`
+or `clang`. After compiling successfully, Rust outputs a binary executable.
+-->
+<p>Si vous avez de l'expérience en C ou en C++, vous observerez des similarités
+avec <code>gcc</code> ou <code>clang</code>.
+Après avoir compilé avec succès, Rust produit un binaire exécutable.</p>
+<!--
+On Linux, macOS, and PowerShell on Windows, you can see the executable by
+entering the `ls` command in your shell. On Linux and macOS, you’ll see two
+files. With PowerShell on Windows, you’ll see the same three files that you
+would see using CMD.
+-->
+<p>Avec Linux, macOS et PowerShell sous Windows, vous pouvez voir l'exécutable en
+utilisant la commande <code>ls</code> dans votre terminal. Avec Linux et macOS,
+vous devriez voir deux fichiers. Avec PowerShell sous Windows, vous devriez voir
+les trois mêmes fichiers que vous verriez en utilisant CMD.</p>
+<!--
+```console
+$ ls
+main  main.rs
+```
+-->
+<pre><code class="language-console">$ ls
+main  main.rs
+</code></pre>
+<!--
+With CMD on Windows, you would enter the following:
+-->
+<p>Avec CMD sous Windows, vous devez saisir la commande suivante :</p>
+<!--
+```cmd
+> dir /B %= the /B option says to only show the file names =%
+main.exe
+main.pdb
+main.rs
+```
+-->
+<pre><code class="language-cmd">&gt; dir /B %= l'option /B demande à n'afficher que les noms de fichiers =%
+main.exe
+main.pdb
+main.rs
+</code></pre>
+<!--
+This shows the source code file with the *.rs* extension, the executable file
+(*main.exe* on Windows, but *main* on all other platforms), and, when using
+Windows, a file containing debugging information with the *.pdb* extension.
+From here, you run the *main* or *main.exe* file, like this:
+-->
+<p>Ceci affiche le fichier de code source avec l'extension <em>.rs</em>, le fichier
+exécutable (<em>main.exe</em> sous Windows, mais <em>main</em> sur toutes les autres
+plateformes) et, quand on utilise Windows, un fichier qui contient des
+informations de débogage avec l'extension <em>.pdb</em>. Dans ce dossier, vous pouvez
+exécuter le fichier <em>main</em> ou <em>main.exe</em> comme ceci :</p>
+<!--
+```console
+$ ./main # or .\main.exe on Windows
+```
+-->
+<pre><code class="language-console">$ ./main # ou .\main.exe sous Windows
+</code></pre>
+<!--
+If *main.rs* was your “Hello, world!” program, this line would print `Hello,
+world!` to your terminal.
+-->
+<p>Si <em>main.rs</em> était votre programme “Hello, world!”, cette ligne devrait afficher
+<code>Hello, world!</code> dans votre terminal.</p>
+<!--
+If you’re more familiar with a dynamic language, such as Ruby, Python, or
+JavaScript, you might not be used to compiling and running a program as
+separate steps. Rust is an *ahead-of-time compiled* language, meaning you can
+compile a program and give the executable to someone else, and they can run it
+even without having Rust installed. If you give someone a *.rb*, *.py*, or
+*.js* file, they need to have a Ruby, Python, or JavaScript implementation
+installed (respectively). But in those languages, you only need one command to
+compile and run your program. Everything is a trade-off in language design.
+-->
+<p>Si vous connaissez un langage dynamique, comme Ruby, Python, ou JavaScript, vous
+n'avez peut-être pas l'habitude de compiler puis lancer votre programme dans des
+étapes séparées.
+Rust est un langage à <em>compilation anticipée</em>, ce qui veut dire que
+vous pouvez compiler le programme et le donner à quelqu'un d'autre, et il peut
+l'exécuter sans avoir Rust d'installé. Si vous donnez à quelqu'un un fichier
+<em>.rb</em>, <em>.py</em> ou <em>.js</em>, il a besoin d'avoir respectivement un interpréteur Ruby,
+Python, ou Javascript d'installé. Cependant, avec ces langages, vous n'avez
+besoin que d'une seule commande pour compiler et exécuter votre programme.
+Dans la conception d'un langage, tout est une question de compromis.</p>
+<!--
+Just compiling with `rustc` is fine for simple programs, but as your project
+grows, you’ll want to manage all the options and make it easy to share your
+code. Next, we’ll introduce you to the Cargo tool, which will help you write
+real-world Rust programs.
+-->
+<p>Compiler avec <code>rustc</code> peut suffire pour de petits programmes, mais au fur et à
+mesure que votre programme grandit, vous allez avoir besoin de régler plus
+d'options et faciliter le partage de votre code. À la page suivante, nous allons
+découvrir l'outil Cargo, qui va vous aider à écrire des programmes Rust à
+l'épreuve de la réalité.</p>
+<!--
+[troubleshooting]: ch01-01-installation.html#troubleshooting
+-->
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch01-01-installation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch01-03-hello-cargo.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch01-01-installation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch01-03-hello-cargo.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../ferris.js"></script>
+    </body>
+</html>

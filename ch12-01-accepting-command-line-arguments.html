@@ -1,0 +1,516 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Récupérer les arguments de la ligne de commande - Le langage de programmation Rust</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../ferris.css">
+        <link rel="stylesheet" href="../theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Le langage de programmation Rust</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Avant-propos</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="translation-terms.html">Traduction des termes</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Prise en main</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, world!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Programmer le jeu du plus ou du moins</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Les concepts courants de programmation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> Les variables et la mutabilité</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Les types de données</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Les fonctions</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Les commentaires</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Les structures de contrôle</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Comprendre la possession</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Qu'est-ce que la possession ?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Les références et l'emprunt</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Le type slice</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Utiliser les structures pour structurer des données apparentées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Définir et instancier des structures</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Un exemple de programme qui utilise des structures</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> La syntaxe des méthodes</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Les énumérations et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Définir une énumération</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> La structure de contrôle match</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> Une structure de contrôle concise : if let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Gérer des projets grandissants avec les paquets, crates et modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Les paquets et les crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Définir des modules pour gérer la portée et la visibilité</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Désigner un élément dans l'arborescence de modules</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Importer des chemins dans la portée via le mot-clé use</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Séparer les modules dans différents fichiers</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Les collections standard</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Stocker des listes de valeurs avec des vecteurs</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> Stocker du texte encodé en UTF-8 avec les Strings</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Stocker des clés associées à des valeurs dans des tables de hachage</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> La gestion des erreurs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Les erreurs irrécupérables avec panic!</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Des erreurs récupérables avec Result</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> Paniquer ou ne pas paniquer, telle est la question</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Les types génériques, les traits et les durées de vie</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Les types de données génériques</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Définir des comportements partagés avec les traits</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> La conformité des références avec les durées de vies</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Ecrire des tests automatisés</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Comment écrire des tests</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Gérer l'exécution des tests</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> L'organisation des tests</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> Un projet d'entrée/sortie : construire un programme en ligne de commande</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html" class="active"><strong aria-hidden="true">12.1.</strong> Récupérer les arguments de la ligne de commande</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Lire un fichier</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Remanier le code pour améliorer sa modularité et la gestion des erreurs</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Développer les fonctionnalités de la bibliothèque avec le TDD</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Travailler avec des variables d'environnement</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Ecrire les messages d'erreur sur la sortie d'erreurs standard au lieu de la sortie normale</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Les fonctionnalités des langages fonctionnels : les itérateurs et les fermetures</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Les fermetures : fonctions anonymes qui peuvent utiliser leur environnement</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Traiter une série d'éléments avec un itérateur</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> Amélioration de notre projet d'entrée/sortie</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Comparaison des performances : les boucles et les itérateurs</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> En savoir plus sur cargo et crates.io</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Personnaliser les compilations avec les profils de publication</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Publier une crate sur crates.io</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Les espaces de travail de cargo</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Installer des binaires à partir de crates.io avec cargo install</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Etendre les fonctionnalités de cargo avec des commandes personnalisées</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Les pointeurs intelligents</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Utiliser Box&lt;T&gt; pour pointer sur des données présentes sur le tas</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Considérer les pointeurs intelligents comme des références grâce au trait Deref</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Exécuter du code au nettoyage avec le trait Drop</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, le pointeur intelligent qui compte les références</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; et le motif de mutabilité interne</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Les boucles de références qui peuvent provoquer des fuites de mémoire</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> La concurrence sans craintes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Utiliser les tâches pour exécuter simultanément du code</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Utiliser l'envoi de messages pour transférer des données entre les tâches</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Le partage d'état en concurrence</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Etendre la concurrence avec les traits Sync et Send</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Les fonctionnalités orientées objet de Rust</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Les caractéristiques des langages orientés objet</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Utiliser les objets traits qui permettent des valeurs de types différents</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Implémenter un patron de conception orienté-objet</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Les motifs et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> Tous les endroits où les motifs peuvent être utilisés</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> La réfutabilité : lorsqu'un motif peut échouer à correspondre</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> La syntaxe des motifs</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Les fonctionnalités avancées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Le Rust non sécurisé (unsafe)</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Les traits avancés</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Les types avancés</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Les fonctions et fermetures avancées</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Les macros</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Projet final : construire un serveur web multitâches</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Développer un serveur web monotâche</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Transformer notre serveur monotâche en serveur multitâches</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Arrêt propre et nettoyage</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Annexes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - les mots-clés</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> 🚧 B - les opérateurs et les symboles</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> 🚧 C - les traits dérivables</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> 🚧 D - Des outils de développement utiles</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> 🚧 E - Les éditions</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> 🚧 F - Les traductions de ce livre</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> 🚧 G - Comment Rust est construit, et “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Le langage de programmation Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/Jimskapt/rust-book-fr" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+## Accepting Command Line Arguments
+-->
+<h2 id="récupérer-les-arguments-de-la-ligne-de-commande"><a class="header" href="#récupérer-les-arguments-de-la-ligne-de-commande">Récupérer les arguments de la ligne de commande</a></h2>
+<!--
+Let’s create a new project with, as always, `cargo new`. We’ll call our project
+`minigrep` to distinguish it from the `grep` tool that you might already have
+on your system.
+-->
+<p>Créons un nouveau projet comme à l'accoutumée avec <code>cargo new</code>. Appelons
+notre projet <code>minigrep</code> pour le distinguer de l'outil <code>grep</code> que vous avez
+probablement déjà sur votre système.</p>
+<!--
+```console
+$ cargo new minigrep
+     Created binary (application) `minigrep` project
+$ cd minigrep
+```
+-->
+<pre><code class="language-console">$ cargo new minigrep
+     Created binary (application) `minigrep` project
+$ cd minigrep
+</code></pre>
+<!--
+The first task is to make `minigrep` accept its two command line arguments: the
+filename and a string to search for. That is, we want to be able to run our
+program with `cargo run`, a string to search for, and a path to a file to
+search in, like so:
+-->
+<p>La première tâche est de faire en sorte que <code>minigrep</code> utilise ses deux
+arguments en ligne de commande : le nom du fichier et la chaîne de caractères à
+rechercher. Autrement dit, nous voulons pouvoir exécuter notre programme avec
+<code>cargo run</code>, une chaîne de caractères à rechercher, et un chemin vers un
+fichier dans lequel chercher, comme ceci :</p>
+<!--
+```console
+$ cargo run searchstring example-filename.txt
+```
+-->
+<pre><code class="language-console">$ cargo run chaine_a_chercher fichier-exemple.txt
+</code></pre>
+<!--
+Right now, the program generated by `cargo new` cannot process arguments we
+give it. Some existing libraries on [crates.io](https://crates.io/) can help
+with writing a program that accepts command line arguments, but because you’re
+just learning this concept, let’s implement this capability ourselves.
+-->
+<p>Pour l'instant, le programme généré par <code>cargo new</code> ne peut pas traiter les
+arguments que nous lui donnons. Certaines bibliothèques qui existent sur
+<a href="https://crates.io/">crates.io</a> peuvent vous aider à écrire un programme
+qui prend des arguments en ligne de commande, mais comme vous apprenez
+juste ce concept, implémentons cette capacité par nous-mêmes.</p>
+<!--
+### Reading the Argument Values
+-->
+<h3 id="lire-les-valeurs-des-arguments"><a class="header" href="#lire-les-valeurs-des-arguments">Lire les valeurs des arguments</a></h3>
+<!--
+To enable `minigrep` to read the values of command line arguments we pass to
+it, we’ll need a function provided in Rust’s standard library, which is
+`std::env::args`. This function returns an iterator of the command line
+arguments that were given to `minigrep`. We’ll cover iterators fully in
+[Chapter 13][ch13]<!-- ignore -- >. For now, you only need to know two details
+about iterators: iterators produce a series of values, and we can call the
+`collect` method on an iterator to turn it into a collection, such as a vector,
+containing all the elements the iterator produces.
+-->
+<p>Pour permettre à <code>minigrep</code> de lire les valeurs des arguments de la ligne de
+commande que nous lui envoyons, nous allons avoir besoin d'une fonction fournie
+par la bibliothèque standard de Rust, qui est <code>std::env::args</code>. Cette fonction
+retourne un itérateur des arguments de la ligne de commande qui ont été donnés
+à <code>minigrep</code>. Nous verrons les itérateurs plus précisément au
+<a href="ch13-00-functional-features.html">chapitre 13</a><!-- ignore -->. Pour l'instant, vous avez juste à savoir
+deux choses à propos des itérateurs : les itérateurs engendrent une série de
+valeurs, et nous pouvons appeler la méthode <code>collect</code> sur un itérateur pour le
+transformer en collection, comme les vecteurs, qui contiennent tous les
+éléments qu'un itérateur engendrent.</p>
+<!--
+Use the code in Listing 12-1 to allow your `minigrep` program to read any
+command line arguments passed to it and then collect the values into a vector.
+-->
+<p>Utilisez le code de l'encart 12-1 pour permettre à votre programme <code>minigrep</code>
+de lire tous les arguments qui lui sont envoyés et ensuite collecter les
+valeurs dans un vecteur.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+use std::env;
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+    println!("{:?}", args);
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">use std::env;
+
+fn main() {
+    let args: Vec&lt;String&gt; = env::args().collect();
+    println!(&quot;{:?}&quot;, args);
+}
+</code></pre></pre>
+<!--
+<span class="caption">Listing 12-1: Collecting the command line arguments into
+a vector and printing them</span>
+-->
+<p><span class="caption">Encart 12-1 : Collecter les arguments de la ligne de
+commande dans un vecteur et les afficher</span></p>
+<!--
+First, we bring the `std::env` module into scope with a `use` statement so we
+can use its `args` function. Notice that the `std::env::args` function is
+nested in two levels of modules. As we discussed in [Chapter
+7][ch7-idiomatic-use]<!-- ignore -- >, in cases where the desired function is
+nested in more than one module, it’s conventional to bring the parent module
+into scope rather than the function. By doing so, we can easily use other
+functions from `std::env`. It’s also less ambiguous than adding `use
+std::env::args` and then calling the function with just `args`, because `args`
+might easily be mistaken for a function that’s defined in the current module.
+-->
+<p>D'abord, nous importons le module <code>std::env</code> dans la portée avec une
+instruction <code>use</code> afin que nous puissions utiliser sa fonction <code>args</code>. Notez
+que la fonction <code>std::env::args</code> est imbriquée sur deux niveaux de modules.
+Comme nous l'avons vu dans le <a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html">chapitre 7</a><!-- ignore -->,
+il est courant d'importer le module parent dans la portée plutôt que la
+fonction. En faisant ainsi, nous pouvons facilement utiliser les autres
+fonctions de <code>std::env</code>. C'est aussi moins ambigü que d'importer uniquement
+<code>std::env::args</code> et ensuite d'appeler la fonction avec seulement <code>args</code>, car
+<code>args</code> peu facilement être confondu avec une fonction qui est définie dans le
+module courant.</p>
+<!--
+> ### The `args` Function and Invalid Unicode
+>
+> Note that `std::env::args` will panic if any argument contains invalid
+> Unicode. If your program needs to accept arguments containing invalid
+> Unicode, use `std::env::args_os` instead. That function returns an iterator
+> that produces `OsString` values instead of `String` values. We’ve chosen to
+> use `std::env::args` here for simplicity, because `OsString` values differ
+> per platform and are more complex to work with than `String` values.
+-->
+<blockquote>
+<h3 id="la-fonction-args-et-lunicode-invalide"><a class="header" href="#la-fonction-args-et-lunicode-invalide">La fonction <code>args</code> et l'unicode invalide</a></h3>
+<p>Notez que <code>std::env::args</code> va paniquer si un des arguments contient de
+l'unicode invalide. Si votre programme a besoin d'utiliser des arguments qui
+contiennent de l'unicode invalide, utilisez plutôt <code>std::env::args_os</code> à la
+place. Cette fonction retourne un itérateur qui engendre des valeurs <code>OsString</code>
+plutôt que des valeurs <code>String</code>. Nous avons choisi d'utiliser ici
+<code>std::env::args</code> par simplicité, car les valeurs <code>OsString</code> diffèrent selon
+la plateforme et c'est plus complexe de travailler avec par rapport aux
+valeurs de type <code>String</code>.</p>
+</blockquote>
+<!--
+On the first line of `main`, we call `env::args`, and we immediately use
+`collect` to turn the iterator into a vector containing all the values produced
+by the iterator. We can use the `collect` function to create many kinds of
+collections, so we explicitly annotate the type of `args` to specify that we
+want a vector of strings. Although we very rarely need to annotate types in
+Rust, `collect` is one function you do often need to annotate because Rust
+isn’t able to infer the kind of collection you want.
+-->
+<p>Dans la première ligne du <code>main</code>, nous appelons <code>env::args</code>, et nous utilisons
+immédiatement <code>collect</code> pour retourner un itérateur dans un vecteur qui
+contient toutes les valeurs engendrées par l'itérateur. Nous pouvons utiliser
+la fonction <code>collect</code> pour créer n'importe quel genre de collection, donc nous
+avons annoté explicitement le type de <code>args</code> pour préciser que nous attendions
+un vecteur de chaînes de caractères. Bien que nous n'ayons que très
+rarement d'annoter les types en Rust, <code>collect</code> est une fonction que vous
+aurez souvent besoin d'annoter car Rust n'est pas capable de déduire le type
+de collection que vous attendez.</p>
+<!--
+Finally, we print the vector using the debug formatter, `:?`. Let’s try running
+the code first with no arguments and then with two arguments:
+-->
+<p>Enfin, nous affichons le vecteur en utilisant la chaîne de formatage <code>:?</code>.
+Essayons d'abord de lancer le code sans arguments, puis ensuite avec deux
+arguments :</p>
+<!--
+```console
+$ cargo run
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.61s
+     Running `target/debug/minigrep`
+["target/debug/minigrep"]
+```
+-->
+<pre><code class="language-console">$ cargo run
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.61s
+     Running `target/debug/minigrep`
+[&quot;target/debug/minigrep&quot;]
+</code></pre>
+<!--
+```console
+$ cargo run aiguille botte_de_foin
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.57s
+     Running `target/debug/minigrep aiguille botte_de_foin`
+["target/debug/minigrep", "aiguille", "botte_de_foin"]
+```
+-->
+<pre><code class="language-console">$ cargo run aiguille botte_de_foin
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.57s
+     Running `target/debug/minigrep aiguille botte_de_foin`
+[&quot;target/debug/minigrep&quot;, &quot;aiguille&quot;, &quot;botte_de_foin&quot;]
+</code></pre>
+<!--
+Notice that the first value in the vector is `"target/debug/minigrep"`, which
+is the name of our binary. This matches the behavior of the arguments list in
+C, letting programs use the name by which they were invoked in their execution.
+It’s often convenient to have access to the program name in case you want to
+print it in messages or change behavior of the program based on what command
+line alias was used to invoke the program. But for the purposes of this
+chapter, we’ll ignore it and save only the two arguments we need.
+-->
+<p>Remarquez que la première valeur dans le vecteur est
+<code>&quot;target/debug/minigrep&quot;</code>, qui est le nom de notre binaire. Cela correspond
+au fonctionnement de la liste d'arguments en C, qui laissent les programmes
+utiliser le nom sous lequel ils ont été invoqués dans leur exécution. C'est
+parfois pratique pour avoir accès au nom du programme dans le cas où vous
+souhaitez l'afficher dans des messages, ou changer le comportement du programme
+en fonction de ce que l'alias de la ligne de commande utilise pour invoquer le
+programme. Mais pour les besoins de ce chapitre, nous allons l'ignorer et
+récupérer uniquement les deux arguments dont nous avons besoin.</p>
+<!--
+### Saving the Argument Values in Variables
+-->
+<h3 id="enregistrer-les-valeurs-des-arguments-dans-des-variables"><a class="header" href="#enregistrer-les-valeurs-des-arguments-dans-des-variables">Enregistrer les valeurs des arguments dans des variables</a></h3>
+<!--
+Printing the value of the vector of arguments illustrated that the program is
+able to access the values specified as command line arguments. Now we need to
+save the values of the two arguments in variables so we can use the values
+throughout the rest of the program. We do that in Listing 12-2.
+-->
+<p>L'affichage des valeurs du vecteur des arguments nous a démontré que le
+programme peut avoir accès aux valeurs envoyées en arguments d'une ligne de
+commande. Maintenant, nous avons besoin d'enregistrer les valeurs des deux
+arguments dans des variables afin que nous puissions utiliser les valeurs pour
+le reste du programme. C'est que nous faisons dans l'encart 12-2.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust,should_panic,noplayground
+use std::env;
+
+fn main() {
+    let args: Vec<String> = env::args().collect();
+
+    let recherche = &args[1];
+    let nom_fichier = &args[2];
+
+    println!("On recherche : {}", recherche);
+    println!("Dans le fichier : {}", nom_fichier);
+}
+```
+-->
+<pre><code class="language-rust should_panic noplayground">use std::env;
+
+fn main() {
+    let args: Vec&lt;String&gt; = env::args().collect();
+
+    let recherche = &amp;args[1];
+    let nom_fichier = &amp;args[2];
+
+    println!(&quot;On recherche : {}&quot;, recherche);
+    println!(&quot;Dans le fichier : {}&quot;, nom_fichier);
+}
+</code></pre>
+<!--
+<span class="caption">Listing 12-2: Creating variables to hold the query
+argument and filename argument</span>
+-->
+<p><span class="caption">Encart 12-2 : Création de variables pour récupérer
+les arguments recherche et nom_fichier</span></p>
+<!--
+As we saw when we printed the vector, the program’s name takes up the first
+value in the vector at `args[0]`, so we’re starting at index `1`. The first
+argument `minigrep` takes is the string we’re searching for, so we put a
+reference to the first argument in the variable `query`. The second argument
+will be the filename, so we put a reference to the second argument in the
+variable `filename`.
+-->
+<p>Comme nous l'avons vu lorsque nous avons affiché le vecteur, le nom du
+programme prend la première valeur dans le vecteur, dans <code>args[0]</code>, donc nous
+allons commencer à l'indice <code>1</code>. Le premier argument que prend <code>minigrep</code> est
+la chaîne de caractères que nous recherchons, donc nous insérons la référence
+vers le premier argument dans la variable <code>recherche</code>. Le second argument sera
+le nom du fichier, donc nous insérons une référence vers le second argument
+dans la variable <code>nom_fichier</code>.</p>
+<!--
+We temporarily print the values of these variables to prove that the code is
+working as we intend. Let’s run this program again with the arguments `test`
+and `sample.txt`:
+-->
+<p>Nous affichons temporairement les valeurs de ces variables pour prouver que le
+code fonctionne bien comme nous le souhaitons. Lançons à nouveau ce programme
+avec les arguments <code>test</code> et <code>example.txt</code> :</p>
+<!--
+```console
+$ cargo run test exemple.txt
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.0s
+     Running `target/debug/minigrep test exemple.txt`
+On recherche : test
+Dans le fichier : exemple.txt
+```
+-->
+<pre><code class="language-console">$ cargo run test exemple.txt
+   Compiling minigrep v0.1.0 (file:///projects/minigrep)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.0s
+     Running `target/debug/minigrep test exemple.txt`
+On recherche : test
+Dans le fichier : exemple.txt
+</code></pre>
+<!--
+Great, the program is working! The values of the arguments we need are being
+saved into the right variables. Later we’ll add some error handling to deal
+with certain potential erroneous situations, such as when the user provides no
+arguments; for now, we’ll ignore that situation and work on adding file-reading
+capabilities instead.
+-->
+<p>Très bien, notre programme fonctionne ! Les valeurs des arguments dont nous
+avons besoin sont enregistrées dans les bonnes variables. Plus tard, nous
+allons ajouter de la gestion d'erreurs pour pallier aux potentielles situations
+d'erreurs, comme lorsque l'utilisateur ne fournit pas d'arguments ; pour le
+moment, nous allons ignorer ces situations et continuer à travailler pour
+l'ajout d'une capacité de lecture de fichier, à la place.</p>
+<!--
+[ch13]: ch13-00-functional-features.html
+[ch7-idiomatic-use]: ch07-04-bringing-paths-into-scope-with-the-use-keyword.html#creating-idiomatic-use-paths
+-->
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch12-00-an-io-project.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch12-02-reading-a-file.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch12-00-an-io-project.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch12-02-reading-a-file.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../ferris.js"></script>
+    </body>
+</html>

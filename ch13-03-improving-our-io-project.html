@@ -1,0 +1,1543 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Amélioration de notre projet d&#x27;entrée/sortie - Le langage de programmation Rust</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../ferris.css">
+        <link rel="stylesheet" href="../theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Le langage de programmation Rust</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Avant-propos</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="translation-terms.html">Traduction des termes</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Prise en main</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, world!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Programmer le jeu du plus ou du moins</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Les concepts courants de programmation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> Les variables et la mutabilité</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Les types de données</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Les fonctions</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Les commentaires</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Les structures de contrôle</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Comprendre la possession</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Qu'est-ce que la possession ?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Les références et l'emprunt</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Le type slice</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Utiliser les structures pour structurer des données apparentées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Définir et instancier des structures</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Un exemple de programme qui utilise des structures</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> La syntaxe des méthodes</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Les énumérations et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Définir une énumération</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> La structure de contrôle match</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> Une structure de contrôle concise : if let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Gérer des projets grandissants avec les paquets, crates et modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Les paquets et les crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Définir des modules pour gérer la portée et la visibilité</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Désigner un élément dans l'arborescence de modules</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Importer des chemins dans la portée via le mot-clé use</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Séparer les modules dans différents fichiers</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Les collections standard</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Stocker des listes de valeurs avec des vecteurs</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> Stocker du texte encodé en UTF-8 avec les Strings</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Stocker des clés associées à des valeurs dans des tables de hachage</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> La gestion des erreurs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Les erreurs irrécupérables avec panic!</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Des erreurs récupérables avec Result</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> Paniquer ou ne pas paniquer, telle est la question</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Les types génériques, les traits et les durées de vie</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Les types de données génériques</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Définir des comportements partagés avec les traits</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> La conformité des références avec les durées de vies</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Ecrire des tests automatisés</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Comment écrire des tests</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Gérer l'exécution des tests</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> L'organisation des tests</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> Un projet d'entrée/sortie : construire un programme en ligne de commande</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Récupérer les arguments de la ligne de commande</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Lire un fichier</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Remanier le code pour améliorer sa modularité et la gestion des erreurs</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Développer les fonctionnalités de la bibliothèque avec le TDD</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Travailler avec des variables d'environnement</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Ecrire les messages d'erreur sur la sortie d'erreurs standard au lieu de la sortie normale</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Les fonctionnalités des langages fonctionnels : les itérateurs et les fermetures</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Les fermetures : fonctions anonymes qui peuvent utiliser leur environnement</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Traiter une série d'éléments avec un itérateur</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html" class="active"><strong aria-hidden="true">13.3.</strong> Amélioration de notre projet d'entrée/sortie</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Comparaison des performances : les boucles et les itérateurs</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> En savoir plus sur cargo et crates.io</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Personnaliser les compilations avec les profils de publication</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Publier une crate sur crates.io</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Les espaces de travail de cargo</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Installer des binaires à partir de crates.io avec cargo install</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Etendre les fonctionnalités de cargo avec des commandes personnalisées</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Les pointeurs intelligents</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Utiliser Box&lt;T&gt; pour pointer sur des données présentes sur le tas</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Considérer les pointeurs intelligents comme des références grâce au trait Deref</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Exécuter du code au nettoyage avec le trait Drop</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, le pointeur intelligent qui compte les références</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; et le motif de mutabilité interne</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Les boucles de références qui peuvent provoquer des fuites de mémoire</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> La concurrence sans craintes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Utiliser les tâches pour exécuter simultanément du code</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Utiliser l'envoi de messages pour transférer des données entre les tâches</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Le partage d'état en concurrence</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Etendre la concurrence avec les traits Sync et Send</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Les fonctionnalités orientées objet de Rust</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Les caractéristiques des langages orientés objet</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Utiliser les objets traits qui permettent des valeurs de types différents</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Implémenter un patron de conception orienté-objet</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Les motifs et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> Tous les endroits où les motifs peuvent être utilisés</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> La réfutabilité : lorsqu'un motif peut échouer à correspondre</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> La syntaxe des motifs</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Les fonctionnalités avancées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Le Rust non sécurisé (unsafe)</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Les traits avancés</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Les types avancés</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Les fonctions et fermetures avancées</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Les macros</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Projet final : construire un serveur web multitâches</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Développer un serveur web monotâche</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Transformer notre serveur monotâche en serveur multitâches</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Arrêt propre et nettoyage</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Annexes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - les mots-clés</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> 🚧 B - les opérateurs et les symboles</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> 🚧 C - les traits dérivables</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> 🚧 D - Des outils de développement utiles</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> 🚧 E - Les éditions</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> 🚧 F - Les traductions de ce livre</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> 🚧 G - Comment Rust est construit, et “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Le langage de programmation Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/Jimskapt/rust-book-fr" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+## Improving Our I/O Project
+-->
+<h2 id="amélioration-de-notre-projet-dentréesortie"><a class="header" href="#amélioration-de-notre-projet-dentréesortie">Amélioration de notre projet d'entrée/sortie</a></h2>
+<!--
+With this new knowledge about iterators, we can improve the I/O project in
+Chapter 12 by using iterators to make places in the code clearer and more
+concise. Let’s look at how iterators can improve our implementation of the
+`Config::new` function and the `search` function.
+-->
+<p>Grâce à ces nouvelles connaissances sur les itérateurs, nous pouvons améliorer
+le projet d'entrée/sortie du chapitre 12 en utilisant des itérateurs pour
+rendre certains endroits du code plus clairs et plus concis. Voyons comment les
+itérateurs peuvent améliorer notre implémentation de la fonction <code>Config::new</code>
+et de la fonction <code>rechercher</code>.</p>
+<!--
+### Removing a `clone` Using an Iterator
+-->
+<h3 id="supprimer-lappel-à-clone-à-laide-dun-itérateur"><a class="header" href="#supprimer-lappel-à-clone-à-laide-dun-itérateur">Supprimer l'appel à <code>clone</code> à l'aide d'un itérateur</a></h3>
+<!--
+In Listing 12-6, we added code that took a slice of `String` values and created
+an instance of the `Config` struct by indexing into the slice and cloning the
+values, allowing the `Config` struct to own those values. In Listing 13-24,
+we’ve reproduced the implementation of the `Config::new` function as it was in
+Listing 12-23:
+-->
+<p>Dans l'encart 12-6, nous avions ajouté du code qui prenait une <em>slice</em> de
+<code>String</code> et qui créait une instance de la structure <code>Config</code> en utilisant les
+indices de la <em>slice</em> et en clonant les valeurs, permettant ainsi à la
+structure <code>Config</code> de posséder ces valeurs. Dans l'encart 13-24, nous avons
+reproduit l'implémentation de la fonction <code>Config::new</code> telle qu'elle était dans
+l'encart 12-23 à la fin du chapitre 12 :</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,ignore
+# use std::env;
+# use std::error::Error;
+# use std::fs;
+# 
+# pub struct Config {
+#     pub recherche: String,
+#     pub nom_fichier: String,
+#     pub sensible_casse: bool,
+# }
+# 
+impl Config {
+    pub fn new(args: &[String]) -> Result<Config, &'static str> {
+        if args.len() < 3 {
+            return Err("il n'y a pas assez d'arguments");
+        }
+
+        let recherche = args[1].clone();
+        let nom_fichier = args[2].clone();
+
+        let sensible_casse = env::var("MINIGREP_INSENSIBLE_CASSE").is_err();
+
+        Ok(Config {
+            recherche,
+            nom_fichier,
+            sensible_casse,
+        })
+    }
+}
+# 
+# pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
+#     let contenu = fs::read_to_string(config.nom_fichier)?;
+# 
+#     let resultats = if config.sensible_casse {
+#         rechercher(&config.recherche, &contenu)
+#     } else {
+#         rechercher_insensible_casse(&config.recherche, &contenu)
+#     };
+# 
+#     for ligne in resultats {
+#         println!("{}", ligne);
+#     }
+# 
+#     Ok(())
+# }
+# 
+# pub fn rechercher<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
+#     let mut resultats = Vec::new();
+# 
+#     for ligne in contenu.lines() {
+#         if ligne.contains(recherche) {
+#             resultats.push(ligne);
+#         }
+#     }
+# 
+#     resultats
+# }
+# 
+# pub fn rechercher_insensible_casse<'a>(
+#     recherche: &str,
+#     contenu: &'a str,
+# ) -> Vec<&'a str> {
+#     let recherche = recherche.to_lowercase();
+#     let mut resultats = Vec::new();
+# 
+#     for ligne in contenu.lines() {
+#         if ligne.to_lowercase().contains(&recherche) {
+#             resultats.push(ligne);
+#         }
+#     }
+# 
+#     resultats
+# }
+# 
+# #[cfg(test)]
+# mod tests {
+#     use super::*;
+# 
+#     #[test]
+#     fn sensible_casse() {
+#         let recherche = "duct";
+#         let contenu = "\
+# Rust:
+# safe, fast, productive.
+# Pick three.
+# Duct tape.";
+# 
+#         assert_eq!(vec!["safe, fast, productive."], rechercher(recherche, contenu));
+#     }
+# 
+#     #[test]
+#     fn case_insensitive() {
+#         let recherche = "rUsT";
+#         let contenu = "\
+# Rust:
+# safe, fast, productive.
+# Pick three.
+# Trust me.";
+# 
+#         assert_eq!(
+#             vec!["Rust:", "Trust me."],
+#             rechercher_insensible_casse(recherche, contenu)
+#         );
+#     }
+# }
+```
+-->
+<pre><code class="language-rust ignore"><span class="boring">use std::env;
+</span><span class="boring">use std::error::Error;
+</span><span class="boring">use std::fs;
+</span><span class="boring">
+</span><span class="boring">pub struct Config {
+</span><span class="boring">    pub recherche: String,
+</span><span class="boring">    pub nom_fichier: String,
+</span><span class="boring">    pub sensible_casse: bool,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Config {
+    pub fn new(args: &amp;[String]) -&gt; Result&lt;Config, &amp;'static str&gt; {
+        if args.len() &lt; 3 {
+            return Err(&quot;il n'y a pas assez d'arguments&quot;);
+        }
+
+        let recherche = args[1].clone();
+        let nom_fichier = args[2].clone();
+
+        let sensible_casse = env::var(&quot;MINIGREP_INSENSIBLE_CASSE&quot;).is_err();
+
+        Ok(Config {
+            recherche,
+            nom_fichier,
+            sensible_casse,
+        })
+    }
+}
+<span class="boring">
+</span><span class="boring">pub fn run(config: Config) -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
+</span><span class="boring">    let contenu = fs::read_to_string(config.nom_fichier)?;
+</span><span class="boring">
+</span><span class="boring">    let resultats = if config.sensible_casse {
+</span><span class="boring">        rechercher(&amp;config.recherche, &amp;contenu)
+</span><span class="boring">    } else {
+</span><span class="boring">        rechercher_insensible_casse(&amp;config.recherche, &amp;contenu)
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    for ligne in resultats {
+</span><span class="boring">        println!(&quot;{}&quot;, ligne);
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">pub fn rechercher&lt;'a&gt;(recherche: &amp;str, contenu: &amp;'a str) -&gt; Vec&lt;&amp;'a str&gt; {
+</span><span class="boring">    let mut resultats = Vec::new();
+</span><span class="boring">
+</span><span class="boring">    for ligne in contenu.lines() {
+</span><span class="boring">        if ligne.contains(recherche) {
+</span><span class="boring">            resultats.push(ligne);
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    resultats
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">pub fn rechercher_insensible_casse&lt;'a&gt;(
+</span><span class="boring">    recherche: &amp;str,
+</span><span class="boring">    contenu: &amp;'a str,
+</span><span class="boring">) -&gt; Vec&lt;&amp;'a str&gt; {
+</span><span class="boring">    let recherche = recherche.to_lowercase();
+</span><span class="boring">    let mut resultats = Vec::new();
+</span><span class="boring">
+</span><span class="boring">    for ligne in contenu.lines() {
+</span><span class="boring">        if ligne.to_lowercase().contains(&amp;recherche) {
+</span><span class="boring">            resultats.push(ligne);
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    resultats
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[cfg(test)]
+</span><span class="boring">mod tests {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn sensible_casse() {
+</span><span class="boring">        let recherche = &quot;duct&quot;;
+</span><span class="boring">        let contenu = &quot;\
+</span><span class="boring">Rust:
+</span><span class="boring">safe, fast, productive.
+</span><span class="boring">Pick three.
+</span><span class="boring">Duct tape.&quot;;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(vec![&quot;safe, fast, productive.&quot;], rechercher(recherche, contenu));
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn case_insensitive() {
+</span><span class="boring">        let recherche = &quot;rUsT&quot;;
+</span><span class="boring">        let contenu = &quot;\
+</span><span class="boring">Rust:
+</span><span class="boring">safe, fast, productive.
+</span><span class="boring">Pick three.
+</span><span class="boring">Trust me.&quot;;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(
+</span><span class="boring">            vec![&quot;Rust:&quot;, &quot;Trust me.&quot;],
+</span><span class="boring">            rechercher_insensible_casse(recherche, contenu)
+</span><span class="boring">        );
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<!--
+<span class="caption">Listing 13-24: Reproduction of the `Config::new` function
+from Listing 12-23</span>
+-->
+<p><span class="caption">Encart 13-24 : reproduction de la fonction <code>Config::new</code>
+de la fin du chapitre 12</span></p>
+<!--
+At the time, we said not to worry about the inefficient `clone` calls because
+we would remove them in the future. Well, that time is now!
+-->
+<p>À ce moment-là, nous avions dit de ne pas s'inquiéter des appels inefficaces à
+<code>clone</code> parce que nous les supprimerions à l'avenir. Et bien, ce moment est
+venu !</p>
+<!--
+We needed `clone` here because we have a slice with `String` elements in the
+parameter `args`, but the `new` function doesn’t own `args`. To return
+ownership of a `Config` instance, we had to clone the values from the `query`
+and `filename` fields of `Config` so the `Config` instance can own its values.
+-->
+<p>Nous avions besoin de <code>clone</code> ici parce que nous avons une slice d'éléments
+<code>String</code> dans le paramètre <code>args</code>, mais la fonction <code>new</code> ne possède pas <code>args</code>.
+Pour renvoyer la propriété d'une instance de <code>Config</code>, nous avons dû cloner les
+valeurs des champs <code>recherche</code> et <code>nom_fichier</code> de <code>Config</code> afin que cette instance
+de <code>Config</code> puisse prendre possession de ces valeurs.</p>
+<!--
+With our new knowledge about iterators, we can change the `new` function to
+take ownership of an iterator as its argument instead of borrowing a slice.
+We’ll use the iterator functionality instead of the code that checks the length
+of the slice and indexes into specific locations. This will clarify what the
+`Config::new` function is doing because the iterator will access the values.
+-->
+<p>Avec nos nouvelles connaissances sur les itérateurs, nous pouvons changer la
+fonction <code>new</code> pour prendre possession d'un itérateur passé en argument au lieu
+d'emprunter une <em>slice</em>. Nous utiliserons les fonctionnalités des itérateurs à
+la place du code qui vérifie la taille de la slice et qui utilise les indices
+des éléments précis. Cela clarifiera ce que la fonction <code>Config::new</code> fait car
+c'est l'itérateur qui accédera aux valeurs.</p>
+<!--
+Once `Config::new` takes ownership of the iterator and stops using indexing
+operations that borrow, we can move the `String` values from the iterator into
+`Config` rather than calling `clone` and making a new allocation.
+-->
+<p>Une fois que <code>Config::new</code> prend possession de l'itérateur et cesse d'utiliser
+les opérations avec les indices et d'emprunter les données, nous pouvons
+déplacer les valeurs <code>String</code> de l'iterator dans <code>Config</code> plutôt que de faire
+appel à <code>clone</code> et de créer par conséquent de nouvelles allocations.</p>
+<!--
+#### Using the Returned Iterator Directly
+-->
+<h4 id="utiliser-directement-litérateur-retourné"><a class="header" href="#utiliser-directement-litérateur-retourné">Utiliser directement l'itérateur retourné</a></h4>
+<!--
+Open your I/O project’s *src/main.rs* file, which should look like this:
+-->
+<p>Ouvrez le fichier <em>src/main.rs</em> de votre projet d'entrée/sortie, qui devrait
+ressembler à ceci :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust,ignore
+# use std::env;
+# use std::process;
+# 
+# use minigrep::Config;
+# 
+fn main() {
+    let args: Vec<String> = env::args().collect();
+
+    let config = Config::new(&args).unwrap_or_else(|err| {
+        eprintln!("Problème rencontré lors de l'interprétation des arguments : {}", err);
+        process::exit(1);
+    });
+
+    // -- partie masquée ici --
+# 
+#     if let Err(e) = minigrep::run(config) {
+#         eprintln!("Erreur applicative : {}", e);
+# 
+#         process::exit(1);
+#     }
+}
+```
+-->
+<pre><code class="language-rust ignore"><span class="boring">use std::env;
+</span><span class="boring">use std::process;
+</span><span class="boring">
+</span><span class="boring">use minigrep::Config;
+</span><span class="boring">
+</span>fn main() {
+    let args: Vec&lt;String&gt; = env::args().collect();
+
+    let config = Config::new(&amp;args).unwrap_or_else(|err| {
+        eprintln!(&quot;Problème rencontré lors de l'interprétation des arguments : {}&quot;, err);
+        process::exit(1);
+    });
+
+    // -- partie masquée ici --
+<span class="boring">
+</span><span class="boring">    if let Err(e) = minigrep::run(config) {
+</span><span class="boring">        eprintln!(&quot;Erreur applicative : {}&quot;, e);
+</span><span class="boring">
+</span><span class="boring">        process::exit(1);
+</span><span class="boring">    }
+</span>}
+</code></pre>
+<!--
+We’ll change the start of the `main` function that we had in Listing 12-24 to
+the code in Listing 13-25. This won’t compile until we update `Config::new` as
+well.
+-->
+<p>Nous allons changer le début de la fonction <code>main</code> que nous avions dans l'encart
+12-24 pour le code dans l'encart 13-25. Ceci ne compilera pas encore jusqu'à ce
+que nous mettions également à jour <code>Config::new</code>.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust,ignore,does_not_compile
+# use std::env;
+# use std::process;
+# 
+# use minigrep::Config;
+# 
+fn main() {
+    let config = Config::new(env::args()).unwrap_or_else(|err| {
+        eprintln!("Problème rencontré lors de l'interprétation des arguments : {}", err);
+        process::exit(1);
+    });
+
+    // -- partie masquée ici --
+# 
+#     if let Err(e) = minigrep::run(config) {
+#         eprintln!("Erreur applicative : {}", e);
+# 
+#         process::exit(1);
+#     }
+}
+```
+-->
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">use std::env;
+</span><span class="boring">use std::process;
+</span><span class="boring">
+</span><span class="boring">use minigrep::Config;
+</span><span class="boring">
+</span>fn main() {
+    let config = Config::new(env::args()).unwrap_or_else(|err| {
+        eprintln!(&quot;Problème rencontré lors de l'interprétation des arguments : {}&quot;, err);
+        process::exit(1);
+    });
+
+    // -- partie masquée ici --
+<span class="boring">
+</span><span class="boring">    if let Err(e) = minigrep::run(config) {
+</span><span class="boring">        eprintln!(&quot;Erreur applicative : {}&quot;, e);
+</span><span class="boring">
+</span><span class="boring">        process::exit(1);
+</span><span class="boring">    }
+</span>}
+</code></pre>
+<!--
+<span class="caption">Listing 13-25: Passing the return value of `env::args` to
+`Config::new`</span>
+-->
+<p><span class="caption">Encart 13-25 : on passe directement la valeur de retour de
+<code>env::args</code> à <code>Config::new</code>.</span></p>
+<!--
+The `env::args` function returns an iterator! Rather than collecting the
+iterator values into a vector and then passing a slice to `Config::new`, now
+we’re passing ownership of the iterator returned from `env::args` to
+`Config::new` directly.
+-->
+<p>La fonction <code>env::args</code> retourne un itérateur ! Plutôt que de collecter les
+valeurs de l'itérateur dans un vecteur et de passer ensuite une <em>slice</em> à
+<code>Config::new</code>, nous passons maintenant la possession de l'itérateur de
+<code>env::args</code> directement à <code>Config::new</code>.</p>
+<!--
+Next, we need to update the definition of `Config::new`. In your I/O project’s
+*src/lib.rs* file, let’s change the signature of `Config::new` to look like
+Listing 13-26. This still won’t compile because we need to update the function
+body.
+-->
+<p>Ensuite, nous devons mettre à jour la définition de <code>Config::new</code>. Dans le
+fichier <em>src/lib.rs</em> de votre projet d'entrée/sortie, modifions la signature de
+<code>Config::new</code> pour qu'elle ressemble à l'encart 13-26. Ceci ne compilera pas
+encore car nous devons mettre à jour le corps de la fonction.</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,ignore,does_not_compile
+# use std::env;
+# use std::error::Error;
+# use std::fs;
+# 
+# pub struct Config {
+#     pub recherche: String,
+#     pub nom_fichier: String,
+#     pub sensible_casse: bool,
+# }
+# 
+impl Config {
+    pub fn new(mut args: env::Args) -> Result<Config, &'static str> {
+        // -- partie masquée ici --
+#         if args.len() < 3 {
+#             return Err("il n'y a pas assez d'arguments");
+#         }
+# 
+#         let recherche = args[1].clone();
+#         let nom_fichier = args[2].clone();
+# 
+#         let sensible_casse = env::var("MINIGREP_INSENSIBLE_CASSE").is_err();
+# 
+#         Ok(Config {
+#             recherche,
+#             nom_fichier,
+#             sensible_casse,
+#         })
+#     }
+# }
+# 
+# pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
+#     let contenu = fs::read_to_string(config.nom_fichier)?;
+# 
+#     let resultats = if config.sensible_casse {
+#         rechercher(&config.recherche, &contenu)
+#     } else {
+#         rechercher_insensible_casse(&config.recherche, &contenu)
+#     };
+# 
+#     for ligne in resultats {
+#         println!("{}", ligne);
+#     }
+# 
+#     Ok(())
+# }
+# 
+# pub fn rechercher<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
+#     let mut resultats = Vec::new();
+# 
+#     for ligne in contenu.lines() {
+#         if ligne.contains(recherche) {
+#             resultats.push(ligne);
+#         }
+#     }
+# 
+#     resultats
+# }
+# 
+# pub fn rechercher_insensible_casse<'a>(
+#     recherche: &str,
+#     contenu: &'a str,
+# ) -> Vec<&'a str> {
+#     let recherche = recherche.to_lowercase();
+#     let mut resultats = Vec::new();
+# 
+#     for ligne in contenu.lines() {
+#         if ligne.to_lowercase().contains(&recherche) {
+#             resultats.push(ligne);
+#         }
+#     }
+# 
+#     resultats
+# }
+# 
+# #[cfg(test)]
+# mod tests {
+#     use super::*;
+# 
+#     #[test]
+#     fn sensible_casse() {
+#         let recherche = "duct";
+#         let contenu = "\
+# Rust:
+# safe, fast, productive.
+# Pick three.
+# Duct tape.";
+# 
+#         assert_eq!(vec!["safe, fast, productive."], rechercher(recherche, contenu));
+#     }
+# 
+#     #[test]
+#     fn case_insensitive() {
+#         let recherche = "rUsT";
+#         let contenu = "\
+# Rust:
+# safe, fast, productive.
+# Pick three.
+# Trust me.";
+# 
+#         assert_eq!(
+#             vec!["Rust:", "Trust me."],
+#             rechercher_insensible_casse(recherche, contenu)
+#         );
+#     }
+# }
+```
+-->
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">use std::env;
+</span><span class="boring">use std::error::Error;
+</span><span class="boring">use std::fs;
+</span><span class="boring">
+</span><span class="boring">pub struct Config {
+</span><span class="boring">    pub recherche: String,
+</span><span class="boring">    pub nom_fichier: String,
+</span><span class="boring">    pub sensible_casse: bool,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Config {
+    pub fn new(mut args: env::Args) -&gt; Result&lt;Config, &amp;'static str&gt; {
+        // -- partie masquée ici --
+<span class="boring">        if args.len() &lt; 3 {
+</span><span class="boring">            return Err(&quot;il n'y a pas assez d'arguments&quot;);
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        let recherche = args[1].clone();
+</span><span class="boring">        let nom_fichier = args[2].clone();
+</span><span class="boring">
+</span><span class="boring">        let sensible_casse = env::var(&quot;MINIGREP_INSENSIBLE_CASSE&quot;).is_err();
+</span><span class="boring">
+</span><span class="boring">        Ok(Config {
+</span><span class="boring">            recherche,
+</span><span class="boring">            nom_fichier,
+</span><span class="boring">            sensible_casse,
+</span><span class="boring">        })
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">pub fn run(config: Config) -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
+</span><span class="boring">    let contenu = fs::read_to_string(config.nom_fichier)?;
+</span><span class="boring">
+</span><span class="boring">    let resultats = if config.sensible_casse {
+</span><span class="boring">        rechercher(&amp;config.recherche, &amp;contenu)
+</span><span class="boring">    } else {
+</span><span class="boring">        rechercher_insensible_casse(&amp;config.recherche, &amp;contenu)
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    for ligne in resultats {
+</span><span class="boring">        println!(&quot;{}&quot;, ligne);
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">pub fn rechercher&lt;'a&gt;(recherche: &amp;str, contenu: &amp;'a str) -&gt; Vec&lt;&amp;'a str&gt; {
+</span><span class="boring">    let mut resultats = Vec::new();
+</span><span class="boring">
+</span><span class="boring">    for ligne in contenu.lines() {
+</span><span class="boring">        if ligne.contains(recherche) {
+</span><span class="boring">            resultats.push(ligne);
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    resultats
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">pub fn rechercher_insensible_casse&lt;'a&gt;(
+</span><span class="boring">    recherche: &amp;str,
+</span><span class="boring">    contenu: &amp;'a str,
+</span><span class="boring">) -&gt; Vec&lt;&amp;'a str&gt; {
+</span><span class="boring">    let recherche = recherche.to_lowercase();
+</span><span class="boring">    let mut resultats = Vec::new();
+</span><span class="boring">
+</span><span class="boring">    for ligne in contenu.lines() {
+</span><span class="boring">        if ligne.to_lowercase().contains(&amp;recherche) {
+</span><span class="boring">            resultats.push(ligne);
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    resultats
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[cfg(test)]
+</span><span class="boring">mod tests {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn sensible_casse() {
+</span><span class="boring">        let recherche = &quot;duct&quot;;
+</span><span class="boring">        let contenu = &quot;\
+</span><span class="boring">Rust:
+</span><span class="boring">safe, fast, productive.
+</span><span class="boring">Pick three.
+</span><span class="boring">Duct tape.&quot;;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(vec![&quot;safe, fast, productive.&quot;], rechercher(recherche, contenu));
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn case_insensitive() {
+</span><span class="boring">        let recherche = &quot;rUsT&quot;;
+</span><span class="boring">        let contenu = &quot;\
+</span><span class="boring">Rust:
+</span><span class="boring">safe, fast, productive.
+</span><span class="boring">Pick three.
+</span><span class="boring">Trust me.&quot;;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(
+</span><span class="boring">            vec![&quot;Rust:&quot;, &quot;Trust me.&quot;],
+</span><span class="boring">            rechercher_insensible_casse(recherche, contenu)
+</span><span class="boring">        );
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<!--
+<span class="caption">Listing 13-26: Updating the signature of `Config::new` to
+expect an iterator</span>
+-->
+<p><span class="caption">Encart 13-26 : mise à jour de la signature de
+<code>Config::new</code> pour recevoir un itérateur</span></p>
+<!--
+The standard library documentation for the `env::args` function shows that the
+type of the iterator it returns is `std::env::Args`. We’ve updated the
+signature of the `Config::new` function so the parameter `args` has the type
+`std::env::Args` instead of `&[String]`. Because we’re taking ownership of
+`args` and we’ll be mutating `args` by iterating over it, we can add the `mut`
+keyword into the specification of the `args` parameter to make it mutable.
+-->
+<p>La documentation de la bibliothèque standard de la fonction <code>env::args</code>
+indique que le type de l'itérateur qu'elle renvoie est <code>std::env::Args</code>. Nous
+avons mis à jour la signature de la fonction <code>Config::new</code> pour que le
+paramètre <code>args</code> ait le type <code>std::env::Args</code> au lieu de <code>&amp;[String]</code>. Etant
+donné que nous prenons possession de <code>args</code> et que nous allons muter <code>args</code>
+en itérant dessus, nous pouvons ajouter le mot-clé <code>mut</code> dans la spécification
+du paramètre <code>args</code> pour le rendre mutable.</p>
+<!--
+#### Using `Iterator` Trait Methods Instead of Indexing
+-->
+<h4 id="utilisation-des-méthodes-du-trait-iterator-au-lieu-des-indices"><a class="header" href="#utilisation-des-méthodes-du-trait-iterator-au-lieu-des-indices">Utilisation des méthodes du trait <code>Iterator</code> au lieu des indices</a></h4>
+<!--
+Next, we’ll fix the body of `Config::new`. The standard library documentation
+also mentions that `std::env::Args` implements the `Iterator` trait, so we know
+we can call the `next` method on it! Listing 13-27 updates the code from
+Listing 12-23 to use the `next` method:
+-->
+<p>Corrigeons ensuite le corps de <code>Config::new</code>. La documentation de la bibliothèque
+standard explique aussi que <code>std::env::Args</code> implémente le trait <code>Iterator</code>, donc
+nous savons que nous pouvons appeler la méthode <code>next</code> dessus ! L'encart 13-27
+met à jour le code de l'encart 12-23 afin d'utiliser la méthode <code>next</code> :</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,noplayground
+# use std::env;
+# use std::error::Error;
+# use std::fs;
+# 
+# pub struct Config {
+#     pub recherche: String,
+#     pub nom_fichier: String,
+#     pub sensible_casse: bool,
+# }
+# 
+impl Config {
+    pub fn new(mut args: env::Args) -> Result<Config, &'static str> {
+        args.next();
+
+        let recherche = match args.next() {
+            Some(arg) => arg,
+            None => return Err("nous n'avons pas de chaîne de caractères"),
+        };
+
+        let nom_fichier = match args.next() {
+            Some(arg) => arg,
+            None => return Err("nous n'avons pas de nom de fichier"),
+        };
+
+        let sensible_casse = env::var("MINIGREP_INSENSIBLE_CASSE").is_err();
+
+        Ok(Config {
+            recherche,
+            nom_fichier,
+            sensible_casse,
+        })
+    }
+}
+# 
+# pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
+#     let contenu = fs::read_to_string(config.nom_fichier)?;
+# 
+#     let resultats = if config.sensible_casse {
+#         rechercher(&config.recherche, &contenu)
+#     } else {
+#         rechercher_insensible_casse(&config.recherche, &contenu)
+#     };
+# 
+#     for ligne in resultats {
+#         println!("{}", ligne);
+#     }
+# 
+#     Ok(())
+# }
+# 
+# pub fn rechercher<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
+#     let mut resultats = Vec::new();
+# 
+#     for ligne in contenu.lines() {
+#         if ligne.contains(recherche) {
+#             resultats.push(ligne);
+#         }
+#     }
+# 
+#     resultats
+# }
+# 
+# pub fn rechercher_insensible_casse<'a>(
+#     recherche: &str,
+#     contenu: &'a str,
+# ) -> Vec<&'a str> {
+#     let recherche = recherche.to_lowercase();
+#     let mut resultats = Vec::new();
+# 
+#     for ligne in contenu.lines() {
+#         if ligne.to_lowercase().contains(&recherche) {
+#             resultats.push(ligne);
+#         }
+#     }
+# 
+#     resultats
+# }
+# 
+# #[cfg(test)]
+# mod tests {
+#     use super::*;
+# 
+#     #[test]
+#     fn sensible_casse() {
+#         let recherche = "duct";
+#         let contenu = "\
+# Rust:
+# safe, fast, productive.
+# Pick three.
+# Duct tape.";
+# 
+#         assert_eq!(vec!["safe, fast, productive."], rechercher(recherche, contenu));
+#     }
+# 
+#     #[test]
+#     fn case_insensitive() {
+#         let recherche = "rUsT";
+#         let contenu = "\
+# Rust:
+# safe, fast, productive.
+# Pick three.
+# Trust me.";
+# 
+#         assert_eq!(
+#             vec!["Rust:", "Trust me."],
+#             rechercher_insensible_casse(recherche, contenu)
+#         );
+#     }
+# }
+```
+-->
+<pre><code class="language-rust noplayground"><span class="boring">use std::env;
+</span><span class="boring">use std::error::Error;
+</span><span class="boring">use std::fs;
+</span><span class="boring">
+</span><span class="boring">pub struct Config {
+</span><span class="boring">    pub recherche: String,
+</span><span class="boring">    pub nom_fichier: String,
+</span><span class="boring">    pub sensible_casse: bool,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Config {
+    pub fn new(mut args: env::Args) -&gt; Result&lt;Config, &amp;'static str&gt; {
+        args.next();
+
+        let recherche = match args.next() {
+            Some(arg) =&gt; arg,
+            None =&gt; return Err(&quot;nous n'avons pas de chaîne de caractères&quot;),
+        };
+
+        let nom_fichier = match args.next() {
+            Some(arg) =&gt; arg,
+            None =&gt; return Err(&quot;nous n'avons pas de nom de fichier&quot;),
+        };
+
+        let sensible_casse = env::var(&quot;MINIGREP_INSENSIBLE_CASSE&quot;).is_err();
+
+        Ok(Config {
+            recherche,
+            nom_fichier,
+            sensible_casse,
+        })
+    }
+}
+<span class="boring">
+</span><span class="boring">pub fn run(config: Config) -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
+</span><span class="boring">    let contenu = fs::read_to_string(config.nom_fichier)?;
+</span><span class="boring">
+</span><span class="boring">    let resultats = if config.sensible_casse {
+</span><span class="boring">        rechercher(&amp;config.recherche, &amp;contenu)
+</span><span class="boring">    } else {
+</span><span class="boring">        rechercher_insensible_casse(&amp;config.recherche, &amp;contenu)
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    for ligne in resultats {
+</span><span class="boring">        println!(&quot;{}&quot;, ligne);
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">pub fn rechercher&lt;'a&gt;(recherche: &amp;str, contenu: &amp;'a str) -&gt; Vec&lt;&amp;'a str&gt; {
+</span><span class="boring">    let mut resultats = Vec::new();
+</span><span class="boring">
+</span><span class="boring">    for ligne in contenu.lines() {
+</span><span class="boring">        if ligne.contains(recherche) {
+</span><span class="boring">            resultats.push(ligne);
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    resultats
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">pub fn rechercher_insensible_casse&lt;'a&gt;(
+</span><span class="boring">    recherche: &amp;str,
+</span><span class="boring">    contenu: &amp;'a str,
+</span><span class="boring">) -&gt; Vec&lt;&amp;'a str&gt; {
+</span><span class="boring">    let recherche = recherche.to_lowercase();
+</span><span class="boring">    let mut resultats = Vec::new();
+</span><span class="boring">
+</span><span class="boring">    for ligne in contenu.lines() {
+</span><span class="boring">        if ligne.to_lowercase().contains(&amp;recherche) {
+</span><span class="boring">            resultats.push(ligne);
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    resultats
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[cfg(test)]
+</span><span class="boring">mod tests {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn sensible_casse() {
+</span><span class="boring">        let recherche = &quot;duct&quot;;
+</span><span class="boring">        let contenu = &quot;\
+</span><span class="boring">Rust:
+</span><span class="boring">safe, fast, productive.
+</span><span class="boring">Pick three.
+</span><span class="boring">Duct tape.&quot;;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(vec![&quot;safe, fast, productive.&quot;], rechercher(recherche, contenu));
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn case_insensitive() {
+</span><span class="boring">        let recherche = &quot;rUsT&quot;;
+</span><span class="boring">        let contenu = &quot;\
+</span><span class="boring">Rust:
+</span><span class="boring">safe, fast, productive.
+</span><span class="boring">Pick three.
+</span><span class="boring">Trust me.&quot;;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(
+</span><span class="boring">            vec![&quot;Rust:&quot;, &quot;Trust me.&quot;],
+</span><span class="boring">            rechercher_insensible_casse(recherche, contenu)
+</span><span class="boring">        );
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<!--
+<span class="caption">Listing 13-27: Changing the body of `Config::new` to use
+iterator methods</span>
+-->
+<p><span class="caption">Encart 13-27 : changement du corps de <code>Config::new</code> afin
+d'utiliser les méthodes d'itération</span></p>
+<!--
+Remember that the first value in the return value of `env::args` is the name of
+the program. We want to ignore that and get to the next value, so first we call
+`next` and do nothing with the return value. Second, we call `next` to get the
+value we want to put in the `query` field of `Config`. If `next` returns a
+`Some`, we use a `match` to extract the value. If it returns `None`, it means
+not enough arguments were given and we return early with an `Err` value. We do
+the same thing for the `filename` value.
+-->
+<p>Rappelez-vous que la première valeur de ce qui est retourné par <code>env::args</code> est
+le nom du programme. Nous voulons ignorer cette valeur et passer à la suivante,
+donc d'abord nous appelons une fois <code>next</code> et nous ne faisons rien avec sa
+valeur de retour. Ensuite, nous appelons <code>next</code> pour obtenir la valeur que nous
+voulons mettre dans le champ <code>recherche</code> de <code>Config</code>. Si <code>next</code> renvoie un
+<code>Some</code>, nous utilisons un <code>match</code> pour extraire sa valeur. S'il retourne <code>None</code>,
+cela signifie que pas assez d'arguments ont été fournis, si bien que nous quittons
+aussitôt la fonction en retournant une valeur <code>Err</code>. Nous procédons de même
+pour la valeur <code>nom_fichier</code>.</p>
+<!--
+### Making Code Clearer with Iterator Adaptors
+-->
+<h3 id="rendre-le-code-plus-clair-avec-des-adaptateurs-ditération"><a class="header" href="#rendre-le-code-plus-clair-avec-des-adaptateurs-ditération">Rendre le code plus clair avec des adaptateurs d'itération</a></h3>
+<!--
+We can also take advantage of iterators in the `search` function in our I/O
+project, which is reproduced here in Listing 13-28 as it was in Listing 12-19:
+-->
+<p>Nous pouvons également tirer parti des itérateurs dans la fonction <code>rechercher</code>
+de notre projet d'entrée/sortie, qui est reproduite ici dans l'encart 13-28,
+telles qu'elle était dans l'encart 12-19 à la fin du chapitre 12 :</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,ignore
+# use std::error::Error;
+# use std::fs;
+# 
+# pub struct Config {
+#     pub recherche: String,
+#     pub nom_fichier: String,
+# }
+# 
+# impl Config {
+#     pub fn new(args: &[String]) -> Result<Config, &'static str> {
+#         if args.len() < 3 {
+#             return Err("il n'y a pas assez d'arguments");
+#         }
+# 
+#         let recherche = args[1].clone();
+#         let nom_fichier = args[2].clone();
+# 
+#         Ok(Config { recherche, nom_fichier })
+#     }
+# }
+# 
+# pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
+#     let contenu = fs::read_to_string(config.nom_fichier)?;
+# 
+#     Ok(())
+# }
+# 
+pub fn rechercher<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
+    let mut resultats = Vec::new();
+
+    for ligne in contenu.lines() {
+        if ligne.contains(recherche) {
+            resultats.push(ligne);
+        }
+    }
+
+    resultats
+}
+# 
+# #[cfg(test)]
+# mod tests {
+#     use super::*;
+# 
+#     #[test]
+#     fn un_resultat() {
+#         let recherche = "duct";
+#         let contenu = "\
+# Rust:
+# sécurité, rapidité, productivité.
+# Obtenez les trois en même temps.";
+# 
+#         assert_eq!(vec!["sécurité, rapidité, productivité."], rechercher(recherche, contenu));
+#     }
+# }
+```
+-->
+<pre><code class="language-rust ignore"><span class="boring">use std::error::Error;
+</span><span class="boring">use std::fs;
+</span><span class="boring">
+</span><span class="boring">pub struct Config {
+</span><span class="boring">    pub recherche: String,
+</span><span class="boring">    pub nom_fichier: String,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Config {
+</span><span class="boring">    pub fn new(args: &amp;[String]) -&gt; Result&lt;Config, &amp;'static str&gt; {
+</span><span class="boring">        if args.len() &lt; 3 {
+</span><span class="boring">            return Err(&quot;il n'y a pas assez d'arguments&quot;);
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        let recherche = args[1].clone();
+</span><span class="boring">        let nom_fichier = args[2].clone();
+</span><span class="boring">
+</span><span class="boring">        Ok(Config { recherche, nom_fichier })
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">pub fn run(config: Config) -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
+</span><span class="boring">    let contenu = fs::read_to_string(config.nom_fichier)?;
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span>pub fn rechercher&lt;'a&gt;(recherche: &amp;str, contenu: &amp;'a str) -&gt; Vec&lt;&amp;'a str&gt; {
+    let mut resultats = Vec::new();
+
+    for ligne in contenu.lines() {
+        if ligne.contains(recherche) {
+            resultats.push(ligne);
+        }
+    }
+
+    resultats
+}
+<span class="boring">
+</span><span class="boring">#[cfg(test)]
+</span><span class="boring">mod tests {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn un_resultat() {
+</span><span class="boring">        let recherche = &quot;duct&quot;;
+</span><span class="boring">        let contenu = &quot;\
+</span><span class="boring">Rust:
+</span><span class="boring">sécurité, rapidité, productivité.
+</span><span class="boring">Obtenez les trois en même temps.&quot;;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(vec![&quot;sécurité, rapidité, productivité.&quot;], rechercher(recherche, contenu));
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<!--
+<span class="caption">Listing 13-28: The implementation of the `search`
+function from Listing 12-19</span>
+-->
+<p><span class="caption">Encart 13-28 : La mise en oeuvre de la fonction
+<code>rechercher</code> de l'encart 12-19</span></p>
+<!--
+We can write this code in a more concise way using iterator adaptor methods.
+Doing so also lets us avoid having a mutable intermediate `results` vector. The
+functional programming style prefers to minimize the amount of mutable state to
+make code clearer. Removing the mutable state might enable a future enhancement
+to make searching happen in parallel, because we wouldn’t have to manage
+concurrent access to the `results` vector. Listing 13-29 shows this change:
+-->
+<p>Nous pouvons écrire ce code de façon plus concise en utilisant des méthodes
+des adaptateurs d'itération. Ce faisant, nous évitons ainsi d'avoir le vecteur
+mutable <code>resultats</code>. Le style de programmation fonctionnelle préfère minimiser
+la quantité d'états modifiables pour rendre le code plus clair. Supprimer l'état
+mutable pourrait nous aider à faire une amélioration future afin que la recherche
+se fasse en parallèle, car nous n'aurions pas à gérer l'accès concurrent au
+vecteur <code>resultats</code>. L'encart 13-29 montre ce changement :</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,ignore
+# use std::env;
+# use std::error::Error;
+# use std::fs;
+# 
+# pub struct Config {
+#     pub recherche: String,
+#     pub nom_fichier: String,
+#     pub sensible_casse: bool,
+# }
+# 
+# impl Config {
+#     pub fn new(mut args: std::env::Args) -> Result<Config, &'static str> {
+#         args.next();
+# 
+#         let recherche = match args.next() {
+#             Some(arg) => arg,
+#             None => return Err("nous n'avons pas de chaîne de caractères"),
+#         };
+# 
+#         let nom_fichier = match args.next() {
+#             Some(arg) => arg,
+#             None => return Err("nous n'avons pas de nom de fichier"),
+#         };
+# 
+#         let sensible_casse = env::var("MINIGREP_INSENSIBLE_CASSE").is_err();
+# 
+#         Ok(Config {
+#             recherche,
+#             nom_fichier,
+#             sensible_casse,
+#         })
+#     }
+# }
+# 
+# pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
+#     let contenu = fs::read_to_string(config.nom_fichier)?;
+# 
+#     let resultats = if config.sensible_casse {
+#         rechercher(&config.recherche, &contenu)
+#     } else {
+#         rechercher_insensible_casse(&config.recherche, &contenu)
+#     };
+# 
+#     for ligne in resultats {
+#         println!("{}", ligne);
+#     }
+# 
+#     Ok(())
+# }
+# 
+pub fn rechercher<'a>(recherche: &str, contenu: &'a str) -> Vec<&'a str> {
+    contenu
+        .lines()
+        .filter(|ligne| ligne.contains(recherche))
+        .collect()
+}
+# 
+# pub fn rechercher_insensible_casse<'a>(
+#     recherche: &str,
+#     contenu: &'a str,
+# ) -> Vec<&'a str> {
+#     let recherche = recherche.to_lowercase();
+#     let mut resultats = Vec::new();
+# 
+#     for ligne in contenu.lines() {
+#         if ligne.to_lowercase().contains(&recherche) {
+#             resultats.push(ligne);
+#         }
+#     }
+# 
+#     resultats
+# }
+# 
+# #[cfg(test)]
+# mod tests {
+#     use super::*;
+# 
+#     #[test]
+#     fn sensible_casse() {
+#         let recherche = "duct";
+#         let contenu = "\
+# Rust:
+# safe, fast, productive.
+# Pick three.
+# Duct tape.";
+# 
+#         assert_eq!(vec!["safe, fast, productive."], rechercher(recherche, contenu));
+#     }
+# 
+#     #[test]
+#     fn case_insensitive() {
+#         let recherche = "rUsT";
+#         let contenu = "\
+# Rust:
+# safe, fast, productive.
+# Pick three.
+# Trust me.";
+# 
+#         assert_eq!(
+#             vec!["Rust:", "Trust me."],
+#             rechercher_insensible_casse(recherche, contenu)
+#         );
+#     }
+# }
+```
+-->
+<pre><code class="language-rust ignore"><span class="boring">use std::env;
+</span><span class="boring">use std::error::Error;
+</span><span class="boring">use std::fs;
+</span><span class="boring">
+</span><span class="boring">pub struct Config {
+</span><span class="boring">    pub recherche: String,
+</span><span class="boring">    pub nom_fichier: String,
+</span><span class="boring">    pub sensible_casse: bool,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Config {
+</span><span class="boring">    pub fn new(mut args: std::env::Args) -&gt; Result&lt;Config, &amp;'static str&gt; {
+</span><span class="boring">        args.next();
+</span><span class="boring">
+</span><span class="boring">        let recherche = match args.next() {
+</span><span class="boring">            Some(arg) =&gt; arg,
+</span><span class="boring">            None =&gt; return Err(&quot;nous n'avons pas de chaîne de caractères&quot;),
+</span><span class="boring">        };
+</span><span class="boring">
+</span><span class="boring">        let nom_fichier = match args.next() {
+</span><span class="boring">            Some(arg) =&gt; arg,
+</span><span class="boring">            None =&gt; return Err(&quot;nous n'avons pas de nom de fichier&quot;),
+</span><span class="boring">        };
+</span><span class="boring">
+</span><span class="boring">        let sensible_casse = env::var(&quot;MINIGREP_INSENSIBLE_CASSE&quot;).is_err();
+</span><span class="boring">
+</span><span class="boring">        Ok(Config {
+</span><span class="boring">            recherche,
+</span><span class="boring">            nom_fichier,
+</span><span class="boring">            sensible_casse,
+</span><span class="boring">        })
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">pub fn run(config: Config) -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
+</span><span class="boring">    let contenu = fs::read_to_string(config.nom_fichier)?;
+</span><span class="boring">
+</span><span class="boring">    let resultats = if config.sensible_casse {
+</span><span class="boring">        rechercher(&amp;config.recherche, &amp;contenu)
+</span><span class="boring">    } else {
+</span><span class="boring">        rechercher_insensible_casse(&amp;config.recherche, &amp;contenu)
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    for ligne in resultats {
+</span><span class="boring">        println!(&quot;{}&quot;, ligne);
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    Ok(())
+</span><span class="boring">}
+</span><span class="boring">
+</span>pub fn rechercher&lt;'a&gt;(recherche: &amp;str, contenu: &amp;'a str) -&gt; Vec&lt;&amp;'a str&gt; {
+    contenu
+        .lines()
+        .filter(|ligne| ligne.contains(recherche))
+        .collect()
+}
+<span class="boring">
+</span><span class="boring">pub fn rechercher_insensible_casse&lt;'a&gt;(
+</span><span class="boring">    recherche: &amp;str,
+</span><span class="boring">    contenu: &amp;'a str,
+</span><span class="boring">) -&gt; Vec&lt;&amp;'a str&gt; {
+</span><span class="boring">    let recherche = recherche.to_lowercase();
+</span><span class="boring">    let mut resultats = Vec::new();
+</span><span class="boring">
+</span><span class="boring">    for ligne in contenu.lines() {
+</span><span class="boring">        if ligne.to_lowercase().contains(&amp;recherche) {
+</span><span class="boring">            resultats.push(ligne);
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    resultats
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[cfg(test)]
+</span><span class="boring">mod tests {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn sensible_casse() {
+</span><span class="boring">        let recherche = &quot;duct&quot;;
+</span><span class="boring">        let contenu = &quot;\
+</span><span class="boring">Rust:
+</span><span class="boring">safe, fast, productive.
+</span><span class="boring">Pick three.
+</span><span class="boring">Duct tape.&quot;;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(vec![&quot;safe, fast, productive.&quot;], rechercher(recherche, contenu));
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    #[test]
+</span><span class="boring">    fn case_insensitive() {
+</span><span class="boring">        let recherche = &quot;rUsT&quot;;
+</span><span class="boring">        let contenu = &quot;\
+</span><span class="boring">Rust:
+</span><span class="boring">safe, fast, productive.
+</span><span class="boring">Pick three.
+</span><span class="boring">Trust me.&quot;;
+</span><span class="boring">
+</span><span class="boring">        assert_eq!(
+</span><span class="boring">            vec![&quot;Rust:&quot;, &quot;Trust me.&quot;],
+</span><span class="boring">            rechercher_insensible_casse(recherche, contenu)
+</span><span class="boring">        );
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<!--
+<span class="caption">Listing 13-29: Using iterator adaptor methods in the
+implementation of the `search` function</span>
+-->
+<p><span class="caption">Encart 13-29 : utilisation des méthodes des adaptateurs
+d'itération dans l'implémentation de la fonction <code>rechercher</code></span></p>
+<!--
+Recall that the purpose of the `search` function is to return all lines in
+`contents` that contain the `query`. Similar to the `filter` example in Listing
+13-19, this code uses the `filter` adaptor to keep only the lines that
+`line.contains(query)` returns `true` for. We then collect the matching lines
+into another vector with `collect`. Much simpler! Feel free to make the same
+change to use iterator methods in the `search_case_insensitive` function as
+well.
+-->
+<p>Souvenez-vous que le but de la fonction <code>rechercher</code> est de renvoyer toutes
+les lignes dans <code>contenu</code> qui contiennent <code>recherche</code>. Comme dans l'exemple de
+<code>filter</code> dans l'encart 13-19, nous pouvons utiliser l'adaptateur <code>filter</code>
+pour garder uniquement les lignes pour lesquelles <code>ligne.contains(recherche)</code>
+renvoie <code>true</code>. Nous collectons ensuite les lignes correspondantes dans un
+autre vecteur avec <code>collect</code>. C'est bien plus simple ! N'hésitez pas à faire
+le même changement pour utiliser les méthodes d'itération dans la fonction
+<code>rechercher_insensible_casse</code>.</p>
+<!--
+The next logical question is which style you should choose in your own code and
+why: the original implementation in Listing 13-28 or the version using
+iterators in Listing 13-29. Most Rust programmers prefer to use the iterator
+style. It’s a bit tougher to get the hang of at first, but once you get a feel
+for the various iterator adaptors and what they do, iterators can be easier to
+understand. Instead of fiddling with the various bits of looping and building
+new vectors, the code focuses on the high-level objective of the loop. This
+abstracts away some of the commonplace code so it’s easier to see the concepts
+that are unique to this code, such as the filtering condition each element in
+the iterator must pass.
+-->
+<p>Logiquement la question suivante est de savoir quel style utiliser dans votre
+propre code et pourquoi : l'implémentation originale de l'encart 13-28 ou la
+version utilisant l'itérateur dans l'encart 13-29. La plupart des développeurs
+Rust préfèrent utiliser le style avec l'itérateur. C'est un peu plus difficile
+à comprendre au début, mais une fois que vous avez compris les différents
+adaptateurs d'itération et ce qu'ils font, les itérateurs peuvent devenir
+plus faciles à comprendre. Au lieu de jongler avec différentes boucles et de
+construire de nouveaux vecteurs, ce code se concentre sur l'objectif de haut
+niveau de la boucle. Cette abstraction permet d'éliminer une partie du code
+trivial, de sorte qu'il soit plus facile de dégager les concepts propres à ce
+code, comme le filtrage de chaque élément de l'itérateur qui est appliqué.</p>
+<!--
+But are the two implementations truly equivalent? The intuitive assumption
+might be that the more low-level loop will be faster. Let’s talk about
+performance.
+-->
+<p>Mais ces deux implémentations sont-elles réellement équivalentes ? L'hypothèse
+intuitive pourrait être que la boucle de plus bas niveau sera plus rapide.
+Intéressons nous donc maintenant à leurs performances.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch13-02-iterators.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch13-04-performance.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch13-02-iterators.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch13-04-performance.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../ferris.js"></script>
+    </body>
+</html>

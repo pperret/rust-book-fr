@@ -1,0 +1,906 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Gérer l&#x27;exécution des tests - Le langage de programmation Rust</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../ferris.css">
+        <link rel="stylesheet" href="../theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Le langage de programmation Rust</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Avant-propos</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="translation-terms.html">Traduction des termes</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Prise en main</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, world!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Programmer le jeu du plus ou du moins</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Les concepts courants de programmation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> Les variables et la mutabilité</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Les types de données</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Les fonctions</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Les commentaires</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Les structures de contrôle</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Comprendre la possession</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Qu'est-ce que la possession ?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Les références et l'emprunt</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Le type slice</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Utiliser les structures pour structurer des données apparentées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Définir et instancier des structures</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Un exemple de programme qui utilise des structures</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> La syntaxe des méthodes</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Les énumérations et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Définir une énumération</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> La structure de contrôle match</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> Une structure de contrôle concise : if let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Gérer des projets grandissants avec les paquets, crates et modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Les paquets et les crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Définir des modules pour gérer la portée et la visibilité</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Désigner un élément dans l'arborescence de modules</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Importer des chemins dans la portée via le mot-clé use</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Séparer les modules dans différents fichiers</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Les collections standard</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Stocker des listes de valeurs avec des vecteurs</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> Stocker du texte encodé en UTF-8 avec les Strings</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Stocker des clés associées à des valeurs dans des tables de hachage</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> La gestion des erreurs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Les erreurs irrécupérables avec panic!</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Des erreurs récupérables avec Result</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> Paniquer ou ne pas paniquer, telle est la question</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Les types génériques, les traits et les durées de vie</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Les types de données génériques</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Définir des comportements partagés avec les traits</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> La conformité des références avec les durées de vies</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Ecrire des tests automatisés</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Comment écrire des tests</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html" class="active"><strong aria-hidden="true">11.2.</strong> Gérer l'exécution des tests</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> L'organisation des tests</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> Un projet d'entrée/sortie : construire un programme en ligne de commande</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Récupérer les arguments de la ligne de commande</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Lire un fichier</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Remanier le code pour améliorer sa modularité et la gestion des erreurs</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Développer les fonctionnalités de la bibliothèque avec le TDD</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Travailler avec des variables d'environnement</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Ecrire les messages d'erreur sur la sortie d'erreurs standard au lieu de la sortie normale</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Les fonctionnalités des langages fonctionnels : les itérateurs et les fermetures</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Les fermetures : fonctions anonymes qui peuvent utiliser leur environnement</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Traiter une série d'éléments avec un itérateur</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> Amélioration de notre projet d'entrée/sortie</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Comparaison des performances : les boucles et les itérateurs</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> En savoir plus sur cargo et crates.io</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Personnaliser les compilations avec les profils de publication</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Publier une crate sur crates.io</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Les espaces de travail de cargo</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Installer des binaires à partir de crates.io avec cargo install</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Etendre les fonctionnalités de cargo avec des commandes personnalisées</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Les pointeurs intelligents</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Utiliser Box&lt;T&gt; pour pointer sur des données présentes sur le tas</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Considérer les pointeurs intelligents comme des références grâce au trait Deref</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Exécuter du code au nettoyage avec le trait Drop</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, le pointeur intelligent qui compte les références</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; et le motif de mutabilité interne</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Les boucles de références qui peuvent provoquer des fuites de mémoire</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> La concurrence sans craintes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Utiliser les tâches pour exécuter simultanément du code</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Utiliser l'envoi de messages pour transférer des données entre les tâches</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Le partage d'état en concurrence</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Etendre la concurrence avec les traits Sync et Send</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Les fonctionnalités orientées objet de Rust</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Les caractéristiques des langages orientés objet</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Utiliser les objets traits qui permettent des valeurs de types différents</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Implémenter un patron de conception orienté-objet</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Les motifs et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> Tous les endroits où les motifs peuvent être utilisés</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> La réfutabilité : lorsqu'un motif peut échouer à correspondre</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> La syntaxe des motifs</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Les fonctionnalités avancées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Le Rust non sécurisé (unsafe)</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Les traits avancés</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Les types avancés</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Les fonctions et fermetures avancées</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Les macros</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Projet final : construire un serveur web multitâches</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Développer un serveur web monotâche</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Transformer notre serveur monotâche en serveur multitâches</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Arrêt propre et nettoyage</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Annexes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - les mots-clés</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> 🚧 B - les opérateurs et les symboles</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> 🚧 C - les traits dérivables</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> 🚧 D - Des outils de développement utiles</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> 🚧 E - Les éditions</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> 🚧 F - Les traductions de ce livre</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> 🚧 G - Comment Rust est construit, et “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Le langage de programmation Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/Jimskapt/rust-book-fr" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+## Controlling How Tests Are Run
+-->
+<h2 id="gérer-lexécution-des-tests"><a class="header" href="#gérer-lexécution-des-tests">Gérer l'exécution des tests</a></h2>
+<!--
+Just as `cargo run` compiles your code and then runs the resulting binary,
+`cargo test` compiles your code in test mode and runs the resulting test
+binary. You can specify command line options to change the default behavior of
+`cargo test`. For example, the default behavior of the binary produced by
+`cargo test` is to run all the tests in parallel and capture output generated
+during test runs, preventing the output from being displayed and making it
+easier to read the output related to the test results.
+-->
+<p>Comme <code>cargo run</code> qui compile votre code et qui exécute ensuite le binaire qui
+en résulte, <code>cargo test</code> compile votre code en mode test et lance le binaire de
+tests qu'il produit. Vous pouvez rajouter des options en ligne de commande pour
+changer le comportement par défaut de <code>cargo test</code>. Par exemple, le
+comportement par défaut des binaires produits par <code>cargo test</code> est de lancer
+tous les tests en parallèle et de capturer la sortie pendant l'exécution des
+tests, ce qui lui évite d'être affichée sur l'écran pendant ce temps,
+facilitant la lecture des messages relatifs aux résultats de l'exécution des
+tests.</p>
+<!--
+Some command line options go to `cargo test`, and some go to the resulting test
+binary. To separate these two types of arguments, you list the arguments that
+go to `cargo test` followed by the separator `--` and then the ones that go to
+the test binary. Running `cargo test --help` displays the options you can use
+with `cargo test`, and running `cargo test -- --help` displays the options you
+can use after the separator `--`.
+-->
+<p>Certaines options de la ligne de commande s'appliquent à <code>cargo test</code>, et
+certaines au binaire de tests qui en résulte. Pour séparer ces types
+d'arguments, il faut lister les arguments qui s'appliquent à <code>cargo test</code>,
+suivis du séparateur <code>--</code>, puis ajouter ceux qui s'appliquent au binaire
+de tests. L'exécution de <code>cargo test --help</code> affiche les options que vous
+pouvez utiliser sur <code>cargo test</code>, et l'exécution de <code>cargo test -- --help</code>
+affiche les options que vous pouvez utiliser après le séparateur <code>--</code>.</p>
+<!--
+### Running Tests in Parallel or Consecutively
+-->
+<h3 id="lancer-les-tests-en-parallèle-ou-en-séquence"><a class="header" href="#lancer-les-tests-en-parallèle-ou-en-séquence">Lancer les tests en parallèle ou en séquence</a></h3>
+<!--
+When you run multiple tests, by default they run in parallel using threads.
+This means the tests will finish running faster so you can get feedback quicker
+on whether or not your code is working. Because the tests are running at the
+same time, make sure your tests don’t depend on each other or on any shared
+state, including a shared environment, such as the current working directory or
+environment variables.
+-->
+<p>Lorsque vous lancez de nombreux tests, par défaut ils s'exécutent en parallèle
+dans des tâches. Cela veut dire que tous les tests vont finir de s'exécuter plus
+rapidement afin que vous sachiez si votre code fonctionne ou non. Comme les
+tests s'exécutent en même temps, il faut s'assurer qu'ils ne dépendent
+pas les uns des autres ou d'un état partagé, y compris un environnement partagé,
+comme le dossier de travail actuel ou des variables d'environnement.</p>
+<!--
+For example, say each of your tests runs some code that creates a file on disk
+named *test-output.txt* and writes some data to that file. Then each test reads
+the data in that file and asserts that the file contains a particular value,
+which is different in each test. Because the tests run at the same time, one
+test might overwrite the file between when another test writes and reads the
+file. The second test will then fail, not because the code is incorrect but
+because the tests have interfered with each other while running in parallel.
+One solution is to make sure each test writes to a different file; another
+solution is to run the tests one at a time.
+-->
+<p>Par exemple, disons que chacun de vos tests exécute du code qui crée un fichier
+<em>test-sortie.txt</em> sur le disque dur et qu'il écrit quelques données dans ce
+fichier. Ensuite, chaque test lit les données de ce fichier et vérifie que le
+fichier contient une valeur précise, qui est différente dans chaque test. Comme
+les tests sont lancés en même temps, un test risque d'écraser le contenu du
+fichier entre le moment où un autre test lit et écrit sur ce fichier. Le second
+test va ensuite échouer, non pas parce que le code est incorrect mais parce
+que les tests se sont perturbés mutuellement pendant qu'ils s'exécutaient en
+parallèle. Une solution serait de s'assurer que chaque test écrit dans un
+fichier différent ; une autre serait de lancer les tests les uns après les autres.</p>
+<!--
+If you don’t want to run the tests in parallel or if you want more fine-grained
+control over the number of threads used, you can send the `--test-threads` flag
+and the number of threads you want to use to the test binary. Take a look at
+the following example:
+-->
+<p>Si vous ne souhaitez pas exécuter les tests en parallèle ou si vous voulez un
+contrôle plus précis du nombre de tâches utilisées, vous pouvez utiliser l'option
+<code>--test-threads</code> suivie du nombre de tâches que vous souhaitez
+que le binaire de test exécute en parallèle. Regardez cet exemple :</p>
+<!--
+```console
+$ cargo test -- --test-threads=1
+```
+-->
+<pre><code class="language-console">$ cargo test -- --test-threads=1
+</code></pre>
+<!--
+We set the number of test threads to `1`, telling the program not to use any
+parallelism. Running the tests using one thread will take longer than running
+them in parallel, but the tests won’t interfere with each other if they share
+state.
+-->
+<p>Nous avons réglé le nombre de tâches à <code>1</code>, ce qui indique au programme de ne
+pas utiliser le parallélisme. Exécuter ces tests en n'effectuant qu'une seule
+tâche à la fois va prendre plus de temps que de les lancer en parallèle, mais
+cela assure que les tests ne vont pas s'influencer mutuellement s'ils partagent
+le même état.</p>
+<!--
+### Showing Function Output
+-->
+<h3 id="afficher-la-sortie-de-la-fonction"><a class="header" href="#afficher-la-sortie-de-la-fonction">Afficher la sortie de la fonction</a></h3>
+<!--
+By default, if a test passes, Rust’s test library captures anything printed to
+standard output. For example, if we call `println!` in a test and the test
+passes, we won’t see the `println!` output in the terminal; we’ll see only the
+line that indicates the test passed. If a test fails, we’ll see whatever was
+printed to standard output with the rest of the failure message.
+-->
+<p>Par défaut, si un test réussit, la bibliothèque de test de Rust récupère tout
+ce qui est affiché sur la sortie standard. Par exemple, si nous appelons
+<code>println!</code> dans un test et que le test réussit, nous ne verrons pas la sortie
+correspondant au <code>println!</code> dans le terminal ; on verra seulement la ligne qui
+indique que le test a réussi. Si un test échoue, nous verrons ce qui a été
+affiché sur la sortie standard avec le reste des messages d'erreur.</p>
+<!--
+As an example, Listing 11-10 has a silly function that prints the value of its
+parameter and returns 10, as well as a test that passes and a test that fails.
+-->
+<p>Par exemple, l'encart 11-10 a une fonction stupide qui affiche la valeur de ses
+paramètres et retourne 10, ainsi qu'un test qui réussit et un test qui échoue.</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,panics,noplayground
+fn affiche_et_retourne_10(a: i32) -> i32 {
+    println!("J'ai obtenu la valeur {}", a);
+    10
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn ce_test_reussit() {
+        let valeur = affiche_et_retourne_10(4);
+        assert_eq!(10, valeur);
+    }
+
+    #[test]
+    fn ce_test_echoue() {
+        let valeur = affiche_et_retourne_10(8);
+        assert_eq!(5, valeur);
+    }
+}
+```
+-->
+<pre><code class="language-rust panics noplayground">fn affiche_et_retourne_10(a: i32) -&gt; i32 {
+    println!(&quot;J'ai obtenu la valeur {}&quot;, a);
+    10
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn ce_test_reussit() {
+        let valeur = affiche_et_retourne_10(4);
+        assert_eq!(10, valeur);
+    }
+
+    #[test]
+    fn ce_test_echoue() {
+        let valeur = affiche_et_retourne_10(8);
+        assert_eq!(5, valeur);
+    }
+}
+</code></pre>
+<!--
+<span class="caption">Listing 11-10: Tests for a function that calls
+`println!`</span>
+-->
+<p><span class="caption">Encart 11-10 : tests d'une fonction qui fait appel à
+<code>println!</code></span></p>
+<!--
+When we run these tests with `cargo test`, we’ll see the following output:
+-->
+<p>Lorsque nous lançons ces tests avec <code>cargo test</code>, nous voyons cette sortie :</p>
+<!--
+```console
+$ cargo test
+   Compiling silly-function v0.1.0 (file:///projects/silly-function)
+    Finished test [unoptimized + debuginfo] target(s) in 0.58s
+     Running unittests (target/debug/deps/silly_function-160869f38cff9166)
+
+running 2 tests
+test tests::ce_test_echoue ... FAILED
+test tests::ce_test_reussit ... ok
+
+failures:
+
+---- tests::ce_test_echoue stdout ----
+J'ai obtenu la valeur 8
+thread 'main' panicked at 'assertion failed: `(left == right)`
+  left: `5`,
+ right: `10`', src/lib.rs:19:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::ce_test_echoue
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass '--lib'
+```
+-->
+<pre><code class="language-console">$ cargo test
+   Compiling silly-function v0.1.0 (file:///projects/silly-function)
+    Finished test [unoptimized + debuginfo] target(s) in 0.58s
+     Running unittests (target/debug/deps/silly_function-160869f38cff9166)
+
+running 2 tests
+test tests::ce_test_echoue ... FAILED
+test tests::ce_test_reussit ... ok
+
+failures:
+
+---- tests::ce_test_echoue stdout ----
+J'ai obtenu la valeur 8
+thread 'main' panicked at 'assertion failed: `(left == right)`
+  left: `5`,
+ right: `10`', src/lib.rs:19:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::ce_test_echoue
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass '--lib'
+</code></pre>
+<!--
+Note that nowhere in this output do we see `I got the value 4`, which is what
+is printed when the test that passes runs. That output has been captured. The
+output from the test that failed, `I got the value 8`, appears in the section
+of the test summary output, which also shows the cause of the test failure.
+-->
+<p>Remarquez que nous n'avons jamais vu <code>J'ai obtenu la valeur 4</code> dans cette
+sortie, qui est ce qui est affiché lors de l'exécution du test qui réussit.
+Cette sortie a été capturée. La sortie pour le test qui a échoué,
+<code>J'ai obtenu la valeur 8</code>, s'affiche dans la section de la sortie
+correspondante au résumé des tests, qui affiche aussi les causes de l'échec
+du test.</p>
+<!--
+If we want to see printed values for passing tests as well, we can tell Rust
+to also show the output of successful tests at the end with `--show-output`.
+-->
+<p>Si nous voulons aussi voir les valeurs affichées pour les tests réussis, nous
+pouvons demander à Rust d'afficher également la sortie des tests fructueux en
+lui rajoutant à la fin <code>--show-output</code>.</p>
+<!--
+```console
+$ cargo test -- --show-output
+```
+-->
+<pre><code class="language-console">$ cargo test -- --show-output
+</code></pre>
+<!--
+When we run the tests in Listing 11-10 again with the `--show-output` flag, we
+see the following output:
+-->
+<p>Lorsque nous lançons à nouveau les tests de l'encart 11-10 avec l'option
+<code>--show-output</code>, nous voyons la sortie suivante :</p>
+<!--
+```console
+$ cargo test -- --show-output
+   Compiling silly-function v0.1.0 (file:///projects/silly-function)
+    Finished test [unoptimized + debuginfo] target(s) in 0.60s
+     Running unittests (target/debug/deps/silly_function-160869f38cff9166)
+
+running 2 tests
+test tests::ce_test_echoue ... FAILED
+test tests::ce_test_reussit ... ok
+
+successes:
+
+---- tests::ce_test_reussit stdout ----
+J'ai obtenu la valeur 4
+
+
+successes:
+    tests::ce_test_reussit
+
+failures:
+
+---- tests::ce_test_echoue stdout ----
+J'ai obtenu la valeur 8
+thread 'main' panicked at 'assertion failed: `(left == right)`
+  left: `5`,
+ right: `10`', src/lib.rs:19:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::ce_test_echoue
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass '--lib'
+```
+-->
+<pre><code class="language-console">$ cargo test -- --show-output
+   Compiling silly-function v0.1.0 (file:///projects/silly-function)
+    Finished test [unoptimized + debuginfo] target(s) in 0.60s
+     Running unittests (target/debug/deps/silly_function-160869f38cff9166)
+
+running 2 tests
+test tests::ce_test_echoue ... FAILED
+test tests::ce_test_reussit ... ok
+
+successes:
+
+---- tests::ce_test_reussit stdout ----
+J'ai obtenu la valeur 4
+
+
+successes:
+    tests::ce_test_reussit
+
+failures:
+
+---- tests::ce_test_echoue stdout ----
+J'ai obtenu la valeur 8
+thread 'main' panicked at 'assertion failed: `(left == right)`
+  left: `5`,
+ right: `10`', src/lib.rs:19:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::ce_test_echoue
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass '--lib'
+</code></pre>
+<!--
+### Running a Subset of Tests by Name
+-->
+<h3 id="exécuter-un-sous-ensemble-de-tests-en-fonction-de-son-nom"><a class="header" href="#exécuter-un-sous-ensemble-de-tests-en-fonction-de-son-nom">Exécuter un sous-ensemble de tests en fonction de son nom</a></h3>
+<!--
+Sometimes, running a full test suite can take a long time. If you’re working on
+code in a particular area, you might want to run only the tests pertaining to
+that code. You can choose which tests to run by passing `cargo test` the name
+or names of the test(s) you want to run as an argument.
+-->
+<p>Parfois, lancer une suite de tests entière peut prendre beaucoup de temps. Si
+vous travaillez sur du code d'un périmètre bien défini, vous pourriez avoir
+besoin d'exécuter uniquement les tests relatifs à ce code. Vous pouvez choisir
+quels tests exécuter en envoyant le ou les noms du ou des tests que vous souhaitez
+exécuter en argument de <code>cargo test</code>.</p>
+<!--
+To demonstrate how to run a subset of tests, we’ll create three tests for our
+`add_two` function, as shown in Listing 11-11, and choose which ones to run.
+-->
+<p>Dans le but de démontrer comment lancer un sous-ensemble de tests, nous allons
+créer trois tests pour notre fonction <code>ajouter_deux</code> dans l'encart 11-11, et
+choisir lesquels nous allons exécuter.</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,noplayground
+pub fn ajouter_deux(a: i32) -> i32 {
+    a + 2
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn ajouter_deux_a_deux() {
+        assert_eq!(4, ajouter_deux(2));
+    }
+
+    #[test]
+    fn ajouter_deux_a_trois() {
+        assert_eq!(5, ajouter_deux(3));
+    }
+
+    #[test]
+    fn cent() {
+        assert_eq!(102, ajouter_deux(100));
+    }
+}
+```
+-->
+<pre><code class="language-rust noplayground">pub fn ajouter_deux(a: i32) -&gt; i32 {
+    a + 2
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn ajouter_deux_a_deux() {
+        assert_eq!(4, ajouter_deux(2));
+    }
+
+    #[test]
+    fn ajouter_deux_a_trois() {
+        assert_eq!(5, ajouter_deux(3));
+    }
+
+    #[test]
+    fn cent() {
+        assert_eq!(102, ajouter_deux(100));
+    }
+}
+</code></pre>
+<!--
+<span class="caption">Listing 11-11: Three tests with three different
+names</span>
+-->
+<p><span class="caption">Encart 11-11 : trois tests avec trois noms différents
+</span></p>
+<!--
+If we run the tests without passing any arguments, as we saw earlier, all the
+tests will run in parallel:
+-->
+<p>Si nous exécutons les tests sans ajouter d'arguments, comme nous l'avons vu
+précédemment, tous les tests vont s'exécuter en parallèle :</p>
+<!--
+```console
+$ cargo test
+   Compiling adder v0.1.0 (file:///projects/adder)
+    Finished test [unoptimized + debuginfo] target(s) in 0.62s
+     Running unittests (target/debug/deps/adder-92948b65e88960b4)
+
+running 3 tests
+test tests::ajouter_deux_a_trois ... ok
+test tests::ajouter_deux_a_deux ... ok
+test tests::cent ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+```
+-->
+<pre><code class="language-console">$ cargo test
+   Compiling adder v0.1.0 (file:///projects/adder)
+    Finished test [unoptimized + debuginfo] target(s) in 0.62s
+     Running unittests (target/debug/deps/adder-92948b65e88960b4)
+
+running 3 tests
+test tests::ajouter_deux_a_trois ... ok
+test tests::ajouter_deux_a_deux ... ok
+test tests::cent ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<!--
+#### Running Single Tests
+-->
+<h4 id="exécuter-des-tests-individuellement"><a class="header" href="#exécuter-des-tests-individuellement">Exécuter des tests individuellement</a></h4>
+<!--
+We can pass the name of any test function to `cargo test` to run only that test:
+-->
+<p>Nous pouvons donner le nom de n'importe quelle fonction de test à <code>cargo test</code>
+afin d'exécuter uniquement ce test :</p>
+<!--
+```console
+$ cargo test cent
+   Compiling adder v0.1.0 (file:///projects/adder)
+    Finished test [unoptimized + debuginfo] target(s) in 0.69s
+     Running unittests (target/debug/deps/adder-92948b65e88960b4)
+
+running 1 test
+test tests::cent ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+```
+-->
+<pre><code class="language-console">$ cargo test cent
+   Compiling adder v0.1.0 (file:///projects/adder)
+    Finished test [unoptimized + debuginfo] target(s) in 0.69s
+     Running unittests (target/debug/deps/adder-92948b65e88960b4)
+
+running 1 test
+test tests::cent ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+</code></pre>
+<!--
+Only the test with the name `one_hundred` ran; the other two tests didn’t match
+that name. The test output lets us know we had more tests than what this
+command ran by displaying `2 filtered out` at the end of the summary line.
+-->
+<p>Le test avec le nom <code>cent</code> est le seul exécuté ; les deux autres tests ne
+correspondent pas à ce nom. La sortie du test nous indique que nous avons
+d'autres tests en plus de celui que cette commande a exécuté en affichant
+<code>2 filtered out</code> à la fin de la ligne de résumé.</p>
+<!--
+We can’t specify the names of multiple tests in this way; only the first value
+given to `cargo test` will be used. But there is a way to run multiple tests.
+-->
+<p>Nous ne pouvons pas renseigner plusieurs noms de tests de cette manière ; il
+n'y a que la première valeur fournie à <code>cargo test</code> qui sera utilisée. Mais
+il existe un moyen d'exécuter plusieurs tests.</p>
+<!--
+#### Filtering to Run Multiple Tests
+-->
+<h4 id="filtrer-pour-exécuter-plusieurs-tests"><a class="header" href="#filtrer-pour-exécuter-plusieurs-tests">Filtrer pour exécuter plusieurs tests</a></h4>
+<!--
+We can specify part of a test name, and any test whose name matches that value
+will be run. For example, because two of our tests’ names contain `add`, we can
+run those two by running `cargo test add`:
+-->
+<p>Nous pouvons ne renseigner qu'une partie d'un nom de test, et tous les tests dont
+les noms correspondent à cette valeur vont être exécutés. Par exemple, comme
+deux de nos noms de tests contiennent <code>ajouter</code>, nous pouvons exécuter ces deux
+en lançant <code>cargo test ajouter</code> :</p>
+<!--
+```console
+$ cargo test ajouter
+   Compiling adder v0.1.0 (file:///projects/adder)
+    Finished test [unoptimized + debuginfo] target(s) in 0.61s
+     Running unittests (target/debug/deps/adder-92948b65e88960b4)
+
+running 2 tests
+test tests::ajouter_deux_a_trois ... ok
+test tests::ajouter_deux_a_deux ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+```
+-->
+<pre><code class="language-console">$ cargo test ajouter
+   Compiling adder v0.1.0 (file:///projects/adder)
+    Finished test [unoptimized + debuginfo] target(s) in 0.61s
+     Running unittests (target/debug/deps/adder-92948b65e88960b4)
+
+running 2 tests
+test tests::ajouter_deux_a_trois ... ok
+test tests::ajouter_deux_a_deux ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+</code></pre>
+<!--
+This command ran all tests with `add` in the name and filtered out the test
+named `one_hundred`. Also note that the module in which a test appears becomes
+part of the test’s name, so we can run all the tests in a module by filtering
+on the module’s name.
+-->
+<p>Cette commande a lancé tous les tests qui contiennent <code>ajouter</code> dans leur nom
+et a filtré le test <code>cent</code>. Notez aussi que le module dans lequel un test est
+présent fait partie du nom du test, ainsi nous pouvons exécuter tous les tests
+d'un module en filtrant avec le nom du module.</p>
+<!--
+### Ignoring Some Tests Unless Specifically Requested
+-->
+<h3 id="ignorer-certains-tests-sauf-sils-sont-demandés-explicitement"><a class="header" href="#ignorer-certains-tests-sauf-sils-sont-demandés-explicitement">Ignorer certains tests sauf s'ils sont demandés explicitement</a></h3>
+<!--
+Sometimes a few specific tests can be very time-consuming to execute, so you
+might want to exclude them during most runs of `cargo test`. Rather than
+listing as arguments all tests you do want to run, you can instead annotate the
+time-consuming tests using the `ignore` attribute to exclude them, as shown
+here:
+-->
+<p>Parfois, certains tests spécifiques peuvent prendre beaucoup de temps à
+s'exécuter, de sorte que vous voulez les exclure de la majorité des exécutions
+de <code>cargo test</code>. Plutôt que de lister en argument tous les tests que vous
+souhaitez exécuter, vous pouvez plutôt faire une annotation sur les tests qui
+prennent du temps en utilisant l'attribut <code>ignore</code> pour les exclure, comme
+ci-dessous :</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,noplayground
+#[test]
+fn it_works() {
+    assert_eq!(2 + 2, 4);
+}
+
+#[test]
+#[ignore]
+fn test_long() {
+    // du code qui prend une heure à s'exécuter
+}
+```
+-->
+<pre><code class="language-rust noplayground">#[test]
+fn it_works() {
+    assert_eq!(2 + 2, 4);
+}
+
+#[test]
+#[ignore]
+fn test_long() {
+    // du code qui prend une heure à s'exécuter
+}
+</code></pre>
+<!--
+After `#[test]` we add the `#[ignore]` line to the test we want to exclude. Now
+when we run our tests, `it_works` runs, but `expensive_test` doesn’t:
+-->
+<p>Après <code>#[test]</code>, nous avons ajouté la ligne <code>#[ignore]</code> pour le test que nous
+souhaitons exclure. Maintenant lorsque nous exécutons nos tests, <code>it_works</code>
+s'exécute, mais pas <code>test_long</code> :</p>
+<!--
+```console
+$ cargo test
+   Compiling adder v0.1.0 (file:///projects/adder)
+    Finished test [unoptimized + debuginfo] target(s) in 0.60s
+     Running unittests (target/debug/deps/adder-92948b65e88960b4)
+
+running 2 tests
+test test_long ... ignored
+test it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+```
+-->
+<pre><code class="language-console">$ cargo test
+   Compiling adder v0.1.0 (file:///projects/adder)
+    Finished test [unoptimized + debuginfo] target(s) in 0.60s
+     Running unittests (target/debug/deps/adder-92948b65e88960b4)
+
+running 2 tests
+test test_long ... ignored
+test it_works ... ok
+
+test result: ok. 1 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<!--
+The `expensive_test` function is listed as `ignored`. If we want to run only
+the ignored tests, we can use `cargo test -- --ignored`:
+-->
+<p>La fonction <code>test_long</code> est listée comme <code>ignored</code>. Si nous voulons exécuter
+uniquement les tests ignorés, nous pouvons utiliser <code>cargo test -- --ignored</code> :</p>
+<!--
+```console
+$ cargo test -- --ignored
+   Compiling adder v0.1.0 (file:///projects/adder)
+    Finished test [unoptimized + debuginfo] target(s) in 0.61s
+     Running unittests (target/debug/deps/adder-92948b65e88960b4)
+
+running 1 test
+test test_long ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+```
+-->
+<pre><code class="language-console">$ cargo test -- --ignored
+   Compiling adder v0.1.0 (file:///projects/adder)
+    Finished test [unoptimized + debuginfo] target(s) in 0.61s
+     Running unittests (target/debug/deps/adder-92948b65e88960b4)
+
+running 1 test
+test test_long ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
+
+   Doc-tests adder
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+</code></pre>
+<!--
+By controlling which tests run, you can make sure your `cargo test` results
+will be fast. When you’re at a point where it makes sense to check the results
+of the `ignored` tests and you have time to wait for the results, you can run
+`cargo test -- --ignored` instead. If you want to run all tests whether they’re
+ignored or not, you can run `cargo test -- --include-ignored`.
+-->
+<p>En gérant quels tests sont exécutés, vous pouvez vous assurer que vos résultats
+de <code>cargo test</code> seront rapides. Lorsque vous arrivez à un stade où il est
+justifié de vérifier le résultat des tests <code>ignored</code> et que vous avez le temps
+d'attendre ces résultats, vous pouvez lancer à la place
+<code>cargo test -- --ignored</code>. Si vous voulez exécuter tous les tests q'uils soient
+ignorés ou non, vous pouvez lancer <code>cargo test -- --include-ignored</code>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch11-01-writing-tests.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch11-03-test-organization.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch11-01-writing-tests.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch11-03-test-organization.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../ferris.js"></script>
+    </body>
+</html>

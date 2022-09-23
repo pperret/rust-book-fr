@@ -1,0 +1,2391 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Arrêt propre et nettoyage - Le langage de programmation Rust</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../ferris.css">
+        <link rel="stylesheet" href="../theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Le langage de programmation Rust</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Avant-propos</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="translation-terms.html">Traduction des termes</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Prise en main</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, world!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Programmer le jeu du plus ou du moins</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Les concepts courants de programmation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> Les variables et la mutabilité</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Les types de données</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Les fonctions</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Les commentaires</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Les structures de contrôle</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Comprendre la possession</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Qu'est-ce que la possession ?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Les références et l'emprunt</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Le type slice</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Utiliser les structures pour structurer des données apparentées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Définir et instancier des structures</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Un exemple de programme qui utilise des structures</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> La syntaxe des méthodes</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Les énumérations et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Définir une énumération</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> La structure de contrôle match</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> Une structure de contrôle concise : if let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Gérer des projets grandissants avec les paquets, crates et modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Les paquets et les crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Définir des modules pour gérer la portée et la visibilité</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Désigner un élément dans l'arborescence de modules</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Importer des chemins dans la portée via le mot-clé use</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Séparer les modules dans différents fichiers</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Les collections standard</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Stocker des listes de valeurs avec des vecteurs</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> Stocker du texte encodé en UTF-8 avec les Strings</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Stocker des clés associées à des valeurs dans des tables de hachage</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> La gestion des erreurs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Les erreurs irrécupérables avec panic!</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Des erreurs récupérables avec Result</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> Paniquer ou ne pas paniquer, telle est la question</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Les types génériques, les traits et les durées de vie</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Les types de données génériques</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Définir des comportements partagés avec les traits</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> La conformité des références avec les durées de vies</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Ecrire des tests automatisés</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Comment écrire des tests</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Gérer l'exécution des tests</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> L'organisation des tests</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> Un projet d'entrée/sortie : construire un programme en ligne de commande</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Récupérer les arguments de la ligne de commande</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Lire un fichier</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Remanier le code pour améliorer sa modularité et la gestion des erreurs</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Développer les fonctionnalités de la bibliothèque avec le TDD</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Travailler avec des variables d'environnement</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Ecrire les messages d'erreur sur la sortie d'erreurs standard au lieu de la sortie normale</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Les fonctionnalités des langages fonctionnels : les itérateurs et les fermetures</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Les fermetures : fonctions anonymes qui peuvent utiliser leur environnement</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Traiter une série d'éléments avec un itérateur</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> Amélioration de notre projet d'entrée/sortie</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Comparaison des performances : les boucles et les itérateurs</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> En savoir plus sur cargo et crates.io</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Personnaliser les compilations avec les profils de publication</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Publier une crate sur crates.io</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Les espaces de travail de cargo</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Installer des binaires à partir de crates.io avec cargo install</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Etendre les fonctionnalités de cargo avec des commandes personnalisées</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Les pointeurs intelligents</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Utiliser Box&lt;T&gt; pour pointer sur des données présentes sur le tas</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Considérer les pointeurs intelligents comme des références grâce au trait Deref</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Exécuter du code au nettoyage avec le trait Drop</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, le pointeur intelligent qui compte les références</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; et le motif de mutabilité interne</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Les boucles de références qui peuvent provoquer des fuites de mémoire</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> La concurrence sans craintes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Utiliser les tâches pour exécuter simultanément du code</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Utiliser l'envoi de messages pour transférer des données entre les tâches</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Le partage d'état en concurrence</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Etendre la concurrence avec les traits Sync et Send</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Les fonctionnalités orientées objet de Rust</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Les caractéristiques des langages orientés objet</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Utiliser les objets traits qui permettent des valeurs de types différents</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Implémenter un patron de conception orienté-objet</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Les motifs et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> Tous les endroits où les motifs peuvent être utilisés</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> La réfutabilité : lorsqu'un motif peut échouer à correspondre</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> La syntaxe des motifs</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Les fonctionnalités avancées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Le Rust non sécurisé (unsafe)</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Les traits avancés</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Les types avancés</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Les fonctions et fermetures avancées</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Les macros</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Projet final : construire un serveur web multitâches</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Développer un serveur web monotâche</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Transformer notre serveur monotâche en serveur multitâches</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html" class="active"><strong aria-hidden="true">20.3.</strong> Arrêt propre et nettoyage</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Annexes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - les mots-clés</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> 🚧 B - les opérateurs et les symboles</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> 🚧 C - les traits dérivables</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> 🚧 D - Des outils de développement utiles</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> 🚧 E - Les éditions</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> 🚧 F - Les traductions de ce livre</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> 🚧 G - Comment Rust est construit, et “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Le langage de programmation Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/Jimskapt/rust-book-fr" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+## Graceful Shutdown and Cleanup
+-->
+<h2 id="arrêt-propre-et-nettoyage"><a class="header" href="#arrêt-propre-et-nettoyage">Arrêt propre et nettoyage</a></h2>
+<!--
+The code in Listing 20-20 is responding to requests asynchronously through the
+use of a thread pool, as we intended. We get some warnings about the `workers`,
+`id`, and `thread` fields that we’re not using in a direct way that reminds us
+we’re not cleaning up anything. When we use the less elegant <span
+class="keystroke">ctrl-c</span> method to halt the main thread, all other
+threads are stopped immediately as well, even if they’re in the middle of
+serving a request.
+-->
+<p>Le code de l'encart 20-20 répond aux requêtes de manière asynchrone grâce à
+l'utilisation du groupe de tâches, comme nous l'espérions. Nous avons quelques
+avertissements sur les champs <code>operateurs</code>, <code>id</code> et <code>tâche</code> que nous
+n'utilisons pas directement et qui nous rappellent que nous ne nettoyons rien.
+Lorsque nous arrêtons brutalement la tâche principale en appuyant sur
+<span class="keystroke">ctrl-c</span>, toutes les autres tâches sont également
+immédiatement stoppées, même si elles sont en train de servir une requête.</p>
+<!--
+Now we’ll implement the `Drop` trait to call `join` on each of the threads in
+the pool so they can finish the requests they’re working on before closing.
+Then we’ll implement a way to tell the threads they should stop accepting new
+requests and shut down. To see this code in action, we’ll modify our server to
+accept only two requests before gracefully shutting down its thread pool.
+-->
+<p>Maintenant, nous allons implémenter le trait <code>Drop</code> afin d'appeler <code>join</code> sur chacune
+des tâches du groupe afin qu'elles puissent finir les requêtes qu'elles
+sont en train de traiter avant de s'arrêter. Ensuite, nous allons implémenter un
+moyen de demander aux tâches d'arrêter d'accepter de nouvelles requêtes et de
+s'arrêter. Pour voir ce code en action, nous allons modifier notre serveur
+pour n'accepter que deux requêtes avant d'arrêter proprement son groupe de
+tâches.</p>
+<!--
+### Implementing the `Drop` Trait on `ThreadPool`
+-->
+<h3 id="implémenter-le-trait-drop-sur-groupetaches"><a class="header" href="#implémenter-le-trait-drop-sur-groupetaches">Implémenter le trait <code>Drop</code> sur <code>GroupeTaches</code></a></h3>
+<!--
+Let’s start with implementing `Drop` on our thread pool. When the pool is
+dropped, our threads should all join to make sure they finish their work.
+Listing 20-22 shows a first attempt at a `Drop` implementation; this code won’t
+quite work yet.
+-->
+<p>Commençons par implémenter <code>Drop</code> sur notre groupe de tâches. Lorsque le groupe
+est nettoyé, nos tâches doivent toutes faire appel à <code>join</code> pour s'assurer
+qu'elles finissent leur travail. L'encart 20-22 montre une première tentative
+d'implémentation de <code>Drop</code> ; ce code ne fonctionne pas encore tout à fait.</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,ignore,does_not_compile
+# use std::sync::mpsc;
+# use std::sync::Arc;
+# use std::sync::Mutex;
+# use std::thread;
+# 
+# pub struct ThreadPool {
+#     workers: Vec<Worker>,
+#     sender: mpsc::Sender<Job>,
+# }
+# 
+# type Job = Box<dyn FnOnce() + Send + 'static>;
+# 
+# impl ThreadPool {
+#     /// Create a new ThreadPool.
+#     ///
+#     /// The size is the number of threads in the pool.
+#     ///
+#     /// # Panics
+#     ///
+#     /// The `new` function will panic if the size is zero.
+#     pub fn new(size: usize) -> ThreadPool {
+#         assert!(size > 0);
+# 
+#         let (sender, receiver) = mpsc::channel();
+# 
+#         let receiver = Arc::new(Mutex::new(receiver));
+# 
+#         let mut workers = Vec::with_capacity(size);
+# 
+#         for id in 0..size {
+#             workers.push(Worker::new(id, Arc::clone(&receiver)));
+#         }
+# 
+#         ThreadPool { workers, sender }
+#     }
+# 
+#     pub fn execute<F>(&self, f: F)
+#     where
+#         F: FnOnce() + Send + 'static,
+#     {
+#         let job = Box::new(f);
+# 
+#         self.sender.send(job).unwrap();
+#     }
+# }
+# 
+impl Drop for ThreadPool {
+    fn drop(&mut self) {
+        for worker in &mut self.workers {
+            println!("Shutting down worker {}", worker.id);
+
+            worker.thread.join().unwrap();
+        }
+    }
+}
+# 
+# struct Worker {
+#     id: usize,
+#     thread: thread::JoinHandle<()>,
+# }
+# 
+# impl Worker {
+#     fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
+#         let thread = thread::spawn(move || loop {
+#             let job = receiver.lock().unwrap().recv().unwrap();
+# 
+#             println!("Worker {} got a job; executing.", id);
+# 
+#             job();
+#         });
+# 
+#         Worker { id, thread }
+#     }
+# }
+```
+-->
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">use std::sync::mpsc;
+</span><span class="boring">use std::sync::Arc;
+</span><span class="boring">use std::sync::Mutex;
+</span><span class="boring">use std::thread;
+</span><span class="boring">
+</span><span class="boring">pub struct GroupeTaches {
+</span><span class="boring">    operateurs: Vec&lt;Operateur&gt;,
+</span><span class="boring">    envoi: mpsc::Sender&lt;Mission&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">type Mission = Box&lt;dyn FnOnce() + Send + 'static&gt;;
+</span><span class="boring">
+</span><span class="boring">impl GroupeTaches {
+</span><span class="boring">    /// Crée un nouveau GroupeTaches.
+</span><span class="boring">    ///
+</span><span class="boring">    /// La taille est le nom de tâches présentes dans le groupe.
+</span><span class="boring">    ///
+</span><span class="boring">    /// # Panics
+</span><span class="boring">    ///
+</span><span class="boring">    /// La fonction `new` devrait paniquer si la taille vaut zéro.
+</span><span class="boring">    pub fn new(taille: usize) -&gt; GroupeTaches {
+</span><span class="boring">        assert!(taille &gt; 0);
+</span><span class="boring">
+</span><span class="boring">        let (envoi, reception) = mpsc::channel();
+</span><span class="boring">
+</span><span class="boring">        let reception = Arc::new(Mutex::new(reception));
+</span><span class="boring">
+</span><span class="boring">        let mut operateurs = Vec::with_capacity(taille);
+</span><span class="boring">
+</span><span class="boring">        for id in 0..taille {
+</span><span class="boring">            operateurs.push(Operateur::new(id, Arc::clone(&amp;reception)));
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        GroupeTaches { operateurs, envoi }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn executer&lt;F&gt;(&amp;self, f: F)
+</span><span class="boring">    where
+</span><span class="boring">        F: FnOnce() + Send + 'static,
+</span><span class="boring">    {
+</span><span class="boring">        let mission = Box::new(f);
+</span><span class="boring">
+</span><span class="boring">        self.envoi.send(mission).unwrap();
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Drop for GroupeTaches {
+    fn drop(&amp;mut self) {
+        for operateur in &amp;mut self.operateurs {
+            println!(&quot;Arrêt de l'opérateur {}&quot;, operateur.id);
+
+            operateur.tache.join().unwrap();
+        }
+    }
+}
+<span class="boring">
+</span><span class="boring">struct Operateur {
+</span><span class="boring">    id: usize,
+</span><span class="boring">    tache: thread::JoinHandle&lt;()&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Operateur {
+</span><span class="boring">    fn new(id: usize, reception: Arc&lt;Mutex&lt;mpsc::Receiver&lt;Mission&gt;&gt;&gt;) -&gt; Operateur {
+</span><span class="boring">        let tache = thread::spawn(move || loop {
+</span><span class="boring">            let mission = reception.lock().unwrap().recv().unwrap();
+</span><span class="boring">
+</span><span class="boring">            println!(&quot;L'opérateur {} a reçu une mission ; il l'exécute.&quot;, id);
+</span><span class="boring">
+</span><span class="boring">            mission();
+</span><span class="boring">        });
+</span><span class="boring">
+</span><span class="boring">        Operateur { id, tache }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<!--
+<span class="caption">Listing 20-22: Joining each thread when the thread pool
+goes out of scope</span>
+-->
+<p><span class="caption">Encart 20-22 : utilisation de <code>join</code> sur chaque tâche
+lorsque le groupe de tâches sort de la portée</span></p>
+<!--
+First, we loop through each of the thread pool `workers`. We use `&mut` for
+this because `self` is a mutable reference, and we also need to be able to
+mutate `worker`. For each worker, we print a message saying that this
+particular worker is shutting down, and then we call `join` on that worker’s
+thread. If the call to `join` fails, we use `unwrap` to make Rust panic and go
+into an ungraceful shutdown.
+-->
+<p>D'abord, nous faisons une boucle sur tous les <code>operateurs</code> du groupe de tâches.
+Pour ce faire, nous utilisons <code>&amp;mut</code> car <code>self</code> n'est qu'une référence mutable
+du groupe de tâches mais nous aurons également besoin de pouvoir muter chaque
+<code>operateur</code>. Pour chaque opérateur, nous affichons un message qui indique qu'il
+s'arrête puis nous faisons appel à <code>join</code> sur la tâche de cet opérateur. Si
+l'appel à <code>join</code> échoue, nous utilisons <code>unwrap</code> pour faire paniquer Rust et
+ainsi procéder à un arrêt brutal.</p>
+<!--
+Here is the error we get when we compile this code:
+-->
+<p>Voici l'erreur que nous obtenons lorsque nous compilons ce code :</p>
+<!--
+```console
+$ cargo check
+    Checking hello v0.1.0 (file:///projects/hello)
+error[E0507]: cannot move out of `worker.thread` which is behind a mutable reference
+  -- > src/lib.rs:52:13
+   |
+52 |             worker.thread.join().unwrap();
+   |             ^^^^^^^^^^^^^ move occurs because `worker.thread` has type `JoinHandle<()>`, which does not implement the `Copy` trait
+
+For more information about this error, try `rustc --explain E0507`.
+error: could not compile `hello` due to previous error
+```
+-->
+<pre><code class="language-console">$ cargo check
+    Checking salutations v0.1.0 (file:///projects/salutations)
+error[E0507]: cannot move out of `operateur.tache` which is behind a mutable reference
+  --&gt; src/lib.rs:52:13
+   |
+52 |             operateur.tache.join().unwrap();
+   |             ^^^^^^^^^^^^^^^ move occurs because `operateur.tache` has type `JoinHandle&lt;()&gt;`, which does not implement the `Copy` trait
+
+For more information about this error, try `rustc --explain E0507`.
+error: could not compile `hello` due to previous error
+</code></pre>
+<!--
+The error tells us we can’t call `join` because we only have a mutable borrow
+of each `worker` and `join` takes ownership of its argument. To solve this
+issue, we need to move the thread out of the `Worker` instance that owns
+`thread` so `join` can consume the thread. We did this in Listing 17-15: if
+`Worker` holds an `Option<thread::JoinHandle<()>>` instead, we can call the
+`take` method on the `Option` to move the value out of the `Some` variant and
+leave a `None` variant in its place. In other words, a `Worker` that is running
+will have a `Some` variant in `thread`, and when we want to clean up a
+`Worker`, we’ll replace `Some` with `None` so the `Worker` doesn’t have a
+thread to run.
+-->
+<p>L'erreur nous informe que nous ne pouvons pas faire appel à <code>join</code> car nous
+avons seulement fait un emprunt mutable pour chacun des <code>operateur</code> alors que
+<code>join</code> prend possession de son argument. Pour résoudre ce problème, nous devons
+sortir la <code>tache</code> de l'instance de <code>Operateur</code> qui la possède afin que <code>join</code>
+puisse la consommer. Nous faisons ceci dans l'encart 17-15 : comme <code>Operateur</code>
+contient désormais un <code>Option&lt;thread::JoinHandle&lt;()&gt;&gt;</code>, nous pouvons utiliser
+la méthode <code>take</code> sur <code>Option</code> pour sortir la valeur de la variante <code>Some</code> et
+y mettre à la place une variante <code>None</code>. Autrement dit, un <code>Operateur</code> qui est
+en cours d'exécution aura une variante <code>Some</code> dans <code>tache</code>, et lorsque nous
+souhaiterons nettoyer <code>Operateur</code>, nous remplacerons <code>Some</code> par <code>None</code> afin que
+<code>Operateur</code> n'ait pas de tâche à exécuter.</p>
+<!--
+So we know we want to update the definition of `Worker` like this:
+-->
+<p>Donc nous savons que nous voulons modifier la définition de <code>Operateur</code> comme
+ceci :</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,ignore,does_not_compile
+# use std::sync::mpsc;
+# use std::sync::Arc;
+# use std::sync::Mutex;
+# use std::thread;
+# 
+# pub struct ThreadPool {
+#     workers: Vec<Worker>,
+#     sender: mpsc::Sender<Job>,
+# }
+# 
+# type Job = Box<dyn FnOnce() + Send + 'static>;
+# 
+# impl ThreadPool {
+#     /// Create a new ThreadPool.
+#     ///
+#     /// The size is the number of threads in the pool.
+#     ///
+#     /// # Panics
+#     ///
+#     /// The `new` function will panic if the size is zero.
+#     pub fn new(size: usize) -> ThreadPool {
+#         assert!(size > 0);
+# 
+#         let (sender, receiver) = mpsc::channel();
+# 
+#         let receiver = Arc::new(Mutex::new(receiver));
+# 
+#         let mut workers = Vec::with_capacity(size);
+# 
+#         for id in 0..size {
+#             workers.push(Worker::new(id, Arc::clone(&receiver)));
+#         }
+# 
+#         ThreadPool { workers, sender }
+#     }
+# 
+#     pub fn execute<F>(&self, f: F)
+#     where
+#         F: FnOnce() + Send + 'static,
+#     {
+#         let job = Box::new(f);
+# 
+#         self.sender.send(job).unwrap();
+#     }
+# }
+# 
+# impl Drop for ThreadPool {
+#     fn drop(&mut self) {
+#         for worker in &mut self.workers {
+#             println!("Shutting down worker {}", worker.id);
+# 
+#             worker.thread.join().unwrap();
+#         }
+#     }
+# }
+# 
+struct Worker {
+    id: usize,
+    thread: Option<thread::JoinHandle<()>>,
+}
+# 
+# impl Worker {
+#     fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
+#         let thread = thread::spawn(move || loop {
+#             let job = receiver.lock().unwrap().recv().unwrap();
+# 
+#             println!("Worker {} got a job; executing.", id);
+# 
+#             job();
+#         });
+# 
+#         Worker { id, thread }
+#     }
+# }
+```
+-->
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">use std::sync::mpsc;
+</span><span class="boring">use std::sync::Arc;
+</span><span class="boring">use std::sync::Mutex;
+</span><span class="boring">use std::thread;
+</span><span class="boring">
+</span><span class="boring">pub struct GroupeTaches {
+</span><span class="boring">    operateurs: Vec&lt;Operateur&gt;,
+</span><span class="boring">    envoi: mpsc::Sender&lt;Mission&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">type Mission = Box&lt;dyn FnOnce() + Send + 'static&gt;;
+</span><span class="boring">
+</span><span class="boring">impl GroupeTaches {
+</span><span class="boring">    /// Crée un nouveau GroupeTaches.
+</span><span class="boring">    ///
+</span><span class="boring">    /// La taille est le nom de tâches présentes dans le groupe.
+</span><span class="boring">    ///
+</span><span class="boring">    /// # Panics
+</span><span class="boring">    ///
+</span><span class="boring">    /// La fonction `new` devrait paniquer si la taille vaut zéro.
+</span><span class="boring">    pub fn new(taille: usize) -&gt; GroupeTaches {
+</span><span class="boring">        assert!(taille &gt; 0);
+</span><span class="boring">
+</span><span class="boring">        let (envoi, reception) = mpsc::channel();
+</span><span class="boring">
+</span><span class="boring">        let reception = Arc::new(Mutex::new(reception));
+</span><span class="boring">
+</span><span class="boring">        let mut operateurs = Vec::with_capacity(taille);
+</span><span class="boring">
+</span><span class="boring">        for id in 0..taille {
+</span><span class="boring">            operateurs.push(Operateur::new(id, Arc::clone(&amp;reception)));
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        GroupeTaches { operateurs, envoi }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn executer&lt;F&gt;(&amp;self, f: F)
+</span><span class="boring">    where
+</span><span class="boring">        F: FnOnce() + Send + 'static,
+</span><span class="boring">    {
+</span><span class="boring">        let mission = Box::new(f);
+</span><span class="boring">
+</span><span class="boring">        self.envoi.send(mission).unwrap();
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Drop for GroupeTaches {
+</span><span class="boring">    fn drop(&amp;mut self) {
+</span><span class="boring">        for operateur in &amp;mut self.operateurs {
+</span><span class="boring">            println!(&quot;Arrêt de l'opérateur {}&quot;, operateur.id);
+</span><span class="boring">
+</span><span class="boring">            operateur.tache.join().unwrap();
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>struct Operateur {
+    id: usize,
+    tache: Option&lt;thread::JoinHandle&lt;()&gt;&gt;,
+}
+<span class="boring">
+</span><span class="boring">impl Operateur {
+</span><span class="boring">    fn new(id: usize, reception: Arc&lt;Mutex&lt;mpsc::Receiver&lt;Mission&gt;&gt;&gt;) -&gt; Operateur {
+</span><span class="boring">        let tache = thread::spawn(move || loop {
+</span><span class="boring">            let mission = reception.lock().unwrap().recv().unwrap();
+</span><span class="boring">
+</span><span class="boring">            println!(&quot;L'opérateur {} a reçu une mission ; il l'exécute.&quot;, id);
+</span><span class="boring">
+</span><span class="boring">            mission();
+</span><span class="boring">        });
+</span><span class="boring">
+</span><span class="boring">        Operateur { id, tache }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<!--
+Now let’s lean on the compiler to find the other places that need to change.
+Checking this code, we get two errors:
+-->
+<p>Maintenant, aidons-nous du compilateur pour trouver les autres endroits qui ont
+besoin de changer. En vérifiant ce code, nous obtenons deux erreurs :</p>
+<!--
+```console
+$ cargo check
+    Checking hello v0.1.0 (file:///projects/hello)
+error[E0599]: no method named `join` found for enum `Option` in the current scope
+  -- > src/lib.rs:52:27
+   |
+52 |             worker.thread.join().unwrap();
+   |                           ^^^^ method not found in `Option<JoinHandle<()>>`
+
+error[E0308]: mismatched types
+  -- > src/lib.rs:72:22
+   |
+72 |         Worker { id, thread }
+   |                      ^^^^^^ expected enum `Option`, found struct `JoinHandle`
+   |
+   = note: expected enum `Option<JoinHandle<()>>`
+            found struct `JoinHandle<_>`
+help: try wrapping the expression in `Some`
+   |
+72 |         Worker { id, Some(thread) }
+   |                      +++++      +
+
+Some errors have detailed explanations: E0308, E0599.
+For more information about an error, try `rustc --explain E0308`.
+error: could not compile `hello` due to 2 previous errors
+```
+-->
+<pre><code class="language-console">$ cargo check
+    Checking salutations v0.1.0 (file:///projects/salutations)
+error[E0599]: no method named `join` found for enum `Option` in the current scope
+  --&gt; src/lib.rs:52:27
+   |
+52 |             operateur.tache.join().unwrap();
+   |                             ^^^^ method not found in `Option&lt;JoinHandle&lt;()&gt;&gt;`
+
+error[E0308]: mismatched types
+  --&gt; src/lib.rs:72:22
+   |
+72 |         Operateur { id, tache }
+   |                         ^^^^^ expected enum `Option`, found struct `JoinHandle`
+   |
+   = note: expected enum `Option&lt;JoinHandle&lt;()&gt;&gt;`
+            found struct `JoinHandle&lt;_&gt;`
+help: try wrapping the expression in `Some`
+   |
+72 |         Operateur { id, Some(tache) }
+   |                         +++++     +
+
+Some errors have detailed explanations: E0308, E0599.
+For more information about an error, try `rustc --explain E0308`.
+error: could not compile `hello` due to 2 previous errors
+</code></pre>
+<!--
+Let’s address the second error, which points to the code at the end of
+`Worker::new`; we need to wrap the `thread` value in `Some` when we create a
+new `Worker`. Make the following changes to fix this error:
+-->
+<p>Corrigeons la seconde erreur, qui se situe dans le code à la fin de
+<code>Operateur::new</code> : nous devons intégrer la valeur de <code>tache</code> dans un <code>Some</code>
+lorsque nous créons un nouvel <code>Operateur</code>. Faites les changements suivants pour
+corriger cette erreur :</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,ignore
+# use std::sync::mpsc;
+# use std::sync::Arc;
+# use std::sync::Mutex;
+# use std::thread;
+# 
+# pub struct ThreadPool {
+#     workers: Vec<Worker>,
+#     sender: mpsc::Sender<Job>,
+# }
+# 
+# type Job = Box<dyn FnOnce() + Send + 'static>;
+# 
+# impl ThreadPool {
+#     /// Create a new ThreadPool.
+#     ///
+#     /// The size is the number of threads in the pool.
+#     ///
+#     /// # Panics
+#     ///
+#     /// The `new` function will panic if the size is zero.
+#     pub fn new(size: usize) -> ThreadPool {
+#         assert!(size > 0);
+# 
+#         let (sender, receiver) = mpsc::channel();
+# 
+#         let receiver = Arc::new(Mutex::new(receiver));
+# 
+#         let mut workers = Vec::with_capacity(size);
+# 
+#         for id in 0..size {
+#             workers.push(Worker::new(id, Arc::clone(&receiver)));
+#         }
+# 
+#         ThreadPool { workers, sender }
+#     }
+# 
+#     pub fn execute<F>(&self, f: F)
+#     where
+#         F: FnOnce() + Send + 'static,
+#     {
+#         let job = Box::new(f);
+# 
+#         self.sender.send(job).unwrap();
+#     }
+# }
+# 
+# impl Drop for ThreadPool {
+#     fn drop(&mut self) {
+#         for worker in &mut self.workers {
+#             println!("Shutting down worker {}", worker.id);
+# 
+#             worker.thread.join().unwrap();
+#         }
+#     }
+# }
+# 
+# struct Worker {
+#     id: usize,
+#     thread: Option<thread::JoinHandle<()>>,
+# }
+# 
+impl Worker {
+    fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
+        // --snip--
+
+#         let thread = thread::spawn(move || loop {
+#             let job = receiver.lock().unwrap().recv().unwrap();
+# 
+#             println!("Worker {} got a job; executing.", id);
+# 
+#             job();
+#         });
+# 
+        Worker {
+            id,
+            thread: Some(thread),
+        }
+    }
+}
+```
+-->
+<pre><code class="language-rust ignore"><span class="boring">use std::sync::mpsc;
+</span><span class="boring">use std::sync::Arc;
+</span><span class="boring">use std::sync::Mutex;
+</span><span class="boring">use std::thread;
+</span><span class="boring">
+</span><span class="boring">pub struct GroupeTaches {
+</span><span class="boring">    operateurs: Vec&lt;Operateur&gt;,
+</span><span class="boring">    envoi: mpsc::Sender&lt;Mission&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">type Mission = Box&lt;dyn FnOnce() + Send + 'static&gt;;
+</span><span class="boring">
+</span><span class="boring">impl GroupeTaches {
+</span><span class="boring">    /// Crée un nouveau GroupeTaches.
+</span><span class="boring">    ///
+</span><span class="boring">    /// La taille est le nom de tâches présentes dans le groupe.
+</span><span class="boring">    ///
+</span><span class="boring">    /// # Panics
+</span><span class="boring">    ///
+</span><span class="boring">    /// La fonction `new` devrait paniquer si la taille vaut zéro.
+</span><span class="boring">    pub fn new(taille: usize) -&gt; GroupeTaches {
+</span><span class="boring">        assert!(taille &gt; 0);
+</span><span class="boring">
+</span><span class="boring">        let (envoi, reception) = mpsc::channel();
+</span><span class="boring">
+</span><span class="boring">        let reception = Arc::new(Mutex::new(reception));
+</span><span class="boring">
+</span><span class="boring">        let mut operateurs = Vec::with_capacity(taille);
+</span><span class="boring">
+</span><span class="boring">        for id in 0..taille {
+</span><span class="boring">            operateurs.push(Operateur::new(id, Arc::clone(&amp;reception)));
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        GroupeTaches { operateurs, envoi }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn executer&lt;F&gt;(&amp;self, f: F)
+</span><span class="boring">    where
+</span><span class="boring">        F: FnOnce() + Send + 'static,
+</span><span class="boring">    {
+</span><span class="boring">        let mission = Box::new(f);
+</span><span class="boring">
+</span><span class="boring">        self.envoi.send(mission).unwrap();
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Drop for GroupeTaches {
+</span><span class="boring">    fn drop(&amp;mut self) {
+</span><span class="boring">        for operateur in &amp;mut self.operateurs {
+</span><span class="boring">            println!(&quot;Arrêt de l'opérateur {}&quot;, operateur.id);
+</span><span class="boring">
+</span><span class="boring">            operateur.tache.join().unwrap();
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct Operateur {
+</span><span class="boring">    id: usize,
+</span><span class="boring">    tache: Option&lt;thread::JoinHandle&lt;()&gt;&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Operateur {
+    fn new(id: usize, reception: Arc&lt;Mutex&lt;mpsc::Receiver&lt;Mission&gt;&gt;&gt;) -&gt; Operateur {
+        // -- partie masquée ici --
+
+<span class="boring">        let tache = thread::spawn(move || loop {
+</span><span class="boring">            let mission = reception.lock().unwrap().recv().unwrap();
+</span><span class="boring">
+</span><span class="boring">            println!(&quot;L'opérateur {} a reçu une mission ; il l'exécute.&quot;, id);
+</span><span class="boring">
+</span><span class="boring">            mission();
+</span><span class="boring">        });
+</span><span class="boring">
+</span>        Operateur {
+            id,
+            tache: Some(tache),
+        }
+    }
+}
+</code></pre>
+<!--
+The first error is in our `Drop` implementation. We mentioned earlier that we
+intended to call `take` on the `Option` value to move `thread` out of `worker`.
+The following changes will do so:
+-->
+<p>La première erreur se situe dans notre implémentation de <code>Drop</code>. Nous avions
+mentionné plus tôt que nous voulions faire appel à <code>take</code> sur la valeur de
+<code>Option</code> pour déplacer <code>tache</code> en dehors de <code>operateur</code>. Voici les changements
+à apporter pour ceci :</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,ignore
+# use std::sync::mpsc;
+# use std::sync::Arc;
+# use std::sync::Mutex;
+# use std::thread;
+# 
+# pub struct ThreadPool {
+#     workers: Vec<Worker>,
+#     sender: mpsc::Sender<Job>,
+# }
+# 
+# type Job = Box<dyn FnOnce() + Send + 'static>;
+# 
+# impl ThreadPool {
+#     /// Create a new ThreadPool.
+#     ///
+#     /// The size is the number of threads in the pool.
+#     ///
+#     /// # Panics
+#     ///
+#     /// The `new` function will panic if the size is zero.
+#     pub fn new(size: usize) -> ThreadPool {
+#         assert!(size > 0);
+# 
+#         let (sender, receiver) = mpsc::channel();
+# 
+#         let receiver = Arc::new(Mutex::new(receiver));
+# 
+#         let mut workers = Vec::with_capacity(size);
+# 
+#         for id in 0..size {
+#             workers.push(Worker::new(id, Arc::clone(&receiver)));
+#         }
+# 
+#         ThreadPool { workers, sender }
+#     }
+# 
+#     pub fn execute<F>(&self, f: F)
+#     where
+#         F: FnOnce() + Send + 'static,
+#     {
+#         let job = Box::new(f);
+# 
+#         self.sender.send(job).unwrap();
+#     }
+# }
+# 
+impl Drop for ThreadPool {
+    fn drop(&mut self) {
+        for worker in &mut self.workers {
+            println!("Shutting down worker {}", worker.id);
+
+            if let Some(thread) = worker.thread.take() {
+                thread.join().unwrap();
+            }
+        }
+    }
+}
+# 
+# struct Worker {
+#     id: usize,
+#     thread: Option<thread::JoinHandle<()>>,
+# }
+# 
+# impl Worker {
+#     fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
+#         let thread = thread::spawn(move || loop {
+#             let job = receiver.lock().unwrap().recv().unwrap();
+# 
+#             println!("Worker {} got a job; executing.", id);
+# 
+#             job();
+#         });
+# 
+#         Worker {
+#             id,
+#             thread: Some(thread),
+#         }
+#     }
+# }
+```
+-->
+<pre><code class="language-rust ignore"><span class="boring">use std::sync::mpsc;
+</span><span class="boring">use std::sync::Arc;
+</span><span class="boring">use std::sync::Mutex;
+</span><span class="boring">use std::thread;
+</span><span class="boring">
+</span><span class="boring">pub struct GroupeTaches {
+</span><span class="boring">    operateurs: Vec&lt;Operateur&gt;,
+</span><span class="boring">    envoi: mpsc::Sender&lt;Mission&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">type Mission = Box&lt;dyn FnOnce() + Send + 'static&gt;;
+</span><span class="boring">
+</span><span class="boring">impl GroupeTaches {
+</span><span class="boring">    /// Crée un nouveau GroupeTaches.
+</span><span class="boring">    ///
+</span><span class="boring">    /// La taille est le nom de tâches présentes dans le groupe.
+</span><span class="boring">    ///
+</span><span class="boring">    /// # Panics
+</span><span class="boring">    ///
+</span><span class="boring">    /// La fonction `new` devrait paniquer si la taille vaut zéro.
+</span><span class="boring">    pub fn new(taille: usize) -&gt; GroupeTaches {
+</span><span class="boring">        assert!(taille &gt; 0);
+</span><span class="boring">
+</span><span class="boring">        let (envoi, reception) = mpsc::channel();
+</span><span class="boring">
+</span><span class="boring">        let reception = Arc::new(Mutex::new(reception));
+</span><span class="boring">
+</span><span class="boring">        let mut operateurs = Vec::with_capacity(taille);
+</span><span class="boring">
+</span><span class="boring">        for id in 0..taille {
+</span><span class="boring">            operateurs.push(Operateur::new(id, Arc::clone(&amp;reception)));
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        GroupeTaches { operateurs, envoi }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn executer&lt;F&gt;(&amp;self, f: F)
+</span><span class="boring">    where
+</span><span class="boring">        F: FnOnce() + Send + 'static,
+</span><span class="boring">    {
+</span><span class="boring">        let mission = Box::new(f);
+</span><span class="boring">
+</span><span class="boring">        self.envoi.send(mission).unwrap();
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Drop for GroupeTaches {
+    fn drop(&amp;mut self) {
+        for operateur in &amp;mut self.operateurs {
+            println!(&quot;Arrêt de l'opérateur {}&quot;, operateur.id);
+
+            if let Some(tache) = operateur.tache.take() {
+                tache.join().unwrap();
+            }
+        }
+    }
+}
+<span class="boring">
+</span><span class="boring">struct Operateur {
+</span><span class="boring">    id: usize,
+</span><span class="boring">    tache: Option&lt;thread::JoinHandle&lt;()&gt;&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Operateur {
+</span><span class="boring">    fn new(id: usize, reception: Arc&lt;Mutex&lt;mpsc::Receiver&lt;Mission&gt;&gt;&gt;) -&gt; Operateur {
+</span><span class="boring">        let tache = thread::spawn(move || loop {
+</span><span class="boring">            let mission = reception.lock().unwrap().recv().unwrap();
+</span><span class="boring">
+</span><span class="boring">            println!(&quot;L'opérateur {} a reçu une mission ; il l'exécute.&quot;, id);
+</span><span class="boring">
+</span><span class="boring">            mission();
+</span><span class="boring">        });
+</span><span class="boring">
+</span><span class="boring">        Operateur {
+</span><span class="boring">            id,
+</span><span class="boring">            tache: Some(tache),
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<!--
+As discussed in Chapter 17, the `take` method on `Option` takes the `Some`
+variant out and leaves `None` in its place. We’re using `if let` to destructure
+the `Some` and get the thread; then we call `join` on the thread. If a worker’s
+thread is already `None`, we know that worker has already had its thread
+cleaned up, so nothing happens in that case.
+-->
+<p>Comme nous l'avons vu au chapitre 17, la méthode <code>take</code> sur <code>Option</code> sort la
+variante <code>Some</code> et laisse un <code>None</code> à la place. Nous utilisons <code>if let</code> pour
+destructurer le <code>Some</code> et obtenir la tâche ; ensuite nous faisons appel à <code>join</code>
+sur cette tâche. Si la tâche d'un opérateur est déjà un <code>None</code>, nous savons
+qu'il a déjà nettoyé sa tâche et que dans ce cas nous n'avons rien à faire.</p>
+<!--
+### Signaling to the Threads to Stop Listening for Jobs
+-->
+<h3 id="demander-aux-tâches-darrêter-dattendre-des-missions"><a class="header" href="#demander-aux-tâches-darrêter-dattendre-des-missions">Demander aux tâches d'arrêter d'attendre des missions</a></h3>
+<!--
+With all the changes we’ve made, our code compiles without any warnings. But
+the bad news is this code doesn’t function the way we want it to yet. The key
+is the logic in the closures run by the threads of the `Worker` instances: at
+the moment, we call `join`, but that won’t shut down the threads because they
+`loop` forever looking for jobs. If we try to drop our `ThreadPool` with our
+current implementation of `drop`, the main thread will block forever waiting
+for the first thread to finish.
+-->
+<p>Avec tous ces changements, notre code se compile désormais sans aucun
+avertissement. Mais la mauvaise nouvelle est que pour l'instant ce code ne
+fonctionne comme nous le souhaitons. La cause se situe dans la logique des
+fermetures qui sont exécutées par les tâches des instances de <code>Operateur</code> :
+pour le moment, nous faisons appel à <code>join</code>, mais cela ne va pas arrêter les
+tâches car elles font une boucle infinie avec <code>loop</code> pour attendre des
+missions. Si nous essayons de nettoyer notre <code>GroupeTaches</code> avec
+l'implémentation actuelle de <code>drop</code>, la tâche principale va se bloquer pour
+toujours en attendant en vain que la première tâche se termine.</p>
+<!--
+To fix this problem, we’ll modify the threads so they listen for either a `Job`
+to run or a signal that they should stop listening and exit the infinite loop.
+Instead of `Job` instances, our channel will send one of these two enum
+variants.
+-->
+<p>Pour corriger ce problème, nous allons modifier les tâches pour qu'elles
+attendent soit une <code>Mission</code> à exécuter, soit le signal qui leur dit qu'elles
+doivent arrêter d'attendre des missions et sortir de la boucle infinie. Notre
+canal va envoyer une de ces deux variantes d'énumération au lieu d'instances de
+<code>Mission</code>.</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,noplayground
+# use std::sync::mpsc;
+# use std::sync::Arc;
+# use std::sync::Mutex;
+# use std::thread;
+# 
+# pub struct ThreadPool {
+#     workers: Vec<Worker>,
+#     sender: mpsc::Sender<Job>,
+# }
+# 
+# type Job = Box<dyn FnOnce() + Send + 'static>;
+# 
+enum Message {
+    NewJob(Job),
+    Terminate,
+}
+# 
+# impl ThreadPool {
+#     /// Create a new ThreadPool.
+#     ///
+#     /// The size is the number of threads in the pool.
+#     ///
+#     /// # Panics
+#     ///
+#     /// The `new` function will panic if the size is zero.
+#     pub fn new(size: usize) -> ThreadPool {
+#         assert!(size > 0);
+# 
+#         let (sender, receiver) = mpsc::channel();
+# 
+#         let receiver = Arc::new(Mutex::new(receiver));
+# 
+#         let mut workers = Vec::with_capacity(size);
+# 
+#         for id in 0..size {
+#             workers.push(Worker::new(id, Arc::clone(&receiver)));
+#         }
+# 
+#         ThreadPool { workers, sender }
+#     }
+# 
+#     pub fn execute<F>(&self, f: F)
+#     where
+#         F: FnOnce() + Send + 'static,
+#     {
+#         let job = Box::new(f);
+# 
+#         self.sender.send(job).unwrap();
+#     }
+# }
+# 
+# impl Drop for ThreadPool {
+#     fn drop(&mut self) {
+#         for worker in &mut self.workers {
+#             println!("Shutting down worker {}", worker.id);
+# 
+#             if let Some(thread) = worker.thread.take() {
+#                 thread.join().unwrap();
+#             }
+#         }
+#     }
+# }
+# 
+# struct Worker {
+#     id: usize,
+#     thread: Option<thread::JoinHandle<()>>,
+# }
+# 
+# impl Worker {
+#     fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
+#         let thread = thread::spawn(move || loop {
+#             let job = receiver.lock().unwrap().recv().unwrap();
+# 
+#             println!("Worker {} got a job; executing.", id);
+# 
+#             job();
+#         });
+# 
+#         Worker {
+#             id,
+#             thread: Some(thread),
+#         }
+#     }
+# }
+```
+-->
+<pre><code class="language-rust noplayground"><span class="boring">use std::sync::mpsc;
+</span><span class="boring">use std::sync::Arc;
+</span><span class="boring">use std::sync::Mutex;
+</span><span class="boring">use std::thread;
+</span><span class="boring">
+</span><span class="boring">pub struct GroupeTaches {
+</span><span class="boring">    operateurs: Vec&lt;Operateur&gt;,
+</span><span class="boring">    envoi: mpsc::Sender&lt;Mission&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">type Mission = Box&lt;dyn FnOnce() + Send + 'static&gt;;
+</span><span class="boring">
+</span>enum Message {
+    NouvelleMission(Mission),
+    Extinction,
+}
+<span class="boring">
+</span><span class="boring">impl GroupeTaches {
+</span><span class="boring">    /// Crée un nouveau GroupeTaches.
+</span><span class="boring">    ///
+</span><span class="boring">    /// La taille est le nom de tâches présentes dans le groupe.
+</span><span class="boring">    ///
+</span><span class="boring">    /// # Panics
+</span><span class="boring">    ///
+</span><span class="boring">    /// La fonction `new` devrait paniquer si la taille vaut zéro.
+</span><span class="boring">    pub fn new(taille: usize) -&gt; GroupeTaches {
+</span><span class="boring">        assert!(taille &gt; 0);
+</span><span class="boring">
+</span><span class="boring">        let (envoi, reception) = mpsc::channel();
+</span><span class="boring">
+</span><span class="boring">        let reception = Arc::new(Mutex::new(reception));
+</span><span class="boring">
+</span><span class="boring">        let mut operateurs = Vec::with_capacity(taille);
+</span><span class="boring">
+</span><span class="boring">        for id in 0..taille {
+</span><span class="boring">            operateurs.push(Operateur::new(id, Arc::clone(&amp;reception)));
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        GroupeTaches { operateurs, envoi }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn executer&lt;F&gt;(&amp;self, f: F)
+</span><span class="boring">    where
+</span><span class="boring">        F: FnOnce() + Send + 'static,
+</span><span class="boring">    {
+</span><span class="boring">        let mission = Box::new(f);
+</span><span class="boring">
+</span><span class="boring">        self.envoi.send(mission).unwrap();
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Drop for GroupeTaches {
+</span><span class="boring">    fn drop(&amp;mut self) {
+</span><span class="boring">        for operateur in &amp;mut self.operateurs {
+</span><span class="boring">            println!(&quot;Arrêt de l'opérateur {}&quot;, operateur.id);
+</span><span class="boring">
+</span><span class="boring">            if let Some(tache) = operateur.tache.take() {
+</span><span class="boring">                tache.join().unwrap();
+</span><span class="boring">            }
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct Operateur {
+</span><span class="boring">    id: usize,
+</span><span class="boring">    tache: Option&lt;thread::JoinHandle&lt;()&gt;&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Operateur {
+</span><span class="boring">    fn new(id: usize, reception: Arc&lt;Mutex&lt;mpsc::Receiver&lt;Mission&gt;&gt;&gt;) -&gt; Operateur {
+</span><span class="boring">        let tache = thread::spawn(move || loop {
+</span><span class="boring">            let mission = reception.lock().unwrap().recv().unwrap();
+</span><span class="boring">
+</span><span class="boring">            println!(&quot;L'opérateur {} a reçu une mission ; il l'exécute.&quot;, id);
+</span><span class="boring">
+</span><span class="boring">            mission();
+</span><span class="boring">        });
+</span><span class="boring">
+</span><span class="boring">        Operateur {
+</span><span class="boring">            id,
+</span><span class="boring">            tache: Some(tache),
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<!--
+This `Message` enum will either be a `NewJob` variant that holds the `Job` the
+thread should run, or it will be a `Terminate` variant that will cause the
+thread to exit its loop and stop.
+-->
+<p>Cette énumération <code>Message</code> aura pour valeurs une variante <code>NouvelleMission</code>
+qui contiendra la <code>Mission</code> que la tâche devra exécuter, ou la variante
+<code>Extinction</code> qui va faire en sorte que la tâche sorte de sa boucle et se
+termine.</p>
+<!--
+We need to adjust the channel to use values of type `Message` rather than type
+`Job`, as shown in Listing 20-23.
+-->
+<p>Nous devons corriger le canal pour utiliser les valeurs du type <code>Message</code>
+à la place du type <code>Mission</code>, comme dans l'encart 20-23.</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,ignore
+# use std::sync::mpsc;
+# use std::sync::Arc;
+# use std::sync::Mutex;
+# use std::thread;
+# 
+pub struct ThreadPool {
+    workers: Vec<Worker>,
+    sender: mpsc::Sender<Message>,
+}
+
+// --snip--
+
+# type Job = Box<dyn FnOnce() + Send + 'static>;
+# 
+# enum Message {
+#     NewJob(Job),
+#     Terminate,
+# }
+# 
+impl ThreadPool {
+    // --snip--
+
+#     /// Create a new ThreadPool.
+#     ///
+#     /// The size is the number of threads in the pool.
+#     ///
+#     /// # Panics
+#     ///
+#     /// The `new` function will panic if the size is zero.
+#     pub fn new(size: usize) -> ThreadPool {
+#         assert!(size > 0);
+# 
+#         let (sender, receiver) = mpsc::channel();
+# 
+#         let receiver = Arc::new(Mutex::new(receiver));
+# 
+#         let mut workers = Vec::with_capacity(size);
+# 
+#         for id in 0..size {
+#             workers.push(Worker::new(id, Arc::clone(&receiver)));
+#         }
+# 
+#         ThreadPool { workers, sender }
+#     }
+# 
+    pub fn execute<F>(&self, f: F)
+    where
+        F: FnOnce() + Send + 'static,
+    {
+        let job = Box::new(f);
+
+        self.sender.send(Message::NewJob(job)).unwrap();
+    }
+}
+
+// --snip--
+
+# impl Drop for ThreadPool {
+#     fn drop(&mut self) {
+#         for worker in &mut self.workers {
+#             println!("Shutting down worker {}", worker.id);
+# 
+#             if let Some(thread) = worker.thread.take() {
+#                 thread.join().unwrap();
+#             }
+#         }
+#     }
+# }
+# 
+# struct Worker {
+#     id: usize,
+#     thread: Option<thread::JoinHandle<()>>,
+# }
+# 
+impl Worker {
+    fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Message>>>) -> Worker {
+        let thread = thread::spawn(move || loop {
+            let message = receiver.lock().unwrap().recv().unwrap();
+
+            match message {
+                Message::NewJob(job) => {
+                    println!("Worker {} got a job; executing.", id);
+
+                    job();
+                }
+                Message::Terminate => {
+                    println!("Worker {} was told to terminate.", id);
+
+                    break;
+                }
+            }
+        });
+
+        Worker {
+            id,
+            thread: Some(thread),
+        }
+    }
+}
+```
+-->
+<pre><code class="language-rust ignore"><span class="boring">use std::sync::mpsc;
+</span><span class="boring">use std::sync::Arc;
+</span><span class="boring">use std::sync::Mutex;
+</span><span class="boring">use std::thread;
+</span><span class="boring">
+</span>pub struct GroupeTaches {
+    operateurs: Vec&lt;Operateur&gt;,
+    envoi: mpsc::Sender&lt;Message&gt;,
+}
+
+// -- partie masquée ici --
+
+<span class="boring">type Mission = Box&lt;dyn FnOnce() + Send + 'static&gt;;
+</span><span class="boring">
+</span><span class="boring">enum Message {
+</span><span class="boring">    NouvelleMission(Mission),
+</span><span class="boring">    Extinction,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl GroupeTaches {
+    // -- partie masquée ici --
+
+<span class="boring">    /// Crée un nouveau GroupeTaches.
+</span><span class="boring">    ///
+</span><span class="boring">    /// La taille est le nom de tâches présentes dans le groupe.
+</span><span class="boring">    ///
+</span><span class="boring">    /// # Panics
+</span><span class="boring">    ///
+</span><span class="boring">    /// La fonction `new` devrait paniquer si la taille vaut zéro.
+</span><span class="boring">    pub fn new(taille: usize) -&gt; GroupeTaches {
+</span><span class="boring">        assert!(taille &gt; 0);
+</span><span class="boring">
+</span><span class="boring">        let (envoi, reception) = mpsc::channel();
+</span><span class="boring">
+</span><span class="boring">        let reception = Arc::new(Mutex::new(reception));
+</span><span class="boring">
+</span><span class="boring">        let mut operateurs = Vec::with_capacity(taille);
+</span><span class="boring">
+</span><span class="boring">        for id in 0..taille {
+</span><span class="boring">            operateurs.push(Operateur::new(id, Arc::clone(&amp;reception)));
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        GroupeTaches { operateurs, envoi }
+</span><span class="boring">    }
+</span><span class="boring">
+</span>    pub fn executer&lt;F&gt;(&amp;self, f: F)
+    where
+        F: FnOnce() + Send + 'static,
+    {
+        let mission = Box::new(f);
+
+        self.envoi.send(Message::NouvelleMission(mission)).unwrap();
+    }
+}
+
+// -- partie masquée ici --
+
+<span class="boring">impl Drop for GroupeTaches {
+</span><span class="boring">    fn drop(&amp;mut self) {
+</span><span class="boring">        for operateur in &amp;mut self.operateurs {
+</span><span class="boring">            println!(&quot;Arrêt de l'opérateur {}&quot;, operateur.id);
+</span><span class="boring">
+</span><span class="boring">            if let Some(tache) = operateur.tache.take() {
+</span><span class="boring">                tache.join().unwrap();
+</span><span class="boring">            }
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">struct Operateur {
+</span><span class="boring">    id: usize,
+</span><span class="boring">    tache: Option&lt;thread::JoinHandle&lt;()&gt;&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Operateur {
+    fn new(id: usize, reception: Arc&lt;Mutex&lt;mpsc::Receiver&lt;Message&gt;&gt;&gt;) -&gt; Operateur {
+        let tache = thread::spawn(move || loop {
+            let message = reception.lock().unwrap().recv().unwrap();
+
+            match message {
+                Message::NouvelleMission(mission) =&gt; {
+                    println!(&quot;L'opérateur {} a reçu une mission ; il l'exécute.&quot;, id);
+
+                    mission();
+                }
+                Message::Extinction =&gt; {
+                    println!(&quot;L'opérateur {} a reçu l'instruction d'arrêt.&quot;, id);
+
+                    break;
+                }
+            }
+        });
+
+        Operateur {
+            id,
+            tache: Some(tache),
+        }
+    }
+}
+</code></pre>
+<!--
+<span class="caption">Listing 20-23: Sending and receiving `Message` values and
+exiting the loop if a `Worker` receives `Message::Terminate`</span>
+-->
+<p><span class="caption">Encart 20-23 : envoi et réception de valeurs de <code>Message</code>
+et sortie de la boucle si un <code>Operateur</code> reçoit <code>Message:Extinction</code></span></p>
+<!--
+To incorporate the `Message` enum, we need to change `Job` to `Message` in two
+places: the definition of `ThreadPool` and the signature of `Worker::new`. The
+`execute` method of `ThreadPool` needs to send jobs wrapped in the
+`Message::NewJob` variant. Then, in `Worker::new` where a `Message` is received
+from the channel, the job will be processed if the `NewJob` variant is
+received, and the thread will break out of the loop if the `Terminate` variant
+is received.
+-->
+<p>Pour intégrer l'énumération <code>Message</code>, nous devons changer <code>Mission</code> par
+<code>Message</code> à deux endroits : dans la définition de <code>GroupeTaches</code> et dans la
+signature de <code>Operateur::new</code>. La méthode <code>executer</code> de <code>GroupeTaches</code> doit
+envoyer des missions encapsulées dans des variantes de
+<code>Message::NouvelleTache</code>. Ensuite, dans <code>Operateur::new</code> où nous recevons des
+<code>Message</code> du canal, la mission sera traitée si la variante <code>NouvelleTache</code> est
+reçue, ou bien la tâche arrêtera la boucle si la variante <code>Extinction</code> est
+reçue.</p>
+<!--
+With these changes, the code will compile and continue to function in the same
+way as it did after Listing 20-20. But we’ll get a warning because we aren’t
+creating any messages of the `Terminate` variety. Let’s fix this warning by
+changing our `Drop` implementation to look like Listing 20-24.
+-->
+<p>Grâce à ces changements, le code va se compiler et continuer de fonctionner de
+la même manière qu'il le faisait après l'encart 20-20. Mais nous allons obtenir
+un avertissement car nous ne créons aucun message de la variante <code>Extinction</code>.
+Corrigeons cet avertissement en modifiant notre implémentation de <code>Drop</code>
+pour qu'elle ressemble à l'encart 20-24.</p>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,ignore
+# use std::sync::mpsc;
+# use std::sync::Arc;
+# use std::sync::Mutex;
+# use std::thread;
+# 
+# pub struct ThreadPool {
+#     workers: Vec<Worker>,
+#     sender: mpsc::Sender<Message>,
+# }
+# 
+# type Job = Box<dyn FnOnce() + Send + 'static>;
+# 
+# enum Message {
+#     NewJob(Job),
+#     Terminate,
+# }
+# 
+# impl ThreadPool {
+#     /// Create a new ThreadPool.
+#     ///
+#     /// The size is the number of threads in the pool.
+#     ///
+#     /// # Panics
+#     ///
+#     /// The `new` function will panic if the size is zero.
+#     pub fn new(size: usize) -> ThreadPool {
+#         assert!(size > 0);
+# 
+#         let (sender, receiver) = mpsc::channel();
+# 
+#         let receiver = Arc::new(Mutex::new(receiver));
+# 
+#         let mut workers = Vec::with_capacity(size);
+# 
+#         for id in 0..size {
+#             workers.push(Worker::new(id, Arc::clone(&receiver)));
+#         }
+# 
+#         ThreadPool { workers, sender }
+#     }
+# 
+#     pub fn execute<F>(&self, f: F)
+#     where
+#         F: FnOnce() + Send + 'static,
+#     {
+#         let job = Box::new(f);
+# 
+#         self.sender.send(Message::NewJob(job)).unwrap();
+#     }
+# }
+# 
+impl Drop for ThreadPool {
+    fn drop(&mut self) {
+        println!("Sending terminate message to all workers.");
+
+        for _ in &self.workers {
+            self.sender.send(Message::Terminate).unwrap();
+        }
+
+        println!("Shutting down all workers.");
+
+        for worker in &mut self.workers {
+            println!("Shutting down worker {}", worker.id);
+
+            if let Some(thread) = worker.thread.take() {
+                thread.join().unwrap();
+            }
+        }
+    }
+}
+# 
+# struct Worker {
+#     id: usize,
+#     thread: Option<thread::JoinHandle<()>>,
+# }
+# 
+# impl Worker {
+#     fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Message>>>) -> Worker {
+#         let thread = thread::spawn(move || loop {
+#             let message = receiver.lock().unwrap().recv().unwrap();
+# 
+#             match message {
+#                 Message::NewJob(job) => {
+#                     println!("Worker {} got a job; executing.", id);
+# 
+#                     job();
+#                 }
+#                 Message::Terminate => {
+#                     println!("Worker {} was told to terminate.", id);
+# 
+#                     break;
+#                 }
+#             }
+#         });
+# 
+#         Worker {
+#             id,
+#             thread: Some(thread),
+#         }
+#     }
+# }
+```
+-->
+<pre><code class="language-rust ignore"><span class="boring">use std::sync::mpsc;
+</span><span class="boring">use std::sync::Arc;
+</span><span class="boring">use std::sync::Mutex;
+</span><span class="boring">use std::thread;
+</span><span class="boring">
+</span><span class="boring">pub struct GroupeTaches {
+</span><span class="boring">    operateurs: Vec&lt;Operateur&gt;,
+</span><span class="boring">    envoi: mpsc::Sender&lt;Message&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">type Mission = Box&lt;dyn FnOnce() + Send + 'static&gt;;
+</span><span class="boring">
+</span><span class="boring">enum Message {
+</span><span class="boring">    NouvelleMission(Mission),
+</span><span class="boring">    Extinction,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl GroupeTaches {
+</span><span class="boring">    /// Crée un nouveau GroupeTaches.
+</span><span class="boring">    ///
+</span><span class="boring">    /// La taille est le nom de tâches présentes dans le groupe.
+</span><span class="boring">    ///
+</span><span class="boring">    /// # Panics
+</span><span class="boring">    ///
+</span><span class="boring">    /// La fonction `new` devrait paniquer si la taille vaut zéro.
+</span><span class="boring">    pub fn new(taille: usize) -&gt; GroupeTaches {
+</span><span class="boring">        assert!(taille &gt; 0);
+</span><span class="boring">
+</span><span class="boring">        let (envoi, reception) = mpsc::channel();
+</span><span class="boring">
+</span><span class="boring">        let reception = Arc::new(Mutex::new(reception));
+</span><span class="boring">
+</span><span class="boring">        let mut operateurs = Vec::with_capacity(taille);
+</span><span class="boring">
+</span><span class="boring">        for id in 0..taille {
+</span><span class="boring">            operateurs.push(Operateur::new(id, Arc::clone(&amp;reception)));
+</span><span class="boring">        }
+</span><span class="boring">
+</span><span class="boring">        GroupeTaches { operateurs, envoi }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    pub fn executer&lt;F&gt;(&amp;self, f: F)
+</span><span class="boring">    where
+</span><span class="boring">        F: FnOnce() + Send + 'static,
+</span><span class="boring">    {
+</span><span class="boring">        let mission = Box::new(f);
+</span><span class="boring">
+</span><span class="boring">        self.envoi.send(Message::NouvelleMission(mission)).unwrap();
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl Drop for GroupeTaches {
+    fn drop(&amp;mut self) {
+        println!(&quot;Envoi du message d'extinction à tous les opérateurs.&quot;);
+
+        for _ in &amp;self.operateurs {
+            self.envoi.send(Message::Extinction).unwrap();
+        }
+
+        println!(&quot;Arrêt de tous les opérateurs.&quot;);
+
+        for operateur in &amp;mut self.operateurs {
+            println!(&quot;Arrêt de l'opérateur {}&quot;, operateur.id);
+
+            if let Some(tache) = operateur.tache.take() {
+                tache.join().unwrap();
+            }
+        }
+    }
+}
+<span class="boring">
+</span><span class="boring">struct Operateur {
+</span><span class="boring">    id: usize,
+</span><span class="boring">    tache: Option&lt;thread::JoinHandle&lt;()&gt;&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl Operateur {
+</span><span class="boring">    fn new(id: usize, reception: Arc&lt;Mutex&lt;mpsc::Receiver&lt;Message&gt;&gt;&gt;) -&gt; Operateur {
+</span><span class="boring">        let tache = thread::spawn(move || loop {
+</span><span class="boring">            let message = reception.lock().unwrap().recv().unwrap();
+</span><span class="boring">
+</span><span class="boring">            match message {
+</span><span class="boring">                Message::NouvelleMission(mission) =&gt; {
+</span><span class="boring">                    println!(&quot;L'opérateur {} a reçu une mission ; il l'exécute.&quot;, id);
+</span><span class="boring">
+</span><span class="boring">                    mission();
+</span><span class="boring">                }
+</span><span class="boring">                Message::Extinction =&gt; {
+</span><span class="boring">                    println!(&quot;L'opérateur {} a reçu l'instruction d'arrêt.&quot;, id);
+</span><span class="boring">
+</span><span class="boring">                    break;
+</span><span class="boring">                }
+</span><span class="boring">            }
+</span><span class="boring">        });
+</span><span class="boring">
+</span><span class="boring">        Operateur {
+</span><span class="boring">            id,
+</span><span class="boring">            tache: Some(tache),
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span></code></pre>
+<!--
+<span class="caption">Listing 20-24: Sending `Message::Terminate` to the
+workers before calling `join` on each worker thread</span>
+-->
+<p><span class="caption">Encart 20-24 : envoi de <code>Message::Extinction</code> aux
+opérateurs avant de d'appeler <code>join</code> sur toutes les tâches de ces
+opérateurs</span></p>
+<!--
+We’re now iterating over the workers twice: once to send one `Terminate`
+message for each worker and once to call `join` on each worker’s thread. If we
+tried to send a message and `join` immediately in the same loop, we couldn’t
+guarantee that the worker in the current iteration would be the one to get the
+message from the channel.
+-->
+<p>Nous itérons deux fois sur les opérateurs : une fois pour envoyer un message
+<code>Extinction</code> pour chaque opérateur, et une seconde fois pour utiliser <code>join</code>
+sur leur tâche. Si nous avions essayé d'envoyer le message et d'utiliser
+immédiatement <code>join</code> dans la même boucle, nous n'aurions pas pu garantir que
+l'opérateur de l'itération en cours serait celui qui obtiendrait le message
+envoyé dans le canal.</p>
+<!--
+To better understand why we need two separate loops, imagine a scenario with
+two workers. If we used a single loop to iterate through each worker, on the
+first iteration a terminate message would be sent down the channel and `join`
+called on the first worker’s thread. If that first worker was busy processing a
+request at that moment, the second worker would pick up the terminate message
+from the channel and shut down. We would be left waiting on the first worker to
+shut down, but it never would because the second thread picked up the terminate
+message. Deadlock!
+-->
+<p>Pour mieux comprendre pourquoi nous avons besoin de deux boucles distinctes,
+imaginez un scénario avec deux opérateurs. Si nous avions utilisé une seule
+boucle pour itérer sur chacun des opérateurs, dans la première itération un
+message d'extinction aurait été envoyé dans le canal et <code>join</code> aurait été
+utilisé sur la tâche du premier opérateur. Si ce premier opérateur était occupé
+à traiter une requête à ce moment-là, le second opérateur aurait alors récupéré
+le message d'extinction dans le canal et se serait arrêté. Nous serions alors
+restés à attendre que le premier opérateur s'arrête, mais cela ne se serait
+jamais produit car c'est la seconde tâche qui aurait obtenu le message
+d'extinction. Nous serions alors dans une situation d'interblocage !</p>
+<!--
+To prevent this scenario, we first put all of our `Terminate` messages on the
+channel in one loop; then we join on all the threads in another loop. Each
+worker will stop receiving requests on the channel once it gets a terminate
+message. So, we can be sure that if we send the same number of terminate
+messages as there are workers, each worker will receive a terminate message
+before `join` is called on its thread.
+-->
+<p>Pour éviter ce scénario, nous allons commencer par émettre tous nos messages
+<code>Extinction</code> dans le canal en utilisant une boucle ; puis nous utilisons <code>join</code>
+sur toutes les tâches dans une seconde boucle. Chaque opérateur va arrêter de
+recevoir de nouvelles requêtes du canal dès qu'il aura reçu le message
+d'extinction. Donc, nous sommes maintenant assurés que si nous envoyons autant
+de messages d'extinction qu'il y a d'opérateurs, chaque opérateur
+recevra un message d'extinction avant que <code>join</code> ne soit utilisé sur leur
+tâche.</p>
+<!--
+To see this code in action, let’s modify `main` to accept only two requests
+before gracefully shutting down the server, as shown in Listing 20-25.
+-->
+<p>Pour observer ce code en action, modifions notre <code>main</code> pour accepter
+uniquement deux requêtes avant d'arrêter proprement le serveur, comme dans
+l'encart 20-25.</p>
+<!--
+<span class="filename">Filename: src/bin/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/bin/main.rs</span></p>
+<!--
+```rust,ignore
+# use hello::ThreadPool;
+# use std::fs;
+# use std::io::prelude::*;
+# use std::net::TcpListener;
+# use std::net::TcpStream;
+# use std::thread;
+# use std::time::Duration;
+# 
+fn main() {
+    let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
+    let pool = ThreadPool::new(4);
+
+    for stream in listener.incoming().take(2) {
+        let stream = stream.unwrap();
+
+        pool.execute(|| {
+            handle_connection(stream);
+        });
+    }
+
+    println!("Shutting down.");
+}
+# 
+# fn handle_connection(mut stream: TcpStream) {
+#     let mut buffer = [0; 1024];
+#     stream.read(&mut buffer).unwrap();
+# 
+#     let get = b"GET / HTTP/1.1\r\n";
+#     let sleep = b"GET /sleep HTTP/1.1\r\n";
+# 
+#     let (status_line, filename) = if buffer.starts_with(get) {
+#         ("HTTP/1.1 200 OK", "hello.html")
+#     } else if buffer.starts_with(sleep) {
+#         thread::sleep(Duration::from_secs(5));
+#         ("HTTP/1.1 200 OK", "hello.html")
+#     } else {
+#         ("HTTP/1.1 404 NOT FOUND", "404.html")
+#     };
+# 
+#     let contents = fs::read_to_string(filename).unwrap();
+# 
+#     let response = format!(
+#         "{}\r\nContent-Length: {}\r\n\r\n{}",
+#         status_line,
+#         contents.len(),
+#         contents
+#     );
+# 
+#     stream.write(response.as_bytes()).unwrap();
+#     stream.flush().unwrap();
+# }
+```
+-->
+<pre><code class="language-rust ignore"><span class="boring">use salutations::GroupeTaches;
+</span><span class="boring">use std::fs;
+</span><span class="boring">use std::io::prelude::*;
+</span><span class="boring">use std::net::TcpListener;
+</span><span class="boring">use std::net::TcpStream;
+</span><span class="boring">use std::thread;
+</span><span class="boring">use std::time::Duration;
+</span><span class="boring">
+</span>fn main() {
+    let ecouteur = TcpListener::bind(&quot;127.0.0.1:7878&quot;).unwrap();
+    let groupe = GroupeTaches::new(4);
+
+    for flux in ecouteur.incoming().take(2) {
+        let flux = flux.unwrap();
+
+        groupe.executer(|| {
+            gestion_connexion(flux);
+        });
+    }
+
+    println!(&quot;Arrêt complet.&quot;);
+}
+<span class="boring">
+</span><span class="boring">fn gestion_connexion(mut flux: TcpStream) {
+</span><span class="boring">    let mut tampon = [0; 1024];
+</span><span class="boring">    flux.read(&amp;mut tampon).unwrap();
+</span><span class="boring">
+</span><span class="boring">    let get = b&quot;GET / HTTP/1.1\r\n&quot;;
+</span><span class="boring">    let pause = b&quot;GET /pause HTTP/1.1\r\n&quot;;
+</span><span class="boring">
+</span><span class="boring">    let (ligne_statut, nom_fichier) = if tampon.starts_with(get) {
+</span><span class="boring">        (&quot;HTTP/1.1 200 OK&quot;, &quot;hello.html&quot;)
+</span><span class="boring">    } else if tampon.starts_with(pause) {
+</span><span class="boring">        thread::sleep(Duration::from_secs(5));
+</span><span class="boring">        (&quot;HTTP/1.1 200 OK&quot;, &quot;hello.html&quot;)
+</span><span class="boring">    } else {
+</span><span class="boring">        (&quot;HTTP/1.1 404 NOT FOUND&quot;, &quot;404.html&quot;)
+</span><span class="boring">    };
+</span><span class="boring">
+</span><span class="boring">    let contenu = fs::read_to_string(nom_fichier).unwrap();
+</span><span class="boring">
+</span><span class="boring">    let reponse = format!(
+</span><span class="boring">        &quot;{}\r\nContent-Length: {}\r\n\r\n{}&quot;,
+</span><span class="boring">        ligne_statut,
+</span><span class="boring">        contenu.len(),
+</span><span class="boring">        contenu
+</span><span class="boring">    );
+</span><span class="boring">
+</span><span class="boring">    flux.write(reponse.as_bytes()).unwrap();
+</span><span class="boring">    flux.flush().unwrap();
+</span><span class="boring">}
+</span></code></pre>
+<!--
+<span class="caption">Listing 20-25: Shut down the server after serving two
+requests by exiting the loop</span>
+-->
+<p><span class="caption">Encart 20-25 : arrêt du serveur après avoir servi deux
+requêtes en sortant de la boucle</span></p>
+<!--
+You wouldn’t want a real-world web server to shut down after serving only two
+requests. This code just demonstrates that the graceful shutdown and cleanup is
+in working order.
+-->
+<p>Dans la réalité on ne voudrait pas qu'un serveur web s'arrête après avoir servi
+seulement deux requêtes. Ce code sert uniquement à montrer que l'arrêt et le
+nettoyage s'effectuent bien proprement.</p>
+<!--
+The `take` method is defined in the `Iterator` trait and limits the iteration
+to the first two items at most. The `ThreadPool` will go out of scope at the
+end of `main`, and the `drop` implementation will run.
+-->
+<p>La méthode <code>take</code> est définie dans le trait <code>Iterator</code> et limite l'itération
+aux deux premiers éléments au maximum. Le <code>GroupeTaches</code> va sortir de la portée
+à la fin du <code>main</code> et l'implémentation de <code>drop</code> va s'exécuter.</p>
+<!--
+Start the server with `cargo run`, and make three requests. The third request
+should error, and in your terminal you should see output similar to this:
+-->
+<p>Démarrez le serveur avec <code>cargo run</code> et faites trois requêtes. La troisième
+requête devrait renvoyer une erreur tandis que dans votre terminal vous devriez
+avoir une sortie similaire à ceci :</p>
+<!--
+<!-- manual-regeneration
+cd listings/ch20-web-server/listing-20-25
+cargo run
+curl http://127.0.0.1:7878
+curl http://127.0.0.1:7878
+curl http://127.0.0.1:7878
+third request will error because server will have shut down
+copy output below
+Can't automate because the output depends on making requests
+-- >
+-->
+<!--
+```console
+$ cargo run
+   Compiling hello v0.1.0 (file:///projects/hello)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.0s
+     Running `target/debug/main`
+Worker 0 got a job; executing.
+Worker 3 got a job; executing.
+Shutting down.
+Sending terminate message to all workers.
+Shutting down all workers.
+Shutting down worker 0
+Worker 1 was told to terminate.
+Worker 2 was told to terminate.
+Worker 0 was told to terminate.
+Worker 3 was told to terminate.
+Shutting down worker 1
+Shutting down worker 2
+Shutting down worker 3
+```
+-->
+<pre><code class="language-console">$ cargo run
+   Compiling salutations v0.1.0 (file:///projects/salutations)
+    Finished dev [unoptimized + debuginfo] target(s) in 1.0s
+     Running `target/debug/main`
+L'opérateur 0 a reçu une mission ; il l'exécute.
+L'opérateur 3 a reçu une mission ; il l'exécute.
+Arrêt.
+Envoi du message d'extinction à tous les opérateurs.
+Arrêt de tous les opérateurs.
+Arrêt de l'opérateur 0
+L'opérateur 1 a reçu l'instruction d'arrêt.
+L'opérateur 2 a reçu l'instruction d'arrêt.
+L'opérateur 0 a reçu l'instruction d'arrêt.
+L'opérateur 3 a reçu l'instruction d'arrêt.
+Arrêt de l'opérateur 1
+Arrêt de l'opérateur 2
+Arrêt de l'opérateur 3
+</code></pre>
+<!--
+You might see a different ordering of workers and messages printed. We can see
+how this code works from the messages: workers 0 and 3 got the first two
+requests, and then on the third request, the server stopped accepting
+connections. When the `ThreadPool` goes out of scope at the end of `main`, its
+`Drop` implementation kicks in, and the pool tells all workers to terminate.
+The workers each print a message when they see the terminate message, and then
+the thread pool calls `join` to shut down each worker thread.
+-->
+<p>Vous pourriez avoir un ordre différent entre les opérateurs et les messages
+affichés. Nous pouvons constater la façon dont ce code fonctionne grâce aux
+messages : les opérateurs 0 et 3 obtiennent les deux premières requêtes puis, à
+la troisième requête, le serveur arrête d'accepter des connexions. Lorsque
+le <code>GroupeTaches</code> sort de la portée à la fin du <code>main</code>, son implémentation de
+<code>Drop</code> entre en action et le groupe demande à tous les opérateurs de
+s'arrêter. Chaque opérateur va afficher un message lorsqu'il recevra le message
+d'extinction puis le groupe de tâche utilisera <code>join</code> pour arrêter
+la tâche de chaque opérateur.</p>
+<!--
+Notice one interesting aspect of this particular execution: the `ThreadPool`
+sent the terminate messages down the channel, and before any worker received
+the messages, we tried to join worker 0. Worker 0 had not yet received the
+terminate message, so the main thread blocked waiting for worker 0 to finish.
+In the meantime, each of the workers received the termination messages. When
+worker 0 finished, the main thread waited for the rest of the workers to
+finish. At that point, they had all received the termination message and were
+able to shut down.
+-->
+<p>Remarquez un aspect intéressant spécifique à cette exécution : le
+<code>GroupeTaches</code> a envoyé les messages d'extinction dans le canal, et avant que
+tous les opérateurs aient reçu les messages, nous avons essayé d'utiliser
+<code>join</code> sur l'opérateur 0. L'opérateur 0 n'avait pas encore reçu le message
+d'extinction, donc la tâche principale a attendu que l'opérateur 0 finisse.
+Pendant ce temps, tous les autres opérateurs ont reçu les messages
+d'extinction. Lorsque l'opérateur 0 a fini, la tâche principale a attendu que
+les autres opérateurs se terminent. A ce stade, ils avaient alors tous reçu le
+message d'extinction et étaient en mesure de s'arrêter.</p>
+<!--
+Congrats! We’ve now completed our project; we have a basic web server that uses
+a thread pool to respond asynchronously. We’re able to perform a graceful
+shutdown of the server, which cleans up all the threads in the pool.
+-->
+<p>Félicitations ! Nous avons maintenant terminé notre projet ; nous avons un
+serveur web basique qui utilise un groupe de tâches pour répondre de manière
+asynchrone. Nous pouvons demander un arrêt propre du serveur qui va nettoyer
+toutes les tâches du groupe.</p>
+<!--
+Here’s the full code for reference:
+-->
+<p>Voici le code complet afin que vous puissiez vous y référer :</p>
+<!--
+<span class="filename">Filename: src/bin/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/bin/main.rs</span></p>
+<!--
+```rust,ignore
+use hello::ThreadPool;
+use std::fs;
+use std::io::prelude::*;
+use std::net::TcpListener;
+use std::net::TcpStream;
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+    let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
+    let pool = ThreadPool::new(4);
+
+    for stream in listener.incoming() {
+        let stream = stream.unwrap();
+
+        pool.execute(|| {
+            handle_connection(stream);
+        });
+    }
+
+    println!("Shutting down.");
+}
+
+fn handle_connection(mut stream: TcpStream) {
+    let mut buffer = [0; 1024];
+    stream.read(&mut buffer).unwrap();
+
+    let get = b"GET / HTTP/1.1\r\n";
+    let sleep = b"GET /sleep HTTP/1.1\r\n";
+
+    let (status_line, filename) = if buffer.starts_with(get) {
+        ("HTTP/1.1 200 OK", "hello.html")
+    } else if buffer.starts_with(sleep) {
+        thread::sleep(Duration::from_secs(5));
+        ("HTTP/1.1 200 OK", "hello.html")
+    } else {
+        ("HTTP/1.1 404 NOT FOUND", "404.html")
+    };
+
+    let contents = fs::read_to_string(filename).unwrap();
+
+    let response = format!(
+        "{}\r\nContent-Length: {}\r\n\r\n{}",
+        status_line,
+        contents.len(),
+        contents
+    );
+
+    stream.write(response.as_bytes()).unwrap();
+    stream.flush().unwrap();
+}
+```
+-->
+<pre><code class="language-rust ignore">use salutations::GroupeTaches;
+use std::fs;
+use std::io::prelude::*;
+use std::net::TcpListener;
+use std::net::TcpStream;
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+    let ecouteur = TcpListener::bind(&quot;127.0.0.1:7878&quot;).unwrap();
+    let groupe = GroupeTaches::new(4);
+
+    for flux in ecouteur.incoming() {
+        let flux = flux.unwrap();
+
+        groupe.executer(|| {
+            gestion_connexion(flux);
+        });
+    }
+
+    println!(&quot;Shutting down.&quot;);
+}
+
+fn gestion_connexion(mut flux: TcpStream) {
+    let mut tampon = [0; 1024];
+    flux.read(&amp;mut tampon).unwrap();
+
+    let get = b&quot;GET / HTTP/1.1\r\n&quot;;
+    let pause = b&quot;GET /pause HTTP/1.1\r\n&quot;;
+
+    let (ligne_statut, nom_fichier) = if tampon.starts_with(get) {
+        (&quot;HTTP/1.1 200 OK&quot;, &quot;hello.html&quot;)
+    } else if tampon.starts_with(pause) {
+        thread::sleep(Duration::from_secs(5));
+        (&quot;HTTP/1.1 200 OK&quot;, &quot;hello.html&quot;)
+    } else {
+        (&quot;HTTP/1.1 404 NOT FOUND&quot;, &quot;404.html&quot;)
+    };
+
+    let contenu = fs::read_to_string(nom_fichier).unwrap();
+
+    let reponse = format!(
+        &quot;{}\r\nContent-Length: {}\r\n\r\n{}&quot;,
+        ligne_statut,
+        contenu.len(),
+        contenu
+    );
+
+    flux.write(reponse.as_bytes()).unwrap();
+    flux.flush().unwrap();
+}
+</code></pre>
+<!--
+<span class="filename">Filename: src/lib.rs</span>
+-->
+<p><span class="filename">Fichier : src/lib.rs</span></p>
+<!--
+```rust,noplayground
+use std::sync::mpsc;
+use std::sync::Arc;
+use std::sync::Mutex;
+use std::thread;
+
+pub struct ThreadPool {
+    workers: Vec<Worker>,
+    sender: mpsc::Sender<Message>,
+}
+
+type Job = Box<dyn FnOnce() + Send + 'static>;
+
+enum Message {
+    NewJob(Job),
+    Terminate,
+}
+
+impl ThreadPool {
+    /// Create a new ThreadPool.
+    ///
+    /// The size is the number of threads in the pool.
+    ///
+    /// # Panics
+    ///
+    /// The `new` function will panic if the size is zero.
+    pub fn new(size: usize) -> ThreadPool {
+        assert!(size > 0);
+
+        let (sender, receiver) = mpsc::channel();
+
+        let receiver = Arc::new(Mutex::new(receiver));
+
+        let mut workers = Vec::with_capacity(size);
+
+        for id in 0..size {
+            workers.push(Worker::new(id, Arc::clone(&receiver)));
+        }
+
+        ThreadPool { workers, sender }
+    }
+
+    pub fn execute<F>(&self, f: F)
+    where
+        F: FnOnce() + Send + 'static,
+    {
+        let job = Box::new(f);
+
+        self.sender.send(Message::NewJob(job)).unwrap();
+    }
+}
+
+impl Drop for ThreadPool {
+    fn drop(&mut self) {
+        println!("Sending terminate message to all workers.");
+
+        for _ in &self.workers {
+            self.sender.send(Message::Terminate).unwrap();
+        }
+
+        println!("Shutting down all workers.");
+
+        for worker in &mut self.workers {
+            println!("Shutting down worker {}", worker.id);
+
+            if let Some(thread) = worker.thread.take() {
+                thread.join().unwrap();
+            }
+        }
+    }
+}
+
+struct Worker {
+    id: usize,
+    thread: Option<thread::JoinHandle<()>>,
+}
+
+impl Worker {
+    fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Message>>>) -> Worker {
+        let thread = thread::spawn(move || loop {
+            let message = receiver.lock().unwrap().recv().unwrap();
+
+            match message {
+                Message::NewJob(job) => {
+                    println!("Worker {} got a job; executing.", id);
+
+                    job();
+                }
+                Message::Terminate => {
+                    println!("Worker {} was told to terminate.", id);
+
+                    break;
+                }
+            }
+        });
+
+        Worker {
+            id,
+            thread: Some(thread),
+        }
+    }
+}
+```
+-->
+<pre><code class="language-rust noplayground">use std::sync::mpsc;
+use std::sync::Arc;
+use std::sync::Mutex;
+use std::thread;
+
+pub struct GroupeTaches {
+    operateurs: Vec&lt;Operateur&gt;,
+    envoi: mpsc::Sender&lt;Message&gt;,
+}
+
+type Mission = Box&lt;dyn FnOnce() + Send + 'static&gt;;
+
+enum Message {
+    NouvelleMission(Mission),
+    Extinction,
+}
+
+impl GroupeTaches {
+    /// Crée un nouveau GroupeTaches.
+    ///
+    /// La taille est le nom de tâches présentes dans le groupe.
+    ///
+    /// # Panics
+    ///
+    /// La fonction `new` devrait paniquer si la taille vaut zéro.
+    pub fn new(taille: usize) -&gt; GroupeTaches {
+        assert!(taille &gt; 0);
+
+        let (envoi, reception) = mpsc::channel();
+
+        let reception = Arc::new(Mutex::new(reception));
+
+        let mut operateurs = Vec::with_capacity(taille);
+
+        for id in 0..taille {
+            operateurs.push(Operateur::new(id, Arc::clone(&amp;reception)));
+        }
+
+        GroupeTaches { operateurs, envoi }
+    }
+
+    pub fn executer&lt;F&gt;(&amp;self, f: F)
+    where
+        F: FnOnce() + Send + 'static,
+    {
+        let mission = Box::new(f);
+
+        self.envoi.send(Message::NouvelleMission(mission)).unwrap();
+    }
+}
+
+impl Drop for GroupeTaches {
+    fn drop(&amp;mut self) {
+        println!(&quot;Envoi du message d'extinction à tous les opérateurs.&quot;);
+
+        for _ in &amp;self.operateurs {
+            self.envoi.send(Message::Extinction).unwrap();
+        }
+
+        println!(&quot;Arrêt de tous les opérateurs.&quot;);
+
+        for operateur in &amp;mut self.operateurs {
+            println!(&quot;Arrêt de l'opérateur {}&quot;, operateur.id);
+
+            if let Some(tache) = operateur.tache.take() {
+                tache.join().unwrap();
+            }
+        }
+    }
+}
+
+struct Operateur {
+    id: usize,
+    tache: Option&lt;thread::JoinHandle&lt;()&gt;&gt;,
+}
+
+impl Operateur {
+    fn new(id: usize, reception: Arc&lt;Mutex&lt;mpsc::Receiver&lt;Message&gt;&gt;&gt;) -&gt; Operateur {
+        let tache = thread::spawn(move || loop {
+            let message = reception.lock().unwrap().recv().unwrap();
+
+            match message {
+                Message::NouvelleMission(mission) =&gt; {
+                    println!(&quot;L'opérateur {} a reçu une mission ; il l'exécute.&quot;, id);
+
+                    mission();
+                }
+                Message::Extinction =&gt; {
+                    println!(&quot;L'opérateur {} a reçu l'instruction d'arrêt.&quot;, id);
+
+                    break;
+                }
+            }
+        });
+
+        Operateur {
+            id,
+            tache: Some(tache),
+        }
+    }
+}
+</code></pre>
+<!--
+We could do more here! If you want to continue enhancing this project, here are
+some ideas:
+-->
+<p>Nous aurions pu faire bien plus ! Si vous souhaitez continuer à
+améliorer ce projet, voici quelques idées :</p>
+<!--
+* Add more documentation to `ThreadPool` and its public methods.
+* Add tests of the library’s functionality.
+* Change calls to `unwrap` to more robust error handling.
+* Use `ThreadPool` to perform some task other than serving web requests.
+* Find a thread pool crate on [crates.io](https://crates.io/) and implement a
+  similar web server using the crate instead. Then compare its API and
+  robustness to the thread pool we implemented.
+-->
+<ul>
+<li>Ajouter de la documentation à <code>GroupeTaches</code> et aux méthodes publiques.</li>
+<li>Ajouter des tests sur les fonctionnalités de la bibliothèque.</li>
+<li>Remplacer les appels à <code>unwrap</code> pour fournir une meilleure gestion des erreurs.</li>
+<li>Utiliser <code>GroupeTaches</code> pour exécuter d'autres tâches que de répondre à des
+requêtes web.</li>
+<li>Trouver une crate de groupe de tâches <em>(NdT : thread pool)</em> sur
+<a href="https://crates.io/">crates.io</a> et implémenter un serveur web similaire en
+l'utilisant. Comparer ensuite son API et sa robustesse au
+groupe de tâches que nous avons implémenté.</li>
+</ul>
+<!--
+## Summary
+-->
+<h2 id="résumé"><a class="header" href="#résumé">Résumé</a></h2>
+<!--
+Well done! You’ve made it to the end of the book! We want to thank you for
+joining us on this tour of Rust. You’re now ready to implement your own Rust
+projects and help with other peoples’ projects. Keep in mind that there is a
+welcoming community of other Rustaceans who would love to help you with any
+challenges you encounter on your Rust journey.
+-->
+<p>Bravo ! Vous êtes arrivé à la fin du livre ! Nous tenons à vous remercier
+chaleureusement de nous avoir accompagné pendant cette présentation de Rust.
+Vous êtes maintenant fin prêt(e) à créer vos propres projets Rust et aider les
+projets des autres développeurs. Rappelez-vous qu'il existe une communauté
+accueillante de Rustacés qui adorerait vous aider à relever tous les défis que vous
+rencontrerez dans votre aventure avec Rust.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch20-02-multithreaded.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="appendix-00.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch20-02-multithreaded.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="appendix-00.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../ferris.js"></script>
+    </body>
+</html>

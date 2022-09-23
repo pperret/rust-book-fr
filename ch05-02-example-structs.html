@@ -1,0 +1,907 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Un exemple de programme qui utilise des structures - Le langage de programmation Rust</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../ferris.css">
+        <link rel="stylesheet" href="../theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Le langage de programmation Rust</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Avant-propos</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="translation-terms.html">Traduction des termes</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Prise en main</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, world!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Programmer le jeu du plus ou du moins</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Les concepts courants de programmation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> Les variables et la mutabilité</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Les types de données</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Les fonctions</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Les commentaires</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Les structures de contrôle</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Comprendre la possession</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Qu'est-ce que la possession ?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Les références et l'emprunt</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Le type slice</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Utiliser les structures pour structurer des données apparentées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Définir et instancier des structures</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html" class="active"><strong aria-hidden="true">5.2.</strong> Un exemple de programme qui utilise des structures</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> La syntaxe des méthodes</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Les énumérations et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Définir une énumération</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> La structure de contrôle match</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> Une structure de contrôle concise : if let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Gérer des projets grandissants avec les paquets, crates et modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Les paquets et les crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Définir des modules pour gérer la portée et la visibilité</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Désigner un élément dans l'arborescence de modules</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Importer des chemins dans la portée via le mot-clé use</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Séparer les modules dans différents fichiers</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Les collections standard</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Stocker des listes de valeurs avec des vecteurs</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> Stocker du texte encodé en UTF-8 avec les Strings</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Stocker des clés associées à des valeurs dans des tables de hachage</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> La gestion des erreurs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Les erreurs irrécupérables avec panic!</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Des erreurs récupérables avec Result</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> Paniquer ou ne pas paniquer, telle est la question</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Les types génériques, les traits et les durées de vie</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Les types de données génériques</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Définir des comportements partagés avec les traits</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> La conformité des références avec les durées de vies</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Ecrire des tests automatisés</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Comment écrire des tests</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Gérer l'exécution des tests</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> L'organisation des tests</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> Un projet d'entrée/sortie : construire un programme en ligne de commande</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Récupérer les arguments de la ligne de commande</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Lire un fichier</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Remanier le code pour améliorer sa modularité et la gestion des erreurs</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Développer les fonctionnalités de la bibliothèque avec le TDD</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Travailler avec des variables d'environnement</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Ecrire les messages d'erreur sur la sortie d'erreurs standard au lieu de la sortie normale</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Les fonctionnalités des langages fonctionnels : les itérateurs et les fermetures</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Les fermetures : fonctions anonymes qui peuvent utiliser leur environnement</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Traiter une série d'éléments avec un itérateur</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> Amélioration de notre projet d'entrée/sortie</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Comparaison des performances : les boucles et les itérateurs</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> En savoir plus sur cargo et crates.io</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Personnaliser les compilations avec les profils de publication</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Publier une crate sur crates.io</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Les espaces de travail de cargo</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Installer des binaires à partir de crates.io avec cargo install</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Etendre les fonctionnalités de cargo avec des commandes personnalisées</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Les pointeurs intelligents</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Utiliser Box&lt;T&gt; pour pointer sur des données présentes sur le tas</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Considérer les pointeurs intelligents comme des références grâce au trait Deref</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Exécuter du code au nettoyage avec le trait Drop</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, le pointeur intelligent qui compte les références</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; et le motif de mutabilité interne</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Les boucles de références qui peuvent provoquer des fuites de mémoire</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> La concurrence sans craintes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Utiliser les tâches pour exécuter simultanément du code</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Utiliser l'envoi de messages pour transférer des données entre les tâches</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Le partage d'état en concurrence</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Etendre la concurrence avec les traits Sync et Send</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Les fonctionnalités orientées objet de Rust</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Les caractéristiques des langages orientés objet</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Utiliser les objets traits qui permettent des valeurs de types différents</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Implémenter un patron de conception orienté-objet</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Les motifs et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> Tous les endroits où les motifs peuvent être utilisés</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> La réfutabilité : lorsqu'un motif peut échouer à correspondre</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> La syntaxe des motifs</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Les fonctionnalités avancées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Le Rust non sécurisé (unsafe)</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Les traits avancés</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Les types avancés</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Les fonctions et fermetures avancées</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Les macros</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Projet final : construire un serveur web multitâches</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Développer un serveur web monotâche</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Transformer notre serveur monotâche en serveur multitâches</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Arrêt propre et nettoyage</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Annexes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - les mots-clés</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> 🚧 B - les opérateurs et les symboles</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> 🚧 C - les traits dérivables</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> 🚧 D - Des outils de développement utiles</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> 🚧 E - Les éditions</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> 🚧 F - Les traductions de ce livre</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> 🚧 G - Comment Rust est construit, et “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Le langage de programmation Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/Jimskapt/rust-book-fr" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+## An Example Program Using Structs
+-->
+<h2 id="un-exemple-de-programme-qui-utilise-des-structures"><a class="header" href="#un-exemple-de-programme-qui-utilise-des-structures">Un exemple de programme qui utilise des structures</a></h2>
+<!--
+To understand when we might want to use structs, let’s write a program that
+calculates the area of a rectangle. We’ll start by using single variables, and
+then refactor the program until we’re using structs instead.
+-->
+<p>Pour comprendre dans quels cas nous voudrions utiliser des structures, écrivons
+un programme qui calcule l'aire d'un rectangle. Nous commencerons en utilisant
+de simples variables, puis on remaniera le code jusqu'à utiliser des structures
+à la place.</p>
+<!--
+Let’s make a new binary project with Cargo called *rectangles* that will take
+the width and height of a rectangle specified in pixels and calculate the area
+of the rectangle. Listing 5-8 shows a short program with one way of doing
+exactly that in our project’s *src/main.rs*.
+-->
+<p>Créons un nouveau projet binaire avec Cargo nommé <em>rectangles</em> qui prendra la
+largeur et la hauteur en pixels d'un rectangle et qui calculera l'aire de ce
+rectangle. L'encart 5-8 montre un petit programme qui effectue cette tâche d'une
+certaine manière dans le <em>src/main.rs</em> de notre projet.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier: src/main.rs</span></p>
+<!--
+```rust
+fn main() {
+    let width1 = 30;
+    let height1 = 50;
+
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        area(width1, height1)
+    );
+}
+
+fn area(width: u32, height: u32) -> u32 {
+    width * height
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let largeur1 = 30;
+    let hauteur1 = 50;
+
+    println!(
+        &quot;L'aire du rectangle est de {} pixels carrés.&quot;,
+        aire(largeur1, hauteur1)
+    );
+}
+
+fn aire(largeur: u32, hauteur: u32) -&gt; u32 {
+    largeur * hauteur
+}
+</code></pre></pre>
+<!--
+<span class="caption">Listing 5-8: Calculating the area of a rectangle
+specified by separate width and height variables</span>
+-->
+<p><span class="caption">Encart 5-8 : calcul de l'aire d'un rectangle défini par
+les variables distinctes <code>largeur</code> et <code>hauteur</code></span></p>
+<!--
+Now, run this program using `cargo run`:
+-->
+<p>Maintenant, lancez ce programme avec <code>cargo run</code> :</p>
+<!--
+```console
+$ cargo run
+   Compiling rectangles v0.1.0 (file:///projects/rectangles)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.42s
+     Running `target/debug/rectangles`
+The area of the rectangle is 1500 square pixels.
+```
+-->
+<pre><code class="language-console">$ cargo run
+   Compiling rectangles v0.1.0 (file:///projects/rectangles)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.42s
+     Running `target/debug/rectangles`
+L'aire du rectangle est de 1500 pixels carrés.
+</code></pre>
+<!--
+This code succeeds in figuring out the area of the rectangle by calling the
+`area` function with each dimension, but we can do more to make this code clear
+and readable.
+-->
+<p>Ce code arrive à déterminer l'aire du rectangle en appelant la fonction <code>aire</code>
+avec chaque dimension, mais on peut faire mieux pour clarifier ce code et le
+rendre plus lisible.</p>
+<!--
+The issue with this code is evident in the signature of `area`:
+-->
+<p>Le problème de ce code se voit dans la signature de <code>aire</code> :</p>
+<!--
+```rust,ignore
+# fn main() {
+#     let width1 = 30;
+#     let height1 = 50;
+# 
+#     println!(
+#         "The area of the rectangle is {} square pixels.",
+#         area(width1, height1)
+#     );
+# }
+# 
+fn area(width: u32, height: u32) -> u32 {
+#     width * height
+# }
+```
+-->
+<pre><code class="language-rust ignore"><span class="boring">fn main() {
+</span><span class="boring">    let largeur1 = 30;
+</span><span class="boring">    let hauteur1 = 50;
+</span><span class="boring">
+</span><span class="boring">    println!(
+</span><span class="boring">        &quot;L'aire du rectangle est de {} pixels carrés.&quot;,
+</span><span class="boring">        aire(largeur1, hauteur1)
+</span><span class="boring">    );
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn aire(largeur: u32, hauteur: u32) -&gt; u32 {
+<span class="boring">    largeur * hauteur
+</span><span class="boring">}
+</span></code></pre>
+<!--
+The `area` function is supposed to calculate the area of one rectangle, but the
+function we wrote has two parameters, and it’s not clear anywhere in our
+program that the parameters are related. It would be more readable and more
+manageable to group width and height together. We’ve already discussed one way
+we might do that in [“The Tuple Type”][the-tuple-type]<!-- ignore -- > section
+of Chapter 3: by using tuples.
+-->
+<p>La fonction <code>aire</code> est censée calculer l'aire d'un rectangle, mais la fonction
+que nous avons écrite a deux paramètres, et il n'est pas précisé nulle part
+dans notre programme à quoi sont liés les paramètres. Il serait plus lisible et
+plus gérable de regrouper ensemble la largeur et la hauteur. Nous avons déjà vu
+dans la section <a href="ch03-02-data-types.html">“Le type <em>tuple</em>”</a><!-- ignore --> du chapitre 3
+une façon qui nous permettrait de le faire : en utilisant des tuples.</p>
+<!--
+### Refactoring with Tuples
+-->
+<h3 id="remanier-le-code-avec-des-tuples"><a class="header" href="#remanier-le-code-avec-des-tuples">Remanier le code avec des tuples</a></h3>
+<!--
+Listing 5-9 shows another version of our program that uses tuples.
+-->
+<p>L'encart 5-9 nous montre une autre version de notre programme qui utilise des
+tuples.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+fn main() {
+    let rect1 = (30, 50);
+
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        area(rect1)
+    );
+}
+
+fn area(dimensions: (u32, u32)) -> u32 {
+    dimensions.0 * dimensions.1
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let rect1 = (30, 50);
+
+    println!(
+        &quot;L'aire du rectangle est de {} pixels carrés.&quot;,
+        aire(rect1)
+    );
+}
+
+fn aire(dimensions: (u32, u32)) -&gt; u32 {
+    dimensions.0 * dimensions.1
+}
+</code></pre></pre>
+<!--
+<span class="caption">Listing 5-9: Specifying the width and height of the
+rectangle with a tuple</span>
+-->
+<p><span class="caption">Encart 5-9 : Renseigner la largeur et la hauteur du
+rectangle dans un tuple</span></p>
+<!--
+In one way, this program is better. Tuples let us add a bit of structure, and
+we’re now passing just one argument. But in another way, this version is less
+clear: tuples don’t name their elements, so we have to index into the parts of
+the tuple, making our calculation less obvious.
+-->
+<p>D'une certaine façon, ce programme est meilleur. Les tuples nous permettent de
+structurer un peu plus et nous ne passons plus qu'un argument. Mais d'une autre
+façon, cette version est moins claire : les tuples ne donnent pas de noms à
+leurs éléments, donc il faut accéder aux éléments du tuple via leur indice, ce
+qui rends plus compliqué notre calcul.</p>
+<!--
+Mixing up the width and height wouldn’t matter for the area calculation, but if
+we want to draw the rectangle on the screen, it would matter! We would have to
+keep in mind that `width` is the tuple index `0` and `height` is the tuple
+index `1`. This would be even harder for someone else to figure out and keep in
+mind if they were to use our code. Because we haven’t conveyed the meaning of
+our data in our code, it’s now easier to introduce errors.
+-->
+<p>Le mélange de la largeur et la hauteur n'est pas important pour calculer l'aire,
+mais si on voulait afficher le rectangle à l'écran, cela serait problématique !
+Il nous faut garder à l'esprit que la <code>largeur</code> est l'élément à l'indice <code>0</code> du
+tuple et que la <code>hauteur</code> est l'élément à l'indice <code>1</code>. Cela complexifie le
+travail de quelqu'un d'autre de le comprendre et s'en souvenir pour qu'il
+puisse l'utiliser. Comme on n'a pas exprimé la signification de nos données
+dans notre code, il est plus facile de faire des erreurs.</p>
+<!--
+### Refactoring with Structs: Adding More Meaning
+-->
+<h3 id="remanier-avec-des-structures--donner-plus-de-sens"><a class="header" href="#remanier-avec-des-structures--donner-plus-de-sens">Remanier avec des structures : donner plus de sens</a></h3>
+<!--
+We use structs to add meaning by labeling the data. We can transform the tuple
+we’re using into a struct with a name for the whole as well as names for the
+parts, as shown in Listing 5-10.
+-->
+<p>On utilise des structures pour rendre les données plus expressives en leur
+donnant des noms. On peut transformer le tuple que nous avons utilisé en une
+structure nommée dont ses éléments sont aussi nommés, comme le montre l'encart
+5-10.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        area(&rect1)
+    );
+}
+
+fn area(rectangle: &Rectangle) -> u32 {
+    rectangle.width * rectangle.height
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">struct Rectangle {
+    largeur: u32,
+    hauteur: u32,
+}
+
+fn main() {
+    let rect1 = Rectangle { largeur: 30, hauteur: 50 };
+
+    println!(
+        &quot;L'aire du rectangle est de {} pixels carrés.&quot;,
+        aire(&amp;rect1)
+    );
+}
+
+fn aire(rectangle: &amp;Rectangle) -&gt; u32 {
+    rectangle.largeur * rectangle.hauteur
+}
+</code></pre></pre>
+<!--
+<span class="caption">Listing 5-10: Defining a `Rectangle` struct</span>
+-->
+<p><span class="caption">Encart 5-10 : Définition d'une structure
+<code>Rectangle</code></span></p>
+<!--
+Here we’ve defined a struct and named it `Rectangle`. Inside the curly
+brackets, we defined the fields as `width` and `height`, both of which have
+type `u32`. Then in `main`, we created a particular instance of `Rectangle`
+that has a width of 30 and a height of 50.
+-->
+<p>Ici, on a défini une structure et on l'a appelée <code>Rectangle</code>. Entre les
+accolades, on a défini les champs <code>largeur</code> et <code>hauteur</code>, tous deux du type
+<code>u32</code>. Puis dans <code>main</code>, on crée une instance de <code>Rectangle</code> de largeur 30 et de
+hauteur 50.</p>
+<!--
+Our `area` function is now defined with one parameter, which we’ve named
+`rectangle`, whose type is an immutable borrow of a struct `Rectangle`
+instance. As mentioned in Chapter 4, we want to borrow the struct rather than
+take ownership of it. This way, `main` retains its ownership and can continue
+using `rect1`, which is the reason we use the `&` in the function signature and
+where we call the function.
+-->
+<p>Notre fonction <code>aire</code> est désormais définie avec un unique paramètre, nommé
+<code>rectangle</code>, et dont le type est une référence immuable vers une instance de la
+structure <code>Rectangle</code>. Comme mentionné au chapitre 4, on préfère emprunter la
+structure au lieu d'en prendre possession. Ainsi, elle reste en possession de
+<code>main</code> qui peut continuer à utiliser <code>rect1</code> ; c'est pourquoi on utilise le <code>&amp;</code>
+dans la signature de la fonction ainsi que dans l'appel de fonction.</p>
+<!--
+The `area` function accesses the `width` and `height` fields of the `Rectangle`
+instance. Our function signature for `area` now says exactly what we mean:
+calculate the area of `Rectangle`, using its `width` and `height` fields. This
+conveys that the width and height are related to each other, and it gives
+descriptive names to the values rather than using the tuple index values of `0`
+and `1`. This is a win for clarity.
+-->
+<p>La fonction <code>aire</code> accède aux champs <code>largeur</code> et <code>hauteur</code> de l'instance de
+<code>Rectangle</code>. Notre signature de fonction pour <code>aire</code> est enfin explicite :
+calculer l'aire d'un <code>Rectangle</code> en utilisant ses champs <code>largeur</code> et <code>hauteur</code>.
+Cela explique que la largeur et la hauteur sont liées entre elles, et cela donne
+des noms descriptifs aux valeurs plutôt que d'utiliser les valeurs du tuple avec
+les indices <code>0</code> et <code>1</code>. On gagne en clarté.</p>
+<!--
+### Adding Useful Functionality with Derived Traits
+-->
+<h3 id="ajouter-des-fonctionnalités-utiles-avec-les-traits-dérivés"><a class="header" href="#ajouter-des-fonctionnalités-utiles-avec-les-traits-dérivés">Ajouter des fonctionnalités utiles avec les traits dérivés</a></h3>
+<!--
+It’d be useful to be able to print an instance of `Rectangle` while we’re
+debugging our program and see the values for all its fields. Listing 5-11 tries
+using the [`println!` macro][println]<!-- ignore -- > as we have used in
+previous chapters. This won’t work, however.
+-->
+<p>Cela serait pratique de pouvoir afficher une instance de <code>Rectangle</code> pendant
+qu'on débogue notre programme et de voir la valeur de chacun de ses champs.
+L'encart 5-11 essaye de le faire en utilisant <a href="https://doc.rust-lang.org/std/macro.println.html">la macro
+<code>println!</code></a><!-- ignore --> comme on l'a fait dans les chapitres
+précédents. Cependant, cela ne fonctionne pas.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust,ignore,does_not_compile
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+
+    println!("rect1 is {}", rect1);
+}
+```
+-->
+<pre><code class="language-rust ignore does_not_compile">struct Rectangle {
+    largeur: u32,
+    hauteur: u32,
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        largeur: 30,
+        hauteur: 50
+    };
+
+    println!(&quot;rect1 est {}&quot;, rect1);
+}
+</code></pre>
+<!--
+<span class="caption">Listing 5-11: Attempting to print a `Rectangle`
+instance</span>
+-->
+<p><span class="caption">Encart 5-11 : Tentative d'afficher une instance de
+<code>Rectangle</code></span></p>
+<!--
+When we compile this code, we get an error with this core message:
+-->
+<p>Lorsqu'on compile ce code, on obtient ce message d'erreur qui nous informe que
+<code>Rectangle</code> n'implémente pas le trait <code>std::fmt::Display</code> :</p>
+<!--
+```text
+error[E0277]: `Rectangle` doesn't implement `std::fmt::Display`
+```
+-->
+<pre><code class="language-text">error[E0277]: `Rectangle` doesn't implement `std::fmt::Display`
+</code></pre>
+<!--
+The `println!` macro can do many kinds of formatting, and by default, the curly
+brackets tell `println!` to use formatting known as `Display`: output intended
+for direct end user consumption. The primitive types we’ve seen so far
+implement `Display` by default, because there’s only one way you’d want to show
+a `1` or any other primitive type to a user. But with structs, the way
+`println!` should format the output is less clear because there are more
+display possibilities: Do you want commas or not? Do you want to print the
+curly brackets? Should all the fields be shown? Due to this ambiguity, Rust
+doesn’t try to guess what we want, and structs don’t have a provided
+implementation of `Display` to use with `println!` and the `{}` placeholder.
+-->
+<p>La macro <code>println!</code> peut faire toutes sortes de formatages textuels, et par
+défaut, les accolades demandent à <code>println!</code> d'utiliser le formatage appelé
+<code>Display</code>, pour convertir en texte destiné à être vu par l'utilisateur final.
+Les types primitifs qu'on a vus jusqu'ici implémentent <code>Display</code> par défaut
+puisqu'il n'existe qu'une seule façon d'afficher un <code>1</code> ou tout autre type
+primitif à l'utilisateur. Mais pour les structures, la façon dont <code>println!</code>
+devrait formater son résultat est moins claire car il y a plus de possibilités
+d'affichage : Voulez-vous des virgules ? Voulez-vous afficher les accolades ?
+Est-ce que tous les champs devraient être affichés ? À cause de ces ambiguïtés,
+Rust n'essaye pas de deviner ce qu'on veut, et les structures n'implémentent pas
+<code>Display</code> par défaut pour l'utiliser avec <code>println!</code> et les espaces réservés
+<code>{}</code>.</p>
+<!--
+If we continue reading the errors, we’ll find this helpful note:
+-->
+<p>Si nous continuons de lire les erreurs, nous trouvons cette remarque utile :</p>
+<!--
+```text
+   = help: the trait `std::fmt::Display` is not implemented for `Rectangle`
+   = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+```
+-->
+<pre><code class="language-text">   = help: the trait `std::fmt::Display` is not implemented for `Rectangle`
+   = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+</code></pre>
+<p>Le compilateur nous informe que dans notre chaîne de formatage, on est peut-être
+en mesure d'utiliser <code>{:?}</code> (ou <code>{:#?}</code> pour un affichage plus élégant).</p>
+<!--
+Let’s try it! The `println!` macro call will now look like `println!("rect1 is
+{:?}", rect1);`. Putting the specifier `:?` inside the curly brackets tells
+`println!` we want to use an output format called `Debug`. The `Debug` trait
+enables us to print our struct in a way that is useful for developers so we can
+see its value while we’re debugging our code.
+-->
+<p>Essayons cela ! L'appel de la macro <code>println!</code> ressemble maintenant à
+<code>println!(&quot;rect1 est {:?}&quot;, rect1);</code>. Insérer le sélecteur <code>:?</code> entre les
+accolades permet d'indiquer à <code>println!</code> que nous voulons utiliser le formatage
+appelé <code>Debug</code>. Le trait <code>Debug</code> nous permet d'afficher notre structure d'une
+manière utile aux développeurs pour qu'on puisse voir sa valeur pendant qu'on
+débogue le code.</p>
+<!--
+Compile the code with this change. Drat! We still get an error:
+-->
+<p>Compilez le code avec ce changement. Zut ! On a encore une erreur, nous
+informant cette fois-ci que <code>Rectangle</code> n'implémente pas <code>std::fmt::Debug</code> :</p>
+<!--
+```text
+error[E0277]: `Rectangle` doesn't implement `Debug`
+```
+-->
+<pre><code class="language-text">error[E0277]: `Rectangle` doesn't implement `Debug`
+</code></pre>
+<!--
+But again, the compiler gives us a helpful note:
+-->
+<p>Mais une nouvelle fois, le compilateur nous fait une remarque utile :</p>
+<!--
+```text
+   = help: the trait `Debug` is not implemented for `Rectangle`
+   = note: add `#[derive(Debug)]` to `Rectangle` or manually `impl Debug for Rectangle`
+```
+-->
+<pre><code class="language-text">   = help: the trait `Debug` is not implemented for `Rectangle`
+   = note: add `#[derive(Debug)]` to `Rectangle` or manually `impl Debug for Rectangle`
+</code></pre>
+<p>Il nous conseille d'ajouter <code>#[derive(Debug)]</code> ou d'implémenter manuellement
+<code>std::fmt::Debug</code>.</p>
+<!--
+Rust *does* include functionality to print out debugging information, but we
+have to explicitly opt in to make that functionality available for our struct.
+To do that, we add the outer attribute `#[derive(Debug)]` just before the
+struct definition, as shown in Listing 5-12.
+-->
+<p>Rust <em>inclut</em> bel et bien une fonctionnalité pour afficher des informations de
+débogage, mais nous devons l'activer explicitement pour la rendre disponible sur
+notre structure. Pour ce faire, on ajoute l'attribut externe <code>#[derive(Debug)]</code>
+juste avant la définition de la structure, comme le montre l'encart 5-12.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+
+    println!("rect1 is {:?}", rect1);
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">#[derive(Debug)]
+struct Rectangle {
+    largeur: u32,
+    hauteur: u32,
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        largeur: 30,
+        hauteur: 50
+    };
+
+    println!(&quot;rect1 est {:?}&quot;, rect1);
+}
+</code></pre></pre>
+<!--
+<span class="caption">Listing 5-12: Adding the attribute to derive the `Debug`
+trait and printing the `Rectangle` instance using debug formatting</span>
+-->
+<p><span class="caption">Encart 5-12 : ajout de l'attribut pour dériver le
+trait <code>Debug</code> et afficher l'instance de <code>Rectangle</code> en utilisant le formatage
+de débogage</span></p>
+<!--
+Now when we run the program, we won’t get any errors, and we’ll see the
+following output:
+-->
+<p>Maintenant, quand on exécute le programme, nous n'avons plus d'erreurs et ce
+texte s'affiche à l'écran :</p>
+<!--
+```console
+$ cargo run
+   Compiling rectangles v0.1.0 (file:///projects/rectangles)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.48s
+     Running `target/debug/rectangles`
+rect1 is Rectangle { width: 30, height: 50 }
+```
+-->
+<pre><code class="language-console">$ cargo run
+   Compiling rectangles v0.1.0 (file:///projects/rectangles)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.48s
+     Running `target/debug/rectangles`
+rect1 est Rectangle { largeur: 30, hauteur: 50 }
+</code></pre>
+<!--
+Nice! It’s not the prettiest output, but it shows the values of all the fields
+for this instance, which would definitely help during debugging. When we have
+larger structs, it’s useful to have output that’s a bit easier to read; in
+those cases, we can use `{:#?}` instead of `{:?}` in the `println!` string.
+In this example, using the `{:#?}` style will output:
+-->
+<p>Super ! Ce n'est pas le plus beau des affichages, mais cela montre les
+valeurs de tous les champs de cette instance, ce qui serait assurément utile
+lors du débogage. Quand on a des structures plus grandes, il serait bien d'avoir
+un affichage un peu plus lisible ; dans ces cas-là, on pourra utiliser <code>{:#?}</code>
+au lieu de <code>{:?}</code> dans la chaîne de formatage. Dans cette exemple,
+l'utilisation du style <code>{:#?}</code> va afficher ceci :</p>
+<!--
+```console
+$ cargo run
+   Compiling rectangles v0.1.0 (file:///projects/rectangles)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.48s
+     Running `target/debug/rectangles`
+rect1 is Rectangle {
+    width: 30,
+    height: 50,
+}
+```
+-->
+<pre><code class="language-console">$ cargo run
+   Compiling rectangles v0.1.0 (file:///projects/rectangles)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.48s
+     Running `target/debug/rectangles`
+rect1 est Rectangle {
+    largeur: 30,
+    hauteur: 50,
+}
+</code></pre>
+<!--
+Another way to print out a value using the `Debug` format is to use the [`dbg!`
+macro][dbg]<!-- ignore -- >, which takes ownership of an expression, prints the
+file and line number of where that `dbg!` macro call occurs in your code along
+with the resulting value of that expression, and returns ownership of the value.
+-->
+<p>Une autre façon d'afficher une valeur en utilisant le format <code>Debug</code> est
+d'utiliser la <a href="https://doc.rust-lang.org/std/macro.dbg.html">macro <code>dbg!</code></a><!-- ignore -->, qui prend possession de
+l'expression, affiche le nom du fichier et la ligne de votre code où se trouve
+cet appel à la macro <code>dbg!</code> ainsi que le résultat de cette expression, puis
+rend la possession de cette valeur.</p>
+<!--
+> Note: Calling the `dbg!` macro prints to the standard error console stream
+> (`stderr`), as opposed to `println!` which prints to the standard output
+> console stream (`stdout`). We’ll talk more about `stderr` and `stdout` in the
+> “[“Writing Error Messages to Standard Error Instead of Standard
+> Output” section in Chapter 12][err]<!-- ignore -- >.
+-->
+<blockquote>
+<p>Remarque : l'appel à la macro <code>dbg!</code> écrit dans le flux d'erreur standard
+de la console (<code>stderr</code>), contrairement à <code>println!</code> qui écrit dans le flux
+de sortie standard de la console (<code>stdout</code>). Nous reparlerons de <code>stderr</code> et
+de <code>stdout</code> dans <a href="ch12-06-writing-to-stderr-instead-of-stdout.html">une section du chapitre 12</a><!-- ignore -->.</p>
+</blockquote>
+<!--
+Here’s an example where we’re interested in the value that gets assigned to the
+`width` field, as well as the value of the whole struct in `rect1`:
+-->
+<p>Voici un exemple dans lequel nous nous intéressons à la valeur assignée au
+champ <code>largeur</code>, ainsi que la valeur de toute la structure <code>rect1</code> :</p>
+<!--
+```rust
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+fn main() {
+    let scale = 2;
+    let rect1 = Rectangle {
+        width: dbg!(30 * scale),
+        height: 50,
+    };
+
+    dbg!(&rect1);
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">#[derive(Debug)]
+struct Rectangle {
+    largeur: u32,
+    hauteur: u32,
+}
+
+fn main() {
+    let echelle = 2;
+    let rect1 = Rectangle {
+        largeur: dbg!(30 * echelle),
+        hauteur: 50,
+    };
+
+    dbg!(&amp;rect1);
+}
+</code></pre></pre>
+<!--
+We can put `dbg!` around the expression `30 * scale` and, because `dbg!`
+returns ownership of the expression’s value, the `width` field will get the
+same value as if we didn’t have the `dbg!` call there. We don’t want `dbg!` to
+take ownership of `rect1`, so we use a reference to `rect1` in the next call.
+Here’s what the output of this example looks like:
+-->
+<p>Nous pouvons placer le <code>dbg!</code> autour de l'expression <code>30 * echelle</code> et, comme
+<code>dbg!</code> retourne la possession de la valeur issue de l'expression, le champ
+<code>largeur</code> va avoir la même valeur que si nous n'avions pas appelé <code>dbg!</code> ici.
+Nous ne voulons pas que <code>dbg!</code> prenne possession de <code>rect1</code>, donc nous donnons
+une référence à <code>rect1</code> lors de son prochain appel. Voici à quoi ressemble la
+sortie de cet exemple :</p>
+<!--
+```console
+$ cargo run
+   Compiling rectangles v0.1.0 (file:///projects/rectangles)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.61s
+     Running `target/debug/rectangles`
+[src/main.rs:10] 30 * scale = 60
+[src/main.rs:14] &rect1 = Rectangle {
+    width: 60,
+    height: 50,
+}
+```
+-->
+<pre><code class="language-console">$ cargo run
+   Compiling rectangles v0.1.0 (file:///projects/rectangles)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.61s
+     Running `target/debug/rectangles`
+[src/main.rs:10] 30 * echelle = 60
+[src/main.rs:14] &amp;rect1 = Rectangle {
+    largeur: 60,
+    hauteur: 50,
+}
+</code></pre>
+<!--
+We can see the first bit of output came from *src/main.rs* line 10, where we’re
+debugging the expression `30 * scale`, and its resulting value is 60 (the
+`Debug` formatting implemented for integers is to print only their value). The
+`dbg!` call on line 14 of *src/main.rs* outputs the value of `&rect1`, which is
+the `Rectangle` struct. This output uses the pretty `Debug` formatting of the
+`Rectangle` type. The `dbg!` macro can be really helpful when you’re trying to
+figure out what your code is doing!
+-->
+<p>Nous pouvons constater que la première sortie provient de la ligne 10
+de <em>src/main.rs</em>, où nous déboguons l'expression <code>30 * echelle</code>, et son résultat
+est 60 (le formattage de <code>Debug</code> pour les entiers est d'afficher uniquement sa
+valeur). L'appel à <code>dbg!</code> à la ligne 14 de <em>src/main.rs</em> affiche la valeur de
+<code>&amp;rect1</code>, qui est une structure <code>Rectangle</code>. La macro <code>dbg!</code> peut être très
+utile lorsque vous essayez de comprendre ce que fait votre code !</p>
+<!--
+In addition to the `Debug` trait, Rust has provided a number of traits for us
+to use with the `derive` attribute that can add useful behavior to our custom
+types. Those traits and their behaviors are listed in [Appendix C][app-c]<!--
+ignore -- >. We’ll cover how to implement these traits with custom behavior as
+well as how to create your own traits in Chapter 10. There are also many
+attributes other than `derive`; for more information, see [the “Attributes”
+section of the Rust Reference][attributes].
+-->
+<p>En plus du trait <code>Debug</code>, Rust nous offre d'autres traits pour que nous
+puissions les utiliser avec l'attribut <code>derive</code> pour ajouter des comportements
+utiles à nos propres types. Ces traits et leurs comportements sont listés à
+<a href="appendix-03-derivable-traits.html">l'annexe C</a><!-- ignore -->. Nous expliquerons comment implémenter ces
+traits avec des comportements personnalisés et comment créer vos propres traits
+au chapitre 10. Il existe aussi de nombreux attributs autres que <code>derive</code> ; pour
+en savoir plus, consultez <a href="https://doc.rust-lang.org/reference/attributes.html">la section “Attributs” de la référence de
+Rust</a><!-- ignore -->.</p>
+<!--
+Our `area` function is very specific: it only computes the area of rectangles.
+It would be helpful to tie this behavior more closely to our `Rectangle`
+struct, because it won’t work with any other type. Let’s look at how we can
+continue to refactor this code by turning the `area` function into an `area`
+*method* defined on our `Rectangle` type.
+-->
+<p>Notre fonction <code>aire</code> est très spécifique : elle ne fait que calculer l'aire
+d'un rectangle. Il serait utile de lier un peu plus ce comportement à notre
+structure <code>Rectangle</code>, puisque cela ne fonctionnera pas avec un autre type.
+Voyons comment on peut continuer de remanier ce code en transformant la fonction
+<code>aire</code> en <em>méthode</em> <code>aire</code> définie sur notre type <code>Rectangle</code>.</p>
+<!--
+[the-tuple-type]: ch03-02-data-types.html#the-tuple-type
+[app-c]: appendix-03-derivable-traits.md
+[println]: ../std/macro.println.html
+[dbg]: ../std/macro.dbg.html
+[err]: ch12-06-writing-to-stderr-instead-of-stdout.html
+[attributes]: ../reference/attributes.html
+-->
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch05-01-defining-structs.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch05-03-method-syntax.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch05-01-defining-structs.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch05-03-method-syntax.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../ferris.js"></script>
+    </body>
+</html>

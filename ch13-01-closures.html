@@ -1,0 +1,2170 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Les fermetures : fonctions anonymes qui peuvent utiliser leur environnement - Le langage de programmation Rust</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../ferris.css">
+        <link rel="stylesheet" href="../theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Le langage de programmation Rust</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Avant-propos</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="translation-terms.html">Traduction des termes</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Prise en main</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, world!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Programmer le jeu du plus ou du moins</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Les concepts courants de programmation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> Les variables et la mutabilité</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Les types de données</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Les fonctions</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Les commentaires</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Les structures de contrôle</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Comprendre la possession</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Qu'est-ce que la possession ?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Les références et l'emprunt</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Le type slice</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Utiliser les structures pour structurer des données apparentées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Définir et instancier des structures</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Un exemple de programme qui utilise des structures</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> La syntaxe des méthodes</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Les énumérations et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Définir une énumération</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> La structure de contrôle match</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> Une structure de contrôle concise : if let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Gérer des projets grandissants avec les paquets, crates et modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Les paquets et les crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Définir des modules pour gérer la portée et la visibilité</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Désigner un élément dans l'arborescence de modules</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Importer des chemins dans la portée via le mot-clé use</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Séparer les modules dans différents fichiers</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Les collections standard</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Stocker des listes de valeurs avec des vecteurs</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> Stocker du texte encodé en UTF-8 avec les Strings</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Stocker des clés associées à des valeurs dans des tables de hachage</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> La gestion des erreurs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Les erreurs irrécupérables avec panic!</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Des erreurs récupérables avec Result</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> Paniquer ou ne pas paniquer, telle est la question</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Les types génériques, les traits et les durées de vie</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Les types de données génériques</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Définir des comportements partagés avec les traits</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> La conformité des références avec les durées de vies</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Ecrire des tests automatisés</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Comment écrire des tests</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Gérer l'exécution des tests</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> L'organisation des tests</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> Un projet d'entrée/sortie : construire un programme en ligne de commande</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Récupérer les arguments de la ligne de commande</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Lire un fichier</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Remanier le code pour améliorer sa modularité et la gestion des erreurs</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Développer les fonctionnalités de la bibliothèque avec le TDD</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Travailler avec des variables d'environnement</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Ecrire les messages d'erreur sur la sortie d'erreurs standard au lieu de la sortie normale</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Les fonctionnalités des langages fonctionnels : les itérateurs et les fermetures</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html" class="active"><strong aria-hidden="true">13.1.</strong> Les fermetures : fonctions anonymes qui peuvent utiliser leur environnement</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Traiter une série d'éléments avec un itérateur</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> Amélioration de notre projet d'entrée/sortie</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Comparaison des performances : les boucles et les itérateurs</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> En savoir plus sur cargo et crates.io</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Personnaliser les compilations avec les profils de publication</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Publier une crate sur crates.io</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Les espaces de travail de cargo</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Installer des binaires à partir de crates.io avec cargo install</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Etendre les fonctionnalités de cargo avec des commandes personnalisées</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Les pointeurs intelligents</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Utiliser Box&lt;T&gt; pour pointer sur des données présentes sur le tas</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Considérer les pointeurs intelligents comme des références grâce au trait Deref</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Exécuter du code au nettoyage avec le trait Drop</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, le pointeur intelligent qui compte les références</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; et le motif de mutabilité interne</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Les boucles de références qui peuvent provoquer des fuites de mémoire</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> La concurrence sans craintes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Utiliser les tâches pour exécuter simultanément du code</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Utiliser l'envoi de messages pour transférer des données entre les tâches</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Le partage d'état en concurrence</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Etendre la concurrence avec les traits Sync et Send</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Les fonctionnalités orientées objet de Rust</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Les caractéristiques des langages orientés objet</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Utiliser les objets traits qui permettent des valeurs de types différents</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Implémenter un patron de conception orienté-objet</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Les motifs et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> Tous les endroits où les motifs peuvent être utilisés</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> La réfutabilité : lorsqu'un motif peut échouer à correspondre</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> La syntaxe des motifs</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Les fonctionnalités avancées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Le Rust non sécurisé (unsafe)</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Les traits avancés</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Les types avancés</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Les fonctions et fermetures avancées</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Les macros</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Projet final : construire un serveur web multitâches</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Développer un serveur web monotâche</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Transformer notre serveur monotâche en serveur multitâches</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Arrêt propre et nettoyage</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Annexes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - les mots-clés</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> 🚧 B - les opérateurs et les symboles</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> 🚧 C - les traits dérivables</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> 🚧 D - Des outils de développement utiles</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> 🚧 E - Les éditions</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> 🚧 F - Les traductions de ce livre</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> 🚧 G - Comment Rust est construit, et “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Le langage de programmation Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/Jimskapt/rust-book-fr" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+## Closures: Anonymous Functions that Can Capture Their Environment
+-->
+<h2 id="les-fermetures--fonctions-anonymes-qui-peuvent-utiliser-leur-environnement"><a class="header" href="#les-fermetures--fonctions-anonymes-qui-peuvent-utiliser-leur-environnement">Les fermetures : fonctions anonymes qui peuvent utiliser leur environnement</a></h2>
+<!--
+Rust’s closures are anonymous functions you can save in a variable or pass as
+arguments to other functions. You can create the closure in one place and then
+call the closure to evaluate it in a different context. Unlike functions,
+closures can capture values from the scope in which they’re defined. We’ll
+demonstrate how these closure features allow for code reuse and behavior
+customization.
+-->
+<p>Les fermetures en Rust sont des fonctions anonymes qui peuvent être
+sauvegardées dans une variable ou qui peuvent être passées en argument à
+d'autres fonctions. Il est possible de créer une fermeture à un endroit du code
+et ensuite de l'appeler dans un contexte différent pour l'exécuter.
+Contrairement aux fonctions, les fermetures ont la possibilité de capturer les
+valeurs présentes dans le contexte où elles sont appelées. Nous allons montrer
+comment les fonctionnalités des fermetures permettent de réutiliser du code et
+suivre des comportements personnalisés.</p>
+<!--
+### Creating an Abstraction of Behavior with Closures
+-->
+<h3 id="créer-une-abstraction-de-comportement-avec-une-fermeture"><a class="header" href="#créer-une-abstraction-de-comportement-avec-une-fermeture">Créer une abstraction de comportement avec une fermeture</a></h3>
+<!--
+Let’s work on an example of a situation in which it’s useful to store a closure
+to be executed later. Along the way, we’ll talk about the syntax of closures,
+type inference, and traits.
+-->
+<p>Travaillons sur un exemple d'une situation où il est utile de stocker une
+fermeture qui s'exécutera ultérieurement. Au cours de ce chapitre, nous allons
+parler de la syntaxe des fermetures, de l'inférence de type et des traits.</p>
+<!--
+Consider this hypothetical situation: we work at a startup that’s making an app
+to generate custom exercise workout plans. The backend is written in Rust, and
+the algorithm that generates the workout plan takes into account many factors,
+such as the app user’s age, body mass index, exercise preferences, recent
+workouts, and an intensity number they specify. The actual algorithm used isn’t
+important in this example; what’s important is that this calculation takes a
+few seconds. We want to call this algorithm only when we need to and only call
+it once so we don’t make the user wait more than necessary.
+-->
+<p>Imaginons la situation suivante : nous travaillons dans une <em>startup</em> qui crée
+une application destinée à générer des programmes d'entraînements physiques
+personnalisés. L'application dorsale est écrite en Rust et repose sur un
+algorithme qui génère les exercices en fonction de beaucoup de facteurs tels
+que l'âge de l'utilisateur, son indice de masse corporelle, ses préférences et
+une intensité qu'il aura paramétré. L'algorithme réellement utilisé n'est pas
+important pour cet exemple : ce qui est important c'est que le calcul prenne
+plusieurs secondes. Nous voulons appeler l'algorithme uniquement lorsque nous
+en avons besoin, et seulement une fois, afin que l'utilisateur n'ait pas à
+attendre plus longtemps que nécessaire.</p>
+<!--
+We’ll simulate calling this hypothetical algorithm with the function
+`simulated_expensive_calculation` shown in Listing 13-1, which will print
+`calculating slowly...`, wait for two seconds, and then return whatever number
+we passed in.
+-->
+<p>Pour simuler l'appel à cet algorithme hypothétique, nous allons utiliser la
+fonction <code>simuler_gros_calcul</code> présent dans l'encart 13-1, qui affichera
+<code>calcul très lent ...</code> et attendra deux secondes avant de retourner le nombre
+qui lui a été donné :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+use std::thread;
+use std::time::Duration;
+
+fn simulated_expensive_calculation(intensity: u32) -> u32 {
+    println!("calculating slowly...");
+    thread::sleep(Duration::from_secs(2));
+    intensity
+}
+# 
+# fn main() {}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">use std::thread;
+use std::time::Duration;
+
+fn simuler_gros_calcul(intensite: u32) -&gt; u32 {
+    println!(&quot;calcul très lent ...&quot;);
+    thread::sleep(Duration::from_secs(2));
+    intensite
+}
+<span class="boring">
+</span><span class="boring">fn main() {}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 13-1: A function to stand in for a hypothetical
+calculation that takes about 2 seconds to run</span>
+-->
+<p><span class="caption">Encart 13-1 : une fonction pour remplacer un calcul
+hypothétique qui prend environ deux secondes à s'exécuter</span></p>
+<!--
+Next is the `main` function, which contains the parts of the workout app
+important for this example. This function represents the code that the app will
+call when a user asks for a workout plan. Because the interaction with the
+app’s frontend isn’t relevant to the use of closures, we’ll hardcode values
+representing inputs to our program and print the outputs.
+-->
+<p>Ensuite, nous avons la fonction <code>main</code> qui contient les parties de
+l'application d'entraînement qui sont importantes pour cet exemple. Cette
+fonction représente le code que l'application appellera lorsqu'un utilisateur
+demande un programme d'entraînement. Comme l'interaction avec l'interface
+frontale de l'application n'apporte rien dans l'étude de l'utilisation des
+fermetures qui nous occupe ici, nous allons nous contenter de coder en dur les
+valeurs représentant les entrées de notre programme puis afficher les résultats
+obtenus.</p>
+<!--
+The required inputs are these:
+-->
+<p>Les paramètres d'entrées nécessaires sont :</p>
+<!--
+* An intensity number from the user, which is specified when they request
+  a workout to indicate whether they want a low-intensity workout or a
+  high-intensity workout
+* A random number that will generate some variety in the workout plans
+-->
+<ul>
+<li><code>intensite</code> qui est un nombre saisi par utilisateur lorsqu'il demande un
+entraînement afin d'indiquer s'il veut un entraînement de
+faible ou de haute intensité.</li>
+<li>Un nombre aléatoire faisant varier les programmes d'entraînement</li>
+</ul>
+<!--
+The output will be the recommended workout plan. Listing 13-2 shows the `main`
+function we’ll use.
+-->
+<p>Le résultat sera le programme d'entraînement recommandé. L'encart 13-2 montre la
+fonction <code>main</code> que nous allons utiliser.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+# use std::thread;
+# use std::time::Duration;
+# 
+# fn simulated_expensive_calculation(intensity: u32) -> u32 {
+#     println!("calculating slowly...");
+#     thread::sleep(Duration::from_secs(2));
+#     intensity
+# }
+# 
+# fn generate_workout(intensity: u32, random_number: u32) {}
+# 
+fn main() {
+    let simulated_user_specified_value = 10;
+    let simulated_random_number = 7;
+
+    generate_workout(simulated_user_specified_value, simulated_random_number);
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">use std::thread;
+</span><span class="boring">use std::time::Duration;
+</span><span class="boring">
+</span><span class="boring">fn simuler_gros_calcul(intensite: u32) -&gt; u32 {
+</span><span class="boring">    println!(&quot;calcul très lent ...&quot;);
+</span><span class="boring">    thread::sleep(Duration::from_secs(2));
+</span><span class="boring">    intensite
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn generer_exercices(intensite: u32, nombre_aleatoire: u32) {}
+</span><span class="boring">
+</span>fn main() {
+    let valeur_utilisateur_simule = 10;
+    let nombre_aleatoire_simule = 7;
+
+    generer_exercices(valeur_utilisateur_simule, nombre_aleatoire_simule);
+}
+</code></pre></pre>
+<!--
+<span class="caption">Listing 13-2: A `main` function with hardcoded values to
+simulate user input and random number generation</span>
+-->
+<p><span class="caption">Encart 13-2 : une fonction <code>main</code> avec des valeurs codées
+en dur pour simuler la saisie d'une valeur d'intensité par l'utilisateur et la
+génération d'un nombre aléatoire</span></p>
+<!--
+We’ve hardcoded the variable `simulated_user_specified_value` as 10 and the
+variable `simulated_random_number` as 7 for simplicity’s sake; in an actual
+program, we’d get the intensity number from the app frontend, and we’d use the
+`rand` crate to generate a random number, as we did in the Guessing Game
+example in Chapter 2. The `main` function calls a `generate_workout` function
+with the simulated input values.
+-->
+<p>Nous avons codé en dur la variable <code>valeur_utilisateur_simule</code> à 10 et la
+variable <code>nombre_aleatoire_simule</code> à 7 pour des raisons de simplicité ; dans un
+vrai programme nous obtiendrions la valeur d'intensité à partir de l'interface
+frontale et nous utiliserions la crate <code>rand</code> pour générer un nombre aléatoire,
+comme nous l'avons fait dans l'exemple du jeu du plus ou du moins dans le
+chapitre 2. La fonction <code>main</code> appelle une fonction <code>generer_exercices</code> avec ces
+valeurs d'entrée simulées.</p>
+<!--
+Now that we have the context, let’s get to the algorithm. The function
+`generate_workout` in Listing 13-3 contains the business logic of the
+app that we’re most concerned with in this example. The rest of the code
+changes in this example will be made to this function.
+-->
+<p>Maintenant que nous avons le contexte, passons à l'algorithme. La fonction
+<code>generer_exercices</code> dans l'encart 13-3 contient la logique métier de
+l'application qui nous préoccupe le plus dans cet exemple. Le reste des
+changements de code dans cet exemple seront appliqués à cette fonction :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+# use std::thread;
+# use std::time::Duration;
+# 
+# fn simulated_expensive_calculation(intensity: u32) -> u32 {
+#     println!("calculating slowly...");
+#     thread::sleep(Duration::from_secs(2));
+#     intensity
+# }
+# 
+fn generate_workout(intensity: u32, random_number: u32) {
+    if intensity < 25 {
+        println!(
+            "Today, do {} pushups!",
+            simulated_expensive_calculation(intensity)
+        );
+        println!(
+            "Next, do {} situps!",
+            simulated_expensive_calculation(intensity)
+        );
+    } else {
+        if random_number == 3 {
+            println!("Take a break today! Remember to stay hydrated!");
+        } else {
+            println!(
+                "Today, run for {} minutes!",
+                simulated_expensive_calculation(intensity)
+            );
+        }
+    }
+}
+# 
+# fn main() {
+#     let simulated_user_specified_value = 10;
+#     let simulated_random_number = 7;
+# 
+#     generate_workout(simulated_user_specified_value, simulated_random_number);
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">use std::thread;
+</span><span class="boring">use std::time::Duration;
+</span><span class="boring">
+</span><span class="boring">fn simuler_gros_calcul(intensite: u32) -&gt; u32 {
+</span><span class="boring">    println!(&quot;calcul très lent ...&quot;);
+</span><span class="boring">    thread::sleep(Duration::from_secs(2));
+</span><span class="boring">    intensite
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn generer_exercices(intensite: u32, nombre_aleatoire: u32) {
+    if intensite &lt; 25 {
+        println!(
+            &quot;Aujourd'hui, faire {} pompes !&quot;,
+            simuler_gros_calcul(intensite)
+        );
+        println!(
+            &quot;Ensuite, faire {} abdominaux !&quot;,
+            simuler_gros_calcul(intensite)
+        );
+    } else {
+        if nombre_aleatoire == 3 {
+            println!(&quot;Faites une pause aujourd'hui ! Rappelez-vous de bien vous hydrater !&quot;);
+        } else {
+            println!(
+                &quot;Aujourd'hui, courrez pendant {} minutes !&quot;,
+                simuler_gros_calcul(intensite)
+            );
+        }
+    }
+}
+<span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let valeur_utilisateur_simule = 10;
+</span><span class="boring">    let nombre_aleatoire_simule = 7;
+</span><span class="boring">
+</span><span class="boring">    generer_exercices(valeur_utilisateur_simule, nombre_aleatoire_simule);
+</span><span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 13-3: The business logic that prints the workout
+plans based on the inputs and calls to the `simulated_expensive_calculation`
+function</span>
+-->
+<p><span class="caption">Encart 13-3 : la logique métier qui affiche les programmes
+d'entraînement en fonction des entrées et des appels à la fonction
+<code>simuler_gros_calcul</code>.</span></p>
+<!--
+The code in Listing 13-3 has multiple calls to the slow calculation function.
+The first `if` block calls `simulated_expensive_calculation` twice, the `if`
+inside the outer `else` doesn’t call it at all, and the code inside the
+second `else` case calls it once.
+-->
+<p>Le code de l'encart 13-3 a plusieurs appels à la fonction de calcul lent : le
+premier bloc <code>if</code> appelle <code>simuler_gros_calcul</code> deux fois, le <code>if</code> à l'intérieur
+du <code>else</code> ne l'appelle pas du tout, et le code à l'intérieur du second <code>else</code>
+l'appelle une seule fois.</p>
+<!--
+The desired behavior of the `generate_workout` function is to first check
+whether the user wants a low-intensity workout (indicated by a number less than
+25) or a high-intensity workout (a number of 25 or greater).
+-->
+<p>Le comportement souhaité de la fonction <code>generer_exercices</code> est de vérifier
+d'abord si l'utilisateur veut un entraînement de faible intensité (indiqué par
+un nombre inférieur à 25) ou un entraînement de haute intensité (un nombre de 25
+ou plus).</p>
+<!--
+Low-intensity workout plans will recommend a number of push-ups and sit-ups
+based on the complex algorithm we’re simulating.
+-->
+<p>Les plans d'entraînement à faible intensité recommanderont un certain nombre de
+pompes et d'abdominaux basés sur l'algorithme complexe que nous simulons.</p>
+<!--
+If the user wants a high-intensity workout, there’s some additional logic: if
+the value of the random number generated by the app happens to be 3, the app
+will recommend a break and hydration. If not, the user will get a number of
+minutes of running based on the complex algorithm.
+-->
+<p>Si l'utilisateur souhaite un entraînement de haute intensité, il y a une logique
+en plus : si la valeur du nombre aléatoire généré par l'application est 3,
+l'application recommandera une pause et une hydratation à la place. Sinon,
+l'utilisateur recevra un nombre de minutes de course à pied calculé par
+l'algorithme complexe.</p>
+<!--
+This code works the way the business wants it to now, but let’s say the data
+science team decides that we need to make some changes to the way we call the
+`simulated_expensive_calculation` function in the future. To simplify the
+update when those changes happen, we want to refactor this code so it calls the
+`simulated_expensive_calculation` function only once. We also want to cut the
+place where we’re currently unnecessarily calling the function twice without
+adding any other calls to that function in the process. That is, we don’t want
+to call it if the result isn’t needed, and we still want to call it only once.
+-->
+<p>Ce code fonctionne comme la logique métier le souhaite, mais imaginons que
+l'équipe de science des données nous informe qu'il va y avoir des changements
+dans la façon dont nous devrons appeler l'algorithme à l'avenir. Pour simplifier
+la mise à jour lorsque ces changements se produiront, nous voulons remanier ce
+code de sorte qu'il n'appelle la fonction <code>simuler_gros_calcul</code> qu'une seule fois.
+Nous voulons également nous débarrasser de l'endroit où nous appelons la
+fonction deux fois inutilement, sans ajouter d'autres appels à cette fonction au
+cours de ce processus. Autrement dit, nous ne voulons pas l'appeler si le
+résultat n'en a pas besoin, et nous voulons ne l'appeler qu'une seule fois.</p>
+<!--
+#### Refactoring Using Functions
+-->
+<h4 id="remaniement-en-utilisant-des-fonctions"><a class="header" href="#remaniement-en-utilisant-des-fonctions">Remaniement en utilisant des fonctions</a></h4>
+<!--
+We could restructure the workout program in many ways. First, we’ll try
+extracting the duplicated call to the `simulated_expensive_calculation`
+function into a variable, as shown in Listing 13-4.
+-->
+<p>Nous pourrions restructurer le programme d'entraînement de plusieurs manières.
+Tout d'abord, nous allons essayer d'extraire l'appel en double à la fonction
+<code>simuler_gros_calcul</code> dans une variable, comme dans l'encart 13-4 :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+# use std::thread;
+# use std::time::Duration;
+# 
+# fn simulated_expensive_calculation(intensity: u32) -> u32 {
+#     println!("calculating slowly...");
+#     thread::sleep(Duration::from_secs(2));
+#     intensity
+# }
+# 
+fn generate_workout(intensity: u32, random_number: u32) {
+    let expensive_result = simulated_expensive_calculation(intensity);
+
+    if intensity < 25 {
+        println!("Today, do {} pushups!", expensive_result);
+        println!("Next, do {} situps!", expensive_result);
+    } else {
+        if random_number == 3 {
+            println!("Take a break today! Remember to stay hydrated!");
+        } else {
+            println!("Today, run for {} minutes!", expensive_result);
+        }
+    }
+}
+# 
+# fn main() {
+#     let simulated_user_specified_value = 10;
+#     let simulated_random_number = 7;
+# 
+#     generate_workout(simulated_user_specified_value, simulated_random_number);
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">use std::thread;
+</span><span class="boring">use std::time::Duration;
+</span><span class="boring">
+</span><span class="boring">fn simuler_gros_calcul(intensite: u32) -&gt; u32 {
+</span><span class="boring">    println!(&quot;calcul très lent ...&quot;);
+</span><span class="boring">    thread::sleep(Duration::from_secs(2));
+</span><span class="boring">    intensite
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn generer_exercices(intensite: u32, nombre_aleatoire: u32) {
+    let resultat_lent = simuler_gros_calcul(intensite);
+
+    if intensite &lt; 25 {
+        println!(&quot;Aujourd'hui, faire {} pompes !&quot;, resultat_lent);
+        println!(&quot;Ensuite, faire {} abdominaux !&quot;, resultat_lent);
+    } else {
+        if nombre_aleatoire == 3 {
+            println!(&quot;Faites une pause aujourd'hui ! Rappelez-vous de bien vous hydrater !&quot;);
+        } else {
+            println!(&quot;Aujourd'hui, courrez pendant {} minutes !&quot;, resultat_lent);
+        }
+    }
+}
+<span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let valeur_utilisateur_simule = 10;
+</span><span class="boring">    let nombre_aleatoire_simule = 7;
+</span><span class="boring">
+</span><span class="boring">    generer_exercices(valeur_utilisateur_simule, nombre_aleatoire_simule);
+</span><span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 13-4: Extracting the calls to
+`simulated_expensive_calculation` to one place and storing the result in the
+`expensive_result` variable</span>
+-->
+<p><span class="caption">Encart 13-4 : extraction des appels à
+<code>simuler_gros_calcul</code> dans un seul endroit et stockage du résultat dans la
+variable <code>resultat_lent</code>.</span></p>
+<!--
+This change unifies all the calls to `simulated_expensive_calculation` and
+solves the problem of the first `if` block unnecessarily calling the function
+twice. Unfortunately, we’re now calling this function and waiting for the
+result in all cases, which includes the inner `if` block that doesn’t use the
+result value at all.
+-->
+<p>Ce changement unifie tous les appels à <code>simuler_gros_calcul</code> et résout le
+problème du premier bloc <code>if</code> qui appelle inutilement la fonction à deux
+reprises. Malheureusement, nous appelons maintenant cette fonction et attendons
+le résultat dans tous les cas, ce qui inclut le bloc <code>if</code> interne qui n'utilise
+pas du tout la valeur du résultat.</p>
+<!--
+We want to refer to `simulated_expensive_calculation` only once in
+`generate_workout`, but defer the expensive calculation to only where
+we actually need the result. This is a use case for closures!
+-->
+<p>Nous voulons nous référer à <code>simuler_gros_calcul</code> qu'une seule fois dans
+<code>generer_exercices</code>, mais retarder le gros calcul jusqu'au moment où nous avons
+avons réellement besoin du résultat. C'est un cas d'utilisation des fermetures !</p>
+<!--
+#### Refactoring with Closures to Store Code
+-->
+<h4 id="remanier-le-code-avec-des-fermetures-pour-stocker-du-code"><a class="header" href="#remanier-le-code-avec-des-fermetures-pour-stocker-du-code">Remanier le code avec des fermetures pour stocker du code</a></h4>
+<!--
+Instead of always calling the `simulated_expensive_calculation` function before
+the `if` blocks, we can define a closure and store the *closure* in a variable
+rather than storing the result of the function call, as shown in Listing 13-5.
+We can actually move the whole body of `simulated_expensive_calculation` within
+the closure we’re introducing here.
+-->
+<p>Au lieu d'appeler systématiquement la fonction <code>simuler_gros_calcul</code> avant
+les blocs <code>if</code>, nous pouvons définir une fermeture et la stocker dans une
+variable au lieu de le faire pour le résultat, comme le montre l'encart 13-5.
+Nous pouvons en fait déplacer l'ensemble du corps de <code>simuler_gros_calcul</code> dans
+la fermeture que nous introduisons ici.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+# use std::thread;
+# use std::time::Duration;
+# 
+# fn generate_workout(intensity: u32, random_number: u32) {
+    let expensive_closure = |num| {
+        println!("calculating slowly...");
+        thread::sleep(Duration::from_secs(2));
+        num
+    };
+# 
+#     if intensity < 25 {
+#         println!("Today, do {} pushups!", expensive_closure(intensity));
+#         println!("Next, do {} situps!", expensive_closure(intensity));
+#     } else {
+#         if random_number == 3 {
+#             println!("Take a break today! Remember to stay hydrated!");
+#         } else {
+#             println!(
+#                 "Today, run for {} minutes!",
+#                 expensive_closure(intensity)
+#             );
+#         }
+#     }
+# }
+# 
+# fn main() {
+#     let simulated_user_specified_value = 10;
+#     let simulated_random_number = 7;
+# 
+#     generate_workout(simulated_user_specified_value, simulated_random_number);
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">use std::thread;
+</span><span class="boring">use std::time::Duration;
+</span><span class="boring">
+</span><span class="boring">fn generer_exercices(intensite: u32, nombre_aleatoire: u32) {
+</span>    let fermeture_lente = |nombre| {
+        println!(&quot;calcul très lent ...&quot;);
+        thread::sleep(Duration::from_secs(2));
+        nombre
+    };
+<span class="boring">
+</span><span class="boring">    if intensite &lt; 25 {
+</span><span class="boring">        println!(&quot;Aujourd'hui, faire {} pompes !&quot;, fermeture_lente(intensite));
+</span><span class="boring">        println!(&quot;Ensuite, faire {} abdominaux !&quot;, fermeture_lente(intensite));
+</span><span class="boring">    } else {
+</span><span class="boring">        if nombre_aleatoire == 3 {
+</span><span class="boring">            println!(&quot;Faites une pause aujourd'hui ! Rappelez-vous de bien vous hydrater !&quot;);
+</span><span class="boring">        } else {
+</span><span class="boring">            println!(
+</span><span class="boring">                &quot;Aujourd'hui, courrez pendant {} minutes !&quot;,
+</span><span class="boring">                fermeture_lente(intensite)
+</span><span class="boring">            );
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let valeur_utilisateur_simule = 10;
+</span><span class="boring">    let nombre_aleatoire_simule = 7;
+</span><span class="boring">
+</span><span class="boring">    generer_exercices(valeur_utilisateur_simule, nombre_aleatoire_simule);
+</span><span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 13-5: Defining a closure and storing it in the
+`expensive_closure` variable</span>
+-->
+<p><span class="caption">Encart 13-5 : définition d'une fermeture et son
+enregistrement dans la variable <code>fermeture_lente</code>.</span></p>
+<!--
+The closure definition comes after the `=` to assign it to the variable
+`expensive_closure`. To define a closure, we start with a pair of vertical
+pipes (`|`), inside which we specify the parameters to the closure; this syntax
+was chosen because of its similarity to closure definitions in Smalltalk and
+Ruby. This closure has one parameter named `num`: if we had more than one
+parameter, we would separate them with commas, like `|param1, param2|`.
+-->
+<p>La définition de la fermeture vient après le <code>=</code> pour l'assigner à la variable
+<code>fermeture_lente</code>. Pour définir une fermeture, on commence par une paire de
+barres verticales (<code>|</code>), à l'intérieur desquelles on renseigne les paramètres de
+la fermeture ; cette syntaxe a été choisie en raison de sa similitude avec les
+définitions des fermetures en Smalltalk et en Ruby. Cette fermeture a un
+paramètre <code>nombre</code> : si nous avions plus d'un paramètre, nous les séparerions
+par des virgules, comme ceci : <code>|param1, param2|</code>.</p>
+<!--
+After the parameters, we place curly brackets that hold the body of the
+closure—these are optional if the closure body is a single expression. The end
+of the closure, after the curly brackets, needs a semicolon to complete the
+`let` statement. The value returned from the last line in the closure body
+(`num`) will be the value returned from the closure when it’s called, because
+that line doesn’t end in a semicolon; just as in function bodies.
+-->
+<p>Après les paramètres, on ajoute des accolades qui contiennent le corps de la
+fermeture, celles-ci sont facultatives si le corps de la fermeture est une seule
+expression. Après les accolades, nous avons besoin d'un point-virgule
+pour terminer l'instruction <code>let</code>. La valeur à la dernière ligne dans le corps
+de la fermeture (<code>nombre</code>) sera la valeur retournée par la fermeture lorsqu'elle
+sera exécutée, et cette ligne ne se termine pas par un point-virgule, exactement
+comme dans le corps des fonctions.</p>
+<!--
+Note that this `let` statement means `expensive_closure` contains the
+*definition* of an anonymous function, not the *resulting value* of calling the
+anonymous function. Recall that we’re using a closure because we want to define
+the code to call at one point, store that code, and call it at a later point;
+the code we want to call is now stored in `expensive_closure`.
+-->
+<p>Notez que cette instruction <code>let</code> signifie que la variable <code>fermeture_lente</code>
+contient la <em>définition</em> d'une fonction anonyme, pas la <em>valeur résultante</em> à
+l'appel de cette fonction anonyme. Rappelons que nous utilisons une fermeture
+pour définir le code à appeler dans un seul endroit, stocker ce code et
+l'appeler plus tard ; le code que nous voulons appeler est maintenant stocké
+dans <code>fermeture_lente</code>.</p>
+<!--
+With the closure defined, we can change the code in the `if` blocks to call the
+closure to execute the code and get the resulting value. We call a closure like
+we do a function: we specify the variable name that holds the closure
+definition and follow it with parentheses containing the argument values we
+want to use, as shown in Listing 13-6.
+-->
+<p>Maintenant que nous avons défini la fermeture, nous pouvons changer le code dans
+les blocs <code>if</code> pour appeler la fermeture afin d'exécuter le code et obtenir la
+valeur résultante. L'appel d'une fermeture fonctionne comme pour l'appel d'une
+fonction : nous renseignons le nom de la variable qui stocke la définition de la
+fermeture et la complétons avec des parenthèses contenant les valeurs du ou des
+arguments que nous voulons utiliser pour cet appel, comme dans l'encart 13-6.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+# use std::thread;
+# use std::time::Duration;
+# 
+fn generate_workout(intensity: u32, random_number: u32) {
+    let expensive_closure = |num| {
+        println!("calculating slowly...");
+        thread::sleep(Duration::from_secs(2));
+        num
+    };
+
+    if intensity < 25 {
+        println!("Today, do {} pushups!", expensive_closure(intensity));
+        println!("Next, do {} situps!", expensive_closure(intensity));
+    } else {
+        if random_number == 3 {
+            println!("Take a break today! Remember to stay hydrated!");
+        } else {
+            println!(
+                "Today, run for {} minutes!",
+                expensive_closure(intensity)
+            );
+        }
+    }
+}
+# 
+# fn main() {
+#     let simulated_user_specified_value = 10;
+#     let simulated_random_number = 7;
+# 
+#     generate_workout(simulated_user_specified_value, simulated_random_number);
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">use std::thread;
+</span><span class="boring">use std::time::Duration;
+</span><span class="boring">
+</span>fn generer_exercices(intensite: u32, nombre_aleatoire: u32) {
+    let fermeture_lente = |nombre| {
+        println!(&quot;calcul très lent ...&quot;);
+        thread::sleep(Duration::from_secs(2));
+        nombre
+    };
+
+    if intensite &lt; 25 {
+        println!(&quot;Aujourd'hui, faire {} pompes !&quot;, fermeture_lente(intensite));
+        println!(&quot;Ensuite, faire {} abdominaux !&quot;, fermeture_lente(intensite));
+    } else {
+        if nombre_aleatoire == 3 {
+            println!(&quot;Faites une pause aujourd'hui ! Rappelez-vous de bien vous hydrater !&quot;);
+        } else {
+            println!(
+                &quot;Aujourd'hui, courrez pendant {} minutes !&quot;,
+                fermeture_lente(intensite)
+            );
+        }
+    }
+}
+<span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let valeur_utilisateur_simule = 10;
+</span><span class="boring">    let nombre_aleatoire_simule = 7;
+</span><span class="boring">
+</span><span class="boring">    generer_exercices(valeur_utilisateur_simule, nombre_aleatoire_simule);
+</span><span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 13-6: Calling the `expensive_closure` we’ve
+defined</span>
+-->
+<p><span class="caption">Encart 13-6 : appel de la fermeture <code>fermeture_lente</code>
+que nous avons définie</span></p>
+<!--
+Now how to perform the expensive calculation is defined in only one
+place, and we’re only executing that code where we need the results.
+-->
+<p>Désormais, le calcul lent n'est défini qu'à un seul endroit et nous
+n'exécutons ce code qu'aux endroits où nous avons besoin des résultats.</p>
+<!--
+However, we’ve reintroduced one of the problems from Listing 13-3: we’re still
+calling the closure twice in the first `if` block, which will call the
+expensive code twice and make the user wait twice as long as they need to. We
+could fix this problem by creating a variable local to that `if` block to hold
+the result of calling the closure, but closures provide us with another
+solution. We’ll talk about that solution in a bit. But first let’s talk about
+why there aren’t type annotations in the closure definition and the traits
+involved with closures.
+-->
+<p>Cependant, nous avons réintroduit l'un des problèmes de l'encart 13-3 : nous
+continuons d'appeler la fermeture deux fois dans le premier bloc <code>if</code>, qui
+appellera le code lent à deux reprises et fera attendre l'utilisateur deux fois
+plus longtemps que nécessaire. Nous pourrions résoudre ce problème en créant une
+variable locale à ce bloc <code>if</code> pour conserver le résultat de l'appel à la
+fermeture, mais les fermetures nous ouvrent d'autres solutions. Commençons
+d'abord par expliquer pourquoi il n'y a pas d'annotation de type dans la
+définition des fermetures et des traits liés aux fermetures.</p>
+<!--
+### Closure Type Inference and Annotation
+-->
+<h3 id="linférence-de-type-et-lannotation-des-fermetures"><a class="header" href="#linférence-de-type-et-lannotation-des-fermetures">L'inférence de type et l'annotation des fermetures</a></h3>
+<!--
+Closures don’t require you to annotate the types of the parameters or the
+return value like `fn` functions do. Type annotations are required on functions
+because they’re part of an explicit interface exposed to your users. Defining
+this interface rigidly is important for ensuring that everyone agrees on what
+types of values a function uses and returns. But closures aren’t used in an
+exposed interface like this: they’re stored in variables and used without
+naming them and exposing them to users of our library.
+-->
+<p>Les fermetures ne nécessitent pas d'annoter le type des paramètres ou de la
+valeur de retour comme le font les fonctions <code>fn</code>. Les annotations de type sont
+nécessaires pour les fonctions car elles font partie d'une interface explicite
+exposée à leurs utilisateurs. Définir cette interface de manière rigide est
+nécessaire pour s'assurer que tout le monde s'accorde sur les types de valeurs
+qu'une fonction utilise et retourne. Mais les fermetures ne sont pas utilisées
+dans une interface exposée de cette façon : elles sont stockées dans des
+variables et utilisées sans les nommer ni les exposer aux utilisateurs de notre
+bibliothèque.</p>
+<!--
+Closures are usually short and relevant only within a narrow context rather
+than in any arbitrary scenario. Within these limited contexts, the compiler is
+reliably able to infer the types of the parameters and the return type, similar
+to how it’s able to infer the types of most variables.
+-->
+<p>En outre, les fermetures sont généralement brèves et ne sont pertinentes que
+dans un contexte précis plutôt que pour des cas génériques. Dans ce contexte
+précis, le compilateur est capable de déduire le type des paramètres et le type
+de retour, tout comme il est capable d'inférer le type de la plupart des variables.</p>
+<!--
+Making programmers annotate the types in these small, anonymous functions would
+be annoying and largely redundant with the information the compiler already has
+available.
+-->
+<p>Demander aux développeurs d'annoter le type dans ces petites fonctions anonymes
+serait pénible et largement redondant avec l'information dont dispose déjà le
+compilateur.</p>
+<!--
+As with variables, we can add type annotations if we want to increase
+explicitness and clarity at the cost of being more verbose than is strictly
+necessary. Annotating the types for the closure we defined in Listing 13-5
+would look like the definition shown in Listing 13-7.
+-->
+<p>Comme pour les variables, nous pouvons ajouter des annotations de type si nous
+voulons rendre explicite et clarifier le code au risque d'être plus verbeux que
+ce qui est strictement nécessaire. Annoter les types de la fermeture que nous
+avons définie dans l'encart 13-5 ressemblerait à l'encart 13-7.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+# use std::thread;
+# use std::time::Duration;
+# 
+# fn generate_workout(intensity: u32, random_number: u32) {
+    let expensive_closure = |num: u32| -> u32 {
+        println!("calculating slowly...");
+        thread::sleep(Duration::from_secs(2));
+        num
+    };
+# 
+#     if intensity < 25 {
+#         println!("Today, do {} pushups!", expensive_closure(intensity));
+#         println!("Next, do {} situps!", expensive_closure(intensity));
+#     } else {
+#         if random_number == 3 {
+#             println!("Take a break today! Remember to stay hydrated!");
+#         } else {
+#             println!(
+#                 "Today, run for {} minutes!",
+#                 expensive_closure(intensity)
+#             );
+#         }
+#     }
+# }
+# 
+# fn main() {
+#     let simulated_user_specified_value = 10;
+#     let simulated_random_number = 7;
+# 
+#     generate_workout(simulated_user_specified_value, simulated_random_number);
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">use std::thread;
+</span><span class="boring">use std::time::Duration;
+</span><span class="boring">
+</span><span class="boring">fn generer_exercices(intensite: u32, nombre_aleatoire: u32) {
+</span>    let fermeture_lente = |nombre: u32| -&gt; u32 {
+        println!(&quot;calcul très lent ...&quot;);
+        thread::sleep(Duration::from_secs(2));
+        nombre
+    };
+<span class="boring">
+</span><span class="boring">    if intensite &lt; 25 {
+</span><span class="boring">        println!(&quot;Aujourd'hui, faire {} pompes !&quot;, fermeture_lente(intensite));
+</span><span class="boring">        println!(&quot;Ensuite, faire {} abdominaux !&quot;, fermeture_lente(intensite));
+</span><span class="boring">    } else {
+</span><span class="boring">        if nombre_aleatoire == 3 {
+</span><span class="boring">            println!(&quot;Faites une pause aujourd'hui ! Rappelez-vous de bien vous hydrater !&quot;);
+</span><span class="boring">        } else {
+</span><span class="boring">            println!(
+</span><span class="boring">                &quot;Aujourd'hui, courrez pendant {} minutes !&quot;,
+</span><span class="boring">                fermeture_lente(intensite)
+</span><span class="boring">            );
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let valeur_utilisateur_simule = 10;
+</span><span class="boring">    let nombre_aleatoire_simule = 7;
+</span><span class="boring">
+</span><span class="boring">    generer_exercices(valeur_utilisateur_simule, nombre_aleatoire_simule);
+</span><span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 13-7: Adding optional type annotations of the
+parameter and return value types in the closure</span>
+-->
+<p><span class="caption">Encart 13-7 : ajout d'annotations de type optionnelles sur
+les paramètres et les valeurs de retour de la fermeture</span></p>
+<!--
+With type annotations added, the syntax of closures looks more similar to the
+syntax of functions. The following is a vertical comparison of the syntax for
+the definition of a function that adds 1 to its parameter and a closure that
+has the same behavior. We’ve added some spaces to line up the relevant parts.
+This illustrates how closure syntax is similar to function syntax except for
+the use of pipes and the amount of syntax that is optional:
+-->
+<p>La syntaxe des fermetures et des fonctions semble plus similaire avec les
+annotations de type. Ce qui suit est une comparaison verticale entre la syntaxe
+d'une définition d'une fonction qui ajoute 1 à son paramètre, et d'une fermeture
+qui a le même comportement. Nous avons ajouté des espaces pour aligner les
+parties pertinentes. Ceci met en évidence la similarité entre la syntaxe des
+fermetures et celle des fonctions, hormis l'utilisation des barres verticales
+et certaines syntaxes facultatives :</p>
+<!--
+```rust,ignore
+fn  add_one_v1   (x: u32) -> u32 { x + 1 }
+let add_one_v2 = |x: u32| -> u32 { x + 1 };
+let add_one_v3 = |x|             { x + 1 };
+let add_one_v4 = |x|               x + 1  ;
+```
+-->
+<pre><code class="language-rust ignore">fn  ajouter_un_v1   (x: u32) -&gt; u32 { x + 1 }
+let ajouter_un_v2 = |x: u32| -&gt; u32 { x + 1 };
+let ajouter_un_v3 = |x|             { x + 1 };
+let ajouter_un_v4 = |x|               x + 1  ;
+</code></pre>
+<!--
+The first line shows a function definition, and the second line shows a fully
+annotated closure definition. The third line removes the type annotations from
+the closure definition, and the fourth line removes the brackets, which are
+optional because the closure body has only one expression. These are all valid
+definitions that will produce the same behavior when they’re called. Calling
+the closures is required for `add_one_v3` and `add_one_v4` to be able to
+compile because the types will be inferred from their usage.
+-->
+<p>La première ligne affiche la définition d'une fonction et la deuxième ligne une
+définition d'une fermeture entièrement annotée. La troisième ligne supprime les
+annotations de type de la définition de la fermeture, et la quatrième ligne
+supprime les accolades qui sont facultatives, parce que le corps d'une fermeture
+n'a qu'une seule expression. Ce sont toutes des définitions valides qui
+suivront le même comportement lorsqu'on les appellera. L'appel aux fermetures
+est nécessaire pour que <code>ajouter_un_v3</code> et <code>ajouter_un_v4</code> puissent être compilés
+car les types seront déduits en fonction de leur utilisation.</p>
+<!--
+Closure definitions will have one concrete type inferred for each of their
+parameters and for their return value. For instance, Listing 13-8 shows the
+definition of a short closure that just returns the value it receives as a
+parameter. This closure isn’t very useful except for the purposes of this
+example. Note that we haven’t added any type annotations to the definition: if
+we then try to call the closure twice, using a `String` as an argument the
+first time and a `u32` the second time, we’ll get an error.
+-->
+<p>Les définitions des fermetures auront un type concret déduit pour chacun de
+leurs paramètres et pour leur valeur de retour. Par exemple, l'encart 13-8
+montre la définition d'une petite fermeture qui renvoie simplement la valeur
+qu'elle reçoit comme paramètre. Cette fermeture n'est pas très utile sauf pour
+les besoins de cet exemple. Notez que nous n'avons pas ajouté d'annotation de
+type à la définition : si nous essayons alors d'appeler la fermeture deux fois,
+en utilisant une <code>String</code> comme argument la première fois et un <code>u32</code> la
+deuxième fois, nous obtiendrons une erreur :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust,ignore,does_not_compile
+# fn main() {
+    let example_closure = |x| x;
+
+    let s = example_closure(String::from("hello"));
+    let n = example_closure(5);
+# }
+```
+-->
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">fn main() {
+</span>    let fermeture_exemple = |x| x;
+
+    let s = fermeture_exemple(String::from(&quot;hello&quot;));
+    let n = fermeture_exemple(5);
+<span class="boring">}
+</span></code></pre>
+<!--
+<span class="caption">Listing 13-8: Attempting to call a closure whose types
+are inferred with two different types</span>
+-->
+<p><span class="caption">Encart 13-8 : tentative d'appeler une fermeture dont les
+types sont déduits avec deux types différents</span></p>
+<!--
+The compiler gives us this error:
+-->
+<p>Le compilateur nous renvoie l'erreur suivante :</p>
+<!--
+```console
+$ cargo run
+   Compiling closure-example v0.1.0 (file:///projects/closure-example)
+error[E0308]: mismatched types
+ -- > src/main.rs:5:29
+  |
+5 |     let n = example_closure(5);
+  |                             ^- help: try using a conversion method: `.to_string()`
+  |                             |
+  |                             expected struct `String`, found integer
+
+For more information about this error, try `rustc --explain E0308`.
+error: could not compile `closure-example` due to previous error
+```
+-->
+<pre><code class="language-console">$ cargo run
+   Compiling closure-example v0.1.0 (file:///projects/closure-example)
+error[E0308]: mismatched types
+ --&gt; src/main.rs:5:29
+  |
+5 |     let n = fermeture_exemple(5);
+  |                               ^- help: try using a conversion method: `.to_string()`
+  |                               |
+  |                               expected struct `String`, found integer
+
+For more information about this error, try `rustc --explain E0308`.
+error: could not compile `closure-example` due to previous error
+</code></pre>
+<!--
+The first time we call `example_closure` with the `String` value, the compiler
+infers the type of `x` and the return type of the closure to be `String`. Those
+types are then locked into the closure in `example_closure`, and we get a type
+error if we try to use a different type with the same closure.
+-->
+<p>La première fois que nous appelons <code>fermeture_exemple</code> avec une <code>String</code>, le
+compilateur déduit que le type de <code>x</code> et le type de retour de la fermeture sont
+de type <code>String</code>. Ces types sont ensuite verrouillés dans <code>fermeture_exemple</code>,
+et nous obtenons une erreur de type si nous essayons d'utiliser un type
+différent avec la même fermeture.</p>
+<!--
+### Storing Closures Using Generic Parameters and the `Fn` Traits
+-->
+<h3 id="stockage-des-fermetures-avec-des-paramètres-génériques-et-le-trait-fn"><a class="header" href="#stockage-des-fermetures-avec-des-paramètres-génériques-et-le-trait-fn">Stockage des fermetures avec des paramètres génériques et le trait <code>Fn</code></a></h3>
+<!--
+Let’s return to our workout generation app. In Listing 13-6, our code was still
+calling the expensive calculation closure more times than it needed to. One
+option to solve this issue is to save the result of the expensive closure in a
+variable for reuse and use the variable in each place we need the result,
+instead of calling the closure again. However, this method could result in a
+lot of repeated code.
+-->
+<p>Revenons à notre application de génération d'entraînements. Dans l'encart 13-6,
+notre code appelait toujours la fermeture lente plus de fois que nécessaire. Une
+option pour résoudre ce problème est de sauvegarder le résultat de la fermeture
+lente dans une variable pour une future utilisation et d'utiliser la variable à
+chaque endroit où nous en avons besoin au lieu de rappeler la fermeture à
+nouveau. Cependant, cette méthode pourrait donner lieu à du code très répété.</p>
+<!--
+Fortunately, another solution is available to us. We can create a struct that
+will hold the closure and the resulting value of calling the closure. The
+struct will execute the closure only if we need the resulting value, and it
+will cache the resulting value so the rest of our code doesn’t have to be
+responsible for saving and reusing the result. You may know this pattern as
+*memoization* or *lazy evaluation*.
+-->
+<p>Heureusement, une autre solution s'offre à nous. Nous pouvons créer une
+structure qui stockera la fermeture et la valeur qui en résulte. La structure
+n'exécutera la fermeture que si nous avons besoin de la valeur
+résultante, et elle mettra en cache la valeur résultante pour que le reste de
+notre code n'ait pas la responsabilité de sauvegarder et de réutiliser le résultat.
+Vous connaissez peut-être cette technique sous le nom de <em>mémoïsation</em> ou
+<em>d'évaluation paresseuse</em>.</p>
+<!--
+To make a struct that holds a closure, we need to specify the type of the
+closure, because a struct definition needs to know the types of each of its
+fields. Each closure instance has its own unique anonymous type: that is, even
+if two closures have the same signature, their types are still considered
+different. To define structs, enums, or function parameters that use closures,
+we use generics and trait bounds, as we discussed in Chapter 10.
+-->
+<p>Pour faire en sorte qu'une structure détienne une fermeture, il faut préciser
+le type de fermeture, car une définition de structure a besoin de connaître les
+types de chacun de ses champs. Chaque instance de fermeture a son propre type
+anonyme unique : cela signifie que même si deux fermetures ont la même
+signature, leurs types sont toujours considérés comme différents. Pour définir
+des structures, des énumérations ou des paramètres de fonction qui utilisent des
+fermetures, nous utilisons des génériques et des traits liés, comme nous
+l'avons vu au chapitre 10.</p>
+<!--
+The `Fn` traits are provided by the standard library. All closures implement at
+least one of the traits: `Fn`, `FnMut`, or `FnOnce`. We’ll discuss the
+difference between these traits in the [“Capturing the Environment with
+Closures”](#capturing-the-environment-with-closures)<!-- ignore -- > section; in
+this example, we can use the `Fn` trait.
+-->
+<p>Les traits <code>Fn</code> sont fournis par la bibliothèque standard. Toutes les fermetures
+implémentent au moins un des traits suivants : <code>Fn</code>, <code>FnMut</code> ou <code>FnOnce</code>. Nous
+verrons la différence entre ces traits dans la section
+<a href="#capturer-lenvironnement-avec-les-fermetures">“Capturer l'environnement avec les
+fermetures”</a><!-- ignore --> ; dans
+cet exemple, nous pouvons utiliser le trait <code>Fn</code>.</p>
+<!--
+We add types to the `Fn` trait bound to represent the types of the parameters
+and return values the closures must have to match this trait bound. In this
+case, our closure has a parameter of type `u32` and returns a `u32`, so the
+trait bound we specify is `Fn(u32) -> u32`.
+-->
+<p>Nous ajoutons des types au trait lié <code>Fn</code> pour représenter les types de
+paramètres et les valeurs de retour que les fermetures doivent avoir pour
+correspondre à ce trait lié. Dans ce cas, notre fermeture a un paramètre de type
+<code>u32</code> et renvoie un <code>u32</code>, le trait lié que nous précisons est donc
+<code>Fn (u32) -&gt; u32</code>.</p>
+<!--
+Listing 13-9 shows the definition of the `Cacher` struct that holds a closure
+and an optional result value.
+-->
+<p>L'encart 13-9 montre la définition de la structure <code>Cache</code> qui possède une
+fermeture et une valeur de résultat optionnelle :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+struct Cacher<T>
+where
+    T: Fn(u32) -> u32,
+{
+    calculation: T,
+    value: Option<u32>,
+}
+# 
+# fn main() {}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">struct Cache&lt;T&gt;
+where
+    T: Fn(u32) -&gt; u32,
+{
+    calcul: T,
+    valeur: Option&lt;u32&gt;,
+}
+<span class="boring">
+</span><span class="boring">fn main() {}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 13-9: Defining a `Cacher` struct that holds a
+closure in `calculation` and an optional result in `value`</span>
+-->
+<p><span class="caption">Encart 13-9 : définition d'une structure <code>Cache</code> qui
+possède une fermeture dans <code>calcul</code> et un résultat optionnel dans <code>valeur</code>.
+</span></p>
+<!--
+The `Cacher` struct has a `calculation` field of the generic type `T`. The
+trait bounds on `T` specify that it’s a closure by using the `Fn` trait. Any
+closure we want to store in the `calculation` field must have one `u32`
+parameter (specified within the parentheses after `Fn`) and must return a
+`u32` (specified after the `->`).
+-->
+<p>La structure <code>Cache</code> a un champ <code>calcul</code> du type générique <code>T</code>. Le trait lié <code>T</code>
+précise que c'est une fermeture en utilisant le trait <code>Fn</code>. Toute fermeture que
+l'on veut stocker dans le champ <code>calcul</code> doit avoir un paramètre <code>u32</code> (ce qui
+est précisé entre parenthèse après le <code>Fn</code>) et doit retourner un <code>u32</code> (ce qui
+est précisé après le <code>-&gt;</code>).</p>
+<!--
+> Note: Functions can implement all three of the `Fn` traits too. If what we
+> want to do doesn’t require capturing a value from the environment, we can use
+> a function rather than a closure where we need something that implements an
+> `Fn` trait.
+-->
+<blockquote>
+<p>Remarque : les fonctions peuvent aussi implémenter chacun de ces trois traits
+<code>Fn</code>. Si ce que nous voulons faire ne nécessite pas de capturer une valeur de
+l'environnement, nous pouvons utiliser une fonction plutôt qu'une fermeture
+lorsque nous avons besoin de quelque chose qui implémente un trait <code>Fn</code>.</p>
+</blockquote>
+<!--
+The `value` field is of type `Option<u32>`. Before we execute the closure,
+`value` will be `None`. When code using a `Cacher` asks for the *result* of the
+closure, the `Cacher` will execute the closure at that time and store the
+result within a `Some` variant in the `value` field. Then if the code asks for
+the result of the closure again, instead of executing the closure again, the
+`Cacher` will return the result held in the `Some` variant.
+-->
+<p>Le champ <code>valeur</code> est de type <code>Option&lt;u32&gt;</code>. Avant d'exécuter la fermeture,
+<code>valeur</code> sera initialisée à <code>None</code>. Lorsque du code utilisant un <code>Cache</code> demande
+le <em>résultat</em> de la fermeture, le <code>Cache</code> exécutera la fermeture à ce moment-là
+et stockera le résultat dans une variante <code>Some</code> dans le champ <code>valeur</code>.
+Ensuite, si le code demande à nouveau le résultat de la fermeture, le <code>Cache</code>
+renverra le résultat contenu dans la variante <code>Some</code> au lieu d'exécuter à
+nouveau la fermeture.</p>
+<!--
+The logic around the `value` field we’ve just described is defined in Listing
+13-10.
+-->
+<p>La logique autour du champ <code>valeur</code> que nous venons de décrire est définie dans
+l'encart 13-10 :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+# struct Cacher<T>
+# where
+#     T: Fn(u32) -> u32,
+# {
+#     calculation: T,
+#     value: Option<u32>,
+# }
+# 
+impl<T> Cacher<T>
+where
+    T: Fn(u32) -> u32,
+{
+    fn new(calculation: T) -> Cacher<T> {
+        Cacher {
+            calculation,
+            value: None,
+        }
+    }
+
+    fn value(&mut self, arg: u32) -> u32 {
+        match self.value {
+            Some(v) => v,
+            None => {
+                let v = (self.calculation)(arg);
+                self.value = Some(v);
+                v
+            }
+        }
+    }
+}
+# 
+# fn main() {}
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">struct Cache&lt;T&gt;
+</span><span class="boring">where
+</span><span class="boring">    T: Fn(u32) -&gt; u32,
+</span><span class="boring">{
+</span><span class="boring">    calcul: T,
+</span><span class="boring">    valeur: Option&lt;u32&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span>impl&lt;T&gt; Cache&lt;T&gt;
+where
+    T: Fn(u32) -&gt; u32
+{
+    fn new(calcul: T) -&gt; Cache&lt;T&gt; {
+        Cache {
+            calcul,
+            valeur: None,
+        }
+    }
+
+    fn valeur(&amp;mut self, arg: u32) -&gt; u32 {
+        match self.valeur {
+            Some(v) =&gt; v,
+            None =&gt; {
+                let v = (self.calcul)(arg);
+                self.valeur = Some(v);
+                v
+            },
+        }
+    }
+}
+<span class="boring">
+</span><span class="boring">fn main() {}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 13-10: The caching logic of `Cacher`</span>
+-->
+<p><span class="caption">Encart 13-10 : la logique de <code>Cache</code></span></p>
+<!--
+We want `Cacher` to manage the struct fields’ values rather than letting the
+calling code potentially change the values in these fields directly, so these
+fields are private.
+-->
+<p>Nous voulons que <code>Cache</code> gère les valeurs des champs de structure plutôt que de
+laisser la possibilité au code appelant la possibilité de modifier directement
+les valeurs dans ces champs, donc nous faisons en sorte que ces champs soient
+privés.</p>
+<!--
+The `Cacher::new` function takes a generic parameter `T`, which we’ve defined
+as having the same trait bound as the `Cacher` struct. Then `Cacher::new`
+returns a `Cacher` instance that holds the closure specified in the
+`calculation` field and a `None` value in the `value` field, because we haven’t
+executed the closure yet.
+-->
+<p>La fonction <code>Cache::new</code> prend un paramètre générique <code>T</code>, que nous avons
+défini comme ayant le même trait lié que la structure <code>Cache</code>. Puis <code>Cache::new</code>
+renvoie une instance <code>Cache</code> qui contient la fermeture présente dans le champ
+<code>calcul</code> et une valeur <code>None</code> dans le champ <code>valeur</code>, car nous n'avons pas
+encore exécuté la fermeture.</p>
+<!--
+When the calling code needs the result of evaluating the closure, instead of
+calling the closure directly, it will call the `value` method. This method
+checks whether we already have a resulting value in `self.value` in a `Some`;
+if we do, it returns the value within the `Some` without executing the closure
+again.
+-->
+<p>Lorsque le code appelant veut le résultat de l'exécution de la fermeture, au
+lieu d'appeler directement la fermeture, il appellera la méthode <code>valeur</code>. Cette
+méthode vérifie si nous avons déjà une valeur dans un <code>Some</code> dans
+<code>self.valeur</code> ; et si c'est le cas, elle renvoie la valeur contenue dans le
+<code>Some</code> sans exécuter de nouveau la fermeture.</p>
+<!--
+If `self.value` is `None`, the code calls the closure stored in
+`self.calculation`, saves the result in `self.value` for future use, and
+returns the value as well.
+-->
+<p>Si <code>self.valeur</code> est <code>None</code>, nous appelons la fermeture stockée dans
+<code>self.calcul</code>, et nous sauvegardons le résultat dans <code>self.valeur</code> pour une
+utilisation future, puis nous retournons la valeur.</p>
+<!--
+Listing 13-11 shows how we can use this `Cacher` struct in the function
+`generate_workout` from Listing 13-6.
+-->
+<p>L'encart 13-11 montre comment utiliser cette structure <code>Cache</code> dans la fonction
+<code>generer_exercices</code> de l'encart 13-6 :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+# use std::thread;
+# use std::time::Duration;
+# 
+# struct Cacher<T>
+# where
+#     T: Fn(u32) -> u32,
+# {
+#     calculation: T,
+#     value: Option<u32>,
+# }
+# 
+# impl<T> Cacher<T>
+# where
+#     T: Fn(u32) -> u32,
+# {
+#     fn new(calculation: T) -> Cacher<T> {
+#         Cacher {
+#             calculation,
+#             value: None,
+#         }
+#     }
+# 
+#     fn value(&mut self, arg: u32) -> u32 {
+#         match self.value {
+#             Some(v) => v,
+#             None => {
+#                 let v = (self.calculation)(arg);
+#                 self.value = Some(v);
+#                 v
+#             }
+#         }
+#     }
+# }
+# 
+fn generate_workout(intensity: u32, random_number: u32) {
+    let mut expensive_result = Cacher::new(|num| {
+        println!("calculating slowly...");
+        thread::sleep(Duration::from_secs(2));
+        num
+    });
+
+    if intensity < 25 {
+        println!("Today, do {} pushups!", expensive_result.value(intensity));
+        println!("Next, do {} situps!", expensive_result.value(intensity));
+    } else {
+        if random_number == 3 {
+            println!("Take a break today! Remember to stay hydrated!");
+        } else {
+            println!(
+                "Today, run for {} minutes!",
+                expensive_result.value(intensity)
+            );
+        }
+    }
+}
+# 
+# fn main() {
+#     let simulated_user_specified_value = 10;
+#     let simulated_random_number = 7;
+# 
+#     generate_workout(simulated_user_specified_value, simulated_random_number);
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">use std::thread;
+</span><span class="boring">use std::time::Duration;
+</span><span class="boring">
+</span><span class="boring">struct Cache&lt;T&gt;
+</span><span class="boring">where
+</span><span class="boring">    T: Fn(u32) -&gt; u32,
+</span><span class="boring">{
+</span><span class="boring">    calcul: T,
+</span><span class="boring">    valeur: Option&lt;u32&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl&lt;T&gt; Cache&lt;T&gt;
+</span><span class="boring">where
+</span><span class="boring">    T: Fn(u32) -&gt; u32
+</span><span class="boring">{
+</span><span class="boring">    fn new(calcul: T) -&gt; Cache&lt;T&gt; {
+</span><span class="boring">        Cache {
+</span><span class="boring">            calcul,
+</span><span class="boring">            valeur: None,
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn valeur(&amp;mut self, arg: u32) -&gt; u32 {
+</span><span class="boring">        match self.valeur {
+</span><span class="boring">            Some(v) =&gt; v,
+</span><span class="boring">            None =&gt; {
+</span><span class="boring">                let v = (self.calcul)(arg);
+</span><span class="boring">                self.valeur = Some(v);
+</span><span class="boring">                v
+</span><span class="boring">            },
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span>fn generer_exercices(intensite: u32, nombre_aleatoire: u32) {
+    let mut resultat_lent = Cache::new(|nombre| {
+        println!(&quot;calcul très lent ...&quot;);
+        thread::sleep(Duration::from_secs(2));
+        nombre
+    });
+
+    if intensite &lt; 25 {
+        println!(&quot;Aujourd'hui, faire {} pompes !&quot;, resultat_lent.valeur(intensite));
+        println!(&quot;Ensuite, faire {} abdominaux !&quot;, resultat_lent.valeur(intensite));
+    } else {
+        if nombre_aleatoire == 3 {
+            println!(&quot;Faites une pause aujourd'hui ! Rappelez-vous de bien vous hydrater !&quot;);
+        } else {
+            println!(
+                &quot;Aujourd'hui, courrez pendant {} minutes !&quot;,
+                resultat_lent.valeur(intensite)
+            );
+        }
+    }
+}
+<span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let valeur_utilisateur_simule = 10;
+</span><span class="boring">    let nombre_aleatoire_simule = 7;
+</span><span class="boring">
+</span><span class="boring">    generer_exercices(valeur_utilisateur_simule, nombre_aleatoire_simule);
+</span><span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 13-11: Using `Cacher` in the `generate_workout`
+function to abstract away the caching logic</span>
+-->
+<p><span class="caption">Encart 13-11 : utilisation de <code>Cache</code> dans la fonction
+<code>generer_exercices</code> pour masquer la logique du cache.</span></p>
+<!--
+Instead of saving the closure in a variable directly, we save a new instance of
+`Cacher` that holds the closure. Then, in each place we want the result, we
+call the `value` method on the `Cacher` instance. We can call the `value`
+method as many times as we want, or not call it at all, and the expensive
+calculation will be run a maximum of once.
+-->
+<p>Au lieu de sauvegarder la fermeture dans une variable directement, nous
+sauvegardons une nouvelle instance de <code>Cache</code> qui contient la fermeture.
+Ensuite, à chaque fois que nous voulons le résultat, nous appelons la méthode
+<code>valeur</code> sur cette instance de <code>Cache</code>. Nous pouvons appeler la méthode <code>valeur</code>
+autant de fois que nous le souhaitons, ou ne pas l'appeler du tout, et le calcul
+lent sera exécuté une fois au maximum.</p>
+<!--
+Try running this program with the `main` function from Listing 13-2. Change the
+values in the `simulated_user_specified_value` and `simulated_random_number`
+variables to verify that in all the cases in the various `if` and `else`
+blocks, `calculating slowly...` appears only once and only when needed. The
+`Cacher` takes care of the logic necessary to ensure we aren’t calling the
+expensive calculation more than we need to so `generate_workout` can focus on
+the business logic.
+-->
+<p>Essayez d'exécuter ce programme avec la fonction <code>main</code> de l'encart 13-2.
+Modifiez les valeurs des variables <code>valeur_utilisateur_simule</code> et
+<code>nombre_aleatoire_simule</code> pour vérifier que dans tous les cas des différents
+blocs <code>if</code> et <code>else</code>, <code>calcul très lent ...</code> n'apparaît qu'une seule fois et
+seulement si nécessaire. Le <code>Cache</code> se charge de la logique nécessaire pour
+s'assurer que nous n'appelons pas le calcul lent plus que nous n'en avons
+besoin afin que <code>generer_exercices</code> puisse se concentrer sur la logique métier.</p>
+<!--
+### Limitations of the `Cacher` Implementation
+-->
+<h3 id="limitations-de-limplémentation-de-cache"><a class="header" href="#limitations-de-limplémentation-de-cache">Limitations de l'implémentation de <code>Cache</code></a></h3>
+<!--
+Caching values is a generally useful behavior that we might want to use in
+other parts of our code with different closures. However, there are two
+problems with the current implementation of `Cacher` that would make reusing it
+in different contexts difficult.
+-->
+<p>La mise en cache des valeurs est un comportement généralement utile que nous
+pourrions vouloir utiliser dans d'autres parties de notre code avec différentes
+fermetures. Cependant, il y a deux problèmes avec l'implémentation actuelle de
+<code>Cache</code> qui rendraient difficile sa réutilisation dans des contextes différents.</p>
+<!--
+The first problem is that a `Cacher` instance assumes it will always get the
+same value for the parameter `arg` to the `value` method. That is, this test of
+`Cacher` will fail:
+-->
+<p>Le premier problème est qu'une instance de <code>Cache</code> suppose qu'elle obtienne
+toujours la même valeur, indépendamment du paramètre <code>arg</code> de la méthode
+<code>valeur</code>. Autrement dit, ce test sur <code>Cache</code> échouera :</p>
+<!--
+```rust,ignore,panics
+# struct Cacher<T>
+# where
+#     T: Fn(u32) -> u32,
+# {
+#     calculation: T,
+#     value: Option<u32>,
+# }
+# 
+# impl<T> Cacher<T>
+# where
+#     T: Fn(u32) -> u32,
+# {
+#     fn new(calculation: T) -> Cacher<T> {
+#         Cacher {
+#             calculation,
+#             value: None,
+#         }
+#     }
+# 
+#     fn value(&mut self, arg: u32) -> u32 {
+#         match self.value {
+#             Some(v) => v,
+#             None => {
+#                 let v = (self.calculation)(arg);
+#                 self.value = Some(v);
+#                 v
+#             }
+#         }
+#     }
+# }
+# 
+# #[cfg(test)]
+# mod tests {
+#     use super::*;
+# 
+    #[test]
+    fn call_with_different_values() {
+        let mut c = Cacher::new(|a| a);
+
+        let v1 = c.value(1);
+        let v2 = c.value(2);
+
+        assert_eq!(v2, 2);
+    }
+# }
+```
+-->
+<pre><code class="language-rust ignore panics"><span class="boring">struct Cache&lt;T&gt;
+</span><span class="boring">where
+</span><span class="boring">    T: Fn(u32) -&gt; u32,
+</span><span class="boring">{
+</span><span class="boring">    calcul: T,
+</span><span class="boring">    valeur: Option&lt;u32&gt;,
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">impl&lt;T&gt; Cache&lt;T&gt;
+</span><span class="boring">where
+</span><span class="boring">    T: Fn(u32) -&gt; u32
+</span><span class="boring">{
+</span><span class="boring">    fn new(calcul: T) -&gt; Cache&lt;T&gt; {
+</span><span class="boring">        Cache {
+</span><span class="boring">            calcul,
+</span><span class="boring">            valeur: None,
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">
+</span><span class="boring">    fn valeur(&amp;mut self, arg: u32) -&gt; u32 {
+</span><span class="boring">        match self.valeur {
+</span><span class="boring">            Some(v) =&gt; v,
+</span><span class="boring">            None =&gt; {
+</span><span class="boring">                let v = (self.calcul)(arg);
+</span><span class="boring">                self.valeur = Some(v);
+</span><span class="boring">                v
+</span><span class="boring">            },
+</span><span class="boring">        }
+</span><span class="boring">    }
+</span><span class="boring">}
+</span><span class="boring">
+</span><span class="boring">#[cfg(test)]
+</span><span class="boring">mod tests {
+</span><span class="boring">    use super::*;
+</span><span class="boring">
+</span>    #[test]
+    fn appel_avec_differentes_valeurs() {
+        let mut c = Cache::new(|a| a);
+
+        let v1 = c.valeur(1);
+        let v2 = c.valeur(2);
+
+        assert_eq!(v2, 2);
+    }
+<span class="boring">}
+</span></code></pre>
+<!--
+This test creates a new `Cacher` instance with a closure that returns the value
+passed into it. We call the `value` method on this `Cacher` instance with an
+`arg` value of 1 and then an `arg` value of 2, and we expect the call to
+`value` with the `arg` value of 2 to return 2.
+-->
+<p>Ce test crée une nouvelle instance de <code>Cache</code> avec une fermeture qui retourne
+la valeur qui lui est passée. Nous appelons la méthode <code>valeur</code> sur cette
+instance de <code>Cache</code> avec une valeur <code>arg</code> de 1 et ensuite une valeur <code>arg</code>
+de 2, et nous nous attendons à ce que l'appel à <code>valeur</code> avec la valeur <code>arg</code>
+de 2 retourne 2.</p>
+<!--
+Run this test with the `Cacher` implementation in Listing 13-9 and Listing
+13-10, and the test will fail on the `assert_eq!` with this message:
+-->
+<p>Exécutez ce test avec l'implémentation de <code>Cache</code> de l'encart 13-9 et de
+l'encart 13-10, et le test échouera sur le <code>assert_eq!</code> avec ce message :</p>
+<!--
+```console
+$ cargo test
+   Compiling cacher v0.1.0 (file:///projects/cacher)
+    Finished test [unoptimized + debuginfo] target(s) in 0.72s
+     Running unittests (target/debug/deps/cacher-074d7c200c000afa)
+
+running 1 test
+test tests::call_with_different_values ... FAILED
+
+failures:
+
+---- tests::call_with_different_values stdout ----
+thread 'main' panicked at 'assertion failed: `(left == right)`
+  left: `1`,
+ right: `2`', src/lib.rs:43:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::call_with_different_values
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass '--lib'
+```
+-->
+<pre><code class="language-console">$ cargo test
+   Compiling cacher v0.1.0 (file:///projects/cacher)
+    Finished test [unoptimized + debuginfo] target(s) in 0.72s
+     Running unittests (target/debug/deps/cacher-074d7c200c000afa)
+
+running 1 test
+test tests::appel_avec_differentes_valeurs ... FAILED
+
+failures:
+
+---- tests::appel_avec_differentes_valeurs stdout ----
+thread 'main' panicked at 'assertion failed: `(left == right)`
+  left: `1`,
+ right: `2`', src/lib.rs:43:9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::appel_avec_differentes_valeurs
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass '--lib'
+</code></pre>
+<!--
+The problem is that the first time we called `c.value` with 1, the `Cacher`
+instance saved `Some(1)` in `self.value`. Thereafter, no matter what we pass into
+the `value` method, it will always return 1.
+-->
+<p>Le problème est que la première fois que nous avons appelé <code>c.valeur</code> avec 1,
+l'instance <code>Cache</code> a sauvegardé <code>Some(1)</code> dans <code>self.valeur</code>. Par la suite, peu
+importe ce que nous passons à la méthode <code>valeur</code>, elle retournera toujours 1.</p>
+<!--
+Try modifying `Cacher` to hold a hash map rather than a single value. The keys
+of the hash map will be the `arg` values that are passed in, and the values of
+the hash map will be the result of calling the closure on that key. Instead of
+looking at whether `self.value` directly has a `Some` or a `None` value, the
+`value` function will look up the `arg` in the hash map and return the value if
+it’s present. If it’s not present, the `Cacher` will call the closure and save
+the resulting value in the hash map associated with its `arg` value.
+-->
+<p>Essayez de modifier <code>Cache</code> pour tenir une table de hachage plutôt qu'une seule
+valeur. Les clés de la table de hachage seront les valeurs <code>arg</code> qui lui sont
+passées, et les valeurs de la table de hachage seront le résultat de l'appel à
+la fermeture avec cette clé. Plutôt que de regarder directement si <code>self.valeur</code>
+a une valeur <code>Some</code> ou une valeur <code>None</code>, la fonction <code>valeur</code> recherchera <code>arg</code>
+dans la table de hachage et retournera la valeur si elle est présente. S'il
+n'est pas présent, le <code>Cache</code> appellera la fermeture et sauvegardera la valeur
+résultante dans la table de hachage associée à sa clé <code>arg</code>.</p>
+<!--
+The second problem with the current `Cacher` implementation is that it only
+accepts closures that take one parameter of type `u32` and return a `u32`. We
+might want to cache the results of closures that take a string slice and return
+`usize` values, for example. To fix this issue, try introducing more generic
+parameters to increase the flexibility of the `Cacher` functionality.
+-->
+<p>Le second problème avec l'implémentation actuelle de <code>Cache</code> est qu'il n'accepte
+que les fermetures qui prennent un paramètre de type <code>u32</code> et renvoient un
+<code>u32</code>. Nous pourrions vouloir mettre en cache les résultats des fermetures qui
+prennent une slice d'une chaîne de caractères et renvoient des valeurs <code>usize</code>,
+par exemple. Pour corriger ce problème, essayez d'introduire des paramètres plus
+génériques pour augmenter la flexibilité de la fonctionnalité offerte par
+<code>Cache</code>.</p>
+<!--
+### Capturing the Environment with Closures
+-->
+<h3 id="capturer-lenvironnement-avec-les-fermetures"><a class="header" href="#capturer-lenvironnement-avec-les-fermetures">Capturer l'environnement avec les fermetures</a></h3>
+<!--
+In the workout generator example, we only used closures as inline anonymous
+functions. However, closures have an additional capability that functions don’t
+have: they can capture their environment and access variables from the scope in
+which they’re defined.
+-->
+<p>Dans l'exemple du générateur d'entraînement, nous n'avons utilisé les fermetures
+que comme des fonctions anonymes internes. Cependant, les fermetures ont
+une capacité supplémentaire que les fonctions n'ont pas : elles peuvent capturer
+leur environnement et accéder aux variables de la portée dans laquelle elles
+sont définies.</p>
+<!--
+Listing 13-12 has an example of a closure stored in the `equal_to_x` variable
+that uses the `x` variable from the closure’s surrounding environment.
+-->
+<p>L'encart 13-12 montre un exemple de fermeture stockée dans la variable
+<code>egal_a_x</code> qui utilise la variable <code>x</code> de l'environnement environnant de la
+fermeture :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+fn main() {
+    let x = 4;
+
+    let equal_to_x = |z| z == x;
+
+    let y = 4;
+
+    assert!(equal_to_x(y));
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let x = 4;
+
+    let egal_a_x = |z| z == x;
+
+    let y = 4;
+
+    assert!(egal_a_x(y));
+}
+</code></pre></pre>
+<!--
+<span class="caption">Listing 13-12: Example of a closure that refers to a
+variable in its enclosing scope</span>
+-->
+<p><span class="caption">Encart 13-12 : exemple d'une fermeture qui se réfère à une
+variable présente dans la portée qui la contient.</span></p>
+<!--
+Here, even though `x` is not one of the parameters of `equal_to_x`, the
+`equal_to_x` closure is allowed to use the `x` variable that’s defined in the
+same scope that `equal_to_x` is defined in.
+-->
+<p>Ici, même si <code>x</code> n'est pas un des paramètres de <code>egal_a_x</code>, la fermeture
+<code>egal_a_x</code> est autorisée à utiliser la variable <code>x</code> définie dans la même
+portée que celle où est définie <code>egal_a_x</code>.</p>
+<!--
+We can’t do the same with functions; if we try with the following example, our
+code won’t compile:
+-->
+<p>Nous ne pouvons pas faire la même chose avec les fonctions ; si nous essayons
+avec l'exemple suivant, notre code ne se compilera pas :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust,ignore,does_not_compile
+fn main() {
+    let x = 4;
+
+    fn equal_to_x(z: i32) -> bool {
+        z == x
+    }
+
+    let y = 4;
+
+    assert!(equal_to_x(y));
+}
+```
+-->
+<pre><code class="language-rust ignore does_not_compile">fn main() {
+    let x = 4;
+
+    fn egal_a_x(z: i32) -&gt; bool {
+        z == x
+    }
+
+    let y = 4;
+
+    assert!(egal_a_x(y));
+}
+</code></pre>
+<!--
+We get an error:
+-->
+<p>Nous obtenons l'erreur suivante :</p>
+<!--
+```console
+$ cargo run
+   Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
+error[E0434]: can't capture dynamic environment in a fn item
+ -- > src/main.rs:5:14
+  |
+5 |         z == x
+  |              ^
+  |
+  = help: use the `|| { ... }` closure form instead
+
+For more information about this error, try `rustc --explain E0434`.
+error: could not compile `equal-to-x` due to previous error
+```
+-->
+<pre><code class="language-console">$ cargo run
+   Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
+error[E0434]: can't capture dynamic environment in a fn item
+ --&gt; src/main.rs:5:14
+  |
+5 |         z == x
+  |              ^
+  |
+  = help: use the `|| { ... }` closure form instead
+
+For more information about this error, try `rustc --explain E0434`.
+error: could not compile `equal-to-x` due to previous error
+</code></pre>
+<!--
+The compiler even reminds us that this only works with closures!
+-->
+<p>Le compilateur nous rappelle même que cela ne fonctionne qu'avec les
+fermetures !</p>
+<!--
+When a closure captures a value from its environment, it uses memory to store
+the values for use in the closure body. This use of memory is overhead that we
+don’t want to pay in more common cases where we want to execute code that
+doesn’t capture its environment. Because functions are never allowed to capture
+their environment, defining and using functions will never incur this overhead.
+-->
+<p>Lorsqu'une fermeture capture une valeur de son environnement, elle utilise la
+mémoire pour stocker les valeurs à utiliser dans son corps. Cette utilisation de
+la mémoire a un coût supplémentaire que nous ne voulons pas payer dans les cas
+les plus courants où nous voulons exécuter du code qui ne capture pas son
+environnement. Comme les fonctions ne sont jamais autorisées à capturer leur
+environnement, la définition et l'utilisation des fonctions n'occasionneront
+jamais cette surcharge.</p>
+<!--
+Closures can capture values from their environment in three ways, which
+directly map to the three ways a function can take a parameter: taking
+ownership, borrowing mutably, and borrowing immutably. These are encoded in the
+three `Fn` traits as follows:
+-->
+<p>Les fermetures peuvent capturer les valeurs de leur environnement de trois
+façons différentes, qui correspondent directement aux trois façons dont une
+fonction peut prendre un paramètre : prendre possession, emprunter de manière
+immuable et emprunter de manière mutable. Ces moyens sont codés dans les trois
+traits <code>Fn</code> comme ceci :</p>
+<!--
+* `FnOnce` consumes the variables it captures from its enclosing scope, known
+  as the closure’s *environment*. To consume the captured variables, the
+  closure must take ownership of these variables and move them into the closure
+  when it is defined. The `Once` part of the name represents the fact that the
+  closure can’t take ownership of the same variables more than once, so it can
+  be called only once.
+* `FnMut` can change the environment because it mutably borrows values.
+* `Fn` borrows values from the environment immutably.
+-->
+<ul>
+<li><code>FnOnce</code> consomme les variables qu'il capture à partir de sa portée, désignée
+sous le nom de <em>l'environnement</em> de la fermeture. Pour consommer les variables
+capturées, la fermeture doit prendre possession de ces variables et les
+déplacer dans la fermeture lorsqu'elle est définie. La partie <code>Once</code> du nom
+représente le fait que la fermeture ne puisse pas prendre prendre possession
+des mêmes variables plus d'une fois, donc elle ne peut être appelée qu'une
+seule fois.</li>
+<li><code>FnMut</code> peut changer l'environnement car elle emprunte des valeurs de manière
+mutable.</li>
+<li><code>Fn</code> emprunte des valeurs de l'environnement de manière immuable.</li>
+</ul>
+<!--
+When you create a closure, Rust infers which trait to use based on how the
+closure uses the values from the environment. All closures implement `FnOnce`
+because they can all be called at least once. Closures that don’t move the
+captured variables also implement `FnMut`, and closures that don’t need mutable
+access to the captured variables also implement `Fn`. In Listing 13-12, the
+`equal_to_x` closure borrows `x` immutably (so `equal_to_x` has the `Fn` trait)
+because the body of the closure only needs to read the value in `x`.
+-->
+<p>Lorsque nous créons une fermeture, Rust déduit quel trait utiliser en se basant
+sur la façon dont la fermeture utilise les valeurs de l'environnement. Toutes
+les fermetures implémentent <code>FnOne</code> car elles peuvent toute être appelées au
+moins une fois. Les fermetures qui ne déplacent pas les variables capturées
+implémentent également <code>FnMut</code>, et les fermetures qui n'ont pas besoin d'accès
+mutable aux variables capturées implémentent aussi <code>Fn</code>. Dans l'encart 13-12, la
+fermeture <code>egal_a_x</code> emprunte <code>x</code> immuablement (donc <code>egal_a_x</code> a le trait <code>Fn</code>)
+parce que le corps de la fermeture ne fait que lire la valeur de <code>x</code>.</p>
+<!--
+If you want to force the closure to take ownership of the values it uses in the
+environment, you can use the `move` keyword before the parameter list. This
+technique is mostly useful when passing a closure to a new thread to move the
+data so it’s owned by the new thread.
+-->
+<p>Si nous voulons forcer la fermeture à prendre possession des valeurs qu'elle
+utilise dans l'environnement, nous pouvons utiliser le mot-clé <code>move</code> avant la
+liste des paramètres. Cette technique est très utile lorsque vous passez une
+fermeture à une nouvelle tâche pour déplacer les données afin qu'elles
+appartiennent à la nouvelle tâche.</p>
+<!--
+> Note: `move` closures may still implement `Fn` or `FnMut`, even though
+> they capture variables by move. This is because the traits implemented by a
+> closure type are determined by what the closure does with captured values,
+> not how it captures them. The `move` keyword only specifies the latter.
+-->
+<blockquote>
+<p>Remarque : les fermetures <code>move</code> peuvent toujours implémenter <code>Fn</code> ou
+<code>FnMut</code>, même si elles capturent les variables en les déplaçant. C'est
+possible car les traits implémentés par un type de fermeture sont déterminés
+par ce que font ces fermetures avec les valeurs déplacées et pas d'après la façon
+dont elles les capturent. Le mot-clé <code>move</code> ne définit que ce dernier aspect.</p>
+</blockquote>
+<!--
+We’ll have more examples of `move` closures in Chapter 16 when we talk about
+concurrency. For now, here’s the code from Listing 13-12 with the `move`
+keyword added to the closure definition and using vectors instead of integers,
+because integers can be copied rather than moved; note that this code will not
+yet compile.
+-->
+<p>Nous verrons d'autres exemples de fermetures utilisant <code>move</code> au chapitre 16
+lorsque nous parlerons de la concurrence. Pour l'instant, voici le code de
+l'encart 13-12 avec le mot-clé <code>move</code> ajouté à la définition de la fermeture et
+utilisant des vecteurs au lieu d'entiers, car les entiers peuvent être copiés
+plutôt que déplacés ; notez aussi que ce code ne compile pas encore.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust,ignore,does_not_compile
+fn main() {
+    let x = vec![1, 2, 3];
+
+    let equal_to_x = move |z| z == x;
+
+    println!("can't use x here: {:?}", x);
+
+    let y = vec![1, 2, 3];
+
+    assert!(equal_to_x(y));
+}
+```
+-->
+<pre><code class="language-rust ignore does_not_compile">fn main() {
+    let x = vec![1, 2, 3];
+
+    let egal_a_x = move |z| z == x;
+
+    println!(&quot;On ne peut pas utiliser x ici : {:?}&quot;, x);
+
+    let y = vec![1, 2, 3];
+
+    assert!(egal_a_x(y));
+}
+</code></pre>
+<!--
+We receive the following error:
+-->
+<p>Nous obtenons l'erreur suivante :</p>
+<!--
+```console
+$ cargo run
+   Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
+error[E0382]: borrow of moved value: `x`
+ -- > src/main.rs:6:40
+  |
+2 |     let x = vec![1, 2, 3];
+  |         - move occurs because `x` has type `Vec<i32>`, which does not implement the `Copy` trait
+3 | 
+4 |     let equal_to_x = move |z| z == x;
+  |                      --------      - variable moved due to use in closure
+  |                      |
+  |                      value moved into closure here
+5 | 
+6 |     println!("can't use x here: {:?}", x);
+  |                                        ^ value borrowed here after move
+
+For more information about this error, try `rustc --explain E0382`.
+error: could not compile `equal-to-x` due to previous error
+```
+-->
+<pre><code class="language-console">$ cargo run
+   Compiling equal-to-x v0.1.0 (file:///projects/equal-to-x)
+error[E0382]: borrow of moved value: `x`
+ --&gt; src/main.rs:6:40
+  |
+2 |     let x = vec![1, 2, 3];
+  |         - move occurs because `x` has type `Vec&lt;i32&gt;`, which does not implement the `Copy` trait
+3 | 
+4 |     let egal_a_x = move |z| z == x;
+  |                    --------      - variable moved due to use in closure
+  |                    |
+  |                    value moved into closure here
+5 | 
+6 |     println!(&quot;On ne peut pas utiliser x ici : {:?}&quot;, x);
+  |                                                      ^ value borrowed here after move
+
+For more information about this error, try `rustc --explain E0382`.
+error: could not compile `equal-to-x` due to previous error
+</code></pre>
+<!--
+The `x` value is moved into the closure when the closure is defined, because we
+added the `move` keyword. The closure then has ownership of `x`, and `main`
+isn’t allowed to use `x` anymore in the `println!` statement. Removing
+`println!` will fix this example.
+-->
+<p>La valeur <code>x</code> est déplacée dans la fermeture lorsque la fermeture est définie,
+parce que nous avons ajouté le mot-clé <code>move</code>. La fermeture a alors la propriété
+de <code>x</code>, et <code>main</code> n'est plus autorisé à utiliser <code>x</code> dans l'instruction
+<code>println!</code>. Supprimer <code>println!</code> corrigera cet exemple.</p>
+<!--
+Most of the time when specifying one of the `Fn` trait bounds, you can start
+with `Fn` and the compiler will tell you if you need `FnMut` or `FnOnce` based
+on what happens in the closure body.
+-->
+<p>La plupart du temps, lorsque vous renseignez l'un des traits liés <code>Fn</code>, vous
+pouvez commencer par <code>Fn</code> et le compilateur vous dira si vous avez besoin de
+<code>FnMut</code> ou <code>FnOnce</code> en fonction de ce qui se passe dans le corps de la
+fermeture.</p>
+<!--
+To illustrate situations where closures that can capture their environment are
+useful as function parameters, let’s move on to our next topic: iterators.
+-->
+<p>Pour illustrer les situations où des fermetures qui capturent leur
+environnement sont utiles comme paramètres de fonction, passons à notre
+sujet suivant : les itérateurs.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch13-00-functional-features.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch13-02-iterators.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch13-00-functional-features.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch13-02-iterators.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../ferris.js"></script>
+    </body>
+</html>

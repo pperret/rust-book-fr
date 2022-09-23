@@ -1,0 +1,1000 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Utiliser les tâches pour exécuter simultanément du code - Le langage de programmation Rust</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../ferris.css">
+        <link rel="stylesheet" href="../theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Le langage de programmation Rust</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Avant-propos</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="translation-terms.html">Traduction des termes</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Prise en main</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, world!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Programmer le jeu du plus ou du moins</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Les concepts courants de programmation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> Les variables et la mutabilité</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Les types de données</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Les fonctions</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Les commentaires</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Les structures de contrôle</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Comprendre la possession</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Qu'est-ce que la possession ?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Les références et l'emprunt</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Le type slice</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Utiliser les structures pour structurer des données apparentées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Définir et instancier des structures</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Un exemple de programme qui utilise des structures</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> La syntaxe des méthodes</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Les énumérations et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Définir une énumération</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> La structure de contrôle match</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> Une structure de contrôle concise : if let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Gérer des projets grandissants avec les paquets, crates et modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Les paquets et les crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Définir des modules pour gérer la portée et la visibilité</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Désigner un élément dans l'arborescence de modules</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Importer des chemins dans la portée via le mot-clé use</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Séparer les modules dans différents fichiers</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Les collections standard</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Stocker des listes de valeurs avec des vecteurs</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> Stocker du texte encodé en UTF-8 avec les Strings</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Stocker des clés associées à des valeurs dans des tables de hachage</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> La gestion des erreurs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Les erreurs irrécupérables avec panic!</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Des erreurs récupérables avec Result</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> Paniquer ou ne pas paniquer, telle est la question</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Les types génériques, les traits et les durées de vie</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Les types de données génériques</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Définir des comportements partagés avec les traits</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> La conformité des références avec les durées de vies</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Ecrire des tests automatisés</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Comment écrire des tests</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Gérer l'exécution des tests</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> L'organisation des tests</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> Un projet d'entrée/sortie : construire un programme en ligne de commande</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Récupérer les arguments de la ligne de commande</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Lire un fichier</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Remanier le code pour améliorer sa modularité et la gestion des erreurs</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Développer les fonctionnalités de la bibliothèque avec le TDD</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Travailler avec des variables d'environnement</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Ecrire les messages d'erreur sur la sortie d'erreurs standard au lieu de la sortie normale</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Les fonctionnalités des langages fonctionnels : les itérateurs et les fermetures</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Les fermetures : fonctions anonymes qui peuvent utiliser leur environnement</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Traiter une série d'éléments avec un itérateur</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> Amélioration de notre projet d'entrée/sortie</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Comparaison des performances : les boucles et les itérateurs</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> En savoir plus sur cargo et crates.io</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Personnaliser les compilations avec les profils de publication</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Publier une crate sur crates.io</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Les espaces de travail de cargo</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Installer des binaires à partir de crates.io avec cargo install</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Etendre les fonctionnalités de cargo avec des commandes personnalisées</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Les pointeurs intelligents</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Utiliser Box&lt;T&gt; pour pointer sur des données présentes sur le tas</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Considérer les pointeurs intelligents comme des références grâce au trait Deref</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Exécuter du code au nettoyage avec le trait Drop</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, le pointeur intelligent qui compte les références</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; et le motif de mutabilité interne</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Les boucles de références qui peuvent provoquer des fuites de mémoire</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> La concurrence sans craintes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html" class="active"><strong aria-hidden="true">16.1.</strong> Utiliser les tâches pour exécuter simultanément du code</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Utiliser l'envoi de messages pour transférer des données entre les tâches</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Le partage d'état en concurrence</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Etendre la concurrence avec les traits Sync et Send</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Les fonctionnalités orientées objet de Rust</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Les caractéristiques des langages orientés objet</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Utiliser les objets traits qui permettent des valeurs de types différents</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Implémenter un patron de conception orienté-objet</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Les motifs et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> Tous les endroits où les motifs peuvent être utilisés</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> La réfutabilité : lorsqu'un motif peut échouer à correspondre</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> La syntaxe des motifs</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Les fonctionnalités avancées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Le Rust non sécurisé (unsafe)</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Les traits avancés</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Les types avancés</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Les fonctions et fermetures avancées</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Les macros</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Projet final : construire un serveur web multitâches</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Développer un serveur web monotâche</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Transformer notre serveur monotâche en serveur multitâches</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Arrêt propre et nettoyage</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Annexes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - les mots-clés</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> 🚧 B - les opérateurs et les symboles</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> 🚧 C - les traits dérivables</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> 🚧 D - Des outils de développement utiles</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> 🚧 E - Les éditions</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> 🚧 F - Les traductions de ce livre</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> 🚧 G - Comment Rust est construit, et “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Le langage de programmation Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/Jimskapt/rust-book-fr" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+## Using Threads to Run Code Simultaneously
+-->
+<h2 id="utiliser-les-tâches-pour-exécuter-simultanément-du-code"><a class="header" href="#utiliser-les-tâches-pour-exécuter-simultanément-du-code">Utiliser les tâches pour exécuter simultanément du code</a></h2>
+<!--
+In most current operating systems, an executed program’s code is run in a
+*process*, and the operating system manages multiple processes at once. Within
+your program, you can also have independent parts that run simultaneously. The
+features that run these independent parts are called *threads*.
+-->
+<p>Dans la plupart des systèmes d'exploitation actuels, le code d'un programme
+est exécuté dans un <em>processus</em>, et le système d'exploitation gère plusieurs
+processus à la fois. Dans votre programme, vous pouvez vous aussi avoir des
+parties indépendantes qui s'exécutent simultanément. Les éléments qui font
+fonctionner ces parties indépendantes sont appelés les <em>tâches</em>.</p>
+<!--
+Splitting the computation in your program into multiple threads can improve
+performance because the program does multiple tasks at the same time, but it
+also adds complexity. Because threads can run simultaneously, there’s no
+inherent guarantee about the order in which parts of your code on different
+threads will run. This can lead to problems, such as:
+-->
+<p>Le découpage des calculs de votre programme dans plusieurs tâches peut
+améliorer sa performance car le programme fait plusieurs choses à la fois, mais
+cela rajoute aussi de la complexité. Comme les tâches peuvent s'exécuter de
+manière simultanée, il n'y a pas de garantie absolue sur l'ordre d'exécution
+des différentes parties de votre code. Cela peut poser des problèmes,
+tels que :</p>
+<!--
+* Race conditions, where threads are accessing data or resources in an
+  inconsistent order
+* Deadlocks, where two threads are waiting for each other to finish using a
+  resource the other thread has, preventing both threads from continuing
+* Bugs that happen only in certain situations and are hard to reproduce and fix
+  reliably
+-->
+<ul>
+<li>Les situations de concurrence, durant lesquelles les tâches accèdent à des
+données ou des ressources dans un ordre incohérent</li>
+<li>Des interblocages, durant lesquels deux tâches attendent mutuellement que
+l'autre finisse d'utiliser une ressource que l'autre tâche utilise, bloquant
+la progression des deux tâches</li>
+<li>Des bogues qui surgissent uniquement dans certaines situations et qui sont
+difficiles à reproduire et corriger durablement</li>
+</ul>
+<!--
+Rust attempts to mitigate the negative effects of using threads, but
+programming in a multithreaded context still takes careful thought and requires
+a code structure that is different from that in programs running in a single
+thread.
+-->
+<p>Rust cherche à atténuer les effets indésirables de l'utilisation des tâches,
+mais le développement dans un contexte multitâches exige toujours une attention
+particulière et nécessite une structure de code différente de celle des
+programmes qui s'exécutent dans une seule tâche.</p>
+<!--
+Programming languages implement threads in a few different ways. Many operating
+systems provide an API for creating new threads. This model where a language
+calls the operating system APIs to create threads is sometimes called *1:1*,
+meaning one operating system thread per one language thread. The Rust standard
+library only provides an implementation of 1:1 threading; there are crates that
+implement other models of threading that make different tradeoffs.
+-->
+<p>Les langages de programmation implémentent les tâches de différentes manières.
+De nombreux systèmes d'exploitation offrent des API pour créer de nouvelles
+tâches. L'appel à cette API du système d'exploitation pour créer des tâches par
+un langage est parfois qualifié de <em>1:1</em>, ce qui signifie une tâche du système
+d'exploitation par tâche dans le langage de programmation. La bibliothèque
+standard de Rust fournit une seule implémentation 1:1 ; il existe des crates
+qui implémentent d'autres modèles qui font des choix différents.</p>
+<!--
+### Creating a New Thread with `spawn`
+-->
+<h3 id="créer-une-nouvelle-tâche-avec-spawn"><a class="header" href="#créer-une-nouvelle-tâche-avec-spawn">Créer une nouvelle tâche avec <code>spawn</code></a></h3>
+<!--
+To create a new thread, we call the `thread::spawn` function and pass it a
+closure (we talked about closures in Chapter 13) containing the code we want to
+run in the new thread. The example in Listing 16-1 prints some text from a main
+thread and other text from a new thread:
+-->
+<p>Pour créer une nouvelle tâche, nous appelons la fonction <code>thread::spawn</code> et
+nous lui passons une fermeture (nous avons vu les fermetures au chapitre 13)
+qui contient le code que nous souhaitons exécuter dans la nouvelle tâche.
+L'exemple dans l'encart 16-1 affiche du texte à partir de la tâche principale
+et un autre texte à partir d'une nouvelle tâche :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+    thread::spawn(|| {
+        for i in 1..10 {
+            println!("hi number {} from the spawned thread!", i);
+            thread::sleep(Duration::from_millis(1));
+        }
+    });
+
+    for i in 1..5 {
+        println!("hi number {} from the main thread!", i);
+        thread::sleep(Duration::from_millis(1));
+    }
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">use std::thread;
+use std::time::Duration;
+
+fn main() {
+    thread::spawn(|| {
+        for i in 1..10 {
+            println!(&quot;Bonjour n°{} à partir de la nouvelle tâche !&quot;, i);
+            thread::sleep(Duration::from_millis(1));
+        }
+    });
+
+    for i in 1..5 {
+        println!(&quot;Bonjour n°{} à partir de la tâche principale !&quot;, i);
+        thread::sleep(Duration::from_millis(1));
+    }
+}
+</code></pre></pre>
+<!--
+<span class="caption">Listing 16-1: Creating a new thread to print one thing
+while the main thread prints something else</span>
+-->
+<p><span class="caption">Encart 16-1 : création d'une nouvelle tâche pour afficher
+une chose pendant que la tâche principale affiche autre chose</span></p>
+<!--
+Note that with this function, the new thread will be stopped when the main
+thread ends, whether or not it has finished running. The output from this
+program might be a little different every time, but it will look similar to the
+following:
+-->
+<p>Remarquez qu'avec cette fonction, la nouvelle tâche s'arrêtera lorsque la tâche
+principale s'arrêtera, qu'elle ait fini ou non de s'exécuter. La sortie de ce
+programme peut être différente à chaque fois, mais elle devrait ressembler à
+ceci :</p>
+<!--
+<!-- Not extracting output because changes to this output aren't significant;
+the changes are likely to be due to the threads running differently rather than
+changes in the compiler -- >
+-->
+<!--
+```text
+hi number 1 from the main thread!
+hi number 1 from the spawned thread!
+hi number 2 from the main thread!
+hi number 2 from the spawned thread!
+hi number 3 from the main thread!
+hi number 3 from the spawned thread!
+hi number 4 from the main thread!
+hi number 4 from the spawned thread!
+hi number 5 from the spawned thread!
+```
+-->
+<pre><code class="language-text">Bonjour n°1 à partir de la tâche principale !
+Bonjour n°1 à partir de la nouvelle tâche !
+Bonjour n°2 à partir de la tâche principale !
+Bonjour n°2 à partir de la nouvelle tâche !
+Bonjour n°3 à partir de la tâche principale !
+Bonjour n°3 à partir de la nouvelle tâche !
+Bonjour n°4 à partir de la tâche principale !
+Bonjour n°4 à partir de la nouvelle tâche !
+Bonjour n°5 à partir de la nouvelle tâche !
+</code></pre>
+<!--
+The calls to `thread::sleep` force a thread to stop its execution for a short
+duration, allowing a different thread to run. The threads will probably take
+turns, but that isn’t guaranteed: it depends on how your operating system
+schedules the threads. In this run, the main thread printed first, even though
+the print statement from the spawned thread appears first in the code. And even
+though we told the spawned thread to print until `i` is 9, it only got to 5
+before the main thread shut down.
+-->
+<p>L'appel à <code>thread::sleep</code> force une tâche à mettre en pause son exécution
+pendant une petite durée, permettant à une autre tâche de s'exécuter. Les
+tâches se relaieront probablement, mais ce n'est pas garanti : cela dépend de
+comment votre système d'exploitation agence les tâches. Lors de cette
+exécution, la tâche principale a écrit en premier, même si l'instruction
+d'écriture de la nouvelle tâche apparaissait d'abord dans le code. Et même si
+nous avons demandé à la nouvelle tâche d'écrire jusqu'à ce que <code>i</code> vaille <code>9</code>,
+elle ne l'a fait que jusqu'à <code>5</code>, moment où la tâche principale s'est arrêtée.</p>
+<!--
+If you run this code and only see output from the main thread, or don’t see any
+overlap, try increasing the numbers in the ranges to create more opportunities
+for the operating system to switch between the threads.
+-->
+<p>Si vous exécutez ce code et que vous ne voyez que du texte provenant de la
+tâche principale, ou que vous ne voyez aucun chevauchement, essayez d'augmenter
+les nombres dans les intervalles pour donner plus d'opportunités au système
+d'exploitation pour basculer entre les tâches.</p>
+<!--
+### Waiting for All Threads to Finish Using `join` Handles
+-->
+<h3 id="attendre-que-toutes-les-tâches-aient-fini-en-utilisant-join"><a class="header" href="#attendre-que-toutes-les-tâches-aient-fini-en-utilisant-join">Attendre que toutes les tâches aient fini en utilisant <code>join</code></a></h3>
+<!--
+The code in Listing 16-1 not only stops the spawned thread prematurely most of
+the time due to the main thread ending, but also can’t guarantee that the
+spawned thread will get to run at all. The reason is that there is no guarantee
+on the order in which threads run!
+-->
+<p>Le code dans l'encart 16-1 non seulement stoppe la nouvelle tâche prématurément
+la plupart du temps à cause de la fin de la tâche principale, mais il ne
+garantit pas non plus que la nouvelle tâche va s'exécuter ne serait-ce qu'une
+seule fois. La raison à cela est qu'il n'y a pas de garantie sur l'ordre dans
+lequel les tâches vont s'exécuter !</p>
+<!--
+We can fix the problem of the spawned thread not getting to run, or not getting
+to run completely, by saving the return value of `thread::spawn` in a variable.
+The return type of `thread::spawn` is `JoinHandle`. A `JoinHandle` is an owned
+value that, when we call the `join` method on it, will wait for its thread to
+finish. Listing 16-2 shows how to use the `JoinHandle` of the thread we created
+in Listing 16-1 and call `join` to make sure the spawned thread finishes before
+`main` exits:
+-->
+<p>Nous pouvons régler le problème des nouvelles tâches qui ne s'exécutent pas, ou
+pas complètement, en sauvegardant la valeur de retour de <code>thread::spawn</code> dans
+une variable. Le type de retour de <code>thread::spawn</code> est <code>JoinHandle</code>. Un
+<code>JoinHandle</code> est une valeur possédée qui, lorsque nous appelons la méthode
+<code>join</code> sur elle, va attendre que ses tâches finissent. L'encart 16-2 montre
+comment utiliser le <code>JoinHandle</code> de la tâche que nous avons créée dans l'encart
+16-1 en appelant la méthode <code>join</code> pour s'assurer que la nouvelle tâche finit
+bien avant que <code>main</code> ne se termine :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+    let handle = thread::spawn(|| {
+        for i in 1..10 {
+            println!("hi number {} from the spawned thread!", i);
+            thread::sleep(Duration::from_millis(1));
+        }
+    });
+
+    for i in 1..5 {
+        println!("hi number {} from the main thread!", i);
+        thread::sleep(Duration::from_millis(1));
+    }
+
+    handle.join().unwrap();
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">use std::thread;
+use std::time::Duration;
+
+fn main() {
+    let manipulateur = thread::spawn(|| {
+        for i in 1..10 {
+            println!(&quot;Bonjour n°{} à partir de la nouvelle tâche !&quot;, i);
+            thread::sleep(Duration::from_millis(1));
+        }
+    });
+
+    for i in 1..5 {
+        println!(&quot;Bonjour n°{} à partir de la tâche principale !&quot;, i);
+        thread::sleep(Duration::from_millis(1));
+    }
+
+    manipulateur.join().unwrap();
+}
+</code></pre></pre>
+<!--
+<span class="caption">Listing 16-2: Saving a `JoinHandle` from `thread::spawn`
+to guarantee the thread is run to completion</span>
+-->
+<p><span class="caption">Encart 16-2 : sauvegarde d'un <code>JoinHandle</code> d'un
+<code>thread::spawn</code> pour garantir que la tâche est exécutée jusqu'à la fin</span></p>
+<!--
+Calling `join` on the handle blocks the thread currently running until the
+thread represented by the handle terminates. *Blocking* a thread means that
+thread is prevented from performing work or exiting. Because we’ve put the call
+to `join` after the main thread’s `for` loop, running Listing 16-2 should
+produce output similar to this:
+-->
+<p>L'appel à <code>join</code> sur le manipulateur bloque la tâche qui s'exécute actuellement
+jusqu'à ce que la tâche représentée par le manipulateur se termine. <em>Bloquer</em>
+une tâche signifie que cette tâche est empêchée d'accomplir un quelconque travail
+ou de se terminer. Comme nous avons inséré l'appel à <code>join</code> après la boucle
+<code>for</code> de la tâche principale, l'exécution de l'encart 16-2 devrait produire un
+résultat similaire à celui-ci :</p>
+<!--
+<!-- Not extracting output because changes to this output aren't significant;
+the changes are likely to be due to the threads running differently rather than
+changes in the compiler -- >
+-->
+<!--
+```text
+hi number 1 from the main thread!
+hi number 2 from the main thread!
+hi number 1 from the spawned thread!
+hi number 3 from the main thread!
+hi number 2 from the spawned thread!
+hi number 4 from the main thread!
+hi number 3 from the spawned thread!
+hi number 4 from the spawned thread!
+hi number 5 from the spawned thread!
+hi number 6 from the spawned thread!
+hi number 7 from the spawned thread!
+hi number 8 from the spawned thread!
+hi number 9 from the spawned thread!
+```
+-->
+<pre><code class="language-text">Bonjour n°1 à partir de la tâche principale !
+Bonjour n°2 à partir de la tâche principale !
+Bonjour n°1 à partir de la nouvelle tâche !
+Bonjour n°3 à partir de la tâche principale !
+Bonjour n°2 à partir de la nouvelle tâche !
+Bonjour n°4 à partir de la tâche principale !
+Bonjour n°3 à partir de la nouvelle tâche !
+Bonjour n°4 à partir de la nouvelle tâche !
+Bonjour n°5 à partir de la nouvelle tâche !
+Bonjour n°6 à partir de la nouvelle tâche !
+Bonjour n°7 à partir de la nouvelle tâche !
+Bonjour n°8 à partir de la nouvelle tâche !
+Bonjour n°9 à partir de la nouvelle tâche !
+</code></pre>
+<!--
+The two threads continue alternating, but the main thread waits because of the
+call to `handle.join()` and does not end until the spawned thread is finished.
+-->
+<p>Les deux tâches continuent à alterner, mais la tâche principale attend à cause
+de l'appel à <code>manipulateur.join()</code> et ne se termine pas avant que la nouvelle
+tâche ne soit finie.</p>
+<!--
+But let’s see what happens when we instead move `handle.join()` before the
+`for` loop in `main`, like this:
+-->
+<p>Mais voyons maintenant ce qui se passe lorsque nous déplaçons le
+<code>manipulateur.join()</code> avant la boucle <code>for</code> du <code>main</code> comme ceci :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+    let handle = thread::spawn(|| {
+        for i in 1..10 {
+            println!("hi number {} from the spawned thread!", i);
+            thread::sleep(Duration::from_millis(1));
+        }
+    });
+
+    handle.join().unwrap();
+
+    for i in 1..5 {
+        println!("hi number {} from the main thread!", i);
+        thread::sleep(Duration::from_millis(1));
+    }
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">use std::thread;
+use std::time::Duration;
+
+fn main() {
+    let manipulateur = thread::spawn(|| {
+        for i in 1..10 {
+            println!(&quot;Bonjour n°{} à partir de la nouvelle tâche !&quot;, i);
+            thread::sleep(Duration::from_millis(1));
+        }
+    });
+
+    manipulateur.join().unwrap();
+
+    for i in 1..5 {
+        println!(&quot;Bonjour n°{} à partir de la tâche principale !&quot;, i);
+        thread::sleep(Duration::from_millis(1));
+    }
+}
+</code></pre></pre>
+<!--
+The main thread will wait for the spawned thread to finish and then run its
+`for` loop, so the output won’t be interleaved anymore, as shown here:
+-->
+<p>La tâche principale va attendre que la nouvelle tâche se finisse et ensuite
+exécuter sa boucle <code>for</code>, ainsi la sortie ne sera plus chevauchée, comme
+ci-dessous :</p>
+<!--
+<!-- Not extracting output because changes to this output aren't significant;
+the changes are likely to be due to the threads running differently rather than
+changes in the compiler -- >
+-->
+<!--
+```text
+hi number 1 from the spawned thread!
+hi number 2 from the spawned thread!
+hi number 3 from the spawned thread!
+hi number 4 from the spawned thread!
+hi number 5 from the spawned thread!
+hi number 6 from the spawned thread!
+hi number 7 from the spawned thread!
+hi number 8 from the spawned thread!
+hi number 9 from the spawned thread!
+hi number 1 from the main thread!
+hi number 2 from the main thread!
+hi number 3 from the main thread!
+hi number 4 from the main thread!
+```
+-->
+<pre><code class="language-text">Bonjour n°1 à partir de la nouvelle tâche !
+Bonjour n°2 à partir de la nouvelle tâche !
+Bonjour n°3 à partir de la nouvelle tâche !
+Bonjour n°4 à partir de la nouvelle tâche !
+Bonjour n°5 à partir de la nouvelle tâche !
+Bonjour n°6 à partir de la nouvelle tâche !
+Bonjour n°7 à partir de la nouvelle tâche !
+Bonjour n°8 à partir de la nouvelle tâche !
+Bonjour n°9 à partir de la nouvelle tâche !
+Bonjour n°1 à partir de la tâche principale !
+Bonjour n°2 à partir de la tâche principale !
+Bonjour n°3 à partir de la tâche principale !
+Bonjour n°4 à partir de la tâche principale !
+</code></pre>
+<!--
+Small details, such as where `join` is called, can affect whether or not your
+threads run at the same time.
+-->
+<p>Des petits détails, comme l'endroit où <code>join</code> est appelé, peuvent déterminer si
+vos tâches peuvent être exécutées ou non en même temps.</p>
+<!--
+### Using `move` Closures with Threads
+-->
+<h3 id="utiliser-les-fermetures-move-avec-les-tâches"><a class="header" href="#utiliser-les-fermetures-move-avec-les-tâches">Utiliser les fermetures <code>move</code> avec les tâches</a></h3>
+<!--
+The `move` keyword is often used with closures passed to `thread::spawn`
+because the closure will then take ownership of the values it uses from the
+environment, thus transferring ownership of those values from one thread to
+another. In the [“Capturing the Environment with Closures”][capture]<!-- ignore
+-- > section of Chapter 13, we discussed `move` in the context of closures. Now,
+we’ll concentrate more on the interaction between `move` and `thread::spawn`
+-->
+<p>Le mot-clé <code>move</code> est souvent utilisé avec des fermetures passées à
+<code>thread::spawn</code> car la fermeture va alors prendre possession des valeurs de son
+environnement qu'elle utilise, ce qui transfère la possession des valeurs d'une
+tâche à une autre. Dans <a href="ch13-01-closures.html">une section du chapitre 13</a><!-- ignore -->,
+nous avons présenté <code>move</code> dans le contexte des fermetures. A présent, nous
+allons plus nous concentrer sur l'interaction entre <code>move</code> et <code>thread::spawn</code>.</p>
+<!--
+Notice in Listing 16-1 that the closure we pass to `thread::spawn` takes no
+arguments: we’re not using any data from the main thread in the spawned
+thread’s code. To use data from the main thread in the spawned thread, the
+spawned thread’s closure must capture the values it needs. Listing 16-3 shows
+an attempt to create a vector in the main thread and use it in the spawned
+thread. However, this won’t yet work, as you’ll see in a moment.
+-->
+<p>Remarquez dans l'encart 16-1 que la fermeture que nous donnons à <code>thread::spawn</code>
+ne prend pas d'arguments : nous n'utilisons aucune donnée de la tâche
+principale dans le code de la nouvelle tâche. Pour utiliser des données de la
+tâche principale dans la nouvelle tâche, la fermeture de la nouvelle tâche doit
+capturer les valeurs dont elle a besoin. L'encart 16-3 montre une tentative de
+création d'un vecteur dans la tâche principale et son utilisation dans la
+nouvelle tâche. Cependant, cela ne fonctionne pas encore, comme vous allez le
+constater dans un moment.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust,ignore,does_not_compile
+use std::thread;
+
+fn main() {
+    let v = vec![1, 2, 3];
+
+    let handle = thread::spawn(|| {
+        println!("Here's a vector: {:?}", v);
+    });
+
+    handle.join().unwrap();
+}
+```
+-->
+<pre><code class="language-rust ignore does_not_compile">use std::thread;
+
+fn main() {
+    let v = vec![1, 2, 3];
+
+    let manipulateur = thread::spawn(|| {
+        println!(&quot;Voici un vecteur : {:?}&quot;, v);
+    });
+
+    manipulateur.join().unwrap();
+}
+</code></pre>
+<!--
+<span class="caption">Listing 16-3: Attempting to use a vector created by the
+main thread in another thread</span>
+-->
+<p><span class="caption">Encart 16-3 : tentative d'utilisation d'un vecteur créé
+par la tâche principale dans une autre tâche</span></p>
+<!--
+The closure uses `v`, so it will capture `v` and make it part of the closure’s
+environment. Because `thread::spawn` runs this closure in a new thread, we
+should be able to access `v` inside that new thread. But when we compile this
+example, we get the following error:
+-->
+<p>La fermeture utilise <code>v</code>, donc elle va capturer <code>v</code> et l'intégrer dans son
+environnement. Comme <code>thread::spawn</code> exécute cette fermeture dans une nouvelle
+tâche, nous devrions pouvoir accéder à <code>v</code> dans cette nouvelle tâche. Mais
+lorsque nous compilons cet exemple, nous obtenons l'erreur suivante :</p>
+<!--
+```console
+$ cargo run
+   Compiling threads v0.1.0 (file:///projects/threads)
+error[E0373]: closure may outlive the current function, but it borrows `v`, which is owned by the current function
+ -- > src/main.rs:6:32
+  |
+6 |     let handle = thread::spawn(|| {
+  |                                ^^ may outlive borrowed value `v`
+7 |         println!("Here's a vector: {:?}", v);
+  |                                           - `v` is borrowed here
+  |
+note: function requires argument type to outlive `'static`
+ -- > src/main.rs:6:18
+  |
+6 |       let handle = thread::spawn(|| {
+  |  __________________^
+7 | |         println!("Here's a vector: {:?}", v);
+8 | |     });
+  | |______^
+help: to force the closure to take ownership of `v` (and any other referenced variables), use the `move` keyword
+  |
+6 |     let handle = thread::spawn(move || {
+  |                                ++++
+
+For more information about this error, try `rustc --explain E0373`.
+error: could not compile `threads` due to previous error
+```
+-->
+<pre><code class="language-console">$ cargo run
+   Compiling threads v0.1.0 (file:///projects/threads)
+error[E0373]: closure may outlive the current function, but it borrows `v`, which is owned by the current function
+ --&gt; src/main.rs:6:32
+  |
+6 |     let manipulateur = thread::spawn(|| {
+  |                                      ^^ may outlive borrowed value `v`
+7 |         println!(&quot;Here's a vector: {:?}&quot;, v);
+  |                                           - `v` is borrowed here
+  |
+note: function requires argument type to outlive `'static`
+ --&gt; src/main.rs:6:18
+  |
+6 |       let manipulateur = thread::spawn(|| {
+  |  ________________________^
+7 | |         println!(&quot;Here's a vector: {:?}&quot;, v);
+8 | |     });
+  | |______^
+help: to force the closure to take ownership of `v` (and any other referenced variables), use the `move` keyword
+  |
+6 |     let handle = thread::spawn(move || {
+  |                                ++++
+
+For more information about this error, try `rustc --explain E0373`.
+error: could not compile `threads` due to previous error
+</code></pre>
+<!--
+Rust *infers* how to capture `v`, and because `println!` only needs a reference
+to `v`, the closure tries to borrow `v`. However, there’s a problem: Rust can’t
+tell how long the spawned thread will run, so it doesn’t know if the reference
+to `v` will always be valid.
+-->
+<p>Rust <em>déduit</em> comment capturer <code>v</code>, et comme <code>println!</code> n'a besoin que d'une
+référence à <code>v</code>, la fermeture essaye d'emprunter <code>v</code>. Cependant, il y a un
+problème : Rust ne peut pas savoir combien de temps la tâche va s'exécuter,
+donc il ne peut pas savoir si la référence à <code>v</code> sera toujours valide.</p>
+<!--
+Listing 16-4 provides a scenario that’s more likely to have a reference to `v`
+that won’t be valid:
+-->
+<p>L'encart 16-4 propose un scénario qui est a plus de chance d'avoir une
+référence à <code>v</code> qui ne sera plus valide :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust,ignore,does_not_compile
+use std::thread;
+
+fn main() {
+    let v = vec![1, 2, 3];
+
+    let handle = thread::spawn(|| {
+        println!("Here's a vector: {:?}", v);
+    });
+
+    drop(v); // oh no!
+
+    handle.join().unwrap();
+}
+```
+-->
+<pre><code class="language-rust ignore does_not_compile">use std::thread;
+
+fn main() {
+    let v = vec![1, 2, 3];
+
+    let manipulateur = thread::spawn(|| {
+        println!(&quot;Voici un vecteur : {:?}&quot;, v);
+    });
+
+    drop(v); // oh, non !
+
+    manipulateur.join().unwrap();
+}
+</code></pre>
+<!--
+<span class="caption">Listing 16-4: A thread with a closure that attempts to
+capture a reference to `v` from a main thread that drops `v`</span>
+-->
+<p><span class="caption">Encart 16-4 : une tâche dont la fermeture essaye de
+capturer une référence à <code>v</code> à partir de la tâche principale, qui va ensuite
+libérer <code>v</code></span></p>
+<!--
+If we were allowed to run this code, there’s a possibility the spawned thread
+would be immediately put in the background without running at all. The spawned
+thread has a reference to `v` inside, but the main thread immediately drops
+`v`, using the `drop` function we discussed in Chapter 15. Then, when the
+spawned thread starts to execute, `v` is no longer valid, so a reference to it
+is also invalid. Oh no!
+-->
+<p>Si nous étions autorisés à exécuter ce code, il y aurait une possibilité que
+la nouvelle tâche soit immédiatement placée en arrière-plan sans être
+exécutée du tout. La nouvelle tâche a une référence à <code>v</code> en son sein, mais la
+tâche principale libère immédiatement <code>v</code>, en utilisant la fonction <code>drop</code> que
+nous avons vue au chapitre 15. Ensuite, lorsque la nouvelle tâche commence à
+s'exécuter, <code>v</code> n'est plus en vigueur, donc une référence à cette dernière est
+elle aussi invalide !</p>
+<!--
+To fix the compiler error in Listing 16-3, we can use the error message’s
+advice:
+-->
+<p>Pour corriger l'erreur de compilation de l'encart 16-3, nous pouvons appliquer
+le conseil du message d'erreur :</p>
+<!--
+<!-- manual-regeneration
+after automatic regeneration, look at listings/ch16-fearless-concurrency/listing-16-03/output.txt and copy the relevant part
+-- >
+-->
+<!--
+```text
+help: to force the closure to take ownership of `v` (and any other referenced variables), use the `move` keyword
+  |
+6 |     let handle = thread::spawn(move || {
+  |                                ++++
+```
+-->
+<pre><code class="language-text">help: to force the closure to take ownership of `v` (and any other referenced variables), use the `move` keyword
+  |
+6 |     let manipulateur = thread::spawn(move || {
+  |                                      ++++
+</code></pre>
+<!--
+By adding the `move` keyword before the closure, we force the closure to take
+ownership of the values it’s using rather than allowing Rust to infer that it
+should borrow the values. The modification to Listing 16-3 shown in Listing
+16-5 will compile and run as we intend:
+-->
+<p>En ajoutant le mot-clé <code>move</code> avant la fermeture, nous forçons la fermeture à
+prendre possession des valeurs qu'elle utilise au lieu de laisser Rust déduire
+qu'il doit emprunter les valeurs. Les modifications à l'encart 16-3 proposées
+dans l'encart 16-5 devraient se compiler et s'exécuter comme prévu :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+use std::thread;
+
+fn main() {
+    let v = vec![1, 2, 3];
+
+    let handle = thread::spawn(move || {
+        println!("Here's a vector: {:?}", v);
+    });
+
+    handle.join().unwrap();
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">use std::thread;
+
+fn main() {
+    let v = vec![1, 2, 3];
+
+    let manipulateur = thread::spawn(move || {
+        println!(&quot;Voici un vecteur : {:?}&quot;, v);
+    });
+
+    manipulateur.join().unwrap();
+}
+</code></pre></pre>
+<!--
+<span class="caption">Listing 16-5: Using the `move` keyword to force a closure
+to take ownership of the values it uses</span>
+-->
+<p><span class="caption">Encart 16-5 : utilisation du mot-clé <code>move</code> pour forcer
+une fermeture à prendre possession des valeurs qu'elle utilise</span></p>
+<!--
+What would happen to the code in Listing 16-4 where the main thread called
+`drop` if we use a `move` closure? Would `move` fix that case? Unfortunately,
+no; we would get a different error because what Listing 16-4 is trying to do
+isn’t allowed for a different reason. If we added `move` to the closure, we
+would move `v` into the closure’s environment, and we could no longer call
+`drop` on it in the main thread. We would get this compiler error instead:
+-->
+<p>Qu'est-ce qui arriverait au code de l'encart 16-4 dans lequel la tâche
+principale fait appel à <code>drop</code> si nous utilisions la fermeture avec <code>move</code> ?
+Est-ce que le <code>move</code> résoudrait le problème ? Malheureusement, non ; nous
+obtiendrions une erreur différente parce que ce que l'encart 16-4 essaye de
+faire n'est pas autorisé pour une raison différente de la précédente. Si nous
+ajoutions <code>move</code> à la fermeture, nous déplacerions <code>v</code> dans l'environnement de
+la fermeture, et nous ne pourrions plus appeler <code>drop</code> sur <code>v</code> dans la tâche
+principale. Nous obtiendrons à la place cette erreur de compilation :</p>
+<!--
+```console
+$ cargo run
+   Compiling threads v0.1.0 (file:///projects/threads)
+error[E0382]: use of moved value: `v`
+  -- > src/main.rs:10:10
+   |
+4  |     let v = vec![1, 2, 3];
+   |         - move occurs because `v` has type `Vec<i32>`, which does not implement the `Copy` trait
+5  | 
+6  |     let handle = thread::spawn(move || {
+   |                                ------- value moved into closure here
+7  |         println!("Here's a vector: {:?}", v);
+   |                                           - variable moved due to use in closure
+...
+10 |     drop(v); // oh no!
+   |          ^ value used here after move
+
+For more information about this error, try `rustc --explain E0382`.
+error: could not compile `threads` due to previous error
+```
+-->
+<pre><code class="language-console">$ cargo run
+   Compiling threads v0.1.0 (file:///projects/threads)
+error[E0382]: use of moved value: `v`
+  --&gt; src/main.rs:10:10
+   |
+4  |     let v = vec![1, 2, 3];
+   |         - move occurs because `v` has type `std::vec::Vec&lt;i32&gt;`, which does not implement the `Copy` trait
+5  | 
+6  |     let manipulateur = thread::spawn(move || {
+   |                                ------- value moved into closure here
+7  |         println!(&quot;Voici un vecteur : {:?}&quot;, v);
+   |                                             - variable moved due to use in closure
+...
+10 |     drop(v); // oh, non !
+   |          ^ value used here after move
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0382`.
+error: could not compile `threads`.
+
+To learn more, run the command again with --verbose.
+</code></pre>
+<pre><code class="language-text">error[E0382]: use of moved value: `v`
+  -- &gt; src/main.rs:10:10
+   |
+6  |     let manipulateur = thread::spawn(move || {
+   |                                      ------- value moved (into closure) here
+...
+10 |     drop(v); // oh non, le vecteur est libéré !
+   |          ^ value used here after move
+   |
+   = note: move occurs because `v` has type `std::vec::Vec&lt;i32&gt;`, which does
+   not implement the `Copy` trait
+</code></pre>
+<!--
+Rust’s ownership rules have saved us again! We got an error from the code in
+Listing 16-3 because Rust was being conservative and only borrowing `v` for the
+thread, which meant the main thread could theoretically invalidate the spawned
+thread’s reference. By telling Rust to move ownership of `v` to the spawned
+thread, we’re guaranteeing Rust that the main thread won’t use `v` anymore. If
+we change Listing 16-4 in the same way, we’re then violating the ownership
+rules when we try to use `v` in the main thread. The `move` keyword overrides
+Rust’s conservative default of borrowing; it doesn’t let us violate the
+ownership rules.
+-->
+<p>Les règles de possession de Rust nous ont encore sauvé la mise ! Nous obtenions
+une erreur avec le code de l'encart 16-3 car Rust a été conservateur et a juste emprunté
+<code>v</code> pour la tâche, ce qui signifie que la tâche principale pouvait théoriquement
+neutraliser la référence de la tâche créée. En demandant à Rust de déplacer la
+possession de <code>v</code> à la nouvelle tâche, nous avons garanti à Rust que la tâche
+principale n'utiliserait plus <code>v</code>. Si nous changeons l'encart 16-4 de la même
+manière, nous violons les règles de possession lorsque nous essayons d'utiliser
+<code>v</code> dans la tâche principale. Le mot-clé <code>move</code> remplace le comportement
+d'emprunt conservateur par défaut de Rust; il ne nous laisse pas enfreindre les règles
+de possession.</p>
+<!--
+With a basic understanding of threads and the thread API, let’s look at what we
+can *do* with threads.
+-->
+<p>Armé de cette connaissance de base des tâches et de leur API, découvrons ce que
+nous pouvons <em>faire</em> avec les tâches.</p>
+<!--
+[capture]: ch13-01-closures.html#capturing-the-environment-with-closures
+-->
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch16-00-concurrency.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch16-02-message-passing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch16-00-concurrency.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch16-02-message-passing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../ferris.js"></script>
+    </body>
+</html>

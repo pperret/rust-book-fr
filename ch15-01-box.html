@@ -1,0 +1,840 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Utiliser Box&lt;T&gt; pour pointer sur des données présentes sur le tas - Le langage de programmation Rust</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../ferris.css">
+        <link rel="stylesheet" href="../theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Le langage de programmation Rust</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Avant-propos</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="translation-terms.html">Traduction des termes</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Prise en main</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, world!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Programmer le jeu du plus ou du moins</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Les concepts courants de programmation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> Les variables et la mutabilité</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Les types de données</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Les fonctions</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Les commentaires</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Les structures de contrôle</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Comprendre la possession</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Qu'est-ce que la possession ?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Les références et l'emprunt</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Le type slice</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Utiliser les structures pour structurer des données apparentées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Définir et instancier des structures</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Un exemple de programme qui utilise des structures</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> La syntaxe des méthodes</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Les énumérations et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Définir une énumération</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> La structure de contrôle match</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> Une structure de contrôle concise : if let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Gérer des projets grandissants avec les paquets, crates et modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Les paquets et les crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Définir des modules pour gérer la portée et la visibilité</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Désigner un élément dans l'arborescence de modules</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Importer des chemins dans la portée via le mot-clé use</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Séparer les modules dans différents fichiers</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Les collections standard</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Stocker des listes de valeurs avec des vecteurs</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> Stocker du texte encodé en UTF-8 avec les Strings</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Stocker des clés associées à des valeurs dans des tables de hachage</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> La gestion des erreurs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Les erreurs irrécupérables avec panic!</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Des erreurs récupérables avec Result</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> Paniquer ou ne pas paniquer, telle est la question</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Les types génériques, les traits et les durées de vie</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Les types de données génériques</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Définir des comportements partagés avec les traits</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> La conformité des références avec les durées de vies</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Ecrire des tests automatisés</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Comment écrire des tests</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Gérer l'exécution des tests</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> L'organisation des tests</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> Un projet d'entrée/sortie : construire un programme en ligne de commande</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Récupérer les arguments de la ligne de commande</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Lire un fichier</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Remanier le code pour améliorer sa modularité et la gestion des erreurs</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Développer les fonctionnalités de la bibliothèque avec le TDD</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Travailler avec des variables d'environnement</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Ecrire les messages d'erreur sur la sortie d'erreurs standard au lieu de la sortie normale</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Les fonctionnalités des langages fonctionnels : les itérateurs et les fermetures</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Les fermetures : fonctions anonymes qui peuvent utiliser leur environnement</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Traiter une série d'éléments avec un itérateur</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> Amélioration de notre projet d'entrée/sortie</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Comparaison des performances : les boucles et les itérateurs</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> En savoir plus sur cargo et crates.io</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Personnaliser les compilations avec les profils de publication</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Publier une crate sur crates.io</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Les espaces de travail de cargo</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Installer des binaires à partir de crates.io avec cargo install</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Etendre les fonctionnalités de cargo avec des commandes personnalisées</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Les pointeurs intelligents</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html" class="active"><strong aria-hidden="true">15.1.</strong> Utiliser Box&lt;T&gt; pour pointer sur des données présentes sur le tas</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Considérer les pointeurs intelligents comme des références grâce au trait Deref</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Exécuter du code au nettoyage avec le trait Drop</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, le pointeur intelligent qui compte les références</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; et le motif de mutabilité interne</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Les boucles de références qui peuvent provoquer des fuites de mémoire</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> La concurrence sans craintes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Utiliser les tâches pour exécuter simultanément du code</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Utiliser l'envoi de messages pour transférer des données entre les tâches</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Le partage d'état en concurrence</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Etendre la concurrence avec les traits Sync et Send</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Les fonctionnalités orientées objet de Rust</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Les caractéristiques des langages orientés objet</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Utiliser les objets traits qui permettent des valeurs de types différents</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Implémenter un patron de conception orienté-objet</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Les motifs et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> Tous les endroits où les motifs peuvent être utilisés</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> La réfutabilité : lorsqu'un motif peut échouer à correspondre</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> La syntaxe des motifs</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Les fonctionnalités avancées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Le Rust non sécurisé (unsafe)</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Les traits avancés</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Les types avancés</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Les fonctions et fermetures avancées</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Les macros</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Projet final : construire un serveur web multitâches</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Développer un serveur web monotâche</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Transformer notre serveur monotâche en serveur multitâches</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Arrêt propre et nettoyage</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Annexes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - les mots-clés</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> 🚧 B - les opérateurs et les symboles</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> 🚧 C - les traits dérivables</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> 🚧 D - Des outils de développement utiles</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> 🚧 E - Les éditions</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> 🚧 F - Les traductions de ce livre</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> 🚧 G - Comment Rust est construit, et “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Le langage de programmation Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/Jimskapt/rust-book-fr" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+## Using `Box<T>` to Point to Data on the Heap
+-->
+<h2 id="utiliser-boxt-pour-pointer-sur-des-données-présentes-sur-le-tas"><a class="header" href="#utiliser-boxt-pour-pointer-sur-des-données-présentes-sur-le-tas">Utiliser <code>Box&lt;T&gt;</code> pour pointer sur des données présentes sur le tas</a></h2>
+<!--
+The most straightforward smart pointer is a *box*, whose type is written
+`Box<T>`. Boxes allow you to store data on the heap rather than the stack. What
+remains on the stack is the pointer to the heap data. Refer to Chapter 4 to
+review the difference between the stack and the heap.
+-->
+<p>Le pointeur intelligent le plus simple est la <em>boite</em>, dont le type s'écrit
+<code>Box&lt;T&gt;</code>. Les boites vous permettent de stocker des données sur le tas plutôt
+que sur la pile. La seule chose qui reste sur la pile est le pointeur vers les
+données sur le tas. Revenez au chapitre 4 pour vous rappeler la différence entre
+la pile et le tas.</p>
+<!--
+Boxes don’t have performance overhead, other than storing their data on the
+heap instead of on the stack. But they don’t have many extra capabilities
+either. You’ll use them most often in these situations:
+-->
+<p>Les boites ne provoquent pas de surcharge au niveau des performances, si ce
+n'est le stockage de leurs données sur le tas plutôt que sur la pile. Mais elles
+n'ont pas non plus beaucoup plus de fonctionnalités. Vous allez les utiliser
+principalement dans les situations suivantes :</p>
+<!--
+* When you have a type whose size can’t be known at compile time and you want
+  to use a value of that type in a context that requires an exact size
+* When you have a large amount of data and you want to transfer ownership but
+  ensure the data won’t be copied when you do so
+* When you want to own a value and you care only that it’s a type that
+  implements a particular trait rather than being of a specific type
+-->
+<ul>
+<li>Lorsque vous avez un type dont la taille ne peut pas être connu au moment de
+la compilation et que vous souhaitez une valeur d'un certain type dans un
+contexte qui nécessite de savoir exactement sa taille</li>
+<li>Lorsque vous avez une grosse quantité de données et que vous souhaitez
+transférer la possession tout en assurant que les données ne seront pas
+copiées lorsque vous le ferez</li>
+<li>Lorsque vous voulez prendre possession d'une valeur et que vous souhaitez
+seulement qu'elle soit d'un type qui implémente un trait particulier plutôt
+que d'être d'un type spécique</li>
+</ul>
+<!--
+We’ll demonstrate the first situation in the [“Enabling Recursive Types with
+Boxes”](#enabling-recursive-types-with-boxes)<!-- ignore -- > section. In the
+second case, transferring ownership of a large amount of data can take a long
+time because the data is copied around on the stack. To improve performance in
+this situation, we can store the large amount of data on the heap in a box.
+Then, only the small amount of pointer data is copied around on the stack,
+while the data it references stays in one place on the heap. The third case is
+known as a *trait object*, and Chapter 17 devotes an entire section, [“Using
+Trait Objects That Allow for Values of Different Types,”][trait-objects]<!--
+ignore -- > just to that topic. So what you learn here you’ll apply again in
+Chapter 17!
+-->
+<p>Nous allons expérimenter la première situation dans la section <a href="#pouvoir-utiliser-des-types-r%C3%A9cursifs-gr%C3%A2ce-aux-boites">“Pouvoir
+utiliser des types récursifs grâce aux
+boites”</a><!-- ignore -->.
+Pour la seconde situation, le transfert de possession d'une grosse quantité de
+données peut prendre beaucoup de temps car les données sont recopiées sur la
+pile. Pour améliorer les performances dans cette situation, nous pouvons stocker
+ces données sur le tas grâce à une boite. Ainsi, seul le petit pointeur vers les
+données est copié sur la pile, alors que les données qu'il pointe restent à leur
+place sur le tas. La troisième situation décris ce qu'on appelle un
+<em>objet de trait</em> et le <a href="ch17-02-trait-objects.html">chapitre 17</a><!-- ignore --> dédie une
+section entière à ce sujet. Donc ce que vous apprenez ici, vous le retrouverez à
+nouveau au chapitre 17 !</p>
+<!--
+### Using a `Box<T>` to Store Data on the Heap
+-->
+<h3 id="utiliser-une-boxt-pour-stocker-des-données-sur-le-tas"><a class="header" href="#utiliser-une-boxt-pour-stocker-des-données-sur-le-tas">Utiliser une <code>Box&lt;T&gt;</code> pour stocker des données sur le tas</a></h3>
+<!--
+Before we discuss this use case for `Box<T>`, we’ll cover the syntax and how to
+interact with values stored within a `Box<T>`.
+-->
+<p>Avant de parler de ce cas d'usage de <code>Box&lt;T&gt;</code>, nous devons voir sa syntaxe et
+comment interagir avec les valeurs stockées dans un <code>Box&lt;T&gt;</code>.</p>
+<!--
+Listing 15-1 shows how to use a box to store an `i32` value on the heap:
+-->
+<p>L'encart 15-1 nous montre comment utiliser une boite pour stocker une valeur
+<code>i32</code> sur le tas :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+fn main() {
+    let b = Box::new(5);
+    println!("b = {}", b);
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">fn main() {
+    let b = Box::new(5);
+    println!(&quot;b = {}&quot;, b);
+}
+</code></pre></pre>
+<!--
+<span class="caption">Listing 15-1: Storing an `i32` value on the heap using a
+box</span>
+-->
+<p><span class="caption">Encart 15-1 : stocker une valeur <code>i32</code> sur le tas en
+utilisant une boîte</span></p>
+<!--
+We define the variable `b` to have the value of a `Box` that points to the
+value `5`, which is allocated on the heap. This program will print `b = 5`; in
+this case, we can access the data in the box similar to how we would if this
+data were on the stack. Just like any owned value, when a box goes out of
+scope, as `b` does at the end of `main`, it will be deallocated. The
+deallocation happens for the box (stored on the stack) and the data it points
+to (stored on the heap).
+-->
+<p>Nous avons défini la variable <code>b</code> pour avoir la valeur d'une <code>Box</code> qui pointe
+sur la valeur <code>5</code>, qui est donc allouée sur le tas. Ce programme va afficher
+<code>b = 5</code> ; dans ce cas, nous pouvons accéder à la donnée présente dans la boite
+de la même manière que nous le ferrions si elle était sur la pile. Comme toute
+valeur possédée, lorsque une boite sort de la portée, comme lorsque <code>b</code> le fait
+à la fin du <code>main</code>, elle sera désallouée. Ce sera la boite qui sera désallouée
+en premier (elle est stockée sur la pile), puis ce sera au tour des données sur
+lesquelles elle pointait (qui sont stockées sur le tas).</p>
+<!--
+Putting a single value on the heap isn’t very useful, so you won’t use boxes by
+themselves in this way very often. Having values like a single `i32` on the
+stack, where they’re stored by default, is more appropriate in the majority of
+situations. Let’s look at a case where boxes allow us to define types that we
+wouldn’t be allowed to if we didn’t have boxes.
+-->
+<p>Déposer une seule valeur sur le tas n'est pas très utile, donc vous n'utiliserez
+que très rarement les boites de cette manière. Laisser les valeurs comme des <code>i32</code>
+indépendantes sur la pile, où elles sont stockées par défaut, reste plus
+approprié dans la majeure partie des situations. Regardons un cas où les boites
+nous permettent de définir des types que nous ne pourrions pas définir si nous
+n'avions pas les boites.</p>
+<!--
+### Enabling Recursive Types with Boxes
+-->
+<h3 id="pouvoir-utiliser-des-types-récursifs-grâce-aux-boites"><a class="header" href="#pouvoir-utiliser-des-types-récursifs-grâce-aux-boites">Pouvoir utiliser des types récursifs grâce aux boites</a></h3>
+<!--
+At compile time, Rust needs to know how much space a type takes up. One type
+whose size can’t be known at compile time is a *recursive type*, where a value
+can have as part of itself another value of the same type. Because this nesting
+of values could theoretically continue infinitely, Rust doesn’t know how much
+space a value of a recursive type needs. However, boxes have a known size, so
+by inserting a box in a recursive type definition, you can have recursive types.
+-->
+<p>Au moment de la compilation, Rust a besoin de savoir combien d'espace prend un
+type. Un des types dont la taille ne peut pas être connu au moment de la
+compilation est le <em>type récursif</em>, dans lequel une valeur peut avoir une partie
+de sa définition qui a une valeur du même type qu'elle-même. Comme cet emboîtement
+de valeurs pourrait théoriquement se poursuivre à l'infini, Rust ne sait pas
+combien d'espace une valeur d'un type récursif peut avoir besoin. Cependant, les
+boites ont une taille connue, donc en utilisant une boite dans la définition
+d'un type récursif, vous pouvez créer des types récursifs.</p>
+<!--
+Let’s explore the *cons list*, which is a data type common in functional
+programming languages, as an example of a recursive type. The cons list type
+we’ll define is straightforward except for the recursion; therefore, the
+concepts in the example we’ll work with will be useful any time you get into
+more complex situations involving recursive types.
+-->
+<p>Découvrons maintenant la <em>liste de construction</em> (NdT : cons list), qui est un
+type de donnée courant dans les langages de programmation fonctionnels, comme
+étant un exemple de type récursif. Le type liste de construction que nous allons
+définir est plutôt simple, sauf pour les cas de récursivité ; par conséquent,
+les concepts dans l'exemple avec lequel nous allons travailler vous seront
+utiles à chaque fois que vous vous retrouverez dans des situations plus
+complexes qui impliquent des types récursifs.</p>
+<!--
+#### More Information About the Cons List
+-->
+<h4 id="en-savoir-plus-sur-les-listes-de-construction"><a class="header" href="#en-savoir-plus-sur-les-listes-de-construction">En savoir plus sur les listes de construction</a></h4>
+<!--
+A *cons list* is a data structure that comes from the Lisp programming language
+and its dialects. In Lisp, the `cons` function (short for “construct function”)
+constructs a new pair from its two arguments, which usually are a single value
+and another pair. These pairs containing pairs form a list.
+-->
+<p>Une <em>liste de construction</em> est une structure de donnée qui provient du langage
+de programmation Lisp et de ses dérivés. En Lisp, la fonction <code>cons</code> (qui est
+une forme contractée de “fonction de construction”) construit une nouvelle paire
+à partir de ses deux arguments, qui sont souvent une valeur individuelle et une
+autre paire. Ces paires qui contiennent des paires forment des listes.</p>
+<!--
+The cons function concept has made its way into more general functional
+programming jargon: “to cons *x* onto *y*” informally means to construct a new
+container instance by putting the element *x* at the start of this new
+container, followed by the container *y*.
+-->
+<p>Le concept de la fonction cons a fait son chemin dans le jargon plus général de
+la programmation fonctionnelle : &quot;to cons <em>x</em> onto <em>y</em>&quot; signifie de manière
+informelle de construire une nouvelle instance de conteneur en mettant l'élément
+<em>x</em> au début de ce nouveau conteneur, suivi du conteneur <em>y</em>.</p>
+<!--
+Each item in a cons list contains two elements: the value of the current item
+and the next item. The last item in the list contains only a value called `Nil`
+without a next item. A cons list is produced by recursively calling the `cons`
+function. The canonical name to denote the base case of the recursion is `Nil`.
+Note that this is not the same as the “null” or “nil” concept in Chapter 6,
+which is an invalid or absent value.
+-->
+<p>Chaque élément dans une liste de construction contient deux éléments : la valeur
+de l'élément courant et celle de l'élément suivant. Le dernier élément dans la
+liste contient seulement une valeur <code>Nil</code> sans aucun élément suivant. Une
+liste de construction est produite de manière récursive en appelant la fonction
+<code>cons</code>. Le nom canonique pour indiquer le cas de base de la récursion est <code>Nil</code>.
+Notez que ce n'est pas la même chose que les concepts “null” ou “nil” du
+chapitre 6, qui signale une valeur invalide ou absente.</p>
+<!--
+Although functional programming languages use cons lists frequently, the cons
+list isn’t a commonly used data structure in Rust. Most of the time when you
+have a list of items in Rust, `Vec<T>` is a better choice to use. Other, more
+complex recursive data types *are* useful in various situations, but by
+starting with the cons list, we can explore how boxes let us define a recursive
+data type without much distraction.
+-->
+<p>Bien que les langages de programmation fonctionnels utilisent les listes de
+construction fréquemment, la liste de construction n'est pas une structure de
+donnée utilisée couramment en Rust. La plupart du temps lorsque vous avez une
+liste d'éléments en Rust, <code>Vec&lt;T&gt;</code> s'avère être un meilleur choix à faire.
+Autrement, il existe des types de données récursifs plus complexes <em>qui sont</em>
+utiles dans d'autres situations, mais en commençant avec les listes de
+construction, nous pouvons découvrir comment les boites nous permettent de
+définir un type de données récursif sans être trop perturbé par la complexité.</p>
+<!--
+Listing 15-2 contains an enum definition for a cons list. Note that this code
+won’t compile yet because the `List` type doesn’t have a known size, which
+we’ll demonstrate.
+-->
+<p>L'encart 15-2 propose une définition d'une énumération pour une liste de
+construction. Notez que ce code ne se compile pas encore car le type <code>List</code> n'a
+pas encore de taille connue, ce que nous allons voir ensuite.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust,ignore,does_not_compile
+enum List {
+    Cons(i32, List),
+    Nil,
+}
+# 
+# fn main() {}
+```
+-->
+<pre><code class="language-rust ignore does_not_compile">enum List {
+    Cons(i32, List),
+    Nil,
+}
+<span class="boring">
+</span><span class="boring">fn main() {}
+</span></code></pre>
+<!--
+<span class="caption">Listing 15-2: The first attempt at defining an enum to
+represent a cons list data structure of `i32` values</span>
+-->
+<p><span class="caption">Encart 15-2 : première tentative de définition d'une
+énumération pour représenter une structure de données de liste de construction
+de valeurs <code>i32</code></span></p>
+<!--
+> Note: We’re implementing a cons list that holds only `i32` values for the
+> purposes of this example. We could have implemented it using generics, as we
+> discussed in Chapter 10, to define a cons list type that could store values of
+> any type.
+-->
+<blockquote>
+<p>Remarque : nous implémentons une liste de construction qui stocke uniquement
+des valeurs <code>i32</code> pour les besoins de cet exemple. Nous aurions pu
+l'implémenter en utilisant des génériques, que nous avons vu chapitre 10, afin
+de définir une liste de construction qui pourrait stocker n'importe quel type.</p>
+</blockquote>
+<!--
+Using the `List` type to store the list `1, 2, 3` would look like the code in
+Listing 15-3:
+-->
+<p>L'utilisation du type <code>List</code> pour stocker la liste <code>1, 2, 3</code> ressemblerait au
+code dans l'encart 15-3 :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust,ignore,does_not_compile
+# enum List {
+#     Cons(i32, List),
+#     Nil,
+# }
+# 
+use crate::List::{Cons, Nil};
+
+fn main() {
+    let list = Cons(1, Cons(2, Cons(3, Nil)));
+}
+```
+-->
+<pre><code class="language-rust ignore does_not_compile"><span class="boring">enum List {
+</span><span class="boring">    Cons(i32, List),
+</span><span class="boring">    Nil,
+</span><span class="boring">}
+</span><span class="boring">
+</span>use crate::List::{Cons, Nil};
+
+fn main() {
+    let list = Cons(1, Cons(2, Cons(3, Nil)));
+}
+</code></pre>
+<!--
+<span class="caption">Listing 15-3: Using the `List` enum to store the list `1,
+2, 3`</span>
+-->
+<p><span class="caption">Encart 15-3 : utilisation de l'énumération <code>List</code> pour
+stocker la liste <code>1, 2, 3</code></span></p>
+<!--
+The first `Cons` value holds `1` and another `List` value. This `List` value is
+another `Cons` value that holds `2` and another `List` value. This `List` value
+is one more `Cons` value that holds `3` and a `List` value, which is finally
+`Nil`, the non-recursive variant that signals the end of the list.
+-->
+<p>La première valeur <code>Cons</code> stocke <code>1</code> et une autre valeur de <code>List</code>. Cette
+valeur <code>List</code> est une autre valeur <code>Cons</code> qui stocke <code>2</code> et une autre valeur de
+<code>List</code>. Cette valeur <code>List</code> n'est rien d'autre qu'une valeur <code>Cons</code> qui stocke
+<code>3</code> et une valeur <code>List</code>, qui finalement est <code>Nil</code>, la variante non récursive
+qui signale la fin de la liste.</p>
+<!--
+If we try to compile the code in Listing 15-3, we get the error shown in
+Listing 15-4:
+-->
+<p>Si nous essayons de compiler le code de l'encart 15-3, nous avons l'erreur de
+l'encart 15-4 :</p>
+<!--
+```console
+$ cargo run
+   Compiling cons-list v0.1.0 (file:///projects/cons-list)
+error[E0072]: recursive type `List` has infinite size
+ -- > src/main.rs:1:1
+  |
+1 | enum List {
+  | ^^^^^^^^^ recursive type has infinite size
+2 |     Cons(i32, List),
+  |               ---- recursive without indirection
+  |
+help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to make `List` representable
+  |
+2 |     Cons(i32, Box<List>),
+  |               ++++    +
+
+error[E0391]: cycle detected when computing drop-check constraints for `List`
+ -- > src/main.rs:1:1
+  |
+1 | enum List {
+  | ^^^^^^^^^
+  |
+  = note: ...which immediately requires computing drop-check constraints for `List` again
+  = note: cycle used when computing dropck types for `Canonical { max_universe: U0, variables: [], value: ParamEnvAnd { param_env: ParamEnv { caller_bounds: [], reveal: UserFacing }, value: List } }`
+
+Some errors have detailed explanations: E0072, E0391.
+For more information about an error, try `rustc --explain E0072`.
+error: could not compile `cons-list` due to 2 previous errors
+```
+-->
+<pre><code class="language-console">$ cargo run
+   Compiling cons-list v0.1.0 (file:///projects/cons-list)
+error[E0072]: recursive type `List` has infinite size
+ --&gt; src/main.rs:1:1
+  |
+1 | enum List {
+  | ^^^^^^^^^ recursive type has infinite size
+2 |     Cons(i32, List),
+  |               ---- recursive without indirection
+  |
+help: insert some indirection (e.g., a `Box`, `Rc`, or `&amp;`) to make `List` representable
+  |
+2 |     Cons(i32, Box&lt;List&gt;),
+  |               ++++    +
+
+error[E0391]: cycle detected when computing drop-check constraints for `List`
+ --&gt; src/main.rs:1:1
+  |
+1 | enum List {
+  | ^^^^^^^^^
+  |
+  = note: ...which immediately requires computing drop-check constraints for `List` again
+  = note: cycle used when computing dropck types for `Canonical { max_universe: U0, variables: [], value: ParamEnvAnd { param_env: ParamEnv { caller_bounds: [], reveal: UserFacing }, value: List } }`
+
+Some errors have detailed explanations: E0072, E0391.
+For more information about an error, try `rustc --explain E0072`.
+error: could not compile `cons-list` due to 2 previous errors
+</code></pre>
+<!--
+<span class="caption">Listing 15-4: The error we get when attempting to define
+a recursive enum</span>
+-->
+<p><span class="caption">Encart 15-4 : l'erreur que nous obtenons lorsque nous
+essayons de définir une énumération récursive</span></p>
+<!--
+The error shows this type “has infinite size.” The reason is that we’ve defined
+`List` with a variant that is recursive: it holds another value of itself
+directly. As a result, Rust can’t figure out how much space it needs to store a
+`List` value. Let’s break down why we get this error a bit. First, let’s look
+at how Rust decides how much space it needs to store a value of a non-recursive
+type.
+-->
+<p>L'erreur explique que ce type “a une taille infinie”. La raison est que nous
+avons défini <code>List</code> avec une variante qui est récursive : elle stocke
+directement une autre valeur d'elle-même. Au final, Rust ne peut pas savoir
+combien de place il a besoin pour stocker une valeur <code>List</code>. Analysons
+pourquoi nous obtenons cette erreur. D'abord, regardons comment Rust décide de
+l'espace dont il a besoin pour stocker une valeur d'un type non récursif.</p>
+<!--
+#### Computing the Size of a Non-Recursive Type
+-->
+<h4 id="calculer-la-taille-dun-type-non-récursif"><a class="header" href="#calculer-la-taille-dun-type-non-récursif">Calculer la taille d'un type non récursif</a></h4>
+<!--
+Recall the `Message` enum we defined in Listing 6-2 when we discussed enum
+definitions in Chapter 6:
+-->
+<p>Rappelez-vous de l'énumération <code>Message</code> que nous avons défini dans
+l'encart 6-2 lorsque nous avons abordé les définitions des énumérations au
+chapitre 6 :</p>
+<!--
+```rust
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+# 
+# fn main() {}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">enum Message {
+    Quitter,
+    Deplacer { x: i32, y: i32 },
+    Ecrire(String),
+    ChangerCouleur(i32, i32, i32),
+}
+<span class="boring">
+</span><span class="boring">fn main() {}
+</span></code></pre></pre>
+<!--
+To determine how much space to allocate for a `Message` value, Rust goes
+through each of the variants to see which variant needs the most space. Rust
+sees that `Message::Quit` doesn’t need any space, `Message::Move` needs enough
+space to store two `i32` values, and so forth. Because only one variant will be
+used, the most space a `Message` value will need is the space it would take to
+store the largest of its variants.
+-->
+<p>Pour déterminer combien d'espace allouer pour une valeur <code>Message</code>, Rust
+parcourt chaque variante pour voir quelle variante a besoin le plus d'espace.
+Rust voit que <code>Message::Quitter</code> n'a pas besoin d'espace, <code>Message::Deplacer</code> a
+besoin de suffisamment d'espace pour stocker deux valeurs <code>i32</code>, et ainsi de
+suite. Comme une seule variante sera utilisée, le plus grand espace dont une
+valeur de <code>Message</code> aura besoin sera l'espace que cela prendra de stocker la
+plus grosse de ses variantes.</p>
+<!--
+Contrast this with what happens when Rust tries to determine how much space a
+recursive type like the `List` enum in Listing 15-2 needs. The compiler starts
+by looking at the `Cons` variant, which holds a value of type `i32` and a value
+of type `List`. Therefore, `Cons` needs an amount of space equal to the size of
+an `i32` plus the size of a `List`. To figure out how much memory the `List`
+type needs, the compiler looks at the variants, starting with the `Cons`
+variant. The `Cons` variant holds a value of type `i32` and a value of type
+`List`, and this process continues infinitely, as shown in Figure 15-1.
+-->
+<p>Comparez cela avec ce qui se passe lorsque Rust essaye de déterminer combien
+d'espace un type récursif comme l'énumération <code>List</code> de l'encart 15-2 aurait
+besoin. Le compilateur commence par regarder la variante <code>Cons</code>, qui stocke une
+valeur de type <code>i32</code> et une valeur de type <code>List</code>. Ainsi, <code>Cons</code> a besoin d'une
+quantité d'espace égale à la taille d'un <code>i32</code> plus la taille d'une valeur
+<code>List</code>. Pour savoir combien de mémoire le type <code>List</code> a besoin, le compilateur
+va regarder ses variantes, en commençant avec la variante <code>Cons</code>. La variante
+<code>Cons</code> stocke une valeur de type <code>i32</code> et une valeur de type <code>List</code>, et ce
+processus continue à l'infini, comme l'illustration 15-1.</p>
+<!-- markdownlint-disable -->
+<!--
+<img alt="An infinite Cons list" src="img/trpl15-01.svg" class="center" style="width: 50%;" />
+-->
+<!-- markdownlint-restore -->
+<p><img alt="Une liste de construction infinie"
+    src="img/trpl15-01.svg"
+    class="center"
+    style="width: 50%;" /></p>
+<!--
+<span class="caption">Figure 15-1: An infinite `List` consisting of infinite
+`Cons` variants</span>
+-->
+<p><span class="caption">Illustration 15-1 : une <code>List</code> infinie qui contient des
+variantes <code>Cons</code> infinies</span></p>
+<!--
+#### Using `Box<T>` to Get a Recursive Type with a Known Size
+-->
+<h4 id="utiliser-boxt-pour-créer-un-type-récursif-avec-une-taille-finie"><a class="header" href="#utiliser-boxt-pour-créer-un-type-récursif-avec-une-taille-finie">Utiliser <code>Box&lt;T&gt;</code> pour créer un type récursif avec une taille finie</a></h4>
+<!--
+Rust can’t figure out how much space to allocate for recursively defined types,
+so the compiler gives the error in Listing 15-4. But the error does include
+this helpful suggestion:
+-->
+<p>Rust ne peut pas calculer la quantité d'espace à allouer pour les types
+définis récursivement, donc le compilateur déclenche l'erreur de l'encart
+15-4. Mais l'erreur renferme cette suggestion très utile :</p>
+<!--
+<!-- manual-regeneration
+after doing automatic regeneration, look at listings/ch15-smart-pointers/listing-15-03/output.txt and copy the relevant line
+-- >
+-->
+<!--
+```text
+help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to make `List` representable
+  |
+2 |     Cons(i32, Box<List>),
+  |               ^^^^    ^
+```
+-->
+<pre><code class="language-text">help: insert some indirection (e.g., a `Box`, `Rc`, or `&amp;`) to make `List` representable
+  |
+2 |     Cons(i32, Box&lt;List&gt;),
+  |               ^^^^    ^
+</code></pre>
+<!--
+In this suggestion, “indirection” means that instead of storing a value
+directly, we’ll change the data structure to store the value indirectly by
+storing a pointer to the value instead.
+-->
+<p>Dans cette suggestion, “indirection” (NdT : redirection) signifie qu'au lieu de
+stocker une valeur directement, nous devrions changer la structure des données
+pour stocker à la place un pointeur vers la valeur.</p>
+<!--
+Because a `Box<T>` is a pointer, Rust always knows how much space a `Box<T>`
+needs: a pointer’s size doesn’t change based on the amount of data it’s
+pointing to. This means we can put a `Box<T>` inside the `Cons` variant instead
+of another `List` value directly. The `Box<T>` will point to the next `List`
+value that will be on the heap rather than inside the `Cons` variant.
+Conceptually, we still have a list, created with lists “holding” other lists,
+but this implementation is now more like placing the items next to one another
+rather than inside one another.
+-->
+<p>Comme <code>Box&lt;T&gt;</code> est un pointeur, Rust connaît toujours combien d'espace un
+<code>Box&lt;T&gt;</code> a besoin : la taille d'un pointeur ne change pas, peu importe la
+quantité de données sur lesquelles il pointe. Cela signifie que nous pouvons
+insérer un <code>Box&lt;T&gt;</code> à l'intérieur d'une variante <code>Cons</code> au lieu d'y mettre
+directement une autre valeur <code>List</code>. Le <code>Box&lt;T&gt;</code> va pointer sur la prochaine
+valeur <code>List</code> qui sera sur le tas plutôt que d'être dans la variante <code>Cons</code>.
+Théoriquement, nous avons toujours une liste, créée avec des listes qui
+“contiennent” d'autres listes, mais cette implémentation ressemble plus à
+présent à des éléments placés les uns à côté des autres plutôt que les uns dans
+les autres.</p>
+<!--
+We can change the definition of the `List` enum in Listing 15-2 and the usage
+of the `List` in Listing 15-3 to the code in Listing 15-5, which will compile:
+-->
+<p>Nous pouvons changer la définition de l'énumération <code>List</code> de l'encart 15-2 et
+l'utilisation de <code>List</code> dans l'encart 15-3 pour le code de l'encart 15-5, qui
+va se compiler :</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Filename : src/main.rs</span></p>
+<!--
+```rust
+enum List {
+    Cons(i32, Box<List>),
+    Nil,
+}
+
+use crate::List::{Cons, Nil};
+
+fn main() {
+    let list = Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil))))));
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">enum List {
+    Cons(i32, Box&lt;List&gt;),
+    Nil,
+}
+
+use crate::List::{Cons, Nil};
+
+fn main() {
+    let list = Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil))))));
+}
+</code></pre></pre>
+<!--
+<span class="caption">Listing 15-5: Definition of `List` that uses `Box<T>` in
+order to have a known size</span>
+-->
+<p><span class="caption">Encart 15-5 : définition de <code>List</code> qui utilise <code>Box&lt;T&gt;</code>
+dans le but d'avoir une taille connue</span></p>
+<!--
+The `Cons` variant will need the size of an `i32` plus the space to store the
+box’s pointer data. The `Nil` variant stores no values, so it needs less space
+than the `Cons` variant. We now know that any `List` value will take up the
+size of an `i32` plus the size of a box’s pointer data. By using a box, we’ve
+broken the infinite, recursive chain, so the compiler can figure out the size
+it needs to store a `List` value. Figure 15-2 shows what the `Cons` variant
+looks like now.
+-->
+<p>La variante <code>Cons</code> va avoir besoin de l'espace d'un <code>i32</code> plus l'espace pour
+stocker le pointeur vers la donnée de la boite. La variante <code>Nil</code> ne stocke pas
+de valeurs, donc elle a besoin de moins d'espace que la variante <code>Cons</code>. Nous
+savons maintenant que chaque valeur <code>List</code> va prendre la taille d'un <code>i32</code>
+plus la taille d'un pointeur vers la donnée de la boite. En utilisant une boite,
+vous avez arrêté la chaine infinie et récursive, donc le compilateur peut
+savoir l'espace dont il a besoin pour stocker une valeur <code>List</code>. L'illustration
+15-2 montre à quoi ressemble maintenant la variante <code>Cons</code>.</p>
+<!--
+<img alt="A finite Cons list" src="img/trpl15-02.svg" class="center" />
+-->
+<p><img
+    alt="Une liste de construction finie"
+    src="img/trpl15-02.svg"
+    class="center" /></p>
+<!--
+<span class="caption">Figure 15-2: A `List` that is not infinitely sized
+because `Cons` holds a `Box`</span>
+-->
+<p><span class="caption">Illustration 15-2 : une <code>List</code> qui n'a pas de taille
+infinie car <code>Cons</code> est une <code>Box</code></span></p>
+<!--
+Boxes provide only the indirection and heap allocation; they don’t have any
+other special capabilities, like those we’ll see with the other smart pointer
+types. They also don’t have any performance overhead that these special
+capabilities incur, so they can be useful in cases like the cons list where the
+indirection is the only feature we need. We’ll look at more use cases for boxes
+in Chapter 17, too.
+-->
+<p>Les boites fournissent uniquement la redirection et l'allocation sur le tas ;
+elles n'ont pas d'autres fonctionnalités, comme celles que nous verrons sur
+d'autres types de pointeurs intelligents. Elles n'ont pas non plus de surcoût
+sur les performances autre que ce qu'offrent ces capacités spéciales, donc
+elles sont utiles dans des cas comme les listes de construction où la
+redirection est la seule fonctionnalité que nous avons besoin. Nous verrons
+aussi plus de cas d'usages pour les boites dans le chapitre 17.</p>
+<!--
+The `Box<T>` type is a smart pointer because it implements the `Deref` trait,
+which allows `Box<T>` values to be treated like references. When a `Box<T>`
+value goes out of scope, the heap data that the box is pointing to is cleaned
+up as well because of the `Drop` trait implementation. Let’s explore these two
+traits in more detail. These two traits will be even more important to the
+functionality provided by the other smart pointer types we’ll discuss in the
+rest of this chapter.
+-->
+<p>Le type <code>Box&lt;T&gt;</code> est un pointeur intelligent car il implémente le trait
+<code>Deref</code>, qui permet aux valeurs <code>Box&lt;T&gt;</code> d'être traitées comme des
+références. Lorsque une valeur <code>Box&lt;T&gt;</code> sort de la portée, les données sur le
+tas pointées par la boite seront également nettoyées grâce à l'implémentation
+du trait <code>Drop</code>. Explorons plus en détail ces deux traits. Ces deux traits
+deviendrons encore plus importants pour les fonctionnalités offertes par les
+autres pointeurs intelligents que nous verrons dans le reste de ce chapitre.</p>
+<!-- markdownlint-disable -->
+<!--
+[trait-objects]: ch17-02-trait-objects.html#using-trait-objects-that-allow-for-values-of-different-types
+-->
+<!-- markdownlint-restore -->
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch15-00-smart-pointers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch15-02-deref.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch15-00-smart-pointers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch15-02-deref.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../ferris.js"></script>
+    </body>
+</html>

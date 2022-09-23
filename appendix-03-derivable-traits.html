@@ -1,0 +1,585 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>🚧 C - les traits dérivables - Le langage de programmation Rust</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../ferris.css">
+        <link rel="stylesheet" href="../theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Le langage de programmation Rust</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Avant-propos</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="translation-terms.html">Traduction des termes</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Prise en main</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, world!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Programmer le jeu du plus ou du moins</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Les concepts courants de programmation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> Les variables et la mutabilité</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Les types de données</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Les fonctions</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Les commentaires</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Les structures de contrôle</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Comprendre la possession</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Qu'est-ce que la possession ?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Les références et l'emprunt</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Le type slice</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Utiliser les structures pour structurer des données apparentées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Définir et instancier des structures</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Un exemple de programme qui utilise des structures</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> La syntaxe des méthodes</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Les énumérations et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Définir une énumération</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> La structure de contrôle match</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> Une structure de contrôle concise : if let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Gérer des projets grandissants avec les paquets, crates et modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Les paquets et les crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Définir des modules pour gérer la portée et la visibilité</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Désigner un élément dans l'arborescence de modules</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Importer des chemins dans la portée via le mot-clé use</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Séparer les modules dans différents fichiers</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Les collections standard</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Stocker des listes de valeurs avec des vecteurs</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> Stocker du texte encodé en UTF-8 avec les Strings</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Stocker des clés associées à des valeurs dans des tables de hachage</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> La gestion des erreurs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Les erreurs irrécupérables avec panic!</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Des erreurs récupérables avec Result</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> Paniquer ou ne pas paniquer, telle est la question</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Les types génériques, les traits et les durées de vie</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Les types de données génériques</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Définir des comportements partagés avec les traits</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> La conformité des références avec les durées de vies</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Ecrire des tests automatisés</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Comment écrire des tests</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Gérer l'exécution des tests</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> L'organisation des tests</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> Un projet d'entrée/sortie : construire un programme en ligne de commande</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Récupérer les arguments de la ligne de commande</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Lire un fichier</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Remanier le code pour améliorer sa modularité et la gestion des erreurs</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Développer les fonctionnalités de la bibliothèque avec le TDD</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Travailler avec des variables d'environnement</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Ecrire les messages d'erreur sur la sortie d'erreurs standard au lieu de la sortie normale</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Les fonctionnalités des langages fonctionnels : les itérateurs et les fermetures</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Les fermetures : fonctions anonymes qui peuvent utiliser leur environnement</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Traiter une série d'éléments avec un itérateur</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> Amélioration de notre projet d'entrée/sortie</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Comparaison des performances : les boucles et les itérateurs</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> En savoir plus sur cargo et crates.io</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Personnaliser les compilations avec les profils de publication</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Publier une crate sur crates.io</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Les espaces de travail de cargo</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Installer des binaires à partir de crates.io avec cargo install</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Etendre les fonctionnalités de cargo avec des commandes personnalisées</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Les pointeurs intelligents</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Utiliser Box&lt;T&gt; pour pointer sur des données présentes sur le tas</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Considérer les pointeurs intelligents comme des références grâce au trait Deref</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Exécuter du code au nettoyage avec le trait Drop</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, le pointeur intelligent qui compte les références</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; et le motif de mutabilité interne</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Les boucles de références qui peuvent provoquer des fuites de mémoire</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> La concurrence sans craintes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Utiliser les tâches pour exécuter simultanément du code</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Utiliser l'envoi de messages pour transférer des données entre les tâches</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Le partage d'état en concurrence</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Etendre la concurrence avec les traits Sync et Send</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Les fonctionnalités orientées objet de Rust</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Les caractéristiques des langages orientés objet</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Utiliser les objets traits qui permettent des valeurs de types différents</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Implémenter un patron de conception orienté-objet</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Les motifs et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> Tous les endroits où les motifs peuvent être utilisés</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> La réfutabilité : lorsqu'un motif peut échouer à correspondre</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> La syntaxe des motifs</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Les fonctionnalités avancées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html"><strong aria-hidden="true">19.1.</strong> Le Rust non sécurisé (unsafe)</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Les traits avancés</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Les types avancés</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Les fonctions et fermetures avancées</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Les macros</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Projet final : construire un serveur web multitâches</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Développer un serveur web monotâche</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Transformer notre serveur monotâche en serveur multitâches</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Arrêt propre et nettoyage</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Annexes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - les mots-clés</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> 🚧 B - les opérateurs et les symboles</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html" class="active"><strong aria-hidden="true">21.3.</strong> 🚧 C - les traits dérivables</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> 🚧 D - Des outils de développement utiles</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> 🚧 E - Les éditions</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> 🚧 F - Les traductions de ce livre</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> 🚧 G - Comment Rust est construit, et “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Le langage de programmation Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/Jimskapt/rust-book-fr" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <blockquote>
+<h1 id="-attention-peinture-fraîche-"><a class="header" href="#-attention-peinture-fraîche-">🚧 Attention, peinture fraîche !</a></h1>
+<p>Cette page a été traduite par une seule personne et n'a pas été relue et
+vérifiée par quelqu'un d'autre ! Les informations peuvent par exemple être
+erronées, être formulées maladroitement, ou contenir d'autres types de fautes.</p>
+<p>Vous pouvez contribuer à l'amélioration de cette page sur sa
+<a href="https://github.com/Jimskapt/rust-book-fr/pull/224">Pull Request</a>.</p>
+</blockquote>
+<!--
+## Appendix C: Derivable Traits
+-->
+<h2 id="annexe-c--les-traits-dérivables"><a class="header" href="#annexe-c--les-traits-dérivables">Annexe C : les traits dérivables</a></h2>
+<!--
+In various places in the book, we’ve discussed the `derive` attribute, which
+you can apply to a struct or enum definition. The `derive` attribute generates
+code that will implement a trait with its own default implementation on the
+type you’ve annotated with the `derive` syntax.
+-->
+<p>Dans de nombreux endroits du livre, nous avons vu l'attribut <code>derive</code>, que vous
+pouvez appliquer à une définition de structure ou d'énumération. L'attribut
+<code>derive</code> génère du code qui va implémenter un trait avec sa propre
+implémentation par défaut sur le type que vous avez annoté avec la syntaxe
+<code>derive</code>.</p>
+<!--
+In this appendix, we provide a reference of all the traits in the standard
+library that you can use with `derive`. Each section covers:
+-->
+<p>Dans cette annexe, nous allons produire une référence de tous les traits de la
+bibliothèque standard que vous pouvez utiliser avec <code>derive</code>. Chaque section
+va donner :</p>
+<!--
+* What operators and methods deriving this trait will enable
+* What the implementation of the trait provided by `derive` does
+* What implementing the trait signifies about the type
+* The conditions in which you’re allowed or not allowed to implement the trait
+* Examples of operations that require the trait
+-->
+<ul>
+<li>Quels opérateurs et méthodes seront activés en dérivant de ce trait</li>
+<li>Ce que fait l'implémentation du trait appliqué par le <code>derive</code></li>
+<li>Ce que l'implémentation du trait implique sur le type concerné</li>
+<li>Les conditions dans lesquelles vous pouvez ou non implémenter le trait</li>
+<li>Des exemples d'opérations qui nécessitent que le trait soit implémenté</li>
+</ul>
+<!--
+If you want different behavior from that provided by the `derive` attribute,
+consult the [standard library documentation](../std/index.html)<!-- ignore -- >
+for each trait for details of how to manually implement them.
+-->
+<p>Si vous souhaitez appliquer un comportement différent de celui fourni par
+l'attribut <code>derive</code>, consultez <a href="https://doc.rust-lang.org/std/index.html">la documentation de la bibliothèque
+standard</a><!-- ignore --> pour le trait
+concerné afin d'en savoir plus sur son implémentation manuelle.</p>
+<!--
+The rest of the traits defined in the standard library can’t be implemented on
+your types using `derive`. These traits don’t have sensible default behavior,
+so it’s up to you to implement them in the way that makes sense for what you’re
+trying to accomplish.
+-->
+<p>Le reste des traits définis dans la bibliothèque standard ne peuvent pas être
+implémentés sur des types en utilisant <code>derive</code>. Ces traits n'ont pas de
+comportement logique par défaut, donc c'est à vous de les implémenter de la
+façon la plus appropriée pour ce que vous souhaitez accomplir.</p>
+<!--
+An example of a trait that can’t be derived is `Display`, which handles
+formatting for end users. You should always consider the appropriate way to
+display a type to an end user. What parts of the type should an end user be
+allowed to see? What parts would they find relevant? What format of the data
+would be most relevant to them? The Rust compiler doesn’t have this insight, so
+it can’t provide appropriate default behavior for you.
+-->
+<p>Un exemple de trait qui ne peut pas être dérivé est <code>Display</code>, qui permet de
+formater la donnée pour les utilisateurs finaux. Vous devez toujours réfléchir
+au formatage du type le plus approprié pour un utilisateur final. Quelles
+parties d'un type un utilisateur final devrait pouvoir voir ? Sous quelle forme
+les données devraient être les plus intéressantes pour eux ? Le compilateur de
+Rust n'a pas cette intuition, donc il ne peut pas fournir un comportement par
+défaut à votre place.</p>
+<!--
+The list of derivable traits provided in this appendix is not comprehensive:
+libraries can implement `derive` for their own traits, making the list of
+traits you can use `derive` with truly open-ended. Implementing `derive`
+involves using a procedural macro, which is covered in the
+[“Macros”][macros]<!-- ignore -- > section of Chapter 19.
+-->
+<p>La liste des traits dérivables fournis dans cette annexe n'est pas exhaustive :
+les bibliothèques peuvent implémenter <code>derive</code> pour leurs propres traits,
+étendant potentiellement à l'infini la liste de traits que vous pouvez utiliser
+avec <code>derive</code>. L'implémentation de <code>derive</code> implique l'utilisation d'une macro
+procédurale, que nous avons vu dans <a href="ch19-06-macros.html">une section</a><!-- ignore --> du
+chapitre 19.</p>
+<!--
+### `Debug` for Programmer Output
+-->
+<h3 id="debug-pour-laffichage-au-développeur"><a class="header" href="#debug-pour-laffichage-au-développeur"><code>Debug</code> pour l'affichage au développeur</a></h3>
+<!--
+The `Debug` trait enables debug formatting in format strings, which you
+indicate by adding `:?` within `{}` placeholders.
+-->
+<p>Le trait <code>Debug</code> permet le formatage de déboguage pour mettre en forme en tant
+que chaînes de caractères, que vous pouvez utiliser en ajoutant <code>:?</code> dans un
+espace réservé <code>{}</code>.</p>
+<!--
+The `Debug` trait allows you to print instances of a type for debugging
+purposes, so you and other programmers using your type can inspect an instance
+at a particular point in a program’s execution.
+-->
+<p>Le trait <code>Debug</code> vous permet d'afficher des instances d'un type pour des besoins
+de déboguage, afin que vous et les autres développeurs qui utilisent votre type
+puissent inspecter une de ses instances à un endroit précis de l'exécution du
+programme.</p>
+<!--
+The `Debug` trait is required, for example, in use of the `assert_eq!` macro.
+This macro prints the values of instances given as arguments if the equality
+assertion fails so programmers can see why the two instances weren’t equal.
+-->
+<p>Le trait <code>Debug</code> est nécessaire, par exemple, pour l'utilisation de la macro
+<code>assert_eq!</code>. Cette macro affiche les valeurs des instances passées en argument
+dans le cas où l'affirmation échoue afin que le développeur puisse voir pourquoi
+les deux instances ne sont pas égales.</p>
+<!--
+### `PartialEq` and `Eq` for Equality Comparisons
+-->
+<h3 id="partialeq-et-eq-pour-comparer-légalité"><a class="header" href="#partialeq-et-eq-pour-comparer-légalité"><code>PartialEq</code> et <code>Eq</code> pour comparer l'égalité</a></h3>
+<!--
+The `PartialEq` trait allows you to compare instances of a type to check for
+equality and enables use of the `==` and `!=` operators.
+-->
+<p>Le trait <code>PartialEq</code> vous permet de comparer des instances d'un type pour
+vérifier leur égalité et permet l'utilisation des opérateurs <code>==</code> et <code>!=</code>.</p>
+<!--
+Deriving `PartialEq` implements the `eq` method. When `PartialEq` is derived on
+structs, two instances are equal only if *all* fields are equal, and the
+instances are not equal if any fields are not equal. When derived on enums,
+each variant is equal to itself and not equal to the other variants.
+-->
+<p>L'application de <code>derive</code> avec <code>PartialEq</code> implémente la méthode <code>eq</code>. Lorsque
+<code>PartialEq</code> est dérivé sur une structure, deux instances ne peuvent être égales
+seulement si <em>tous</em> leurs champs sont égaux, et les instances ne sont pas égales
+si un des champs n'est pas égal. Lorsque ce trait est dérivé sur une
+énumération, chaque variante est égale à elle-même et n'est pas égale aux autres
+variantes.</p>
+<!--
+The `PartialEq` trait is required, for example, with the use of the
+`assert_eq!` macro, which needs to be able to compare two instances of a type
+for equality.
+-->
+<p>Le trait <code>Eq</code> est nécessaire, par exemple, pour utiliser la macro <code>assert_eq!</code>,
+qui nécessite de pouvoir comparer l'égalité de deux instances d'un type.</p>
+<!--
+The `Eq` trait has no methods. Its purpose is to signal that for every value of
+the annotated type, the value is equal to itself. The `Eq` trait can only be
+applied to types that also implement `PartialEq`, although not all types that
+implement `PartialEq` can implement `Eq`. One example of this is floating point
+number types: the implementation of floating point numbers states that two
+instances of the not-a-number (`NaN`) value are not equal to each other.
+-->
+<p>Le trait <code>Eq</code> n'a pas de méthode. Son rôle est de signaler que pour chaque
+valeur du type annoté, la valeur est égale à elle-même. Le trait <code>Eq</code> peut
+seulement être appliqué sur des types qui implémentent <code>PartialEq</code>, bien que
+tous les types qui implémentent <code>PartialEq</code> ne puissent pas implémenter <code>Eq</code>. Un
+exemple de ceci sont les types de nombres à virgule flottante : l'implémentation
+des nombres à virgule flottante stipule que deux instances ayant la valeur
+“not-a-number” (<code>NaN</code>, c'est-à-dire “ceci n'est pas un nombre”) ne sont pas
+égales entre elles.</p>
+<!--
+An example of when `Eq` is required is for keys in a `HashMap<K, V>` so the
+`HashMap<K, V>` can tell whether two keys are the same.
+-->
+<p>Par exemple, <code>Eq</code> est nécessaire est pour les clés dans un <code>HashMap&lt;K, V&gt;</code> afin
+que le <code>HashMap&lt;K, V&gt;</code> puisse déterminer si deux clés sont identiques.</p>
+<!--
+### `PartialOrd` and `Ord` for Ordering Comparisons
+-->
+<h3 id="partialord-et-ord-pour-comparer-les-ordres-de-grandeur"><a class="header" href="#partialord-et-ord-pour-comparer-les-ordres-de-grandeur"><code>PartialOrd</code> et <code>Ord</code> pour comparer les ordres de grandeur</a></h3>
+<!--
+The `PartialOrd` trait allows you to compare instances of a type for sorting
+purposes. A type that implements `PartialOrd` can be used with the `<`, `>`,
+`<=`, and `>=` operators. You can only apply the `PartialOrd` trait to types
+that also implement `PartialEq`.
+-->
+<p>Le trait <code>PartialOrd</code> vous permet de comparer des instances d'un type pour
+pouvoir les trier. Un type qui implémente <code>PartialOrd</code> peut être utilisé avec
+les opérateurs <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, et <code>&gt;=</code>. Vous pouvez appliquer uniquement le
+trait <code>PartialOrd</code> aux types qui implémentent aussi <code>PartialEq</code>.</p>
+<!--
+Deriving `PartialOrd` implements the `partial_cmp` method, which returns an
+`Option<Ordering>` that will be `None` when the values given don’t produce an
+ordering. An example of a value that doesn’t produce an ordering, even though
+most values of that type can be compared, is the not-a-number (`NaN`) floating
+point value. Calling `partial_cmp` with any floating point number and the `NaN`
+floating point value will return `None`.
+-->
+<p>L'application de <code>derive</code> avec <code>PartialOrd</code> implémente la méthode <code>partial_cmp</code>,
+qui retourne un <code>Option&lt;Ordering&gt;</code> qui vaudra <code>None</code> lorsque les valeurs
+fournies ne fournissent pas un ordre. Un exemple de valeur qui ne produit pas
+d'ordre, même si la plupart des valeurs de ce type peuvent être comparées, est
+la valeur “not-a-number” (<code>NaN</code>) des virgules flottantes. L'appel à
+<code>partial_cmp</code> entre n'importe quel nombre à virgule flottante et la valeur <code>NaN</code>
+de virgule flottante va retourner <code>None</code>.</p>
+<!--
+When derived on structs, `PartialOrd` compares two instances by comparing the
+value in each field in the order in which the fields appear in the struct
+definition. When derived on enums, variants of the enum declared earlier in the
+enum definition are considered less than the variants listed later.
+-->
+<p>Lorsqu'il est dérivé sur une structure, <code>PartialOrd</code> compare deux instances en
+comparant les valeurs de chaque champ dans l'ordre dans lequel les champs
+apparaissent dans la définition de la structure. Lorsqu'il est dérivé sur des
+énumérations, les variantes de l'énumération déclarées plus tôt dans la
+définition de l'énumération sont considérées inférieures aux variantes déclarées
+ensuite.</p>
+<!--
+The `PartialOrd` trait is required, for example, for the `gen_range` method
+from the `rand` crate that generates a random value in the range specified by a
+low value and a high value.
+-->
+<p>Le trait <code>PartialOrd</code> est nécessaire, par exemple, pour la méthode <code>gen_range</code>
+de la crate <code>rand</code> qui génère une valeur aléatoire dans l'intervalle contrainte
+par une valeur minimale et une valeur maximale.</p>
+<!--
+The `Ord` trait allows you to know that for any two values of the annotated
+type, a valid ordering will exist. The `Ord` trait implements the `cmp` method,
+which returns an `Ordering` rather than an `Option<Ordering>` because a valid
+ordering will always be possible. You can only apply the `Ord` trait to types
+that also implement `PartialOrd` and `Eq` (and `Eq` requires `PartialEq`). When
+derived on structs and enums, `cmp` behaves the same way as the derived
+implementation for `partial_cmp` does with `PartialOrd`.
+-->
+<p>Le trait <code>Ord</code> vous permet de savoir si un ordre valide existe toujours entre
+deux valeurs du type annoté. Le trait <code>Ord</code> implémente la méthode <code>cmp</code>, qui
+retourne un <code>Ordering</code> plutôt qu'une <code>Option&lt;Ordering&gt;</code> car un ordre valide sera
+toujours possible. Vous pouvez appliquer le trait <code>Ord</code> uniquement sur les types
+qui implémentent aussi <code>PartialOrd</code> et <code>Eq</code> (et <code>Eq</code> nécessite <code>PartialEq</code>).
+Lorsqu'il est dérivé sur des structures et des énumérations, <code>cmp</code> se comporte
+de la même manière que l'implémentation de <code>partial_cmp</code> dérivée de
+<code>PartialOrd</code>.</p>
+<!--
+An example of when `Ord` is required is when storing values in a `BTreeSet<T>`,
+a data structure that stores data based on the sort order of the values.
+-->
+<p>Par exemple, <code>Ord</code> doit être implémenté sur le type de valeurs que nous stockons
+dans un <code>BTreeSet&lt;T&gt;</code>, qui est une structure de donnée qui stocke des données en
+fonction de l'ordre de tri de ces valeurs.</p>
+<!--
+### `Clone` and `Copy` for Duplicating Values
+-->
+<h3 id="clone-et-copy-pour-dupliquer-des-valeurs"><a class="header" href="#clone-et-copy-pour-dupliquer-des-valeurs"><code>Clone</code> et <code>Copy</code> pour dupliquer des valeurs</a></h3>
+<!--
+The `Clone` trait allows you to explicitly create a deep copy of a value, and
+the duplication process might involve running arbitrary code and copying heap
+data. See the [“Ways Variables and Data Interact:
+Clone”][ways-variables-and-data-interact-clone]<!-- ignore -- > section in
+Chapter 4 for more information on `Clone`.
+-->
+<p>Le trait <code>Clone</code> vous permet de créer explicitement une copie profonde d'une
+valeur, et le processus de duplication peut impliquer l'exécution d'un code
+arbitraire pour copier les données stockées dans le tas. Rendez-vous à la
+section <a href="ch04-01-what-is-ownership.html#les-interactions-entre-les-variables-et-les-donn%C3%A9es--le-d%C3%A9placement">“Les interactions entre les variables et les données : le
+déplacement”</a><!-- ignore --> du
+chapitre 4 pour plus d'informations sur <code>Clone</code>.</p>
+<!--
+Deriving `Clone` implements the `clone` method, which when implemented for the
+whole type, calls `clone` on each of the parts of the type. This means all the
+fields or values in the type must also implement `Clone` to derive `Clone`.
+-->
+<p>Utiliser <code>derive</code> avec <code>Clone</code> implémente la méthode <code>clone</code>, qui, lorsqu'elle
+est implémentée sur tout le type, fait appel à <code>clone</code> sur chaque constituant du
+type. Cela signifie que tous les champs ou les valeurs dans le type doivent
+aussi implémenter <code>Clone</code> pour dériver de <code>Clone</code>.</p>
+<!--
+An example of when `Clone` is required is when calling the `to_vec` method on a
+slice. The slice doesn’t own the type instances it contains, but the vector
+returned from `to_vec` will need to own its instances, so `to_vec` calls
+`clone` on each item. Thus, the type stored in the slice must implement `Clone`.
+-->
+<p><code>Clone</code> est par exemple nécessaire lorsque nous appelons la méthode <code>to_vec</code> sur
+une slice. La slice ne prend pas possession des instances du type qu'il
+contient, mais le vecteur retourné par <code>to_vec</code> va avoir besoin de prendre
+possession de ses instances, donc <code>to_vec</code> fait appel à <code>clone</code> sur chaque
+élément. C'est pourquoi le type stocké dans la slice doit implémenter <code>Clone</code>.</p>
+<!--
+The `Copy` trait allows you to duplicate a value by only copying bits stored on
+the stack; no arbitrary code is necessary. See the [“Stack-Only Data:
+Copy”][stack-only-data-copy]<!-- ignore -- > section in Chapter 4 for more
+information on `Copy`.
+-->
+<p>Le trait <code>Copy</code> vous permet de dupliquer une valeur en copiant uniquement les
+éléments stockés sur la pile ; il n'est pas nécessaire d'avoir de code
+arbitraire. Rendez-vous à la section <a href="ch04-01-what-is-ownership.html#donn%C3%A9es-uniquement-sur-la-pile--la-copie">“Données uniquement sur la pile : la
+copie”</a><!-- ignore --> du chapitre 4 pour plus
+d'informations sur <code>Copy</code>.</p>
+<!--
+The `Copy` trait doesn’t define any methods to prevent programmers from
+overloading those methods and violating the assumption that no arbitrary code
+is being run. That way, all programmers can assume that copying a value will be
+very fast.
+-->
+<p>Le trait <code>Copy</code> ne définit pas de méthode, volontairement pour empêcher les
+développeurs de surcharger ces méthodes et ainsi violer l'affirmation qu'aucun
+code arbitraire est exécuté à la copie. Ainsi, tous les développeurs peuvent
+compter sur le fait qu'une copie de valeur est très rapide.</p>
+<!--
+You can derive `Copy` on any type whose parts all implement `Copy`. You can
+only apply the `Copy` trait to types that also implement `Clone`, because a
+type that implements `Copy` has a trivial implementation of `Clone` that
+performs the same task as `Copy`.
+-->
+<p>Vous pouvez utiliser <code>derive</code> avec <code>Copy</code> sur n'importe quel type constitué
+d'éléments qui implémentent aussi <code>Copy</code>. Vous ne pouvez appliquer le trait
+<code>Copy</code> que sur des types qui implémentent aussi <code>Clone</code>, car un type qui
+implémente <code>Copy</code> a aussi une implémentation triviale de <code>Clone</code> qui procède
+aux mêmes actions que <code>Copy</code>.</p>
+<!--
+The `Copy` trait is rarely required; types that implement `Copy` have
+optimizations available, meaning you don’t have to call `clone`, which makes
+the code more concise.
+-->
+<p>Le trait <code>Copy</code> est rarement nécessaire ; les types qui implémentent <code>Copy</code>
+peuvent être optimisés, ce qui veut dire que vous n'avez pas à appeler <code>clone</code>,
+ce qui rend le code plus concis.</p>
+<!--
+Everything possible with `Copy` you can also accomplish with `Clone`, but the
+code might be slower or have to use `clone` in places.
+-->
+<p>Tout ce que vous pouvez accomplir avec <code>Copy</code>, vous pouvez le faire avec
+<code>Clone</code>, mais le code risque d'être plus lent ou doit parfois utiliser <code>clone</code>.</p>
+<!--
+### `Hash` for Mapping a Value to a Value of Fixed Size
+-->
+<h3 id="hash-pour-faire-correspondre-une-valeur-avec-une-valeur-de-taille-fixe"><a class="header" href="#hash-pour-faire-correspondre-une-valeur-avec-une-valeur-de-taille-fixe"><code>Hash</code> pour faire correspondre une valeur avec une valeur de taille fixe</a></h3>
+<!--
+The `Hash` trait allows you to take an instance of a type of arbitrary size and
+map that instance to a value of fixed size using a hash function. Deriving
+`Hash` implements the `hash` method. The derived implementation of the `hash`
+method combines the result of calling `hash` on each of the parts of the type,
+meaning all fields or values must also implement `Hash` to derive `Hash`.
+-->
+<p>Le trait <code>Hash</code> vous permet d'obtenir une valeur à taille fixe en utilisant une
+fonction de hachage sur une instance d'un type d'une taille quelconque. Utiliser
+<code>derive</code> avec <code>Hash</code> implémente la méthode <code>hash</code>. L'implémentation dérive de la
+méthode <code>hash</code> combine le résultat de l'appel de <code>hash</code> sur chaque élément du
+type, ce qui signifie que tous ses champs ou valeurs doivent aussi implémenter
+<code>Hash</code> pour pouvoir lui appliquer le trait <code>Hash</code>.</p>
+<!--
+An example of when `Hash` is required is in storing keys in a `HashMap<K, V>`
+to store data efficiently.
+-->
+<p>Pour stocker des clés efficacement dans un <code>HashMap&lt;K, V&gt;</code>, les clés doivent
+nécessairement implémenter <code>Hash</code>.</p>
+<!--
+### `Default` for Default Values
+-->
+<h3 id="default-pour-des-valeurs-par-défaut"><a class="header" href="#default-pour-des-valeurs-par-défaut"><code>Default</code> pour des valeurs par défaut</a></h3>
+<!--
+The `Default` trait allows you to create a default value for a type. Deriving
+`Default` implements the `default` function. The derived implementation of the
+`default` function calls the `default` function on each part of the type,
+meaning all fields or values in the type must also implement `Default` to
+derive `Default`.
+-->
+<p>Le trait <code>Default</code> vous permet de créer une valeur par défaut pour un type.
+Implémenter <code>Default</code> avec <code>derive</code> ajoute la fonction <code>default</code>. Cette fonction
+<code>default</code> fait elle-même appel à la fonction <code>default</code> sur chaque élément du
+type, ce qui signifie que tous les champs ou les valeurs dans le type doit aussi
+implémenter <code>Default</code> pour que ce type puisse dériver de <code>Default</code>.</p>
+<!-- markdownlint-disable -->
+<!--
+The `Default::default` function is commonly used in combination with the struct
+update syntax discussed in the [“Creating Instances From Other Instances With
+Struct Update
+Syntax”][creating-instances-from-other-instances-with-struct-update-syntax]<!-- ignore -- >
+section in Chapter 5. You can customize a few fields of a struct and then
+set and use a default value for the rest of the fields by using
+`..Default::default()`.
+-->
+<p>La fonction <code>Default::default</code> est couramment utilisé en association avec la
+syntaxe de modification de structures que nous avons vu dans la section <a href="ch05-01-defining-structs.html#cr%C3%A9er-des-instances-%C3%A0-partir-dautres-instances-avec-la-syntaxe-de-mise-%C3%A0-jour-de-structure">“Créer
+des instances à partir d'autres instances avec la syntaxe de mise à jour de
+structure”</a><!-- ignore -->
+du chapitre 5. Vous pouvez personnaliser quelques champs d'une structure et
+ensuite définir et utiliser une valeur par défaut pour le reste des champs en
+utilisant <code>..Default::default()</code>.</p>
+<!--
+The `Default` trait is required when you use the method `unwrap_or_default` on
+`Option<T>` instances, for example. If the `Option<T>` is `None`, the method
+`unwrap_or_default` will return the result of `Default::default` for the type
+`T` stored in the `Option<T>`.
+-->
+<p>Le trait <code>Default</code> est nécessaire lorsque vous utilisez la méthode
+<code>unwrap_or_default</code> sur les instances de <code>Option&lt;T&gt;</code>, par exemple. Si le
+<code>Option&lt;T&gt;</code> vaut <code>None</code>, la méthode <code>unwrap_or_default</code> va retourner le résultat
+de <code>Default::default</code> sur le type <code>T</code> provenant du <code>Option&lt;T&gt;</code>.</p>
+<!--
+[creating-instances-from-other-instances-with-struct-update-syntax]:
+ch05-01-defining-structs.html#creating-instances-from-other-instances-with-struct-update-syntax
+[stack-only-data-copy]:
+ch04-01-what-is-ownership.html#stack-only-data-copy
+[ways-variables-and-data-interact-clone]:
+ch04-01-what-is-ownership.html#ways-variables-and-data-interact-clone
+[macros]: ch19-06-macros.html#macros
+-->
+<!-- markdownlint-enable -->
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="appendix-02-operators.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="appendix-04-useful-development-tools.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="appendix-02-operators.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="appendix-04-useful-development-tools.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../ferris.js"></script>
+    </body>
+</html>

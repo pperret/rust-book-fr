@@ -1,0 +1,1398 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Le Rust non sécurisé (unsafe) - Le langage de programmation Rust</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../ferris.css">
+        <link rel="stylesheet" href="../theme/2018-edition.css">
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">Le langage de programmation Rust</a></li><li class="chapter-item expanded affix "><a href="foreword.html">Avant-propos</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><a href="translation-terms.html">Traduction des termes</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Prise en main</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-installation.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="ch01-02-hello-world.html"><strong aria-hidden="true">1.2.</strong> Hello, world!</a></li><li class="chapter-item expanded "><a href="ch01-03-hello-cargo.html"><strong aria-hidden="true">1.3.</strong> Hello, Cargo!</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-guessing-game-tutorial.html"><strong aria-hidden="true">2.</strong> Programmer le jeu du plus ou du moins</a></li><li class="chapter-item expanded "><a href="ch03-00-common-programming-concepts.html"><strong aria-hidden="true">3.</strong> Les concepts courants de programmation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-variables-and-mutability.html"><strong aria-hidden="true">3.1.</strong> Les variables et la mutabilité</a></li><li class="chapter-item expanded "><a href="ch03-02-data-types.html"><strong aria-hidden="true">3.2.</strong> Les types de données</a></li><li class="chapter-item expanded "><a href="ch03-03-how-functions-work.html"><strong aria-hidden="true">3.3.</strong> Les fonctions</a></li><li class="chapter-item expanded "><a href="ch03-04-comments.html"><strong aria-hidden="true">3.4.</strong> Les commentaires</a></li><li class="chapter-item expanded "><a href="ch03-05-control-flow.html"><strong aria-hidden="true">3.5.</strong> Les structures de contrôle</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-understanding-ownership.html"><strong aria-hidden="true">4.</strong> Comprendre la possession</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-what-is-ownership.html"><strong aria-hidden="true">4.1.</strong> Qu'est-ce que la possession ?</a></li><li class="chapter-item expanded "><a href="ch04-02-references-and-borrowing.html"><strong aria-hidden="true">4.2.</strong> Les références et l'emprunt</a></li><li class="chapter-item expanded "><a href="ch04-03-slices.html"><strong aria-hidden="true">4.3.</strong> Le type slice</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-structs.html"><strong aria-hidden="true">5.</strong> Utiliser les structures pour structurer des données apparentées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-defining-structs.html"><strong aria-hidden="true">5.1.</strong> Définir et instancier des structures</a></li><li class="chapter-item expanded "><a href="ch05-02-example-structs.html"><strong aria-hidden="true">5.2.</strong> Un exemple de programme qui utilise des structures</a></li><li class="chapter-item expanded "><a href="ch05-03-method-syntax.html"><strong aria-hidden="true">5.3.</strong> La syntaxe des méthodes</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-enums.html"><strong aria-hidden="true">6.</strong> Les énumérations et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-defining-an-enum.html"><strong aria-hidden="true">6.1.</strong> Définir une énumération</a></li><li class="chapter-item expanded "><a href="ch06-02-match.html"><strong aria-hidden="true">6.2.</strong> La structure de contrôle match</a></li><li class="chapter-item expanded "><a href="ch06-03-if-let.html"><strong aria-hidden="true">6.3.</strong> Une structure de contrôle concise : if let</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-managing-growing-projects-with-packages-crates-and-modules.html"><strong aria-hidden="true">7.</strong> Gérer des projets grandissants avec les paquets, crates et modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-packages-and-crates.html"><strong aria-hidden="true">7.1.</strong> Les paquets et les crates</a></li><li class="chapter-item expanded "><a href="ch07-02-defining-modules-to-control-scope-and-privacy.html"><strong aria-hidden="true">7.2.</strong> Définir des modules pour gérer la portée et la visibilité</a></li><li class="chapter-item expanded "><a href="ch07-03-paths-for-referring-to-an-item-in-the-module-tree.html"><strong aria-hidden="true">7.3.</strong> Désigner un élément dans l'arborescence de modules</a></li><li class="chapter-item expanded "><a href="ch07-04-bringing-paths-into-scope-with-the-use-keyword.html"><strong aria-hidden="true">7.4.</strong> Importer des chemins dans la portée via le mot-clé use</a></li><li class="chapter-item expanded "><a href="ch07-05-separating-modules-into-different-files.html"><strong aria-hidden="true">7.5.</strong> Séparer les modules dans différents fichiers</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-common-collections.html"><strong aria-hidden="true">8.</strong> Les collections standard</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-vectors.html"><strong aria-hidden="true">8.1.</strong> Stocker des listes de valeurs avec des vecteurs</a></li><li class="chapter-item expanded "><a href="ch08-02-strings.html"><strong aria-hidden="true">8.2.</strong> Stocker du texte encodé en UTF-8 avec les Strings</a></li><li class="chapter-item expanded "><a href="ch08-03-hash-maps.html"><strong aria-hidden="true">8.3.</strong> Stocker des clés associées à des valeurs dans des tables de hachage</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-error-handling.html"><strong aria-hidden="true">9.</strong> La gestion des erreurs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-unrecoverable-errors-with-panic.html"><strong aria-hidden="true">9.1.</strong> Les erreurs irrécupérables avec panic!</a></li><li class="chapter-item expanded "><a href="ch09-02-recoverable-errors-with-result.html"><strong aria-hidden="true">9.2.</strong> Des erreurs récupérables avec Result</a></li><li class="chapter-item expanded "><a href="ch09-03-to-panic-or-not-to-panic.html"><strong aria-hidden="true">9.3.</strong> Paniquer ou ne pas paniquer, telle est la question</a></li></ol></li><li class="chapter-item expanded "><a href="ch10-00-generics.html"><strong aria-hidden="true">10.</strong> Les types génériques, les traits et les durées de vie</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch10-01-syntax.html"><strong aria-hidden="true">10.1.</strong> Les types de données génériques</a></li><li class="chapter-item expanded "><a href="ch10-02-traits.html"><strong aria-hidden="true">10.2.</strong> Définir des comportements partagés avec les traits</a></li><li class="chapter-item expanded "><a href="ch10-03-lifetime-syntax.html"><strong aria-hidden="true">10.3.</strong> La conformité des références avec les durées de vies</a></li></ol></li><li class="chapter-item expanded "><a href="ch11-00-testing.html"><strong aria-hidden="true">11.</strong> Ecrire des tests automatisés</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch11-01-writing-tests.html"><strong aria-hidden="true">11.1.</strong> Comment écrire des tests</a></li><li class="chapter-item expanded "><a href="ch11-02-running-tests.html"><strong aria-hidden="true">11.2.</strong> Gérer l'exécution des tests</a></li><li class="chapter-item expanded "><a href="ch11-03-test-organization.html"><strong aria-hidden="true">11.3.</strong> L'organisation des tests</a></li></ol></li><li class="chapter-item expanded "><a href="ch12-00-an-io-project.html"><strong aria-hidden="true">12.</strong> Un projet d'entrée/sortie : construire un programme en ligne de commande</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch12-01-accepting-command-line-arguments.html"><strong aria-hidden="true">12.1.</strong> Récupérer les arguments de la ligne de commande</a></li><li class="chapter-item expanded "><a href="ch12-02-reading-a-file.html"><strong aria-hidden="true">12.2.</strong> Lire un fichier</a></li><li class="chapter-item expanded "><a href="ch12-03-improving-error-handling-and-modularity.html"><strong aria-hidden="true">12.3.</strong> Remanier le code pour améliorer sa modularité et la gestion des erreurs</a></li><li class="chapter-item expanded "><a href="ch12-04-testing-the-librarys-functionality.html"><strong aria-hidden="true">12.4.</strong> Développer les fonctionnalités de la bibliothèque avec le TDD</a></li><li class="chapter-item expanded "><a href="ch12-05-working-with-environment-variables.html"><strong aria-hidden="true">12.5.</strong> Travailler avec des variables d'environnement</a></li><li class="chapter-item expanded "><a href="ch12-06-writing-to-stderr-instead-of-stdout.html"><strong aria-hidden="true">12.6.</strong> Ecrire les messages d'erreur sur la sortie d'erreurs standard au lieu de la sortie normale</a></li></ol></li><li class="chapter-item expanded "><a href="ch13-00-functional-features.html"><strong aria-hidden="true">13.</strong> Les fonctionnalités des langages fonctionnels : les itérateurs et les fermetures</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch13-01-closures.html"><strong aria-hidden="true">13.1.</strong> Les fermetures : fonctions anonymes qui peuvent utiliser leur environnement</a></li><li class="chapter-item expanded "><a href="ch13-02-iterators.html"><strong aria-hidden="true">13.2.</strong> Traiter une série d'éléments avec un itérateur</a></li><li class="chapter-item expanded "><a href="ch13-03-improving-our-io-project.html"><strong aria-hidden="true">13.3.</strong> Amélioration de notre projet d'entrée/sortie</a></li><li class="chapter-item expanded "><a href="ch13-04-performance.html"><strong aria-hidden="true">13.4.</strong> Comparaison des performances : les boucles et les itérateurs</a></li></ol></li><li class="chapter-item expanded "><a href="ch14-00-more-about-cargo.html"><strong aria-hidden="true">14.</strong> En savoir plus sur cargo et crates.io</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch14-01-release-profiles.html"><strong aria-hidden="true">14.1.</strong> Personnaliser les compilations avec les profils de publication</a></li><li class="chapter-item expanded "><a href="ch14-02-publishing-to-crates-io.html"><strong aria-hidden="true">14.2.</strong> Publier une crate sur crates.io</a></li><li class="chapter-item expanded "><a href="ch14-03-cargo-workspaces.html"><strong aria-hidden="true">14.3.</strong> Les espaces de travail de cargo</a></li><li class="chapter-item expanded "><a href="ch14-04-installing-binaries.html"><strong aria-hidden="true">14.4.</strong> Installer des binaires à partir de crates.io avec cargo install</a></li><li class="chapter-item expanded "><a href="ch14-05-extending-cargo.html"><strong aria-hidden="true">14.5.</strong> Etendre les fonctionnalités de cargo avec des commandes personnalisées</a></li></ol></li><li class="chapter-item expanded "><a href="ch15-00-smart-pointers.html"><strong aria-hidden="true">15.</strong> Les pointeurs intelligents</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch15-01-box.html"><strong aria-hidden="true">15.1.</strong> Utiliser Box&lt;T&gt; pour pointer sur des données présentes sur le tas</a></li><li class="chapter-item expanded "><a href="ch15-02-deref.html"><strong aria-hidden="true">15.2.</strong> Considérer les pointeurs intelligents comme des références grâce au trait Deref</a></li><li class="chapter-item expanded "><a href="ch15-03-drop.html"><strong aria-hidden="true">15.3.</strong> Exécuter du code au nettoyage avec le trait Drop</a></li><li class="chapter-item expanded "><a href="ch15-04-rc.html"><strong aria-hidden="true">15.4.</strong> Rc&lt;T&gt;, le pointeur intelligent qui compte les références</a></li><li class="chapter-item expanded "><a href="ch15-05-interior-mutability.html"><strong aria-hidden="true">15.5.</strong> RefCell&lt;T&gt; et le motif de mutabilité interne</a></li><li class="chapter-item expanded "><a href="ch15-06-reference-cycles.html"><strong aria-hidden="true">15.6.</strong> Les boucles de références qui peuvent provoquer des fuites de mémoire</a></li></ol></li><li class="chapter-item expanded "><a href="ch16-00-concurrency.html"><strong aria-hidden="true">16.</strong> La concurrence sans craintes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch16-01-threads.html"><strong aria-hidden="true">16.1.</strong> Utiliser les tâches pour exécuter simultanément du code</a></li><li class="chapter-item expanded "><a href="ch16-02-message-passing.html"><strong aria-hidden="true">16.2.</strong> Utiliser l'envoi de messages pour transférer des données entre les tâches</a></li><li class="chapter-item expanded "><a href="ch16-03-shared-state.html"><strong aria-hidden="true">16.3.</strong> Le partage d'état en concurrence</a></li><li class="chapter-item expanded "><a href="ch16-04-extensible-concurrency-sync-and-send.html"><strong aria-hidden="true">16.4.</strong> Etendre la concurrence avec les traits Sync et Send</a></li></ol></li><li class="chapter-item expanded "><a href="ch17-00-oop.html"><strong aria-hidden="true">17.</strong> Les fonctionnalités orientées objet de Rust</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch17-01-what-is-oo.html"><strong aria-hidden="true">17.1.</strong> Les caractéristiques des langages orientés objet</a></li><li class="chapter-item expanded "><a href="ch17-02-trait-objects.html"><strong aria-hidden="true">17.2.</strong> Utiliser les objets traits qui permettent des valeurs de types différents</a></li><li class="chapter-item expanded "><a href="ch17-03-oo-design-patterns.html"><strong aria-hidden="true">17.3.</strong> Implémenter un patron de conception orienté-objet</a></li></ol></li><li class="chapter-item expanded "><a href="ch18-00-patterns.html"><strong aria-hidden="true">18.</strong> Les motifs et le filtrage par motif</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch18-01-all-the-places-for-patterns.html"><strong aria-hidden="true">18.1.</strong> Tous les endroits où les motifs peuvent être utilisés</a></li><li class="chapter-item expanded "><a href="ch18-02-refutability.html"><strong aria-hidden="true">18.2.</strong> La réfutabilité : lorsqu'un motif peut échouer à correspondre</a></li><li class="chapter-item expanded "><a href="ch18-03-pattern-syntax.html"><strong aria-hidden="true">18.3.</strong> La syntaxe des motifs</a></li></ol></li><li class="chapter-item expanded "><a href="ch19-00-advanced-features.html"><strong aria-hidden="true">19.</strong> Les fonctionnalités avancées</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch19-01-unsafe-rust.html" class="active"><strong aria-hidden="true">19.1.</strong> Le Rust non sécurisé (unsafe)</a></li><li class="chapter-item expanded "><a href="ch19-03-advanced-traits.html"><strong aria-hidden="true">19.2.</strong> Les traits avancés</a></li><li class="chapter-item expanded "><a href="ch19-04-advanced-types.html"><strong aria-hidden="true">19.3.</strong> Les types avancés</a></li><li class="chapter-item expanded "><a href="ch19-05-advanced-functions-and-closures.html"><strong aria-hidden="true">19.4.</strong> Les fonctions et fermetures avancées</a></li><li class="chapter-item expanded "><a href="ch19-06-macros.html"><strong aria-hidden="true">19.5.</strong> Les macros</a></li></ol></li><li class="chapter-item expanded "><a href="ch20-00-final-project-a-web-server.html"><strong aria-hidden="true">20.</strong> Projet final : construire un serveur web multitâches</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch20-01-single-threaded.html"><strong aria-hidden="true">20.1.</strong> Développer un serveur web monotâche</a></li><li class="chapter-item expanded "><a href="ch20-02-multithreaded.html"><strong aria-hidden="true">20.2.</strong> Transformer notre serveur monotâche en serveur multitâches</a></li><li class="chapter-item expanded "><a href="ch20-03-graceful-shutdown-and-cleanup.html"><strong aria-hidden="true">20.3.</strong> Arrêt propre et nettoyage</a></li></ol></li><li class="chapter-item expanded "><a href="appendix-00.html"><strong aria-hidden="true">21.</strong> Annexes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix-01-keywords.html"><strong aria-hidden="true">21.1.</strong> A - les mots-clés</a></li><li class="chapter-item expanded "><a href="appendix-02-operators.html"><strong aria-hidden="true">21.2.</strong> 🚧 B - les opérateurs et les symboles</a></li><li class="chapter-item expanded "><a href="appendix-03-derivable-traits.html"><strong aria-hidden="true">21.3.</strong> 🚧 C - les traits dérivables</a></li><li class="chapter-item expanded "><a href="appendix-04-useful-development-tools.html"><strong aria-hidden="true">21.4.</strong> 🚧 D - Des outils de développement utiles</a></li><li class="chapter-item expanded "><a href="appendix-05-editions.html"><strong aria-hidden="true">21.5.</strong> 🚧 E - Les éditions</a></li><li class="chapter-item expanded "><a href="appendix-06-translation.html"><strong aria-hidden="true">21.6.</strong> 🚧 F - Les traductions de ce livre</a></li><li class="chapter-item expanded "><a href="appendix-07-nightly-rust.html"><strong aria-hidden="true">21.7.</strong> 🚧 G - Comment Rust est construit, et “Nightly Rust”</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Le langage de programmation Rust</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/Jimskapt/rust-book-fr" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <!--
+## Unsafe Rust
+-->
+<h2 id="le-rust-non-sécurisé-unsafe"><a class="header" href="#le-rust-non-sécurisé-unsafe">Le Rust non sécurisé (<code>unsafe</code>)</a></h2>
+<!--
+All the code we’ve discussed so far has had Rust’s memory safety guarantees
+enforced at compile time. However, Rust has a second language hidden inside it
+that doesn’t enforce these memory safety guarantees: it’s called *unsafe Rust*
+and works just like regular Rust, but gives us extra superpowers.
+-->
+<p>Tout le code Rust que nous avons abordé jusqu'à présent a bénéficié des
+garanties de sécurité de la mémoire, vérifiées à la compilation. Cependant Rust
+possède un second langage caché en son sein qui n'applique pas ces vérifications
+de sécurité de la mémoire : il s'appelle le <em>Rust non sécurisé</em> et
+fonctionne comme le Rust habituel, mais fournit quelques super-pouvoirs
+supplémentaires.</p>
+<!--
+Unsafe Rust exists because, by nature, static analysis is conservative. When
+the compiler tries to determine whether or not code upholds the guarantees,
+it’s better for it to reject some valid programs rather than accept some
+invalid programs. Although the code *might* be okay, if the Rust compiler
+doesn’t have enough information to be confident, it will reject the code. In
+these cases, you can use unsafe code to tell the compiler, “Trust me, I know
+what I’m doing.” The downside is that you use it at your own risk: if you use
+unsafe code incorrectly, problems due to memory unsafety, such as null pointer
+dereferencing, can occur.
+-->
+<p>Le Rust non sécurisé existe car, par nature, l'analyse statique est conservative.
+Lorsque le compilateur essaye de déterminer si le code respecte ou non les
+garanties, il vaut mieux rejeter quelques programmes valides plutôt que
+d'accepter quelques programmes invalides. Bien que le code <em>puisse</em> être
+correct, si le compilateur Rust n'a pas assez d'information pour être sûr, il
+va refuser ce code. Dans ce cas, vous pouvez utiliser du code non sécurisé pour
+dire au compilateur “fais-moi confiance, je sais ce que je fait”. Le prix à
+payer pour cela est que vous l'utilisez à vos risques et périls : si
+vous écrivez du code non sécurisé de manière incorrecte, des problèmes liés à
+la sécurité de la mémoire peuvent se produire, tel qu'un déréférencement d'un
+pointeur vide.</p>
+<!--
+Another reason Rust has an unsafe alter ego is that the underlying computer
+hardware is inherently unsafe. If Rust didn’t let you do unsafe operations, you
+couldn’t do certain tasks. Rust needs to allow you to do low-level systems
+programming, such as directly interacting with the operating system or even
+writing your own operating system. Working with low-level systems programming
+is one of the goals of the language. Let’s explore what we can do with unsafe
+Rust and how to do it.
+-->
+<p>Une autre raison pour laquelle Rust embarque son alter-ego non sécurisé est que
+le matériel des ordinateurs sur lequel il repose n'est pas sécurisé par essence.
+Si Rust ne vous laissait pas procéder à des opérations non sécurisées, vous ne
+pourriez pas faire certaines choses. Rust doit pouvoir vous permettre de
+développer du code bas-niveau, comme pouvoir interagir directement avec le
+système d'exploitation ou même écrire votre propre système d'exploitation.
+Pouvoir travailler avec des systèmes bas-niveau est un des objectifs du langage.
+Voyons ce que nous pouvons faire avec le Rust non sécurisé et comment le faire.</p>
+<!--
+### Unsafe Superpowers
+-->
+<h3 id="les-super-pouvoirs-du-code-non-sécurisé"><a class="header" href="#les-super-pouvoirs-du-code-non-sécurisé">Les super-pouvoirs du code non sécurisé</a></h3>
+<!--
+To switch to unsafe Rust, use the `unsafe` keyword and then start a new block
+that holds the unsafe code. You can take five actions in unsafe Rust, called
+*unsafe superpowers*, that you can’t in safe Rust. Those superpowers include
+the ability to:
+-->
+<p>Pour pouvoir utiliser le Rust non sécurisé, il faut utiliser le mot-clé <code>unsafe</code>
+et ensuite créer un nouveau bloc qui contient le code non sécurisé. Vous pouvez
+faire cinq actions en Rust non sécurisé, qui s'appellent <em>les super-pouvoirs du
+non sécurisé</em>, actions que vous ne pourriez pas faire en Rust sécurisé. Ces super-pouvoirs
+permettent de :</p>
+<!--
+* Dereference a raw pointer
+* Call an unsafe function or method
+* Access or modify a mutable static variable
+* Implement an unsafe trait
+* Access fields of `union`s
+-->
+<ul>
+<li>Déréférencer un pointeur brut</li>
+<li>Faire appel à une fonction ou une méthode non sécurisée</li>
+<li>Lire ou modifier une variable statique mutable</li>
+<li>Implémenter un trait non sécurisé</li>
+<li>Accéder aux champs des <code>union</code></li>
+</ul>
+<!--
+It’s important to understand that `unsafe` doesn’t turn off the borrow checker
+or disable any other of Rust’s safety checks: if you use a reference in unsafe
+code, it will still be checked. The `unsafe` keyword only gives you access to
+these five features that are then not checked by the compiler for memory
+safety. You’ll still get some degree of safety inside of an unsafe block.
+-->
+<p>Il est important de comprendre que <code>unsafe</code> ne désactive pas le vérificateur
+d'emprunt et ne désactive pas les autres vérifications de sécurité de Rust : si
+vous utilisez une référence dans du code non sécurisé, elle sera toujours
+vérifiée. Le mot-clé <code>unsafe</code> vous donne seulement accès à ces cinq
+fonctionnalités qui ne sont alors pas vérifiées par le compilateur en vue de veiller
+à la sécurité de la mémoire. Vous conservez donc un certain niveau de sécurité à
+l'intérieur d'un bloc <code>unsafe</code>.</p>
+<!--
+In addition, `unsafe` does not mean the code inside the block is necessarily
+dangerous or that it will definitely have memory safety problems: the intent is
+that as the programmer, you’ll ensure the code inside an `unsafe` block will
+access memory in a valid way.
+-->
+<p>De plus, <code>unsafe</code> ne signifie pas que le code à l'intérieur du bloc est
+obligatoirement dangereux ou qu'il va forcément présenter des problèmes de sécurité
+mémoire : l'idée étant qu'en tant que développeur, vous vous assuriez que le code
+à l'intérieur d'un bloc <code>unsafe</code> va accéder correctement à la mémoire.</p>
+<!--
+People are fallible, and mistakes will happen, but by requiring these five
+unsafe operations to be inside blocks annotated with `unsafe` you’ll know that
+any errors related to memory safety must be within an `unsafe` block. Keep
+`unsafe` blocks small; you’ll be thankful later when you investigate memory
+bugs.
+-->
+<p>Personne n'est parfait, les erreurs arrivent, et en imposant que ces cinq
+opérations non sécurisés se trouvent dans des blocs marqués d'un <code>unsafe</code>, Rust
+vous permet de savoir que ces éventuelles erreurs liées à la sécurité de la
+mémoire se trouveront dans un bloc <code>unsafe</code>. Vous devez donc essayer de
+minimiser la taille des blocs <code>unsafe</code> ; vous ne le regretterez pas lorsque
+vous rechercherez des bogues de mémoire.</p>
+<!--
+To isolate unsafe code as much as possible, it’s best to enclose unsafe code
+within a safe abstraction and provide a safe API, which we’ll discuss later in
+the chapter when we examine unsafe functions and methods. Parts of the standard
+library are implemented as safe abstractions over unsafe code that has been
+audited. Wrapping unsafe code in a safe abstraction prevents uses of `unsafe`
+from leaking out into all the places that you or your users might want to use
+the functionality implemented with `unsafe` code, because using a safe
+abstraction is safe.
+-->
+<p>Pour isoler autant que possible le code non sécurisé, il vaut mieux intégrer du
+code non sécurisé dans une abstraction et fournir ainsi une API sécurisée,
+comme nous le verrons plus tard dans ce chapitre lorsque nous examinerons les
+fonctions et méthodes non sécurisées. Certaines parties de la bibliothèque
+standard sont implémentées comme étant des abstractions sécurisées et basées
+sur du code non sécurisé qui a été audité. Encapsuler du code non sécurisé dans
+une abstraction sécurisée évite que l'utilisation de <code>unsafe</code> ne se propage
+dans des endroits où vous ou vos utilisateurs souhaiteraient éviter d'utiliser
+les fonctionnalités du code <code>unsafe</code>, car au final utiliser une abstraction
+sécurisée doit rester sûr.</p>
+<!--
+Let’s look at each of the five unsafe superpowers in turn. We’ll also look at
+some abstractions that provide a safe interface to unsafe code.
+-->
+<p>Analysons ces cinq super-pouvoirs à tour de rôle. Nous allons aussi
+découvrir quelques abstractions qui fournissent une interface sécurisée pour
+faire fonctionner du code non sécurisé.</p>
+<!--
+### Dereferencing a Raw Pointer
+-->
+<h3 id="déréférencer-un-pointeur-brut"><a class="header" href="#déréférencer-un-pointeur-brut">Déréférencer un pointeur brut</a></h3>
+<!--
+In Chapter 4, in the [“Dangling References”][dangling-references]<!-- ignore
+-- > section, we mentioned that the compiler ensures references are always
+valid. Unsafe Rust has two new types called *raw pointers* that are similar to
+references. As with references, raw pointers can be immutable or mutable and
+are written as `*const T` and `*mut T`, respectively. The asterisk isn’t the
+dereference operator; it’s part of the type name. In the context of raw
+pointers, *immutable* means that the pointer can’t be directly assigned to
+after being dereferenced.
+-->
+<p>Au chapitre 4, dans la section
+<a href="ch04-02-references-and-borrowing.html#les-r%C3%A9f%C3%A9rences-pendouillantes">“Les références pendouillantes”</a><!-- ignore -->, nous
+avions mentionné que le compilateur s'assure que les références sont toujours
+valides. Le Rust non sécurisé offre deux nouveaux types qui s'appellent les
+<em>pointeurs brut</em> et qui ressemblent aux références. Comme les références, les
+pointeurs bruts peuvent être immuables ou mutables et s'écrivent respectivement
+<code>*const T</code> et <code>*mut T</code>. L'astérisque n'est pas l'opérateur de déréférencement ;
+il fait partie du nom du type. Dans un contexte de pointeur brut, <em>immuable</em>
+signifie que le pointeur ne peut pas être affecté directement après avoir été
+déréférencé.</p>
+<!--
+Different from references and smart pointers, raw pointers:
+-->
+<p>Par rapport aux références et aux pointeurs intelligents, les pointeurs
+bruts peuvent :</p>
+<!--
+* Are allowed to ignore the borrowing rules by having both immutable and
+  mutable pointers or multiple mutable pointers to the same location
+* Aren’t guaranteed to point to valid memory
+* Are allowed to be null
+* Don’t implement any automatic cleanup
+-->
+<ul>
+<li>ignorer les règles d'emprunt en ayant plusieurs pointeurs tant immuables que
+mutables ou en ayant plusieurs pointeurs mutables qui pointent vers le même
+endroit.</li>
+<li>ne pas être obligés de pointer sur un emplacement mémoire valide</li>
+<li>être autorisés à avoir la valeur nulle</li>
+<li>ne pas implémenter de fonctionnalité de nettoyage automatique</li>
+</ul>
+<!--
+By opting out of having Rust enforce these guarantees, you can give up
+guaranteed safety in exchange for greater performance or the ability to
+interface with another language or hardware where Rust’s guarantees don’t apply.
+-->
+<p>En renonçant à ce que Rust fasse respecter ces garanties, vous pouvez sacrifier
+la sécurité garantie pour obtenir de meilleures performances ou avoir la
+possibilité de vous interfacer avec un autre langage ou matériel pour lesquels
+les garanties de Rust ne s'appliquent pas.</p>
+<!--
+Listing 19-1 shows how to create an immutable and a mutable raw pointer from
+references.
+-->
+<p>L'encart 19-1 montre comment créer un pointeur brut immuable et mutable à partir
+de références.</p>
+<!--
+```rust
+# fn main() {
+    let mut num = 5;
+
+    let r1 = &num as *const i32;
+    let r2 = &mut num as *mut i32;
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let mut nombre = 5;
+
+    let r1 = &amp;nombre as *const i32;
+    let r2 = &amp;mut nombre as *mut i32;
+<span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 19-1: Creating raw pointers from references</span>
+-->
+<p><span class="caption">Encart 19-1 : création de pointeurs bruts à partir de
+références</span></p>
+<!--
+Notice that we don’t include the `unsafe` keyword in this code. We can create
+raw pointers in safe code; we just can’t dereference raw pointers outside an
+unsafe block, as you’ll see in a bit.
+-->
+<p>Remarquez que nous n'incorporons pas le mot-clé <code>unsafe</code> dans ce code. Nous
+pouvons créer des pointeurs bruts dans du code sécurisé ; nous ne pouvons
+simplement pas déréférencer les pointeurs bruts à l'extérieur d'un bloc non
+sécurisé, comme vous allez le constater d'ici peu.</p>
+<!--
+We’ve created raw pointers by using `as` to cast an immutable and a mutable
+reference into their corresponding raw pointer types. Because we created them
+directly from references guaranteed to be valid, we know these particular raw
+pointers are valid, but we can’t make that assumption about just any raw
+pointer.
+-->
+<p>Nous avons créé des pointeurs bruts en utilisant <code>as</code> pour transformer les
+références immuables et mutables en leur type de pointeur brut correspondant.
+Comme nous les avons créés directement à partir de références qui sont garanties
+d'être valides, nous savons que ces pointeurs bruts seront valides, mais nous ne
+pouvons pas faire cette supposition sur tous les pointeurs bruts.</p>
+<!--
+Next, we’ll create a raw pointer whose validity we can’t be so certain of.
+Listing 19-2 shows how to create a raw pointer to an arbitrary location in
+memory. Trying to use arbitrary memory is undefined: there might be data at
+that address or there might not, the compiler might optimize the code so there
+is no memory access, or the program might error with a segmentation fault.
+Usually, there is no good reason to write code like this, but it is possible.
+-->
+<p>Ensuite, nous allons créer un pointeur brut dont la validité n'est pas
+certaine. L'encart 19-2 montre comment créer un pointeur brut vers un
+emplacement arbitraire de la mémoire. Essayer d'utiliser de la mémoire
+arbitraire va engendrer un comportement incertain : il peut y avoir des données
+à cette adresse comme il peut ne pas y en avoir, le compilateur pourrait
+optimiser le code de tel sorte qu'aucun accès mémoire n'aura lieu ou bien le
+programme pourrait déclencher une erreur de segmentation. Habituellement, il
+n'y a pas de bonne raison d'écrire du code comme celui-ci, mais c'est possible.</p>
+<!--
+```rust
+# fn main() {
+    let address = 0x012345usize;
+    let r = address as *const i32;
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let addresse = 0x012345usize;
+    let r = addresse as *const i32;
+<span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 19-2: Creating a raw pointer to an arbitrary
+memory address</span>
+-->
+<p><span class="caption">Encart 19-2 : création d'un pointeur brut vers une
+adresse mémoire arbitraire</span></p>
+<!--
+Recall that we can create raw pointers in safe code, but we can’t *dereference*
+raw pointers and read the data being pointed to. In Listing 19-3, we use the
+dereference operator `*` on a raw pointer that requires an `unsafe` block.
+-->
+<p>Souvenez-vous que nous pouvons créer des pointeurs bruts dans du code sécurisé,
+mais que nous ne pouvons pas y <em>déréférencer</em> les pointeurs bruts et lire les
+données sur lesquelles ils pointent. Dans l'encart 19-3, nous utilisons
+l'opérateur de déréférencement <code>*</code> sur un pointeur brut qui nécessite un bloc
+<code>unsafe</code>.</p>
+<!--
+```rust
+# fn main() {
+    let mut num = 5;
+
+    let r1 = &num as *const i32;
+    let r2 = &mut num as *mut i32;
+
+    unsafe {
+        println!("r1 is: {}", *r1);
+        println!("r2 is: {}", *r2);
+    }
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let mut nombre = 5;
+
+    let r1 = &amp;nombre as *const i32;
+    let r2 = &amp;mut nombre as *mut i32;
+
+    unsafe {
+        println!(&quot;r1 vaut : {}&quot;, *r1);
+        println!(&quot;r2 vaut : {}&quot;, *r2);
+    }
+<span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 19-3: Dereferencing raw pointers within an
+`unsafe` block</span>
+-->
+<p><span class="caption">Encart 19-3 : déréférencement d'un pointeur brut à
+l'intérieur d'un bloc <code>unsafe</code></span></p>
+<!--
+Creating a pointer does no harm; it’s only when we try to access the value that
+it points at that we might end up dealing with an invalid value.
+-->
+<p>La création de pointeur ne pose pas de problèmes ; c'est seulement lorsque nous
+essayons d'accéder aux valeurs sur lesquelles ils pointent qu'on risque
+d'obtenir une valeur invalide.</p>
+<!--
+Note also that in Listing 19-1 and 19-3, we created `*const i32` and `*mut i32`
+raw pointers that both pointed to the same memory location, where `num` is
+stored. If we instead tried to create an immutable and a mutable reference to
+`num`, the code would not have compiled because Rust’s ownership rules don’t
+allow a mutable reference at the same time as any immutable references. With
+raw pointers, we can create a mutable pointer and an immutable pointer to the
+same location and change data through the mutable pointer, potentially creating
+a data race. Be careful!
+-->
+<p>Remarquez aussi que dans les encarts 19-1 et 19-3, nous avons créé les
+pointeurs bruts <code>*const i32</code> et <code>*mut i32</code> qui pointent tous les deux au même
+endroit de la mémoire, où <code>nombre</code> est stocké. Si nous avions plutôt tenté de
+créer une référence immuable et une mutable vers <code>nombre</code>, le code n'aurait pas
+compilé à cause des règles de possession de Rust qui ne permettent pas d'avoir
+une référence mutable en même temps qu'une ou plusieurs références immuables.
+Avec les pointeurs bruts, nous pouvons créer un pointeur mutable et un pointeur
+immuable vers le même endroit et changer la donnée via le pointeur mutable, en
+risquant un accès concurrent. Soyez vigilant !</p>
+<!--
+With all of these dangers, why would you ever use raw pointers? One major use
+case is when interfacing with C code, as you’ll see in the next section,
+[“Calling an Unsafe Function or
+Method.”](#calling-an-unsafe-function-or-method)<!-- ignore -- > Another case is
+when building up safe abstractions that the borrow checker doesn’t understand.
+We’ll introduce unsafe functions and then look at an example of a safe
+abstraction that uses unsafe code.
+-->
+<p>Avec tous ces dangers, pourquoi vous risquer à utiliser les pointeurs bruts ?
+Une des utilisations principale consiste à s'interfacer avec du code
+C, comme vous allez le découvrir dans la section suivante. Une autre
+utilisation est de nous permettre de créer une abstraction sécurisée que le
+vérificateur d'emprunt ne comprend pas. Nous allons découvrir les fonctions
+non sécurisées puis voir un exemple d'une abstraction sécurisée qui
+utilise du code non sécurisé.</p>
+<!--
+### Calling an Unsafe Function or Method
+-->
+<h3 id="faire-appel-à-une-fonction-ou-une-méthode-non-sécurisée"><a class="header" href="#faire-appel-à-une-fonction-ou-une-méthode-non-sécurisée">Faire appel à une fonction ou une méthode non sécurisée</a></h3>
+<!--
+The second type of operation that requires an unsafe block is calls to unsafe
+functions. Unsafe functions and methods look exactly like regular functions and
+methods, but they have an extra `unsafe` before the rest of the definition. The
+`unsafe` keyword in this context indicates the function has requirements we
+need to uphold when we call this function, because Rust can’t guarantee we’ve
+met these requirements. By calling an unsafe function within an `unsafe` block,
+we’re saying that we’ve read this function’s documentation and take
+responsibility for upholding the function’s contracts.
+-->
+<p>Le deuxième type d'opération qui nécessite un bloc <code>unsafe</code> est l'appel à des
+fonctions non sécurisées. Les fonctions et méthodes non sécurisées ressemblent
+exactement aux méthodes et fonctions habituelles, mais ont un <code>unsafe</code> en plus
+devant le reste de leur définition. Le mot-clé <code>unsafe</code> dans ce cas signifie
+que la fonction a des exigences que nous devons respecter pour pouvoir y faire
+appel, car Rust ne pourra pas garantir de son côté que nous les ayons remplies.
+En faisant appel à une fonction non sécurisée dans un bloc <code>unsafe</code>, nous
+reconnaissons que nous avons lu la documentation de cette fonction et pris la
+responsabilité de respecter les conditions d'utilisation de la fonction.</p>
+<!--
+Here is an unsafe function named `dangerous` that doesn’t do anything in its
+body:
+-->
+<p>Voici une fonction non sécurisée <code>dangereux</code>, qui ne fait rien dans son corps :</p>
+<!--
+```rust
+# fn main() {
+    unsafe fn dangerous() {}
+
+    unsafe {
+        dangerous();
+    }
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    unsafe fn dangereux() {}
+
+    unsafe {
+        dangereux();
+    }
+<span class="boring">}
+</span></code></pre></pre>
+<!--
+We must call the `dangerous` function within a separate `unsafe` block. If we
+try to call `dangerous` without the `unsafe` block, we’ll get an error:
+-->
+<p>Nous devons faire appel à la fonction <code>dangereux</code> dans un bloc <code>unsafe</code> séparé.
+Si nous essayons d'appeler <code>dangereux</code> sans le bloc <code>unsafe</code>, nous obtenons une
+erreur :</p>
+<!--
+```console
+$ cargo run
+   Compiling unsafe-example v0.1.0 (file:///projects/unsafe-example)
+error[E0133]: call to unsafe function is unsafe and requires unsafe function or block
+ -- > src/main.rs:4:5
+  |
+4 |     dangerous();
+  |     ^^^^^^^^^^^ call to unsafe function
+  |
+  = note: consult the function's documentation for information on how to avoid undefined behavior
+
+For more information about this error, try `rustc --explain E0133`.
+error: could not compile `unsafe-example` due to previous error
+```
+-->
+<pre><code class="language-console">$ cargo run
+   Compiling unsafe-example v0.1.0 (file:///projects/unsafe-example)
+error[E0133]: call to unsafe function is unsafe and requires unsafe function or block
+ --&gt; src/main.rs:4:5
+  |
+4 |     dangereux();
+  |     ^^^^^^^^^^^ call to unsafe function
+  |
+  = note: consult the function's documentation for information on how to avoid undefined behavior
+
+For more information about this error, try `rustc --explain E0133`.
+error: could not compile `unsafe-example` due to previous error
+</code></pre>
+<!--
+By inserting the `unsafe` block around our call to `dangerous`, we’re asserting
+to Rust that we’ve read the function’s documentation, we understand how to use
+it properly, and we’ve verified that we’re fulfilling the contract of the
+function.
+-->
+<p>En ajoutant le bloc <code>unsafe</code> autour de notre appel à <code>dangereux</code>, nous
+déclarons à Rust que nous avons lu la documentation de la fonction, que nous
+comprenons comment l'utiliser correctement et que nous avons vérifié que nous
+répondons bien aux exigences de la fonction.</p>
+<!--
+Bodies of unsafe functions are effectively `unsafe` blocks, so to perform other
+unsafe operations within an unsafe function, we don’t need to add another
+`unsafe` block.
+-->
+<p>Les corps des fonctions non sécurisées sont bel et bien des blocs <code>unsafe</code>,
+donc pour pouvoir procéder à d'autres opérations non sécurisées dans une
+fonction non sécurisée, nous n'avons pas besoin d'ajouter un autre bloc
+<code>unsafe</code>.</p>
+<!--
+#### Creating a Safe Abstraction over Unsafe Code
+-->
+<h4 id="créer-une-abstraction-sécurisée-sur-du-code-non-sécurisé"><a class="header" href="#créer-une-abstraction-sécurisée-sur-du-code-non-sécurisé">Créer une abstraction sécurisée sur du code non sécurisé</a></h4>
+<!--
+Just because a function contains unsafe code doesn’t mean we need to mark the
+entire function as unsafe. In fact, wrapping unsafe code in a safe function is
+a common abstraction. As an example, let’s study a function from the standard
+library, `split_at_mut`, that requires some unsafe code and explore how we
+might implement it. This safe method is defined on mutable slices: it takes one
+slice and makes it two by splitting the slice at the index given as an
+argument. Listing 19-4 shows how to use `split_at_mut`.
+-->
+<p>Ce n'est pas parce qu'une fonction contient du code non sécurisé que nous devons
+forcément marquer l'intégralité de cette fonction comme non sécurisée. En fait,
+envelopper du code non sécurisé dans une fonction sécurisée est une abstraction
+courante. Par exemple, étudions une fonction de la bibliothèque standard,
+<code>split_at_mut</code>, qui nécessite du code non sécurisé, et étudions comment nous
+devrions l'implémenter. Cette méthode sécurisée est définie sur des slices
+mutables : elle prend une slice en paramètre et en créée deux autres en divisant
+la slice à l'indice donné en argument. L'encart 19-4 montre comment utiliser
+<code>split_at_mut</code>.</p>
+<!--
+```rust
+# fn main() {
+    let mut v = vec![1, 2, 3, 4, 5, 6];
+
+    let r = &mut v[..];
+
+    let (a, b) = r.split_at_mut(3);
+
+    assert_eq!(a, &mut [1, 2, 3]);
+    assert_eq!(b, &mut [4, 5, 6]);
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    let mut v = vec![1, 2, 3, 4, 5, 6];
+
+    let r = &amp;mut v[..];
+
+    let (a, b) = r.split_at_mut(3);
+
+    assert_eq!(a, &amp;mut [1, 2, 3]);
+    assert_eq!(b, &amp;mut [4, 5, 6]);
+<span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 19-4: Using the safe `split_at_mut`
+function</span>
+-->
+<p><span class="caption">Encart 19-4 : utilisation de la fonction sécurisée
+<code>split_at_mut</code></span></p>
+<!--
+We can’t implement this function using only safe Rust. An attempt might look
+something like Listing 19-5, which won’t compile. For simplicity, we’ll
+implement `split_at_mut` as a function rather than a method and only for slices
+of `i32` values rather than for a generic type `T`.
+-->
+<p>Nous ne pouvons pas implémenter cette fonction en utilisant uniquement du Rust
+sécurisé. Une tentative en ce sens ressemblerait à l'encart 19-5, qui ne se
+compilera pas. Par simplicité, nous allons implémenter <code>split_at_mut</code> comme une
+fonction plutôt qu'une méthode et seulement pour des slices de valeurs <code>i32</code> au
+lieu d'un type générique <code>T</code>.</p>
+<!--
+```rust,ignore,does_not_compile
+fn split_at_mut(values: &mut [i32], mid: usize) -> (&mut [i32], &mut [i32]) {
+    let len = values.len();
+
+    assert!(mid <= len);
+
+    (&mut values[..mid], &mut values[mid..])
+}
+# 
+# fn main() {
+#     let mut vector = vec![1, 2, 3, 4, 5, 6];
+#     let (left, right) = split_at_mut(&mut vector, 3);
+# }
+```
+-->
+<pre><code class="language-rust ignore does_not_compile">fn split_at_mut(values: &amp;mut [i32], mid: usize) -&gt; (&amp;mut [i32], &amp;mut [i32]) {
+    let len = values.len();
+
+    assert!(mid &lt;= len);
+
+    (&amp;mut values[..mid], &amp;mut values[mid..])
+}
+<span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let mut vector = vec![1, 2, 3, 4, 5, 6];
+</span><span class="boring">    let (left, right) = split_at_mut(&amp;mut vector, 3);
+</span><span class="boring">}
+</span></code></pre>
+<!--
+<span class="caption">Listing 19-5: An attempted implementation of
+`split_at_mut` using only safe Rust</span>
+-->
+<p><span class="caption">Encart 19-5 : une tentative d'implémentation de
+<code>split_at_mut</code> en utilisant uniquement du Rust sécurisé</span></p>
+<!--
+This function first gets the total length of the slice. Then it asserts that
+the index given as a parameter is within the slice by checking whether it’s
+less than or equal to the length. The assertion means that if we pass an index
+that is greater than the length to split the slice at, the function will panic
+before it attempts to use that index.
+-->
+<p>Cette fonction commence par obtenir la longueur totale de la slice. Elle
+vérifie ensuite que l'indice donné en paramètre est bien à l'intérieur de la
+slice en vérifiant s'il est inférieur ou égal à la longueur. La vérification
+implique que si nous envoyons un indice qui est plus grand que la longueur de
+la slice à découper, la fonction va paniquer avant d'essayer d'utiliser cet
+indice.</p>
+<!--
+Then we return two mutable slices in a tuple: one from the start of the
+original slice to the `mid` index and another from `mid` to the end of the
+slice.
+-->
+<p>Ensuite, nous retournons deux slices mutables dans un tuple : une à partir du
+début de la slice initiale jusqu'à l'indice <code>mod</code> et une autre à partir de
+l'indice jusqu'à la fin de la slice.</p>
+<!--
+When we try to compile the code in Listing 19-5, we’ll get an error.
+-->
+<p>Lorsque nous essayons de compiler le code de l'encart 19-5, nous allons obtenir
+une erreur.</p>
+<!--
+```console
+$ cargo run
+   Compiling unsafe-example v0.1.0 (file:///projects/unsafe-example)
+error[E0499]: cannot borrow `*values` as mutable more than once at a time
+ -- > src/main.rs:6:31
+  |
+1 | fn split_at_mut(values: &mut [i32], mid: usize) -> (&mut [i32], &mut [i32]) {
+  |                         - let's call the lifetime of this reference `'1`
+...
+6 |     (&mut values[..mid], &mut values[mid..])
+  |     --------------------------^^^^^^--------
+  |     |     |                   |
+  |     |     |                   second mutable borrow occurs here
+  |     |     first mutable borrow occurs here
+  |     returning this value requires that `*values` is borrowed for `'1`
+
+For more information about this error, try `rustc --explain E0499`.
+error: could not compile `unsafe-example` due to previous error
+```
+-->
+<pre><code class="language-console">$ cargo run
+   Compiling unsafe-example v0.1.0 (file:///projects/unsafe-example)
+error[E0499]: cannot borrow `*values` as mutable more than once at a time
+ --&gt; src/main.rs:6:30
+  |
+1 | fn split_at_mut(values: &amp;mut [i32], mid: usize) -&gt; (&amp;mut [i32], &amp;mut [i32]) {
+  |                         - let's call the lifetime of this reference `'1`
+...
+6 |     (&amp;mut values[..mid], &amp;mut values[mid..])
+  |     --------------------------^^^^^^--------
+  |     |     |                   |
+  |     |     |                   second mutable borrow occurs here
+  |     |     first mutable borrow occurs here
+  |     returning this value requires that `*values` is borrowed for `'1`
+
+For more information about this error, try `rustc --explain E0499`.
+error: could not compile `unsafe-example` due to previous error
+</code></pre>
+<!--
+Rust’s borrow checker can’t understand that we’re borrowing different parts of
+the slice; it only knows that we’re borrowing from the same slice twice.
+Borrowing different parts of a slice is fundamentally okay because the two
+slices aren’t overlapping, but Rust isn’t smart enough to know this. When we
+know code is okay, but Rust doesn’t, it’s time to reach for unsafe code.
+-->
+<p>Le vérificateur d'emprunt de Rust ne comprend pas que nous empruntons
+différentes parties de la slice ; il comprend seulement que nous empruntons la
+même slice à deux reprises. L'emprunt de différentes parties d'une slice ne
+pose fondamentalement pas de problèmes car les deux slices ne se chevauchent
+pas, mais Rust n'est pas suffisamment intelligent pour comprendre ceci. Lorsque
+nous savons que ce code est correct, mais que Rust ne le sait pas, il est
+approprié d'utiliser du code non sécurisé.</p>
+<!--
+Listing 19-6 shows how to use an `unsafe` block, a raw pointer, and some calls
+to unsafe functions to make the implementation of `split_at_mut` work.
+-->
+<p>L'encart 19-6 montre comment utiliser un bloc <code>unsafe</code>, un pointeur brut, et
+quelques appels à des fonctions non sécurisées pour construire une
+implémentation de <code>split_at_mut</code> qui fonctionne.</p>
+<!--
+```rust
+use std::slice;
+
+fn split_at_mut(values: &mut [i32], mid: usize) -> (&mut [i32], &mut [i32]) {
+    let len = values.len();
+    let ptr = values.as_mut_ptr();
+
+    assert!(mid <= len);
+
+    unsafe {
+        (
+            slice::from_raw_parts_mut(ptr, mid),
+            slice::from_raw_parts_mut(ptr.add(mid), len - mid),
+        )
+    }
+}
+# 
+# fn main() {
+#     let mut vector = vec![1, 2, 3, 4, 5, 6];
+#     let (left, right) = split_at_mut(&mut vector, 3);
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust">use std::slice;
+
+fn split_at_mut(slice: &amp;mut [i32], mid: usize) -&gt; (&amp;mut [i32], &amp;mut [i32]) {
+    let len = slice.len();
+    let ptr = slice.as_mut_ptr();
+
+    assert!(mid &lt;= len);
+
+    unsafe {
+        (
+            slice::from_raw_parts_mut(ptr, mid),
+            slice::from_raw_parts_mut(ptr.add(mid), len - mid),
+        )
+    }
+}
+<span class="boring">
+</span><span class="boring">fn main() {
+</span><span class="boring">    let mut vector = vec![1, 2, 3, 4, 5, 6];
+</span><span class="boring">    let (left, right) = split_at_mut(&amp;mut vector, 3);
+</span><span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 19-6: Using unsafe code in the implementation of
+the `split_at_mut` function</span>
+-->
+<p><span class="caption">Encart 19-6 : utilisation de code non sécurisé dans
+l'implémentation de la fonction <code>split_at_mut</code></span></p>
+<!--
+Recall from [“The Slice Type”][the-slice-type]<!-- ignore -- > section in
+Chapter 4 that slices are a pointer to some data and the length of the slice.
+We use the `len` method to get the length of a slice and the `as_mut_ptr`
+method to access the raw pointer of a slice. In this case, because we have a
+mutable slice to `i32` values, `as_mut_ptr` returns a raw pointer with the type
+`*mut i32`, which we’ve stored in the variable `ptr`.
+-->
+<p>Souvenez-vous de la section <a href="ch04-03-slices.html#le-type-slice">“Le type slice”</a><!-- ignore --> du
+chapitre 4 dans laquelle nous avions dit qu'une slice est définie par un pointeur
+vers une donnée ainsi qu'une longueur de la slice. Nous avons utilisé la méthode
+<code>len</code> pour obtenir la longueur d'une slice ainsi que la méthode <code>as_mut_ptr</code>
+pour accéder au pointeur brut d'une slice. Dans ce cas, comme nous avons une
+slice mutable de valeurs <code>i32</code>, <code>as_mut_ptr</code> retourne un pointeur brut avec le
+type <code>*mut i32</code> que nous stockons dans la variable <code>ptr</code>.</p>
+<!--
+We keep the assertion that the `mid` index is within the slice. Then we get to
+the unsafe code: the `slice::from_raw_parts_mut` function takes a raw pointer
+and a length, and it creates a slice. We use this function to create a slice
+that starts from `ptr` and is `mid` items long. Then we call the `add`
+method on `ptr` with `mid` as an argument to get a raw pointer that starts at
+`mid`, and we create a slice using that pointer and the remaining number of
+items after `mid` as the length.
+-->
+<p>Nous avons conservé la vérification que l'indice <code>mid</code> soit dans la slice.
+Ensuite, nous utilisons le code non sécurisé : la fonction
+<code>slice::from_raw_parts_mut</code> prend en paramètre un pointeur brut et une longueur,
+et elle créée une slice. Nous utilisons cette fonction pour créer une slice qui
+débute à <code>ptr</code> et qui est longue de <code>mid</code> éléments. Ensuite nous faisons appel à
+la méthode <code>add</code> sur <code>ptr</code> avec <code>mid</code> en argument pour obtenir un pointeur
+brut qui démarre à <code>mid</code>, et nous créons une slice qui utilise ce pointeur et
+le nombre restant d'éléments après <code>mid</code> comme longueur.</p>
+<!--
+The function `slice::from_raw_parts_mut` is unsafe because it takes a raw
+pointer and must trust that this pointer is valid. The `add` method on raw
+pointers is also unsafe, because it must trust that the offset location is also
+a valid pointer. Therefore, we had to put an `unsafe` block around our calls to
+`slice::from_raw_parts_mut` and `add` so we could call them. By looking at
+the code and by adding the assertion that `mid` must be less than or equal to
+`len`, we can tell that all the raw pointers used within the `unsafe` block
+will be valid pointers to data within the slice. This is an acceptable and
+appropriate use of `unsafe`.
+-->
+<p>La fonction <code>slice::from_raw_parts_mut</code> est non sécurisée car elle prend en
+argument un pointeur brut et doit avoir confiance en la validité de ce pointeur.
+La méthode <code>add</code> sur les pointeurs bruts est aussi non sécurisée, car elle
+doit croire que l'emplacement décalé est aussi un pointeur valide. Voilà
+pourquoi nous avons placé un bloc <code>unsafe</code> autour de nos appels à
+<code>slice::from_raw_parts_mut</code> et <code>add</code> afin que nous puissions les effectuer. En
+analysant le code et en ayant ajouté la vérification que <code>mid</code> doit être
+inférieur ou égal à <code>len</code>, nous pouvons affirmer que tous les pointeurs bruts
+utilisés dans le bloc <code>unsafe</code> sont des pointeurs valides vers les données de la
+slice. C'est une utilisation acceptable et appropriée de <code>unsafe</code>.</p>
+<!--
+Note that we don’t need to mark the resulting `split_at_mut` function as
+`unsafe`, and we can call this function from safe Rust. We’ve created a safe
+abstraction to the unsafe code with an implementation of the function that uses
+`unsafe` code in a safe way, because it creates only valid pointers from the
+data this function has access to.
+-->
+<p>Remarquez que nous n'avons pas eu besoin de marquer la fonction résultante
+<code>split_at_mut</code> comme étant <code>unsafe</code>, et que nous pouvons faire appel à cette
+fonction dans du code Rust sécurisé. Nous avons créé une abstraction sécurisée
+du code non sécurisé avec une implémentation de la fonction qui utilise de
+manière sécurisée du code non sécurisé, car elle créée uniquement des pointeurs
+valides à partir des données auxquelles cette fonction a accès.</p>
+<!--
+In contrast, the use of `slice::from_raw_parts_mut` in Listing 19-7 would
+likely crash when the slice is used. This code takes an arbitrary memory
+location and creates a slice 10,000 items long.
+-->
+<p>En contre-partie, l'utilisation de <code>slice::from_raw_parts_mut</code> dans l'encart
+19-7 peut planter lorsque la slice sera utilisée. Ce code prend un emplacement
+arbitraire dans la mémoire et crée un slice de 10 000 éléments.</p>
+<!--
+```rust
+# fn main() {
+    use std::slice;
+
+    let address = 0x01234usize;
+    let r = address as *mut i32;
+
+    let values: &[i32] = unsafe { slice::from_raw_parts_mut(r, 10000) };
+# }
+```
+-->
+<pre><pre class="playground"><code class="language-rust"><span class="boring">fn main() {
+</span>    use std::slice;
+
+    let addresse = 0x01234usize;
+    let r = addresse as *mut i32;
+
+    let valeurs: &amp;[i32] = unsafe { slice::from_raw_parts_mut(r, 10000) };
+<span class="boring">}
+</span></code></pre></pre>
+<!--
+<span class="caption">Listing 19-7: Creating a slice from an arbitrary memory
+location</span>
+-->
+<p><span class="caption">Encart 19-7 : création d'une slice à partir d'un
+emplacement mémoire arbitraire</span></p>
+<!--
+We don’t own the memory at this arbitrary location, and there is no guarantee
+that the slice this code creates contains valid `i32` values. Attempting to use
+`values` as though it’s a valid slice results in undefined behavior.
+-->
+<p>Nous ne possédons pas la mémoire à cet emplacement arbitraire, et il n'y a
+aucune garantie que la slice créée par ce code contiennent des valeurs <code>i32</code>
+valides. Toute tentative d'utilisation de <code>valeurs</code> aura un comportement
+imprévisible bien qu'il s'agisse d'une slice valide.</p>
+<!--
+#### Using `extern` Functions to Call External Code
+-->
+<h4 id="utiliser-des-fonctions-extern-pour-faire-appel-à-du-code-externe"><a class="header" href="#utiliser-des-fonctions-extern-pour-faire-appel-à-du-code-externe">Utiliser des fonctions <code>extern</code> pour faire appel à du code externe</a></h4>
+<!--
+Sometimes, your Rust code might need to interact with code written in another
+language. For this, Rust has a keyword, `extern`, that facilitates the creation
+and use of a *Foreign Function Interface (FFI)*. An FFI is a way for a
+programming language to define functions and enable a different (foreign)
+programming language to call those functions.
+-->
+<p>Parfois, votre code Rust peut avoir besoin d'interagir avec du code écrit dans
+d'autres langages. Dans ce cas, Rust propose un mot-clé, <code>extern</code>, qui facilite
+la création et l'utilisation du <em>Foreign Function Interface (FFI)</em>. Le FFI est
+un outil permettant à un langage de programmation de définir des fonctions auxquelles
+d'autres langages de programmation pourront faire appel.</p>
+<!--
+Listing 19-8 demonstrates how to set up an integration with the `abs` function
+from the C standard library. Functions declared within `extern` blocks are
+always unsafe to call from Rust code. The reason is that other languages don’t
+enforce Rust’s rules and guarantees, and Rust can’t check them, so
+responsibility falls on the programmer to ensure safety.
+-->
+<p>L'encart 19-8 montre comment configurer l'intégration de la fonction <code>abs</code> de la
+bibliothèque standard du C. Les fonctions déclarées dans des blocs <code>extern</code>
+sont toujours non sécurisées lorsqu'on les utilise dans du code Rust. La raison
+à cela est que les autres langages n'appliquent pas les règles et garanties de
+Rust, Rust ne peut donc pas les vérifier, si bien que la responsabilité de s'assurer
+de la sécurité revient au développeur.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+extern "C" {
+    fn abs(input: i32) -> i32;
+}
+
+fn main() {
+    unsafe {
+        println!("Absolute value of -3 according to C: {}", abs(-3));
+    }
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">extern &quot;C&quot; {
+    fn abs(input: i32) -&gt; i32;
+}
+
+fn main() {
+    unsafe {
+        println!(&quot;La valeur absolue de -3 selon le langage C : {}&quot;, abs(-3));
+    }
+}
+</code></pre></pre>
+<!--
+<span class="caption">Listing 19-8: Declaring and calling an `extern` function
+defined in another language</span>
+-->
+<p><span class="caption">Encart 19-8 : déclaration et appel à une fonction externe
+qui est définie dans un autre langage</span></p>
+<!--
+Within the `extern "C"` block, we list the names and signatures of external
+functions from another language we want to call. The `"C"` part defines which
+*application binary interface (ABI)* the external function uses: the ABI
+defines how to call the function at the assembly level. The `"C"` ABI is the
+most common and follows the C programming language’s ABI.
+-->
+<p>Au sein du bloc <code>extern &quot;C&quot;</code>, nous listons les noms et les signatures des
+fonctions externes de l'autre langage que nous souhaitons solliciter. La partie
+&quot;C&quot; définit quelle est l'<em>application binary interface (ABI)</em> que la fonction
+doit utiliser : l'ABI définit comment faire appel à la fonction au niveau
+assembleur. L'ABI <code>&quot;C&quot;</code> est la plus courante et respecte l'ABI du langage de
+programmation C.</p>
+<!--
+> #### Calling Rust Functions from Other Languages
+>
+> We can also use `extern` to create an interface that allows other languages
+> to call Rust functions. Instead of an `extern` block, we add the `extern`
+> keyword and specify the ABI to use just before the `fn` keyword. We also need
+> to add a `#[no_mangle]` annotation to tell the Rust compiler not to mangle
+> the name of this function. *Mangling* is when a compiler changes the name
+> we’ve given a function to a different name that contains more information for
+> other parts of the compilation process to consume but is less human readable.
+> Every programming language compiler mangles names slightly differently, so
+> for a Rust function to be nameable by other languages, we must disable the
+> Rust compiler’s name mangling.
+>
+> In the following example, we make the `call_from_c` function accessible from
+> C code, after it’s compiled to a shared library and linked from C:
+>
+> ```rust
+> #[no_mangle]
+> pub extern "C" fn call_from_c() {
+>     println!("Just called a Rust function from C!");
+> }
+> ```
+>
+> This usage of `extern` does not require `unsafe`.
+-->
+<blockquote>
+<h4 id="faire-appel-à-des-fonctions-rust-dans-dautres-langages"><a class="header" href="#faire-appel-à-des-fonctions-rust-dans-dautres-langages">Faire appel à des fonctions Rust dans d'autres langages</a></h4>
+<p>Nous pouvons aussi utiliser <code>extern</code> pour créer une interface qui permet à
+d'autres langages de faire appel à des fonctions Rust. Au lieu d'avoir un
+bloc <code>extern</code>, nous ajoutons le mot-clé <code>extern</code> et nous renseignons l'ABI
+à utiliser juste avant le mot-clé <code>fn</code>. Nous avons aussi besoin d'ajouter
+l'annotation <code>#[no_mangle]</code> pour dire au compilateur Rust de ne pas déformer
+le nom de cette fonction. La <em>déformation</em> s'effectue lorsqu'un compilateur
+change le nom que nous avons donné à une fonction pour un nom qui contient
+plus d'informations pour d'autres étapes du processus de compilation, mais
+qui est moins lisible par l'humain. Tous les compilateurs de langages de
+programmation déforment les noms de façon légèrement différente, donc pour
+que le nom d'une fonction Rust soit utilisable par d'autres langages, nous
+devons désactiver la déformation du nom par le compilateur de Rust.</p>
+</blockquote>
+<!--
+### Accessing or Modifying a Mutable Static Variable
+-->
+<h3 id="lire-ou-modifier-une-variable-statique-mutable"><a class="header" href="#lire-ou-modifier-une-variable-statique-mutable">Lire ou modifier une variable statique mutable</a></h3>
+<!--
+Until now, we’ve not talked about *global variables*, which Rust does support
+but can be problematic with Rust’s ownership rules. If two threads are
+accessing the same mutable global variable, it can cause a data race.
+-->
+<p>Jusqu'à présent, nous n'avons pas parlé des <em>variables globales</em>, que Rust
+accepte mais qui peuvent poser des problèmes avec les règles de possession de
+Rust. Si deux tâches accèdent en même temps à la même variable globale, cela
+peut causer un accès concurrent.</p>
+<!--
+In Rust, global variables are called *static* variables. Listing 19-9 shows an
+example declaration and use of a static variable with a string slice as a
+value.
+-->
+<p>En Rust, les variables globales s'appellent des variables <em>statiques</em>. L'encart
+19-9 montre un exemple de déclaration et d'utilisation d'une variable statique
+avec une slice de chaîne de caractères comme valeur.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+static HELLO_WORLD: &str = "Hello, world!";
+
+fn main() {
+    println!("name is: {}", HELLO_WORLD);
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">static HELLO_WORLD: &amp;str = &quot;Hello, world!&quot;;
+
+fn main() {
+    println!(&quot;Cela vaut : {}&quot;, HELLO_WORLD);
+}
+</code></pre></pre>
+<!--
+<span class="caption">Listing 19-9: Defining and using an immutable static
+variable</span>
+-->
+<p><span class="caption">Encart 19-9 : définition et utilisation d'une variable
+statique immuable</span></p>
+<!--
+Static variables are similar to constants, which we discussed in the
+[“Differences Between Variables and
+Constants”][differences-between-variables-and-constants]<!-- ignore -- >
+section in Chapter 3. The names of static variables are in
+`SCREAMING_SNAKE_CASE` by convention. Static variables can only store
+references with the `'static` lifetime, which means the Rust compiler can
+figure out the lifetime and we aren’t required to annotate it explicitly.
+Accessing an immutable static variable is safe.
+-->
+<p>Les variables statiques ressemblent aux constantes, que nous avons vues dans la
+section
+<a href="ch03-01-variables-and-mutability.html#les-constantes">“Différences entre les variables et les constantes”</a><!-- ignore -->
+du chapitre 3. Les noms des variables statiques sont par convention en
+<code>SCREAMING_SNAKE_CASE</code>. Les variables statiques
+peuvent uniquement stocker des références ayant la durée de vie <code>'static</code>, de façon
+à ce que le compilateur Rust puisse la déterminer tout seul et que nous
+n'ayons pas besoin de la renseigner explicitement. L'accès à une variable
+statique immuable est sécurisé.</p>
+<!--
+Constants and immutable static variables might seem similar, but a subtle
+difference is that values in a static variable have a fixed address in memory.
+Using the value will always access the same data. Constants, on the other hand,
+are allowed to duplicate their data whenever they’re used.
+-->
+<p>Les constantes et les variables statiques immuables se ressemblent, mais leur
+différence subtile est que les valeurs dans les variables statiques ont une
+adresse fixe en mémoire. L'utilisation de sa valeur va toujours accéder à la
+même donnée. Les constantes en revanche, peuvent reproduire leurs données à
+chaque fois qu'elles sont utilisées.</p>
+<!--
+Another difference between constants and static variables is that static
+variables can be mutable. Accessing and modifying mutable static variables is
+*unsafe*. Listing 19-10 shows how to declare, access, and modify a mutable
+static variable named `COUNTER`.
+-->
+<p>Une autre différence entre les constantes et les variables statiques est que
+les variables statiques peuvent être mutables. Lire et modifier des variables
+statiques mutables est <em>non sécurisé</em>. L'encart 19-10 montre comment déclarer,
+lire et modifier la variable statique mutable <code>COMPTEUR</code>.</p>
+<!--
+<span class="filename">Filename: src/main.rs</span>
+-->
+<p><span class="filename">Fichier : src/main.rs</span></p>
+<!--
+```rust
+static mut COUNTER: u32 = 0;
+
+fn add_to_count(inc: u32) {
+    unsafe {
+        COUNTER += inc;
+    }
+}
+
+fn main() {
+    add_to_count(3);
+
+    unsafe {
+        println!("COUNTER: {}", COUNTER);
+    }
+}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">static mut COMPTEUR: u32 = 0;
+
+fn ajouter_au_compteur(valeur: u32) {
+    unsafe {
+        COMPTEUR += valeur;
+    }
+}
+
+fn main() {
+    ajouter_au_compteur(3);
+
+    unsafe {
+        println!(&quot;COMPTEUR : {}&quot;, COMPTEUR);
+    }
+}
+</code></pre></pre>
+<!--
+<span class="caption">Listing 19-10: Reading from or writing to a mutable
+static variable is unsafe</span>
+-->
+<p><span class="caption">Encart 19-10 : la lecture et l'écriture d'une variable
+statique mutable est non sécurisé</span></p>
+<!--
+As with regular variables, we specify mutability using the `mut` keyword. Any
+code that reads or writes from `COUNTER` must be within an `unsafe` block. This
+code compiles and prints `COUNTER: 3` as we would expect because it’s single
+threaded. Having multiple threads access `COUNTER` would likely result in data
+races.
+-->
+<p>Comme avec les variables classiques, nous renseignons la mutabilité en
+utilisant le mot-clé <code>mut</code>. Tout code qui lit ou modifie <code>COMPTEUR</code> doit se
+trouver dans un bloc <code>unsafe</code>. Ce code se compile et affiche <code>COMPTEUR : 3</code>
+comme nous l'espérions car nous n'avons qu'une seule tâche. Si nous avions
+plusieurs tâches qui accèdent à <code>COMPTEUR</code>, nous pourrions avoir un accès
+concurrent.</p>
+<!--
+With mutable data that is globally accessible, it’s difficult to ensure there
+are no data races, which is why Rust considers mutable static variables to be
+unsafe. Where possible, it’s preferable to use the concurrency techniques and
+thread-safe smart pointers we discussed in Chapter 16 so the compiler checks
+that data accessed from different threads is done safely.
+-->
+<p>Avec les données mutables qui sont accessibles globalement, il devient
+difficile de s'assurer qu'il n'y a pas d'accès concurrent, c'est pourquoi Rust
+considère les variables statiques mutables comme étant non sécurisées. Lorsque
+c'est possible, il vaut mieux utiliser les techniques de concurrence et les
+pointeurs intelligents adaptés au multitâche que nous avons vus au chapitre 16,
+afin que le compilateur puisse vérifier que les données qu'utilisent les
+différentes tâches sont sécurisées.</p>
+<!--
+### Implementing an Unsafe Trait
+-->
+<h3 id="implémenter-un-trait-non-sécurisé"><a class="header" href="#implémenter-un-trait-non-sécurisé">Implémenter un trait non sécurisé</a></h3>
+<!--
+Another use case for `unsafe` is implementing an unsafe trait. A trait is
+unsafe when at least one of its methods has some invariant that the compiler
+can’t verify. We can declare that a trait is `unsafe` by adding the `unsafe`
+keyword before `trait` and marking the implementation of the trait as `unsafe`
+too, as shown in Listing 19-11.
+-->
+<p>Un autre cas d'usage de <code>unsafe</code> est l'implémentation d'un trait non sécurisé.
+Un trait n'est pas sécurisé lorsque au moins une de ses méthodes contient une
+invariante que le compilateur ne peut pas vérifier. Nous pouvons déclarer un
+trait qui n'est pas sécurisé en ajoutant le mot-clé <code>unsafe</code> devant <code>trait</code> et
+en marquant aussi l'implémentation du trait comme <code>unsafe</code>, comme dans
+l'encart 19-11.</p>
+<!--
+```rust
+unsafe trait Foo {
+    // methods go here
+}
+
+unsafe impl Foo for i32 {
+    // method implementations go here
+}
+
+fn main() {}
+```
+-->
+<pre><pre class="playground"><code class="language-rust">unsafe trait Foo {
+    // les méthodes vont ici
+}
+
+unsafe impl Foo for i32 {
+    // les implémentations des méthodes vont ici
+}
+
+fn main() {}
+</code></pre></pre>
+<!--
+<span class="caption">Listing 19-11: Defining and implementing an unsafe
+trait</span>
+-->
+<p><span class="caption">Encart 19-11 : définition et implémentation d'un trait non
+sécurisé</span></p>
+<!--
+By using `unsafe impl`, we’re promising that we’ll uphold the invariants that
+the compiler can’t verify.
+-->
+<p>En utilisant <code>unsafe impl</code>, nous promettons que nous veillons aux invariantes
+que le compilateur ne peut pas vérifier.</p>
+<!--
+As an example, recall the `Sync` and `Send` marker traits we discussed in the
+[“Extensible Concurrency with the `Sync` and `Send`
+Traits”][extensible-concurrency-with-the-sync-and-send-traits]<!-- ignore -- >
+section in Chapter 16: the compiler implements these traits automatically if
+our types are composed entirely of `Send` and `Sync` types. If we implement a
+type that contains a type that is not `Send` or `Sync`, such as raw pointers,
+and we want to mark that type as `Send` or `Sync`, we must use `unsafe`. Rust
+can’t verify that our type upholds the guarantees that it can be safely sent
+across threads or accessed from multiple threads; therefore, we need to do
+those checks manually and indicate as such with `unsafe`.
+-->
+<p>Par exemple, souvenez-vous des traits <code>Sync</code> et <code>Send</code> que nous avions découverts
+dans une section du
+<a href="ch16-04-extensible-concurrency-sync-and-send.html">chapitre 16</a><!--
+ignore --> : le compilateur implémente automatiquement ces traits si nos types
+sont entièrement composés des types <code>Send</code> et <code>Sync</code>. Si nous implémentions un
+type qui contenait un type qui n'était pas <code>Send</code> ou <code>Sync</code>, tel que les
+pointeurs bruts, et nous souhaitions marquer ce type comme étant <code>Send</code> ou
+<code>Sync</code>, nous aurions dû utiliser <code>unsafe</code>. Rust ne peut pas vérifier que notre
+type respecte les garanties pour que ce type puisse être envoyé en toute
+sécurité entre des tâches ou qu'il puisse être utilisé par plusieurs tâches ;
+en conséquence, nous avons besoin de faire ces vérifications manuellement et le
+signaler avec <code>unsafe</code>.</p>
+<!--
+### Accessing Fields of a Union
+-->
+<h3 id="utiliser-des-champs-dun-union"><a class="header" href="#utiliser-des-champs-dun-union">Utiliser des champs d'un Union</a></h3>
+<!--
+The final action that works only with `unsafe` is accessing fields of a
+*union*. A `union` is similar to a `struct`, but only one declared field is
+used in a particular instance at one time. Unions are primarily used to
+interface with unions in C code. Accessing union fields is unsafe because Rust
+can’t guarantee the type of the data currently being stored in the union
+instance. You can learn more about unions in [the Rust Reference][reference].
+-->
+<p>La dernière action qui fonctionne uniquement avec <code>unsafe</code> est d'accéder aux
+champs d'un <em>union</em>. Un <code>union</code> ressemble à une <code>struct</code>, mais un seul champ de
+ceux déclarés est utilisé dans une instance précise au même moment. Les unions
+sont principalement utilisés pour s'interfacer avec les unions du code C.
+L'accès aux champs des unions n'est pas sécurisé car Rust ne peut pas garantir
+le type de la donnée qui est actuellement stockée dans l'instance de l'union.
+Vous pouvez en apprendre plus sur les unions dans
+<a href="https://doc.rust-lang.org/reference/items/unions.html">the Rust Reference</a>.</p>
+<!--
+### When to Use Unsafe Code
+-->
+<h3 id="quand-utiliser-du-code-non-sécurisé"><a class="header" href="#quand-utiliser-du-code-non-sécurisé">Quand utiliser du code non sécurisé</a></h3>
+<!--
+Using `unsafe` to take one of the five actions (superpowers) just discussed
+isn’t wrong or even frowned upon. But it is trickier to get `unsafe` code
+correct because the compiler can’t help uphold memory safety. When you have a
+reason to use `unsafe` code, you can do so, and having the explicit `unsafe`
+annotation makes it easier to track down the source of problems when they occur.
+-->
+<p>L'utilisation de <code>unsafe</code> pour mettre en oeuvre une des cinq actions (ou
+super-pouvoirs) que nous venons d'aborder n'est pas une mauvaise chose et ne doit
+pas être mal vu. Mais il est plus difficile de sécuriser du code <code>unsafe</code> car le
+compilateur ne peut pas aider à garantir la sécurité de la mémoire. Lorsque vous
+avez une bonne raison d'utiliser du code non sécurisé, vous pouvez le faire, et
+vous aurez l'annotation explicite <code>unsafe</code> pour faciliter la recherche de la
+source des problèmes lorsqu'ils surviennent.</p>
+<!--
+[dangling-references]:
+ch04-02-references-and-borrowing.html#dangling-references
+[differences-between-variables-and-constants]:
+ch03-01-variables-and-mutability.html#constants
+[extensible-concurrency-with-the-sync-and-send-traits]:
+ch16-04-extensible-concurrency-sync-and-send.html#extensible-concurrency-with-the-sync-and-send-traits
+[the-slice-type]: ch04-03-slices.html#the-slice-type
+[reference]: ../reference/items/unions.html
+-->
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch19-00-advanced-features.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="ch19-03-advanced-traits.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch19-00-advanced-features.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="ch19-03-advanced-traits.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript" src="../ferris.js"></script>
+    </body>
+</html>
